@@ -14,7 +14,7 @@ class OpenAIResponsesClient:
     def enabled(self) -> bool:
         return bool(self.api_key)
 
-    def ask(self, messages: list[dict]) -> str | None:
+    def ask(self, messages: list[dict]) -> dict | None:
         if not self.enabled:
             return None
 
@@ -33,6 +33,10 @@ class OpenAIResponsesClient:
             response = requests.post(self.url, headers=headers, json=payload, timeout=25)
             response.raise_for_status()
             data = response.json()
-            return data.get("output_text")
+            return {
+                "text": data.get("output_text"),
+                "usage": data.get("usage", {}),
+                "model": data.get("model", self.model),
+            }
         except Exception:
             return None

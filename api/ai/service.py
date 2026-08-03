@@ -2,14 +2,17 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
+from time import perf_counter
 
 from ai.client import OpenAIResponsesClient
+from ai.critic import critic_engine
 from ai.models import AIAnswerModel
 from ai.planner import build_plan
 from ai.prompts import SYSTEM_PROMPT
+from ai.reasoning import reasoning_engine
 from context.builder import context_builder
 from core.event_bus import event_bus
-from services.openai_reasoner import has_openai_enabled
+from services.postgres_store import postgres_store
 from services.openai_reasoner import has_openai_enabled
 
 
@@ -17,80 +20,108 @@ class OpenAIService:
     def __init__(self):
         self.client = OpenAIResponsesClient()
 
-    def _looks_like_host_count(self, question: str) -> bool:
-        q = question.lower()
-        count_terms = ["quantos", "quantas", "quantidade", "total", "numero", "número"]
-        host_terms = ["host", "hosts"]
-        severity_terms = ["severity", "severidade", "average", "avg", "avarege", "avarage"]
-        return any(term in q for term in count_terms) and any(term in q for term in host_terms) and not any(term in q for term in severity_terms)
+    @staticmethod
+    def _build_explainability(question: str, plan: dict, context: dict, reasoning: dict, critic: dict) -> dict:
+        return {
+            "flow": ["question", "planner", "context", "reasoning", "openai_or_fallback", "critic", "response"],
+            "question": question,
+            "intent": plan.get("intent", "unknown"),
+            "capabilities": plan.get("capabilities", []),
+            "tools": plan.get("tools", []),
+            "evidence_sources": [trace.get("tool") for trace in context.get("evidence", [])],
+            "risk_levels": [risk.get("level") for risk in context.get("risks", [])],
+            "justification": reasoning.get("justification", ""),
+            "critic_issues": critic.get("issues", []),
+        }
 
     def answer(self, question: str) -> dict:
+        start = perf_counter()
         event_bus.publish_sync(
             "ai.question.received",
             {"question": question, "generated_at": datetime.now(timezone.utc).isoformat()},
         )
         plan = build_plan(question)
         context = context_builder.build(question, plan)
+        reasoning = reasoning_engine.build(question, plan, context)
 
-        if self._looks_like_host_count(question):
-            host_count = context.get("summary", {}).get("hosts", 0)
-            answer = f"Você possui {host_count} host(s) cadastrados no Zabbix."
-            result = AIAnswerModel(
-                answer=answer,
-                plan=plan,
-                context=context,
-                llm_used=False,
-            )
-            event_bus.publish_sync(
-                "ai.answered",
-                {
-                    "question": question,
-                    "answer": answer,
-                    "llm_used": False,
-                    "generated_at": datetime.now(timezone.utc).isoformat(),
-                },
-            )
-            return result.model_dump()
+        candidate_answer = reasoning.get("deterministic_answer")
+        llm_used = False
+        usage: dict = {}
 
-        messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "developer", "content": json.dumps(context, ensure_ascii=False)},
-            {"role": "user", "content": question},
-        ]
+        if not candidate_answer:
+            messages = [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "developer", "content": json.dumps(context, ensure_ascii=False)},
+                {"role": "developer", "content": reasoning_engine.to_developer_note(reasoning)},
+                {"role": "user", "content": question},
+            ]
 
-        llm_answer = self.client.ask(messages)
-        if llm_answer:
-            result = AIAnswerModel(
-                answer=llm_answer.strip(),
-                plan=plan,
-                context=context,
-                llm_used=True,
-            )
-            event_bus.publish_sync(
-                "ai.answered",
-                {
-                    "question": question,
-                    "answer": llm_answer.strip(),
-                    "llm_used": True,
-                    "generated_at": datetime.now(timezone.utc).isoformat(),
-                },
-            )
-            return result.model_dump()
+            llm_result = self.client.ask(messages)
+            if llm_result and llm_result.get("text"):
+                candidate_answer = str(llm_result.get("text", "")).strip()
+                usage = llm_result.get("usage", {}) if isinstance(llm_result.get("usage", {}), dict) else {}
+                llm_used = True
 
-        # Deterministic fallback when OpenAI is unavailable.
-        answer = self._fallback_answer(question, context)
-        result = AIAnswerModel(
-            answer=answer,
+        if not candidate_answer:
+            candidate_answer = self._fallback_answer(question, context)
+
+        critic = critic_engine.evaluate(question, plan, context, candidate_answer)
+        final_answer = candidate_answer
+        if not critic.get("approved", False):
+            revised_answer = critic.get("revised_answer")
+            if revised_answer:
+                final_answer = revised_answer
+            else:
+                final_answer = self._fallback_answer(question, context)
+
+        confidence = float(critic.get("confidence", critic.get("score", 0.0)) or 0.0)
+        explainability = self._build_explainability(
+            question=question,
             plan=plan,
             context=context,
-            llm_used=False,
+            reasoning=reasoning,
+            critic=critic,
+        )
+
+        latency_ms = int((perf_counter() - start) * 1000)
+        tokens_in = int(usage.get("input_tokens", 0) or 0)
+        tokens_out = int(usage.get("output_tokens", 0) or 0)
+        # Conservative estimate for dashboard cost trend.
+        cost_usd = round((tokens_in * 0.0000005) + (tokens_out * 0.0000015), 8)
+
+        postgres_store.save_ai_metric(
+            question=question,
+            intent=plan.get("intent", "unknown"),
+            llm_used=llm_used,
+            latency_ms=latency_ms,
+            confidence=confidence,
+            critic_approved=bool(critic.get("approved", False)),
+            tokens_in=tokens_in,
+            tokens_out=tokens_out,
+            cost_usd=cost_usd,
+            tools=plan.get("tools", []),
+            metadata={
+                "critic_issues": critic.get("issues", []),
+                "capabilities": plan.get("capabilities", []),
+            },
+        )
+
+        result = AIAnswerModel(
+            answer=final_answer,
+            plan=plan,
+            context=context,
+            llm_used=llm_used,
+            reasoning=reasoning,
+            critic=critic,
+            confidence=confidence,
+            explainability=explainability,
         )
         event_bus.publish_sync(
             "ai.answered",
             {
                 "question": question,
-                "answer": answer,
-                "llm_used": False,
+                "answer": final_answer,
+                "llm_used": llm_used,
                 "generated_at": datetime.now(timezone.utc).isoformat(),
             },
         )
@@ -98,8 +129,19 @@ class OpenAIService:
 
     def _fallback_answer(self, question: str, context: dict) -> str:
         tools = context.get("tools", {})
-        insights = context.get("insights", {}) if isinstance(context.get("insights", {}), dict) else {}
+        insights = context.get("insights", []) if isinstance(context.get("insights", []), list) else []
         q = question.lower()
+        temporal = context.get("snapshot", {}).get("temporal", {}) if isinstance(context.get("snapshot", {}), dict) else {}
+        trends = temporal.get("group_trends_30d", []) if isinstance(temporal.get("group_trends_30d", []), list) else []
+
+        if any(term in q for term in ["30 dias", "reincid", "grupo", "grupos"]) and trends:
+            top = trends[:5]
+            ranking = "; ".join([f"{item.get('group')} ({item.get('occurrences')} ocorrencias)" for item in top])
+            return (
+                "Nos ultimos 30 dias, os grupos com maior reincidencia observada foram: "
+                f"{ranking}. "
+                "Recomendo iniciar pelos dois primeiros grupos, correlacionar com runbooks do Knowledge e priorizar eventos de maior severidade."
+            )
 
         operational_terms = [
             "zabbix",
@@ -145,8 +187,9 @@ class OpenAIService:
                 hosts = ", ".join(item.get("hosts", [])[:2]) or "host não identificado"
                 top.append(f"{sev} - {name} (hosts: {hosts})")
             pattern_lines = []
-            for pattern in insights.get("patterns", [])[:2]:
-                pattern_lines.append(pattern.get("insight", ""))
+            for pattern in insights[:2]:
+                if isinstance(pattern, dict):
+                    pattern_lines.append(pattern.get("insight", ""))
             if pattern_lines:
                 return f"Encontrei {len(problems)} problema(s) ativo(s). Top: {'; '.join(top)}. Padrões aprendidos: {' | '.join(pattern_lines)}"
             return f"Encontrei {len(problems)} problema(s) ativo(s). Top: {'; '.join(top)}"
@@ -156,9 +199,10 @@ class OpenAIService:
             if isinstance(containers, list):
                 return f"Há {len(containers)} container(s): {', '.join(containers)}"
 
-        if insights.get("patterns"):
-            pattern = insights["patterns"][0]
-            return f"O SOFIA aprendeu um padrão recorrente: {pattern.get('insight', '')}"
+        if insights:
+            pattern = insights[0]
+            if isinstance(pattern, dict):
+                return f"O SOFIA aprendeu um padrão recorrente: {pattern.get('insight', '')}"
 
         return "Contexto consolidado com sucesso. Faça uma pergunta operacional específica para eu trazer evidências detalhadas."
 

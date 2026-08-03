@@ -1,6 +1,44 @@
 async function loadJSON(url) {
   const response = await fetch(url);
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`${url} failed (${response.status}): ${text.slice(0, 180)}`);
+  }
   return response.json();
+}
+
+async function safeLoad(url, fallback) {
+  try {
+    return await loadJSON(url);
+  } catch (error) {
+    console.warn('SOFIA UI load warning:', error.message);
+    return fallback;
+  }
+}
+
+function initScrollMenu() {
+  const links = Array.from(document.querySelectorAll('#main-menu a[data-menu]'));
+  const sections = Array.from(document.querySelectorAll('[data-section]'));
+  if (!links.length || !sections.length) return;
+
+  const linkById = new Map(links.map((link) => [link.dataset.menu, link]));
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (!visible.length) return;
+
+      const id = visible[0].target.getAttribute('data-section');
+      links.forEach((link) => link.classList.remove('active'));
+      const activeLink = linkById.get(id);
+      if (activeLink) activeLink.classList.add('active');
+    },
+    { rootMargin: '-25% 0px -55% 0px', threshold: [0.2, 0.4, 0.6] }
+  );
+
+  sections.forEach((section) => observer.observe(section));
 }
 
 function getChatIdentity() {
@@ -20,29 +58,42 @@ function renderHistory(messages, container, userLabel = 'You') {
 
 async function initDashboard() {
   try {
-    const registry = await loadJSON('/core/registry');
-    const knowledge = await loadJSON('/knowledge/status');
-    const marketplace = await loadJSON('/marketplace/catalog');
-    const mcp = await loadJSON('/mcp/tools');
+    const registry = await safeLoad('/core/registry', { modules: [], capabilities: {} });
+    const knowledge = await safeLoad('/knowledge/status', { status: 'unavailable' });
+    const marketplace = await safeLoad('/marketplace/catalog', { modules: [] });
+    const mcp = await safeLoad('/mcp/tools', { registered_modules: [] });
+    const aiPanel = await safeLoad('/engine/ai/panel?hours=24', { kpis: {}, group_trends_30d: [], recent_audits: [] });
 
-    document.getElementById('registry-count').textContent = `${registry.modules.length} modules registered`;
+    document.getElementById('registry-count').textContent = `${(registry.modules || []).length} modules registered`;
     document.getElementById('knowledge-status').textContent = knowledge.status;
-    document.getElementById('marketplace-status').textContent = `${marketplace.modules.length} modules available`;
-    document.getElementById('mcp-status').textContent = `${mcp.registered_modules.length} MCP-visible modules`;
+    document.getElementById('marketplace-status').textContent = `${(marketplace.modules || []).length} modules available`;
+    document.getElementById('mcp-status').textContent = `${(mcp.registered_modules || []).length} MCP-visible modules`;
 
     const moduleList = document.getElementById('module-list');
-    registry.modules.forEach((module) => {
+    (registry.modules || []).forEach((module) => {
       const item = document.createElement('li');
       item.textContent = module;
       moduleList.appendChild(item);
     });
 
+    if ((registry.modules || []).length === 0) {
+      const item = document.createElement('li');
+      item.textContent = 'No modules loaded yet.';
+      moduleList.appendChild(item);
+    }
+
     const capabilityList = document.getElementById('capability-list');
-    Object.entries(registry.capabilities).forEach(([module, capabilities]) => {
+    Object.entries(registry.capabilities || {}).forEach(([module, capabilities]) => {
       const item = document.createElement('li');
       item.innerHTML = `<strong>${module}</strong>: ${capabilities.join(', ')}`;
       capabilityList.appendChild(item);
     });
+
+    if (Object.keys(registry.capabilities || {}).length === 0) {
+      const item = document.createElement('li');
+      item.textContent = 'Capabilities unavailable.';
+      capabilityList.appendChild(item);
+    }
 
     const stackList = document.getElementById('stack-list');
     const stack = [
@@ -58,6 +109,66 @@ async function initDashboard() {
       card.innerHTML = `<strong>${service.name}</strong><span>${service.endpoint}</span>`;
       stackList.appendChild(card);
     });
+
+    const marketplaceGrid = document.getElementById('marketplace-grid');
+    (marketplace.modules || []).forEach((module) => {
+      const card = document.createElement('article');
+      card.className = 'marketplace-item';
+      card.innerHTML = `
+        <h4>${module.name}</h4>
+        <span class="marketplace-tag">${module.category}</span>
+      `;
+      marketplaceGrid.appendChild(card);
+    });
+
+    if ((marketplace.modules || []).length === 0) {
+      const card = document.createElement('article');
+      card.className = 'marketplace-item';
+      card.innerHTML = `<h4>Marketplace unavailable</h4><span class="marketplace-tag">retry later</span>`;
+      marketplaceGrid.appendChild(card);
+    }
+
+    const aiMetricsList = document.getElementById('ai-metrics-list');
+    const kpis = aiPanel.kpis || {};
+    [
+      `Perguntas: ${kpis.total_questions ?? 0}`,
+      `Latencia media: ${kpis.avg_latency_ms ?? 0} ms`,
+      `Confidence media: ${kpis.avg_confidence ?? 0}`,
+      `Uso de LLM: ${Math.round((kpis.llm_usage_rate ?? 0) * 100)}%`,
+      `Aprovacao do Critic: ${Math.round((kpis.critic_approval_rate ?? 0) * 100)}%`,
+      `Tokens in/out: ${kpis.total_tokens_in ?? 0} / ${kpis.total_tokens_out ?? 0}`,
+      `Custo estimado USD: ${(kpis.estimated_cost_usd ?? 0).toFixed ? kpis.estimated_cost_usd.toFixed(6) : kpis.estimated_cost_usd}`,
+    ].forEach((itemText) => {
+      const item = document.createElement('li');
+      item.textContent = itemText;
+      aiMetricsList.appendChild(item);
+    });
+
+    const aiGroupTrendsList = document.getElementById('ai-group-trends-list');
+    (aiPanel.group_trends_30d || []).forEach((trend) => {
+      const item = document.createElement('li');
+      item.textContent = `${trend.group}: ${trend.occurrences} ocorrencias (${trend.unique_hosts} hosts)`;
+      aiGroupTrendsList.appendChild(item);
+    });
+
+    if ((aiPanel.group_trends_30d || []).length === 0) {
+      const item = document.createElement('li');
+      item.textContent = 'No trend data yet.';
+      aiGroupTrendsList.appendChild(item);
+    }
+
+    const aiAuditList = document.getElementById('ai-audit-list');
+    (aiPanel.recent_audits || []).slice(0, 12).forEach((audit) => {
+      const item = document.createElement('li');
+      item.textContent = `${audit.tool} | success=${audit.success} | ${audit.duration}s`;
+      aiAuditList.appendChild(item);
+    });
+
+    if ((aiPanel.recent_audits || []).length === 0) {
+      const item = document.createElement('li');
+      item.textContent = 'No audit records yet.';
+      aiAuditList.appendChild(item);
+    }
 
     const chatWindow = document.getElementById('chat-window');
     const input = document.getElementById('prompt-input');
@@ -120,8 +231,16 @@ async function initDashboard() {
         sendMessage();
       }
     });
+
+    initScrollMenu();
   } catch (error) {
-    document.querySelector('.shell').innerHTML = `<div class="card error">Unable to load SOFIA dashboard: ${error.message}</div>`;
+    const shell = document.querySelector('.shell');
+    if (shell) {
+      const warning = document.createElement('div');
+      warning.className = 'card error';
+      warning.textContent = `Dashboard loaded with partial data: ${error.message}`;
+      shell.prepend(warning);
+    }
   }
 }
 

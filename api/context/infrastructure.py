@@ -6,6 +6,7 @@ from typing import Any
 from connectors.zabbix import ZabbixConnector
 from core.event_bus import event_bus
 from services.docker_service import DockerService
+from services.postgres_store import postgres_store
 
 
 def _extract_group_name(question: str) -> str | None:
@@ -74,11 +75,13 @@ class SnapshotService:
             summary = connector.get_problem_summary(limit=200)
             problems = connector.list_active_problems(limit=200)
             down_hosts = self._detect_down_hosts(problems)
+            group_summary = self._group_problem_summary(problems)
             snapshot["zabbix"] = {
                 "host_count": connector.count_hosts(),
                 "problem_summary": summary,
                 "problems": problems,
                 "down_hosts": sorted(down_hosts),
+                "group_summary": group_summary,
             }
             self._publish_transitions(
                 down_hosts=down_hosts,
@@ -102,7 +105,30 @@ class SnapshotService:
 
         self._snapshot = snapshot
         self._last_refresh = datetime.now(timezone.utc)
+
+        self._persist_snapshot(snapshot)
         return snapshot
+
+    @staticmethod
+    def _group_problem_summary(problems: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        totals: dict[str, int] = {}
+        for problem in problems:
+            for group in problem.get("groups", []) or []:
+                totals[group] = totals.get(group, 0) + 1
+        ranked = sorted(totals.items(), key=lambda item: item[1], reverse=True)
+        return [{"group": group, "occurrences": count} for group, count in ranked[:20]]
+
+    @staticmethod
+    def _persist_snapshot(snapshot: dict[str, Any]) -> None:
+        zabbix = snapshot.get("zabbix", {}) if isinstance(snapshot.get("zabbix", {}), dict) else {}
+        docker = snapshot.get("docker", {}) if isinstance(snapshot.get("docker", {}), dict) else {}
+        summary = {
+            "hosts": zabbix.get("host_count", 0),
+            "problems": len(zabbix.get("problems", []) or []),
+            "containers": docker.get("container_count", 0),
+            "groups": len(zabbix.get("group_summary", []) or []),
+        }
+        postgres_store.save_snapshot(snapshot=snapshot, summary=summary)
 
     def get(self, force_refresh: bool = False) -> dict[str, Any]:
         if force_refresh or self._is_stale():

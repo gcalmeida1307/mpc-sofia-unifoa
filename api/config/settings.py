@@ -48,6 +48,15 @@ class N8NConfig:
 class RuntimeConfig:
     request_timeout: int
     debug: bool
+    snapshot_interval_seconds: int
+    ai_metrics_window_hours: int
+    request_rate_limit_per_minute: int
+
+
+@dataclass(frozen=True)
+class SecurityConfig:
+    admin_api_key: str
+    mfa_totp_secret: str
 
 
 class Settings:
@@ -75,6 +84,13 @@ class Settings:
         self.runtime = RuntimeConfig(
             request_timeout=int(os.getenv("REQUEST_TIMEOUT", "30")),
             debug=_as_bool(os.getenv("DEBUG"), default=False),
+            snapshot_interval_seconds=int(os.getenv("SNAPSHOT_INTERVAL_SECONDS", "30")),
+            ai_metrics_window_hours=int(os.getenv("AI_METRICS_WINDOW_HOURS", "24")),
+            request_rate_limit_per_minute=int(os.getenv("REQUEST_RATE_LIMIT_PER_MINUTE", "120")),
+        )
+        self.security = SecurityConfig(
+            admin_api_key=os.getenv("SECURITY_ADMIN_API_KEY", ""),
+            mfa_totp_secret=os.getenv("SECURITY_MFA_TOTP_SECRET", ""),
         )
 
         # Backward-compatible attributes used across existing services.
@@ -82,6 +98,11 @@ class Settings:
         self.ZABBIX_USER = self.zabbix.user
         self.ZABBIX_PASSWORD = self.zabbix.password
         self.REQUEST_TIMEOUT = self.runtime.request_timeout
+        self.SNAPSHOT_INTERVAL_SECONDS = self.runtime.snapshot_interval_seconds
+        self.AI_METRICS_WINDOW_HOURS = self.runtime.ai_metrics_window_hours
+        self.REQUEST_RATE_LIMIT_PER_MINUTE = self.runtime.request_rate_limit_per_minute
+        self.SECURITY_ADMIN_API_KEY = self.security.admin_api_key
+        self.SECURITY_MFA_TOTP_SECRET = self.security.mfa_totp_secret
         self.POSTGRES_DSN = self.postgres.dsn
         self.QDRANT_URL = self.qdrant.url
         self.QDRANT_COLLECTION = self.qdrant.collection
@@ -120,9 +141,16 @@ class Settings:
                 "base_url": self.n8n.base_url,
                 "default_webhook": self.n8n.default_webhook,
             },
+            "security": {
+                "admin_api_key": self._mask(self.security.admin_api_key) if masked else self.security.admin_api_key,
+                "mfa_totp_secret": self._mask(self.security.mfa_totp_secret) if masked else self.security.mfa_totp_secret,
+            },
             "runtime": {
                 "request_timeout": self.runtime.request_timeout,
                 "debug": self.runtime.debug,
+                "snapshot_interval_seconds": self.runtime.snapshot_interval_seconds,
+                "ai_metrics_window_hours": self.runtime.ai_metrics_window_hours,
+                "request_rate_limit_per_minute": self.runtime.request_rate_limit_per_minute,
             },
         }
 

@@ -4,3 +4,4 @@ requests
 python-dotenv
 psycopg[binary]
 qdrant-client
+pyotp

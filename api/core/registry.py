@@ -8,6 +8,7 @@ class ModuleRegistry:
         self._modules: dict[str, type] = {}
         self._instances: dict[str, Any] = {}
         self._capabilities: dict[str, set[str]] = {}
+        self._capability_tools: dict[str, list[str]] = {}
         self._services: dict[str, Any] = {}
 
     def register(self, module_obj: type | Any) -> None:
@@ -49,6 +50,18 @@ class ModuleRegistry:
     def register_service(self, name: str, service: Any) -> None:
         self._services[name] = service
 
+    def register_capability_tools(self, capability: str, tools: list[str]) -> None:
+        self._capability_tools[capability] = sorted(set(tools))
+
+    def resolve_tools_by_capabilities(self, capabilities: list[str]) -> list[str]:
+        tools: list[str] = []
+        for capability in capabilities:
+            tools.extend(self._capability_tools.get(capability, []))
+        return sorted(set(tools))
+
+    def get_capability_catalog(self) -> dict[str, list[str]]:
+        return {name: list(tools) for name, tools in self._capability_tools.items()}
+
     def get(self, name: str) -> Any:
         if name in self._services:
             return self._services[name]
@@ -67,6 +80,7 @@ class ModuleRegistry:
                 module: self.get_capabilities(module)
                 for module in modules
             },
+            "capability_catalog": self.get_capability_catalog(),
             "services": sorted(self._services.keys()),
         }
 
@@ -74,6 +88,7 @@ class ModuleRegistry:
         self._modules.clear()
         self._instances.clear()
         self._capabilities.clear()
+        self._capability_tools.clear()
         self._services.clear()
 
 

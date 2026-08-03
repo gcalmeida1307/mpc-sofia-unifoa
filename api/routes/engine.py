@@ -59,3 +59,46 @@ def memory_search(query: str):
 @router.post("/docker/list")
 def docker_list():
     return {"containers": DockerService().list_containers()}
+
+
+@router.get("/temporal/groups")
+def temporal_groups(days: int = 30, limit: int = 10):
+    days = max(1, min(days, 180))
+    limit = max(1, min(limit, 50))
+    return {
+        "days": days,
+        "groups": postgres_store.get_group_trends(days=days, limit=limit),
+    }
+
+
+@router.get("/evidence/audit")
+def evidence_audit(limit: int = 100):
+    limit = max(1, min(limit, 500))
+    return {
+        "audits": postgres_store.get_recent_tool_audits(limit=limit),
+        "count": limit,
+    }
+
+
+@router.get("/ai/metrics")
+def ai_metrics(hours: int = 24):
+    hours = max(1, min(hours, 720))
+    metrics = postgres_store.get_ai_metrics_summary(hours=hours)
+    return {
+        "metrics": metrics,
+        "hours": hours,
+    }
+
+
+@router.get("/ai/panel")
+def ai_panel(hours: int = 24):
+    hours = max(1, min(hours, 720))
+    metrics = postgres_store.get_ai_metrics_summary(hours=hours)
+    trends = postgres_store.get_group_trends(days=30, limit=10)
+    audits = postgres_store.get_recent_tool_audits(limit=20)
+    return {
+        "kpis": metrics,
+        "group_trends_30d": trends,
+        "recent_audits": audits,
+        "window_hours": hours,
+    }

@@ -16,6 +16,10 @@ def ask(payload: AIAskRequest):
     return {
         "answer": result.get("answer", ""),
         "plan": result.get("plan", {}),
+        "reasoning": result.get("reasoning", {}),
+        "critic": result.get("critic", {}),
+        "confidence": result.get("confidence", 0.0),
+        "explainability": result.get("explainability", {}),
         "llm_used": result.get("llm_used", False),
         "context": result.get("context", {}),
         "source": "openai-service",

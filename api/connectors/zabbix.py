@@ -102,7 +102,7 @@ class ZabbixConnector:
             "params": {
                 "output": ["triggerid"],
                 "triggerids": trigger_ids,
-                "selectHosts": ["hostid", "name"],
+                "selectHosts": ["hostid", "host", "name"],
             },
             "auth": self.token,
             "id": 4,
@@ -120,6 +120,40 @@ class ZabbixConnector:
         mapping = {}
         for item in data.get("result", []):
             mapping[str(item.get("triggerid"))] = item.get("hosts", [])
+        return mapping
+
+    def get_groups_for_hostids(self, host_ids: list[str]):
+        if not host_ids:
+            return {}
+        if not self.token:
+            self.login()
+
+        payload = {
+            "jsonrpc": "2.0",
+            "method": "host.get",
+            "params": {
+                "output": ["hostid"],
+                "hostids": host_ids,
+                "selectGroups": ["groupid", "name"],
+            },
+            "auth": self.token,
+            "id": 6,
+        }
+        response = requests.post(
+            settings.ZABBIX_URL,
+            json=payload,
+            timeout=settings.REQUEST_TIMEOUT,
+        )
+        response.raise_for_status()
+        data = response.json()
+        if "error" in data:
+            raise Exception(data["error"])
+
+        mapping = {}
+        for host in data.get("result", []):
+            hid = str(host.get("hostid"))
+            groups = host.get("groups", []) or []
+            mapping[hid] = [group.get("name", "") for group in groups if group.get("name")]
         return mapping
 
     def find_hostgroup_ids(self, group_name: str):
@@ -180,6 +214,15 @@ class ZabbixConnector:
         problems = self.get_active_problems(limit=limit, groupids=groupids)
         trigger_ids = [str(problem.get("objectid")) for problem in problems if problem.get("objectid")]
         trigger_hosts = self.get_hosts_for_triggers(trigger_ids)
+        host_ids = sorted(
+            {
+                str(host.get("hostid"))
+                for hosts in trigger_hosts.values()
+                for host in hosts
+                if host.get("hostid")
+            }
+        )
+        host_groups = self.get_groups_for_hostids(host_ids)
 
         severity_map = {
             "0": "Not classified",
@@ -194,6 +237,13 @@ class ZabbixConnector:
         for problem in problems:
             hosts = trigger_hosts.get(str(problem.get("objectid")), [])
             host_names = [host.get("name", "") for host in hosts if host.get("name")]
+            groups = sorted(
+                {
+                    group_name_item
+                    for host in hosts
+                    for group_name_item in host_groups.get(str(host.get("hostid")), [])
+                }
+            )
             severity = str(problem.get("severity", "0"))
             enriched.append(
                 {
@@ -203,6 +253,7 @@ class ZabbixConnector:
                     "severity_label": severity_map.get(severity, severity),
                     "group_filter": group_name,
                     "hosts": host_names,
+                    "groups": groups,
                 }
             )
 

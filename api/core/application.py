@@ -1,17 +1,23 @@
 from __future__ import annotations
 
 import asyncio
+import hmac
+import time
+from collections import defaultdict, deque
 from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+import pyotp
 
 from config.settings import settings
 from core.bootstrap import bootstrap_registry
 from core.event_bus import event_bus
 from core.event_handlers import register_default_event_handlers
 from core.registry import registry
+from core.snapshot_scheduler import SnapshotScheduler
 
 
 class Application:
@@ -19,6 +25,8 @@ class Application:
         self.settings = settings
         self.registry = registry
         self.event_bus = event_bus
+        self.snapshot_scheduler = SnapshotScheduler(interval_seconds=self.settings.SNAPSHOT_INTERVAL_SECONDS)
+        self._request_buckets: dict[str, deque[float]] = defaultdict(deque)
 
     async def startup(self) -> None:
         # Kernel dependencies are registered once and reused via registry.get(...).
@@ -30,6 +38,7 @@ class Application:
         self.registry.register_service("event_bus", self.event_bus)
         self.registry.register_service("registry_snapshot", snapshot)
         register_default_event_handlers(self.event_bus)
+        self.registry.register_service("snapshot_scheduler", self.snapshot_scheduler)
 
         for module_name in self.registry.list_modules():
             module_cls = self.registry.get_module_class(module_name)
@@ -41,7 +50,10 @@ class Application:
             if asyncio.iscoroutine(result):
                 await result
 
+        await self.snapshot_scheduler.start()
+
     async def shutdown(self) -> None:
+        await self.snapshot_scheduler.stop()
         for module_name in reversed(self.registry.list_modules()):
             module = self.registry.get_module(module_name)
             if module is None:
@@ -62,6 +74,45 @@ class Application:
 
         @app.middleware("http")
         async def add_security_headers(request, call_next):
+            protected_write_paths = {
+                "/marketplace/install",
+                "/workflows/run",
+                "/workflows/n8n/run",
+                "/engine/ingest",
+            }
+            path = request.url.path
+            method = request.method.upper()
+
+            # Enforce admin API key and optional TOTP for critical mutating endpoints.
+            if method in {"POST", "PUT", "PATCH", "DELETE"} and path in protected_write_paths:
+                expected_key = self.settings.SECURITY_ADMIN_API_KEY.strip()
+                if expected_key:
+                    received_key = request.headers.get("x-sofia-admin-key", "").strip()
+                    if not received_key or not hmac.compare_digest(received_key, expected_key):
+                        return JSONResponse(status_code=401, content={"detail": "admin api key required"})
+
+                    mfa_secret = self.settings.SECURITY_MFA_TOTP_SECRET.strip()
+                    if mfa_secret:
+                        otp = request.headers.get("x-sofia-otp", "").strip()
+                        if not otp or not pyotp.TOTP(mfa_secret).verify(otp, valid_window=1):
+                            return JSONResponse(status_code=401, content={"detail": "valid TOTP required"})
+
+            # Lightweight in-memory rate limit for AI chat endpoints.
+            if path in {"/assistant/ask", "/ai/ask"}:
+                limit = max(10, int(self.settings.REQUEST_RATE_LIMIT_PER_MINUTE))
+                client_ip = request.client.host if request.client and request.client.host else "unknown"
+                key = f"{client_ip}:{path}"
+                now = time.time()
+                bucket = self._request_buckets[key]
+                while bucket and now - bucket[0] > 60:
+                    bucket.popleft()
+                if len(bucket) >= limit:
+                    return JSONResponse(
+                        status_code=429,
+                        content={"detail": "rate limit exceeded", "limit_per_minute": limit},
+                    )
+                bucket.append(now)
+
             response = await call_next(request)
             response.headers["X-Content-Type-Options"] = "nosniff"
             response.headers["X-Frame-Options"] = "DENY"
