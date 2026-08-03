@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 
 from ai.client import OpenAIResponsesClient
 from ai.models import AIAnswerModel
 from ai.planner import build_plan
 from ai.prompts import SYSTEM_PROMPT
 from context.builder import context_builder
+from core.event_bus import event_bus
+from services.openai_reasoner import has_openai_enabled
 from services.openai_reasoner import has_openai_enabled
 
 
@@ -22,6 +25,10 @@ class OpenAIService:
         return any(term in q for term in count_terms) and any(term in q for term in host_terms) and not any(term in q for term in severity_terms)
 
     def answer(self, question: str) -> dict:
+        event_bus.publish_sync(
+            "ai.question.received",
+            {"question": question, "generated_at": datetime.now(timezone.utc).isoformat()},
+        )
         plan = build_plan(question)
         context = context_builder.build(question, plan)
 
@@ -33,6 +40,15 @@ class OpenAIService:
                 plan=plan,
                 context=context,
                 llm_used=False,
+            )
+            event_bus.publish_sync(
+                "ai.answered",
+                {
+                    "question": question,
+                    "answer": answer,
+                    "llm_used": False,
+                    "generated_at": datetime.now(timezone.utc).isoformat(),
+                },
             )
             return result.model_dump()
 
@@ -50,6 +66,15 @@ class OpenAIService:
                 context=context,
                 llm_used=True,
             )
+            event_bus.publish_sync(
+                "ai.answered",
+                {
+                    "question": question,
+                    "answer": llm_answer.strip(),
+                    "llm_used": True,
+                    "generated_at": datetime.now(timezone.utc).isoformat(),
+                },
+            )
             return result.model_dump()
 
         # Deterministic fallback when OpenAI is unavailable.
@@ -59,6 +84,15 @@ class OpenAIService:
             plan=plan,
             context=context,
             llm_used=False,
+        )
+        event_bus.publish_sync(
+            "ai.answered",
+            {
+                "question": question,
+                "answer": answer,
+                "llm_used": False,
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+            },
         )
         return result.model_dump()
 

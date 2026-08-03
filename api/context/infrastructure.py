@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from connectors.zabbix import ZabbixConnector
+from core.event_bus import event_bus
 from services.docker_service import DockerService
 
 
@@ -25,6 +26,36 @@ class SnapshotService:
         self.refresh_seconds = refresh_seconds
         self._snapshot: dict[str, Any] | None = None
         self._last_refresh: datetime | None = None
+        self._last_down_hosts: set[str] = set()
+
+    @staticmethod
+    def _detect_down_hosts(problems: list[dict[str, Any]]) -> set[str]:
+        down_tokens = ["down", "unavailable", "link down", "indispon", "offline"]
+        hosts: set[str] = set()
+        for problem in problems:
+            name = str(problem.get("name", "")).lower()
+            if not any(token in name for token in down_tokens):
+                continue
+            for host in problem.get("hosts", []) or []:
+                host_name = str(host).strip()
+                if host_name:
+                    hosts.add(host_name)
+        return hosts
+
+    def _publish_transitions(self, down_hosts: set[str], generated_at: str, total_problems: int) -> None:
+        new_down = sorted(down_hosts - self._last_down_hosts)
+        recovered = sorted(self._last_down_hosts - down_hosts)
+        for host in new_down:
+            event_bus.publish_sync(
+                "host.down",
+                {"host": host, "generated_at": generated_at, "problem_count": total_problems},
+            )
+        for host in recovered:
+            event_bus.publish_sync(
+                "host.recovered",
+                {"host": host, "generated_at": generated_at, "problem_count": total_problems},
+            )
+        self._last_down_hosts = down_hosts
 
     def _is_stale(self) -> bool:
         if self._snapshot is None or self._last_refresh is None:
@@ -42,11 +73,18 @@ class SnapshotService:
             connector = ZabbixConnector()
             summary = connector.get_problem_summary(limit=200)
             problems = connector.list_active_problems(limit=200)
+            down_hosts = self._detect_down_hosts(problems)
             snapshot["zabbix"] = {
                 "host_count": connector.count_hosts(),
                 "problem_summary": summary,
                 "problems": problems,
+                "down_hosts": sorted(down_hosts),
             }
+            self._publish_transitions(
+                down_hosts=down_hosts,
+                generated_at=snapshot["generated_at"],
+                total_problems=len(problems),
+            )
         except Exception as exc:
             snapshot["zabbix"] = {"error": str(exc), "problems": []}
 

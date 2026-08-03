@@ -1,20 +1,130 @@
-from dotenv import load_dotenv
+from __future__ import annotations
+
 import os
+from dataclasses import dataclass
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
-class Settings:
 
-   ZABBIX_URL= os.getenv("ZABBIX_URL")
-   ZABBIX_USER= os.getenv("ZABBIX_USER")
-   ZABBIX_PASSWORD= os.getenv("ZABBIX_PASSWORD")
-   REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", 30))
-   POSTGRES_DSN = os.getenv("POSTGRES_DSN", "postgresql://sofia:sofia123@sofia_postgres:5432/sofia")
-   QDRANT_URL = os.getenv("QDRANT_URL", "http://sofia_qdrant:6333")
-   QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "sofia_memory")
-   N8N_BASE_URL = os.getenv("N8N_BASE_URL", "http://sofia_n8n:5678")
-   N8N_DEFAULT_WEBHOOK = os.getenv("N8N_DEFAULT_WEBHOOK", "sofia-investigation")
-   OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-   OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5")
+def _as_bool(value: str | None, default: bool = False) -> bool:
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+@dataclass(frozen=True)
+class OpenAIConfig:
+    api_key: str
+    model: str
+
+
+@dataclass(frozen=True)
+class ZabbixConfig:
+    url: str | None
+    user: str | None
+    password: str | None
+
+
+@dataclass(frozen=True)
+class PostgresConfig:
+    dsn: str
+
+
+@dataclass(frozen=True)
+class QdrantConfig:
+    url: str
+    collection: str
+
+
+@dataclass(frozen=True)
+class N8NConfig:
+    base_url: str
+    default_webhook: str
+
+
+@dataclass(frozen=True)
+class RuntimeConfig:
+    request_timeout: int
+    debug: bool
+
+
+class Settings:
+    def __init__(self):
+        self.openai = OpenAIConfig(
+            api_key=os.getenv("OPENAI_API_KEY", ""),
+            model=os.getenv("OPENAI_MODEL", "gpt-5"),
+        )
+        self.zabbix = ZabbixConfig(
+            url=os.getenv("ZABBIX_URL"),
+            user=os.getenv("ZABBIX_USER"),
+            password=os.getenv("ZABBIX_PASSWORD"),
+        )
+        self.postgres = PostgresConfig(
+            dsn=os.getenv("POSTGRES_DSN", "postgresql://sofia:sofia123@sofia_postgres:5432/sofia"),
+        )
+        self.qdrant = QdrantConfig(
+            url=os.getenv("QDRANT_URL", "http://sofia_qdrant:6333"),
+            collection=os.getenv("QDRANT_COLLECTION", "sofia_memory"),
+        )
+        self.n8n = N8NConfig(
+            base_url=os.getenv("N8N_BASE_URL", "http://sofia_n8n:5678"),
+            default_webhook=os.getenv("N8N_DEFAULT_WEBHOOK", "sofia-investigation"),
+        )
+        self.runtime = RuntimeConfig(
+            request_timeout=int(os.getenv("REQUEST_TIMEOUT", "30")),
+            debug=_as_bool(os.getenv("DEBUG"), default=False),
+        )
+
+        # Backward-compatible attributes used across existing services.
+        self.ZABBIX_URL = self.zabbix.url
+        self.ZABBIX_USER = self.zabbix.user
+        self.ZABBIX_PASSWORD = self.zabbix.password
+        self.REQUEST_TIMEOUT = self.runtime.request_timeout
+        self.POSTGRES_DSN = self.postgres.dsn
+        self.QDRANT_URL = self.qdrant.url
+        self.QDRANT_COLLECTION = self.qdrant.collection
+        self.N8N_BASE_URL = self.n8n.base_url
+        self.N8N_DEFAULT_WEBHOOK = self.n8n.default_webhook
+        self.OPENAI_API_KEY = self.openai.api_key
+        self.OPENAI_MODEL = self.openai.model
+
+    @staticmethod
+    def _mask(value: str | None) -> str:
+        if not value:
+            return ""
+        if len(value) <= 6:
+            return "***"
+        return f"{value[:3]}***{value[-2:]}"
+
+    def snapshot(self, masked: bool = True) -> dict[str, object]:
+        openai_api_key = self._mask(self.openai.api_key) if masked else self.openai.api_key
+        zabbix_password = self._mask(self.zabbix.password) if masked else self.zabbix.password
+        return {
+            "openai": {
+                "api_key": openai_api_key,
+                "model": self.openai.model,
+            },
+            "zabbix": {
+                "url": self.zabbix.url,
+                "user": self.zabbix.user,
+                "password": zabbix_password,
+            },
+            "postgres": {"dsn": self._mask(self.postgres.dsn) if masked else self.postgres.dsn},
+            "qdrant": {
+                "url": self.qdrant.url,
+                "collection": self.qdrant.collection,
+            },
+            "n8n": {
+                "base_url": self.n8n.base_url,
+                "default_webhook": self.n8n.default_webhook,
+            },
+            "runtime": {
+                "request_timeout": self.runtime.request_timeout,
+                "debug": self.runtime.debug,
+            },
+        }
+
 
 settings = Settings()
