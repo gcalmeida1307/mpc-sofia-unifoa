@@ -22,6 +22,8 @@ class ContextModel(BaseModel):
     risks: list[dict] = Field(default_factory=list)
     tools: dict = Field(default_factory=dict)
     summary: dict = Field(default_factory=dict)
+    agent: dict = Field(default_factory=dict)
+    hypothesis: dict = Field(default_factory=dict)
 
 
 class AIAnswerModel(BaseModel):
@@ -33,3 +35,4 @@ class AIAnswerModel(BaseModel):
     critic: dict = Field(default_factory=dict)
     confidence: float = 0.0
     explainability: dict = Field(default_factory=dict)
+    learning: dict = Field(default_factory=dict)

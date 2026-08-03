@@ -49,6 +49,7 @@ class RuntimeConfig:
     request_timeout: int
     debug: bool
     snapshot_interval_seconds: int
+    autonomous_investigation_interval_seconds: int
     ai_metrics_window_hours: int
     request_rate_limit_per_minute: int
 
@@ -85,6 +86,7 @@ class Settings:
             request_timeout=int(os.getenv("REQUEST_TIMEOUT", "30")),
             debug=_as_bool(os.getenv("DEBUG"), default=False),
             snapshot_interval_seconds=int(os.getenv("SNAPSHOT_INTERVAL_SECONDS", "30")),
+            autonomous_investigation_interval_seconds=int(os.getenv("AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS", "90")),
             ai_metrics_window_hours=int(os.getenv("AI_METRICS_WINDOW_HOURS", "24")),
             request_rate_limit_per_minute=int(os.getenv("REQUEST_RATE_LIMIT_PER_MINUTE", "120")),
         )
@@ -99,6 +101,7 @@ class Settings:
         self.ZABBIX_PASSWORD = self.zabbix.password
         self.REQUEST_TIMEOUT = self.runtime.request_timeout
         self.SNAPSHOT_INTERVAL_SECONDS = self.runtime.snapshot_interval_seconds
+        self.AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS = self.runtime.autonomous_investigation_interval_seconds
         self.AI_METRICS_WINDOW_HOURS = self.runtime.ai_metrics_window_hours
         self.REQUEST_RATE_LIMIT_PER_MINUTE = self.runtime.request_rate_limit_per_minute
         self.SECURITY_ADMIN_API_KEY = self.security.admin_api_key
@@ -149,6 +152,7 @@ class Settings:
                 "request_timeout": self.runtime.request_timeout,
                 "debug": self.runtime.debug,
                 "snapshot_interval_seconds": self.runtime.snapshot_interval_seconds,
+                "autonomous_investigation_interval_seconds": self.runtime.autonomous_investigation_interval_seconds,
                 "ai_metrics_window_hours": self.runtime.ai_metrics_window_hours,
                 "request_rate_limit_per_minute": self.runtime.request_rate_limit_per_minute,
             },

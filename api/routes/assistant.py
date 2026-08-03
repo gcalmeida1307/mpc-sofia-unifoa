@@ -143,6 +143,9 @@ def ask(payload: AssistantRequest):
                 "memory_hits": memory_hits,
                 "llm_enabled": has_openai_enabled(),
                 "planner": ai_result.get("plan", {}),
+                "agent": ai_result.get("context", {}).get("agent", {}),
+                "hypothesis": ai_result.get("context", {}).get("hypothesis", {}),
+                "learning": ai_result.get("learning", {}),
                 "source": "openai-service+context-engine",
             }
     except Exception:

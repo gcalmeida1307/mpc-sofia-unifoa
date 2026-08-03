@@ -62,7 +62,14 @@ async function initDashboard() {
     const knowledge = await safeLoad('/knowledge/status', { status: 'unavailable' });
     const marketplace = await safeLoad('/marketplace/catalog', { modules: [] });
     const mcp = await safeLoad('/mcp/tools', { registered_modules: [] });
-    const aiPanel = await safeLoad('/engine/ai/panel?hours=24', { kpis: {}, group_trends_30d: [], recent_audits: [] });
+    const aiPanel = await safeLoad('/engine/ai/panel?hours=24', {
+      kpis: {},
+      intelligence: { ai: {}, hypothesis: {}, learning: {} },
+      group_trends_30d: [],
+      recent_audits: [],
+      recent_investigations: []
+    });
+    const agents = await safeLoad('/engine/agents/status', { agents: [] });
 
     document.getElementById('registry-count').textContent = `${(registry.modules || []).length} modules registered`;
     document.getElementById('knowledge-status').textContent = knowledge.status;
@@ -130,12 +137,19 @@ async function initDashboard() {
 
     const aiMetricsList = document.getElementById('ai-metrics-list');
     const kpis = aiPanel.kpis || {};
+    const intelligence = aiPanel.intelligence || {};
+    const hypothesis = intelligence.hypothesis || {};
+    const learning = intelligence.learning || {};
     [
       `Perguntas: ${kpis.total_questions ?? 0}`,
       `Latencia media: ${kpis.avg_latency_ms ?? 0} ms`,
       `Confidence media: ${kpis.avg_confidence ?? 0}`,
       `Uso de LLM: ${Math.round((kpis.llm_usage_rate ?? 0) * 100)}%`,
       `Aprovacao do Critic: ${Math.round((kpis.critic_approval_rate ?? 0) * 100)}%`,
+      `Runs de hipoteses: ${hypothesis.total_runs ?? 0}`,
+      `Hipotese confirmada: ${Math.round((hypothesis.confirmed_rate ?? 0) * 100)}%`,
+      `Ciclos de aprendizado: ${learning.total_cycles ?? 0}`,
+      `Reuso de aprendizado: ${Math.round((learning.reuse_rate ?? 0) * 100)}%`,
       `Tokens in/out: ${kpis.total_tokens_in ?? 0} / ${kpis.total_tokens_out ?? 0}`,
       `Custo estimado USD: ${(kpis.estimated_cost_usd ?? 0).toFixed ? kpis.estimated_cost_usd.toFixed(6) : kpis.estimated_cost_usd}`,
     ].forEach((itemText) => {
@@ -168,6 +182,33 @@ async function initDashboard() {
       const item = document.createElement('li');
       item.textContent = 'No audit records yet.';
       aiAuditList.appendChild(item);
+    }
+
+    const investigationsList = document.getElementById('ai-investigations-list');
+    (aiPanel.recent_investigations || []).slice(0, 8).forEach((itemData) => {
+      const item = document.createElement('li');
+      const selectedHypothesis = itemData.hypothesis?.selected_hypothesis || 'n/a';
+      item.textContent = `[${itemData.severity}] ${itemData.watcher} - ${selectedHypothesis}`;
+      investigationsList.appendChild(item);
+    });
+
+    if ((aiPanel.recent_investigations || []).length === 0) {
+      const item = document.createElement('li');
+      item.textContent = 'No autonomous investigations yet.';
+      investigationsList.appendChild(item);
+    }
+
+    const agentsList = document.getElementById('ai-agents-list');
+    (agents.agents || []).forEach((agent) => {
+      const item = document.createElement('li');
+      item.textContent = `${agent.name} | budget=${agent.tool_budget?.max_tools ?? 0} tools`;
+      agentsList.appendChild(item);
+    });
+
+    if ((agents.agents || []).length === 0) {
+      const item = document.createElement('li');
+      item.textContent = 'No specialist agents registered.';
+      agentsList.appendChild(item);
     }
 
     const chatWindow = document.getElementById('chat-window');

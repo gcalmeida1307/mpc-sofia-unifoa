@@ -4,8 +4,11 @@ import json
 from datetime import datetime, timezone
 from time import perf_counter
 
+from ai.agent_runtime import agent_runtime
 from ai.client import OpenAIResponsesClient
 from ai.critic import critic_engine
+from ai.hypothesis import hypothesis_engine
+from ai.learning_loop import learning_loop
 from ai.models import AIAnswerModel
 from ai.planner import build_plan
 from ai.prompts import SYSTEM_PROMPT
@@ -28,6 +31,8 @@ class OpenAIService:
             "intent": plan.get("intent", "unknown"),
             "capabilities": plan.get("capabilities", []),
             "tools": plan.get("tools", []),
+            "agent": context.get("agent", {}),
+            "selected_hypothesis": context.get("hypothesis", {}).get("selected_hypothesis"),
             "evidence_sources": [trace.get("tool") for trace in context.get("evidence", [])],
             "risk_levels": [risk.get("level") for risk in context.get("risks", [])],
             "justification": reasoning.get("justification", ""),
@@ -41,8 +46,26 @@ class OpenAIService:
             {"question": question, "generated_at": datetime.now(timezone.utc).isoformat()},
         )
         plan = build_plan(question)
-        context = context_builder.build(question, plan)
+        agent = agent_runtime.resolve(question=question, plan=plan)
+        context = context_builder.build(question, plan, agent=agent)
+        hypothesis = hypothesis_engine.build(question=question, plan=plan, context=context)
+        context["hypothesis"] = hypothesis
+        context["agent"] = agent
         reasoning = reasoning_engine.build(question, plan, context)
+
+        postgres_store.save_hypothesis_run(
+            question=question,
+            symptom=hypothesis.get("symptom", question),
+            domain=hypothesis.get("domain", "general"),
+            hypotheses=hypothesis.get("hypotheses", []),
+            selected_hypothesis=hypothesis.get("selected_hypothesis"),
+            confidence=float(hypothesis.get("confidence", 0.0) or 0.0),
+            metadata={
+                "intent": plan.get("intent", "unknown"),
+                "agent": agent.get("name", "unknown"),
+                "confirmed": bool(float(hypothesis.get("confidence", 0.0) or 0.0) >= 0.6),
+            },
+        )
 
         candidate_answer = reasoning.get("deterministic_answer")
         llm_used = False
@@ -103,7 +126,20 @@ class OpenAIService:
             metadata={
                 "critic_issues": critic.get("issues", []),
                 "capabilities": plan.get("capabilities", []),
+                "agent": agent.get("name", "unknown"),
+                "selected_hypothesis": hypothesis.get("selected_hypothesis"),
             },
+        )
+
+        learning = learning_loop.process(
+            question=question,
+            plan=plan,
+            context=context,
+            reasoning=reasoning,
+            critic=critic,
+            answer=final_answer,
+            hypothesis=hypothesis,
+            agent=agent,
         )
 
         result = AIAnswerModel(
@@ -115,6 +151,7 @@ class OpenAIService:
             critic=critic,
             confidence=confidence,
             explainability=explainability,
+            learning=learning,
         )
         event_bus.publish_sync(
             "ai.answered",
@@ -122,6 +159,8 @@ class OpenAIService:
                 "question": question,
                 "answer": final_answer,
                 "llm_used": llm_used,
+                "agent": agent.get("name", "unknown"),
+                "selected_hypothesis": hypothesis.get("selected_hypothesis"),
                 "generated_at": datetime.now(timezone.utc).isoformat(),
             },
         )

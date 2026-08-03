@@ -90,6 +90,64 @@ class PostgresStore:
                         )
                         """
                     )
+                    cur.execute(
+                        """
+                        CREATE TABLE IF NOT EXISTS ai_hypothesis_runs (
+                            id BIGSERIAL PRIMARY KEY,
+                            question TEXT NOT NULL,
+                            symptom TEXT NOT NULL,
+                            domain TEXT NOT NULL,
+                            hypotheses JSONB NOT NULL DEFAULT '[]'::jsonb,
+                            selected_hypothesis TEXT NULL,
+                            confidence DOUBLE PRECISION NOT NULL DEFAULT 0,
+                            metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+                            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                        )
+                        """
+                    )
+                    cur.execute(
+                        """
+                        CREATE TABLE IF NOT EXISTS ai_learning_cycles (
+                            id BIGSERIAL PRIMARY KEY,
+                            question TEXT NOT NULL,
+                            intent TEXT NOT NULL,
+                            decision JSONB NOT NULL DEFAULT '{}'::jsonb,
+                            evidence JSONB NOT NULL DEFAULT '[]'::jsonb,
+                            outcome JSONB NOT NULL DEFAULT '{}'::jsonb,
+                            knowledge_updated BOOLEAN NOT NULL DEFAULT FALSE,
+                            metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+                            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                        )
+                        """
+                    )
+                    cur.execute(
+                        """
+                        CREATE TABLE IF NOT EXISTS planner_policy_weights (
+                            id BIGSERIAL PRIMARY KEY,
+                            capability TEXT NOT NULL UNIQUE,
+                            weight DOUBLE PRECISION NOT NULL DEFAULT 1.0,
+                            success_count INTEGER NOT NULL DEFAULT 0,
+                            failure_count INTEGER NOT NULL DEFAULT 0,
+                            updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                        )
+                        """
+                    )
+                    cur.execute(
+                        """
+                        CREATE TABLE IF NOT EXISTS autonomous_investigations (
+                            id BIGSERIAL PRIMARY KEY,
+                            watcher TEXT NOT NULL,
+                            title TEXT NOT NULL,
+                            severity TEXT NOT NULL,
+                            status TEXT NOT NULL DEFAULT 'open',
+                            summary TEXT NOT NULL,
+                            hypothesis JSONB NOT NULL DEFAULT '{}'::jsonb,
+                            evidence JSONB NOT NULL DEFAULT '[]'::jsonb,
+                            metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+                            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                        )
+                        """
+                    )
                 conn.commit()
             self._ready = True
             return True
@@ -466,6 +524,312 @@ class PostgresStore:
                 "estimated_cost_usd": 0,
                 "top_tools": [],
             }
+
+    def save_hypothesis_run(
+        self,
+        *,
+        question: str,
+        symptom: str,
+        domain: str,
+        hypotheses: list[dict[str, Any]],
+        selected_hypothesis: str | None,
+        confidence: float,
+        metadata: dict[str, Any] | None = None,
+    ) -> bool:
+        if not self._ready and not self.ensure_schema():
+            return False
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        INSERT INTO ai_hypothesis_runs (
+                            question, symptom, domain, hypotheses, selected_hypothesis, confidence, metadata
+                        )
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        """,
+                        (
+                            question,
+                            symptom,
+                            domain,
+                            Jsonb(hypotheses),
+                            selected_hypothesis,
+                            confidence,
+                            Jsonb(metadata or {}),
+                        ),
+                    )
+                conn.commit()
+            return True
+        except Exception:
+            return False
+
+    def get_hypothesis_metrics_summary(self, hours: int = 24) -> dict[str, Any]:
+        if not self._ready and not self.ensure_schema():
+            return {
+                "window_hours": hours,
+                "total_runs": 0,
+                "avg_confidence": 0,
+                "confirmed_rate": 0,
+                "top_domains": [],
+            }
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT
+                            COUNT(*)::int,
+                            COALESCE(AVG(confidence), 0)::float,
+                            COALESCE(AVG(CASE WHEN COALESCE(metadata->>'confirmed', 'false') = 'true' THEN 1 ELSE 0 END), 0)::float
+                        FROM ai_hypothesis_runs
+                        WHERE created_at >= NOW() - (%s || ' hours')::interval
+                        """,
+                        (str(hours),),
+                    )
+                    totals = cur.fetchone()
+
+                    cur.execute(
+                        """
+                        SELECT domain, COUNT(*)::int AS uses
+                        FROM ai_hypothesis_runs
+                        WHERE created_at >= NOW() - (%s || ' hours')::interval
+                        GROUP BY domain
+                        ORDER BY uses DESC
+                        LIMIT 8
+                        """,
+                        (str(hours),),
+                    )
+                    top_domains = [{"domain": domain, "uses": uses} for domain, uses in cur.fetchall()]
+
+            return {
+                "window_hours": hours,
+                "total_runs": totals[0],
+                "avg_confidence": round(totals[1], 3),
+                "confirmed_rate": round(totals[2], 3),
+                "top_domains": top_domains,
+            }
+        except Exception:
+            return {
+                "window_hours": hours,
+                "total_runs": 0,
+                "avg_confidence": 0,
+                "confirmed_rate": 0,
+                "top_domains": [],
+            }
+
+    def save_learning_cycle(
+        self,
+        *,
+        question: str,
+        intent: str,
+        decision: dict[str, Any],
+        evidence: list[dict[str, Any]],
+        outcome: dict[str, Any],
+        knowledge_updated: bool,
+        metadata: dict[str, Any] | None = None,
+    ) -> bool:
+        if not self._ready and not self.ensure_schema():
+            return False
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        INSERT INTO ai_learning_cycles (
+                            question, intent, decision, evidence, outcome, knowledge_updated, metadata
+                        )
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        """,
+                        (
+                            question,
+                            intent,
+                            Jsonb(decision),
+                            Jsonb(evidence),
+                            Jsonb(outcome),
+                            knowledge_updated,
+                            Jsonb(metadata or {}),
+                        ),
+                    )
+                conn.commit()
+            return True
+        except Exception:
+            return False
+
+    def get_learning_metrics_summary(self, hours: int = 24) -> dict[str, Any]:
+        if not self._ready and not self.ensure_schema():
+            return {
+                "window_hours": hours,
+                "total_cycles": 0,
+                "knowledge_update_rate": 0,
+                "reuse_rate": 0,
+            }
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT
+                            COUNT(*)::int,
+                            COALESCE(AVG(CASE WHEN knowledge_updated THEN 1 ELSE 0 END), 0)::float,
+                            COALESCE(AVG(CASE WHEN COALESCE(metadata->>'reused', 'false') = 'true' THEN 1 ELSE 0 END), 0)::float
+                        FROM ai_learning_cycles
+                        WHERE created_at >= NOW() - (%s || ' hours')::interval
+                        """,
+                        (str(hours),),
+                    )
+                    totals = cur.fetchone()
+            return {
+                "window_hours": hours,
+                "total_cycles": totals[0],
+                "knowledge_update_rate": round(totals[1], 3),
+                "reuse_rate": round(totals[2], 3),
+            }
+        except Exception:
+            return {
+                "window_hours": hours,
+                "total_cycles": 0,
+                "knowledge_update_rate": 0,
+                "reuse_rate": 0,
+            }
+
+    def update_planner_policy(self, capability: str, success: bool, confidence_delta: float = 0.0) -> bool:
+        if not capability:
+            return False
+        if not self._ready and not self.ensure_schema():
+            return False
+        try:
+            weight_delta = 0.03 + max(-0.1, min(0.1, confidence_delta * 0.05))
+            if not success:
+                weight_delta = -weight_delta
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        INSERT INTO planner_policy_weights (capability, weight, success_count, failure_count, updated_at)
+                        VALUES (%s, %s, %s, %s, NOW())
+                        ON CONFLICT (capability)
+                        DO UPDATE SET
+                            weight = LEAST(2.0, GREATEST(0.5, planner_policy_weights.weight + EXCLUDED.weight - 1.0)),
+                            success_count = planner_policy_weights.success_count + EXCLUDED.success_count,
+                            failure_count = planner_policy_weights.failure_count + EXCLUDED.failure_count,
+                            updated_at = NOW()
+                        """,
+                        (capability, 1.0 + weight_delta, 1 if success else 0, 0 if success else 1),
+                    )
+                conn.commit()
+            return True
+        except Exception:
+            return False
+
+    def get_planner_policy_weights(self) -> dict[str, dict[str, Any]]:
+        if not self._ready and not self.ensure_schema():
+            return {}
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT capability, weight, success_count, failure_count, updated_at
+                        FROM planner_policy_weights
+                        ORDER BY capability ASC
+                        """
+                    )
+                    rows = cur.fetchall()
+            return {
+                capability: {
+                    "weight": float(weight),
+                    "success_count": int(success_count),
+                    "failure_count": int(failure_count),
+                    "updated_at": updated_at.isoformat() if updated_at else None,
+                }
+                for capability, weight, success_count, failure_count, updated_at in rows
+            }
+        except Exception:
+            return {}
+
+    def save_autonomous_investigation(
+        self,
+        *,
+        watcher: str,
+        title: str,
+        severity: str,
+        status: str,
+        summary: str,
+        hypothesis: dict[str, Any],
+        evidence: list[dict[str, Any]],
+        metadata: dict[str, Any] | None = None,
+    ) -> bool:
+        if not self._ready and not self.ensure_schema():
+            return False
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        INSERT INTO autonomous_investigations (
+                            watcher, title, severity, status, summary, hypothesis, evidence, metadata
+                        )
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                        """,
+                        (
+                            watcher,
+                            title,
+                            severity,
+                            status,
+                            summary,
+                            Jsonb(hypothesis),
+                            Jsonb(evidence),
+                            Jsonb(metadata or {}),
+                        ),
+                    )
+                conn.commit()
+            return True
+        except Exception:
+            return False
+
+    def get_recent_autonomous_investigations(self, limit: int = 20) -> list[dict[str, Any]]:
+        if not self._ready and not self.ensure_schema():
+            return []
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT watcher, title, severity, status, summary, hypothesis, evidence, metadata, created_at
+                        FROM autonomous_investigations
+                        ORDER BY id DESC
+                        LIMIT %s
+                        """,
+                        (limit,),
+                    )
+                    rows = cur.fetchall()
+            return [
+                {
+                    "watcher": watcher,
+                    "title": title,
+                    "severity": severity,
+                    "status": status,
+                    "summary": summary,
+                    "hypothesis": hypothesis,
+                    "evidence": evidence,
+                    "metadata": metadata,
+                    "created_at": created_at.isoformat() if created_at else None,
+                }
+                for watcher, title, severity, status, summary, hypothesis, evidence, metadata, created_at in rows
+            ]
+        except Exception:
+            return []
+
+    def get_intelligence_metrics_summary(self, hours: int = 24) -> dict[str, Any]:
+        ai_metrics = self.get_ai_metrics_summary(hours=hours)
+        hypothesis_metrics = self.get_hypothesis_metrics_summary(hours=hours)
+        learning_metrics = self.get_learning_metrics_summary(hours=hours)
+        return {
+            "window_hours": hours,
+            "ai": ai_metrics,
+            "hypothesis": hypothesis_metrics,
+            "learning": learning_metrics,
+        }
 
 
 postgres_store = PostgresStore()

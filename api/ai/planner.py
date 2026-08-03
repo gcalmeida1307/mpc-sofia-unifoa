@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from ai.models import PlanModel
+from ai.planner_policy import planner_policy
 from core.capability_resolver import capability_resolver
 
 
@@ -17,6 +18,15 @@ def _infer_intent_and_capabilities(question: str) -> tuple[str, list[str]]:
 
     if _looks_like_host_count(question):
         return "host_count", ["host_count"]
+
+    if any(term in q for term in ["switch", "stp", "crc", "broadcast storm", "storm", "lent", "lento"]):
+        return "network_investigation", ["network_investigation", "incident_analysis"]
+
+    if any(term in q for term in ["vpn", "firewall", "auth", "login", "security", "seguranca", "ataque"]):
+        return "security_investigation", ["security_investigation", "knowledge_lookup"]
+
+    if any(term in q for term in ["cpu", "memory", "ram", "disk", "storage", "latency", "capacity"]):
+        return "capacity_investigation", ["capacity_investigation", "incident_analysis"]
 
     if any(term in q for term in ["quais hosts", "mais problema", "incidente", "indispon", "link down", "alerta"]):
         return "incident_analysis", ["host_analysis", "incident_analysis"]
@@ -44,11 +54,12 @@ def _infer_intent_and_capabilities(question: str) -> tuple[str, list[str]]:
 
 def build_plan(question: str) -> dict:
     intent, capabilities = _infer_intent_and_capabilities(question)
-    tools = capability_resolver.resolve(intent=intent, requested_capabilities=capabilities)
+    ranked_capabilities = planner_policy.rank_capabilities(capabilities)
+    tools = capability_resolver.resolve(intent=intent, requested_capabilities=ranked_capabilities)
 
     plan = PlanModel(
         intent=intent,
-        capabilities=capabilities,
+        capabilities=ranked_capabilities,
         tools=tools,
         needs_llm_reasoning=True,
     )

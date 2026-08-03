@@ -9,6 +9,7 @@ class ReasoningEngine:
         summary = context.get("summary", {}) if isinstance(context, dict) else {}
         operational = bool(tools)
         risks = context.get("risks", []) if isinstance(context, dict) else []
+        selected_hypothesis = context.get("hypothesis", {}).get("selected_hypothesis") if isinstance(context, dict) else None
 
         objective = "Responder a pergunta com base no contexto consolidado do SOFIA."
         if operational:
@@ -21,11 +22,15 @@ class ReasoningEngine:
             deterministic_answer = f"Voce possui {host_count} host(s) cadastrados no Zabbix."
 
         recommended_actions = self._recommended_actions(summary=summary, risks=risks, operational=operational)
+        if selected_hypothesis:
+            recommended_actions.insert(0, f"Validar a hipotese prioritaria: {selected_hypothesis}.")
         justification = (
             "Plano baseado no snapshot mais recente, trilha de tools executadas e contexto do registry."
             if operational
             else "Plano baseado em conversa geral com fallback seguro quando faltar contexto operacional."
         )
+        if selected_hypothesis:
+            justification = f"{justification} Hipotese inicial selecionada para reduzir tempo de diagnostico."
 
         return {
             "objective": objective,

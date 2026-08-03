@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
+from ai.agent_runtime import agent_runtime
 from services.docker_service import DockerService
 from services.persistence import persistence
 from services.postgres_store import postgres_store
@@ -94,11 +95,38 @@ def ai_metrics(hours: int = 24):
 def ai_panel(hours: int = 24):
     hours = max(1, min(hours, 720))
     metrics = postgres_store.get_ai_metrics_summary(hours=hours)
+    intelligence = postgres_store.get_intelligence_metrics_summary(hours=hours)
     trends = postgres_store.get_group_trends(days=30, limit=10)
     audits = postgres_store.get_recent_tool_audits(limit=20)
+    investigations = postgres_store.get_recent_autonomous_investigations(limit=10)
     return {
         "kpis": metrics,
+        "intelligence": intelligence,
         "group_trends_30d": trends,
         "recent_audits": audits,
+        "recent_investigations": investigations,
         "window_hours": hours,
+    }
+
+
+@router.get("/agents/status")
+def agents_status():
+    return agent_runtime.status()
+
+
+@router.get("/investigations/recent")
+def investigations_recent(limit: int = 20):
+    limit = max(1, min(limit, 200))
+    return {
+        "recent": postgres_store.get_recent_autonomous_investigations(limit=limit),
+        "limit": limit,
+    }
+
+
+@router.get("/intelligence/summary")
+def intelligence_summary(hours: int = 24):
+    hours = max(1, min(hours, 720))
+    return {
+        "summary": postgres_store.get_intelligence_metrics_summary(hours=hours),
+        "hours": hours,
     }

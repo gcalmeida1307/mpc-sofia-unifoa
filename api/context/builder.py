@@ -8,7 +8,7 @@ from services.postgres_store import postgres_store
 
 
 class ContextBuilder:
-    def build(self, question: str, plan: dict) -> dict[str, Any]:
+    def build(self, question: str, plan: dict, agent: dict[str, Any] | None = None, hypothesis: dict[str, Any] | None = None) -> dict[str, Any]:
         tools = plan.get("tools", [])
         tools_output, tool_traces = tool_executor.execute_with_trace(plan=tools, question=question)
 
@@ -64,6 +64,8 @@ class ContextBuilder:
             evidence=tool_traces,
             risks=risks,
             tools=tools_output,
+            agent=agent or {},
+            hypothesis=hypothesis or {},
             summary={
                 "hosts": host_count,
                 "problems": len(problems) if isinstance(problems, list) else 0,

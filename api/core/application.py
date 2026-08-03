@@ -13,6 +13,7 @@ from fastapi.staticfiles import StaticFiles
 import pyotp
 
 from config.settings import settings
+from core.autonomy_scheduler import AutonomyScheduler
 from core.bootstrap import bootstrap_registry
 from core.event_bus import event_bus
 from core.event_handlers import register_default_event_handlers
@@ -26,6 +27,9 @@ class Application:
         self.registry = registry
         self.event_bus = event_bus
         self.snapshot_scheduler = SnapshotScheduler(interval_seconds=self.settings.SNAPSHOT_INTERVAL_SECONDS)
+        self.autonomy_scheduler = AutonomyScheduler(
+            interval_seconds=self.settings.AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS
+        )
         self._request_buckets: dict[str, deque[float]] = defaultdict(deque)
 
     async def startup(self) -> None:
@@ -39,6 +43,7 @@ class Application:
         self.registry.register_service("registry_snapshot", snapshot)
         register_default_event_handlers(self.event_bus)
         self.registry.register_service("snapshot_scheduler", self.snapshot_scheduler)
+        self.registry.register_service("autonomy_scheduler", self.autonomy_scheduler)
 
         for module_name in self.registry.list_modules():
             module_cls = self.registry.get_module_class(module_name)
@@ -51,8 +56,10 @@ class Application:
                 await result
 
         await self.snapshot_scheduler.start()
+        await self.autonomy_scheduler.start()
 
     async def shutdown(self) -> None:
+        await self.autonomy_scheduler.stop()
         await self.snapshot_scheduler.stop()
         for module_name in reversed(self.registry.list_modules()):
             module = self.registry.get_module(module_name)

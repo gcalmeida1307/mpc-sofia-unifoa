@@ -20,6 +20,7 @@ def ask(payload: AIAskRequest):
         "critic": result.get("critic", {}),
         "confidence": result.get("confidence", 0.0),
         "explainability": result.get("explainability", {}),
+        "learning": result.get("learning", {}),
         "llm_used": result.get("llm_used", False),
         "context": result.get("context", {}),
         "source": "openai-service",
