@@ -1,0 +1,82 @@
+services:
+  sofia-api:
+     build:
+       context: ./api
+
+     container_name: sofia_api
+
+     restart: unless-stopped
+
+     environment:
+       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+
+     volumes:
+       - ./api:/app
+       - ./docs:/app/docs
+
+     ports:
+       - "8080:8000"
+
+     networks:
+       - sofia-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: sofia_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - sofia-network
+
+  postgres:
+    image: postgres:16
+    container_name: sofia_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sofia
+      POSTGRES_USER: sofia
+      POSTGRES_PASSWORD: sofia123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sofia-network
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: sofia_qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - sofia-network
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: sofia_n8n
+    restart: unless-stopped
+    environment:
+      N8N_HOST: 0.0.0.0
+      N8N_PORT: 5678
+      GENERIC_TIMEZONE: UTC
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - sofia-network
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  n8n_data:
+
+networks:
+  sofia-network:
+    driver: bridge

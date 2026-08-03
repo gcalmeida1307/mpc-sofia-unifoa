@@ -1,0 +1,107 @@
+from __future__ import annotations
+
+from datetime import datetime, timedelta, timezone
+from typing import Any
+
+from connectors.zabbix import ZabbixConnector
+from services.docker_service import DockerService
+
+
+def _extract_group_name(question: str) -> str | None:
+    q = question.lower()
+    if "grupo " not in q:
+        return None
+    tail = q.split("grupo ", 1)[1]
+    separators = [",", "?", ".", " no zabbix", " agora", " quais"]
+    for sep in separators:
+        if sep in tail:
+            tail = tail.split(sep, 1)[0]
+    group = tail.strip()
+    return group or None
+
+
+class SnapshotService:
+    def __init__(self, refresh_seconds: int = 30):
+        self.refresh_seconds = refresh_seconds
+        self._snapshot: dict[str, Any] | None = None
+        self._last_refresh: datetime | None = None
+
+    def _is_stale(self) -> bool:
+        if self._snapshot is None or self._last_refresh is None:
+            return True
+        return datetime.now(timezone.utc) - self._last_refresh > timedelta(seconds=self.refresh_seconds)
+
+    def refresh(self) -> dict[str, Any]:
+        snapshot: dict[str, Any] = {
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "zabbix": {},
+            "docker": {},
+        }
+
+        try:
+            connector = ZabbixConnector()
+            summary = connector.get_problem_summary(limit=200)
+            problems = connector.list_active_problems(limit=200)
+            snapshot["zabbix"] = {
+                "host_count": connector.count_hosts(),
+                "problem_summary": summary,
+                "problems": problems,
+            }
+        except Exception as exc:
+            snapshot["zabbix"] = {"error": str(exc), "problems": []}
+
+        try:
+            containers = DockerService().list_containers()
+            if isinstance(containers, list):
+                snapshot["docker"] = {
+                    "containers": containers,
+                    "container_count": len(containers),
+                }
+            else:
+                snapshot["docker"] = {"containers": [], "error": containers}
+        except Exception as exc:
+            snapshot["docker"] = {"containers": [], "error": str(exc)}
+
+        self._snapshot = snapshot
+        self._last_refresh = datetime.now(timezone.utc)
+        return snapshot
+
+    def get(self, force_refresh: bool = False) -> dict[str, Any]:
+        if force_refresh or self._is_stale():
+            return self.refresh()
+        return self._snapshot or self.refresh()
+
+
+class InfrastructureProvider:
+    def __init__(self, service: SnapshotService):
+        self.service = service
+
+    def execute(self, tool_name: str, question: str) -> dict[str, Any]:
+        snapshot = self.service.get()
+
+        if tool_name == "zabbix.count_hosts":
+            return {"host_count": snapshot.get("zabbix", {}).get("host_count", 0)}
+
+        if tool_name == "zabbix.list_problems":
+            group_name = _extract_group_name(question)
+            problems = snapshot.get("zabbix", {}).get("problems", [])
+            if group_name:
+                connector = ZabbixConnector()
+                problems = connector.list_active_problems(limit=200, group_name=group_name)
+            return {
+                "group": group_name,
+                "summary": snapshot.get("zabbix", {}).get("problem_summary", {}),
+                "problems": problems,
+            }
+
+        if tool_name == "docker.list_containers":
+            return {
+                "containers": snapshot.get("docker", {}).get("containers", []),
+                "container_count": snapshot.get("docker", {}).get("container_count", 0),
+            }
+
+        return {"error": f"unsupported infrastructure tool: {tool_name}"}
+
+
+snapshot_service = SnapshotService()
+infrastructure_provider = InfrastructureProvider(snapshot_service)

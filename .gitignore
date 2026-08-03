@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.venv/
+venv/
+
+# Environment
+.env
+.env.*
+
+# Logs and runtime data
+logs/
+data/
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker local state
+*.pid
+
+# Node (if used by UI later)
+node_modules/
