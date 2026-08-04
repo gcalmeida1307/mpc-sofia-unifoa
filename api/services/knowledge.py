@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import io
 import json
 import re
 from collections import deque
@@ -268,7 +269,12 @@ def _store_upload(file_name: str, raw_bytes: bytes, metadata: dict[str, Any] | N
     metadata = metadata or {}
     target = _upload_target_path(file_name)
     target.write_bytes(raw_bytes)
-    text = raw_bytes.decode("utf-8", errors="ignore")
+    if Path(file_name).suffix.lower() == ".pdf":
+        from pypdf import PdfReader
+        reader = PdfReader(io.BytesIO(raw_bytes))
+        text = "\n".join(page.extract_text() or "" for page in reader.pages)
+    else:
+        text = raw_bytes.decode("utf-8", errors="ignore")
     cleaned = _normalize_whitespace(text)
     if not cleaned:
         return {
@@ -445,17 +451,22 @@ def _save_page(source_name: str, page: dict[str, Any]) -> Path:
 
 def _index_page(page: dict[str, Any], metadata: dict[str, Any]) -> int:
     chunks = _chunk_text(page.get("text", ""))
-    for index, chunk in enumerate(chunks):
-        chunk_metadata = {
-            **metadata,
-            "chunk_index": index,
-            "chunk_count": len(chunks),
-            "title": page.get("title", ""),
-            "url": page.get("url", ""),
-        }
-        vector_store.add(chunk, chunk_metadata)
-        qdrant_store.add_text(chunk, chunk_metadata)
-    return len(chunks)
+    indexed = [
+        (
+            chunk,
+            {
+                **metadata,
+                "chunk_index": index,
+                "chunk_count": len(chunks),
+                "title": page.get("title", ""),
+                "url": page.get("url", ""),
+            },
+        )
+        for index, chunk in enumerate(chunks)
+    ]
+    vector_store.add_many(indexed)
+    qdrant_store.add_many(indexed)
+    return len(indexed)
 
 
 def _fetch_html(url: str) -> str:

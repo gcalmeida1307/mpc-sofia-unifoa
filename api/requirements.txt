@@ -6,3 +6,4 @@ psycopg[binary]
 qdrant-client
 pyotp
 python-multipart
+pypdf
