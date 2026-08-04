@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 
 from ai.autonomous_investigator import autonomous_investigator
+
+logger = logging.getLogger(__name__)
 
 
 class AutonomyScheduler:
@@ -15,7 +18,7 @@ class AutonomyScheduler:
         if self._task and not self._task.done():
             return
         self._running = True
-        autonomous_investigator.run_cycle()
+        await self._run_cycle()
         self._task = asyncio.create_task(self._run())
 
     async def stop(self) -> None:
@@ -28,10 +31,16 @@ class AutonomyScheduler:
                 pass
             self._task = None
 
+    async def _run_cycle(self) -> None:
+        try:
+            await asyncio.to_thread(autonomous_investigator.run_cycle)
+        except Exception:
+            logger.exception("SOFIA autonomous investigation cycle failed")
+
     async def _run(self) -> None:
         while self._running:
             await asyncio.sleep(self.interval_seconds)
-            autonomous_investigator.run_cycle()
+            await self._run_cycle()
 
 
 autonomy_scheduler = AutonomyScheduler()

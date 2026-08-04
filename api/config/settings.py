@@ -93,8 +93,8 @@ class Settings:
         )
         self.ollama = OllamaConfig(
             base_url=os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434"),
-            model=os.getenv("OLLAMA_MODEL", "llama3.1:8b"),
-            fallback_model=os.getenv("OLLAMA_FALLBACK_MODEL", "qwen2.5:1.5b"),
+            model=os.getenv("OLLAMA_MODEL", "qwen2.5:1.5b"),
+            fallback_model=os.getenv("OLLAMA_FALLBACK_MODEL", ""),
             api_key=os.getenv("OLLAMA_API_KEY", ""),
             mode=os.getenv("OLLAMA_MODE", "native").strip().lower() or "native",
         )

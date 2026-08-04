@@ -67,8 +67,8 @@ class OpenAIResponsesClient:
         if not self.ollama_base_url or not self.ollama_model:
             return None
 
-        primary_timeout = min(self.request_timeout, 120)
-        fallback_timeout = min(self.request_timeout, 90)
+        primary_timeout = min(self.request_timeout, 10)
+        fallback_timeout = min(self.request_timeout, 10)
 
         result = self._ask_ollama_with_model(messages=messages, model=self.ollama_model, timeout=primary_timeout)
         if result and result.get("text"):
@@ -95,7 +95,7 @@ class OpenAIResponsesClient:
                     "model": model,
                     "messages": [self._normalize_message_for_ollama(item) for item in messages],
                     "temperature": 0.2,
-                    "max_tokens": 220,
+                    "max_tokens": 48,
                 }
                 response = requests.post(
                     f"{self.ollama_base_url}/v1/chat/completions",
@@ -122,7 +122,7 @@ class OpenAIResponsesClient:
                 "stream": False,
                 "options": {
                     "temperature": 0.2,
-                    "num_predict": 220,
+                    "num_predict": 48,
                 },
             }
             response = requests.post(

@@ -19,6 +19,11 @@ def _infer_intent_and_capabilities(question: str) -> tuple[str, list[str]]:
     if _looks_like_host_count(question):
         return "host_count", ["host_count"]
 
+    documentation_terms = ["runbook", "documentacao", "documenta\u00e7\u00e3o", "doc", "base", "procedimento", "como investigar"]
+    zabbix_terms = ["zabbix", "host", "hosts", "problema", "alerta", "trigger", "severidade", "severity"]
+    if any(term in q for term in documentation_terms) and any(term in q for term in zabbix_terms):
+        return "knowledge_lookup", ["knowledge_lookup", "host_analysis"]
+
     if any(term in q for term in ["switch", "stp", "crc", "broadcast storm", "storm", "lent", "lento"]):
         return "network_investigation", ["network_investigation", "incident_analysis"]
 

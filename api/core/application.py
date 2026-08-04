@@ -89,6 +89,7 @@ class Application:
                 "/knowledge/providers",
                 "/knowledge/providers/refresh",
                 "/knowledge/upload",
+                "/knowledge/ingest",
                 "/knowledge/ingest/site",
             }
             path = request.url.path

@@ -145,11 +145,11 @@ class OpenAIService:
         if not candidate_answer:
             llm_context = self._compact_context_for_llm(context)
             llm_context_json = json.dumps(llm_context, ensure_ascii=False)
-            if len(llm_context_json) > 1600:
-                llm_context_json = llm_context_json[:1600]
+            if len(llm_context_json) > 420:
+                llm_context_json = llm_context_json[:420]
             reasoning_note = reasoning_engine.to_developer_note(reasoning)
-            if len(reasoning_note) > 700:
-                reasoning_note = reasoning_note[:700]
+            if len(reasoning_note) > 140:
+                reasoning_note = reasoning_note[:140]
             messages = [
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "developer", "content": llm_context_json},
@@ -250,6 +250,17 @@ class OpenAIService:
 
     def _fallback_answer(self, question: str, context: dict) -> str:
         tools = context.get("tools", {})
+        knowledge = context.get("knowledge", []) if isinstance(context.get("knowledge", []), list) else []
+        if knowledge:
+            first = knowledge[0] if isinstance(knowledge[0], dict) else {}
+            snippet = str(first.get("snippet", "")).strip()
+            source = str(first.get("source", "base de conhecimento")).strip()
+            if snippet:
+                evidence = snippet[:420].rstrip()
+                return (
+                    f"Segundo a base {source}: {evidence} "
+                    "Proximo passo: valide essa orientacao com o estado atual do ambiente antes de executar qualquer acao."
+                )
         insights = context.get("insights", []) if isinstance(context.get("insights", []), list) else []
         q = question.lower()
         temporal = context.get("snapshot", {}).get("temporal", {}) if isinstance(context.get("snapshot", {}), dict) else {}
