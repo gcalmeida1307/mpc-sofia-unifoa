@@ -298,6 +298,7 @@ async function initDashboard() {
     const saveNameButton = document.getElementById('save-name-button');
     const displayNameInput = document.getElementById('display-name');
     const refreshProvidersButton = document.getElementById('refresh-providers-button');
+    const adminKeyInput = document.getElementById('admin-key');
     const saveProviderButton = document.getElementById('save-provider-button');
     const uploadTrainingButton = document.getElementById('upload-training-button');
     const providerLabelInput = document.getElementById('provider-label');
@@ -319,6 +320,11 @@ async function initDashboard() {
       userLabel = name || 'You';
       renderHistory(messages, chatWindow, userLabel);
     });
+
+    function adminHeaders() {
+      const key = adminKeyInput ? adminKeyInput.value.trim() : '';
+      return key ? { 'X-SOFIA-ADMIN-KEY': key } : {};
+    }
 
     async function refreshKnowledgeProviders() {
       await fetch('/knowledge/providers/refresh', { method: 'POST' });
@@ -358,7 +364,7 @@ async function initDashboard() {
 
       await fetch('/knowledge/providers', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...adminHeaders() },
         body: JSON.stringify(payload),
       });
       window.location.reload();
@@ -384,6 +390,7 @@ async function initDashboard() {
       formData.append('metadata', JSON.stringify(metadata));
       await fetch('/knowledge/upload', {
         method: 'POST',
+        headers: adminHeaders(),
         body: formData,
       });
       window.location.reload();

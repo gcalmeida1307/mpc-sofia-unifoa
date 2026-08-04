@@ -439,3 +439,15 @@ li { margin: 7px 0; color: #d8e6fb; }
   content: "Olá. Posso analisar o Zabbix, consultar sua base e explicar o próximo passo.";
   color: var(--muted);
 }
+
+.knowledge-admin-key {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.knowledge-admin-key input {
+  min-width: min(360px, 100%);
+}
