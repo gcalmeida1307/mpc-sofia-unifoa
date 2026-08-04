@@ -4,6 +4,7 @@ import json
 from dataclasses import dataclass
 from typing import Any, Callable
 
+from connectors.zabbix import ZabbixConnector
 from core.registry import registry
 from services.infrastructure import get_infrastructure_summary
 from services.knowledge import search_knowledge
@@ -47,6 +48,12 @@ class McpServer:
                     "additionalProperties": False,
                 },
                 lambda arguments: search_knowledge(arguments["query"]),
+            ),
+            "sofia.zabbix.active_summary": McpTool(
+                "sofia.zabbix.active_summary",
+                "Return current Zabbix host and active problem impact summary.",
+                {"type": "object", "properties": {}, "additionalProperties": False},
+                self._zabbix_active_summary,
             ),
         }
 
@@ -119,6 +126,17 @@ class McpServer:
     @staticmethod
     def _descriptor(tool: McpTool) -> dict[str, Any]:
         return {"name": tool.name, "description": tool.description, "inputSchema": tool.input_schema}
+
+    @staticmethod
+    def _zabbix_active_summary(_: dict[str, Any]) -> dict[str, Any]:
+        connector = ZabbixConnector()
+        summary = connector.get_problem_summary(limit=200)
+        return {
+            "host_count": connector.count_hosts(),
+            "active_problems": int(summary.get("total_problems", 0) or 0),
+            "affected_hosts": int(summary.get("affected_hosts", 0) or 0),
+            "severity_buckets": summary.get("severity_buckets", {}),
+        }
 
     @staticmethod
     def _platform_status(_: dict[str, Any]) -> dict[str, Any]:

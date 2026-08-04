@@ -23,7 +23,8 @@ Ferramentas de leitura:
 
 - `sofia.platform.status`
 - `sofia.infrastructure.summary`
-- `sofia.knowledge.search`
+- `sofia.knowledge.search
+- sofia.zabbix.active_summary: resumo atual de hosts afetados, problemas ativos e severidades do Zabbix.`
 
 O servidor MCP nao expoe acoes mutaveis. Operacoes de ingestao e administracao continuam protegidas pela API administrativa do SOFIA.
 

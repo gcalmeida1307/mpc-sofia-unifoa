@@ -17,7 +17,20 @@ class ReasoningEngine:
 
         deterministic_answer = None
         q = question.lower()
-        if self._looks_like_host_count(q):
+        if self._looks_like_active_trigger_count(q):
+            problem_summary = (
+                context.get("snapshot", {}).get("zabbix", {}).get("problem_summary", {})
+                if isinstance(context, dict)
+                else {}
+            )
+            affected_hosts = int(problem_summary.get("affected_hosts", 0) or 0)
+            active_problems = int(problem_summary.get("total_problems", summary.get("problems", 0)) or 0)
+            deterministic_answer = (
+                f"No recorte atual do Zabbix, {affected_hosts} host(s) possuem pelo menos um "
+                f"problema ou trigger ativo, em {active_problems} evento(s) ativo(s). "
+                "Esta e uma contagem de impacto atual, nao do total de triggers configurados."
+            )
+        elif self._looks_like_host_count(q):
             host_count = summary.get("hosts", 0)
             deterministic_answer = f"Voce possui {host_count} host(s) cadastrados no Zabbix."
 
@@ -75,6 +88,17 @@ class ReasoningEngine:
         if not actions:
             actions.append("Sem riscos operacionais relevantes no momento; manter monitoramento continuo.")
         return actions
+
+    @staticmethod
+    def _looks_like_active_trigger_count(question: str) -> bool:
+        count_terms = ["quantos", "quantas", "quantidade", "total", "numero"]
+        trigger_terms = ["trigger", "triggers", "alerta ativo", "problema ativo"]
+        references = ["host", "hosts", "deles", "delas"]
+        return (
+            any(term in question for term in count_terms)
+            and any(term in question for term in trigger_terms)
+            and any(term in question for term in references)
+        )
 
     @staticmethod
     def _looks_like_host_count(question: str) -> bool:
