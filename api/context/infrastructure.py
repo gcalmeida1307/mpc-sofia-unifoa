@@ -15,7 +15,7 @@ def _extract_group_name(question: str) -> str | None:
     if "grupo " not in q:
         return None
     tail = q.split("grupo ", 1)[1]
-    separators = [",", "?", ".", " no zabbix", " agora", " quais"]
+    separators = [",", "?", ".", " no zabbix", " agora", " quais", " possui", " tem", " existem"]
     for sep in separators:
         if sep in tail:
             tail = tail.split(sep, 1)[0]
@@ -145,6 +145,9 @@ class InfrastructureProvider:
         snapshot = self.service.get()
 
         if tool_name == "zabbix.count_hosts":
+            group_name = _extract_group_name(question)
+            if group_name:
+                return {"host_count": ZabbixConnector().count_hosts_in_group(group_name), "group": group_name}
             return {"host_count": snapshot.get("zabbix", {}).get("host_count", 0)}
 
         if tool_name == "zabbix.list_problems":

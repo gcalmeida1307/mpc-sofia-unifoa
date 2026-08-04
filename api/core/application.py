@@ -126,6 +126,8 @@ class Application:
                 bucket.append(now)
 
             response = await call_next(request)
+            if path.startswith("/ui/"):
+                response.headers["Cache-Control"] = "no-store"
             response.headers["X-Content-Type-Options"] = "nosniff"
             response.headers["X-Frame-Options"] = "DENY"
             response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"

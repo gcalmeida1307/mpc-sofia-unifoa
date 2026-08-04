@@ -29,17 +29,20 @@ class ZabbixConnector:
         self.token = data["result"]
         return self.token
 
-    def get_hosts(self):
+    def get_hosts(self, groupids: list[str] | None = None):
         if not self.token:
             self.login()
 
+        params = {
+            "output": ["hostid", "host", "name"],
+            "selectInterfaces": ["ip"],
+        }
+        if groupids:
+            params["groupids"] = groupids
         payload = {
             "jsonrpc": "2.0",
             "method": "host.get",
-            "params": {
-                "output": ["hostid", "host", "name"],
-                "selectInterfaces": ["ip"],
-            },
+            "params": params,
             "auth": self.token,
             "id": 2,
         }
@@ -55,8 +58,11 @@ class ZabbixConnector:
         return data.get("result", [])
 
     def count_hosts(self):
-        hosts = self.get_hosts()
-        return len(hosts)
+        return len(self.get_hosts())
+
+    def count_hosts_in_group(self, group_name: str) -> int:
+        groupids = self.find_hostgroup_ids(group_name)
+        return len(self.get_hosts(groupids=groupids)) if groupids else 0
 
     def get_active_problems(self, limit: int = 100, groupids: list[str] | None = None):
         if not self.token:
