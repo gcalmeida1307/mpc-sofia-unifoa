@@ -13,8 +13,18 @@ class ContextBuilder:
         tools_output, tool_traces = tool_executor.execute_with_trace(plan=tools, question=question)
 
         problems = tools_output.get("zabbix.list_problems", {}).get("problems", [])
+        mcp_zabbix = tools_output.get("mcp.sofia.zabbix.active_summary", {})
         containers = tools_output.get("docker.list_containers", {}).get("containers", [])
-        host_count = tools_output.get("zabbix.count_hosts", {}).get("host_count", 0)
+        host_count = tools_output.get("zabbix.count_hosts", {}).get("host_count", 0) or mcp_zabbix.get("host_count", 0)
+        active_problem_count = len(problems) if isinstance(problems, list) else 0
+        active_problem_count = active_problem_count or int(mcp_zabbix.get("active_problems", 0) or 0)
+        problem_summary = tools_output.get("zabbix.list_problems", {}).get("summary", {})
+        if not problem_summary and isinstance(mcp_zabbix, dict):
+            problem_summary = {
+                "affected_hosts": mcp_zabbix.get("affected_hosts", 0),
+                "total_problems": mcp_zabbix.get("active_problems", 0),
+                "severity_buckets": mcp_zabbix.get("severity_buckets", {}),
+            }
         modules = tools_output.get("registry.snapshot", {}).get("modules", [])
         insights = tools_output.get("learning.insights", {}) if isinstance(tools_output.get("learning.insights", {}), dict) else {}
         knowledge = tools_output.get("knowledge.search", {}).get("results", [])
@@ -39,8 +49,8 @@ class ContextBuilder:
         snapshot = {
             "zabbix": {
                 "host_count": host_count,
-                "problem_count": len(problems) if isinstance(problems, list) else 0,
-                "problem_summary": tools_output.get("zabbix.list_problems", {}).get("summary", {}),
+                "problem_count": active_problem_count,
+                "problem_summary": problem_summary,
             },
             "docker": {
                 "container_count": len(containers) if isinstance(containers, list) else 0,
@@ -68,7 +78,7 @@ class ContextBuilder:
             hypothesis=hypothesis or {},
             summary={
                 "hosts": host_count,
-                "problems": len(problems) if isinstance(problems, list) else 0,
+                "problems": active_problem_count,
                 "containers": len(containers) if isinstance(containers, list) else 0,
                 "modules": len(modules),
                 "group_trends_30d": len(temporal_groups_30d),

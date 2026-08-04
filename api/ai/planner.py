@@ -21,7 +21,7 @@ def _infer_intent_and_capabilities(question: str) -> tuple[str, list[str]]:
 
     trigger_terms = ["trigger", "triggers", "alerta ativo", "problema ativo"]
     if any(term in q for term in trigger_terms):
-        return "active_trigger_summary", ["host_analysis"]
+        return "active_trigger_summary", ["mcp_zabbix_summary"]
 
     documentation_terms = ["runbook", "documentacao", "documenta\u00e7\u00e3o", "doc", "base", "procedimento", "como investigar"]
     zabbix_terms = ["zabbix", "host", "hosts", "problema", "alerta", "trigger", "severidade", "severity"]

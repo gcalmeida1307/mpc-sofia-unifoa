@@ -31,3 +31,10 @@ O servidor MCP nao expoe acoes mutaveis. Operacoes de ingestao e administracao c
 ## Operacao do LLM
 
 O default interativo e `qwen2.5:1.5b`, adequado ao servidor CPU atual. O modelo maior pode ser usado sob demanda, mas nao deve ser colocado como fallback automatico do chat, pois aumenta a fila de inferencia.
+
+## Controlled tool selection
+
+SOFIA exposes read-only MCP tools through tools/list. The internal planner selects
+the smallest capability set from the user question and invokes the selected MCP tool
+through the same JSON-RPC contract used by external clients. This keeps operational
+data collection explicit, auditable and free of destructive actions by default.

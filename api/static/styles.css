@@ -408,3 +408,34 @@ li { margin: 7px 0; color: #d8e6fb; }
   .prompt-header { flex-direction: column; }
   .resource-grid { grid-template-columns: 1fr; }
 }
+
+/* Focus the default experience on conversation and knowledge, not implementation detail. */
+.stats,
+#journey,
+#modules,
+#server,
+#observability,
+#marketplace {
+  display: none;
+}
+
+.hero {
+  min-height: 34vh;
+  display: grid;
+  align-items: center;
+}
+
+#docs,
+#knowledge {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.prompt-card {
+  border-color: rgba(0, 223, 189, 0.32);
+}
+
+.chat-window:empty::before {
+  content: "Olá. Posso analisar o Zabbix, consultar sua base e explicar o próximo passo.";
+  color: var(--muted);
+}

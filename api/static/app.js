@@ -46,14 +46,18 @@ function getChatIdentity() {
   return profile.name && profile.name.trim() ? profile.name.trim() : 'You';
 }
 
-function renderHistory(messages, container, userLabel = 'You') {
+function renderHistory(messages, container, userLabel = 'Você') {
   container.innerHTML = '';
   messages.forEach((message) => {
     const item = document.createElement('div');
-    item.className = `message ${message.role}`;
-    item.innerHTML = `<strong>${message.role === 'user' ? userLabel : 'SOFIA'}:</strong> ${message.text}`;
+    item.className = 'message ' + message.role;
+    const label = document.createElement('strong');
+    label.textContent = (message.role === 'user' ? userLabel : 'SOFIA') + ': ';
+    item.appendChild(label);
+    item.appendChild(document.createTextNode(message.text || ''));
     container.appendChild(item);
   });
+  container.scrollTop = container.scrollHeight;
 }
 
 async function initDashboard() {
@@ -290,6 +294,7 @@ async function initDashboard() {
     const chatWindow = document.getElementById('chat-window');
     const input = document.getElementById('prompt-input');
     const askButton = document.getElementById('ask-button');
+    const clearChatButton = document.getElementById('clear-chat-button');
     const saveNameButton = document.getElementById('save-name-button');
     const displayNameInput = document.getElementById('display-name');
     const refreshProvidersButton = document.getElementById('refresh-providers-button');
@@ -303,7 +308,7 @@ async function initDashboard() {
     const providerMetadataInput = document.getElementById('provider-metadata');
     const trainingFileInput = document.getElementById('training-file');
     const trainingMetadataInput = document.getElementById('training-metadata');
-    const messages = JSON.parse(localStorage.getItem('sofia-chat') || '[]');
+    let messages = JSON.parse(localStorage.getItem('sofia-chat') || '[]');
     let userLabel = getChatIdentity();
     displayNameInput.value = userLabel === 'You' ? '' : userLabel;
     renderHistory(messages, chatWindow, userLabel);
@@ -399,6 +404,7 @@ async function initDashboard() {
       if (!question) return;
 
       const nextMessages = [...messages, { role: 'user', text: question }];
+      messages = nextMessages;
       localStorage.setItem('sofia-chat', JSON.stringify(nextMessages));
       renderHistory(nextMessages, chatWindow, userLabel);
       input.value = '';
@@ -421,14 +427,29 @@ async function initDashboard() {
         }
         const assistantMessage = { role: 'assistant', text: payload.answer };
         const finalMessages = [...nextMessages, assistantMessage];
+        messages = finalMessages;
         localStorage.setItem('sofia-chat', JSON.stringify(finalMessages));
         renderHistory(finalMessages, chatWindow, userLabel);
       } catch (error) {
         const errorMessage = { role: 'assistant', text: `Error: ${error.message}` };
         const finalMessages = [...nextMessages, errorMessage];
+        messages = finalMessages;
         localStorage.setItem('sofia-chat', JSON.stringify(finalMessages));
         renderHistory(finalMessages, chatWindow, userLabel);
       }
+    }
+
+    if (clearChatButton) {
+      clearChatButton.addEventListener('click', async () => {
+        messages = [];
+        localStorage.removeItem('sofia-chat');
+        renderHistory(messages, chatWindow, userLabel);
+        try {
+          await fetch('/assistant/conversation/reset', { method: 'POST' });
+        } catch (error) {
+          console.warn('SOFIA reset learning record failed:', error.message);
+        }
+      });
     }
 
     askButton.addEventListener('click', sendMessage);

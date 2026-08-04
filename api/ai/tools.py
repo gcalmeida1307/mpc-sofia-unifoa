@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import json
 from time import perf_counter
 
 from context.infrastructure import infrastructure_provider
 from context.learning import learning_provider
 from context.knowledge import knowledge_provider
 from context.registry import registry_provider
+from services.mcp_server import mcp_server
 from services.postgres_store import postgres_store
 from services.marketplace import get_marketplace_catalog
 from services.workflows import list_n8n_templates
@@ -37,6 +39,9 @@ class ToolExecutor:
         return output, traces
 
     def _run_tool(self, tool_name: str, question: str) -> dict:
+        if tool_name.startswith("mcp."):
+            return self._run_mcp_tool(tool_name.removeprefix("mcp."))
+
         if tool_name in {"zabbix.count_hosts", "zabbix.list_problems", "docker.list_containers", "docker.restart_container"}:
             return infrastructure_provider.execute(tool_name, question)
 
@@ -56,6 +61,28 @@ class ToolExecutor:
             return registry_provider.execute(tool_name, question)
 
         return {"error": f"tool {tool_name} not implemented"}
+
+    @staticmethod
+    def _run_mcp_tool(name: str) -> dict:
+        response = mcp_server.handle(
+            {
+                "jsonrpc": "2.0",
+                "id": "sofia-internal",
+                "method": "tools/call",
+                "params": {"name": name, "arguments": {}},
+            }
+        )
+        result = (response or {}).get("result", {}) if isinstance(response, dict) else {}
+        content = result.get("content", []) if isinstance(result, dict) else []
+        if not content or not isinstance(content[0], dict):
+            return {"error": f"MCP tool returned no content: {name}"}
+        if result.get("isError"):
+            return {"error": str(content[0].get("text", "MCP tool failed"))}
+        try:
+            parsed = json.loads(str(content[0].get("text", "{}")))
+        except json.JSONDecodeError:
+            return {"error": f"MCP tool returned invalid JSON: {name}"}
+        return parsed if isinstance(parsed, dict) else {"result": parsed}
 
     def _extract_evidence(self, tool_name: str, result: dict) -> list[str]:
         if not isinstance(result, dict):

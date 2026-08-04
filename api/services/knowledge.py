@@ -471,20 +471,24 @@ def _fetch_html(url: str) -> str:
     return response.text
 
 
-def _internal_links(base_url: str, links: list[str], allowed_prefix: str) -> list[str]:
-    parsed_base = urlparse(base_url)
+def _internal_links(
+    base_url: str,
+    links: list[str],
+    allowed_hosts: set[str],
+    allowed_prefixes: list[str],
+) -> list[str]:
     discovered: list[str] = []
     for link in links:
         absolute = _normalize_url(urljoin(base_url, link))
         parsed = urlparse(absolute)
         if parsed.scheme not in {"http", "https"}:
             continue
-        if parsed.netloc != parsed_base.netloc:
+        if parsed.netloc.lower() not in allowed_hosts:
             continue
-        if not (parsed.path == allowed_prefix or parsed.path.startswith(f"{allowed_prefix}/")):
+        if not any(parsed.path == prefix or parsed.path.startswith(f"{prefix}/") for prefix in allowed_prefixes):
             continue
         discovered.append(absolute)
-    return discovered
+    return _unique_sequence(discovered)
 
 
 def _crawl_documentation_site(

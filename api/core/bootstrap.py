@@ -31,6 +31,7 @@ def bootstrap_registry():
     capability_tools = {
         "host_count": ["zabbix.count_hosts"],
         "host_analysis": ["zabbix.count_hosts", "zabbix.list_problems"],
+        "mcp_zabbix_summary": ["mcp.sofia.zabbix.active_summary"],
         "incident_analysis": ["zabbix.list_problems", "learning.insights", "knowledge.search"],
         "network_investigation": ["zabbix.list_problems", "learning.insights", "knowledge.search"],
         "security_investigation": ["zabbix.list_problems", "learning.insights", "knowledge.search"],

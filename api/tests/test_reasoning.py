@@ -9,7 +9,7 @@ class ReasoningEngineTests(unittest.TestCase):
         plan = build_plan("E quantos deles esta com triggers?")
 
         self.assertEqual(plan["intent"], "active_trigger_summary")
-        self.assertIn("host_analysis", plan["capabilities"])
+        self.assertIn("mcp_zabbix_summary", plan["capabilities"])
 
     def test_answers_affected_hosts_for_trigger_question(self):
         result = reasoning_engine.build(

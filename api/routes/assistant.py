@@ -79,6 +79,23 @@ def _build_recommendations(question: str, modules: list[str], knowledge_hint: st
     return recommendations
 
 
+@router.post("/conversation/reset")
+def reset_conversation():
+    """Clear only the browser conversation while retaining a learning preference."""
+    recorded = postgres_store.save_insight(
+        signature="conversation-reset-policy",
+        kind="conversation_preference",
+        summary="User cleared the visible chat history; retain operational learnings and insights.",
+        payload={"retain_operational_learning": True, "ui_history_cleared": True},
+    )
+    return {
+        "status": "ok",
+        "ui_history": "cleared",
+        "learning_retained": bool(recorded),
+        "message": "A conversa visual foi limpa. Conhecimento e insights operacionais foram preservados.",
+    }
+
+
 @router.post("/ask")
 def ask(payload: AssistantRequest):
     question = payload.question.lower()

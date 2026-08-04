@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
+from config.settings import settings
 from connectors.zabbix import ZabbixConnector
 from core.event_bus import event_bus
 from services.docker_service import DockerService
@@ -23,8 +24,8 @@ def _extract_group_name(question: str) -> str | None:
 
 
 class SnapshotService:
-    def __init__(self, refresh_seconds: int = 30):
-        self.refresh_seconds = refresh_seconds
+    def __init__(self, refresh_seconds: int | None = None):
+        self.refresh_seconds = int(refresh_seconds or settings.SNAPSHOT_INTERVAL_SECONDS)
         self._snapshot: dict[str, Any] | None = None
         self._last_refresh: datetime | None = None
         self._last_down_hosts: set[str] = set()

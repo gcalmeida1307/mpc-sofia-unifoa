@@ -27,3 +27,8 @@ Thumbs.db
 
 # Node (if used by UI later)
 node_modules/
+
+# Knowledge runtime cache (persisted on the server, not source-controlled)
+docs/_external/
+docs/_uploads/
+docs/_knowledge_sources.json

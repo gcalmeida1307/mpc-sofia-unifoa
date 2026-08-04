@@ -14,10 +14,8 @@
           <strong>SOFIA</strong>
         </div>
         <nav class="menu" id="main-menu">
-          <a href="#platform" data-menu="platform" class="active">Visão geral</a>
-          <a href="#journey" data-menu="journey">Como ajuda</a>
-          <a href="#server" data-menu="server">Servidor</a>
-          <a href="#knowledge" data-menu="knowledge">Conhecimento</a>
+          <a href="#platform" data-menu="platform" class="active">Início</a>
+          <a href="#knowledge" data-menu="knowledge">Base</a>
           <a href="#docs" data-menu="docs">Conversar</a>
         </nav>
         <div class="status-pill">
@@ -30,12 +28,12 @@
     <main class="shell">
       <section id="platform" data-section="platform" class="hero section-block">
         <div class="hero-main">
-          <p class="eyebrow">SOFIA - Operação assistida por contexto</p>
-          <h1>Entenda o que está acontecendo e <span>aja com segurança</span></h1>
-          <p class="subtitle">SOFIA organiza sinais, documentos e histórico em uma visão simples para o time. O sistema observa, aprende e responde com base no que está no servidor, não em suposições.</p>
+          <p class="eyebrow">SOFIA · analista do seu ambiente</p>
+          <h1>Pergunte. Entenda. <span>Decida com segurança.</span></h1>
+          <p class="subtitle">Uma conversa simples com evidências do Zabbix, do servidor e da sua base de conhecimento.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#knowledge">Add knowledge</a>
-            <a class="btn btn-ghost" href="#docs">Ask SOFIA</a>
+            <a class="btn btn-primary" href="#docs">Conversar com SOFIA</a>
+            <a class="btn btn-ghost" href="#knowledge">Adicionar base</a>
           </div>
         </div>
       </section>
@@ -248,11 +246,12 @@
           <div class="prompt-header">
             <div>
               <h2>Pergunte ao SOFIA</h2>
-              <p>Use linguagem natural. O sistema cruza estado do ambiente, conhecimento local e histórico antes de responder.</p>
+              <p>Converse naturalmente. SOFIA consulta o ambiente, a base aprovada e ferramentas MCP quando forem relevantes.</p>
             </div>
             <div class="prompt-actions">
               <input id="display-name" maxlength="40" placeholder="Seu nome (opcional)" />
               <button id="save-name-button" type="button" class="btn btn-ghost small">Salvar nome</button>
+              <button id="clear-chat-button" type="button" class="btn btn-ghost small">Limpar conversa</button>
               <button id="ask-button" type="button" class="btn btn-primary small">Enviar</button>
             </div>
           </div>

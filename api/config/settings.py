@@ -101,7 +101,7 @@ class Settings:
         self.runtime = RuntimeConfig(
             request_timeout=int(os.getenv("REQUEST_TIMEOUT", "30")),
             debug=_as_bool(os.getenv("DEBUG"), default=False),
-            snapshot_interval_seconds=int(os.getenv("SNAPSHOT_INTERVAL_SECONDS", "30")),
+            snapshot_interval_seconds=int(os.getenv("SNAPSHOT_INTERVAL_SECONDS", "120")),
             autonomous_investigation_interval_seconds=int(os.getenv("AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS", "90")),
             ai_metrics_window_hours=int(os.getenv("AI_METRICS_WINDOW_HOURS", "24")),
             request_rate_limit_per_minute=int(os.getenv("REQUEST_RATE_LIMIT_PER_MINUTE", "120")),
