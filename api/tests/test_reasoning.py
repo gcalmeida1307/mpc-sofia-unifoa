@@ -5,6 +5,10 @@ from ai.reasoning import reasoning_engine
 
 
 class ReasoningEngineTests(unittest.TestCase):
+    def test_calculates_simple_expression(self):
+        result = reasoning_engine.build("quanto e 2+2?", {}, {})
+        self.assertEqual(result["deterministic_answer"], "O resultado de 2+2 e 4.")
+
     def test_routes_short_trigger_question_to_zabbix_tools(self):
         plan = build_plan("E quantos deles esta com triggers?")
 

@@ -451,3 +451,18 @@ li { margin: 7px 0; color: #d8e6fb; }
 .knowledge-admin-key input {
   min-width: min(360px, 100%);
 }
+
+.shell {
+  max-width: 1440px;
+}
+#docs,
+#knowledge {
+  max-width: 1320px;
+}
+.prompt-card {
+  min-height: 620px;
+}
+.chat-window {
+  max-height: 440px;
+  min-height: 300px;
+}

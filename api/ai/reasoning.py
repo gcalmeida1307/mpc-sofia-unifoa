@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+import re
 from typing import Any
 
 
@@ -17,7 +19,10 @@ class ReasoningEngine:
 
         deterministic_answer = None
         q = question.lower()
-        if self._looks_like_active_trigger_count(q):
+        calculation = self._calculate(q)
+        if calculation is not None:
+            deterministic_answer = calculation
+        elif self._looks_like_active_trigger_count(q):
             problem_summary = (
                 context.get("snapshot", {}).get("zabbix", {}).get("problem_summary", {})
                 if isinstance(context, dict)
@@ -88,6 +93,28 @@ class ReasoningEngine:
         if not actions:
             actions.append("Sem riscos operacionais relevantes no momento; manter monitoramento continuo.")
         return actions
+
+    @staticmethod
+    def _calculate(question: str) -> str | None:
+        root = re.search(r"raiz quadrada(?: de| do)?\s*(\d+)", question)
+        if root:
+            value = int(root.group(1))
+            result = math.isqrt(value)
+            if result * result == value:
+                return f"A raiz quadrada de {value} e {result}."
+            return f"A raiz quadrada de {value} e aproximadamente {math.sqrt(value):.6g}."
+
+        expression = re.sub(r"^(quanto e|qual e|calcule)\s*", "", question).rstrip("?. ")
+        if not re.fullmatch(r"[0-9\s+\-*/().]+", expression):
+            return None
+        try:
+            value = eval(expression, {"__builtins__": {}}, {})
+        except Exception:
+            return None
+        if not isinstance(value, (int, float)) or not math.isfinite(value):
+            return None
+        display = int(value) if isinstance(value, float) and value.is_integer() else value
+        return f"O resultado de {expression} e {display}."
 
     @staticmethod
     def _looks_like_active_trigger_count(question: str) -> bool:
