@@ -264,3 +264,37 @@ class ZabbixConnector:
             )
 
         return enriched
+
+    def list_groups(self, limit: int = 200) -> list[dict]:
+        if not self.token:
+            self.login()
+        payload = {
+            "jsonrpc": "2.0",
+            "method": "hostgroup.get",
+            "params": {"output": ["groupid", "name"], "selectHosts": ["hostid"], "sortfield": "name", "limit": limit},
+            "auth": self.token,
+            "id": 20,
+        }
+        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
+        response.raise_for_status()
+        data = response.json()
+        if "error" in data:
+            raise Exception(data["error"])
+        return [{"groupid": str(item.get("groupid")), "name": item.get("name", ""), "hosts": len(item.get("hosts", []) or [])} for item in data.get("result", [])]
+
+    def create_group(self, name: str) -> dict:
+        if not self.token:
+            self.login()
+        payload = {
+            "jsonrpc": "2.0",
+            "method": "hostgroup.create",
+            "params": [{"name": name}],
+            "auth": self.token,
+            "id": 21,
+        }
+        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
+        response.raise_for_status()
+        data = response.json()
+        if "error" in data:
+            raise Exception(data["error"])
+        return {"name": name, "groupids": data.get("result", {}).get("groupids", [])}

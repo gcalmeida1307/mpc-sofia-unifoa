@@ -91,6 +91,7 @@ class Application:
                 "/knowledge/upload",
                 "/knowledge/ingest",
                 "/knowledge/ingest/site",
+                "/zabbix/groups",
             }
             path = request.url.path
             method = request.method.upper()
