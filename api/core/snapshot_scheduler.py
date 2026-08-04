@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 
 from context.infrastructure import snapshot_service
+from services.knowledge import refresh_due_knowledge_sources
 from learning.service import learning_service
 
 
@@ -18,6 +19,7 @@ class SnapshotScheduler:
         self._running = True
         # Warm-up snapshot so temporal series starts immediately on boot.
         snapshot_service.refresh()
+        refresh_due_knowledge_sources()
         learning_service.learn()
         self._task = asyncio.create_task(self._run())
 
@@ -35,6 +37,7 @@ class SnapshotScheduler:
         while self._running:
             await asyncio.sleep(self.interval_seconds)
             snapshot_service.refresh()
+            refresh_due_knowledge_sources()
             learning_service.learn()
 
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SOFIA Platform</title>
+    <title>SOFIA - Operational Copilot</title>
     <link rel="stylesheet" href="/ui/styles.css" />
   </head>
   <body>
@@ -14,15 +14,15 @@
           <strong>SOFIA</strong>
         </div>
         <nav class="menu" id="main-menu">
-          <a href="#platform" data-menu="platform" class="active">Platform</a>
-          <a href="#modules" data-menu="modules">Modules</a>
-          <a href="#observability" data-menu="observability">Observability</a>
-          <a href="#marketplace" data-menu="marketplace">Marketplace</a>
-          <a href="#docs" data-menu="docs">Docs</a>
+          <a href="#platform" data-menu="platform" class="active">Visão geral</a>
+          <a href="#journey" data-menu="journey">Como ajuda</a>
+          <a href="#server" data-menu="server">Servidor</a>
+          <a href="#knowledge" data-menu="knowledge">Conhecimento</a>
+          <a href="#docs" data-menu="docs">Conversar</a>
         </nav>
         <div class="status-pill">
           <span class="status-dot"></span>
-          <span>Platform online</span>
+          <span>SOFIA online</span>
         </div>
       </div>
     </header>
@@ -30,12 +30,12 @@
     <main class="shell">
       <section id="platform" data-section="platform" class="hero section-block">
         <div class="hero-main">
-          <p class="eyebrow">v2.4.1 - Operations Intelligence</p>
-          <h1>Operations Intelligence <span>Platform</span></h1>
-          <p class="subtitle">A modular, observable and extensible operating copilot for infrastructure teams. Built for high-trust operational decisions.</p>
+          <p class="eyebrow">SOFIA - Operação assistida por contexto</p>
+          <h1>Entenda o que está acontecendo e <span>aja com segurança</span></h1>
+          <p class="subtitle">SOFIA organiza sinais, documentos e histórico em uma visão simples para o time. O sistema observa, aprende e responde com base no que está no servidor, não em suposições.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#modules">Explore Modules</a>
-            <a class="btn btn-ghost" href="#docs">Read the Docs</a>
+            <a class="btn btn-primary" href="#knowledge">Add knowledge</a>
+            <a class="btn btn-ghost" href="#docs">Ask SOFIA</a>
           </div>
         </div>
       </section>
@@ -43,40 +43,67 @@
       <section class="grid stats section-block" aria-label="Platform metrics">
         <article class="metric-card">
           <strong id="registry-count" class="metric-value"></strong>
-          <span class="metric-label">core registry</span>
+          <span class="metric-label">módulos ativos</span>
         </article>
         <article class="metric-card">
           <strong id="knowledge-status" class="metric-value"></strong>
-          <span class="metric-label">knowledge</span>
+          <span class="metric-label">base de conhecimento</span>
         </article>
         <article class="metric-card">
           <strong id="marketplace-status" class="metric-value"></strong>
-          <span class="metric-label">marketplace</span>
+          <span class="metric-label">conteúdos disponíveis</span>
         </article>
         <article class="metric-card">
-          <strong id="mcp-status" class="metric-value"></strong>
-          <span class="metric-label">mcp</span>
+          <strong id="server-status" class="metric-value"></strong>
+          <span class="metric-label">servidor</span>
         </article>
       </section>
 
+      <section id="journey" data-section="journey" class="section-block">
+        <p class="eyebrow">Como SOFIA ajuda</p>
+        <h2>Uma leitura por partes, sem jargão desnecessário</h2>
+        <div class="grid four-up">
+          <article class="card step-card">
+            <span class="step-index">1</span>
+            <h3>Entende a pergunta</h3>
+            <p>SOFIA transforma a dúvida do usuário em intenção operacional.</p>
+          </article>
+          <article class="card step-card">
+            <span class="step-index">2</span>
+            <h3>Olha o que está vivo</h3>
+            <p>O sistema lê o servidor e o ambiente para saber o estado atual.</p>
+          </article>
+          <article class="card step-card">
+            <span class="step-index">3</span>
+            <h3>Consulta o conhecimento</h3>
+            <p>Ele usa documentação, arquivos enviados e fontes cadastradas.</p>
+          </article>
+          <article class="card step-card">
+            <span class="step-index">4</span>
+            <h3>Explica o próximo passo</h3>
+            <p>A resposta vem com contexto e orientação prática para o usuário.</p>
+          </article>
+        </div>
+      </section>
+
       <section id="modules" data-section="modules" class="section-block">
-        <p class="eyebrow">Core Modules</p>
-        <h2>Everything your ops team needs</h2>
+        <p class="eyebrow">O que está por trás</p>
+        <h2>Capacidades técnicas em uma linguagem mais simples</h2>
         <div class="grid four-up">
           <article class="card">
-            <h3>Core Registry</h3>
+            <h3>Registro central</h3>
             <ul id="module-list"></ul>
           </article>
           <article class="card">
-            <h3>Capabilities</h3>
+            <h3>O que pode fazer</h3>
             <ul id="capability-list"></ul>
           </article>
           <article class="card">
-            <h3>Infrastructure Stack</h3>
+            <h3>Serviços do ambiente</h3>
             <div class="stack-list" id="stack-list"></div>
           </article>
           <article class="card terminal-card">
-            <h3>Kernel status</h3>
+            <h3>Estado do núcleo</h3>
             <pre>$ sofia status --all
 • core-registry
 • knowledge-base
@@ -87,30 +114,124 @@
         </div>
       </section>
 
-      <section id="observability" data-section="observability" class="section-block">
-        <p class="eyebrow">AI Observability</p>
-        <h2>Cognitive telemetry and traceability</h2>
+      <section id="server" data-section="server" class="section-block">
+        <p class="eyebrow">Servidor</p>
+        <h2>Leitura rápida do que o SOFIA está consumindo</h2>
         <div class="grid two-column">
           <article class="card">
-            <h3>AI Metrics (24h)</h3>
+            <h3>Disco e memória</h3>
+            <div class="resource-grid">
+              <div class="resource-box">
+                <strong id="server-disk-value"></strong>
+                <span>Disco usado</span>
+              </div>
+              <div class="resource-box">
+                <strong id="server-memory-value"></strong>
+                <span>Memória usada</span>
+              </div>
+            </div>
+            <div class="resource-detail" id="server-disk-detail"></div>
+            <div class="resource-detail" id="server-memory-detail"></div>
+          </article>
+          <article class="card">
+            <h3>CPU e rede</h3>
+            <div class="resource-grid">
+              <div class="resource-box">
+                <strong id="server-cpu-value"></strong>
+                <span>CPU estimada</span>
+              </div>
+              <div class="resource-box">
+                <strong id="server-network-value"></strong>
+                <span>Tráfego</span>
+              </div>
+            </div>
+            <div class="resource-detail" id="server-cpu-detail"></div>
+            <div class="resource-detail" id="server-network-detail"></div>
+          </article>
+          <article class="card">
+            <h3>Banco de dados</h3>
+            <div class="resource-grid">
+              <div class="resource-box">
+                <strong id="server-db-value"></strong>
+                <span>Tamanho</span>
+              </div>
+              <div class="resource-box">
+                <strong id="server-db-connections-value"></strong>
+                <span>Conexões</span>
+              </div>
+            </div>
+            <div class="resource-detail" id="server-db-detail"></div>
+            <div class="resource-detail" id="server-db-connections-detail"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="knowledge" data-section="knowledge" class="section-block">
+        <p class="eyebrow">Conhecimento</p>
+        <h2>Adicione fontes, receba atualizações e envie materiais para aprendizado</h2>
+        <div class="grid two-column">
+          <article class="card">
+            <h3>Fontes configuradas</h3>
+            <ul id="provider-list" class="dense-list"></ul>
+            <button id="refresh-providers-button" type="button" class="btn btn-ghost small inline-action">Atualizar fontes agora</button>
+          </article>
+          <article class="card">
+            <h3>Adicionar uma fonte</h3>
+            <div class="form-grid">
+              <input id="provider-label" placeholder="Nome amigável" />
+              <input id="provider-url" placeholder="https://www.zabbix.com/documentation/current/en/manual/" />
+              <input id="provider-refresh" type="number" min="300" step="300" placeholder="Refresh em segundos" />
+              <input id="provider-paths" placeholder="Caminhos permitidos separados por vírgula" />
+              <input id="provider-domains" placeholder="Domínios permitidos separados por vírgula" />
+              <textarea id="provider-metadata" placeholder='Metadados JSON, por exemplo {"team":"ops"}'></textarea>
+            </div>
+            <button id="save-provider-button" type="button" class="btn btn-primary small inline-action">Salvar fonte</button>
+          </article>
+        </div>
+        <div class="grid two-column knowledge-upload-grid">
+          <article class="card">
+            <h3>Enviar arquivo para treino</h3>
+            <p class="card-copy">Envie runbooks, notas, checklists ou qualquer texto útil para o conhecimento local do SOFIA.</p>
+            <input id="training-file" type="file" />
+            <textarea id="training-metadata" placeholder='Metadados JSON opcionais'></textarea>
+            <button id="upload-training-button" type="button" class="btn btn-primary small inline-action">Enviar arquivo</button>
+          </article>
+          <article class="card">
+            <h3>Como o conhecimento funciona</h3>
+            <ul class="dense-list">
+              <li>Fontes externas ficam no servidor depois do primeiro crawl.</li>
+              <li>O refresh roda por fonte, com escopo de domínio e caminho.</li>
+              <li>Uploads entram como aprendizado local e podem ser reutilizados depois.</li>
+              <li>O modelo recebe só o contexto consolidado, não a internet.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="observability" data-section="observability" class="section-block">
+        <p class="eyebrow">Operação da IA</p>
+        <h2>O que a plataforma vem fazendo em segundo plano</h2>
+        <div class="grid two-column">
+          <article class="card">
+            <h3>Métricas da IA</h3>
             <ul id="ai-metrics-list"></ul>
           </article>
           <article class="card">
-            <h3>Top Group Trends (30d)</h3>
+            <h3>Tendências do ambiente</h3>
             <ul id="ai-group-trends-list"></ul>
           </article>
         </div>
         <article class="card">
-          <h3>Recent Evidence Audits</h3>
+          <h3>Auditoria recente</h3>
           <ul id="ai-audit-list"></ul>
         </article>
         <div class="grid two-column">
           <article class="card">
-            <h3>Autonomous Investigations</h3>
+            <h3>Investigações automáticas</h3>
             <ul id="ai-investigations-list"></ul>
           </article>
           <article class="card">
-            <h3>Specialist Agents</h3>
+            <h3>Agentes especializados</h3>
             <ul id="ai-agents-list"></ul>
           </article>
         </div>
@@ -118,7 +239,7 @@
 
       <section id="marketplace" data-section="marketplace" class="section-block">
         <p class="eyebrow">Marketplace</p>
-        <h2>Install trusted operational modules</h2>
+        <h2>Componentes prontos para uso</h2>
         <div class="grid marketplace-grid" id="marketplace-grid"></div>
       </section>
 
@@ -126,17 +247,17 @@
         <article class="card prompt-card">
           <div class="prompt-header">
             <div>
-              <h2>SOFIA Copilot</h2>
-              <p>Ask questions and inspect what the platform can do with Knowledge, MCP and registered capabilities.</p>
+              <h2>Pergunte ao SOFIA</h2>
+              <p>Use linguagem natural. O sistema cruza estado do ambiente, conhecimento local e histórico antes de responder.</p>
             </div>
             <div class="prompt-actions">
-              <input id="display-name" maxlength="40" placeholder="Your name (optional)" />
-              <button id="save-name-button" type="button" class="btn btn-ghost small">Save Name</button>
-              <button id="ask-button" type="button" class="btn btn-primary small">Send</button>
+              <input id="display-name" maxlength="40" placeholder="Seu nome (opcional)" />
+              <button id="save-name-button" type="button" class="btn btn-ghost small">Salvar nome</button>
+              <button id="ask-button" type="button" class="btn btn-primary small">Enviar</button>
             </div>
           </div>
           <div class="chat-window" id="chat-window"></div>
-          <textarea id="prompt-input" placeholder="Example: What can you do with Zabbix and Docker?"></textarea>
+          <textarea id="prompt-input" placeholder="Exemplo: por que o grupo Switches está com severity average?"></textarea>
         </article>
       </section>
     </main>

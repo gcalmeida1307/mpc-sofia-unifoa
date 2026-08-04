@@ -16,7 +16,7 @@ from ai.reasoning import reasoning_engine
 from context.builder import context_builder
 from core.event_bus import event_bus
 from services.postgres_store import postgres_store
-from services.openai_reasoner import has_openai_enabled
+from services.openai_reasoner import has_llm_enabled
 
 
 class OpenAIService:
@@ -37,6 +37,76 @@ class OpenAIService:
             "risk_levels": [risk.get("level") for risk in context.get("risks", [])],
             "justification": reasoning.get("justification", ""),
             "critic_issues": critic.get("issues", []),
+            "provider": critic.get("provider", "unknown"),
+        }
+
+    @staticmethod
+    def _compact_context_for_llm(context: dict) -> dict:
+        tools = context.get("tools", {}) if isinstance(context, dict) else {}
+        problems = tools.get("zabbix.list_problems", {}).get("problems", [])
+        if not isinstance(problems, list):
+            problems = []
+
+        compact_problems = []
+        for item in problems[:10]:
+            if not isinstance(item, dict):
+                continue
+            compact_problems.append(
+                {
+                    "name": item.get("name", ""),
+                    "severity": item.get("severity_label", item.get("severity", "")),
+                    "hosts": (item.get("hosts", []) or [])[:2],
+                    "groups": (item.get("groups", []) or [])[:2],
+                }
+            )
+            if len(compact_problems) >= 3:
+                break
+
+        knowledge = context.get("knowledge", []) if isinstance(context.get("knowledge", []), list) else []
+        insights = context.get("insights", []) if isinstance(context.get("insights", []), list) else []
+
+        compact_knowledge = []
+        for item in knowledge[:1]:
+            if not isinstance(item, dict):
+                continue
+            compact_knowledge.append(
+                {
+                    "source": item.get("source", ""),
+                    "score": item.get("score", 0),
+                    "snippet": str(item.get("snippet", ""))[:220],
+                }
+            )
+
+        compact_insights = []
+        for item in insights[:2]:
+            if not isinstance(item, dict):
+                continue
+            compact_insights.append(
+                {
+                    "family": item.get("family", ""),
+                    "count": item.get("count", 0),
+                    "insight": str(item.get("insight", ""))[:180],
+                }
+            )
+
+        risks = context.get("risks", []) if isinstance(context.get("risks", []), list) else []
+
+        return {
+            "summary": context.get("summary", {}),
+            "intent": context.get("intent", "unknown"),
+            "agent": {
+                "name": context.get("agent", {}).get("name", ""),
+                "critic_focus": context.get("agent", {}).get("critic_focus", ""),
+            },
+            "hypothesis": {
+                "domain": context.get("hypothesis", {}).get("domain", ""),
+                "selected_hypothesis": context.get("hypothesis", {}).get("selected_hypothesis", ""),
+                "confidence": context.get("hypothesis", {}).get("confidence", 0.0),
+            },
+            "top_problems": compact_problems,
+            "knowledge": compact_knowledge,
+            "insights": compact_insights,
+            "risk": risks[:2],
         }
 
     def answer(self, question: str) -> dict:
@@ -69,13 +139,21 @@ class OpenAIService:
 
         candidate_answer = reasoning.get("deterministic_answer")
         llm_used = False
+        llm_provider = "none"
         usage: dict = {}
 
         if not candidate_answer:
+            llm_context = self._compact_context_for_llm(context)
+            llm_context_json = json.dumps(llm_context, ensure_ascii=False)
+            if len(llm_context_json) > 1600:
+                llm_context_json = llm_context_json[:1600]
+            reasoning_note = reasoning_engine.to_developer_note(reasoning)
+            if len(reasoning_note) > 700:
+                reasoning_note = reasoning_note[:700]
             messages = [
                 {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "developer", "content": json.dumps(context, ensure_ascii=False)},
-                {"role": "developer", "content": reasoning_engine.to_developer_note(reasoning)},
+                {"role": "developer", "content": llm_context_json},
+                {"role": "developer", "content": reasoning_note},
                 {"role": "user", "content": question},
             ]
 
@@ -84,11 +162,13 @@ class OpenAIService:
                 candidate_answer = str(llm_result.get("text", "")).strip()
                 usage = llm_result.get("usage", {}) if isinstance(llm_result.get("usage", {}), dict) else {}
                 llm_used = True
+                llm_provider = str(llm_result.get("provider", "unknown"))
 
         if not candidate_answer:
             candidate_answer = self._fallback_answer(question, context)
 
         critic = critic_engine.evaluate(question, plan, context, candidate_answer)
+        critic["provider"] = llm_provider
         final_answer = candidate_answer
         if not critic.get("approved", False):
             revised_answer = critic.get("revised_answer")
@@ -128,6 +208,7 @@ class OpenAIService:
                 "capabilities": plan.get("capabilities", []),
                 "agent": agent.get("name", "unknown"),
                 "selected_hypothesis": hypothesis.get("selected_hypothesis"),
+                "llm_provider": llm_provider,
             },
         )
 
@@ -159,6 +240,7 @@ class OpenAIService:
                 "question": question,
                 "answer": final_answer,
                 "llm_used": llm_used,
+                "llm_provider": llm_provider,
                 "agent": agent.get("name", "unknown"),
                 "selected_hypothesis": hypothesis.get("selected_hypothesis"),
                 "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -202,10 +284,10 @@ class OpenAIService:
             "documentação",
             "doc",
         ]
-        if not has_openai_enabled() and not any(term in q for term in operational_terms):
+        if not has_llm_enabled() and not any(term in q for term in operational_terms):
             return (
-                "Ainda não há um provedor de IA configurado neste servidor. "
-                "Se você definir OPENAI_API_KEY (ou outro provedor equivalente), eu consigo responder como chat livre."
+                "Ainda nao ha um provedor de IA funcional neste servidor. "
+                "Configure OPENAI_API_KEY com quota ativa ou OLLAMA_BASE_URL/OLLAMA_MODEL para chat livre."
             )
 
         if "market" in q:

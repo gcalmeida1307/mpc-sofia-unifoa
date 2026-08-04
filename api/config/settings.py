@@ -45,6 +45,15 @@ class N8NConfig:
 
 
 @dataclass(frozen=True)
+class OllamaConfig:
+    base_url: str
+    model: str
+    fallback_model: str
+    api_key: str
+    mode: str
+
+
+@dataclass(frozen=True)
 class RuntimeConfig:
     request_timeout: int
     debug: bool
@@ -82,6 +91,13 @@ class Settings:
             base_url=os.getenv("N8N_BASE_URL", "http://sofia_n8n:5678"),
             default_webhook=os.getenv("N8N_DEFAULT_WEBHOOK", "sofia-investigation"),
         )
+        self.ollama = OllamaConfig(
+            base_url=os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434"),
+            model=os.getenv("OLLAMA_MODEL", "llama3.1:8b"),
+            fallback_model=os.getenv("OLLAMA_FALLBACK_MODEL", "qwen2.5:1.5b"),
+            api_key=os.getenv("OLLAMA_API_KEY", ""),
+            mode=os.getenv("OLLAMA_MODE", "native").strip().lower() or "native",
+        )
         self.runtime = RuntimeConfig(
             request_timeout=int(os.getenv("REQUEST_TIMEOUT", "30")),
             debug=_as_bool(os.getenv("DEBUG"), default=False),
@@ -113,6 +129,11 @@ class Settings:
         self.N8N_DEFAULT_WEBHOOK = self.n8n.default_webhook
         self.OPENAI_API_KEY = self.openai.api_key
         self.OPENAI_MODEL = self.openai.model
+        self.OLLAMA_BASE_URL = self.ollama.base_url
+        self.OLLAMA_MODEL = self.ollama.model
+        self.OLLAMA_FALLBACK_MODEL = self.ollama.fallback_model
+        self.OLLAMA_API_KEY = self.ollama.api_key
+        self.OLLAMA_MODE = self.ollama.mode
 
     @staticmethod
     def _mask(value: str | None) -> str:
@@ -124,6 +145,7 @@ class Settings:
 
     def snapshot(self, masked: bool = True) -> dict[str, object]:
         openai_api_key = self._mask(self.openai.api_key) if masked else self.openai.api_key
+        ollama_api_key = self._mask(self.ollama.api_key) if masked else self.ollama.api_key
         zabbix_password = self._mask(self.zabbix.password) if masked else self.zabbix.password
         return {
             "openai": {
@@ -143,6 +165,13 @@ class Settings:
             "n8n": {
                 "base_url": self.n8n.base_url,
                 "default_webhook": self.n8n.default_webhook,
+            },
+            "ollama": {
+                "base_url": self.ollama.base_url,
+                "model": self.ollama.model,
+                "fallback_model": self.ollama.fallback_model,
+                "api_key": ollama_api_key,
+                "mode": self.ollama.mode,
             },
             "security": {
                 "admin_api_key": self._mask(self.security.admin_api_key) if masked else self.security.admin_api_key,

@@ -8,13 +8,20 @@ services:
      restart: unless-stopped
 
      environment:
-       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
-       SECURITY_ADMIN_API_KEY: ${SECURITY_ADMIN_API_KEY:-}
-       SECURITY_MFA_TOTP_SECRET: ${SECURITY_MFA_TOTP_SECRET:-}
-       REQUEST_RATE_LIMIT_PER_MINUTE: ${REQUEST_RATE_LIMIT_PER_MINUTE:-120}
-       SNAPSHOT_INTERVAL_SECONDS: ${SNAPSHOT_INTERVAL_SECONDS:-30}
-       AI_METRICS_WINDOW_HOURS: ${AI_METRICS_WINDOW_HOURS:-24}
+        OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+        OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+        OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://sofia_ollama:11434}
+        OLLAMA_MODEL: "${OLLAMA_MODEL:-qwen2.5:3b}"
+        OLLAMA_FALLBACK_MODEL: "${OLLAMA_FALLBACK_MODEL:-qwen2.5:1.5b}"
+        OLLAMA_API_KEY: ${OLLAMA_API_KEY:-}
+        OLLAMA_MODE: ${OLLAMA_MODE:-native}
+        SECURITY_ADMIN_API_KEY: ${SECURITY_ADMIN_API_KEY:-}
+        SECURITY_MFA_TOTP_SECRET: ${SECURITY_MFA_TOTP_SECRET:-}
+        REQUEST_TIMEOUT: ${REQUEST_TIMEOUT:-30}
+        REQUEST_RATE_LIMIT_PER_MINUTE: ${REQUEST_RATE_LIMIT_PER_MINUTE:-120}
+        SNAPSHOT_INTERVAL_SECONDS: ${SNAPSHOT_INTERVAL_SECONDS:-30}
+        AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS: ${AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS:-90}
+        AI_METRICS_WINDOW_HOURS: ${AI_METRICS_WINDOW_HOURS:-24}
 
      volumes:
        - ./api:/app
@@ -25,6 +32,17 @@ services:
 
      networks:
        - sofia-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: sofia_ollama
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - sofia-network
 
   redis:
     image: redis:7-alpine
@@ -90,6 +108,7 @@ volumes:
   postgres_data:
   qdrant_data:
   n8n_data:
+  ollama_data:
 
 networks:
   sofia-network:

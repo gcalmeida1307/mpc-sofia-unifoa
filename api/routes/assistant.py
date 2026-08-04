@@ -7,7 +7,7 @@ from core.registry import registry
 from services.docker_service import DockerService
 from services.knowledge import search_knowledge
 from services.marketplace import get_marketplace_catalog
-from services.openai_reasoner import generate_answer, has_openai_enabled
+from services.openai_reasoner import generate_answer, has_llm_enabled
 from services.persistence import persistence
 from services.postgres_store import postgres_store
 from services.qdrant_store import qdrant_store
@@ -141,7 +141,7 @@ def ask(payload: AssistantRequest):
                 "capabilities": capabilities,
                 "recommendations": recommendations,
                 "memory_hits": memory_hits,
-                "llm_enabled": has_openai_enabled(),
+                "llm_enabled": has_llm_enabled(),
                 "planner": ai_result.get("plan", {}),
                 "agent": ai_result.get("context", {}).get("agent", {}),
                 "hypothesis": ai_result.get("context", {}).get("hypothesis", {}),

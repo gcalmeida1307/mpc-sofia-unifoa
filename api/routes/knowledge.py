@@ -1,7 +1,16 @@
-from fastapi import APIRouter
+import json
+
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
 
-from services.knowledge import get_knowledge_index, ingest_source, search_knowledge
+from services.knowledge import (
+    get_knowledge_index,
+    ingest_source,
+    list_knowledge_sources,
+    refresh_due_knowledge_sources,
+    register_knowledge_source,
+    search_knowledge,
+)
 
 router = APIRouter(prefix="/knowledge", tags=["Knowledge"])
 
@@ -10,6 +19,20 @@ class KnowledgeIngestRequest(BaseModel):
     source: str
     source_type: str
     path: str | None = None
+    url: str | None = None
+    max_pages: int | None = None
+    max_depth: int | None = None
+    metadata: dict | None = None
+
+
+class KnowledgeProviderRequest(BaseModel):
+    name: str | None = None
+    label: str | None = None
+    url: str
+    enabled: bool = True
+    refresh_seconds: int | None = None
+    allowed_domains: list[str] | None = None
+    allowed_paths: list[str] | None = None
     metadata: dict | None = None
 
 
@@ -27,9 +50,52 @@ def index():
     return get_knowledge_index()
 
 
+@router.get("/providers")
+def providers():
+    return list_knowledge_sources()
+
+
+@router.post("/providers")
+def providers_create(payload: KnowledgeProviderRequest):
+    return register_knowledge_source(payload.model_dump())
+
+
+@router.post("/providers/refresh")
+def providers_refresh(force: bool = False):
+    return refresh_due_knowledge_sources(force=force)
+
+
 @router.post("/ingest")
 def ingest(payload: KnowledgeIngestRequest):
     return ingest_source(payload.model_dump())
+
+
+@router.post("/ingest/site")
+def ingest_site(payload: KnowledgeIngestRequest):
+    return ingest_source({**payload.model_dump(), "source_type": payload.source_type or "documentation_site"})
+
+
+@router.post("/upload")
+async def upload_training_asset(
+    file: UploadFile = File(...),
+    source: str = Form("user-upload"),
+    metadata: str = Form("{}"),
+):
+    try:
+        parsed_metadata = json.loads(metadata) if metadata else {}
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"invalid metadata JSON: {exc}") from exc
+
+    content = await file.read()
+    return ingest_source(
+        {
+            "source": source,
+            "source_type": "upload",
+            "file_name": file.filename or source,
+            "content_bytes": content,
+            "metadata": parsed_metadata,
+        }
+    )
 
 
 @router.get("/search")

@@ -60,6 +60,9 @@ async function initDashboard() {
   try {
     const registry = await safeLoad('/core/registry', { modules: [], capabilities: {} });
     const knowledge = await safeLoad('/knowledge/status', { status: 'unavailable' });
+    const knowledgeIndex = await safeLoad('/knowledge/index', { providers: { count: 0, sources: [] } });
+    const knowledgeProviders = await safeLoad('/knowledge/providers', { count: 0, sources: [] });
+    const infra = await safeLoad('/infra/resumo', { resources: {} });
     const marketplace = await safeLoad('/marketplace/catalog', { modules: [] });
     const mcp = await safeLoad('/mcp/tools', { registered_modules: [] });
     const aiPanel = await safeLoad('/engine/ai/panel?hours=24', {
@@ -70,11 +73,66 @@ async function initDashboard() {
       recent_investigations: []
     });
     const agents = await safeLoad('/engine/agents/status', { agents: [] });
+    const serverResources = infra.resources || {};
 
     document.getElementById('registry-count').textContent = `${(registry.modules || []).length} modules registered`;
     document.getElementById('knowledge-status').textContent = knowledge.status;
     document.getElementById('marketplace-status').textContent = `${(marketplace.modules || []).length} modules available`;
-    document.getElementById('mcp-status').textContent = `${(mcp.registered_modules || []).length} MCP-visible modules`;
+    document.getElementById('server-status').textContent = `${serverResources.disk?.used_percent ?? 0}% used`;
+
+    const setMetricDetail = (valueId, detailId, value, detail) => {
+      const valueNode = document.getElementById(valueId);
+      const detailNode = document.getElementById(detailId);
+      if (valueNode) valueNode.textContent = value;
+      if (detailNode) detailNode.textContent = detail;
+    };
+
+    setMetricDetail(
+      'server-disk-value',
+      'server-disk-detail',
+      `${serverResources.disk?.used_percent ?? 0}%`,
+      `Usados ${serverResources.disk?.used_gb ?? 0} GB de ${serverResources.disk?.total_gb ?? 0} GB, com ${serverResources.disk?.free_gb ?? 0} GB livres.`
+    );
+    setMetricDetail(
+      'server-memory-value',
+      'server-memory-detail',
+      `${serverResources.memory?.used_percent ?? 0}%`,
+      `Memória em uso: ${serverResources.memory?.used_gb ?? 0} GB de ${serverResources.memory?.total_gb ?? 0} GB.`
+    );
+    setMetricDetail(
+      'server-cpu-value',
+      'server-cpu-detail',
+      `${serverResources.cpu?.load_percent_estimate ?? 0}%`,
+      `Carga média 1m/5m/15m: ${serverResources.cpu?.load_1m ?? 0} / ${serverResources.cpu?.load_5m ?? 0} / ${serverResources.cpu?.load_15m ?? 0} em ${serverResources.cpu?.cores ?? 0} núcleos.`
+    );
+    setMetricDetail(
+      'server-network-value',
+      'server-network-detail',
+      `${serverResources.network?.interfaces ?? 0} links`,
+      `Tráfego observado: ${serverResources.network?.rx_mb ?? 0} MB recebidos e ${serverResources.network?.tx_mb ?? 0} MB enviados.`
+    );
+    const databaseLabel = serverResources.database?.error
+      ? 'indisponível'
+      : `${serverResources.database?.size_gb ?? 0} GB`;
+    const databaseConnections = serverResources.database?.error
+      ? 'erro'
+      : `${serverResources.database?.connections ?? 0}`;
+    setMetricDetail(
+      'server-db-value',
+      'server-db-detail',
+      databaseLabel,
+      serverResources.database?.error
+        ? `Não foi possível ler o banco local: ${serverResources.database.error}`
+        : `Banco ${serverResources.database?.name ?? 'PostgreSQL'} com ${serverResources.database?.size_mb ?? 0} MB e ${serverResources.database?.active_connections ?? 0} conexões ativas.`
+    );
+    setMetricDetail(
+      'server-db-connections-value',
+      'server-db-connections-detail',
+      databaseConnections,
+      serverResources.database?.error
+        ? 'Sem leitura de conexões.'
+        : `Conexões totais no momento: ${serverResources.database?.connections ?? 0}.`
+    );
 
     const moduleList = document.getElementById('module-list');
     (registry.modules || []).forEach((module) => {
@@ -211,11 +269,40 @@ async function initDashboard() {
       agentsList.appendChild(item);
     }
 
+    const providerList = document.getElementById('provider-list');
+    const providerSources = knowledgeProviders.sources || knowledgeIndex.providers?.sources || [];
+    if (providerList) {
+      providerList.innerHTML = '';
+      if (providerSources.length === 0) {
+        const item = document.createElement('li');
+        item.textContent = 'Nenhuma fonte cadastrada ainda.';
+        providerList.appendChild(item);
+      } else {
+        providerSources.forEach((source) => {
+          const item = document.createElement('li');
+          const nextRefresh = source.next_refresh_at ? ` | próxima atualização: ${source.next_refresh_at}` : '';
+          item.textContent = `${source.label || source.name} | ${source.url}${nextRefresh}`;
+          providerList.appendChild(item);
+        });
+      }
+    }
+
     const chatWindow = document.getElementById('chat-window');
     const input = document.getElementById('prompt-input');
     const askButton = document.getElementById('ask-button');
     const saveNameButton = document.getElementById('save-name-button');
     const displayNameInput = document.getElementById('display-name');
+    const refreshProvidersButton = document.getElementById('refresh-providers-button');
+    const saveProviderButton = document.getElementById('save-provider-button');
+    const uploadTrainingButton = document.getElementById('upload-training-button');
+    const providerLabelInput = document.getElementById('provider-label');
+    const providerUrlInput = document.getElementById('provider-url');
+    const providerRefreshInput = document.getElementById('provider-refresh');
+    const providerPathsInput = document.getElementById('provider-paths');
+    const providerDomainsInput = document.getElementById('provider-domains');
+    const providerMetadataInput = document.getElementById('provider-metadata');
+    const trainingFileInput = document.getElementById('training-file');
+    const trainingMetadataInput = document.getElementById('training-metadata');
     const messages = JSON.parse(localStorage.getItem('sofia-chat') || '[]');
     let userLabel = getChatIdentity();
     displayNameInput.value = userLabel === 'You' ? '' : userLabel;
@@ -227,6 +314,85 @@ async function initDashboard() {
       userLabel = name || 'You';
       renderHistory(messages, chatWindow, userLabel);
     });
+
+    async function refreshKnowledgeProviders() {
+      await fetch('/knowledge/providers/refresh', { method: 'POST' });
+      window.location.reload();
+    }
+
+    async function saveKnowledgeProvider() {
+      const url = providerUrlInput.value.trim();
+      if (!url) return;
+
+      let metadata = {};
+      if (providerMetadataInput.value.trim()) {
+        try {
+          metadata = JSON.parse(providerMetadataInput.value.trim());
+        } catch (error) {
+          alert(`Metadados inválidos: ${error.message}`);
+          return;
+        }
+      }
+
+      const payload = {
+        name: providerLabelInput.value.trim() || undefined,
+        label: providerLabelInput.value.trim() || undefined,
+        url,
+        enabled: true,
+        refresh_seconds: providerRefreshInput.value ? Number(providerRefreshInput.value) : undefined,
+        allowed_paths: providerPathsInput.value
+          .split(',')
+          .map((item) => item.trim())
+          .filter(Boolean),
+        allowed_domains: providerDomainsInput.value
+          .split(',')
+          .map((item) => item.trim())
+          .filter(Boolean),
+        metadata,
+      };
+
+      await fetch('/knowledge/providers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      window.location.reload();
+    }
+
+    async function uploadTrainingFile() {
+      const file = trainingFileInput.files && trainingFileInput.files[0];
+      if (!file) return;
+
+      let metadata = {};
+      if (trainingMetadataInput.value.trim()) {
+        try {
+          metadata = JSON.parse(trainingMetadataInput.value.trim());
+        } catch (error) {
+          alert(`Metadados inválidos: ${error.message}`);
+          return;
+        }
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('source', file.name);
+      formData.append('metadata', JSON.stringify(metadata));
+      await fetch('/knowledge/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      window.location.reload();
+    }
+
+    if (refreshProvidersButton) {
+      refreshProvidersButton.addEventListener('click', refreshKnowledgeProviders);
+    }
+    if (saveProviderButton) {
+      saveProviderButton.addEventListener('click', saveKnowledgeProvider);
+    }
+    if (uploadTrainingButton) {
+      uploadTrainingButton.addEventListener('click', uploadTrainingFile);
+    }
 
     async function sendMessage() {
       const question = input.value.trim();

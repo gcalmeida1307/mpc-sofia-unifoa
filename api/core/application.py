@@ -86,6 +86,10 @@ class Application:
                 "/workflows/run",
                 "/workflows/n8n/run",
                 "/engine/ingest",
+                "/knowledge/providers",
+                "/knowledge/providers/refresh",
+                "/knowledge/upload",
+                "/knowledge/ingest/site",
             }
             path = request.url.path
             method = request.method.upper()

@@ -8,6 +8,7 @@
   --muted: #8ca4c4;
   --accent: #00dfbd;
   --accent-soft: #1eb7ff;
+  --accent-warm: #f7b267;
 }
 
 * { box-sizing: border-box; }
@@ -17,6 +18,7 @@ body {
   font-family: "Space Grotesk", "IBM Plex Sans", "Segoe UI", sans-serif;
   background:
     linear-gradient(180deg, rgba(0, 223, 189, 0.04), transparent 24%),
+    radial-gradient(circle at 20% 0%, rgba(30, 183, 255, 0.08), transparent 28%),
     repeating-linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.04) 0,
@@ -112,7 +114,10 @@ body {
   padding: 36px 24px;
   border: 1px solid rgba(34, 55, 87, 0.9);
   border-radius: 24px;
-  background: radial-gradient(circle at top right, rgba(0, 223, 189, 0.14), transparent 50%), var(--panel);
+  background:
+    radial-gradient(circle at top right, rgba(0, 223, 189, 0.14), transparent 50%),
+    radial-gradient(circle at bottom left, rgba(247, 178, 103, 0.08), transparent 42%),
+    var(--panel);
 }
 .hero h1 {
   margin: 0;
@@ -204,6 +209,98 @@ h2 {
   font-size: clamp(1.6rem, 2.8vw, 2.4rem);
 }
 h3 { margin-top: 0; }
+
+.card p,
+.card li {
+  color: #d8e6fb;
+  line-height: 1.55;
+}
+
+.step-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  background: rgba(0, 223, 189, 0.14);
+  border: 1px solid rgba(0, 223, 189, 0.35);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.resource-box {
+  border: 1px solid rgba(34, 55, 87, 0.9);
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resource-box strong {
+  font-size: 1.35rem;
+  color: var(--accent);
+}
+
+.resource-box span,
+.resource-detail,
+.card-copy {
+  color: var(--muted);
+}
+
+.resource-detail {
+  min-height: 22px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.form-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.form-grid textarea {
+  min-height: 90px;
+}
+
+.inline-action {
+  margin-top: 12px;
+}
+
+.dense-list {
+  padding-left: 18px;
+}
+
+.dense-list li {
+  margin: 8px 0;
+}
+
+.knowledge-upload-grid {
+  margin-top: 4px;
+}
+
+.metric-card:nth-child(4) .metric-value {
+  color: var(--accent-warm);
+}
+
+.section-block h2 {
+  max-width: 900px;
+}
 
 .terminal-card pre {
   margin: 0;
@@ -309,4 +406,5 @@ li { margin: 7px 0; color: #d8e6fb; }
   .menu { width: 100%; }
   .status-pill { display: none; }
   .prompt-header { flex-direction: column; }
+  .resource-grid { grid-template-columns: 1fr; }
 }

@@ -18,6 +18,7 @@ def ask(payload: AIAskRequest):
         "plan": result.get("plan", {}),
         "reasoning": result.get("reasoning", {}),
         "critic": result.get("critic", {}),
+        "llm_provider": result.get("critic", {}).get("provider", "none"),
         "confidence": result.get("confidence", 0.0),
         "explainability": result.get("explainability", {}),
         "learning": result.get("learning", {}),
