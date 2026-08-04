@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from ai.models import PlanModel
 from ai.planner_policy import planner_policy
 from core.capability_resolver import capability_resolver
@@ -17,6 +19,8 @@ def _infer_intent_and_capabilities(question: str) -> tuple[str, list[str]]:
     q = question.lower()
 
     if _looks_like_host_count(question):
+        return "host_count", ["host_count"]
+    if any(term in q for term in ["quantos", "quantas"]) and re.search(r"\bprd\d+", q):
         return "host_count", ["host_count"]
 
     group_count_terms = ["quantos estao no grupo", "quantos estão no grupo", "quantos existem no grupo", "quantos tem no grupo", "quantos têm no grupo"]
