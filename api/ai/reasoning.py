@@ -35,9 +35,13 @@ class ReasoningEngine:
                 f"problema ou trigger ativo, em {active_problems} evento(s) ativo(s). "
                 "Esta e uma contagem de impacto atual, nao do total de triggers configurados."
             )
-        elif self._looks_like_host_count(q):
+        elif self._looks_like_host_count(q) or "quantos estao no grupo" in q or "quantos estão no grupo" in q:
             host_count = summary.get("hosts", 0)
-            deterministic_answer = f"Voce possui {host_count} host(s) cadastrados no Zabbix."
+            group_name = context.get("tools", {}).get("zabbix.count_hosts", {}).get("group") if isinstance(context, dict) else None
+            if group_name:
+                deterministic_answer = f"O grupo {group_name} possui {host_count} host(s) cadastrados no Zabbix."
+            else:
+                deterministic_answer = f"Voce possui {host_count} host(s) cadastrados no Zabbix."
 
         recommended_actions = self._recommended_actions(summary=summary, risks=risks, operational=operational)
         if selected_hypothesis:

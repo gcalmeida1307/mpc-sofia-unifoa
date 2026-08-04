@@ -417,7 +417,7 @@ async function initDashboard() {
       input.value = '';
 
       try {
-        const response = await fetch('/assistant/ask', {
+        const response = await fetch('/ai/ask', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question })

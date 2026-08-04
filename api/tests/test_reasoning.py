@@ -9,6 +9,10 @@ class ReasoningEngineTests(unittest.TestCase):
         result = reasoning_engine.build("quanto e 2+2?", {}, {})
         self.assertEqual(result["deterministic_answer"], "O resultado de 2+2 e 4.")
 
+    def test_routes_group_pronoun_to_host_count(self):
+        plan = build_plan("quantos estao no grupo PRD01-ANTIGA MEDICINA?")
+        self.assertEqual(plan["intent"], "host_count")
+
     def test_routes_short_trigger_question_to_zabbix_tools(self):
         plan = build_plan("E quantos deles esta com triggers?")
 
