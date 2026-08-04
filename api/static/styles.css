@@ -466,3 +466,5 @@ li { margin: 7px 0; color: #d8e6fb; }
   max-height: 440px;
   min-height: 300px;
 }
+
+.control-panel{max-width:1320px;margin:0 auto}.panel-kpis,.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.panel-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px}.panel-card strong{display:block;font-size:2rem;color:var(--accent);margin:8px 0}.panel-card small{color:var(--muted)}.flow-live{display:flex;align-items:center;gap:10px;margin:18px 0;overflow:auto;padding:8px 0}.flow-node{min-width:170px;padding:13px;text-align:center;border:1px solid var(--border);border-radius:12px;background:var(--panel-soft)}.flow-node.active{border-color:var(--accent);animation:sofiaPulse 1.8s infinite}.flow-live i{color:var(--accent);font-size:1.4rem}@keyframes sofiaPulse{50%{box-shadow:0 0 20px rgba(0,223,189,.38);transform:translateY(-2px)}}

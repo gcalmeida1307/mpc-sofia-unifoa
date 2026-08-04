@@ -138,6 +138,9 @@ async function initDashboard() {
         : `Conexões totais no momento: ${serverResources.database?.connections ?? 0}.`
     );
 
+    const ps=(id,v)=>{const n=document.getElementById(id);if(n)n.textContent=v;}; const pl=(id,vs)=>{const n=document.getElementById(id);if(!n)return;n.innerHTML='';vs.forEach(v=>{const x=document.createElement('li');x.textContent=v;n.appendChild(x);});};
+    ps('panel-rags',String((knowledgeProviders.count||0)+1)); ps('panel-rags-detail',(knowledgeProviders.count||0)+' fontes + base local'); ps('panel-modules',String((registry.modules||[]).length)); ps('panel-modules-detail','MCP e servicos'); ps('panel-memory',String(serverResources.memory?.used_percent??0)+'%'); ps('panel-memory-detail',String(serverResources.memory?.used_gb??0)+' GB em uso'); ps('panel-disk',String(serverResources.disk?.used_percent??0)+'%'); ps('panel-disk-detail',String(serverResources.disk?.free_gb??0)+' GB livres');
+    pl('panel-sources',(knowledgeProviders.sources||[]).map(s=>(s.label||s.name)+': '+(s.last_status||'pronta')).concat(['Base local e uploads: ativos'])); pl('panel-module-list',(registry.modules||[]).map(m=>m+': ativo')); const learn=aiPanel.intelligence?.learning||{}; pl('panel-learning',['Ciclos: '+(learn.cycles||0),'Historico: registrado','Promocao: requer evidencia']); pl('panel-resources',['CPU: '+(serverResources.cpu?.load_percent_estimate??0)+'%','Rede: '+(serverResources.network?.interfaces??0)+' interfaces','Banco: '+(serverResources.database?.size_mb??0)+' MB']);
     const moduleList = document.getElementById('module-list');
     (registry.modules || []).forEach((module) => {
       const item = document.createElement('li');
