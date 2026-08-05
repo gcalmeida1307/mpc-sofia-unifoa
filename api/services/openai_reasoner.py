@@ -5,11 +5,11 @@ from config.settings import settings
 
 
 def has_openai_enabled() -> bool:
-    return bool(settings.OPENAI_API_KEY.strip())
+    return bool(settings.ANTHROPIC_API_KEY.strip())
 
 
 def has_llm_enabled() -> bool:
-    return bool(settings.OPENAI_API_KEY.strip()) or bool(settings.OLLAMA_BASE_URL.strip() and settings.OLLAMA_MODEL.strip())
+    return bool(settings.ANTHROPIC_API_KEY.strip()) or bool(settings.OLLAMA_BASE_URL.strip() and settings.OLLAMA_MODEL.strip())
 
 
 def generate_answer(question: str, evidence: str) -> str | None:

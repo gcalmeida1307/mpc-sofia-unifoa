@@ -6,9 +6,10 @@ from config.settings import settings
 
 class OpenAIResponsesClient:
     def __init__(self):
-        self.openai_api_key = settings.OPENAI_API_KEY.strip()
-        self.openai_model = settings.OPENAI_MODEL
-        self.openai_url = "https://api.openai.com/v1/responses"
+        self.anthropic_api_key = settings.ANTHROPIC_API_KEY.strip()
+        self.anthropic_model = settings.ANTHROPIC_MODEL
+        self.anthropic_max_tokens = settings.ANTHROPIC_MAX_TOKENS
+        self.anthropic_url = "https://api.anthropic.com/v1/messages"
         self.ollama_base_url = settings.OLLAMA_BASE_URL.strip().rstrip("/")
         self.ollama_model = settings.OLLAMA_MODEL.strip()
         self.ollama_fallback_model = settings.OLLAMA_FALLBACK_MODEL.strip()
@@ -18,47 +19,43 @@ class OpenAIResponsesClient:
 
     @property
     def enabled(self) -> bool:
-        return bool(self.openai_api_key) or bool(self.ollama_base_url and self.ollama_model)
+        return bool(self.anthropic_api_key) or bool(self.ollama_base_url and self.ollama_model)
 
     def ask(self, messages: list[dict]) -> dict | None:
         if not messages:
             return None
 
-        # Prefer local provider first for operational latency and resilience.
-        result = self._ask_ollama(messages)
+        result = self._ask_anthropic(messages)
         if result and result.get("text"):
             return result
 
-        result = self._ask_openai(messages)
+        result = self._ask_ollama(messages)
         if result and result.get("text"):
             return result
 
         return None
 
-    def _ask_openai(self, messages: list[dict]) -> dict | None:
-        if not self.openai_api_key:
+    def _ask_anthropic(self, messages: list[dict]) -> dict | None:
+        if not self.anthropic_api_key:
             return None
-
+        system = "\n\n".join(str(item.get("content", "")) for item in messages if item.get("role") in {"system", "developer"})
         payload = {
-            "model": self.openai_model,
-            "input": messages,
+            "model": self.anthropic_model,
+            "max_tokens": self.anthropic_max_tokens,
+            "messages": [self._normalize_message_for_ollama(item) for item in messages if item.get("role") not in {"system", "developer"}],
         }
-
-        headers = {
-            "Authorization": f"Bearer {self.openai_api_key}",
-            "Content-Type": "application/json",
-        }
-
+        if system:
+            payload["system"] = system
+        headers = {"x-api-key": self.anthropic_api_key, "anthropic-version": "2023-06-01", "Content-Type": "application/json"}
         try:
-            # OpenAI is secondary in this stack; fail fast if unavailable/quota-limited.
-            response = requests.post(self.openai_url, headers=headers, json=payload, timeout=min(self.request_timeout, 12))
+            response = requests.post(self.anthropic_url, headers=headers, json=payload, timeout=self.request_timeout)
             response.raise_for_status()
             data = response.json()
             return {
-                "text": data.get("output_text"),
+                "text": "".join(block.get("text", "") for block in data.get("content", []) if block.get("type") == "text"),
                 "usage": data.get("usage", {}),
-                "model": data.get("model", self.openai_model),
-                "provider": "openai",
+                "model": data.get("model", self.anthropic_model),
+                "provider": "anthropic",
             }
         except Exception:
             return None

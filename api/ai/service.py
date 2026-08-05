@@ -298,7 +298,7 @@ class OpenAIService:
         if not has_llm_enabled() and not any(term in q for term in operational_terms):
             return (
                 "Ainda nao ha um provedor de IA funcional neste servidor. "
-                "Configure OPENAI_API_KEY com quota ativa ou OLLAMA_BASE_URL/OLLAMA_MODEL para chat livre."
+                "Configure ANTHROPIC_API_KEY com quota ativa ou OLLAMA_BASE_URL/OLLAMA_MODEL para chat livre."
             )
 
         if "market" in q:

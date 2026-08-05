@@ -7,3 +7,5 @@ qdrant-client
 pyotp
 python-multipart
 pypdf
+pytest
+httpx

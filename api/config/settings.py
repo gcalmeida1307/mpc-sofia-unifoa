@@ -15,9 +15,10 @@ def _as_bool(value: str | None, default: bool = False) -> bool:
 
 
 @dataclass(frozen=True)
-class OpenAIConfig:
+class AnthropicConfig:
     api_key: str
     model: str
+    max_tokens: int
 
 
 @dataclass(frozen=True)
@@ -71,9 +72,10 @@ class SecurityConfig:
 
 class Settings:
     def __init__(self):
-        self.openai = OpenAIConfig(
-            api_key=os.getenv("OPENAI_API_KEY", ""),
-            model=os.getenv("OPENAI_MODEL", "gpt-5"),
+        self.anthropic = AnthropicConfig(
+            api_key=os.getenv("ANTHROPIC_API_KEY", ""),
+            model=os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-5"),
+            max_tokens=max(1, int(os.getenv("ANTHROPIC_MAX_TOKENS", "1024"))),
         )
         self.zabbix = ZabbixConfig(
             url=os.getenv("ZABBIX_URL"),
@@ -127,8 +129,9 @@ class Settings:
         self.QDRANT_COLLECTION = self.qdrant.collection
         self.N8N_BASE_URL = self.n8n.base_url
         self.N8N_DEFAULT_WEBHOOK = self.n8n.default_webhook
-        self.OPENAI_API_KEY = self.openai.api_key
-        self.OPENAI_MODEL = self.openai.model
+        self.ANTHROPIC_API_KEY = self.anthropic.api_key
+        self.ANTHROPIC_MODEL = self.anthropic.model
+        self.ANTHROPIC_MAX_TOKENS = self.anthropic.max_tokens
         self.OLLAMA_BASE_URL = self.ollama.base_url
         self.OLLAMA_MODEL = self.ollama.model
         self.OLLAMA_FALLBACK_MODEL = self.ollama.fallback_model
@@ -144,13 +147,13 @@ class Settings:
         return f"{value[:3]}***{value[-2:]}"
 
     def snapshot(self, masked: bool = True) -> dict[str, object]:
-        openai_api_key = self._mask(self.openai.api_key) if masked else self.openai.api_key
         ollama_api_key = self._mask(self.ollama.api_key) if masked else self.ollama.api_key
         zabbix_password = self._mask(self.zabbix.password) if masked else self.zabbix.password
         return {
-            "openai": {
-                "api_key": openai_api_key,
-                "model": self.openai.model,
+            "anthropic": {
+                "api_key": self._mask(self.anthropic.api_key) if masked else self.anthropic.api_key,
+                "model": self.anthropic.model,
+                "max_tokens": self.anthropic.max_tokens,
             },
             "zabbix": {
                 "url": self.zabbix.url,

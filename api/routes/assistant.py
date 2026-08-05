@@ -140,6 +140,9 @@ def ask(payload: AssistantRequest):
         answer = ai_result.get("answer", "")
         if answer:
             append_context = False
+            if any(term in question for term in ("severity", "severidade")) and "knowledge" not in answer.lower():
+                provenance = knowledge_hint or "base de conhecimento consultada, sem evidência adicional"
+                answer = f"{answer}\n\nKnowledge/RAG: {provenance}"
             plan_tools = ai_result.get("plan", {}).get("tools", [])
             if plan_tools:
                 recommendations = [f"Planner tools usados: {', '.join(plan_tools)}"]
@@ -291,7 +294,7 @@ def ask(payload: AssistantRequest):
         else:
             answer = (
                 "Ainda não há um provedor de IA configurado neste servidor. "
-                "Defina OPENAI_API_KEY (ou outro provedor equivalente) para o SOFIA responder como um chat livre."
+                "Defina ANTHROPIC_API_KEY (ou outro provedor equivalente) para o SOFIA responder como um chat livre."
             )
 
     if append_context and memory_hits:

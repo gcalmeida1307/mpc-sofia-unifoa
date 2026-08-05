@@ -8,8 +8,10 @@ services:
      restart: unless-stopped
 
      environment:
-        OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-        OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+        ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+        ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
+        ANTHROPIC_MAX_TOKENS: ${ANTHROPIC_MAX_TOKENS:-1024}
+        POSTGRES_DSN: postgresql://${POSTGRES_USER:-sofia}:${POSTGRES_PASSWORD:-change-this-strong-password}@sofia_postgres:5432/${POSTGRES_DB:-sofia}
         OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://sofia_ollama:11434}
         OLLAMA_MODEL: "${OLLAMA_MODEL:-qwen2.5:1.5b}"
         OLLAMA_FALLBACK_MODEL: "${OLLAMA_FALLBACK_MODEL:-}"
@@ -32,6 +34,9 @@ services:
 
      networks:
        - sofia-network
+     depends_on:
+       postgres:
+         condition: service_healthy
 
   ollama:
     image: ollama/ollama:latest
