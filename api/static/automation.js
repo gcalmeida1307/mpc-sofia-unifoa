@@ -3,6 +3,21 @@ let nodes=[];
 let edges=[];
 let selected=[];
 let catalog=[];
+let connectingSource=null;
+const recommendations={
+  trigger:['zabbix','offline','grafana'],
+  zabbix:['grafana','prometheus','loki'],
+  grafana:['prometheus','loki','postgres'],
+  prometheus:['loki','correlate'],
+  loki:['postgres','git','correlate'],
+  postgres:['correlate'],
+  offline:['claude','correlate'],
+  claude:['offline','correlate'],
+  git:['correlate'],
+  jira:['correlate'],
+  correlate:['report']
+};
+const NODE_WIDTH=190,NODE_HEIGHT=104;
 
 const byId=id=>document.getElementById(id);
 function persistDraft(){localStorage.setItem('sofia-automation-draft',JSON.stringify({graphId,nodes,edges,name:byId('graph-name')?.value||'',description:byId('graph-description')?.value||''}))}
@@ -10,39 +25,66 @@ function restoreDraft(){try{const draft=JSON.parse(localStorage.getItem('sofia-a
 const escapeHtml=value=>String(value||'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
 function connector(type){return catalog.find(item=>item.type===type)||{label:type,status:'unknown',category:'Outro'}}
-function addNode(item){
+function canvasBounds(){
+  const canvas=byId('graph-canvas');
+  return {width:Math.max(0,canvas.clientWidth-NODE_WIDTH-8),height:Math.max(0,canvas.clientHeight-NODE_HEIGHT-8)};
+}
+function clampPosition(x,y){const b=canvasBounds();return{x:Math.max(8,Math.min(b.width,x)),y:Math.max(8,Math.min(b.height,y))}}
+function addNode(item,position=null,sourceId=null){
   const count=nodes.length;
-  nodes.push({id:crypto.randomUUID(),type:item.type,label:item.label,x:40+(count%3)*210,y:45+Math.floor(count/3)*125});
-  persistDraft();renderGraph();
+  const pos=clampPosition(position?.x??40+(count%4)*210,position?.y??45+Math.floor(count/4)*125);
+  const node={id:crypto.randomUUID(),type:item.type,label:item.label,x:pos.x,y:pos.y};
+  nodes.push(node);
+  if(sourceId&&!edges.some(e=>e.source===sourceId&&e.target===node.id))edges.push({id:crypto.randomUUID(),source:sourceId,target:node.id});
+  connectingSource=null;persistDraft();renderGraph();showSuggestions(node);
 }
 function toggleNode(id){selected=selected.includes(id)?selected.filter(x=>x!==id):[...selected,id].slice(-2);renderGraph()}
-function removeNode(id){nodes=nodes.filter(n=>n.id!==id);edges=edges.filter(e=>e.source!==id&&e.target!==id);selected=selected.filter(x=>x!==id);persistDraft();renderGraph()}
-function connectSelected(){if(selected.length!==2)return alert('Selecione dois blocos na ordem origem → destino.');const [source,target]=selected;if(!edges.some(e=>e.source===source&&e.target===target))edges.push({id:crypto.randomUUID(),source,target});selected=[];persistDraft();renderGraph()}
-
+function removeNode(id){nodes=nodes.filter(n=>n.id!==id);edges=edges.filter(e=>e.source!==id&&e.target!==id);selected=selected.filter(x=>x!==id);if(connectingSource===id)connectingSource=null;persistDraft();renderGraph();showSuggestions()}
+function makeConnection(source,target){
+  if(!source||!target||source===target)return;
+  if(!edges.some(e=>e.source===source&&e.target===target))edges.push({id:crypto.randomUUID(),source,target});
+  connectingSource=null;selected=[];persistDraft();renderGraph();showSuggestions(nodes.find(n=>n.id===target));
+}
+function connectSelected(){if(selected.length!==2)return alert('Selecione dois blocos na ordem origem → destino.');makeConnection(selected[0],selected[1])}
+function showSuggestions(node){
+  const host=byId('connection-suggestions');if(!host)return;
+  if(!node){host.innerHTML='<small>Adicione um bloco para ver sugestões de conexão.</small>';return}
+  const types=(recommendations[node.type]||[]).filter(type=>catalog.some(item=>item.type===type));
+  host.innerHTML=types.length?'<small>Conectar depois de <b>'+escapeHtml(node.label)+'</b>:</small>'+types.map(type=>'<button class="suggestion-chip" data-type="'+type+'">+ '+escapeHtml(connector(type).label)+'</button>').join(''):'<small>Este bloco normalmente encerra o fluxo.</small>';
+  host.querySelectorAll('.suggestion-chip').forEach(button=>button.onclick=()=>addNode(connector(button.dataset.type),{x:node.x+220,y:node.y},node.id));
+}
 function renderGraph(){
   const host=byId('graph-nodes');host.innerHTML='';
+  const empty=byId('canvas-empty');if(empty)empty.hidden=nodes.length>0;
   nodes.forEach(node=>{
-    const meta=connector(node.type);const el=document.createElement('article');
-    el.className=`graph-node ${selected.includes(node.id)?'selected':''}`;el.dataset.id=node.id;el.style.left=`${node.x}px`;el.style.top=`${node.y}px`;
-    el.innerHTML=`<button class="node-remove" title="Remover">×</button><small>${escapeHtml(meta.category)}</small><strong>${escapeHtml(node.label||meta.label)}</strong><span class="connector-status ${meta.status}">${meta.status==='active'?'pronto':'configurar'}</span>`;
-    el.onclick=e=>{if(!e.target.classList.contains('node-remove'))toggleNode(node.id)};
+    Object.assign(node,clampPosition(node.x,node.y));
+    const meta=connector(node.type),el=document.createElement('article');
+    el.className=`graph-node ${selected.includes(node.id)?'selected':''} ${connectingSource===node.id?'connecting':''}`;el.dataset.id=node.id;el.style.left=`${node.x}px`;el.style.top=`${node.y}px`;
+    el.innerHTML=`<button class="node-port node-input" title="Entrada" aria-label="Conectar na entrada"></button><button class="node-remove" title="Remover">×</button><small>${escapeHtml(meta.category)}</small><strong>${escapeHtml(node.label||meta.label)}</strong><span class="connector-status ${meta.status}">${meta.status==='active'?'pronto':'configurar'}</span><button class="node-port node-output" title="Saída" aria-label="Iniciar conexão pela saída"></button>`;
+    let moved=false;
+    el.onclick=e=>{if(!moved&&!e.target.closest('button')){toggleNode(node.id);showSuggestions(node)}};
     el.querySelector('.node-remove').onclick=e=>{e.stopPropagation();removeNode(node.id)};
+    el.querySelector('.node-output').onclick=e=>{e.stopPropagation();connectingSource=node.id;selected=[];renderGraph();showSuggestions(node)};
+    el.querySelector('.node-input').onclick=e=>{e.stopPropagation();if(connectingSource)makeConnection(connectingSource,node.id);else alert('Primeiro clique na saída do bloco de origem.')};
     let dragging=false,dx=0,dy=0;
-    el.onpointerdown=e=>{if(e.target.tagName==='BUTTON')return;const canvas=byId('graph-canvas');const rect=canvas.getBoundingClientRect();dragging=true;dx=e.clientX-rect.left+canvas.scrollLeft-node.x;dy=e.clientY-rect.top+canvas.scrollTop-node.y;el.setPointerCapture(e.pointerId)};
-    el.onpointermove=e=>{if(!dragging)return;const canvas=byId('graph-canvas'),rect=canvas.getBoundingClientRect();node.x=Math.max(0,Math.min(canvas.scrollWidth-185,e.clientX-rect.left+canvas.scrollLeft-dx));node.y=Math.max(0,Math.min(canvas.scrollHeight-90,e.clientY-rect.top+canvas.scrollTop-dy));el.style.left=`${node.x}px`;el.style.top=`${node.y}px`;renderEdges()};
-    el.onpointerup=()=>{dragging=false;persistDraft()};host.append(el);
+    el.onpointerdown=e=>{if(e.target.closest('button'))return;const rect=byId('graph-canvas').getBoundingClientRect();dragging=true;moved=false;dx=e.clientX-rect.left-node.x;dy=e.clientY-rect.top-node.y;el.setPointerCapture(e.pointerId)};
+    el.onpointermove=e=>{if(!dragging)return;moved=true;const rect=byId('graph-canvas').getBoundingClientRect(),pos=clampPosition(e.clientX-rect.left-dx,e.clientY-rect.top-dy);node.x=pos.x;node.y=pos.y;el.style.left=`${node.x}px`;el.style.top=`${node.y}px`;renderEdges()};
+    el.onpointerup=()=>{if(dragging){dragging=false;persistDraft()}};
+    el.onpointercancel=()=>{dragging=false};
+    host.append(el);
   });renderEdges();
 }
 function renderEdges(){
   const svg=byId('graph-edges');svg.innerHTML='';
-  edges.forEach(edge=>{const a=nodes.find(n=>n.id===edge.source),b=nodes.find(n=>n.id===edge.target);if(!a||!b)return;const x1=a.x+175,y1=a.y+42,x2=b.x,y2=b.y+42;const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',`M ${x1} ${y1} C ${x1+70} ${y1}, ${x2-70} ${y2}, ${x2} ${y2}`);path.setAttribute('class','graph-edge');svg.append(path)})
+  edges.forEach(edge=>{const a=nodes.find(n=>n.id===edge.source),b=nodes.find(n=>n.id===edge.target);if(!a||!b)return;const x1=a.x+NODE_WIDTH,y1=a.y+NODE_HEIGHT/2,x2=b.x,y2=b.y+NODE_HEIGHT/2;const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',`M ${x1} ${y1} C ${x1+70} ${y1}, ${x2-70} ${y2}, ${x2} ${y2}`);path.setAttribute('class','graph-edge');svg.append(path)})
 }
 function renderCatalog(){byId('connector-catalog').innerHTML=catalog.map(item=>`<button class="connector-card ${item.status}" data-type="${item.type}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.category)} · ${item.status==='active'?'pronto':'requer configuração'}</small><em>${escapeHtml(item.description||'')}</em></button>`).join('');document.querySelectorAll('.connector-card').forEach(button=>{
   button.draggable=true;
   button.onclick=()=>addNode(connector(button.dataset.type));
-  button.ondragstart=event=>{event.dataTransfer.setData('application/x-sofia-connector',button.dataset.type);event.dataTransfer.effectAllowed='copy'};
+  button.ondragstart=event=>{event.dataTransfer.setData('application/x-sofia-connector',button.dataset.type);event.dataTransfer.setData('text/plain',button.dataset.type);event.dataTransfer.effectAllowed='copy';button.classList.add('dragging')};
+  button.ondragend=()=>button.classList.remove('dragging');
 })}
-async function loadGraphs(){const data=await sofia.api('/workflows/automation/graphs');const select=byId('saved-graphs');select.innerHTML='<option value="">Fluxos salvos</option>'+data.graphs.map(g=>`<option value="${g.id}">${escapeHtml(g.name)}</option>`).join('');select.onchange=()=>{const graph=data.graphs.find(g=>g.id===select.value);if(!graph)return;graphId=graph.id;nodes=graph.nodes||[];edges=graph.edges||[];byId('graph-name').value=graph.name;byId('graph-description').value=graph.description;renderGraph()}}
+async function loadGraphs(){const data=await sofia.api('/workflows/automation/graphs');const select=byId('saved-graphs');select.innerHTML='<option value="">Fluxos salvos</option>'+data.graphs.map(g=>`<option value="${g.id}">${escapeHtml(g.name)}</option>`).join('');select.onchange=()=>{const graph=data.graphs.find(g=>g.id===select.value);if(!graph)return;graphId=graph.id;nodes=graph.nodes||[];edges=graph.edges||[];byId('graph-name').value=graph.name;byId('graph-description').value=graph.description;renderGraph();showSuggestions(nodes.at(-1))}}
 async function saveGraph(){const payload={id:graphId,name:byId('graph-name').value,description:byId('graph-description').value,nodes,edges};const result=await sofia.api('/workflows/automation/graphs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});graphId=result.id;await loadGraphs();return result}
 async function simulate(){if(!nodes.length)return alert('Adicione blocos ao fluxo.');await saveGraph();const result=await sofia.api(`/workflows/automation/graphs/${graphId}/simulate`,{method:'POST'});byId('simulation').innerHTML=`<p class="run-status ${result.status}">${result.status==='ready'?'Fluxo pronto':'Configuração necessária'}</p>`+result.timeline.map((x,i)=>`<article class="timeline-item"><b>${i+1}</b><span><strong>${escapeHtml(x.label)}</strong><small>${escapeHtml(x.connector)} · ${escapeHtml(x.status)}</small></span></article>`).join('')}
 function loadSqlTemplate(){
@@ -54,4 +96,4 @@ function loadSqlTemplate(){
 }
 async function loadAdmin(){const [m,r,u]=await Promise.all([sofia.api('/mcp/tools'),sofia.api('/auth/admin/access-requests'),sofia.api('/auth/admin/users')]);byId('tools').innerHTML=Object.entries(m.capabilities||{}).map(([k,v])=>`<li><strong>${escapeHtml(k)}</strong><span>${escapeHtml(v.join(', '))}</span></li>`).join('');byId('requests').innerHTML=(r.requests||[]).filter(x=>x.status==='pending').map(x=>`<article class="row"><span><strong>${escapeHtml(x.display_name)}</strong><small>${escapeHtml(x.username)} · ${escapeHtml(x.email)}</small></span><button onclick="approve(${x.id})">Aprovar</button></article>`).join('')||'<p>Sem solicitações pendentes.</p>';byId('users').innerHTML=(u.users||[]).map(x=>`<article class="row"><span><strong>${escapeHtml(x.display_name)}</strong><small>${escapeHtml(x.username)} · ${escapeHtml(x.role)} · ${escapeHtml(x.status)}</small></span><button class="ghost" onclick="revoke(${x.id})">Revogar sessões</button></article>`).join('')}
 async function approve(id){const result=await sofia.api(`/auth/admin/access-requests/${id}/approve`,{method:'POST'});prompt('Acesso aprovado. Copie e entregue este token uma única vez ao usuário:',result.setup_token);location.reload()}async function revoke(id){await sofia.api(`/auth/admin/users/${id}/revoke-sessions`,{method:'POST'});alert('Sessões revogadas')}
-(async()=>{await sofia.initAuth();catalog=(await sofia.api('/workflows/automation/connectors')).connectors;renderCatalog();restoreDraft();await Promise.all([loadGraphs(),loadAdmin()]);const canvas=byId('graph-canvas');canvas.ondragover=event=>{event.preventDefault();event.dataTransfer.dropEffect='copy';canvas.classList.add('drop-active')};canvas.ondragleave=()=>canvas.classList.remove('drop-active');canvas.ondrop=event=>{event.preventDefault();canvas.classList.remove('drop-active');const type=event.dataTransfer.getData('application/x-sofia-connector');const item=connector(type);if(!type||!catalog.some(x=>x.type===type))return;const rect=canvas.getBoundingClientRect();const node={id:crypto.randomUUID(),type:item.type,label:item.label,x:Math.max(0,event.clientX-rect.left+canvas.scrollLeft-85),y:Math.max(0,event.clientY-rect.top+canvas.scrollTop-40)};nodes.push(node);persistDraft();renderGraph()};byId('sql-template').onclick=loadSqlTemplate;byId('connect-selected').onclick=connectSelected;byId('clear-graph').onclick=()=>{nodes=[];edges=[];selected=[];graphId=null;localStorage.removeItem('sofia-automation-draft');renderGraph()};byId('save-graph').onclick=async()=>{await saveGraph();alert('Fluxo salvo.')};byId('simulate-graph').onclick=simulate;renderGraph()})().catch(e=>alert(e.message));
+(async()=>{await sofia.initAuth();catalog=(await sofia.api('/workflows/automation/connectors')).connectors;renderCatalog();restoreDraft();showSuggestions(nodes.at(-1));await Promise.all([loadGraphs(),loadAdmin()]);const canvas=byId('graph-canvas');canvas.ondragover=event=>{event.preventDefault();event.dataTransfer.dropEffect='copy';canvas.classList.add('drop-active')};canvas.ondragleave=()=>canvas.classList.remove('drop-active');canvas.ondrop=event=>{event.preventDefault();canvas.classList.remove('drop-active');const type=event.dataTransfer.getData('application/x-sofia-connector')||event.dataTransfer.getData('text/plain');if(!type||!catalog.some(x=>x.type===type))return;const rect=canvas.getBoundingClientRect();addNode(connector(type),{x:event.clientX-rect.left-NODE_WIDTH/2,y:event.clientY-rect.top-NODE_HEIGHT/2})};byId('sql-template').onclick=loadSqlTemplate;byId('connect-selected').onclick=connectSelected;byId('clear-graph').onclick=()=>{nodes=[];edges=[];selected=[];graphId=null;localStorage.removeItem('sofia-automation-draft');renderGraph();showSuggestions()};byId('save-graph').onclick=async()=>{await saveGraph();alert('Fluxo salvo.')};byId('simulate-graph').onclick=simulate;window.addEventListener('resize',renderGraph);renderGraph()})().catch(e=>alert(e.message));
