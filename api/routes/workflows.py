@@ -27,6 +27,10 @@ class AutomationGraphRequest(BaseModel):
     edges: list[dict] = Field(default_factory=list)
 
 
+class AutomationExecuteRequest(BaseModel):
+    input: str = Field(min_length=1, max_length=2000)
+
+
 def current_admin(request: Request) -> dict:
     user = getattr(request.state, "user", None)
     if not user or user.get("role") != "admin":
@@ -81,3 +85,14 @@ def automation_graph_simulate(graph_id: str, request: Request):
         return automation_graph_store.simulate(graph_id, user["id"])
     except KeyError:
         raise HTTPException(404, "Automação não encontrada")
+
+
+@router.post("/automation/graphs/{graph_id}/execute")
+def automation_graph_execute(graph_id: str, payload: AutomationExecuteRequest, request: Request):
+    user = current_admin(request)
+    try:
+        return automation_graph_store.execute(graph_id, user["id"], payload.input)
+    except KeyError:
+        raise HTTPException(404, "Automação não encontrada")
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))

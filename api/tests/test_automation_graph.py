@@ -32,3 +32,41 @@ def test_graph_validation_rejects_unknown_connector_and_dangling_edge():
         AutomationGraphStore.validate([{"id": "a", "type": "invented"}], [])
     with pytest.raises(ValueError, match="inexistente"):
         AutomationGraphStore.validate([{"id": "a", "type": "trigger"}], [{"source": "a", "target": "missing"}])
+
+
+def test_execution_orders_connected_nodes_and_builds_report():
+    nodes = [
+        {"id": "report", "type": "report"},
+        {"id": "trigger", "type": "trigger"},
+        {"id": "correlate", "type": "correlate"},
+    ]
+    edges = [
+        {"source": "trigger", "target": "correlate"},
+        {"source": "correlate", "target": "report"},
+    ]
+    ordered = AutomationGraphStore._ordered_nodes(nodes, edges)
+    assert [node["id"] for node in ordered] == ["trigger", "correlate", "report"]
+    outputs = [
+        {"connector": "trigger", "summary": "Entrada recebida"},
+        {"connector": "correlate", "summary": "Duas evidências correlacionadas"},
+    ]
+    result = AutomationGraphStore._execute_connector(
+        {"id": "report", "type": "report"}, "Por que o switch caiu?", outputs
+    )
+    assert result["is_report"] is True
+    assert "Por que o switch caiu?" in result["summary"]
+    assert "Duas evidências correlacionadas" in result["summary"]
+
+
+def test_zabbix_execution_returns_all_related_switches(monkeypatch):
+    problems = [
+        {"name": "Unavailable by ICMP ping", "severity_label": "High", "hosts": ["switch-a"], "groups": ["Switches"]},
+        {"name": "Unavailable by ICMP ping", "severity_label": "High", "hosts": ["switch-b"], "groups": ["Switches"]},
+    ]
+    connector = type("Connector", (), {"list_active_problems": lambda self, limit: problems})()
+    monkeypatch.setattr("services.automation_graph.ZabbixConnector", lambda: connector)
+    result = AutomationGraphStore._execute_connector(
+        {"id": "zabbix", "type": "zabbix"}, "Quais switches não respondem ao ping ICMP?", []
+    )
+    assert result["data"]["related_problem_count"] == 2
+    assert "switch-a" in result["summary"] and "switch-b" in result["summary"]

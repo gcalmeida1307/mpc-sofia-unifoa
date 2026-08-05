@@ -6,6 +6,9 @@ from uuid import uuid4
 from psycopg.types.json import Jsonb
 
 from config.settings import settings
+from ai.operational_query import format_related_problems, related_problems, wants_related_alarm_list
+from connectors.zabbix import ZabbixConnector
+from services.knowledge import search_knowledge
 
 
 CONNECTOR_CATALOG = [
@@ -45,6 +48,8 @@ class AutomationGraphStore:
                     id UUID PRIMARY KEY, graph_id UUID REFERENCES automation_graphs(id), status TEXT NOT NULL,
                     timeline JSONB NOT NULL DEFAULT '[]'::jsonb, created_by BIGINT REFERENCES auth_users(id),
                     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())""")
+                conn.execute("ALTER TABLE automation_runs ADD COLUMN IF NOT EXISTS outputs JSONB NOT NULL DEFAULT '[]'::jsonb")
+                conn.execute("ALTER TABLE automation_runs ADD COLUMN IF NOT EXISTS report TEXT NOT NULL DEFAULT ''")
                 conn.commit()
             return True
         except Exception:
@@ -100,6 +105,71 @@ class AutomationGraphStore:
             run_id=str(uuid4()); status='ready' if all(x['status']=='ready' for x in ordered) else 'configuration_required'
             conn.execute("INSERT INTO automation_runs(id,graph_id,status,timeline,created_by) VALUES(%s,%s,%s,%s,%s)",(run_id,graph_id,status,Jsonb(ordered),user_id)); conn.commit()
         return {"run_id":run_id,"status":status,"timeline":ordered,"executed":False}
+
+    @staticmethod
+    def _ordered_nodes(nodes: list[dict[str, Any]], edges: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        incoming={str(e['target']) for e in edges};ordered=[];pending={str(n['id']):n for n in nodes}
+        frontier=[key for key in pending if key not in incoming]
+        while frontier:
+            node_id=frontier.pop(0)
+            if node_id not in pending:continue
+            node=pending.pop(node_id);ordered.append(node)
+            frontier.extend(str(e['target']) for e in edges if str(e['source'])==node_id)
+        ordered.extend(pending.values())
+        return ordered
+
+    @staticmethod
+    def _execute_connector(node: dict[str, Any], input_text: str, previous: list[dict[str, Any]]) -> dict[str, Any]:
+        connector_type=str(node.get('type',''))
+        if connector_type=='trigger':
+            return {'summary':f'Entrada recebida: {input_text}','data':{'input':input_text}}
+        if connector_type=='zabbix':
+            active=ZabbixConnector().list_active_problems(limit=500)
+            matches=related_problems(input_text,active) if wants_related_alarm_list(input_text) else active[:20]
+            return {
+                'summary':format_related_problems(matches,len(active)),
+                'data':{'active_problem_count':len(active),'related_problem_count':len(matches),'problems':matches},
+            }
+        if connector_type=='knowledge':
+            result=search_knowledge(input_text);hits=result.get('results',[]) if isinstance(result,dict) else []
+            summary='\n'.join(str(hit.get('snippet','')) for hit in hits[:5]) or 'A base offline não encontrou conteúdo relacionado.'
+            return {'summary':summary,'data':{'results':hits[:5]}}
+        if connector_type=='correlate':
+            evidence=[item.get('summary','') for item in previous if item.get('summary')]
+            return {'summary':f'Foram correlacionadas {len(evidence)} evidência(s) na ordem do fluxo.','data':{'evidence_count':len(evidence)}}
+        if connector_type=='report':
+            evidence=[item.get('summary','') for item in previous if item.get('connector') not in {'trigger','report'} and item.get('summary')]
+            report='Relatório da automação\n\nPergunta/evento: '+input_text+'\n\n'+'\n\n'.join(evidence)
+            return {'summary':report,'data':{'evidence_count':len(evidence)},'is_report':True}
+        connector=CATALOG_BY_TYPE.get(connector_type,{})
+        return {'summary':f"{connector.get('label',connector_type)} está disponível, mas este bloco ainda não possui executor automático.",'data':{}}
+
+    def execute(self, graph_id: str, user_id: int, input_text: str) -> dict[str, Any]:
+        self.ensure_schema()
+        with self.connect() as conn:
+            row=conn.execute("SELECT nodes,edges FROM automation_graphs WHERE id=%s",(graph_id,)).fetchone()
+            if not row:raise KeyError(graph_id)
+            nodes,edges=row;self.validate(nodes,edges);ordered=self._ordered_nodes(nodes,edges)
+            outputs=[];timeline=[];report=''
+            for node in ordered:
+                connector=CATALOG_BY_TYPE[node['type']]
+                if connector['status']!='active':
+                    result={'summary':f"{connector['label']} requer configuração.",'data':{}}
+                    step_status='needs_configuration'
+                else:
+                    try:
+                        result=self._execute_connector(node,input_text,outputs);step_status='completed'
+                    except Exception as exc:
+                        result={'summary':f"Falha ao executar {connector['label']}: {exc}",'data':{}}
+                        step_status='failed'
+                output={'node_id':str(node['id']),'label':node.get('label') or connector['label'],'connector':node['type'],'status':step_status,**result}
+                outputs.append(output);timeline.append({key:output[key] for key in ('node_id','label','connector','status')})
+                if result.get('is_report'):report=result['summary']
+            status='completed' if all(item['status']=='completed' for item in outputs) else 'partial'
+            if not report:report='\n\n'.join(item['summary'] for item in outputs if item['connector']!='trigger')
+            run_id=str(uuid4())
+            conn.execute("INSERT INTO automation_runs(id,graph_id,status,timeline,outputs,report,created_by) VALUES(%s,%s,%s,%s,%s,%s,%s)",(run_id,graph_id,status,Jsonb(timeline),Jsonb(outputs),report,user_id));conn.commit()
+        return {'run_id':run_id,'status':status,'timeline':timeline,'outputs':outputs,'report':report,'executed':True}
 
 
 automation_graph_store = AutomationGraphStore()
