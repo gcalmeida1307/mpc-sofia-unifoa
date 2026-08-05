@@ -11,7 +11,7 @@ services:
         ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
         ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
         ANTHROPIC_MAX_TOKENS: ${ANTHROPIC_MAX_TOKENS:-1024}
-        GRAFANA_URL: ${GRAFANA_URL:-}
+        GRAFANA_URL: ${GRAFANA_URL:-http://sofia_grafana:3000}
         GRAFANA_TOKEN: ${GRAFANA_TOKEN:-}
         POSTGRES_DSN: postgresql://${POSTGRES_USER:-sofia}:${POSTGRES_PASSWORD:-change-this-strong-password}@sofia_postgres:5432/${POSTGRES_DB:-sofia}
         OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://sofia_ollama:11434}
@@ -70,6 +70,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-sofia}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-this-now}
       POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 --auth-local=scram-sha-256
+      GRAFANA_POSTGRES_PASSWORD: ${GRAFANA_POSTGRES_PASSWORD}
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "-c", "hba_file=/etc/postgresql/pg_hba.conf"]
     ports:
       - "127.0.0.1:5432:5432"
@@ -112,11 +113,84 @@ services:
     networks:
       - sofia-network
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: sofia_prometheus
+    restart: unless-stopped
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=15d", "--storage.tsdb.path=/prometheus"]
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    mem_limit: 512m
+    networks:
+      - sofia-network
+
+  loki:
+    image: grafana/loki:latest
+    container_name: sofia_loki
+    restart: unless-stopped
+    command: ["-config.file=/etc/loki/local-config.yaml"]
+    ports:
+      - "127.0.0.1:3100:3100"
+    volumes:
+      - ./observability/loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+      - loki_data:/loki
+    mem_limit: 512m
+    networks:
+      - sofia-network
+
+  alloy:
+    image: grafana/alloy:latest
+    container_name: sofia_alloy
+    restart: unless-stopped
+    command: ["run", "--server.http.listen-addr=0.0.0.0:12345", "--storage.path=/var/lib/alloy/data", "/etc/alloy/config.alloy"]
+    ports:
+      - "127.0.0.1:12345:12345"
+    volumes:
+      - ./observability/alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - alloy_data:/var/lib/alloy/data
+    depends_on:
+      - loki
+    mem_limit: 256m
+    networks:
+      - sofia-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: sofia_grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-sofiaadmin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      POSTGRES_DB: ${POSTGRES_DB:-sofia}
+      GRAFANA_POSTGRES_PASSWORD: ${GRAFANA_POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+      - loki
+      - postgres
+    mem_limit: 512m
+    networks:
+      - sofia-network
+
 volumes:
   postgres_data:
   qdrant_data:
   n8n_data:
   ollama_data:
+  prometheus_data:
+  loki_data:
+  alloy_data:
+  grafana_data:
 
 networks:
   sofia-network:

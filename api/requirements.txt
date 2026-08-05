@@ -10,3 +10,4 @@ pypdf
 pytest
 httpx
 qrcode
+prometheus-client

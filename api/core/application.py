@@ -100,7 +100,7 @@ class Application:
             }
             path = request.url.path
             method = request.method.upper()
-            public_paths = {"/", "/login.html", "/health", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}
+            public_paths = {"/", "/login.html", "/health", "/metrics", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}
             is_static = path.startswith("/ui/")
             if path not in public_paths and not is_static:
                 authorization = request.headers.get("authorization", "")
@@ -188,11 +188,13 @@ class Application:
         from routes.learning import router as learning_router
         from routes.marketplace import router as marketplace_router
         from routes.mcp import router as mcp_router
+        from routes.metrics import router as metrics_router
         from routes.security import router as security_router
         from routes.workflows import router as workflows_router
         from routes.zabbix import router as zabbix_router
 
         app.include_router(health_router)
+        app.include_router(metrics_router)
         app.include_router(auth_router)
         app.include_router(dashboard_router)
         app.include_router(infra_router)
