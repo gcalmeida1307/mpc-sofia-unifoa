@@ -140,9 +140,9 @@ def ask(payload: AssistantRequest):
         answer = ai_result.get("answer", "")
         if answer:
             append_context = False
-            if any(term in question for term in ("severity", "severidade")) and "knowledge" not in answer.lower():
+            if any(term in question for term in ("severity", "severidade")):
                 provenance = knowledge_hint or "base de conhecimento consultada, sem evidência adicional"
-                answer = f"{answer}\n\nKnowledge/RAG: {provenance}"
+                answer = f"{answer}\n\nSeverity · Knowledge/RAG: {provenance}"
             plan_tools = ai_result.get("plan", {}).get("tools", [])
             if plan_tools:
                 recommendations = [f"Planner tools usados: {', '.join(plan_tools)}"]
