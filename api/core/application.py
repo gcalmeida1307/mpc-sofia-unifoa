@@ -180,6 +180,7 @@ class Application:
         from routes.context import router as context_router
         from routes.core import router as core_router
         from routes.docs import router as docs_router
+        from routes.dashboard import router as dashboard_router
         from routes.engine import router as engine_router
         from routes.health import router as health_router
         from routes.infra import router as infra_router
@@ -193,6 +194,7 @@ class Application:
 
         app.include_router(health_router)
         app.include_router(auth_router)
+        app.include_router(dashboard_router)
         app.include_router(infra_router)
         app.include_router(zabbix_router)
         app.include_router(core_router)

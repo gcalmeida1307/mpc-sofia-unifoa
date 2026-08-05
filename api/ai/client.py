@@ -16,6 +16,8 @@ class OpenAIResponsesClient:
         self.ollama_api_key = settings.OLLAMA_API_KEY.strip()
         self.ollama_mode = settings.OLLAMA_MODE.strip().lower()
         self.request_timeout = max(10, int(settings.REQUEST_TIMEOUT))
+        self.last_anthropic_error: str | None = None
+        self.last_ollama_error: str | None = None
 
     @property
     def enabled(self) -> bool:
@@ -51,6 +53,7 @@ class OpenAIResponsesClient:
         try:
             response = requests.post(self.anthropic_url, headers=headers, json=payload, timeout=self.request_timeout)
             response.raise_for_status()
+            self.last_anthropic_error = None
             data = response.json()
             return {
                 "text": "".join(block.get("text", "") for block in data.get("content", []) if block.get("type") == "text"),
@@ -58,7 +61,12 @@ class OpenAIResponsesClient:
                 "model": data.get("model", self.anthropic_model),
                 "provider": "anthropic",
             }
-        except Exception:
+        except requests.HTTPError as exc:
+            status = exc.response.status_code if exc.response is not None else 0
+            self.last_anthropic_error = self._classify_provider_error(status)
+            return None
+        except requests.RequestException:
+            self.last_anthropic_error = "unavailable"
             return None
 
     def _ask_ollama(self, messages: list[dict]) -> dict | None:
@@ -140,8 +148,23 @@ class OpenAIResponsesClient:
                 "model": data.get("model", model),
                 "provider": "ollama",
             }
-        except Exception:
+        except requests.HTTPError as exc:
+            status = exc.response.status_code if exc.response is not None else 0
+            self.last_ollama_error = self._classify_provider_error(status)
             return None
+        except requests.RequestException:
+            self.last_ollama_error = "unavailable"
+            return None
+
+    @staticmethod
+    def _classify_provider_error(status: int) -> str:
+        if status in {401, 403}:
+            return "invalid_or_expired_key"
+        if status in {402, 429}:
+            return "credit_or_rate_limit"
+        if status >= 500:
+            return "provider_unavailable"
+        return f"http_{status}" if status else "unavailable"
 
     @staticmethod
     def _normalize_message_for_ollama(item: dict) -> dict:
