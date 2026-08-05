@@ -9,6 +9,8 @@ from typing import Any
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+
+from services.auth import auth_service
 from fastapi.staticfiles import StaticFiles
 import pyotp
 
@@ -55,6 +57,7 @@ class Application:
             if asyncio.iscoroutine(result):
                 await result
 
+        auth_service.ensure_schema()
         await self.snapshot_scheduler.start()
         await self.autonomy_scheduler.start()
 
@@ -95,9 +98,21 @@ class Application:
             }
             path = request.url.path
             method = request.method.upper()
+            public_paths = {"/", "/health", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}
+            is_static = path.startswith("/ui/")
+            if path not in public_paths and not is_static:
+                authorization = request.headers.get("authorization", "")
+                token = authorization[7:].strip() if authorization.lower().startswith("bearer ") else ""
+                user = auth_service.authenticate(token)
+                if not user:
+                    return JSONResponse(status_code=401, content={"detail": "sessão inválida ou expirada"})
+                request.state.user = user
+                admin_prefixes = ("/knowledge", "/marketplace", "/workflows", "/engine", "/learning", "/zabbix", "/infra", "/core", "/docs")
+                if user["role"] != "admin" and path.startswith(admin_prefixes):
+                    return JSONResponse(status_code=403, content={"detail": "perfil admin necessário"})
 
             # Enforce admin API key and optional TOTP for critical mutating endpoints.
-            if method in {"POST", "PUT", "PATCH", "DELETE"} and path in protected_write_paths:
+            if method in {"POST", "PUT", "PATCH", "DELETE"} and path in protected_write_paths and not (getattr(request.state, "user", None) and request.state.user.get("role") == "admin"):
                 expected_key = self.settings.SECURITY_ADMIN_API_KEY.strip()
                 if expected_key:
                     received_key = request.headers.get("x-sofia-admin-key", "").strip()
@@ -159,6 +174,7 @@ class Application:
         return app
 
     def _register_routes(self, app: FastAPI) -> None:
+        from routes.auth import router as auth_router
         from routes.ai import router as ai_router
         from routes.assistant import router as assistant_router
         from routes.context import router as context_router
@@ -176,6 +192,7 @@ class Application:
         from routes.zabbix import router as zabbix_router
 
         app.include_router(health_router)
+        app.include_router(auth_router)
         app.include_router(infra_router)
         app.include_router(zabbix_router)
         app.include_router(core_router)
