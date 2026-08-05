@@ -12,15 +12,16 @@ def test_ai_ask_persists_question_and_answer_for_training(monkeypatch):
     }
     monkeypatch.setattr(ai, "postgres_store", store)
     monkeypatch.setattr(ai, "openai_service", service)
+    monkeypatch.setattr(ai, "search_knowledge", lambda question: {"results": []})
 
-    response = ai.ask(ai.AIAskRequest(question="Como está o ambiente?"))
+    response = ai.ask(ai.AIAskRequest(question="Como está o servidor?"))
 
     assert response["answer"] == "Resposta reutilizável"
     assert response["learning"]["knowledge_updated"] is True
     assert store.add_message.call_count == 2
     store.add_message.assert_any_call(
         "user",
-        "Como está o ambiente?",
+        "Como está o servidor?",
         {"channel": "ai", "purpose": "training"},
     )
     store.add_message.assert_any_call(
