@@ -79,10 +79,26 @@ function renderEdges(){
   edges.forEach(edge=>{const a=nodes.find(n=>n.id===edge.source),b=nodes.find(n=>n.id===edge.target);if(!a||!b)return;const x1=a.x+NODE_WIDTH,y1=a.y+NODE_HEIGHT/2,x2=b.x,y2=b.y+NODE_HEIGHT/2;const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',`M ${x1} ${y1} C ${x1+70} ${y1}, ${x2-70} ${y2}, ${x2} ${y2}`);path.setAttribute('class','graph-edge');svg.append(path)})
 }
 function renderCatalog(){byId('connector-catalog').innerHTML=catalog.map(item=>`<button class="connector-card ${item.status}" data-type="${item.type}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.category)} · ${item.status==='active'?'pronto':'requer configuração'}</small><em>${escapeHtml(item.description||'')}</em></button>`).join('');document.querySelectorAll('.connector-card').forEach(button=>{
-  button.draggable=true;
-  button.onclick=()=>addNode(connector(button.dataset.type));
-  button.ondragstart=event=>{event.dataTransfer.setData('application/x-sofia-connector',button.dataset.type);event.dataTransfer.setData('text/plain',button.dataset.type);event.dataTransfer.effectAllowed='copy';button.classList.add('dragging')};
+  button.draggable=false;
+  button.onclick=()=>{if(button.dataset.dragged)return;addNode(connector(button.dataset.type))};
+  button.ondragstart=event=>{event.dataTransfer.setData('text/plain',button.dataset.type);event.dataTransfer.effectAllowed='copy';button.classList.add('dragging')};
   button.ondragend=()=>button.classList.remove('dragging');
+  button.onpointerdown=start=>{
+    if(start.button!==0)return;
+    const origin={x:start.clientX,y:start.clientY};let active=false,ghost=null;
+    button.setPointerCapture(start.pointerId);
+    button.onpointermove=event=>{
+      if(Math.hypot(event.clientX-origin.x,event.clientY-origin.y)<6&&!active)return;
+      if(!active){active=true;button.dataset.dragged='1';button.classList.add('dragging');ghost=button.cloneNode(true);ghost.className='connector-drag-ghost';document.body.append(ghost)}
+      event.preventDefault();ghost.style.left=event.clientX+'px';ghost.style.top=event.clientY+'px';
+      const rect=byId('graph-canvas').getBoundingClientRect();byId('graph-canvas').classList.toggle('drop-active',event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom);
+    };
+    const finish=event=>{
+      button.onpointermove=null;button.onpointerup=null;button.onpointercancel=null;button.classList.remove('dragging');byId('graph-canvas').classList.remove('drop-active');ghost?.remove();
+      if(active){const rect=byId('graph-canvas').getBoundingClientRect();if(event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom)addNode(connector(button.dataset.type),{x:event.clientX-rect.left-NODE_WIDTH/2,y:event.clientY-rect.top-NODE_HEIGHT/2});setTimeout(()=>delete button.dataset.dragged,0)}
+    };
+    button.onpointerup=finish;button.onpointercancel=finish;
+  };
 })}
 async function loadGraphs(){const data=await sofia.api('/workflows/automation/graphs');const select=byId('saved-graphs');select.innerHTML='<option value="">Fluxos salvos</option>'+data.graphs.map(g=>`<option value="${g.id}">${escapeHtml(g.name)}</option>`).join('');select.onchange=()=>{const graph=data.graphs.find(g=>g.id===select.value);if(!graph)return;graphId=graph.id;nodes=graph.nodes||[];edges=graph.edges||[];byId('graph-name').value=graph.name;byId('graph-description').value=graph.description;renderGraph();showSuggestions(nodes.at(-1))}}
 async function saveGraph(){const payload={id:graphId,name:byId('graph-name').value,description:byId('graph-description').value,nodes,edges};const result=await sofia.api('/workflows/automation/graphs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});graphId=result.id;await loadGraphs();return result}

@@ -42,3 +42,13 @@
 .timeline-panel{min-width:0}
 @media(max-width:1000px){.automation-layout{grid-template-columns:1fr}.timeline-panel{grid-column:1}.palette-heading{align-items:flex-start;flex-direction:column}#connection-suggestions{justify-content:flex-start}.port-help{flex-wrap:wrap}.port-help small{width:100%;margin-left:0}}
 @media(max-width:600px){.connector-card{flex-basis:180px}#graph-canvas{height:500px}.graph-node{width:170px}.port-help span{display:none}}
+
+
+/* Complete catalog in two rows and pointer-based dragging */
+#connector-catalog{display:grid;grid-template-rows:repeat(2,minmax(104px,auto));grid-auto-flow:column;grid-auto-columns:minmax(185px,1fr);gap:10px;overflow-x:auto;overscroll-behavior-x:contain;padding:2px 2px 10px}
+.connector-card{width:100%;min-width:185px;min-height:104px;touch-action:none}
+.connector-drag-ghost{position:fixed;z-index:9999;width:190px;min-height:92px;transform:translate(-50%,-50%);pointer-events:none;opacity:.9;background:#142944;color:var(--text);border:1px solid var(--accent);border-radius:12px;padding:12px;display:grid;box-shadow:0 18px 45px #000a}
+.connector-drag-ghost em{font-size:.7rem;color:var(--muted);font-style:normal}
+@media(max-width:700px){#connector-catalog{grid-auto-columns:175px}.connector-card{min-width:175px}}
+
+.connector-card{cursor:grab}.connector-card:active{cursor:grabbing}
