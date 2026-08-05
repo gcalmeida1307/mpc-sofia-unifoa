@@ -69,4 +69,5 @@ def test_zabbix_execution_returns_all_related_switches(monkeypatch):
         {"id": "zabbix", "type": "zabbix"}, "Quais switches não respondem ao ping ICMP?", []
     )
     assert result["data"]["related_problem_count"] == 2
+    assert result["data"]["unique_host_count"] == 2
     assert "switch-a" in result["summary"] and "switch-b" in result["summary"]

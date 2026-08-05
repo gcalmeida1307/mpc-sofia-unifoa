@@ -6,7 +6,7 @@ from uuid import uuid4
 from psycopg.types.json import Jsonb
 
 from config.settings import settings
-from ai.operational_query import format_related_problems, related_problems, wants_related_alarm_list
+from ai.operational_query import format_related_problems, related_problems, unique_affected_hosts, wants_related_alarm_list
 from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
 
@@ -124,11 +124,12 @@ class AutomationGraphStore:
         if connector_type=='trigger':
             return {'summary':f'Entrada recebida: {input_text}','data':{'input':input_text}}
         if connector_type=='zabbix':
-            active=ZabbixConnector().list_active_problems(limit=500)
+            active=ZabbixConnector().list_active_problems(limit=2000)
             matches=related_problems(input_text,active) if wants_related_alarm_list(input_text) else active[:20]
+            affected_hosts=unique_affected_hosts(matches)
             return {
-                'summary':format_related_problems(matches,len(active)),
-                'data':{'active_problem_count':len(active),'related_problem_count':len(matches),'problems':matches},
+                'summary':format_related_problems(matches,len(active),input_text),
+                'data':{'active_problem_count':len(active),'related_problem_count':len(matches),'unique_host_count':len(affected_hosts),'hosts':affected_hosts,'problems':matches},
             }
         if connector_type=='knowledge':
             result=search_knowledge(input_text);hits=result.get('results',[]) if isinstance(result,dict) else []

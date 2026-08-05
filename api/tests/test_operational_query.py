@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from ai.operational_query import format_related_problems, related_problems, wants_related_alarm_list
+from ai.operational_query import format_related_problems, related_problems, unique_affected_hosts, wants_related_alarm_list
 from ai.planner import build_plan
 from routes import ai
 
@@ -50,3 +50,28 @@ def test_host_count_is_not_misclassified_as_alarm_listing():
 def test_generic_active_problem_request_keeps_all_problems():
     matches=related_problems('Quais hosts tem problemas ativos no Zabbix?',PROBLEMS)
     assert matches==PROBLEMS
+
+
+def test_icmp_count_question_does_not_treat_connector_words_as_filters():
+    matches=related_problems('Quantos hosts estão com problema de ICMP?',PROBLEMS)
+    assert [item['hosts'][0] for item in matches] == ['switch-a','switch-b','server-b']
+
+
+def test_same_host_in_multiple_groups_is_counted_once_by_hostid():
+    problems=[
+        {'name':'ICMP unavailable','hosts':['switch-a'],'groups':['Global','Switches'],'host_refs':[{'hostid':'42','name':'switch-a','groups':['Global','Switches']}]},
+        {'name':'Interface down','hosts':['switch-a'],'groups':['PRD06','Switches'],'host_refs':[{'hostid':'42','name':'switch-a','groups':['PRD06','Switches']}]},
+    ]
+    hosts=unique_affected_hosts(problems)
+    assert len(hosts)==1
+    assert hosts[0]['hostid']=='42'
+    assert hosts[0]['groups']==['Global','PRD06','Switches']
+
+
+def test_host_icmp_question_excludes_zabbix_pinger_capacity_alarm():
+    problems=[
+        {'name':'ICMP Ping: Unavailable by ICMP ping','hosts':['server-a']},
+        {'name':'Zabbix server: Utilization of icmp pinger processes over 75%','hosts':['zabbix-server']},
+    ]
+    matches=related_problems('Quantos hosts estão com problema de ICMP?',problems)
+    assert [item['hosts'][0] for item in matches]==['server-a']

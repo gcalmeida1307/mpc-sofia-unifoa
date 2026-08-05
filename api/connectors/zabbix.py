@@ -243,6 +243,15 @@ class ZabbixConnector:
         for problem in problems:
             hosts = trigger_hosts.get(str(problem.get("objectid")), [])
             host_names = [host.get("name", "") for host in hosts if host.get("name")]
+            host_refs = [
+                {
+                    "hostid": str(host.get("hostid", "")),
+                    "name": host.get("name") or host.get("host") or "",
+                    "groups": host_groups.get(str(host.get("hostid")), []),
+                }
+                for host in hosts
+                if host.get("hostid")
+            ]
             groups = sorted(
                 {
                     group_name_item
@@ -259,6 +268,7 @@ class ZabbixConnector:
                     "severity_label": severity_map.get(severity, severity),
                     "group_filter": group_name,
                     "hosts": host_names,
+                    "host_refs": host_refs,
                     "groups": groups,
                 }
             )
