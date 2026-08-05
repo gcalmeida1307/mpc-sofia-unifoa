@@ -100,7 +100,7 @@ class Application:
             }
             path = request.url.path
             method = request.method.upper()
-            public_paths = {"/", "/login.html", "/health", "/metrics", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}
+            public_paths = {"/", "/login.html", "/health", "/metrics", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests", "/auth/password-reset/complete"}
             is_static = path.startswith("/ui/")
             if path not in public_paths and not is_static:
                 authorization = request.headers.get("authorization", "")
@@ -109,6 +109,8 @@ class Application:
                 if not user:
                     return JSONResponse(status_code=401, content={"detail": "sessão inválida ou expirada"})
                 request.state.user = user
+                if user.get('email_required') and path not in {'/auth/me', '/auth/logout'}:
+                    return JSONResponse(status_code=428, content={'detail': 'cadastre um e-mail de recuperacao no perfil'})
                 admin_prefixes = ("/knowledge", "/marketplace", "/workflows", "/engine", "/learning", "/zabbix", "/infra", "/core", "/docs")
                 if user["role"] != "admin" and path.startswith(admin_prefixes):
                     return JSONResponse(status_code=403, content={"detail": "perfil admin necessário"})
@@ -132,7 +134,7 @@ class Application:
                 return JSONResponse(status_code=413, content={"detail": "request body too large"})
 
             # Rate limit AI and authentication endpoints independently.
-            if path in {"/assistant/ask", "/ai/ask", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}:
+            if path in {"/assistant/ask", "/ai/ask", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests", "/auth/password-reset/complete"}:
                 limit = 10 if path.startswith("/auth/") else max(10, int(self.settings.REQUEST_RATE_LIMIT_PER_MINUTE))
                 client_ip = request.client.host if request.client and request.client.host else "unknown"
                 key = f"{client_ip}:{path}"

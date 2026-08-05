@@ -15,3 +15,10 @@ def test_password_hash_is_salted_and_verifiable():
 
 def test_session_idle_timeout_is_fifteen_minutes():
     assert IDLE_MINUTES == 15
+
+
+def test_recovery_email_validation():
+    assert AuthService.validate_email(' Nome@Empresa.COM ') == 'nome@empresa.com'
+    for email in ['sem-arroba', '@empresa.com', 'nome@', 'nome empresa@teste.com']:
+        with pytest.raises(ValueError):
+            AuthService.validate_email(email)

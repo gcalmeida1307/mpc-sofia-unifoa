@@ -57,6 +57,10 @@ class AuthService:
                     for statement in statements:
                         cur.execute(statement)
                     cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS setup_token_hash TEXT")
+                    cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS email TEXT")
+                    cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS password_reset_token_hash TEXT")
+                    cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS password_reset_expires_at TIMESTAMPTZ")
+                    cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS password_reset_required BOOLEAN NOT NULL DEFAULT FALSE")
                     cur.execute("""INSERT INTO auth_users (username, display_name, role, status)
                         VALUES ('glauco.almeida', 'Glauco Almeida', 'admin', 'pending')
                         ON CONFLICT (username) DO NOTHING""")
@@ -73,6 +77,13 @@ class AuthService:
     def validate_password(password: str) -> None:
         if len(password) < 8 or not re.search(r'[A-Z]', password) or not re.search(r'[a-z]', password) or not re.search(r'[^A-Za-z0-9]', password):
             raise ValueError('A senha deve ter 8+ caracteres, maiúscula, minúscula e símbolo')
+
+    @staticmethod
+    def validate_email(email: str) -> str:
+        normalized = email.lower().strip()
+        if len(normalized) > 200 or not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', normalized):
+            raise ValueError('Informe um e-mail valido')
+        return normalized
 
     @staticmethod
     def hash_password(password: str) -> str:
@@ -136,8 +147,8 @@ class AuthService:
     def login(self, username: str, password: str, otp: str, ip: str | None, user_agent: str | None) -> dict[str, Any] | None:
         self.ensure_schema()
         with self.connect() as conn:
-            row = conn.execute("SELECT id, username, display_name, role, status, password_hash, totp_secret, authorized_tools FROM auth_users WHERE username=%s", (username.lower().strip(),)).fetchone()
-        if not row or row[4] != 'active' or not self.verify_password(password, row[5]) or not row[6] or not pyotp.TOTP(row[6]).verify(otp, valid_window=1):
+            row = conn.execute("SELECT id, username, display_name, role, status, password_hash, totp_secret, authorized_tools, email, password_reset_required FROM auth_users WHERE username=%s", (username.lower().strip(),)).fetchone()
+        if not row or row[4] != 'active' or row[9] or not self.verify_password(password, row[5]) or not row[6] or not pyotp.TOTP(row[6]).verify(otp, valid_window=1):
             self.audit(username, 'login', False, ip)
             return None
         token = secrets.token_urlsafe(48); now = datetime.now(timezone.utc); expires = now + timedelta(minutes=IDLE_MINUTES)
@@ -145,17 +156,17 @@ class AuthService:
             conn.execute("INSERT INTO auth_sessions (id,user_id,token_hash,expires_at,ip_address,user_agent) VALUES (gen_random_uuid(),%s,%s,%s,%s,%s)", (row[0], self.token_hash(token), expires, ip, user_agent))
             conn.execute("UPDATE auth_users SET last_login_at=NOW() WHERE id=%s", (row[0],)); conn.commit()
         self.audit(row[1], 'login', True, ip, row[0])
-        return {'token': token, 'expires_in': IDLE_MINUTES * 60, 'user': {'id': row[0], 'username': row[1], 'display_name': row[2], 'role': row[3], 'authorized_tools': row[7] or []}}
+        return {'token': token, 'expires_in': IDLE_MINUTES * 60, 'user': {'id': row[0], 'username': row[1], 'display_name': row[2], 'role': row[3], 'authorized_tools': row[7] or [], 'email': row[8], 'email_required': not bool(row[8])}}
 
     def authenticate(self, token: str) -> dict[str, Any] | None:
         if not token: return None
         with self.connect() as conn:
-            row = conn.execute("""SELECT u.id,u.username,u.display_name,u.role,u.authorized_tools,s.id
+            row = conn.execute("""SELECT u.id,u.username,u.display_name,u.role,u.authorized_tools,s.id,u.email,u.password_reset_required
                 FROM auth_sessions s JOIN auth_users u ON u.id=s.user_id
                 WHERE s.token_hash=%s AND s.revoked_at IS NULL AND s.expires_at>NOW() AND u.status='active'""", (self.token_hash(token),)).fetchone()
             if not row: return None
             conn.execute("UPDATE auth_sessions SET last_activity_at=NOW(), expires_at=NOW()+(%s * INTERVAL '1 minute') WHERE id=%s", (IDLE_MINUTES, row[5])); conn.commit()
-        return {'id': row[0], 'username': row[1], 'display_name': row[2], 'role': row[3], 'authorized_tools': row[4] or []}
+        return {'id': row[0], 'username': row[1], 'display_name': row[2], 'role': row[3], 'authorized_tools': row[4] or [], 'email': row[6], 'email_required': not bool(row[6]), 'password_reset_required': row[7]}
 
     def logout(self, token: str) -> bool:
         with self.connect() as conn:
@@ -163,6 +174,7 @@ class AuthService:
 
     def request_access(self, username: str, display_name: str, email: str, reason: str) -> int:
         self.ensure_schema()
+        email=self.validate_email(email)
         with self.connect() as conn:
             row=conn.execute("INSERT INTO access_requests(username,display_name,email,reason) VALUES(%s,%s,%s,%s) RETURNING id", (username.lower().strip(),display_name.strip(),email.lower().strip(),reason.strip())).fetchone(); conn.commit(); return row[0]
 
@@ -173,18 +185,49 @@ class AuthService:
 
     def approve_request(self, request_id: int, admin_id: int) -> dict[str, Any] | None:
         with self.connect() as conn:
-            row=conn.execute("SELECT username,display_name FROM access_requests WHERE id=%s AND status='pending' FOR UPDATE",(request_id,)).fetchone()
+            row=conn.execute("SELECT username,display_name,email FROM access_requests WHERE id=%s AND status='pending' FOR UPDATE",(request_id,)).fetchone()
             if not row: return None
             setup_token = secrets.token_urlsafe(24)
-            conn.execute("""INSERT INTO auth_users(username,display_name,role,status,setup_token_hash) VALUES(%s,%s,'user','pending',%s)
-                ON CONFLICT(username) DO UPDATE SET display_name=EXCLUDED.display_name,status='pending',setup_token_hash=EXCLUDED.setup_token_hash""",(row[0],row[1],self.token_hash(setup_token)))
+            conn.execute("""INSERT INTO auth_users(username,display_name,email,role,status,setup_token_hash) VALUES(%s,%s,%s,'user','pending',%s)
+                ON CONFLICT(username) DO UPDATE SET display_name=EXCLUDED.display_name,email=EXCLUDED.email,status='pending',setup_token_hash=EXCLUDED.setup_token_hash""",(row[0],row[1],row[2],self.token_hash(setup_token)))
             conn.execute("UPDATE access_requests SET status='approved',reviewed_at=NOW(),reviewed_by=%s WHERE id=%s",(admin_id,request_id)); conn.commit()
             return {"approved": True, "setup_token": setup_token}
 
     def list_users(self) -> list[dict[str, Any]]:
         with self.connect() as conn:
-            rows=conn.execute("SELECT id,username,display_name,role,status,authorized_tools,created_at,last_login_at FROM auth_users ORDER BY created_at").fetchall()
-        return [{'id':r[0],'username':r[1],'display_name':r[2],'role':r[3],'status':r[4],'authorized_tools':r[5] or [],'created_at':r[6].isoformat(),'last_login_at':r[7].isoformat() if r[7] else None} for r in rows]
+            rows=conn.execute("SELECT id,username,display_name,role,status,authorized_tools,created_at,last_login_at,email,password_reset_required FROM auth_users ORDER BY created_at").fetchall()
+        return [{'id':r[0],'username':r[1],'display_name':r[2],'role':r[3],'status':r[4],'authorized_tools':r[5] or [],'created_at':r[6].isoformat(),'last_login_at':r[7].isoformat() if r[7] else None,'email':r[8],'password_reset_required':r[9]} for r in rows]
+
+    def update_profile(self, user_id: int, display_name: str, email: str) -> dict[str, Any]:
+        normalized_email = self.validate_email(email)
+        with self.connect() as conn:
+            row=conn.execute("UPDATE auth_users SET display_name=%s,email=%s WHERE id=%s RETURNING username,display_name,email,role",(display_name.strip(),normalized_email,user_id)).fetchone();conn.commit()
+        if not row: raise ValueError('Usuario nao encontrado')
+        return {'username':row[0],'display_name':row[1],'email':row[2],'role':row[3]}
+
+    def admin_notification_emails(self) -> list[str]:
+        with self.connect() as conn:
+            rows=conn.execute("SELECT email FROM auth_users WHERE role='admin' AND status='active' AND email IS NOT NULL").fetchall()
+        configured=os.getenv('ADMIN_NOTIFICATION_EMAIL','').strip()
+        return sorted({*(r[0] for r in rows if r[0]), *([configured] if configured else [])})
+
+    def require_password_reset(self, user_id: int) -> dict[str, Any] | None:
+        token=secrets.token_urlsafe(32)
+        with self.connect() as conn:
+            row=conn.execute("UPDATE auth_users SET password_reset_token_hash=%s,password_reset_expires_at=NOW()+INTERVAL '30 minutes',password_reset_required=TRUE WHERE id=%s AND status='active' RETURNING username,email",(self.token_hash(token),user_id)).fetchone()
+            if not row:return None
+            conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,));conn.commit()
+        return {'reset_token':token,'username':row[0],'email':row[1]}
+
+    def complete_password_reset(self, username: str, token: str, password: str, otp: str, ip: str | None=None) -> bool:
+        self.validate_password(password);normalized=username.lower().strip()
+        with self.connect() as conn:
+            row=conn.execute("SELECT id,password_reset_token_hash,totp_secret FROM auth_users WHERE username=%s AND status='active' AND password_reset_required=TRUE AND password_reset_expires_at>NOW()",(normalized,)).fetchone()
+            valid=bool(row and row[1] and hmac.compare_digest(self.token_hash(token),row[1]) and row[2] and pyotp.TOTP(row[2]).verify(otp,valid_window=1))
+            if not valid:self.audit(normalized,'password_reset',False,ip);return False
+            conn.execute("UPDATE auth_users SET password_hash=%s,password_reset_token_hash=NULL,password_reset_expires_at=NULL,password_reset_required=FALSE WHERE id=%s",(self.hash_password(password),row[0]))
+            conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(row[0],));conn.commit()
+        self.audit(normalized,'password_reset',True,ip,row[0]);return True
 
     def revoke_user_sessions(self, user_id: int) -> int:
         with self.connect() as conn:
