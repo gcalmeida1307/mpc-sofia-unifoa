@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel, Field
 
 from ai.service import openai_service
+from services.postgres_store import postgres_store
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
@@ -12,9 +13,20 @@ class AIAskRequest(BaseModel):
 
 @router.post("/ask")
 def ask(payload: AIAskRequest):
+    postgres_store.add_message("user", payload.question, {"channel": "ai", "purpose": "training"})
     result = openai_service.answer(payload.question)
+    answer = result.get("answer", "")
+    postgres_store.add_message(
+        "assistant",
+        answer,
+        {
+            "channel": "ai",
+            "purpose": "training",
+            "learning_signature": result.get("learning", {}).get("signature"),
+        },
+    )
     return {
-        "answer": result.get("answer", ""),
+        "answer": answer,
         "plan": result.get("plan", {}),
         "reasoning": result.get("reasoning", {}),
         "critic": result.get("critic", {}),
