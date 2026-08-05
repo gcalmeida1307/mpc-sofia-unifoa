@@ -25,6 +25,7 @@ def related_problems(question: str, problems: list[dict[str, Any]], limit: int =
         "todos", "todas", "alerta", "alertas", "alarme", "alarmes", "problema", "problemas", "respondem",
         "zabbix", "host", "hosts", "ativo", "ativos",
         "com", "sem", "pelo", "pela", "pelos", "pelas",
+        "dispositivo", "dispositivos", "equipamento", "equipamentos", "aparelho", "aparelhos",
     }
     terms = {("switch" if token in {"switches","switchs"} else token.rstrip("s")) for token in re.findall(r"[a-z0-9_.-]{3,}", q) if token not in ignored}
     if not terms:
@@ -37,8 +38,12 @@ def related_problems(question: str, problems: list[dict[str, Any]], limit: int =
             [str(item.get("name", "")), *map(str, item.get("hosts", []) or []), *map(str, item.get("groups", []) or [])]
         )
         haystack = normalize(text)
-        if "icmp" in terms and "host" not in terms and "hosts" in normalize(question):
-            # "host/hosts" is ignored for ranking, but remains a semantic constraint:
+        connectivity_subject = any(
+            subject in q
+            for subject in ("host", "dispositivo", "equipamento", "aparelho")
+        )
+        if "icmp" in terms and connectivity_subject:
+            # Generic device nouns are ignored for ranking, but remain a semantic constraint:
             # internal Zabbix icmp-pinger utilization is not a host connectivity failure.
             if "pinger process" in haystack or "utilization of icmp" in haystack:
                 continue

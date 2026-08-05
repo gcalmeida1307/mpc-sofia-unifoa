@@ -57,6 +57,11 @@ def test_icmp_count_question_does_not_treat_connector_words_as_filters():
     assert [item['hosts'][0] for item in matches] == ['switch-a','switch-b','server-b']
 
 
+def test_icmp_count_accepts_dispositivos_as_generic_host_noun():
+    matches=related_problems('Quantos dispositivos estão com problema de ICMP?',PROBLEMS)
+    assert [item['hosts'][0] for item in matches] == ['switch-a','switch-b','server-b']
+
+
 def test_same_host_in_multiple_groups_is_counted_once_by_hostid():
     problems=[
         {'name':'ICMP unavailable','hosts':['switch-a'],'groups':['Global','Switches'],'host_refs':[{'hostid':'42','name':'switch-a','groups':['Global','Switches']}]},
