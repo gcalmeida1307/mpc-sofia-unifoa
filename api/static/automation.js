@@ -22,6 +22,13 @@ const recommendations={
 const NODE_WIDTH=190,NODE_HEIGHT=104;
 
 const byId=id=>document.getElementById(id);
+function createNodeId(){
+  if(globalThis.crypto&&typeof globalThis.crypto.randomUUID==='function')return globalThis.crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,char=>{
+    const value=Math.floor(Math.random()*16);
+    return (char==='x'?value:(value&3)|8).toString(16);
+  });
+}
 function persistDraft(){localStorage.setItem('sofia-automation-draft',JSON.stringify({graphId,nodes,edges,name:byId('graph-name')?.value||'',description:byId('graph-description')?.value||''}))}
 function restoreDraft(){try{const draft=JSON.parse(localStorage.getItem('sofia-automation-draft')||'null');if(!draft)return;graphId=draft.graphId||null;nodes=Array.isArray(draft.nodes)?draft.nodes:[];edges=Array.isArray(draft.edges)?draft.edges:[];if(draft.name)byId('graph-name').value=draft.name;if(draft.description)byId('graph-description').value=draft.description}catch{localStorage.removeItem('sofia-automation-draft')}}
 const escapeHtml=value=>String(value||'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -36,16 +43,16 @@ function addNode(item,position=null,sourceId=null){
   pendingPlacement=null;byId('graph-canvas')?.classList.remove('placement-active');document.querySelectorAll('.connector-card').forEach(x=>x.classList.remove('placement-selected'));
   const count=nodes.length;
   const pos=clampPosition(position?.x??40+(count%4)*210,position?.y??45+Math.floor(count/4)*125);
-  const node={id:crypto.randomUUID(),type:item.type,label:item.label,x:pos.x,y:pos.y};
+  const node={id:createNodeId(),type:item.type,label:item.label,x:pos.x,y:pos.y};
   nodes.push(node);
-  if(sourceId&&!edges.some(e=>e.source===sourceId&&e.target===node.id))edges.push({id:crypto.randomUUID(),source:sourceId,target:node.id});
+  if(sourceId&&!edges.some(e=>e.source===sourceId&&e.target===node.id))edges.push({id:createNodeId(),source:sourceId,target:node.id});
   connectingSource=null;persistDraft();renderGraph();showSuggestions(node);return node;
 }
 function toggleNode(id){selected=selected.includes(id)?selected.filter(x=>x!==id):[...selected,id].slice(-2);renderGraph()}
 function removeNode(id){nodes=nodes.filter(n=>n.id!==id);edges=edges.filter(e=>e.source!==id&&e.target!==id);selected=selected.filter(x=>x!==id);if(connectingSource===id)connectingSource=null;persistDraft();renderGraph();showSuggestions()}
 function makeConnection(source,target){
   if(!source||!target||source===target)return;
-  if(!edges.some(e=>e.source===source&&e.target===target))edges.push({id:crypto.randomUUID(),source,target});
+  if(!edges.some(e=>e.source===source&&e.target===target))edges.push({id:createNodeId(),source,target});
   connectingSource=null;selected=[];persistDraft();renderGraph();showSuggestions(nodes.find(n=>n.id===target));
 }
 function connectSelected(){if(selected.length!==2)return alert('Selecione dois blocos na ordem origem → destino.');makeConnection(selected[0],selected[1])}
@@ -113,8 +120,8 @@ async function simulate(){if(!nodes.length)return alert('Adicione blocos ao flux
 function loadSqlTemplate(){
   const sequence=['trigger','grafana','prometheus','loki','postgres','correlate','report'];
   const labels=['Pergunta: por que o SQL ficou lento?','Grafana: contexto','CPU / memória / disco','Logs e backup','Queries pesadas','Correlacionar horários','Resposta e relatório'];
-  nodes=sequence.map((type,index)=>({id:crypto.randomUUID(),type,label:labels[index],x:45+(index%3)*220,y:45+Math.floor(index/3)*130}));
-  edges=nodes.slice(0,-1).map((node,index)=>({id:crypto.randomUUID(),source:node.id,target:nodes[index+1].id}));
+  nodes=sequence.map((type,index)=>({id:createNodeId(),type,label:labels[index],x:45+(index%3)*220,y:45+Math.floor(index/3)*130}));
+  edges=nodes.slice(0,-1).map((node,index)=>({id:createNodeId(),source:node.id,target:nodes[index+1].id}));
   graphId=null;persistDraft();byId('graph-name').value='Investigar lentidão SQL';byId('graph-description').value='Correlaciona métricas, logs, banco e eventos para explicar degradação SQL.';renderGraph();
 }
 async function loadAdmin(){const [m,r,u]=await Promise.all([sofia.api('/mcp/tools'),sofia.api('/auth/admin/access-requests'),sofia.api('/auth/admin/users')]);byId('tools').innerHTML=Object.entries(m.capabilities||{}).map(([k,v])=>`<li><strong>${escapeHtml(k)}</strong><span>${escapeHtml(v.join(', '))}</span></li>`).join('');byId('requests').innerHTML=(r.requests||[]).filter(x=>x.status==='pending').map(x=>`<article class="row"><span><strong>${escapeHtml(x.display_name)}</strong><small>${escapeHtml(x.username)} · ${escapeHtml(x.email)}</small></span><button onclick="approve(${x.id})">Aprovar</button></article>`).join('')||'<p>Sem solicitações pendentes.</p>';byId('users').innerHTML=(u.users||[]).map(x=>`<article class="row"><span><strong>${escapeHtml(x.display_name)}</strong><small>${escapeHtml(x.username)} · ${escapeHtml(x.role)} · ${escapeHtml(x.status)}</small></span><button class="ghost" onclick="revoke(${x.id})">Revogar sessões</button></article>`).join('')}
