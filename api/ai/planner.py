@@ -18,6 +18,10 @@ def _looks_like_host_count(question: str) -> bool:
 def _infer_intent_and_capabilities(question: str) -> tuple[str, list[str]]:
     q = question.lower()
 
+    definition_terms = ['o que e ', 'o que é ', 'defina ', 'conceito de ', 'explique o que e ', 'explique o que é ']
+    if any(term in q for term in definition_terms):
+        return 'general_chat', []
+
     if _looks_like_host_count(question):
         return "host_count", ["host_count"]
     if any(term in q for term in ["quantos", "quantas"]) and re.search(r"\bprd\d+", q):

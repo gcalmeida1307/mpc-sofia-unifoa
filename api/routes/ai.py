@@ -3,8 +3,9 @@ from pydantic import BaseModel, Field
 
 from ai.service import openai_service
 from ai.domain_policy import OUT_OF_SCOPE_MESSAGE, is_it_question
-from services.knowledge import search_knowledge
 from services.postgres_store import postgres_store
+from connectors.zabbix import ZabbixConnector
+from ai.operational_query import format_related_problems, related_problems, wants_related_alarm_list
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
@@ -31,28 +32,24 @@ def ask(payload: AIAskRequest):
         }
 
     postgres_store.add_message("user", payload.question, {"channel": "ai", "purpose": "training"})
-    offline = search_knowledge(payload.question)
-    results = offline.get("results", []) if isinstance(offline, dict) else []
-    best = results[0] if results else None
-    if isinstance(best, dict) and float(best.get("score", 0.0) or 0.0) >= 0.55:
-        snippet = str(best.get("snippet", "")).strip()
-        source = str(best.get("source", "base offline")).strip()
-        answer = f"Segundo a base offline ({source}): {snippet}"
-        postgres_store.add_message("assistant", answer, {"channel": "ai", "purpose": "training", "source": "offline_knowledge"})
-        return {
-            "answer": answer,
-            "plan": {"intent": "offline_knowledge", "tools": ["knowledge.search"]},
-            "reasoning": {"mode": "offline_first"},
-            "critic": {"approved": True, "provider": "offline"},
-            "llm_provider": "none",
-            "confidence": float(best.get("score", 0.0)),
-            "explainability": {"domain": "information_technology", "knowledge_source": source},
-            "learning": {"stored": True, "reused": True},
-            "llm_used": False,
-            "context": {"knowledge": results[:3]},
-            "source": "offline-knowledge",
-        }
 
+    if wants_related_alarm_list(payload.question):
+        try:
+            active = ZabbixConnector().list_active_problems(limit=500)
+            related = related_problems(payload.question, active)
+            answer = format_related_problems(related, len(active))
+            postgres_store.add_message('assistant', answer, {'channel':'ai','purpose':'training','source':'zabbix_related_local'})
+            return {
+                'answer':answer,'plan':{'intent':'related_active_alarms','tools':['zabbix.list_problems']},
+                'reasoning':{'mode':'local_operational_correlation'},'critic':{'approved':True,'provider':'local'},
+                'llm_provider':'none','confidence':1.0,'explainability':{'domain':'information_technology','evidence_source':'zabbix','related_count':len(related)},
+                'learning':{'stored':True,'reused':False},'llm_used':False,'context':{'active_problem_count':len(active),'related_problem_count':len(related)},
+                'source':'zabbix-local-correlation',
+            }
+        except Exception:
+            pass
+    # Knowledge remains part of the context pipeline. Do not short-circuit operational
+    # or conceptual questions with a merely similar document fragment.
     result = openai_service.answer(payload.question)
     answer = result.get("answer", "")
     postgres_store.add_message(

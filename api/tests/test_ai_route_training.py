@@ -12,7 +12,6 @@ def test_ai_ask_persists_question_and_answer_for_training(monkeypatch):
     }
     monkeypatch.setattr(ai, "postgres_store", store)
     monkeypatch.setattr(ai, "openai_service", service)
-    monkeypatch.setattr(ai, "search_knowledge", lambda question: {"results": []})
 
     response = ai.ask(ai.AIAskRequest(question="Como está o servidor?"))
 

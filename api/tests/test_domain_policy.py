@@ -31,13 +31,17 @@ def test_out_of_scope_does_not_call_claude_or_train(monkeypatch):
     service.answer.assert_not_called(); store.add_message.assert_not_called()
 
 
-def test_offline_answer_is_used_before_claude(monkeypatch):
-    service = Mock(); store = Mock()
-    monkeypatch.setattr(ai, "openai_service", service)
-    monkeypatch.setattr(ai, "postgres_store", store)
-    monkeypatch.setattr(ai, "search_knowledge", lambda question: {"results": [{"source":"dns.md","snippet":"DNS traduz nomes em endereços IP.","score":0.9}]})
-    response = ai.ask(ai.AIAskRequest(question="Como funciona o DNS?"))
-    assert response["source"] == "offline-knowledge"
-    assert response["llm_used"] is False
-    assert "DNS traduz" in response["answer"]
-    service.answer.assert_not_called()
+def test_similar_offline_fragment_does_not_short_circuit_chat(monkeypatch):
+    service=Mock();store=Mock()
+    service.answer.return_value={'answer':'DNS traduz nomes para enderecos IP.','learning':{},'plan':{},'reasoning':{},'critic':{},'confidence':0.8,'explainability':{},'context':{},'llm_used':True}
+    monkeypatch.setattr(ai,'openai_service',service)
+    monkeypatch.setattr(ai,'postgres_store',store)
+    response=ai.ask(ai.AIAskRequest(question='Como funciona o DNS?'))
+    assert response['source']=='claude-learning-pipeline'
+    assert 'DNS traduz' in response['answer']
+    service.answer.assert_called_once()
+
+
+def test_common_infrastructure_terms_are_in_scope():
+    assert is_it_question('O que é host?')
+    assert is_it_question('Quais switches não respondem ao ping ICMP?')

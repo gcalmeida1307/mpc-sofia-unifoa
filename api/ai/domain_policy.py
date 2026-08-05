@@ -14,6 +14,7 @@ IT_TERMS = {
     "informatica", "computador", "computacao", "hardware", "software", "servidor", "cliente",
     "rede", "redes", "switch", "roteador", "router", "firewall", "vlan", "vpn", "dns", "dhcp",
     "tcp", "udp", "ip", "ipv4", "ipv6", "ethernet", "wifi", "wi-fi", "latencia", "pacote",
+    "host", "hosts", "hostname", "ping", "icmp", "porta", "portas", "interface", "interfaces", "gateway", "proxy", "http", "https", "snmp", "ssh",
     "linux", "windows", "unix", "ubuntu", "debian", "kernel", "processo", "memoria", "cpu", "disco",
     "docker", "container", "kubernetes", "virtualizacao", "vmware", "proxmox", "cloud", "nuvem",
     "banco", "dados", "database", "sql", "postgresql", "postgres", "mysql", "oracle", "mongodb", "redis",
