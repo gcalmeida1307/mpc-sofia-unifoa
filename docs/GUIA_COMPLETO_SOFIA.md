@@ -3,6 +3,8 @@
 Este documento consolida, em um unico lugar, o funcionamento do SOFIA.
 A documentacao por assunto continua valida e recomendada para aprofundamento.
 
+Para instalação, atualização, validação, backup e segurança operacional, siga primeiro o [Runbook operacional](RUNBOOK_OPERACIONAL.md).
+
 ## 1. O que e o SOFIA
 
 SOFIA e uma plataforma operacional orientada a contexto para infraestrutura.
@@ -118,9 +120,10 @@ Consolida:
 - Gera recomendacoes acionaveis.
 - Incorpora hipotese prioritaria no plano de acao.
 
-### 5.6 OpenAI/fallback
-- Tenta resposta via OpenAI Responses API quando disponivel.
-- Em caso de indisponibilidade/erro/quota, aplica fallback deterministico com contexto.
+### 5.6 Claude/Ollama
+- Usa Anthropic Claude por `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` e `ANTHROPIC_MAX_TOKENS`.
+- Usa prompt caching quando aplicável para reduzir latência e consumo.
+- Em indisponibilidade, erro ou falta de crédito, usa Ollama como fallback local.
 
 ### 5.7 Critic
 - Valida consistencia da resposta.
@@ -210,11 +213,14 @@ Comportamentos implementados:
 - carregamento resiliente por widget (safe load)
 - tolerancia a falha parcial de endpoint
 
-## 10. Configuracao (.env)
+## 10. Configuracao (.env local)
 
 Variaveis principais:
-- OPENAI_API_KEY
-- OPENAI_MODEL (exemplo: gpt-5)
+- ANTHROPIC_API_KEY
+- ANTHROPIC_MODEL
+- ANTHROPIC_MAX_TOKENS
+- OLLAMA_BASE_URL
+- OLLAMA_MODEL
 - SNAPSHOT_INTERVAL_SECONDS
 - AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS
 - AI_METRICS_WINDOW_HOURS
@@ -228,8 +234,7 @@ Variaveis principais:
 - ZABBIX_USER
 - ZABBIX_PASSWORD
 
-Observacao importante:
-- Se OPENAI responder 429 insufficient_quota, o SOFIA continuara operando em fallback.
+O `.env` não é versionado. Se Claude estiver sem crédito ou indisponível, a SOFIA continua operando com Ollama e respostas determinísticas quando aplicável.
 
 ## 11. Seguranca
 
