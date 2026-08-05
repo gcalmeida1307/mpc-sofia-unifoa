@@ -39,7 +39,7 @@ function addNode(item,position=null,sourceId=null){
   const node={id:crypto.randomUUID(),type:item.type,label:item.label,x:pos.x,y:pos.y};
   nodes.push(node);
   if(sourceId&&!edges.some(e=>e.source===sourceId&&e.target===node.id))edges.push({id:crypto.randomUUID(),source:sourceId,target:node.id});
-  connectingSource=null;persistDraft();renderGraph();showSuggestions(node);
+  connectingSource=null;persistDraft();renderGraph();showSuggestions(node);return node;
 }
 function toggleNode(id){selected=selected.includes(id)?selected.filter(x=>x!==id):[...selected,id].slice(-2);renderGraph()}
 function removeNode(id){nodes=nodes.filter(n=>n.id!==id);edges=edges.filter(e=>e.source!==id&&e.target!==id);selected=selected.filter(x=>x!==id);if(connectingSource===id)connectingSource=null;persistDraft();renderGraph();showSuggestions()}
@@ -88,19 +88,21 @@ function renderCatalog(){byId('connector-catalog').innerHTML=catalog.map(item=>`
   button.ondragend=()=>button.classList.remove('dragging');
   button.onpointerdown=start=>{
     if(start.button!==0)return;
-    const origin={x:start.clientX,y:start.clientY};let active=false,ghost=null;
+    const origin={x:start.clientX,y:start.clientY};let active=false,ghost=null,draggedNode=null;
     const move=event=>{
       if(event.pointerId!==start.pointerId)return;
       if(Math.hypot(event.clientX-origin.x,event.clientY-origin.y)<6&&!active)return;
-      if(!active){active=true;button.dataset.dragged='1';button.classList.add('dragging');ghost=button.cloneNode(true);ghost.className='connector-drag-ghost';document.body.append(ghost)}
+      if(!active){active=true;lastCatalogDragAt=Date.now();button.classList.add('dragging');ghost=button.cloneNode(true);ghost.className='connector-drag-ghost';document.body.append(ghost)}
       event.preventDefault();ghost.style.left=event.clientX+'px';ghost.style.top=event.clientY+'px';
-      const rect=byId('graph-canvas').getBoundingClientRect();byId('graph-canvas').classList.toggle('drop-active',event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom);
+      const canvas=byId('graph-canvas'),rect=canvas.getBoundingClientRect(),inside=event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom;canvas.classList.toggle('drop-active',inside);
+      if(inside&&!draggedNode)draggedNode=addNode(connector(button.dataset.type),{x:event.clientX-rect.left-NODE_WIDTH/2,y:event.clientY-rect.top-NODE_HEIGHT/2});
+      else if(inside&&draggedNode){const pos=clampPosition(event.clientX-rect.left-NODE_WIDTH/2,event.clientY-rect.top-NODE_HEIGHT/2);Object.assign(draggedNode,pos);const element=document.querySelector(`.graph-node[data-id="${draggedNode.id}"]`);if(element){element.style.left=draggedNode.x+'px';element.style.top=draggedNode.y+'px';renderEdges()}}
     };
     const finish=event=>{
       if(event.pointerId!==start.pointerId)return;
       document.removeEventListener('pointermove',move,true);document.removeEventListener('pointerup',finish,true);document.removeEventListener('pointercancel',finish,true);
       button.classList.remove('dragging');byId('graph-canvas').classList.remove('drop-active');ghost?.remove();
-      if(active){event.preventDefault();lastCatalogDragAt=Date.now();const rect=byId('graph-canvas').getBoundingClientRect();if(event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom)addNode(connector(button.dataset.type),{x:event.clientX-rect.left-NODE_WIDTH/2,y:event.clientY-rect.top-NODE_HEIGHT/2})}
+      if(active){event.preventDefault();lastCatalogDragAt=Date.now();const rect=byId('graph-canvas').getBoundingClientRect();if(!draggedNode&&event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom)draggedNode=addNode(connector(button.dataset.type),{x:event.clientX-rect.left-NODE_WIDTH/2,y:event.clientY-rect.top-NODE_HEIGHT/2});if(draggedNode)persistDraft()}
     };
     document.addEventListener('pointermove',move,true);document.addEventListener('pointerup',finish,true);document.addEventListener('pointercancel',finish,true);
   };
