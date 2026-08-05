@@ -12,6 +12,7 @@ from ai.operational_query import format_related_problems, related_problems, uniq
 from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
 from services.postgres_store import postgres_store
+from services.predictive_analytics import analyze_problem_series
 
 
 CONNECTOR_CATALOG = [
@@ -141,6 +142,21 @@ class AutomationGraphStore:
         snapshots = postgres_store.get_recent_snapshots(limit=30)
         insights = postgres_store.get_recent_insights(limit=10)
         series = [{'generated_at':snap.get('generated_at'),'problems':int((snap.get('summary') or {}).get('problems',0) or 0)} for snap in reversed(snapshots)]
+        predictive = analyze_problem_series(series)
+        model_summaries = []
+        for key, details in predictive.items():
+            if key == 'quality':
+                continue
+            label = details.get('method', key)
+            if details.get('status') in {'hardware_incompatible', 'dependency_unavailable'}:
+                model_summaries.append(f"{label}: indisponível ({details.get('reason', 'ambiente incompatível')})")
+            elif details.get('status') != 'ready':
+                model_summaries.append(f"{label}: coletando {details.get('samples', 0)}/{details.get('required_samples', 0)}")
+            elif key == 'monte_carlo':
+                model_summaries.append(f"{label}: faixa em 60 min {details.get('p10')}–{details.get('p90')} (mediana {details.get('median')})")
+            else:
+                model_summaries.append(f"{label}: próximo volume {details.get('next_prediction')}")
+        model_states = '; '.join(model_summaries)
         return {
             'severity_distribution':[{'label':key,'value':value} for key,value in severity.most_common()],
             'group_distribution':[{'label':key,'value':value} for key,value in groups.most_common(8)],
@@ -149,7 +165,8 @@ class AutomationGraphStore:
                 'insight_count':len(insights),'interval_seconds':settings.SNAPSHOT_INTERVAL_SECONDS,
                 'first_sample_at':snapshots[-1].get('generated_at') if snapshots else None,
                 'last_sample_at':snapshots[0].get('generated_at') if snapshots else None,
-                'problem_series':series,'method':'baseline estatístico e detecção de recorrência'},
+                'problem_series':series,'method':f'baseline estatístico; {model_states}',
+                'predictive_models':predictive},
         }
 
     @staticmethod

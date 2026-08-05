@@ -11,3 +11,5 @@ pytest
 httpx
 qrcode
 prometheus-client
+numpy==2.2.6
+scikit-learn==1.9.0
