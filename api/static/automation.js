@@ -5,6 +5,7 @@ let selected=[];
 let catalog=[];
 let connectingSource=null;
 let pendingPlacement=null;
+let lastCatalogDragAt=0;
 const recommendations={
   trigger:['zabbix','offline','grafana'],
   zabbix:['grafana','prometheus','loki'],
@@ -32,6 +33,7 @@ function canvasBounds(){
 }
 function clampPosition(x,y){const b=canvasBounds();return{x:Math.max(8,Math.min(b.width,x)),y:Math.max(8,Math.min(b.height,y))}}
 function addNode(item,position=null,sourceId=null){
+  pendingPlacement=null;byId('graph-canvas')?.classList.remove('placement-active');document.querySelectorAll('.connector-card').forEach(x=>x.classList.remove('placement-selected'));
   const count=nodes.length;
   const pos=clampPosition(position?.x??40+(count%4)*210,position?.y??45+Math.floor(count/4)*125);
   const node={id:crypto.randomUUID(),type:item.type,label:item.label,x:pos.x,y:pos.y};
@@ -56,7 +58,7 @@ function showSuggestions(node){
 }
 function renderGraph(){
   const host=byId('graph-nodes');host.innerHTML='';
-  const empty=byId('canvas-empty');if(empty)empty.hidden=nodes.length>0;
+  const empty=byId('canvas-empty');if(empty){empty.hidden=nodes.length>0;empty.textContent='Arraste um bloco para começar'}
   nodes.forEach(node=>{
     Object.assign(node,clampPosition(node.x,node.y));
     const meta=connector(node.type),el=document.createElement('article');
@@ -81,7 +83,7 @@ function renderEdges(){
 }
 function renderCatalog(){byId('connector-catalog').innerHTML=catalog.map(item=>`<button class="connector-card ${item.status}" data-type="${item.type}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.category)} · ${item.status==='active'?'pronto':'requer configuração'}</small><em>${escapeHtml(item.description||'')}</em></button>`).join('');document.querySelectorAll('.connector-card').forEach(button=>{
   button.draggable=false;
-  button.onclick=()=>{if(button.dataset.dragged)return;pendingPlacement=button.dataset.type;document.querySelectorAll('.connector-card').forEach(x=>x.classList.toggle('placement-selected',x===button));const empty=byId('canvas-empty');empty.hidden=false;empty.textContent='Clique aqui para posicionar '+button.querySelector('span').textContent;byId('graph-canvas').classList.add('placement-active')};
+  button.onclick=()=>{if(Date.now()-lastCatalogDragAt<800)return;pendingPlacement=button.dataset.type;document.querySelectorAll('.connector-card').forEach(x=>x.classList.toggle('placement-selected',x===button));const empty=byId('canvas-empty');empty.hidden=false;empty.textContent='Clique aqui para posicionar '+button.querySelector('span').textContent;byId('graph-canvas').classList.add('placement-active')};
   button.ondragstart=event=>{event.dataTransfer.setData('text/plain',button.dataset.type);event.dataTransfer.effectAllowed='copy';button.classList.add('dragging')};
   button.ondragend=()=>button.classList.remove('dragging');
   button.onpointerdown=start=>{
@@ -98,7 +100,7 @@ function renderCatalog(){byId('connector-catalog').innerHTML=catalog.map(item=>`
       if(event.pointerId!==start.pointerId)return;
       document.removeEventListener('pointermove',move,true);document.removeEventListener('pointerup',finish,true);document.removeEventListener('pointercancel',finish,true);
       button.classList.remove('dragging');byId('graph-canvas').classList.remove('drop-active');ghost?.remove();
-      if(active){const rect=byId('graph-canvas').getBoundingClientRect();if(event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom)addNode(connector(button.dataset.type),{x:event.clientX-rect.left-NODE_WIDTH/2,y:event.clientY-rect.top-NODE_HEIGHT/2});setTimeout(()=>delete button.dataset.dragged,50)}
+      if(active){event.preventDefault();lastCatalogDragAt=Date.now();const rect=byId('graph-canvas').getBoundingClientRect();if(event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom)addNode(connector(button.dataset.type),{x:event.clientX-rect.left-NODE_WIDTH/2,y:event.clientY-rect.top-NODE_HEIGHT/2})}
     };
     document.addEventListener('pointermove',move,true);document.addEventListener('pointerup',finish,true);document.addEventListener('pointercancel',finish,true);
   };

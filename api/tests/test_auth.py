@@ -22,3 +22,11 @@ def test_recovery_email_validation():
     for email in ['sem-arroba', '@empresa.com', 'nome@', 'nome empresa@teste.com']:
         with pytest.raises(ValueError):
             AuthService.validate_email(email)
+
+
+def test_only_valid_account_roles_are_accepted():
+    service=AuthService()
+    with pytest.raises(ValueError):
+        service.change_user_role(2,'superadmin',1)
+    with pytest.raises(ValueError):
+        service.change_user_role(1,'user',1)

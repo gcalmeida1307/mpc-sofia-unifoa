@@ -229,6 +229,15 @@ class AuthService:
             conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(row[0],));conn.commit()
         self.audit(normalized,'password_reset',True,ip,row[0]);return True
 
+    def change_user_role(self, user_id: int, role: str, acting_admin_id: int) -> dict[str, Any] | None:
+        if role not in {'admin','user'}: raise ValueError('Perfil invalido')
+        if user_id == acting_admin_id: raise ValueError('O administrador nao pode alterar o proprio perfil')
+        with self.connect() as conn:
+            row=conn.execute("UPDATE auth_users SET role=%s WHERE id=%s AND status<>'revoked' RETURNING username,role",(role,user_id)).fetchone()
+            if not row:return None
+            conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,));conn.commit()
+        return {'username':row[0],'role':row[1]}
+
     def revoke_user_sessions(self, user_id: int) -> int:
         with self.connect() as conn:
             cur=conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,)); conn.commit(); return cur.rowcount

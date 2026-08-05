@@ -1,5 +1,6 @@
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
 from pydantic import BaseModel, Field
+from typing import Literal
 from services.auth import auth_service
 from services.notifications import email_notifier
 
@@ -12,6 +13,8 @@ class FirstAccessStartIn(BaseModel):
     invite_token: str = Field(min_length=16, max_length=200)
 class FirstAccessIn(BaseModel):
     username: str; password: str; otp: str
+class RoleIn(BaseModel):
+    role: Literal['admin','user']
 class ProfileIn(BaseModel):
     display_name: str = Field(min_length=2, max_length=120)
     email: str = Field(min_length=5, max_length=200)
@@ -106,6 +109,15 @@ def approve(request_id: int, request: Request):
 @router.get('/admin/users')
 def users(request: Request):
     require_admin(request); return {'users':auth_service.list_users()}
+
+@router.patch('/admin/users/{user_id}/role')
+def change_role(user_id: int, payload: RoleIn, request: Request):
+    admin=require_admin(request)
+    try: result=auth_service.change_user_role(user_id,payload.role,admin['id'])
+    except ValueError as exc: raise HTTPException(422,str(exc))
+    if not result: raise HTTPException(404,'Usuario nao encontrado')
+    auth_service.audit(admin['username'],'change_user_role',True,user_id=admin['id'])
+    return result
 
 @router.post('/admin/users/{user_id}/require-password-reset')
 def require_password_reset(user_id: int, request: Request, background_tasks: BackgroundTasks):
