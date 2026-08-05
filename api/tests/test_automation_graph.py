@@ -7,9 +7,9 @@ def test_connector_catalog_distinguishes_active_and_unconfigured():
     status = {item["type"]: item["status"] for item in CONNECTOR_CATALOG}
     assert status["zabbix"] == "active"
     assert status["knowledge"] == "active"
-    assert status["grafana"] == "needs_configuration"
-    assert status["prometheus"] == "needs_configuration"
-    assert status["loki"] == "needs_configuration"
+    assert status["grafana"] == "active"
+    assert status["prometheus"] == "active"
+    assert status["loki"] == "active"
 
 
 def test_graph_validation_accepts_operational_pipeline():

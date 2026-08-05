@@ -9,18 +9,18 @@ from config.settings import settings
 
 
 CONNECTOR_CATALOG = [
-    {"type": "trigger", "label": "Alerta / pergunta", "category": "Entrada", "status": "active"},
-    {"type": "zabbix", "label": "Zabbix", "category": "Observabilidade", "status": "active"},
-    {"type": "knowledge", "label": "Base offline", "category": "Conhecimento", "status": "active"},
-    {"type": "claude", "label": "Claude curador", "category": "Raciocínio", "status": "active"},
-    {"type": "correlate", "label": "Correlacionar linha do tempo", "category": "Raciocínio", "status": "active"},
-    {"type": "report", "label": "Gerar relatório", "category": "Saída", "status": "active"},
-    {"type": "grafana", "label": "Grafana", "category": "Observabilidade", "status": "needs_configuration"},
-    {"type": "prometheus", "label": "Prometheus", "category": "Métricas", "status": "needs_configuration"},
-    {"type": "loki", "label": "Loki", "category": "Logs", "status": "needs_configuration"},
-    {"type": "sql", "label": "SQL", "category": "Dados", "status": "needs_configuration"},
-    {"type": "jira", "label": "Jira", "category": "Chamados", "status": "needs_configuration"},
-    {"type": "git", "label": "Git", "category": "Mudanças", "status": "needs_configuration"},
+    {"type":"trigger","label":"Alerta / pergunta","category":"Entrada","status":"active","description":"Inicia o fluxo a partir de uma pergunta, alerta ou evento recebido."},
+    {"type":"zabbix","label":"Zabbix","category":"Observabilidade","status":"active","description":"Consulta hosts, grupos, triggers, problemas ativos e severidades."},
+    {"type":"knowledge","label":"Base offline","category":"Conhecimento","status":"active","description":"Pesquisa documentos, runbooks e respostas aprendidas sem depender da internet."},
+    {"type":"claude","label":"Claude curador","category":"Raciocínio","status":"active","description":"Explica e classifica contexto quando a base local ainda não possui resposta suficiente."},
+    {"type":"correlate","label":"Correlacionar linha do tempo","category":"Raciocínio","status":"active","description":"Ordena métricas, logs, alertas e mudanças por horário para sugerir causa provável."},
+    {"type":"report","label":"Gerar relatório","category":"Saída","status":"active","description":"Transforma evidências em resumo técnico, causa provável e próximos passos."},
+    {"type":"grafana","label":"Grafana","category":"Observabilidade","status":"active","description":"Centraliza dashboards e permite explorar métricas e logs das fontes provisionadas."},
+    {"type":"prometheus","label":"Prometheus","category":"Métricas","status":"active","description":"Coleta séries temporais de CPU, memória, disco, banco e saúde da API."},
+    {"type":"loki","label":"Loki + Alloy","category":"Logs","status":"active","description":"Coleta logs dos containers e permite consultas e correlação por serviço e horário."},
+    {"type":"postgres","label":"PostgreSQL","category":"Dados","status":"active","description":"Consulta, em modo somente leitura no Grafana, consumo, conexões e dados operacionais."},
+    {"type":"jira","label":"Jira","category":"Chamados","status":"needs_configuration","description":"Relaciona incidentes a chamados; requer URL, e-mail e token de uma instância Jira."},
+    {"type":"git","label":"Git local","category":"Mudanças","status":"active","description":"Consulta commits e alterações recentes do repositório local para correlacionar mudanças."},
 ]
 CATALOG_BY_TYPE = {item["type"]: item for item in CONNECTOR_CATALOG}
 
