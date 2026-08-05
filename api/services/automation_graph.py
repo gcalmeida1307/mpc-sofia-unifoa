@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 from uuid import uuid4
+from collections import Counter
+from datetime import datetime, timezone
 
 from psycopg.types.json import Jsonb
 
@@ -9,6 +11,7 @@ from config.settings import settings
 from ai.operational_query import format_related_problems, related_problems, unique_affected_hosts, wants_related_alarm_list
 from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
+from services.postgres_store import postgres_store
 
 
 CONNECTOR_CATALOG = [
@@ -119,6 +122,37 @@ class AutomationGraphStore:
         return ordered
 
     @staticmethod
+    def _zabbix_analysis(problems: list[dict[str, Any]]) -> dict[str, Any]:
+        severity = Counter(str(item.get('severity_label') or 'Não classificado') for item in problems)
+        groups = Counter(group for item in problems for group in (item.get('groups') or []))
+        timeline = []
+        now = datetime.now(timezone.utc)
+        for item in problems:
+            try:
+                started = datetime.fromtimestamp(int(item.get('clock')), tz=timezone.utc)
+                age_seconds = max(0, int((now - started).total_seconds()))
+                started_at = started.isoformat()
+            except (TypeError, ValueError, OSError):
+                age_seconds, started_at = None, None
+            timeline.append({'eventid':item.get('eventid'),'started_at':started_at,'age_seconds':age_seconds,
+                'status':'active','name':item.get('name'),'hosts':item.get('hosts') or [],
+                'severity':item.get('severity_label') or 'Não classificado'})
+        timeline.sort(key=lambda event: event.get('started_at') or '')
+        snapshots = postgres_store.get_recent_snapshots(limit=30)
+        insights = postgres_store.get_recent_insights(limit=10)
+        series = [{'generated_at':snap.get('generated_at'),'problems':int((snap.get('summary') or {}).get('problems',0) or 0)} for snap in reversed(snapshots)]
+        return {
+            'severity_distribution':[{'label':key,'value':value} for key,value in severity.most_common()],
+            'group_distribution':[{'label':key,'value':value} for key,value in groups.most_common(8)],
+            'event_timeline':timeline,
+            'behavior':{'status':'collecting' if len(snapshots)<10 else 'baseline_ready','snapshot_count':len(snapshots),
+                'insight_count':len(insights),'interval_seconds':settings.SNAPSHOT_INTERVAL_SECONDS,
+                'first_sample_at':snapshots[-1].get('generated_at') if snapshots else None,
+                'last_sample_at':snapshots[0].get('generated_at') if snapshots else None,
+                'problem_series':series,'method':'baseline estatístico e detecção de recorrência'},
+        }
+
+    @staticmethod
     def _execute_connector(node: dict[str, Any], input_text: str, previous: list[dict[str, Any]]) -> dict[str, Any]:
         connector_type=str(node.get('type',''))
         if connector_type=='trigger':
@@ -127,9 +161,10 @@ class AutomationGraphStore:
             active=ZabbixConnector().list_active_problems(limit=2000)
             matches=related_problems(input_text,active) if wants_related_alarm_list(input_text) else active[:20]
             affected_hosts=unique_affected_hosts(matches)
+            analysis=AutomationGraphStore._zabbix_analysis(matches)
             return {
                 'summary':format_related_problems(matches,len(active),input_text),
-                'data':{'active_problem_count':len(active),'related_problem_count':len(matches),'unique_host_count':len(affected_hosts),'hosts':affected_hosts,'problems':matches},
+                'data':{'active_problem_count':len(active),'related_problem_count':len(matches),'unique_host_count':len(affected_hosts),'hosts':affected_hosts,'problems':matches,**analysis},
             }
         if connector_type=='knowledge':
             result=search_knowledge(input_text);hits=result.get('results',[]) if isinstance(result,dict) else []

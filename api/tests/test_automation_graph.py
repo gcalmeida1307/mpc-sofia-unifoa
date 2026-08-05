@@ -65,9 +65,29 @@ def test_zabbix_execution_returns_all_related_switches(monkeypatch):
     ]
     connector = type("Connector", (), {"list_active_problems": lambda self, limit: problems})()
     monkeypatch.setattr("services.automation_graph.ZabbixConnector", lambda: connector)
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
     result = AutomationGraphStore._execute_connector(
         {"id": "zabbix", "type": "zabbix"}, "Quais switches não respondem ao ping ICMP?", []
     )
     assert result["data"]["related_problem_count"] == 2
     assert result["data"]["unique_host_count"] == 2
+    assert result["data"]["severity_distribution"] == [{"label": "High", "value": 2}]
+    assert result["data"]["behavior"]["status"] == "collecting"
     assert "switch-a" in result["summary"] and "switch-b" in result["summary"]
+
+
+def test_zabbix_analysis_builds_timeline_and_baseline(monkeypatch):
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [
+        {"generated_at": f"2026-08-05T12:{minute:02d}:00+00:00", "summary": {"problems": minute}}
+        for minute in range(10)
+    ])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [{"signature": "a"}])
+    analysis = AutomationGraphStore._zabbix_analysis([{
+        "eventid": "7", "clock": "1754388000", "name": "Unavailable by ICMP ping",
+        "severity_label": "High", "hosts": ["switch-a"], "groups": ["Global", "Switches"],
+    }])
+    assert analysis["event_timeline"][0]["started_at"]
+    assert analysis["group_distribution"][0] == {"label": "Global", "value": 1}
+    assert analysis["behavior"]["status"] == "baseline_ready"
+    assert len(analysis["behavior"]["problem_series"]) == 10

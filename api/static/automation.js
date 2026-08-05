@@ -126,10 +126,28 @@ async function executeGraph(){
     await saveGraph();
     const result=await sofia.api(`/workflows/automation/graphs/${graphId}/execute`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input})});
     renderTimeline(result);
+    const zabbix=(result.outputs||[]).find(item=>item.connector==='zabbix');
+    const analysis=renderOperationalAnalysis(zabbix?.data||{});
     const details=(result.outputs||[]).map(item=>`<details class="execution-step"><summary><strong>${escapeHtml(item.label)}</strong><span class="step-status ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span></summary><pre>${escapeHtml(item.summary)}</pre></details>`).join('');
-    byId('execution-result').innerHTML=`<article class="final-report"><small>Relatório final</small><pre>${escapeHtml(result.report||'Fluxo concluído sem relatório textual.')}</pre></article>${details}`;
+    byId('execution-result').innerHTML=`${analysis}<article class="final-report"><small>Relatório final</small><pre>${escapeHtml(result.report||'Fluxo concluído sem relatório textual.')}</pre></article>${details}`;
   }catch(error){byId('execution-result').innerHTML=`<p class="error">${escapeHtml(error.message)}</p>`}
   finally{button.disabled=false;button.textContent='Executar fluxo'}
+}
+function formatDuration(seconds){if(seconds==null)return 'horário indisponível';const days=Math.floor(seconds/86400),hours=Math.floor(seconds%86400/3600),minutes=Math.floor(seconds%3600/60);return [days&&days+'d',hours&&hours+'h',minutes+'min'].filter(Boolean).join(' ')}
+function renderBars(items,empty='Sem dados para este recorte.'){
+  if(!items?.length)return `<p class="analysis-empty">${escapeHtml(empty)}</p>`;
+  const max=Math.max(...items.map(item=>Number(item.value)||0),1);
+  return `<div class="chart-bars">${items.map(item=>`<div class="chart-row"><span title="${escapeHtml(item.label)}">${escapeHtml(item.label)}</span><i><b style="width:${Math.max(4,(Number(item.value)||0)/max*100)}%"></b></i><strong>${Number(item.value)||0}</strong></div>`).join('')}</div>`;
+}
+function renderOperationalAnalysis(data){
+  if(!data.event_timeline&&!data.behavior)return '';
+  const severity=data.severity_distribution||[],total=severity.reduce((sum,item)=>sum+(Number(item.value)||0),0)||1;
+  let cursor=0;const colors=['#2de2b7','#59a8ff','#f7b267','#ff6b7c','#9b8cff','#91a4bd'];
+  const stops=severity.map((item,index)=>{const start=cursor;cursor+=Number(item.value)/total*100;return `${colors[index%colors.length]} ${start}% ${cursor}%`}).join(',');
+  const donut=severity.length?`<div class="donut" style="background:conic-gradient(${stops})"><span>${total}<small>alertas</small></span></div>`:'<p class="analysis-empty">Sem alarmes.</p>';
+  const timeline=(data.event_timeline||[]).map(event=>`<li><time>${event.started_at?new Date(event.started_at).toLocaleString('pt-BR'):'Sem horário'}</time><span><strong>${escapeHtml((event.hosts||[]).join(', ')||'Host não identificado')}</strong><small>${escapeHtml(event.name)} · ativo há ${escapeHtml(formatDuration(event.age_seconds))}</small></span><b>ATIVO</b></li>`).join('')||'<p class="analysis-empty">Sem eventos no recorte.</p>';
+  const behavior=data.behavior||{},series=(behavior.problem_series||[]).slice(-12);
+  return `<section class="operational-analysis"><header><span><small>ANÁLISE OPERACIONAL</small><h3>Antes, agora e comportamento</h3></span><span class="analysis-badge">${behavior.status==='baseline_ready'?'Baseline disponível':'Coletando baseline'}</span></header><div class="analysis-grid"><article><h4>Severidade</h4>${donut}<div class="chart-legend">${severity.map((item,index)=>`<span><i style="background:${colors[index%colors.length]}"></i>${escapeHtml(item.label)}: ${item.value}</span>`).join('')}</div></article><article><h4>Grupos afetados</h4>${renderBars(data.group_distribution)}</article><article class="history-chart"><h4>Volume observado</h4>${renderBars(series.map((item,index)=>({label:index===series.length-1?'Agora':new Date(item.generated_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),value:item.problems})),'A coleta ainda não possui amostras.')}</article></div><article class="behavior-card"><strong>Aprendizado comportamental</strong><p>${behavior.snapshot_count||0} snapshots e ${behavior.insight_count||0} padrões persistidos. Coleta a cada ${behavior.interval_seconds||0}s. Método atual: ${escapeHtml(behavior.method||'não informado')}.</p><small>Isso aprende recorrências e tendências; não altera pesos de um modelo neural automaticamente.</small></article><ol class="event-timeline">${timeline}</ol></section>`;
 }
 function loadSqlTemplate(){
   const sequence=['trigger','grafana','prometheus','loki','postgres','correlate','report'];

@@ -266,6 +266,7 @@ class ZabbixConnector:
                     "name": problem.get("name"),
                     "severity": severity,
                     "severity_label": severity_map.get(severity, severity),
+                    "clock": problem.get("clock"),
                     "group_filter": group_name,
                     "hosts": host_names,
                     "host_refs": host_refs,

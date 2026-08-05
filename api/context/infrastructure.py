@@ -77,7 +77,7 @@ class SnapshotService:
 
         try:
             connector = ZabbixConnector()
-            summary = connector.get_problem_summary(limit=200)
+            summary = connector.get_problem_summary(limit=2000)
             problems = connector.list_active_problems(limit=200)
             down_hosts = self._detect_down_hosts(problems)
             group_summary = self._group_problem_summary(problems)
@@ -129,7 +129,7 @@ class SnapshotService:
         docker = snapshot.get("docker", {}) if isinstance(snapshot.get("docker", {}), dict) else {}
         summary = {
             "hosts": zabbix.get("host_count", 0),
-            "problems": len(zabbix.get("problems", []) or []),
+            "problems": int((zabbix.get("problem_summary", {}) or {}).get("total_problems", len(zabbix.get("problems", []) or [])) or 0),
             "containers": docker.get("container_count", 0),
             "groups": len(zabbix.get("group_summary", []) or []),
         }
