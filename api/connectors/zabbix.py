@@ -71,7 +71,6 @@ class ZabbixConnector:
 
         params = {
             "output": ["eventid", "name", "severity", "clock", "objectid"],
-            "recent": True,
             "sortfield": ["eventid"],
             "sortorder": "DESC",
             "limit": limit,

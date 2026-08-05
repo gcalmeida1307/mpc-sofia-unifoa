@@ -27,6 +27,30 @@ def historical_trigger_window(question: str) -> int | None:
     return 7 if "semana" in q else None
 
 
+def historical_trigger_group(question: str) -> tuple[str | None, str]:
+    q = normalize(question)
+    mappings = (
+        (("switch",), "Switches", "switches"),
+        (("servidor", "server"), "Servidores", "servidores"),
+        (("access point", "access-point", " aps "), "Access-Point's", "access points"),
+        (("firewall",), "Firewall", "firewalls"),
+        (("nobreak", "ups"), "Nobreaks", "nobreaks"),
+        (("roteador", "router"), "Roteadores", "roteadores"),
+        (("relogio de ponto",), "Relogios de Ponto", "relógios de ponto"),
+    )
+    for terms, group, label in mappings:
+        if any(term in f" {q} " for term in terms):
+            return group, label
+    explicit = re.search(
+        r"\bgrupo\s+(.+?)(?:\s+(?:teve|tiveram|apresentou|apresentaram|com)\b|\s+n[oa]s?\s+[uú]ltim|\s+durante|[?.]|$)",
+        question, re.IGNORECASE,
+    )
+    if explicit and explicit.group(1).strip():
+        group = explicit.group(1).strip()
+        return group, f"hosts do grupo {group}"
+    return None, "hosts"
+
+
 def related_problems(question: str, problems: list[dict[str, Any]], limit: int = 500) -> list[dict[str, Any]]:
     q = normalize(question)
     ignored = {
@@ -68,7 +92,7 @@ def related_problems(question: str, problems: list[dict[str, Any]], limit: int =
     return [entry[2] for entry in ranked[:limit]]
 
 
-def format_historical_triggers(events: list[dict[str, Any]], total_events: int, days: int) -> str:
+def format_historical_triggers(events: list[dict[str, Any]], total_events: int, days: int, entity_label: str = "hosts", active_now: list[dict[str, Any]] | None = None) -> str:
     hosts = unique_affected_hosts(events)
     per_host: dict[str, int] = {}
     per_trigger: dict[str, int] = {}
@@ -83,11 +107,17 @@ def format_historical_triggers(events: list[dict[str, Any]], total_events: int, 
         host_lines.append(f"- ... e mais {len(ranked_hosts) - 15} switch(es), disponíveis nos gráficos e dados da execução.")
     trigger_lines = [f"- {name}: {count}" for name, count in sorted(per_trigger.items(), key=lambda item: (-item[1], item[0]))[:10]]
     if not events:
-        return f"Não encontrei triggers de switches nos últimos {days} dias, entre {total_events} evento(s) consultado(s) no Zabbix."
+        return f"Não encontrei ocorrências de trigger para {entity_label} nos últimos {days} dias, entre {total_events} evento(s) consultado(s) no Zabbix."
+    active_now = active_now or []
+    active_hosts = unique_affected_hosts(active_now)
+    critical_now = [item for item in active_now if int(item.get("severity", 0) or 0) >= 4]
+    critical_hosts = unique_affected_hosts(critical_now)
     return (
-        f"Nos últimos {days} dias, {len(hosts)} switch(es) único(s) apresentaram {len(events)} ocorrência(s) de trigger. "
-        f"O recorte foi aplicado sobre {total_events} evento(s) consultado(s) no Zabbix.\n\n"
-        "Ocorrências por switch:\n" + "\n".join(host_lines) +
+        f"Nos últimos {days} dias, {len(hosts)} host(s) único(s) no escopo “{entity_label}” apresentaram {len(events)} ocorrência(s) de trigger. "
+        f"O recorte foi aplicado sobre {total_events} evento(s) consultado(s) no Zabbix. "
+        f"Neste momento, há {len(active_now)} problema(s) não resolvido(s) em {len(active_hosts)} host(s) desse escopo; "
+        f"{len(critical_now)} são de severidade alta/desastre, afetando {len(critical_hosts)} host(s).\n\n"
+        f"Ocorrências por host ({entity_label}):\n" + "\n".join(host_lines) +
         "\n\nPrincipais triggers:\n" + "\n".join(trigger_lines)
     )
 

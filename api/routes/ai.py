@@ -5,7 +5,7 @@ from ai.service import openai_service
 from ai.domain_policy import OUT_OF_SCOPE_MESSAGE, is_it_question
 from services.postgres_store import postgres_store
 from connectors.zabbix import ZabbixConnector
-from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_window, normalize, related_problems, unique_affected_hosts, wants_related_alarm_list
+from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_group, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
@@ -36,11 +36,13 @@ def ask(payload: AIAskRequest):
     days = historical_trigger_window(payload.question)
     if days:
         try:
-            group_name = 'Switches' if 'switch' in normalize(payload.question) else None
-            events = ZabbixConnector().list_trigger_events(days=days, limit=5000, group_name=group_name)
-            related = related_problems(payload.question, events, limit=5000)
+            group_name, entity_label = historical_trigger_group(payload.question)
+            connector = ZabbixConnector()
+            events = connector.list_trigger_events(days=days, limit=5000, group_name=group_name)
+            active_now = connector.list_active_problems(limit=2000, group_name=group_name)
+            related = events
             affected_hosts = unique_affected_hosts(related)
-            answer = format_historical_triggers(related, len(events), days)
+            answer = format_historical_triggers(related, len(events), days, entity_label, active_now)
             postgres_store.add_message('assistant', answer, {'channel':'ai','purpose':'training','source':'zabbix_historical_local'})
             return {'answer':answer,'plan':{'intent':'historical_triggers','tools':['zabbix.event.get']},
                 'reasoning':{'mode':'local_historical_correlation'},'critic':{'approved':True,'provider':'local'},

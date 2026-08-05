@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from psycopg.types.json import Jsonb
 
 from config.settings import settings
-from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_window, normalize, related_problems, unique_affected_hosts, wants_related_alarm_list
+from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_group, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
 from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
 from services.postgres_store import postgres_store
@@ -179,11 +179,16 @@ class AutomationGraphStore:
         if connector_type=='zabbix':
             connector=ZabbixConnector();days=historical_trigger_window(input_text)
             if days:
-                group_name='Switches' if 'switch' in normalize(input_text) else None
+                group_name,entity_label=historical_trigger_group(input_text)
                 universe=connector.list_trigger_events(days=days,limit=5000,group_name=group_name)
-                matches=related_problems(input_text,universe,limit=5000)
-                summary=format_historical_triggers(matches,len(universe),days)
-                scope={'query_scope':'historical_triggers','days':days,'total_event_count':len(universe)}
+                active_now=connector.list_active_problems(limit=2000,group_name=group_name)
+                matches=universe
+                summary=format_historical_triggers(matches,len(universe),days,entity_label,active_now)
+                scope={'query_scope':'historical_triggers','days':days,'group_filter':group_name,
+                    'entity_label':entity_label,'total_event_count':len(universe),'active_now_count':len(active_now),
+                    'active_now_host_count':len(unique_affected_hosts(active_now)),
+                    'critical_active_count':sum(1 for item in active_now if int(item.get('severity',0) or 0)>=4),
+                    'critical_active_host_count':len(unique_affected_hosts([item for item in active_now if int(item.get('severity',0) or 0)>=4]))}
             else:
                 universe=connector.list_active_problems(limit=2000)
                 matches=related_problems(input_text,universe) if wants_related_alarm_list(input_text) else universe[:20]

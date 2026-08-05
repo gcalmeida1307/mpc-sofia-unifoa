@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
+from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_group, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
 from ai.planner import build_plan
 from routes import ai
 
@@ -92,6 +92,13 @@ def test_historical_trigger_window_and_strict_switch_filter():
     assert historical_trigger_window(question) == 7
     matches = related_problems(question, events, limit=5000)
     assert [item['hosts'][0] for item in matches] == ['switch-a']
-    answer = format_historical_triggers(matches, 3, 7)
-    assert '1 switch(es) único(s)' in answer
+    answer = format_historical_triggers(matches, 3, 7, 'switches')
+    assert '1 host(s) único(s) no escopo “switches”' in answer
     assert 'server-a' not in answer and 'ap-a' not in answer
+
+
+def test_historical_group_scope_supports_varied_wording_and_entities():
+    assert historical_trigger_window('Quantos switches tiveram triggers nos últimos 3 dias?') == 3
+    assert historical_trigger_group('Quantos switches tiveram triggers nos últimos 3 dias?') == ('Switches', 'switches')
+    assert historical_trigger_group('Quais servidores tiveram triggers nos últimos 2 dias?') == ('Servidores', 'servidores')
+    assert historical_trigger_group('Triggers do grupo PRD06-INFORMATICA nos últimos 5 dias?') == ('PRD06-INFORMATICA', 'hosts do grupo PRD06-INFORMATICA')

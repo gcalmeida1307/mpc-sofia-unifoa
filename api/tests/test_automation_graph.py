@@ -100,6 +100,9 @@ def test_historical_switch_flow_uses_event_history_and_group_filter(monkeypatch)
         def list_trigger_events(self, days, limit, group_name):
             assert days == 7 and limit == 5000 and group_name == 'Switches'
             return events
+        def list_active_problems(self, limit, group_name):
+            assert limit == 2000 and group_name == 'Switches'
+            return events
     monkeypatch.setattr("services.automation_graph.ZabbixConnector", Connector)
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
@@ -109,5 +112,7 @@ def test_historical_switch_flow_uses_event_history_and_group_filter(monkeypatch)
     assert result['data']['query_scope'] == 'historical_triggers'
     assert result['data']['days'] == 7
     assert result['data']['unique_host_count'] == 1
+    assert result['data']['group_filter'] == 'Switches'
+    assert result['data']['active_now_count'] == 1
     assert result['data']['event_timeline'][0]['status'] == 'occurred'
     assert result['data']['host_distribution'] == [{'label':'switch-a','value':1}]
