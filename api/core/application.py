@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 
 from services.auth import auth_service
 from services.automation_graph import automation_graph_store
@@ -100,7 +100,7 @@ class Application:
             }
             path = request.url.path
             method = request.method.upper()
-            public_paths = {"/", "/health", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}
+            public_paths = {"/", "/login.html", "/health", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}
             is_static = path.startswith("/ui/")
             if path not in public_paths and not is_static:
                 authorization = request.headers.get("authorization", "")
@@ -127,9 +127,13 @@ class Application:
                         if not otp or not pyotp.TOTP(mfa_secret).verify(otp, valid_window=1):
                             return JSONResponse(status_code=401, content={"detail": "valid TOTP required"})
 
-            # Lightweight in-memory rate limit for AI chat endpoints.
-            if path in {"/assistant/ask", "/ai/ask"}:
-                limit = max(10, int(self.settings.REQUEST_RATE_LIMIT_PER_MINUTE))
+            content_length = int(request.headers.get("content-length", "0") or 0)
+            if content_length > 25 * 1024 * 1024:
+                return JSONResponse(status_code=413, content={"detail": "request body too large"})
+
+            # Rate limit AI and authentication endpoints independently.
+            if path in {"/assistant/ask", "/ai/ask", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests"}:
+                limit = 10 if path.startswith("/auth/") else max(10, int(self.settings.REQUEST_RATE_LIMIT_PER_MINUTE))
                 client_ip = request.client.host if request.client and request.client.host else "unknown"
                 key = f"{client_ip}:{path}"
                 now = time.time()
@@ -144,8 +148,10 @@ class Application:
                 bucket.append(now)
 
             response = await call_next(request)
-            if path.startswith("/ui/"):
+            if path.startswith("/ui/") or path.startswith("/auth/") or path == "/login.html":
                 response.headers["Cache-Control"] = "no-store"
+            response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+            response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
             response.headers["X-Content-Type-Options"] = "nosniff"
             response.headers["X-Frame-Options"] = "DENY"
             response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
@@ -156,21 +162,13 @@ class Application:
 
         self._register_routes(app)
 
-        @app.get("/")
+        @app.get("/", include_in_schema=False)
         def home():
-            return {
-                "projeto": "SOFIA",
-                "status": "online",
-                "engines": {
-                    "core": "/core",
-                    "knowledge": "/knowledge",
-                    "workflows": "/workflows",
-                    "marketplace": "/marketplace",
-                    "docs": "/docs",
-                    "zabbix": "/zabbix",
-                },
-                "zabbix": self.settings.ZABBIX_URL,
-            }
+            return RedirectResponse(url="/login.html", status_code=302)
+
+        @app.get("/login.html", include_in_schema=False)
+        def login_page():
+            return FileResponse("static/login.html", headers={"Cache-Control": "no-store"})
 
         app.state.sofia_core = self
         return app

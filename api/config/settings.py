@@ -68,6 +68,7 @@ class RuntimeConfig:
 class SecurityConfig:
     admin_api_key: str
     mfa_totp_secret: str
+    auth_bootstrap_token: str
 
 
 class Settings:
@@ -111,6 +112,7 @@ class Settings:
         self.security = SecurityConfig(
             admin_api_key=os.getenv("SECURITY_ADMIN_API_KEY", ""),
             mfa_totp_secret=os.getenv("SECURITY_MFA_TOTP_SECRET", ""),
+            auth_bootstrap_token=os.getenv("AUTH_BOOTSTRAP_TOKEN", ""),
         )
 
         # Backward-compatible attributes used across existing services.
@@ -124,6 +126,7 @@ class Settings:
         self.REQUEST_RATE_LIMIT_PER_MINUTE = self.runtime.request_rate_limit_per_minute
         self.SECURITY_ADMIN_API_KEY = self.security.admin_api_key
         self.SECURITY_MFA_TOTP_SECRET = self.security.mfa_totp_secret
+        self.AUTH_BOOTSTRAP_TOKEN = self.security.auth_bootstrap_token
         self.POSTGRES_DSN = self.postgres.dsn
         self.QDRANT_URL = self.qdrant.url
         self.QDRANT_COLLECTION = self.qdrant.collection
@@ -179,6 +182,7 @@ class Settings:
             "security": {
                 "admin_api_key": self._mask(self.security.admin_api_key) if masked else self.security.admin_api_key,
                 "mfa_totp_secret": self._mask(self.security.mfa_totp_secret) if masked else self.security.mfa_totp_secret,
+                "auth_bootstrap_token": self._mask(self.security.auth_bootstrap_token) if masked else self.security.auth_bootstrap_token,
             },
             "runtime": {
                 "request_timeout": self.runtime.request_timeout,

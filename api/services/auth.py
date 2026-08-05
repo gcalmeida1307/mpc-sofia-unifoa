@@ -56,9 +56,14 @@ class AuthService:
                 with conn.cursor() as cur:
                     for statement in statements:
                         cur.execute(statement)
+                    cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS setup_token_hash TEXT")
                     cur.execute("""INSERT INTO auth_users (username, display_name, role, status)
                         VALUES ('glauco.almeida', 'Glauco Almeida', 'admin', 'pending')
                         ON CONFLICT (username) DO NOTHING""")
+                    if settings.AUTH_BOOTSTRAP_TOKEN:
+                        cur.execute("""UPDATE auth_users SET setup_token_hash=%s
+                            WHERE username='glauco.almeida' AND status='pending' AND password_hash IS NULL""",
+                            (self.token_hash(settings.AUTH_BOOTSTRAP_TOKEN),))
                 conn.commit()
             return True
         except Exception:
@@ -98,13 +103,16 @@ class AuthService:
         except Exception:
             pass
 
-    def enrollment(self, username: str) -> dict[str, str] | None:
+    def enrollment(self, username: str, invite_token: str) -> dict[str, str] | None:
         self.ensure_schema()
+        normalized = username.lower().strip()
         with self.connect() as conn:
-            row = conn.execute("SELECT status, password_hash FROM auth_users WHERE username=%s", (username.lower().strip(),)).fetchone()
-        if not row or row[0] != 'pending' or row[1]:
-            return None
-        secret = pyotp.random_base32()
+            row = conn.execute("SELECT status, password_hash, setup_token_hash FROM auth_users WHERE username=%s", (normalized,)).fetchone()
+            if not row or row[0] != 'pending' or row[1] or not row[2] or not hmac.compare_digest(self.token_hash(invite_token), row[2]):
+                return None
+            secret = pyotp.random_base32()
+            conn.execute("UPDATE auth_users SET totp_secret=%s WHERE username=%s AND status='pending'", (secret, normalized))
+            conn.commit()
         provisioning_uri = pyotp.TOTP(secret).provisioning_uri(name=username, issuer_name='SOFIA')
         image = qrcode.make(provisioning_uri, image_factory=qrcode.image.svg.SvgPathImage, box_size=8, border=2)
         buffer = BytesIO()
@@ -112,13 +120,15 @@ class AuthService:
         qr_code_data_url = 'data:image/svg+xml;base64,' + base64.b64encode(buffer.getvalue()).decode()
         return {'secret': secret, 'provisioning_uri': provisioning_uri, 'qr_code_data_url': qr_code_data_url}
 
-    def complete_first_access(self, username: str, password: str, secret: str, otp: str, ip: str | None = None) -> bool:
+    def complete_first_access(self, username: str, password: str, otp: str, ip: str | None = None) -> bool:
         self.validate_password(password)
-        if not pyotp.TOTP(secret).verify(otp, valid_window=1):
-            return False
+        normalized = username.lower().strip()
         with self.connect() as conn:
-            cur = conn.execute("""UPDATE auth_users SET password_hash=%s, totp_secret=%s, status='active', approved_at=NOW()
-                WHERE username=%s AND status='pending' AND password_hash IS NULL""", (self.hash_password(password), secret, username.lower().strip()))
+            row = conn.execute("SELECT totp_secret FROM auth_users WHERE username=%s AND status='pending' AND password_hash IS NULL", (normalized,)).fetchone()
+            if not row or not row[0] or not pyotp.TOTP(row[0]).verify(otp, valid_window=1):
+                return False
+            cur = conn.execute("""UPDATE auth_users SET password_hash=%s, status='active', approved_at=NOW(), setup_token_hash=NULL
+                WHERE username=%s AND status='pending' AND password_hash IS NULL""", (self.hash_password(password), normalized))
             conn.commit()
         self.audit(username, 'first_access', cur.rowcount == 1, ip)
         return cur.rowcount == 1
@@ -161,13 +171,15 @@ class AuthService:
             rows=conn.execute("SELECT id,username,display_name,email,reason,status,created_at FROM access_requests ORDER BY created_at DESC").fetchall()
         return [{'id':r[0],'username':r[1],'display_name':r[2],'email':r[3],'reason':r[4],'status':r[5],'created_at':r[6].isoformat()} for r in rows]
 
-    def approve_request(self, request_id: int, admin_id: int) -> bool:
+    def approve_request(self, request_id: int, admin_id: int) -> dict[str, Any] | None:
         with self.connect() as conn:
             row=conn.execute("SELECT username,display_name FROM access_requests WHERE id=%s AND status='pending' FOR UPDATE",(request_id,)).fetchone()
-            if not row: return False
-            conn.execute("""INSERT INTO auth_users(username,display_name,role,status) VALUES(%s,%s,'user','pending')
-                ON CONFLICT(username) DO UPDATE SET display_name=EXCLUDED.display_name,status='pending'""",row)
-            conn.execute("UPDATE access_requests SET status='approved',reviewed_at=NOW(),reviewed_by=%s WHERE id=%s",(admin_id,request_id)); conn.commit(); return True
+            if not row: return None
+            setup_token = secrets.token_urlsafe(24)
+            conn.execute("""INSERT INTO auth_users(username,display_name,role,status,setup_token_hash) VALUES(%s,%s,'user','pending',%s)
+                ON CONFLICT(username) DO UPDATE SET display_name=EXCLUDED.display_name,status='pending',setup_token_hash=EXCLUDED.setup_token_hash""",(row[0],row[1],self.token_hash(setup_token)))
+            conn.execute("UPDATE access_requests SET status='approved',reviewed_at=NOW(),reviewed_by=%s WHERE id=%s",(admin_id,request_id)); conn.commit()
+            return {"approved": True, "setup_token": setup_token}
 
     def list_users(self) -> list[dict[str, Any]]:
         with self.connect() as conn:

@@ -6,8 +6,11 @@ router = APIRouter(prefix='/auth', tags=['Authentication'])
 
 class LoginIn(BaseModel):
     username: str; password: str; otp: str
+class FirstAccessStartIn(BaseModel):
+    username: str
+    invite_token: str = Field(min_length=16, max_length=200)
 class FirstAccessIn(BaseModel):
-    username: str; password: str; totp_secret: str; otp: str
+    username: str; password: str; otp: str
 class AccessIn(BaseModel):
     username: str = Field(min_length=3, max_length=80)
     display_name: str = Field(min_length=2, max_length=120)
@@ -19,14 +22,14 @@ def bearer(request: Request) -> str:
     return value[7:].strip() if value.lower().startswith('bearer ') else ''
 
 @router.post('/first-access/start')
-def first_access_start(payload: dict):
-    result=auth_service.enrollment(str(payload.get('username','')))
+def first_access_start(payload: FirstAccessStartIn):
+    result=auth_service.enrollment(payload.username, payload.invite_token)
     if not result: raise HTTPException(400, 'Usuário não está disponível para primeiro acesso')
     return result
 
 @router.post('/first-access/complete')
 def first_access_complete(payload: FirstAccessIn, request: Request):
-    try: ok=auth_service.complete_first_access(payload.username,payload.password,payload.totp_secret,payload.otp,request.client.host if request.client else None)
+    try: ok=auth_service.complete_first_access(payload.username,payload.password,payload.otp,request.client.host if request.client else None)
     except ValueError as exc: raise HTTPException(422,str(exc))
     if not ok: raise HTTPException(401,'TOTP inválido ou cadastro indisponível')
     return {'status':'active'}
@@ -67,9 +70,10 @@ def access_requests(request: Request):
 @router.post('/admin/access-requests/{request_id}/approve')
 def approve(request_id: int, request: Request):
     admin=require_admin(request)
-    if not auth_service.approve_request(request_id,admin['id']): raise HTTPException(404,'Solicitação pendente não encontrada')
+    result=auth_service.approve_request(request_id,admin['id'])
+    if not result: raise HTTPException(404,'Solicitação pendente não encontrada')
     auth_service.audit(admin['username'],'approve_access',True,user_id=admin['id'])
-    return {'status':'approved'}
+    return {'status':'approved', 'setup_token':result['setup_token']}
 
 @router.get('/admin/users')
 def users(request: Request):
