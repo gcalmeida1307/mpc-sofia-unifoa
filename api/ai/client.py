@@ -42,6 +42,7 @@ class OpenAIResponsesClient:
         payload = {
             "model": self.anthropic_model,
             "max_tokens": self.anthropic_max_tokens,
+            "cache_control": {"type": "ephemeral"},
             "messages": [self._normalize_message_for_ollama(item) for item in messages if item.get("role") not in {"system", "developer"}],
         }
         if system:

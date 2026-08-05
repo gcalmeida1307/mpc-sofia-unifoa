@@ -12,7 +12,7 @@ def test_anthropic_payload_and_response(monkeypatch):
         result=OpenAIResponsesClient().ask([{'role':'system','content':'Seja breve'},{'role':'user','content':'Oi'}])
     assert result['provider']=='anthropic' and result['text']=='Olá'
     payload=post.call_args.kwargs['json']
-    assert payload=={'model':'claude-test','max_tokens':321,'messages':[{'role':'user','content':'Oi'}],'system':'Seja breve'}
+    assert payload=={'model':'claude-test','max_tokens':321,'cache_control':{'type':'ephemeral'},'messages':[{'role':'user','content':'Oi'}],'system':'Seja breve'}
     assert post.call_args.kwargs['headers']['x-api-key']=='test-key'
 
 def test_ollama_is_fallback(monkeypatch):

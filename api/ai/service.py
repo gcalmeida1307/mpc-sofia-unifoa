@@ -189,6 +189,8 @@ class OpenAIService:
         latency_ms = int((perf_counter() - start) * 1000)
         tokens_in = int(usage.get("input_tokens", 0) or 0)
         tokens_out = int(usage.get("output_tokens", 0) or 0)
+        cache_creation_tokens = int(usage.get("cache_creation_input_tokens", 0) or 0)
+        cache_read_tokens = int(usage.get("cache_read_input_tokens", 0) or 0)
         # Conservative estimate for dashboard cost trend.
         cost_usd = round((tokens_in * 0.0000005) + (tokens_out * 0.0000015), 8)
 
@@ -209,6 +211,11 @@ class OpenAIService:
                 "agent": agent.get("name", "unknown"),
                 "selected_hypothesis": hypothesis.get("selected_hypothesis"),
                 "llm_provider": llm_provider,
+                "prompt_cache": {
+                    "creation_input_tokens": cache_creation_tokens,
+                    "read_input_tokens": cache_read_tokens,
+                    "hit": cache_read_tokens > 0,
+                },
             },
         )
 
