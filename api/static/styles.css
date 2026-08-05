@@ -52,3 +52,11 @@
 @media(max-width:700px){#connector-catalog{grid-auto-columns:175px}.connector-card{min-width:175px}}
 
 .connector-card{cursor:grab}.connector-card:active{cursor:grabbing}
+
+
+#graph-canvas.placement-active{border-color:var(--blue);cursor:crosshair;box-shadow:inset 0 0 34px #59a8ff18}
+.connector-card.placement-selected{outline:2px solid var(--blue);background:#173252}
+.graph-node{animation:node-in .18s ease-out}
+.graph-edge{stroke-dasharray:8 5;animation:edge-flow .9s linear infinite}
+@keyframes node-in{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes edge-flow{to{stroke-dashoffset:-26}}
