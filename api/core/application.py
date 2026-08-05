@@ -11,6 +11,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from services.auth import auth_service
+from services.automation_graph import automation_graph_store
 from fastapi.staticfiles import StaticFiles
 import pyotp
 
@@ -58,6 +59,7 @@ class Application:
                 await result
 
         auth_service.ensure_schema()
+        automation_graph_store.ensure_schema()
         await self.snapshot_scheduler.start()
         await self.autonomy_scheduler.start()
 
