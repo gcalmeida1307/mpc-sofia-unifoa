@@ -17,15 +17,27 @@ def wants_related_alarm_list(question: str) -> bool:
     return operational and collection
 
 
+def historical_trigger_window(question: str) -> int | None:
+    q = normalize(question)
+    if "trigger" not in q or not any(term in q for term in ("ultimo", "ultimos", "dia", "dias", "semana")):
+        return None
+    match = re.search(r"\b(\d{1,3})\s*dias?\b", q)
+    if match:
+        return max(1, min(int(match.group(1)), 90))
+    return 7 if "semana" in q else None
+
+
 def related_problems(question: str, problems: list[dict[str, Any]], limit: int = 500) -> list[dict[str, Any]]:
     q = normalize(question)
     ignored = {
         "qual", "quais", "quantos", "quantas", "tenho", "tem", "estao", "nao", "para", "por", "que",
-        "uma", "uns", "das", "dos", "de", "do", "da", "em", "no", "na", "meu", "minha", "sobre",
+        "uma", "uns", "das", "dos", "de", "do", "da", "em", "no", "na", "nos", "nas", "aos", "meu", "minha", "sobre",
         "todos", "todas", "alerta", "alertas", "alarme", "alarmes", "problema", "problemas", "respondem",
         "zabbix", "host", "hosts", "ativo", "ativos",
         "com", "sem", "pelo", "pela", "pelos", "pelas",
         "dispositivo", "dispositivos", "equipamento", "equipamentos", "aparelho", "aparelhos",
+        "trigger", "triggers", "apresenta", "apresentam", "apresentou", "apresentaram",
+        "ultimo", "ultimos", "ultima", "ultimas", "dia", "dias", "semana", "semanas",
     }
     terms = {("switch" if token in {"switches","switchs"} else token.rstrip("s")) for token in re.findall(r"[a-z0-9_.-]{3,}", q) if token not in ignored}
     if not terms:
@@ -54,6 +66,30 @@ def related_problems(question: str, problems: list[dict[str, Any]], limit: int =
             ranked.append((score, -index, item))
     ranked.sort(key=lambda entry: (entry[0], entry[1]), reverse=True)
     return [entry[2] for entry in ranked[:limit]]
+
+
+def format_historical_triggers(events: list[dict[str, Any]], total_events: int, days: int) -> str:
+    hosts = unique_affected_hosts(events)
+    per_host: dict[str, int] = {}
+    per_trigger: dict[str, int] = {}
+    for event in events:
+        for host in event.get("hosts", []) or []:
+            per_host[str(host)] = per_host.get(str(host), 0) + 1
+        name = str(event.get("name") or "Trigger sem nome")
+        per_trigger[name] = per_trigger.get(name, 0) + 1
+    ranked_hosts = sorted(per_host.items(), key=lambda item: (-item[1], item[0]))
+    host_lines = [f"- {name}: {count} ocorrência(s)" for name, count in ranked_hosts[:15]]
+    if len(ranked_hosts) > 15:
+        host_lines.append(f"- ... e mais {len(ranked_hosts) - 15} switch(es), disponíveis nos gráficos e dados da execução.")
+    trigger_lines = [f"- {name}: {count}" for name, count in sorted(per_trigger.items(), key=lambda item: (-item[1], item[0]))[:10]]
+    if not events:
+        return f"Não encontrei triggers de switches nos últimos {days} dias, entre {total_events} evento(s) consultado(s) no Zabbix."
+    return (
+        f"Nos últimos {days} dias, {len(hosts)} switch(es) único(s) apresentaram {len(events)} ocorrência(s) de trigger. "
+        f"O recorte foi aplicado sobre {total_events} evento(s) consultado(s) no Zabbix.\n\n"
+        "Ocorrências por switch:\n" + "\n".join(host_lines) +
+        "\n\nPrincipais triggers:\n" + "\n".join(trigger_lines)
+    )
 
 
 def unique_affected_hosts(problems: list[dict[str, Any]]) -> list[dict[str, Any]]:

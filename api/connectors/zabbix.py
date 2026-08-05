@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime, timedelta, timezone
 
 from config.settings import settings
 
@@ -90,6 +91,25 @@ class ZabbixConnector:
             json=payload,
             timeout=settings.REQUEST_TIMEOUT,
         )
+        response.raise_for_status()
+        data = response.json()
+        if "error" in data:
+            raise Exception(data["error"])
+        return data.get("result", [])
+
+    def get_trigger_events(self, days: int, limit: int = 5000, groupids: list[str] | None = None):
+        if not self.token:
+            self.login()
+        params = {
+            "output": ["eventid", "name", "severity", "clock", "objectid", "value"],
+            "source": 0, "object": 0, "value": 1,
+            "time_from": int((datetime.now(timezone.utc) - timedelta(days=days)).timestamp()),
+            "sortfield": ["clock"], "sortorder": "DESC", "limit": limit,
+        }
+        if groupids:
+            params["groupids"] = groupids
+        payload = {"jsonrpc":"2.0","method":"event.get","params":params,"auth":self.token,"id":7}
+        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
         if "error" in data:
@@ -274,6 +294,28 @@ class ZabbixConnector:
                 }
             )
 
+        return enriched
+
+    def list_trigger_events(self, days: int = 7, limit: int = 5000, group_name: str | None = None):
+        groupids = self.find_hostgroup_ids(group_name) if group_name else None
+        if group_name and not groupids:
+            return []
+        events = self.get_trigger_events(days=days, limit=limit, groupids=groupids)
+        trigger_ids = sorted({str(event.get("objectid")) for event in events if event.get("objectid")})
+        trigger_hosts = self.get_hosts_for_triggers(trigger_ids)
+        host_ids = sorted({str(host.get("hostid")) for hosts in trigger_hosts.values() for host in hosts if host.get("hostid")})
+        host_groups = self.get_groups_for_hostids(host_ids)
+        severity_map = {"0":"Not classified","1":"Information","2":"Warning","3":"Average","4":"High","5":"Disaster"}
+        enriched = []
+        for event in events:
+            hosts = trigger_hosts.get(str(event.get("objectid")), [])
+            refs = [{"hostid":str(host.get("hostid", "")),"name":host.get("name") or host.get("host") or "",
+                     "groups":host_groups.get(str(host.get("hostid")), [])} for host in hosts if host.get("hostid")]
+            groups = sorted({group for ref in refs for group in ref["groups"]})
+            severity = str(event.get("severity", "0"))
+            enriched.append({"eventid":event.get("eventid"),"objectid":event.get("objectid"),"name":event.get("name"),
+                "severity":severity,"severity_label":severity_map.get(severity,severity),"clock":event.get("clock"),
+                "hosts":[ref["name"] for ref in refs],"host_refs":refs,"groups":groups,"historical":True})
         return enriched
 
     def list_groups(self, limit: int = 200) -> list[dict]:

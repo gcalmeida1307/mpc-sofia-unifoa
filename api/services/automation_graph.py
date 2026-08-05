@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from psycopg.types.json import Jsonb
 
 from config.settings import settings
-from ai.operational_query import format_related_problems, related_problems, unique_affected_hosts, wants_related_alarm_list
+from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_window, normalize, related_problems, unique_affected_hosts, wants_related_alarm_list
 from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
 from services.postgres_store import postgres_store
@@ -126,6 +126,7 @@ class AutomationGraphStore:
     def _zabbix_analysis(problems: list[dict[str, Any]]) -> dict[str, Any]:
         severity = Counter(str(item.get('severity_label') or 'Não classificado') for item in problems)
         groups = Counter(group for item in problems for group in (item.get('groups') or []))
+        hosts = Counter(str(host) for item in problems for host in (item.get('hosts') or []) if host)
         timeline = []
         now = datetime.now(timezone.utc)
         for item in problems:
@@ -136,7 +137,7 @@ class AutomationGraphStore:
             except (TypeError, ValueError, OSError):
                 age_seconds, started_at = None, None
             timeline.append({'eventid':item.get('eventid'),'started_at':started_at,'age_seconds':age_seconds,
-                'status':'active','name':item.get('name'),'hosts':item.get('hosts') or [],
+                'status':'occurred' if item.get('historical') else 'active','name':item.get('name'),'hosts':item.get('hosts') or [],
                 'severity':item.get('severity_label') or 'Não classificado'})
         timeline.sort(key=lambda event: event.get('started_at') or '')
         snapshots = postgres_store.get_recent_snapshots(limit=30)
@@ -160,7 +161,8 @@ class AutomationGraphStore:
         return {
             'severity_distribution':[{'label':key,'value':value} for key,value in severity.most_common()],
             'group_distribution':[{'label':key,'value':value} for key,value in groups.most_common(8)],
-            'event_timeline':timeline,
+            'host_distribution':[{'label':key,'value':value} for key,value in hosts.most_common(12)],
+            'event_timeline':timeline[-100:],
             'behavior':{'status':'collecting' if len(snapshots)<10 else 'baseline_ready','snapshot_count':len(snapshots),
                 'insight_count':len(insights),'interval_seconds':settings.SNAPSHOT_INTERVAL_SECONDS,
                 'first_sample_at':snapshots[-1].get('generated_at') if snapshots else None,
@@ -175,13 +177,24 @@ class AutomationGraphStore:
         if connector_type=='trigger':
             return {'summary':f'Entrada recebida: {input_text}','data':{'input':input_text}}
         if connector_type=='zabbix':
-            active=ZabbixConnector().list_active_problems(limit=2000)
-            matches=related_problems(input_text,active) if wants_related_alarm_list(input_text) else active[:20]
+            connector=ZabbixConnector();days=historical_trigger_window(input_text)
+            if days:
+                group_name='Switches' if 'switch' in normalize(input_text) else None
+                universe=connector.list_trigger_events(days=days,limit=5000,group_name=group_name)
+                matches=related_problems(input_text,universe,limit=5000)
+                summary=format_historical_triggers(matches,len(universe),days)
+                scope={'query_scope':'historical_triggers','days':days,'total_event_count':len(universe)}
+            else:
+                universe=connector.list_active_problems(limit=2000)
+                matches=related_problems(input_text,universe) if wants_related_alarm_list(input_text) else universe[:20]
+                summary=format_related_problems(matches,len(universe),input_text)
+                scope={'query_scope':'active_problems','active_problem_count':len(universe)}
             affected_hosts=unique_affected_hosts(matches)
             analysis=AutomationGraphStore._zabbix_analysis(matches)
             return {
-                'summary':format_related_problems(matches,len(active),input_text),
-                'data':{'active_problem_count':len(active),'related_problem_count':len(matches),'unique_host_count':len(affected_hosts),'hosts':affected_hosts,'problems':matches,**analysis},
+                'summary':summary,
+                'data':{**scope,'related_problem_count':len(matches),'unique_host_count':len(affected_hosts),'hosts':affected_hosts,
+                    'problems':matches[:100],'problems_truncated':len(matches)>100,**analysis},
             }
         if connector_type=='knowledge':
             result=search_knowledge(input_text);hits=result.get('results',[]) if isinstance(result,dict) else []

@@ -91,3 +91,23 @@ def test_zabbix_analysis_builds_timeline_and_baseline(monkeypatch):
     assert analysis["group_distribution"][0] == {"label": "Global", "value": 1}
     assert analysis["behavior"]["status"] == "baseline_ready"
     assert len(analysis["behavior"]["problem_series"]) == 10
+
+
+def test_historical_switch_flow_uses_event_history_and_group_filter(monkeypatch):
+    events = [{"eventid":"1","clock":"1754388000","name":"Interface link down","severity_label":"High",
+        "hosts":["switch-a"],"groups":["Global","Switches"],"historical":True}]
+    class Connector:
+        def list_trigger_events(self, days, limit, group_name):
+            assert days == 7 and limit == 5000 and group_name == 'Switches'
+            return events
+    monkeypatch.setattr("services.automation_graph.ZabbixConnector", Connector)
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
+    result = AutomationGraphStore._execute_connector(
+        {"id":"zabbix","type":"zabbix"}, 'Quantos switches apresentaram triggers nos últimos 7 dias?', []
+    )
+    assert result['data']['query_scope'] == 'historical_triggers'
+    assert result['data']['days'] == 7
+    assert result['data']['unique_host_count'] == 1
+    assert result['data']['event_timeline'][0]['status'] == 'occurred'
+    assert result['data']['host_distribution'] == [{'label':'switch-a','value':1}]

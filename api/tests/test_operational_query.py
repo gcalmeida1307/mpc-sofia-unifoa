@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from ai.operational_query import format_related_problems, related_problems, unique_affected_hosts, wants_related_alarm_list
+from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
 from ai.planner import build_plan
 from routes import ai
 
@@ -80,3 +80,18 @@ def test_host_icmp_question_excludes_zabbix_pinger_capacity_alarm():
     ]
     matches=related_problems('Quantos hosts estão com problema de ICMP?',problems)
     assert [item['hosts'][0] for item in matches]==['server-a']
+
+
+def test_historical_trigger_window_and_strict_switch_filter():
+    question = 'Quantos switches apresentaram triggers nos últimos 7 dias?'
+    events = [
+        {'name':'Interface link down','hosts':['switch-a'],'groups':['Global','Switches']},
+        {'name':'CPU queue high','hosts':['server-a'],'groups':['Global','Servers']},
+        {'name':'Airtime high','hosts':['ap-a'],'groups':['Access-Points']},
+    ]
+    assert historical_trigger_window(question) == 7
+    matches = related_problems(question, events, limit=5000)
+    assert [item['hosts'][0] for item in matches] == ['switch-a']
+    answer = format_historical_triggers(matches, 3, 7)
+    assert '1 switch(es) único(s)' in answer
+    assert 'server-a' not in answer and 'ap-a' not in answer
