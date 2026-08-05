@@ -11,6 +11,9 @@ from typing import Any
 
 import psycopg
 import pyotp
+import qrcode
+import qrcode.image.svg
+from io import BytesIO
 
 from config.settings import settings
 
@@ -102,7 +105,12 @@ class AuthService:
         if not row or row[0] != 'pending' or row[1]:
             return None
         secret = pyotp.random_base32()
-        return {'secret': secret, 'provisioning_uri': pyotp.TOTP(secret).provisioning_uri(name=username, issuer_name='SOFIA')}
+        provisioning_uri = pyotp.TOTP(secret).provisioning_uri(name=username, issuer_name='SOFIA')
+        image = qrcode.make(provisioning_uri, image_factory=qrcode.image.svg.SvgPathImage, box_size=8, border=2)
+        buffer = BytesIO()
+        image.save(buffer)
+        qr_code_data_url = 'data:image/svg+xml;base64,' + base64.b64encode(buffer.getvalue()).decode()
+        return {'secret': secret, 'provisioning_uri': provisioning_uri, 'qr_code_data_url': qr_code_data_url}
 
     def complete_first_access(self, username: str, password: str, secret: str, otp: str, ip: str | None = None) -> bool:
         self.validate_password(password)

@@ -9,3 +9,4 @@ python-multipart
 pypdf
 pytest
 httpx
+qrcode
