@@ -7,7 +7,7 @@ from core.registry import registry
 from services.docker_service import DockerService
 from services.knowledge import search_knowledge
 from services.marketplace import get_marketplace_catalog
-from services.openai_reasoner import generate_answer, has_openai_enabled
+from services.openai_reasoner import generate_answer, has_llm_enabled
 from services.persistence import persistence
 from services.postgres_store import postgres_store
 from services.qdrant_store import qdrant_store
@@ -79,6 +79,23 @@ def _build_recommendations(question: str, modules: list[str], knowledge_hint: st
     return recommendations
 
 
+@router.post("/conversation/reset")
+def reset_conversation():
+    """Clear only the browser conversation while retaining a learning preference."""
+    recorded = postgres_store.save_insight(
+        signature="conversation-reset-policy",
+        kind="conversation_preference",
+        summary="User cleared the visible chat history; retain operational learnings and insights.",
+        payload={"retain_operational_learning": True, "ui_history_cleared": True},
+    )
+    return {
+        "status": "ok",
+        "ui_history": "cleared",
+        "learning_retained": bool(recorded),
+        "message": "A conversa visual foi limpa. Conhecimento e insights operacionais foram preservados.",
+    }
+
+
 @router.post("/ask")
 def ask(payload: AssistantRequest):
     question = payload.question.lower()
@@ -123,6 +140,9 @@ def ask(payload: AssistantRequest):
         answer = ai_result.get("answer", "")
         if answer:
             append_context = False
+            if any(term in question for term in ("severity", "severidade")):
+                provenance = knowledge_hint or "base de conhecimento consultada, sem evidência adicional"
+                answer = f"{answer}\n\nSeverity · Knowledge/RAG: {provenance}"
             plan_tools = ai_result.get("plan", {}).get("tools", [])
             if plan_tools:
                 recommendations = [f"Planner tools usados: {', '.join(plan_tools)}"]
@@ -141,8 +161,11 @@ def ask(payload: AssistantRequest):
                 "capabilities": capabilities,
                 "recommendations": recommendations,
                 "memory_hits": memory_hits,
-                "llm_enabled": has_openai_enabled(),
+                "llm_enabled": has_llm_enabled(),
                 "planner": ai_result.get("plan", {}),
+                "agent": ai_result.get("context", {}).get("agent", {}),
+                "hypothesis": ai_result.get("context", {}).get("hypothesis", {}),
+                "learning": ai_result.get("learning", {}),
                 "source": "openai-service+context-engine",
             }
     except Exception:
@@ -271,7 +294,7 @@ def ask(payload: AssistantRequest):
         else:
             answer = (
                 "Ainda não há um provedor de IA configurado neste servidor. "
-                "Defina OPENAI_API_KEY (ou outro provedor equivalente) para o SOFIA responder como um chat livre."
+                "Defina ANTHROPIC_API_KEY (ou outro provedor equivalente) para o SOFIA responder como um chat livre."
             )
 
     if append_context and memory_hits:

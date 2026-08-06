@@ -23,7 +23,7 @@ def validate_security():
         },
         "notes": [
             "Use reverse proxy TLS termination for production.",
-            "Keep OPENAI_API_KEY only in environment variables.",
+            "Keep ANTHROPIC_API_KEY and OLLAMA_API_KEY only in environment variables.",
             "Use SECURITY_ADMIN_API_KEY for critical write operations.",
             "Set SECURITY_MFA_TOTP_SECRET to require TOTP as a second factor.",
             "Enable fail2ban/ufw/crowdsec on host edge as defense in depth.",

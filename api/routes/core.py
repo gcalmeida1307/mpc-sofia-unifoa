@@ -20,6 +20,7 @@ def modules():
 @router.get("/kernel")
 def kernel_status():
     scheduler = registry.get("snapshot_scheduler") if registry.has("snapshot_scheduler") else None
+    autonomy = registry.get("autonomy_scheduler") if registry.has("autonomy_scheduler") else None
     return {
         "modules": registry.list_modules(),
         "services": registry.get_snapshot().get("services", []),
@@ -27,6 +28,10 @@ def kernel_status():
         "scheduler": {
             "enabled": scheduler is not None,
             "interval_seconds": getattr(scheduler, "interval_seconds", None),
+        },
+        "autonomy": {
+            "enabled": autonomy is not None,
+            "interval_seconds": getattr(autonomy, "interval_seconds", None),
         },
     }
 

@@ -24,6 +24,13 @@ class SimpleVectorStore:
         self._store.append({"text": text, "metadata": metadata or {}})
         self._save()
 
+    def add_many(self, items: list[tuple[str, dict | None]]):
+        prepared = [{"text": text, "metadata": metadata or {}} for text, metadata in items if text.strip()]
+        if not prepared:
+            return
+        self._store.extend(prepared)
+        self._save()
+
     def search(self, query: str, limit: int = 3):
         q = query.lower()
         scored = []

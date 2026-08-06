@@ -79,6 +79,30 @@ class QdrantStore:
         except Exception:
             return False
 
+    def add_many(self, items: list[tuple[str, dict[str, Any] | None]]) -> bool:
+        if not items:
+            return True
+        if not self._ready and not self.ensure_collection():
+            return False
+        client = self._client_or_none()
+        if client is None:
+            return False
+        try:
+            for start in range(0, len(items), 128):
+                points = [
+                    qmodels.PointStruct(
+                        id=int(sha1((text + str(metadata or {})).encode("utf-8")).hexdigest()[:15], 16),
+                        vector=self._embed(text),
+                        payload={"text": text, **(metadata or {})},
+                    )
+                    for text, metadata in items[start:start + 128] if text.strip()
+                ]
+                if points:
+                    client.upsert(collection_name=self.collection, points=points)
+            return True
+        except Exception:
+            return False
+
     def search(self, query: str, limit: int = 3) -> list[dict[str, Any]]:
         if not query.strip():
             return []

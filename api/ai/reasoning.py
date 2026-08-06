@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+import re
 from typing import Any
 
 
@@ -9,6 +11,7 @@ class ReasoningEngine:
         summary = context.get("summary", {}) if isinstance(context, dict) else {}
         operational = bool(tools)
         risks = context.get("risks", []) if isinstance(context, dict) else []
+        selected_hypothesis = context.get("hypothesis", {}).get("selected_hypothesis") if isinstance(context, dict) else None
 
         objective = "Responder a pergunta com base no contexto consolidado do SOFIA."
         if operational:
@@ -16,16 +19,40 @@ class ReasoningEngine:
 
         deterministic_answer = None
         q = question.lower()
-        if self._looks_like_host_count(q):
+        calculation = self._calculate(q)
+        if calculation is not None:
+            deterministic_answer = calculation
+        elif self._looks_like_active_trigger_count(q):
+            problem_summary = (
+                context.get("snapshot", {}).get("zabbix", {}).get("problem_summary", {})
+                if isinstance(context, dict)
+                else {}
+            )
+            affected_hosts = int(problem_summary.get("affected_hosts", 0) or 0)
+            active_problems = int(problem_summary.get("total_problems", summary.get("problems", 0)) or 0)
+            deterministic_answer = (
+                f"No recorte atual do Zabbix, {affected_hosts} host(s) possuem pelo menos um "
+                f"problema ou trigger ativo, em {active_problems} evento(s) ativo(s). "
+                "Esta e uma contagem de impacto atual, nao do total de triggers configurados."
+            )
+        elif self._looks_like_host_count(q) or "quantos estao no grupo" in q or "quantos estão no grupo" in q:
             host_count = summary.get("hosts", 0)
-            deterministic_answer = f"Voce possui {host_count} host(s) cadastrados no Zabbix."
+            group_name = context.get("tools", {}).get("zabbix.count_hosts", {}).get("group") if isinstance(context, dict) else None
+            if group_name:
+                deterministic_answer = f"O grupo {group_name} possui {host_count} host(s) cadastrados no Zabbix."
+            else:
+                deterministic_answer = f"Voce possui {host_count} host(s) cadastrados no Zabbix."
 
         recommended_actions = self._recommended_actions(summary=summary, risks=risks, operational=operational)
+        if selected_hypothesis:
+            recommended_actions.insert(0, f"Validar a hipotese prioritaria: {selected_hypothesis}.")
         justification = (
             "Plano baseado no snapshot mais recente, trilha de tools executadas e contexto do registry."
             if operational
             else "Plano baseado em conversa geral com fallback seguro quando faltar contexto operacional."
         )
+        if selected_hypothesis:
+            justification = f"{justification} Hipotese inicial selecionada para reduzir tempo de diagnostico."
 
         return {
             "objective": objective,
@@ -70,6 +97,39 @@ class ReasoningEngine:
         if not actions:
             actions.append("Sem riscos operacionais relevantes no momento; manter monitoramento continuo.")
         return actions
+
+    @staticmethod
+    def _calculate(question: str) -> str | None:
+        root = re.search(r"raiz quadrada(?: de| do)?\s*(\d+)", question)
+        if root:
+            value = int(root.group(1))
+            result = math.isqrt(value)
+            if result * result == value:
+                return f"A raiz quadrada de {value} e {result}."
+            return f"A raiz quadrada de {value} e aproximadamente {math.sqrt(value):.6g}."
+
+        expression = re.sub(r"^(quanto e|qual e|calcule)\s*", "", question).rstrip("?. ")
+        if not re.fullmatch(r"[0-9\s+\-*/().]+", expression):
+            return None
+        try:
+            value = eval(expression, {"__builtins__": {}}, {})
+        except Exception:
+            return None
+        if not isinstance(value, (int, float)) or not math.isfinite(value):
+            return None
+        display = int(value) if isinstance(value, float) and value.is_integer() else value
+        return f"O resultado de {expression} e {display}."
+
+    @staticmethod
+    def _looks_like_active_trigger_count(question: str) -> bool:
+        count_terms = ["quantos", "quantas", "quantidade", "total", "numero"]
+        trigger_terms = ["trigger", "triggers", "alerta ativo", "problema ativo"]
+        references = ["host", "hosts", "deles", "delas"]
+        return (
+            any(term in question for term in count_terms)
+            and any(term in question for term in trigger_terms)
+            and any(term in question for term in references)
+        )
 
     @staticmethod
     def _looks_like_host_count(question: str) -> bool:

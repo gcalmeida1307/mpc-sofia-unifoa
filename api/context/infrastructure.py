@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+import re
 from typing import Any
 
+from config.settings import settings
 from connectors.zabbix import ZabbixConnector
 from core.event_bus import event_bus
 from services.docker_service import DockerService
@@ -11,10 +13,13 @@ from services.postgres_store import postgres_store
 
 def _extract_group_name(question: str) -> str | None:
     q = question.lower()
+    prd_match = re.search(r"\bprd\d+(?:-[a-z0-9_ -]+)?", q)
+    if prd_match:
+        return prd_match.group(0).strip()
     if "grupo " not in q:
         return None
     tail = q.split("grupo ", 1)[1]
-    separators = [",", "?", ".", " no zabbix", " agora", " quais"]
+    separators = [",", "?", ".", " no zabbix", " agora", " quais", " possui", " tem", " existem"]
     for sep in separators:
         if sep in tail:
             tail = tail.split(sep, 1)[0]
@@ -23,8 +28,8 @@ def _extract_group_name(question: str) -> str | None:
 
 
 class SnapshotService:
-    def __init__(self, refresh_seconds: int = 30):
-        self.refresh_seconds = refresh_seconds
+    def __init__(self, refresh_seconds: int | None = None):
+        self.refresh_seconds = int(refresh_seconds or settings.SNAPSHOT_INTERVAL_SECONDS)
         self._snapshot: dict[str, Any] | None = None
         self._last_refresh: datetime | None = None
         self._last_down_hosts: set[str] = set()
@@ -72,8 +77,10 @@ class SnapshotService:
 
         try:
             connector = ZabbixConnector()
-            summary = connector.get_problem_summary(limit=200)
-            problems = connector.list_active_problems(limit=200)
+            summary = connector.get_problem_summary(limit=2000)
+            # Persist the same operational universe used by the summary so hourly
+            # comparisons are not distorted by a rotating top-200 window.
+            problems = connector.list_active_problems(limit=2000)
             down_hosts = self._detect_down_hosts(problems)
             group_summary = self._group_problem_summary(problems)
             snapshot["zabbix"] = {
@@ -124,7 +131,7 @@ class SnapshotService:
         docker = snapshot.get("docker", {}) if isinstance(snapshot.get("docker", {}), dict) else {}
         summary = {
             "hosts": zabbix.get("host_count", 0),
-            "problems": len(zabbix.get("problems", []) or []),
+            "problems": int((zabbix.get("problem_summary", {}) or {}).get("total_problems", len(zabbix.get("problems", []) or [])) or 0),
             "containers": docker.get("container_count", 0),
             "groups": len(zabbix.get("group_summary", []) or []),
         }
@@ -144,6 +151,9 @@ class InfrastructureProvider:
         snapshot = self.service.get()
 
         if tool_name == "zabbix.count_hosts":
+            group_name = _extract_group_name(question)
+            if group_name:
+                return {"host_count": ZabbixConnector().count_hosts_in_group(group_name), "group": group_name}
             return {"host_count": snapshot.get("zabbix", {}).get("host_count", 0)}
 
         if tool_name == "zabbix.list_problems":

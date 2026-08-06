@@ -8,7 +8,8 @@ class CapabilityResolver:
         capabilities = list(requested_capabilities)
 
         if intent != "general_chat":
-            for base in ["registry_snapshot", "learning_insights"]:
+            bases = ["registry_snapshot"] if intent == "incident_analysis" else ["registry_snapshot", "learning_insights"]
+            for base in bases:
                 if base not in capabilities:
                     capabilities.append(base)
 
