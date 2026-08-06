@@ -52,15 +52,43 @@ def _training_activity() -> dict[str, Any]:
         with postgres_store._connect() as conn:
             totals = conn.execute("""SELECT count(*), count(*) FILTER (WHERE knowledge_updated),
                 max(created_at) FROM ai_learning_cycles""").fetchone()
-            rows = conn.execute("""SELECT question,intent,knowledge_updated,created_at
-                FROM ai_learning_cycles ORDER BY created_at DESC LIMIT 12""").fetchall()
+            rows = conn.execute("""SELECT intent,knowledge_updated,created_at
+                FROM ai_learning_cycles ORDER BY created_at DESC LIMIT 5""").fetchall()
+        now = datetime.now(timezone.utc)
+        last_at = totals[2]
+        in_progress = bool(last_at and (now - last_at).total_seconds() < 45)
         return {
             "cycles": totals[0], "knowledge_updates": totals[1],
-            "last_training_at": totals[2].isoformat() if totals[2] else None,
-            "recent_prompts": [{"question":r[0][:240],"intent":r[1],"knowledge_updated":r[2],"created_at":r[3].isoformat()} for r in rows],
+            "last_training_at": last_at.isoformat() if last_at else None,
+            "status": "in_progress" if in_progress else "completed" if last_at else "idle",
+            "status_message": "Treinamento em curso" if in_progress else "Treinamento concluído" if last_at else "Aguardando primeiro treinamento",
+            "recent_activity": [{"intent":r[0],"knowledge_updated":r[1],"status":"completed","message":"Treinamento concluído","created_at":r[2].isoformat()} for r in rows],
         }
     except Exception:
-        return {"cycles": 0, "knowledge_updates": 0, "recent_prompts": []}
+        return {"cycles": 0, "knowledge_updates": 0, "status":"idle", "status_message":"Aguardando primeiro treinamento", "recent_activity": []}
+
+
+def _hourly_device_timeline(hours: int = 12) -> list[dict[str, Any]]:
+    try:
+        with postgres_store._connect() as conn:
+            rows = conn.execute("""
+                SELECT date_trunc('hour', generated_at) AS hour,
+                       MAX(COALESCE((summary->>'hosts')::int, 0)) AS devices,
+                       MAX(COALESCE((summary->>'problems')::int, 0)) AS problems,
+                       COUNT(*)::int AS readings
+                FROM infra_snapshots
+                WHERE generated_at >= NOW() - (%s || ' hours')::interval
+                GROUP BY 1 ORDER BY 1
+            """, (str(max(2, min(hours, 48))),)).fetchall()
+        result = []
+        previous = None
+        for hour, devices, problems, readings in rows:
+            delta = 0 if previous is None else int(problems) - previous
+            result.append({"hour":hour.isoformat(),"devices":int(devices),"problems":int(problems),"readings":int(readings),"change":delta})
+            previous = int(problems)
+        return result
+    except Exception:
+        return []
 
 
 def _provider_status() -> list[dict[str, Any]]:
@@ -107,4 +135,5 @@ def dashboard_summary() -> dict[str, Any]:
         ],
         "providers":_provider_status(),
         "training":_training_activity(),
+        "device_timeline":_hourly_device_timeline(),
     }

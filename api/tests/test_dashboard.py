@@ -6,11 +6,13 @@ def test_dashboard_summary_combines_resources_services_and_training(monkeypatch)
     monkeypatch.setattr(dashboard, "_database_details", lambda: {"size_mb":42,"connection_percent":3})
     monkeypatch.setattr(dashboard, "_training_activity", lambda: {"cycles":7,"recent_prompts":[]})
     monkeypatch.setattr(dashboard, "_provider_status", lambda: [{"name":"Claude","status":"operational"}])
+    monkeypatch.setattr(dashboard, "_hourly_device_timeline", lambda: [{"hour":"2026-08-06T08:00:00+00:00","devices":234,"problems":12,"readings":30,"change":0}])
     monkeypatch.setattr(dashboard, "_tcp_status", lambda host,port: "online")
     monkeypatch.setattr(dashboard, "_http_status", lambda url: "online")
     result=dashboard.dashboard_summary()
     assert result["resources"]["database"]["size_mb"]==42
     assert result["training"]["cycles"]==7
+    assert result["device_timeline"][0]["devices"]==234
     assert all(item["status"]=="online" for item in result["services"])
 
 

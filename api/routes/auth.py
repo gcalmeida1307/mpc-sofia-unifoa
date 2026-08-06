@@ -134,5 +134,5 @@ def revoke_sessions(user_id: int, request: Request):
     require_admin(request); return {'revoked':auth_service.revoke_user_sessions(user_id)}
 
 @router.get('/admin/audit')
-def audit(request: Request):
-    require_admin(request); return {'entries':auth_service.audit_entries()}
+def audit(request: Request, limit: int = 5):
+    require_admin(request); return {'entries':auth_service.audit_entries(limit=max(1,min(limit,5)))}
