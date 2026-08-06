@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import json
+import re
+
 import requests
 from config.settings import settings
 
 
-class OpenAIResponsesClient:
+class ReasoningProvider:
     def __init__(self):
         self.anthropic_api_key = settings.ANTHROPIC_API_KEY.strip()
         self.anthropic_model = settings.ANTHROPIC_MODEL
@@ -24,6 +27,9 @@ class OpenAIResponsesClient:
         return bool(self.anthropic_api_key) or bool(self.ollama_base_url and self.ollama_model)
 
     def ask(self, messages: list[dict]) -> dict | None:
+        return self.reason(messages)
+
+    def reason(self, messages: list[dict]) -> dict | None:
         if not messages:
             return None
 
@@ -36,6 +42,43 @@ class OpenAIResponsesClient:
             return result
 
         return None
+
+    def interpret(self, *, question: str, schema: dict, examples: list[dict]) -> dict | None:
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    "Você é o gateway semântico da SOFIA. Converta a pergunta somente em um objeto JSON "
+                    "compatível com o schema fornecido. Não inclua markdown, explicações, comandos, SQL ou campos extras. "
+                    "Não invente nomes: use null e ambiguities quando a pergunta não informar algo."
+                ),
+            },
+            {"role": "developer", "content": json.dumps({"schema": schema, "examples": examples}, ensure_ascii=False)},
+            {"role": "user", "content": question},
+        ]
+        result = self.reason(messages)
+        if not result or not result.get("text"):
+            return None
+        parsed = self._parse_json_object(str(result["text"]))
+        return {"data": parsed, "provider": result.get("provider", "unknown"), "usage": result.get("usage", {})} if parsed else None
+
+    def summarize(self, content: str) -> dict | None:
+        return self.reason([{"role":"system","content":"Resuma objetivamente, preservando fatos e incertezas."},{"role":"user","content":content}])
+
+    def criticize(self, content: str) -> dict | None:
+        return self.reason([{"role":"system","content":"Revise precisão, evidências e riscos. Não invente fatos."},{"role":"user","content":content}])
+
+    @staticmethod
+    def _parse_json_object(text: str) -> dict | None:
+        value = text.strip()
+        fenced = re.fullmatch(r"```(?:json)?\s*(\{.*\})\s*```", value, flags=re.DOTALL | re.IGNORECASE)
+        if fenced:
+            value = fenced.group(1)
+        try:
+            parsed = json.loads(value)
+        except (json.JSONDecodeError, TypeError):
+            return None
+        return parsed if isinstance(parsed, dict) else None
 
     def _ask_anthropic(self, messages: list[dict]) -> dict | None:
         if not self.anthropic_api_key:
@@ -175,3 +218,7 @@ class OpenAIResponsesClient:
             "role": role,
             "content": item.get("content", ""),
         }
+
+
+# Compatibility for integrations that still import the former vendor-shaped name.
+OpenAIResponsesClient = ReasoningProvider
