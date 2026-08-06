@@ -29,15 +29,15 @@ class ReasoningProvider:
     def ask(self, messages: list[dict]) -> dict | None:
         return self.reason(messages)
 
-    def reason(self, messages: list[dict]) -> dict | None:
+    def reason(self, messages: list[dict], *, max_tokens: int | None = None) -> dict | None:
         if not messages:
             return None
 
-        result = self._ask_anthropic(messages)
+        result = self._ask_anthropic(messages, max_tokens=max_tokens) if max_tokens else self._ask_anthropic(messages)
         if result and result.get("text"):
             return result
 
-        result = self._ask_ollama(messages)
+        result = self._ask_ollama(messages, max_tokens=max_tokens) if max_tokens else self._ask_ollama(messages)
         if result and result.get("text"):
             return result
 
@@ -56,7 +56,7 @@ class ReasoningProvider:
             {"role": "developer", "content": json.dumps({"schema": schema, "examples": examples}, ensure_ascii=False)},
             {"role": "user", "content": question},
         ]
-        result = self.reason(messages)
+        result = self.reason(messages, max_tokens=512)
         if not result or not result.get("text"):
             return None
         parsed = self._parse_json_object(str(result["text"]))
@@ -80,13 +80,13 @@ class ReasoningProvider:
             return None
         return parsed if isinstance(parsed, dict) else None
 
-    def _ask_anthropic(self, messages: list[dict]) -> dict | None:
+    def _ask_anthropic(self, messages: list[dict], max_tokens: int | None = None) -> dict | None:
         if not self.anthropic_api_key:
             return None
         system = "\n\n".join(str(item.get("content", "")) for item in messages if item.get("role") in {"system", "developer"})
         payload = {
             "model": self.anthropic_model,
-            "max_tokens": self.anthropic_max_tokens,
+            "max_tokens": min(self.anthropic_max_tokens, max_tokens) if max_tokens else self.anthropic_max_tokens,
             "cache_control": {"type": "ephemeral"},
             "messages": [self._normalize_message_for_ollama(item) for item in messages if item.get("role") not in {"system", "developer"}],
         }
@@ -112,25 +112,25 @@ class ReasoningProvider:
             self.last_anthropic_error = "unavailable"
             return None
 
-    def _ask_ollama(self, messages: list[dict]) -> dict | None:
+    def _ask_ollama(self, messages: list[dict], max_tokens: int | None = None) -> dict | None:
         if not self.ollama_base_url or not self.ollama_model:
             return None
 
         primary_timeout = min(self.request_timeout, 10)
         fallback_timeout = min(self.request_timeout, 10)
 
-        result = self._ask_ollama_with_model(messages=messages, model=self.ollama_model, timeout=primary_timeout)
+        result = self._ask_ollama_with_model(messages=messages, model=self.ollama_model, timeout=primary_timeout, max_tokens=max_tokens)
         if result and result.get("text"):
             return result
 
         if self.ollama_fallback_model and self.ollama_fallback_model != self.ollama_model:
-            result = self._ask_ollama_with_model(messages=messages, model=self.ollama_fallback_model, timeout=fallback_timeout)
+            result = self._ask_ollama_with_model(messages=messages, model=self.ollama_fallback_model, timeout=fallback_timeout, max_tokens=max_tokens)
             if result and result.get("text"):
                 return result
 
         return None
 
-    def _ask_ollama_with_model(self, messages: list[dict], model: str, timeout: int) -> dict | None:
+    def _ask_ollama_with_model(self, messages: list[dict], model: str, timeout: int, max_tokens: int | None = None) -> dict | None:
         if not model:
             return None
 
@@ -144,7 +144,7 @@ class ReasoningProvider:
                     "model": model,
                     "messages": [self._normalize_message_for_ollama(item) for item in messages],
                     "temperature": 0.2,
-                    "max_tokens": 48,
+                    "max_tokens": max_tokens or 48,
                 }
                 response = requests.post(
                     f"{self.ollama_base_url}/v1/chat/completions",
@@ -171,7 +171,7 @@ class ReasoningProvider:
                 "stream": False,
                 "options": {
                     "temperature": 0.2,
-                    "num_predict": 48,
+                    "num_predict": max_tokens or 48,
                 },
             }
             response = requests.post(
