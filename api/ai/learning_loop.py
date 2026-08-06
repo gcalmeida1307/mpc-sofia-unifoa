@@ -21,6 +21,7 @@ class LearningLoop:
         answer: str,
         hypothesis: dict[str, Any],
         agent: dict[str, Any],
+        semantic_query: dict[str, Any],
     ) -> dict[str, Any]:
         decision = {
             "intent": plan.get("intent", "unknown"),
@@ -30,6 +31,9 @@ class LearningLoop:
             "selected_hypothesis": hypothesis.get("selected_hypothesis"),
             "critic_approved": bool(critic.get("approved", False)),
             "confidence": float(critic.get("confidence", 0.0) or 0.0),
+            "semantic_query": semantic_query,
+            "validated_query": semantic_query,
+            "plan": plan,
         }
         evidence = context.get("evidence", []) if isinstance(context.get("evidence", []), list) else []
 
@@ -47,6 +51,7 @@ class LearningLoop:
         )
 
         outcome = {
+            "result": answer,
             "answer_preview": answer[:400],
             "insight_summary": insight_summary,
             "hypothesis_confidence": hypothesis.get("confidence", 0.0),
@@ -59,7 +64,7 @@ class LearningLoop:
             evidence=evidence,
             outcome=outcome,
             knowledge_updated=knowledge_updated,
-            metadata={"reused": reused, "signature": signature},
+            metadata={"reused": reused, "signature": signature, "feedback": None, "correction": None},
         )
 
         postgres_store.save_insight(

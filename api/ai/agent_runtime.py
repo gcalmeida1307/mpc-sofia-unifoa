@@ -81,16 +81,19 @@ AGENT_CATALOG: list[dict[str, Any]] = [
 
 class AgentRuntime:
     def resolve(self, question: str, plan: dict[str, Any]) -> dict[str, Any]:
-        q = question.lower()
         intent = str(plan.get("intent", "")).lower()
+        semantic = plan.get("semantic_query", {}) if isinstance(plan.get("semantic_query"), dict) else {}
+        domain = str(semantic.get("domain") or plan.get("domain") or "general").lower()
 
-        if any(token in q for token in ["vpn", "firewall", "auth", "security"]):
+        if domain == "security":
             return self._by_key("security")
-        if any(token in q for token in ["switch", "network", "link", "stp", "crc"]):
+        if domain == "network":
             return self._by_key("network")
-        if any(token in q for token in ["cpu", "memory", "disk", "capacity", "latency"]):
-            return self._by_key("database") if "db" in q else self._by_key("infrastructure")
-        if any(token in q for token in ["n8n", "workflow", "automacao", "automacao"]):
+        if domain == "database":
+            return self._by_key("database")
+        if domain == "infrastructure":
+            return self._by_key("infrastructure")
+        if domain == "automation" or intent == "workflow_lookup":
             return self._by_key("automation")
         if any(token in intent for token in ["incident", "host", "docker"]):
             return self._by_key("operations")

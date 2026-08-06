@@ -159,6 +159,12 @@ class HypothesisEngine:
 
     @staticmethod
     def _infer_domain(question: str, plan: dict[str, Any]) -> str:
+        semantic = plan.get("semantic_query", {}) if isinstance(plan.get("semantic_query"), dict) else {}
+        semantic_domain = str(semantic.get("domain") or plan.get("domain") or "").lower()
+        if semantic_domain in {"network", "security"}:
+            return semantic_domain
+        if semantic_domain in {"capacity", "database", "infrastructure"}:
+            return "capacity" if str(semantic.get("metric", "none")) in {"cpu", "memory", "disk", "latency"} else "general"
         q = question.lower()
         intent = str(plan.get("intent", "")).lower()
 

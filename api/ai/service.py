@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from time import perf_counter
 
 from ai.agent_runtime import agent_runtime
-from ai.client import OpenAIResponsesClient
+from ai.client import ReasoningProvider
 from ai.critic import critic_engine
 from ai.hypothesis import hypothesis_engine
 from ai.learning_loop import learning_loop
@@ -17,11 +17,14 @@ from context.builder import context_builder
 from core.event_bus import event_bus
 from services.postgres_store import postgres_store
 from services.openai_reasoner import has_llm_enabled
+from semantic.interpreter import SemanticGateway
+from semantic.models import SemanticQuery
 
 
 class OpenAIService:
     def __init__(self):
-        self.client = OpenAIResponsesClient()
+        self.client = ReasoningProvider()
+        self.semantic_gateway = SemanticGateway(self.client)
 
     @staticmethod
     def _build_explainability(question: str, plan: dict, context: dict, reasoning: dict, critic: dict) -> dict:
@@ -109,13 +112,14 @@ class OpenAIService:
             "risk": risks[:2],
         }
 
-    def answer(self, question: str) -> dict:
+    def answer(self, question: str, semantic_query: SemanticQuery | None = None) -> dict:
         start = perf_counter()
         event_bus.publish_sync(
             "ai.question.received",
             {"question": question, "generated_at": datetime.now(timezone.utc).isoformat()},
         )
-        plan = build_plan(question)
+        semantic_query = semantic_query or self.semantic_gateway.interpret(question)
+        plan = build_plan(question, semantic_query)
         agent = agent_runtime.resolve(question=question, plan=plan)
         context = context_builder.build(question, plan, agent=agent)
         hypothesis = hypothesis_engine.build(question=question, plan=plan, context=context)
@@ -157,7 +161,7 @@ class OpenAIService:
                 {"role": "user", "content": question},
             ]
 
-            llm_result = self.client.ask(messages)
+            llm_result = self.client.reason(messages)
             if llm_result and llm_result.get("text"):
                 candidate_answer = str(llm_result.get("text", "")).strip()
                 usage = llm_result.get("usage", {}) if isinstance(llm_result.get("usage", {}), dict) else {}
@@ -228,6 +232,7 @@ class OpenAIService:
             answer=final_answer,
             hypothesis=hypothesis,
             agent=agent,
+            semantic_query=semantic_query.model_dump(mode="json"),
         )
 
         result = AIAnswerModel(

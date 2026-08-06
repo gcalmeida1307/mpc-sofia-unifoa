@@ -5,8 +5,10 @@ from pydantic import BaseModel, Field
 
 class PlanModel(BaseModel):
     intent: str
+    domain: str = "general"
     capabilities: list[str] = Field(default_factory=list)
     tools: list[str] = Field(default_factory=list)
+    semantic_query: dict = Field(default_factory=dict)
     needs_llm_reasoning: bool = True
 
 
