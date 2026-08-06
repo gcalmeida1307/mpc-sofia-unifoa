@@ -1,6 +1,7 @@
 import pytest
 
 from services.automation_graph import AutomationGraphStore, CONNECTOR_CATALOG
+from semantic.fallback import deterministic_interpret
 
 
 def test_connector_catalog_distinguishes_active_and_unconfigured():
@@ -63,8 +64,9 @@ def test_zabbix_execution_returns_all_related_switches(monkeypatch):
         {"name": "Unavailable by ICMP ping", "severity_label": "High", "hosts": ["switch-a"], "groups": ["Switches"]},
         {"name": "Unavailable by ICMP ping", "severity_label": "High", "hosts": ["switch-b"], "groups": ["Switches"]},
     ]
-    connector = type("Connector", (), {"list_active_problems": lambda self, limit: problems})()
+    connector = type("Connector", (), {"list_active_problems": lambda self, limit, group_name=None: problems})()
     monkeypatch.setattr("services.automation_graph.ZabbixConnector", lambda: connector)
+    monkeypatch.setattr("services.automation_graph.semantic_gateway.interpret", deterministic_interpret)
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
     result = AutomationGraphStore._execute_connector(
@@ -104,6 +106,7 @@ def test_historical_switch_flow_uses_event_history_and_group_filter(monkeypatch)
             assert limit == 2000 and group_name == 'Switches'
             return events
     monkeypatch.setattr("services.automation_graph.ZabbixConnector", Connector)
+    monkeypatch.setattr("services.automation_graph.semantic_gateway.interpret", deterministic_interpret)
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
     result = AutomationGraphStore._execute_connector(

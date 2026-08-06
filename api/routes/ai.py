@@ -4,8 +4,8 @@ from pydantic import BaseModel, Field
 from ai.service import openai_service
 from ai.domain_policy import OUT_OF_SCOPE_MESSAGE, is_it_question
 from services.postgres_store import postgres_store
-from connectors.zabbix import ZabbixConnector
-from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_group, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
+from semantic.executor import execute_zabbix_query
+from semantic.interpreter import semantic_gateway
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
@@ -32,46 +32,37 @@ def ask(payload: AIAskRequest):
         }
 
     postgres_store.add_message("user", payload.question, {"channel": "ai", "purpose": "training"})
-
-    days = historical_trigger_window(payload.question)
-    if days:
-        try:
-            group_name, entity_label = historical_trigger_group(payload.question)
-            connector = ZabbixConnector()
-            events = connector.list_trigger_events(days=days, limit=5000, group_name=group_name)
-            active_now = connector.list_active_problems(limit=2000, group_name=group_name)
-            related = events
-            affected_hosts = unique_affected_hosts(related)
-            answer = format_historical_triggers(related, len(events), days, entity_label, active_now)
-            postgres_store.add_message('assistant', answer, {'channel':'ai','purpose':'training','source':'zabbix_historical_local'})
-            return {'answer':answer,'plan':{'intent':'historical_triggers','tools':['zabbix.event.get']},
-                'reasoning':{'mode':'local_historical_correlation'},'critic':{'approved':True,'provider':'local'},
-                'llm_provider':'none','confidence':1.0,'explainability':{'domain':'information_technology','evidence_source':'zabbix','days':days},
-                'learning':{'stored':True,'reused':False},'llm_used':False,
-                'context':{'total_event_count':len(events),'related_event_count':len(related),'unique_host_count':len(affected_hosts)},
-                'source':'zabbix-historical-correlation'}
-        except Exception:
-            pass
-
-    if wants_related_alarm_list(payload.question):
-        try:
-            active = ZabbixConnector().list_active_problems(limit=2000)
-            related = related_problems(payload.question, active)
-            affected_hosts = unique_affected_hosts(related)
-            answer = format_related_problems(related, len(active), payload.question)
-            postgres_store.add_message('assistant', answer, {'channel':'ai','purpose':'training','source':'zabbix_related_local'})
+    semantic = semantic_gateway.interpret(payload.question)
+    try:
+        execution = execute_zabbix_query(semantic, payload.question)
+        if execution:
+            answer = execution["answer"]
+            semantic_data = semantic.model_dump(mode="json")
+            plan_data = {"intent":semantic.intent,"domain":semantic.domain,"semantic_query":semantic_data,"tools":["zabbix.event.get" if execution["days"] else "zabbix.list_problems"]}
+            postgres_store.save_learning_cycle(
+                question=payload.question, intent=semantic.intent,
+                decision={"semantic_query":semantic_data,"validated_query":semantic_data,"plan":plan_data},
+                evidence=[{"source":"zabbix","group":execution["group"],"matches":len(execution["matches"])}],
+                outcome={"result":answer,"unique_host_count":len(execution["hosts"])},
+                knowledge_updated=False,
+                metadata={"feedback":None,"correction":None,"interpretation_source":semantic.interpretation_source},
+            )
+            postgres_store.add_message("assistant", answer, {"channel":"ai","purpose":"training","source":"semantic_zabbix"})
             return {
-                'answer':answer,'plan':{'intent':'related_active_alarms','tools':['zabbix.list_problems']},
-                'reasoning':{'mode':'local_operational_correlation'},'critic':{'approved':True,'provider':'local'},
-                'llm_provider':'none','confidence':1.0,'explainability':{'domain':'information_technology','evidence_source':'zabbix','related_count':len(related)},
-                'learning':{'stored':True,'reused':False},'llm_used':False,'context':{'active_problem_count':len(active),'related_problem_count':len(related),'unique_host_count':len(affected_hosts)},
-                'source':'zabbix-local-correlation',
+                "answer":answer,
+                "plan":plan_data,
+                "reasoning":{"mode":"validated_semantic_execution"},"critic":{"approved":True,"provider":"local"},
+                "llm_provider":semantic.interpretation_source,"confidence":semantic.confidence,
+                "explainability":{"domain":semantic.domain,"evidence_source":"zabbix","semantic_query":semantic_data},
+                "learning":{"stored":True,"semantic_query":semantic_data},"llm_used":semantic.interpretation_source in {"anthropic","ollama"},
+                "context":{"related_problem_count":len(execution["matches"]),"unique_host_count":len(execution["hosts"]),"group":execution["group"],"days":execution["days"]},
+                "source":"semantic-zabbix",
             }
-        except Exception:
-            pass
+    except Exception:
+        pass
     # Knowledge remains part of the context pipeline. Do not short-circuit operational
     # or conceptual questions with a merely similar document fragment.
-    result = openai_service.answer(payload.question)
+    result = openai_service.answer(payload.question, semantic_query=semantic)
     answer = result.get("answer", "")
     postgres_store.add_message(
         "assistant", answer,

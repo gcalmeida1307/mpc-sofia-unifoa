@@ -3,6 +3,7 @@ from unittest.mock import Mock
 from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_group, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
 from ai.planner import build_plan
 from routes import ai
+from semantic.fallback import deterministic_interpret
 
 
 PROBLEMS = [
@@ -34,11 +35,12 @@ def test_ai_route_returns_all_related_alarms_without_external_llm(monkeypatch):
     connector.list_active_problems.return_value = PROBLEMS
     service = Mock()
     store = Mock()
-    monkeypatch.setattr(ai, "ZabbixConnector", lambda: connector)
+    monkeypatch.setattr("semantic.executor.ZabbixConnector", lambda: connector)
+    monkeypatch.setattr(ai.semantic_gateway, "interpret", deterministic_interpret)
     monkeypatch.setattr(ai, "openai_service", service)
     monkeypatch.setattr(ai, "postgres_store", store)
     response = ai.ask(ai.AIAskRequest(question="Quais switches não respondem ao ping ICMP?"))
-    assert response["source"] == "zabbix-local-correlation"
+    assert response["source"] == "semantic-zabbix"
     assert "switch-a" in response["answer"] and "switch-b" in response["answer"]
     assert response["context"]["related_problem_count"] == 2
     service.answer.assert_not_called()

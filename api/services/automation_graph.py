@@ -8,7 +8,9 @@ from datetime import datetime, timezone
 from psycopg.types.json import Jsonb
 
 from config.settings import settings
-from ai.operational_query import format_historical_triggers, format_related_problems, historical_trigger_group, historical_trigger_window, related_problems, unique_affected_hosts, wants_related_alarm_list
+from semantic.executor import execute_zabbix_query
+from semantic.interpreter import semantic_gateway
+from zabbix.aggregation import unique_affected_hosts
 from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
 from services.postgres_store import postgres_store
@@ -177,23 +179,17 @@ class AutomationGraphStore:
         if connector_type=='trigger':
             return {'summary':f'Entrada recebida: {input_text}','data':{'input':input_text}}
         if connector_type=='zabbix':
-            connector=ZabbixConnector();days=historical_trigger_window(input_text)
-            if days:
-                group_name,entity_label=historical_trigger_group(input_text)
-                universe=connector.list_trigger_events(days=days,limit=5000,group_name=group_name)
-                active_now=connector.list_active_problems(limit=2000,group_name=group_name)
-                matches=universe
-                summary=format_historical_triggers(matches,len(universe),days,entity_label,active_now)
-                scope={'query_scope':'historical_triggers','days':days,'group_filter':group_name,
-                    'entity_label':entity_label,'total_event_count':len(universe),'active_now_count':len(active_now),
-                    'active_now_host_count':len(unique_affected_hosts(active_now)),
-                    'critical_active_count':sum(1 for item in active_now if int(item.get('severity',0) or 0)>=4),
-                    'critical_active_host_count':len(unique_affected_hosts([item for item in active_now if int(item.get('severity',0) or 0)>=4]))}
-            else:
-                universe=connector.list_active_problems(limit=2000)
-                matches=related_problems(input_text,universe) if wants_related_alarm_list(input_text) else universe[:20]
-                summary=format_related_problems(matches,len(universe),input_text)
-                scope={'query_scope':'active_problems','active_problem_count':len(universe)}
+            semantic=semantic_gateway.interpret(input_text)
+            execution=execute_zabbix_query(semantic,input_text,ZabbixConnector())
+            if not execution:
+                return {'summary':'A pergunta não resultou em uma consulta Zabbix validada. Informe entidade, métrica e período.','data':{'semantic_query':semantic.model_dump(mode='json')}}
+            matches=execution['matches'];summary=execution['answer'];active_now=execution['active']
+            query_scope='historical_triggers' if execution['intent']=='historical_trigger_summary' else 'active_problems'
+            scope={'query_scope':query_scope,'days':execution['days'],'group_filter':execution['group'],
+                'semantic_query':semantic.model_dump(mode='json'),'active_now_count':len(active_now),
+                'active_now_host_count':len(unique_affected_hosts(active_now)),
+                'critical_active_count':sum(1 for item in active_now if int(item.get('severity',0) or 0)>=4),
+                'critical_active_host_count':len(unique_affected_hosts([item for item in active_now if int(item.get('severity',0) or 0)>=4]))}
             affected_hosts=unique_affected_hosts(matches)
             analysis=AutomationGraphStore._zabbix_analysis(matches)
             return {

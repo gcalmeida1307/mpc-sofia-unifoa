@@ -2,6 +2,7 @@ from unittest.mock import Mock
 
 from ai.domain_policy import OUT_OF_SCOPE_MESSAGE, is_it_question
 from routes import ai
+from semantic.fallback import deterministic_interpret
 
 
 def test_domain_policy_accepts_information_technology_topics():
@@ -36,6 +37,7 @@ def test_similar_offline_fragment_does_not_short_circuit_chat(monkeypatch):
     service.answer.return_value={'answer':'DNS traduz nomes para enderecos IP.','learning':{},'plan':{},'reasoning':{},'critic':{},'confidence':0.8,'explainability':{},'context':{},'llm_used':True}
     monkeypatch.setattr(ai,'openai_service',service)
     monkeypatch.setattr(ai,'postgres_store',store)
+    monkeypatch.setattr(ai.semantic_gateway,'interpret',deterministic_interpret)
     response=ai.ask(ai.AIAskRequest(question='Como funciona o DNS?'))
     assert response['source']=='claude-learning-pipeline'
     assert 'DNS traduz' in response['answer']
