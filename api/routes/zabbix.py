@@ -2,12 +2,24 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from connectors.zabbix import ZabbixConnector
+from services.zabbix_investigator import zabbix_investigator
 
 router = APIRouter(prefix="/zabbix", tags=["Zabbix"])
 
 
 class GroupCreateRequest(BaseModel):
     name: str = Field(min_length=2, max_length=255)
+
+class InvestigationRequest(BaseModel):
+    question: str = Field(min_length=3,max_length=1000)
+    hours: int = Field(default=2,ge=1,le=24)
+    recurrence_days: int = Field(default=7,ge=1,le=30)
+    max_problems: int = Field(default=20,ge=1,le=50)
+
+@router.post("/investigate")
+def investigate(payload: InvestigationRequest):
+    try:return zabbix_investigator.investigate(payload.question,hours=payload.hours,recurrence_days=payload.recurrence_days,max_problems=payload.max_problems)
+    except Exception as exc:raise HTTPException(status_code=502,detail=f"Falha na investigação Zabbix: {exc}") from exc
 
 
 @router.get("/groups")

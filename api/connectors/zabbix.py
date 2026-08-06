@@ -30,6 +30,72 @@ class ZabbixConnector:
         self.token = data["result"]
         return self.token
 
+    def _api_call(self, method: str, params: dict, request_id: int = 90):
+        if not self.token:
+            self.login()
+        payload = {"jsonrpc":"2.0","method":method,"params":params,"auth":self.token,"id":request_id}
+        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
+        response.raise_for_status();data=response.json()
+        if "error" in data:
+            raise Exception(data["error"])
+        return data.get("result", [])
+
+    def get_trigger_diagnostics(self, trigger_ids: list[str]) -> dict[str, dict]:
+        if not trigger_ids:
+            return {}
+        rows=self._api_call("trigger.get", {
+            "triggerids":sorted(set(trigger_ids)),
+            "output":["triggerid","description","expression","priority","status","state","value","lastchange","opdata","comments","url"],
+            "selectFunctions":["itemid","function","parameter"],
+            "selectDependencies":["triggerid","description","status","value"],
+            "selectHosts":["hostid","host","name"],
+            "selectTags":["tag","value"],
+        },91)
+        return {str(row.get("triggerid")):row for row in rows}
+
+    def get_items(self, item_ids: list[str]) -> dict[str, dict]:
+        if not item_ids:
+            return {}
+        rows=self._api_call("item.get", {
+            "itemids":sorted(set(item_ids)),
+            "output":["itemid","hostid","name","key_","lastvalue","prevvalue","lastclock","units","value_type","status","state","error","delay","history","trends"],
+            "selectHosts":["hostid","host","name"],
+            "selectValueMap":["mappings"],
+        },92)
+        return {str(row.get("itemid")):row for row in rows}
+
+    def search_items(self, host_ids: list[str], text: str, limit: int = 100) -> list[dict]:
+        if not host_ids or not text.strip():
+            return []
+        return self._api_call("item.get", {"hostids":sorted(set(host_ids)),"output":["itemid","hostid","name","key_","lastvalue","prevvalue","lastclock","units","value_type","status","state","error"],"search":{"name":text.strip(),"key_":text.strip()},"searchByAny":True,"sortfield":"name","limit":max(1,min(limit,300))},99)
+
+    def get_item_history(self, items: list[dict], *, hours: int = 2, limit: int = 1200) -> dict[str, list[dict]]:
+        grouped: dict[int,list[str]]={}
+        for item in items:
+            grouped.setdefault(int(item.get("value_type",0) or 0),[]).append(str(item.get("itemid")))
+        result: dict[str,list[dict]]={}
+        time_from=int((datetime.now(timezone.utc)-timedelta(hours=max(1,min(hours,24)))).timestamp())
+        for value_type,itemids in grouped.items():
+            rows=self._api_call("history.get", {"history":value_type,"itemids":itemids,"time_from":time_from,"sortfield":"clock","sortorder":"ASC","limit":limit,"output":"extend"},93+value_type)
+            for row in rows:
+                result.setdefault(str(row.get("itemid")),[]).append({"clock":row.get("clock"),"value":row.get("value"),"ns":row.get("ns")})
+        return result
+
+    def get_host_diagnostics(self, host_ids: list[str]) -> dict[str, dict]:
+        if not host_ids:
+            return {}
+        rows=self._api_call("host.get", {"hostids":sorted(set(host_ids)),"output":["hostid","host","name","status","description"],"selectInterfaces":["interfaceid","type","ip","dns","port","main","available","error"],"selectInventory":"extend","selectParentTemplates":["templateid","name"],"selectTags":["tag","value"]},100)
+        return {str(row.get("hostid")):row for row in rows}
+
+    def count_trigger_recurrence(self, trigger_ids: list[str], days: int = 7) -> dict[str, int]:
+        if not trigger_ids:
+            return {}
+        rows=self._api_call("event.get", {"source":0,"object":0,"objectids":sorted(set(trigger_ids)),"value":1,"time_from":int((datetime.now(timezone.utc)-timedelta(days=max(1,min(days,30)))).timestamp()),"output":["objectid"],"limit":10000},110)
+        counts: dict[str,int]={}
+        for row in rows:
+            key=str(row.get("objectid"));counts[key]=counts.get(key,0)+1
+        return counts
+
     def get_hosts(self, groupids: list[str] | None = None):
         if not self.token:
             self.login()
@@ -282,6 +348,7 @@ class ZabbixConnector:
             enriched.append(
                 {
                     "eventid": problem.get("eventid"),
+                    "objectid": problem.get("objectid"),
                     "name": problem.get("name"),
                     "severity": severity,
                     "severity_label": severity_map.get(severity, severity),
