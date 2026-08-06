@@ -29,7 +29,10 @@ class ContextBuilder:
         insights = tools_output.get("learning.insights", {}) if isinstance(tools_output.get("learning.insights", {}), dict) else {}
         knowledge = tools_output.get("knowledge.search", {}).get("results", [])
         history = postgres_store.get_recent_messages(limit=8)
-        temporal_groups_30d = postgres_store.get_group_trends(days=30, limit=10)
+        # Deep investigations already carry scoped live evidence. The historical
+        # cross-snapshot aggregation is expensive and unrelated to the immediate
+        # trigger → item → history chain.
+        temporal_groups_30d = [] if plan.get("intent") == "incident_analysis" else postgres_store.get_group_trends(days=30, limit=10)
 
         risk_level = "low"
         if isinstance(problems, list) and len(problems) >= 30:

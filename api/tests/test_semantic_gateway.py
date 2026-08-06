@@ -46,3 +46,12 @@ def test_agent_selection_uses_semantic_domain_not_raw_keyword():
     semantic = deterministic_interpret("Quantos switches tiveram triggers nos últimos 7 dias?")
     plan = build_plan("texto sem palavras de rede", semantic)
     assert agent_runtime.resolve("texto sem palavras de rede", plan)["key"] == "network"
+
+
+def test_resolution_request_routes_to_read_only_investigator():
+    from core.bootstrap import bootstrap_registry
+    bootstrap_registry()
+    semantic=deterministic_interpret("Como resolvo um enlace indisponível?")
+    plan=build_plan("Como resolvo um enlace indisponível?",semantic)
+    assert semantic.intent=="incident_analysis" and semantic.domain=="network"
+    assert "zabbix.investigate" in plan["tools"]

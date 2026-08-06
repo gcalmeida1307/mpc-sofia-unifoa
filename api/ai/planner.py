@@ -15,7 +15,7 @@ INTENT_CAPABILITIES: dict[str, list[str]] = {
     "network_investigation": ["network_investigation", "incident_analysis"],
     "security_investigation": ["security_investigation", "knowledge_lookup"],
     "capacity_investigation": ["capacity_investigation", "incident_analysis"],
-    "incident_analysis": ["host_analysis", "incident_analysis"],
+    "incident_analysis": ["incident_analysis"],
     "docker_action": ["docker_restart"],
     "docker_observe": ["docker_observe"],
     "marketplace": ["marketplace_browse"],

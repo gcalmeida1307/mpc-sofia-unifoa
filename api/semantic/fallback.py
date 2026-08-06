@@ -41,13 +41,20 @@ def deterministic_interpret(question: str) -> SemanticQuery:
         if any(term in f" {q} " for term in terms):
             entity_type, entity_name, domain = candidate_type, candidate_name, candidate_domain
             break
+    if domain == "general" and any(term in q for term in ("enlace", "porta", "interface", "rede", "vlan", "icmp")):
+        domain = "network"
+    elif domain == "general" and any(term in q for term in ("cpu", "memoria", "disco", "storage", "servico", "processo", "sistema operacional")):
+        domain = "infrastructure"
 
     days = _days(q)
     trigger = any(term in q for term in ("trigger", "alerta", "alarme", "problema", "icmp", "ping", "nao respond", "indispon"))
     active = any(term in q for term in ("ativo", "agora", "neste momento", "atual"))
     count = any(term in q for term in ("quantos", "quantas", "quantidade", "total"))
+    investigation = any(term in q for term in ("como resolvo", "como tratar", "investigue", "investigar", "diagnostico", "causa", "por que"))
 
-    if trigger and days:
+    if investigation and any(term in q for term in ("enlace", "porta", "interface", "switch", "firewall", "servidor", "cpu", "memoria", "disco", "storage", "servico", "processo", "zabbix")):
+        intent, source, metric, state, group_by = "incident_analysis", "zabbix", "active_problems", "active", "host"
+    elif trigger and days:
         intent, source, metric, state, group_by = "historical_trigger_summary", "zabbix", "trigger_count", "historical", "host"
     elif trigger:
         intent, source, metric, state, group_by = "active_trigger_summary", "zabbix", "active_problems", "active" if active else "current", "host"

@@ -18,7 +18,8 @@ class CriticEngine:
                 issues.append("Resposta de contagem de hosts sem o total esperado")
                 revised_answer = f"Voce possui {expected} host(s) cadastrados no Zabbix."
 
-        if plan.get("tools") and len(answer) > 1800:
+        max_operational_length = 12000 if plan.get("intent") == "incident_analysis" and "zabbix.investigate" in plan.get("tools", []) else 1800
+        if plan.get("tools") and len(answer) > max_operational_length:
             issues.append("Resposta operacional excessivamente longa")
 
         if "acessar" in answer.lower() and "diretamente" in answer.lower() and "zabbix" in answer.lower():

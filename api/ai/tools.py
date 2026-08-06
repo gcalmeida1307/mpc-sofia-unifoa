@@ -11,6 +11,7 @@ from services.mcp_server import mcp_server
 from services.postgres_store import postgres_store
 from services.marketplace import get_marketplace_catalog
 from services.workflows import list_n8n_templates
+from services.zabbix_investigator import zabbix_investigator
 
 
 class ToolExecutor:
@@ -44,6 +45,8 @@ class ToolExecutor:
 
         if tool_name in {"zabbix.count_hosts", "zabbix.list_problems", "docker.list_containers", "docker.restart_container"}:
             return infrastructure_provider.execute(tool_name, question)
+        if tool_name == "zabbix.investigate":
+            return zabbix_investigator.investigate(question,max_problems=8,hours=2,recurrence_days=7)
 
         if tool_name == "marketplace.catalog":
             return get_marketplace_catalog()
@@ -96,6 +99,9 @@ class ToolExecutor:
         if tool_name == "zabbix.list_problems":
             problems = result.get("problems", [])
             evidence.append(f"problems={len(problems) if isinstance(problems, list) else 0}")
+        if tool_name == "zabbix.investigate":
+            scope=result.get("scope",{})
+            evidence.extend([f"selected_problems={scope.get('selected_problems',0)}",f"items={scope.get('item_count',0)}",f"hosts={scope.get('host_count',0)}"])
         if tool_name == "docker.list_containers":
             evidence.append(f"containers={result.get('container_count', 0)}")
         if tool_name == "knowledge.search":

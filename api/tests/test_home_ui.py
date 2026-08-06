@@ -23,6 +23,8 @@ def test_analyst_view_keeps_detailed_operational_status():
     assert "Alertas que entraram" in script
     assert "Alertas resolvidos" in script
     assert "Dispositivos monitorados" in script
+    executive_script = (STATIC / "executive.js").read_text(encoding="utf-8")
+    assert "Investigar evidências no Zabbix" in executive_script
 
 
 def test_management_contains_five_row_audit_table():

@@ -19,6 +19,7 @@ from services.postgres_store import postgres_store
 from services.openai_reasoner import has_llm_enabled
 from semantic.interpreter import SemanticGateway
 from semantic.models import SemanticQuery
+from services.zabbix_investigator import format_investigation
 
 
 class OpenAIService:
@@ -93,6 +94,11 @@ class OpenAIService:
             )
 
         risks = context.get("risks", []) if isinstance(context.get("risks", []), list) else []
+        investigation = tools.get("zabbix.investigate", {}) if isinstance(tools.get("zabbix.investigate", {}), dict) else {}
+        investigation_evidence=[]
+        for entry in (investigation.get("evidence",[]) or [])[:8]:
+            if not isinstance(entry,dict):continue
+            investigation_evidence.append({"problem":entry.get("problem"),"severity":entry.get("severity"),"started_at":entry.get("started_at"),"entity":entry.get("entity"),"hosts":entry.get("hosts",[])[:3],"recurrence":entry.get("recurrence"),"trigger":entry.get("trigger"),"data_coverage":entry.get("data_coverage"),"items":[{"name":item.get("name"),"current_value":item.get("current_value"),"interpreted_value":item.get("interpreted_value"),"previous_value":item.get("previous_value"),"units":item.get("units"),"last_collected_at":item.get("last_collected_at"),"history_summary":item.get("history_summary")} for item in (entry.get("items",[]) or [])[:6]]})
 
         return {
             "summary": context.get("summary", {}),
@@ -110,6 +116,7 @@ class OpenAIService:
             "knowledge": compact_knowledge,
             "insights": compact_insights,
             "risk": risks[:2],
+            "zabbix_investigation":{"scope":investigation.get("scope",{}),"evidence":investigation_evidence,"missing_data":investigation.get("missing_data",[])},
         }
 
     def answer(self, question: str, semantic_query: SemanticQuery | None = None) -> dict:
@@ -141,7 +148,8 @@ class OpenAIService:
             },
         )
 
-        candidate_answer = reasoning.get("deterministic_answer")
+        investigation_result=context.get("tools",{}).get("zabbix.investigate",{})
+        candidate_answer = format_investigation(investigation_result) if isinstance(investigation_result,dict) and investigation_result.get("evidence") else reasoning.get("deterministic_answer")
         llm_used = False
         llm_provider = "none"
         usage: dict = {}
@@ -149,8 +157,8 @@ class OpenAIService:
         if not candidate_answer:
             llm_context = self._compact_context_for_llm(context)
             llm_context_json = json.dumps(llm_context, ensure_ascii=False)
-            if len(llm_context_json) > 420:
-                llm_context_json = llm_context_json[:420]
+            if not llm_context.get("zabbix_investigation", {}).get("evidence") and len(llm_context_json) > 1400:
+                llm_context_json = llm_context_json[:1400]
             reasoning_note = reasoning_engine.to_developer_note(reasoning)
             if len(reasoning_note) > 140:
                 reasoning_note = reasoning_note[:140]
@@ -160,8 +168,10 @@ class OpenAIService:
                 {"role": "developer", "content": reasoning_note},
                 {"role": "user", "content": question},
             ]
+            if llm_context.get("zabbix_investigation", {}).get("evidence"):
+                messages.insert(3,{"role":"developer","content":"Use somente zabbix_investigation. Separe fatos comprovados, dados ausentes e hipótese. Não atribua core, energia, cabo, processo ou causa sem evidência. Cite componente, valores, horário, histórico e recorrência disponíveis; termine com ação segura e verificável."})
 
-            llm_result = self.client.reason(messages)
+            llm_result = self.client.reason(messages,max_tokens=900) if llm_context.get("zabbix_investigation", {}).get("evidence") else self.client.reason(messages)
             if llm_result and llm_result.get("text"):
                 candidate_answer = str(llm_result.get("text", "")).strip()
                 usage = llm_result.get("usage", {}) if isinstance(llm_result.get("usage", {}), dict) else {}
@@ -262,6 +272,9 @@ class OpenAIService:
 
     def _fallback_answer(self, question: str, context: dict) -> str:
         tools = context.get("tools", {})
+        investigation=tools.get("zabbix.investigate",{})
+        if isinstance(investigation,dict) and investigation.get("evidence"):
+            return format_investigation(investigation)
         knowledge = context.get("knowledge", []) if isinstance(context.get("knowledge", []), list) else []
         if knowledge:
             first = knowledge[0] if isinstance(knowledge[0], dict) else {}

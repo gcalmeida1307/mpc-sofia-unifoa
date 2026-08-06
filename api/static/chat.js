@@ -4,6 +4,8 @@
   const form=document.querySelector('#chat-form');
   const input=document.querySelector('#question');
   const button=form.querySelector('button');
+  const suggested=new URLSearchParams(location.search).get('q');
+  if(suggested)input.value=suggested;
 
   async function sendQuestion(){
     const q=input.value.trim();
