@@ -17,15 +17,15 @@ DOMAINS = {
     "Segurança": ("firewall", "security", "seguranca", "vpn", "auth"),
 }
 RISK_RULES = (
-    ("broadcast", "Broadcast crescente", "Verificar uplinks e possíveis loops"),
-    ("backup", "Backup acima do normal", "Validar duração e janela do backup"),
-    ("cpu", "CPU elevada", "Revisar os equipamentos mais afetados"),
-    ("unavailable by icmp", "Equipamento sem resposta", "Validar energia, enlace e conectividade"),
-    ("link down", "Enlace indisponível", "Verificar porta e equipamento conectado"),
-    ("lower speed", "Porta operando abaixo da velocidade", "Validar cabo e negociação da porta"),
-    ("memory", "Memória elevada", "Verificar consumo e processos recentes"),
-    ("disk", "Armazenamento sob pressão", "Validar espaço, latência e fila de disco"),
-    ("airtime", "Ponto de acesso instável", "Revisar interferência e ocupação de canal"),
+    ("broadcast", "Broadcast crescente", "Tráfego de difusão acima do padrão pode degradar todo o segmento.", "Verificar uplinks e possíveis loops", ["Identificar os equipamentos com maior recorrência", "Validar STP e loops nos uplinks", "Comparar o tráfego após a correção"]),
+    ("backup", "Backup acima do normal", "A janela de backup está consumindo mais recurso ou tempo que o esperado.", "Validar duração e janela do backup", ["Confirmar o início e o fim do backup", "Comparar disco e rede no mesmo horário", "Reagendar ou limitar a carga se necessário"]),
+    ("cpu", "CPU elevada", "Processamento elevado pode aumentar latência ou interromper serviços.", "Revisar os equipamentos mais afetados", ["Ordenar equipamentos por recorrência", "Identificar processo ou carga coincidente", "Acompanhar a CPU depois da intervenção"]),
+    ("unavailable by icmp", "Equipamento sem resposta", "O monitoramento perdeu comunicação com um ou mais equipamentos.", "Validar energia, enlace e conectividade", ["Confirmar energia e conexão física", "Testar o caminho de rede", "Validar o retorno no Zabbix"]),
+    ("link down", "Enlace indisponível", "Uma interface deixou de transportar tráfego e pode afetar usuários conectados.", "Verificar porta e equipamento conectado", ["Identificar porta e equipamento afetado", "Validar cabo, energia e estado administrativo", "Confirmar a recuperação no Zabbix"]),
+    ("lower speed", "Porta operando abaixo da velocidade", "A porta negociou velocidade inferior ao padrão anterior.", "Validar cabo e negociação da porta", ["Verificar cabo e conectores", "Conferir velocidade e duplex nas duas pontas", "Observar erros após renegociar"]),
+    ("memory", "Memória elevada", "Pouca memória disponível pode causar lentidão e encerramento de processos.", "Verificar consumo e processos recentes", ["Identificar os maiores consumidores", "Comparar com a linha de base", "Corrigir vazamento ou ajustar capacidade"]),
+    ("disk", "Armazenamento sob pressão", "Espaço, latência ou fila de disco estão acima do nível esperado.", "Validar espaço, latência e fila de disco", ["Separar falta de espaço de lentidão", "Identificar carga ou rotina coincidente", "Liberar capacidade ou corrigir a origem"]),
+    ("airtime", "Ponto de acesso instável", "O canal sem fio apresenta ocupação ou interferência elevada.", "Revisar interferência e ocupação de canal", ["Identificar os pontos de acesso afetados", "Comparar canais e vizinhança", "Ajustar canal ou potência e reavaliar"]),
 )
 
 
@@ -63,31 +63,33 @@ def _domain_scores(problems: list[dict[str, Any]], hosts: int) -> list[dict[str,
     return [{"name":name,"score":_score(grouped[name],hosts),"active_risks":len(grouped[name])} for name in DOMAINS]
 
 
-def _risk_family(problem: dict[str, Any]) -> tuple[str, str] | None:
+def _risk_family(problem: dict[str, Any]) -> tuple[str, str, str, list[str]] | None:
     name = str(problem.get("name", "")).lower()
-    for token, title, action in RISK_RULES:
+    for token, title, description, action, treatment in RISK_RULES:
         if token in name:
-            return title, action
+            return title, description, action, treatment
     return None
 
 
-def _top_risks(problems: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _top_risks(problems: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
     grouped: dict[str, dict[str, Any]] = {}
     for problem in problems:
         family = _risk_family(problem)
         if not family:
             continue
-        title, action = family
-        entry = grouped.setdefault(title, {"title":title,"recommended_action":action,"hosts":set(),"groups":set(),"weight":0.0,"count":0})
+        title, description, action, treatment = family
+        entry = grouped.setdefault(title, {"title":title,"description":description,"recommended_action":action,"treatment":treatment,"hosts":set(),"groups":set(),"severities":defaultdict(int),"weight":0.0,"count":0})
         entry["hosts"].update(map(str, problem.get("hosts", []) or []));entry["groups"].update(map(str, problem.get("groups", []) or []))
-        entry["weight"] += SEVERITY_WEIGHT.get(int(problem.get("severity", 0) or 0), 0.1);entry["count"] += 1
+        severity=int(problem.get("severity",0) or 0);entry["severities"][severity]+=1
+        entry["weight"] += SEVERITY_WEIGHT.get(severity, 0.1);entry["count"] += 1
     ranked = sorted(grouped.values(), key=lambda item:(item["weight"],item["count"]), reverse=True)[:5]
-    result = []
+    result = [];details = {}
     for item in ranked:
         affected = len(item["hosts"])
         impact = f"{affected} equipamento(s) afetado(s)" if affected else "Impacto ainda não identificado"
         result.append({"title":item["title"],"impact":impact,"confidence":min(98,72+item["count"]*3),"recommended_action":item["recommended_action"]})
-    return result
+        details[item["title"]] = {"description":item["description"],"occurrences":item["count"],"affected_assets":sorted(item["hosts"])[:12],"additional_assets":max(0,len(item["hosts"])-12),"areas":sorted(group for group in item["groups"] if group != "Global")[:6],"severity_distribution":dict(item["severities"]),"treatment":item["treatment"]}
+    return result, details
 
 
 def _load_reference_snapshots() -> tuple[dict | None, dict | None, dict | None]:
@@ -121,13 +123,13 @@ def executive_summary() -> dict[str, Any]:
     hour_problems = _problems(previous_hour);current_ids={str(item.get("eventid")) for item in problems};previous_ids={str(item.get("eventid")) for item in hour_problems}
     new_alerts=len(current_ids-previous_ids);resolved=len(previous_ids-current_ids)
     previous_hosts=int(_summary(previous_hour).get("hosts",hosts) or hosts) if previous_hour else hosts
-    risks=_top_risks(problems)
+    risks,risk_details=_top_risks(problems)
     delta=health-day_score
     return {
         "view":"executive","generated_at":datetime.now(timezone.utc).isoformat(),"ruleset":RULESET_VERSION,
         "health":{"overall":health,"trend":"stable" if abs(delta)<2 else "improving" if delta>0 else "declining","delta_vs_previous":delta},
         "devices":{"total":hosts,"delta":hosts-previous_hosts},
-        "domains":_domain_scores(problems,hosts),"top_risks":risks,
+        "domains":_domain_scores(problems,hosts),"top_risks":risks,"risk_details":risk_details,
         "changes":{"new_alerts":new_alerts,"new_devices":max(0,hosts-previous_hosts),"resolved":resolved,"critical_incidents":sum(1 for item in problems if int(item.get("severity",0) or 0)>=4)},
         "recommended_action":risks[0]["recommended_action"] if risks else "Manter o acompanhamento do ambiente",
         "history":_history(),

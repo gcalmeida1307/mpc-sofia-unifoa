@@ -26,6 +26,10 @@ def test_executive_contract_is_deterministic_and_auditable(monkeypatch):
     assert result["changes"] == {"new_alerts":2,"new_devices":1,"resolved":1,"critical_incidents":1}
     assert result["top_risks"][0].keys() == {"title","impact","confidence","recommended_action"}
     assert result["top_risks"][0]["title"] == "Broadcast crescente"
+    detail = result["risk_details"]["Broadcast crescente"]
+    assert detail["affected_assets"] == ["sw-1"]
+    assert len(detail["treatment"]) == 3
+    assert detail["description"]
 
 
 def test_static_device_count_stays_out_of_timeline_change(monkeypatch):

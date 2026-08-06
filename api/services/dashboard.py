@@ -72,20 +72,33 @@ def _hourly_device_timeline(hours: int = 12) -> list[dict[str, Any]]:
     try:
         with postgres_store._connect() as conn:
             rows = conn.execute("""
-                SELECT date_trunc('hour', generated_at) AS hour,
-                       MAX(COALESCE((summary->>'hosts')::int, 0)) AS devices,
-                       MAX(COALESCE((summary->>'problems')::int, 0)) AS problems,
-                       COUNT(*)::int AS readings
-                FROM infra_snapshots
-                WHERE generated_at >= NOW() - (%s || ' hours')::interval
-                GROUP BY 1 ORDER BY 1
+                SELECT DISTINCT ON (hour) hour, generated_at, summary, payload, readings
+                FROM (
+                    SELECT date_trunc('hour', generated_at) AS hour, generated_at, summary, payload,
+                           COUNT(*) OVER (PARTITION BY date_trunc('hour', generated_at))::int AS readings
+                    FROM infra_snapshots
+                    WHERE generated_at >= NOW() - (%s || ' hours')::interval
+                ) hourly
+                ORDER BY hour, generated_at DESC
             """, (str(max(2, min(hours, 48))),)).fetchall()
         result = []
-        previous = None
-        for hour, devices, problems, readings in rows:
-            delta = 0 if previous is None else int(problems) - previous
-            result.append({"hour":hour.isoformat(),"devices":int(devices),"problems":int(problems),"readings":int(readings),"change":delta})
-            previous = int(problems)
+        previous_items: dict[str, dict[str, Any]] | None = None
+        previous_total: int | None = None
+        for hour, _generated_at, summary, payload, readings in rows:
+            summary=summary or {};problems=((payload or {}).get("zabbix") or {}).get("problems",[]) or []
+            current_items={str(item.get("eventid")):item for item in problems if item.get("eventid")};current_total=int(summary.get("problems",len(current_items)) or 0)
+            if previous_items is None:
+                new_items=[];resolved_items=[]
+            else:
+                new_items=[current_items[key] for key in current_items.keys()-previous_items.keys()]
+                resolved_items=[previous_items[key] for key in previous_items.keys()-current_items.keys()]
+            delta=0 if previous_total is None else current_total-previous_total
+            complete=current_total==len(current_items) and (previous_total is None or previous_total==len(previous_items or {}))
+            if previous_items is None: explanation="Primeiro ponto do período"
+            elif complete: explanation=f"{len(new_items)} alerta(s) entraram e {len(resolved_items)} foram resolvidos"
+            else: explanation=f"O total variou {delta:+d}; os exemplos abaixo pertencem ao recorte disponível"
+            result.append({"hour":hour.isoformat(),"devices":int(summary.get("hosts",0) or 0),"problems":current_total,"readings":int(readings),"change":delta,"new_count":len(new_items) if complete else max(0,delta),"resolved_count":len(resolved_items) if complete else max(0,-delta),"new_alerts":[str(item.get("name") or "Alerta sem descrição") for item in new_items[:5]],"resolved_alerts":[str(item.get("name") or "Alerta sem descrição") for item in resolved_items[:5]],"explanation":explanation,"complete_comparison":complete})
+            previous_items=current_items;previous_total=current_total
         return result
     except Exception:
         return []

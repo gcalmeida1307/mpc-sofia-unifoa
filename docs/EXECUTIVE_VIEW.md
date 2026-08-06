@@ -28,4 +28,8 @@ Versão atual: `executive-health-v1`.
 7. Incidente crítico é um problema ativo com severidade alta ou desastre.
 8. Riscos são agrupados por regras locais traduzidas. Cada cartão expõe somente risco, impacto, confiança e próxima ação.
 
+Ao selecionar um risco, a interface consulta os detalhes já presentes no mesmo contrato: explicação, ocorrências, equipamentos, áreas, severidades e três passos de tratamento. Essa abertura progressiva mantém a leitura executiva curta sem esconder o caminho de investigação.
+
+Na Analyst View, o total de dispositivos aparece uma única vez. A linha horária representa somente variações de alertas. Cada ponto informa quantos alertas entraram, quantos foram resolvidos e apresenta até cinco descrições de cada lado; assim, uma variação não é exibida sem contexto.
+
 Alterações nos pesos ou classificadores exigem nova versão de `ruleset` e testes de regressão.

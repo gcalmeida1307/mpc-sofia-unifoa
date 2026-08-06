@@ -78,7 +78,9 @@ class SnapshotService:
         try:
             connector = ZabbixConnector()
             summary = connector.get_problem_summary(limit=2000)
-            problems = connector.list_active_problems(limit=200)
+            # Persist the same operational universe used by the summary so hourly
+            # comparisons are not distorted by a rotating top-200 window.
+            problems = connector.list_active_problems(limit=2000)
             down_hosts = self._detect_down_hosts(problems)
             group_summary = self._group_problem_summary(problems)
             snapshot["zabbix"] = {
