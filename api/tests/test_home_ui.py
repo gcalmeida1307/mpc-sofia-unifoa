@@ -80,3 +80,13 @@ def test_chat_displays_operational_progress_without_exposing_internal_reasoning(
     assert 'id="answer-progress"' in html
     assert "Consultando fontes autorizadas" in html
     assert "raciocínio interno e dados sensíveis não são exibidos" in html
+
+
+def test_design_system_applies_semantic_tokens_to_both_themes():
+    styles = (STATIC / "styles.css").read_text(encoding="utf-8")
+    for token in ["--background", "--surface-1", "--surface-2", "--surface-3", "--text-primary", "--text-secondary", "--border-subtle", "--success-soft", "--danger-soft"]:
+        assert token in styles
+    assert ':root[data-theme="light"]' in styles
+    assert '.msg.assistant,.suggestion-chip' in styles
+    assert '.connector-card,.connector-drag-ghost,.graph-node' in styles
+    assert '@media(prefers-reduced-motion:reduce)' in styles
