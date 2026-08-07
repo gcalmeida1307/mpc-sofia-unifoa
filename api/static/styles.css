@@ -193,3 +193,34 @@ body.nav-collapsed .topbar>nav{width:76px}body.nav-collapsed .topbar>nav .nav-gr
 /* One predictable menu interaction on every viewport: explicit drawer. */
 .nav-toggle{display:grid!important}.topbar>nav,body.nav-collapsed .topbar>nav{top:72px;bottom:0;left:0;width:min(310px,88vw);height:auto;visibility:hidden;transform:translateX(-105%);padding:18px 12px 28px;overflow-y:auto}.topbar>nav .nav-group,body.nav-collapsed .topbar>nav .nav-group{display:grid;justify-items:stretch}.topbar>nav .nav-group>small,body.nav-collapsed .topbar>nav .nav-group>small,.topbar>nav a span,body.nav-collapsed .topbar>nav a span{display:initial}.topbar>nav .nav-group a,body.nav-collapsed .topbar>nav .nav-group a{display:flex;padding:9px 12px}.nav-open .topbar>nav{visibility:visible;transform:translateX(0)}.topbar~main.shell,.topbar~main.wide-shell,body.nav-collapsed .topbar~main.shell,body.nav-collapsed .topbar~main.wide-shell{width:min(1200px,100%)!important;max-width:1500px;margin-left:auto!important;margin-right:auto!important}.topbar~main.wide-shell{width:min(1500px,100%)!important}.nav-open:after{content:'';position:fixed;z-index:40;inset:72px 0 0;background:#02081270;backdrop-filter:blur(2px);pointer-events:none}.nav-open .nav-toggle{background:var(--info-soft);border-color:var(--info)}
 @media(max-width:900px){.topbar>nav,body.nav-collapsed .topbar>nav{top:64px}.nav-open:after{inset:64px 0 66px}}
+
+/* Navigation v2: full navigation on wide screens, compact drawer only when needed. */
+@media(min-width:1101px){
+  .topbar{height:72px;padding-inline:max(24px,calc((100% - 1500px)/2));gap:24px}
+  .topbar>.brand{flex:0 0 auto}
+  .nav-toggle{display:none!important}
+  .topbar>nav,.topbar>nav:where(:not(.unused)),body.nav-collapsed .topbar>nav{
+    position:static;display:flex;flex:1;align-items:center;gap:3px;width:auto;height:auto;
+    padding:0;border:0;background:transparent;overflow:visible;visibility:visible;
+    transform:none;box-shadow:none
+  }
+  .topbar>nav .nav-group,body.nav-collapsed .topbar>nav .nav-group{
+    display:flex;align-items:center;gap:3px;margin:0
+  }
+  .topbar>nav .nav-group>small,body.nav-collapsed .topbar>nav .nav-group>small{display:none}
+  .topbar>nav .nav-group a,body.nav-collapsed .topbar>nav .nav-group a{
+    min-height:40px;padding:8px 10px;gap:7px;white-space:nowrap
+  }
+  .topbar>nav .nav-group a i{display:none}
+  .topbar>nav a span,body.nav-collapsed .topbar>nav a span{display:inline}
+  .topbar~main.shell,.topbar~main.wide-shell,body.nav-collapsed .topbar~main.shell,body.nav-collapsed .topbar~main.wide-shell{
+    width:min(1500px,100%)!important;margin-inline:auto!important
+  }
+  body.nav-open:after{display:none!important}
+}
+@media(max-width:1100px){
+  .topbar{height:64px;padding-inline:18px}
+  .topbar>nav,body.nav-collapsed .topbar>nav{top:64px;z-index:70}
+  .nav-open:after{z-index:60;inset:64px 0 0;pointer-events:auto;backdrop-filter:none;background:#02081299}
+  .topbar~main.shell,.topbar~main.wide-shell{margin-inline:auto!important}
+}
