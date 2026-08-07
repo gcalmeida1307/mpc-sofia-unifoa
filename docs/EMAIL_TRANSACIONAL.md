@@ -34,4 +34,7 @@ docker compose up -d --build sofia-api
 - Se o envio de ativação funcionar, o token não volta para o navegador do administrador.
 - Se SMTP estiver indisponível, a interface apresenta uma cópia emergencial para entrega por canal seguro.
 - Reenviar ativação invalida o código anterior.
+- Enquanto SMTP estiver indisponível, um administrador autenticado recebe uma cópia única do código para entrega por canal seguro.
+- Para uma conta ativa que perdeu senha ou TOTP, `Reconfigurar acesso` revoga sessões, invalida as credenciais anteriores e exige novo Primeiro acesso.
+- Um administrador não pode reconfigurar a própria conta; outro administrador deve executar a recuperação.
 - Senhas, hashes e segredos TOTP nunca são enviados por e-mail.

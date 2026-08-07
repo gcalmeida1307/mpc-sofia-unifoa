@@ -30,3 +30,9 @@ def test_only_valid_account_roles_are_accepted():
         service.change_user_role(2,'superadmin',1)
     with pytest.raises(ValueError):
         service.change_user_role(1,'user',1)
+
+
+def test_administrator_cannot_reconfigure_own_access():
+    service=AuthService()
+    with pytest.raises(ValueError, match='próprio acesso'):
+        service.recover_access(1,1)

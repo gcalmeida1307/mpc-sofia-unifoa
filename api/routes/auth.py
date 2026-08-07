@@ -149,6 +149,21 @@ def resend_activation(user_id: int, request: Request):
     auth_service.audit(admin['username'],'resend_activation',True,user_id=admin['id'])
     return {'status':'activation_renewed','email_sent':email_sent,'setup_token':None if email_sent else result['setup_token']}
 
+@router.post('/admin/users/{user_id}/recover-access')
+def recover_access(user_id: int, request: Request):
+    admin=require_admin(request)
+    try: result=auth_service.recover_access(user_id,admin['id'])
+    except ValueError as exc: raise HTTPException(422,str(exc))
+    if not result: raise HTTPException(404,'Usuário ativo não encontrado')
+    email_sent=False
+    if result.get('email') and email_notifier.configured():
+        try:
+            email_sent=email_notifier.notify_account_activation(result['email'],result['username'],result['display_name'],result['setup_token'])
+        except Exception:
+            email_sent=False
+    auth_service.audit(admin['username'],'recover_user_access',True,user_id=admin['id'])
+    return {'status':'access_recovery_required','email_sent':email_sent,'setup_token':None if email_sent else result['setup_token']}
+
 @router.post('/admin/users/{user_id}/revoke-sessions')
 def revoke_sessions(user_id: int, request: Request):
     require_admin(request); return {'revoked':auth_service.revoke_user_sessions(user_id)}

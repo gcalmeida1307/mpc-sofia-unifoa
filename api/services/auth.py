@@ -229,6 +229,21 @@ class AuthService:
         if not row:return None
         return {'setup_token':token,'username':row[0],'display_name':row[1],'email':row[2]}
 
+    def recover_access(self, user_id: int, acting_admin_id: int) -> dict[str, Any] | None:
+        if user_id == acting_admin_id:
+            raise ValueError('O administrador não pode reconfigurar o próprio acesso')
+        token=secrets.token_urlsafe(24)
+        with self.connect() as conn:
+            row=conn.execute("""UPDATE auth_users SET status='pending',password_hash=NULL,totp_secret=NULL,
+                setup_token_hash=%s,password_reset_token_hash=NULL,password_reset_expires_at=NULL,
+                password_reset_required=FALSE
+                WHERE id=%s AND status='active'
+                RETURNING username,display_name,email""",(self.token_hash(token),user_id)).fetchone()
+            if not row:return None
+            conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,))
+            conn.commit()
+        return {'setup_token':token,'username':row[0],'display_name':row[1],'email':row[2]}
+
     def complete_password_reset(self, username: str, token: str, password: str, otp: str, ip: str | None=None) -> bool:
         self.validate_password(password);normalized=username.lower().strip()
         with self.connect() as conn:

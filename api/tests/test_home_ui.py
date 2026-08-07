@@ -38,6 +38,8 @@ def test_management_contains_five_row_audit_table():
     assert "/auth/admin/audit?limit=5" in script
     assert ".slice(0,5)" in script
     assert "Reenviar ativação" in script
+    assert "Reconfigurar acesso" in script
+    assert "invalidar senha e TOTP" in script
     assert "código de ativação foi enviado" in script
 
 
