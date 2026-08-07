@@ -10,6 +10,8 @@ def test_home_is_compact_and_does_not_render_audit_or_prompt_list():
     assert 'id="executive-devices"' in html
     assert 'id="risk-ranking"' in html
     assert 'id="risk-detail"' in html
+    assert "Evolução da saúde geral" in html
+    assert "Pontuação de 0 a 100% nas últimas 12 horas" in html
     assert '/ui/analista.html' in html
     assert 'id="audit"' not in html
     assert 'id="training-prompts"' not in html
@@ -25,6 +27,7 @@ def test_analyst_view_keeps_detailed_operational_status():
     assert "Dispositivos monitorados" in script
     executive_script = (STATIC / "executive.js").read_text(encoding="utf-8")
     assert "Investigar evidências no Zabbix" in executive_script
+    assert "Saúde calculada com alertas ativos e severidade" in executive_script
 
 
 def test_management_contains_five_row_audit_table():
