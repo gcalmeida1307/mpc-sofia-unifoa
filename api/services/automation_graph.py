@@ -10,6 +10,8 @@ from psycopg.types.json import Jsonb
 from config.settings import settings
 from semantic.executor import execute_zabbix_query
 from semantic.interpreter import semantic_gateway
+from semantic.models import SemanticTimeRange
+from presentation.formatters import format_historical_triggers, format_related_problems
 from zabbix.aggregation import unique_affected_hosts
 from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
@@ -179,10 +181,31 @@ class AutomationGraphStore:
         if connector_type=='trigger':
             return {'summary':f'Entrada recebida: {input_text}','data':{'input':input_text}}
         if connector_type=='zabbix':
+            config=node.get('config') or {}
             semantic=semantic_gateway.interpret(input_text)
+            updates: dict[str, Any] = {}
+            operation=str(config.get('operation') or '')
+            period=str(config.get('period') or '')
+            if operation=='history' or period in {'24h','7d'}:
+                updates.update(intent='historical_trigger_summary',state='historical',source='zabbix',metric='trigger_count')
+                updates['time_range']=SemanticTimeRange(days=1 if period=='24h' else 7)
+            elif operation=='problems':
+                updates.update(intent='active_trigger_summary',state='active',source='zabbix',metric='active_problems')
+            scope=str(config.get('scope') or '').lower()
+            scope_types={'switches':'switch','switch':'switch','servidores':'server','servers':'server','access points':'access_point','access-point':'access_point','firewalls':'firewall','roteadores':'router','routers':'router','nobreaks':'ups','ups':'ups'}
+            if scope in scope_types:updates['entity_type']=scope_types[scope]
+            if updates:semantic=semantic.model_copy(update=updates)
             execution=execute_zabbix_query(semantic,input_text,ZabbixConnector())
             if not execution:
                 return {'summary':'A pergunta não resultou em uma consulta Zabbix validada. Informe entidade, métrica e período.','data':{'semantic_query':semantic.model_dump(mode='json')}}
+            severity_min={'Informação':1,'Aviso':2,'Médio':3,'Alto':4}.get(str(config.get('severity') or ''),0)
+            if severity_min:
+                execution['matches']=[item for item in execution['matches'] if int(item.get('severity',0) or 0)>=severity_min]
+                execution['active']=[item for item in execution['active'] if int(item.get('severity',0) or 0)>=severity_min]
+                if execution['intent']=='historical_trigger_summary':
+                    label=semantic.entity_type.replace('_',' ') if semantic.entity_type!='unknown' else 'hosts'
+                    execution['answer']=format_historical_triggers(execution['matches'],len(execution['matches']),execution['days'],label,execution['active'])
+                else:execution['answer']=format_related_problems(execution['matches'],len(execution['matches']),input_text)
             matches=execution['matches'];summary=execution['answer'];active_now=execution['active']
             query_scope='historical_triggers' if execution['intent']=='historical_trigger_summary' else 'active_problems'
             scope={'query_scope':query_scope,'days':execution['days'],'group_filter':execution['group'],

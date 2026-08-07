@@ -90,3 +90,14 @@ def test_design_system_applies_semantic_tokens_to_both_themes():
     assert '.msg.assistant,.suggestion-chip' in styles
     assert '.connector-card,.connector-drag-ghost,.graph-node' in styles
     assert '@media(prefers-reduced-motion:reduce)' in styles
+
+
+def test_product_navigation_chat_and_automation_are_progressively_disclosed():
+    auth = (STATIC / "auth.js").read_text(encoding="utf-8")
+    chat = (STATIC / "chat.js").read_text(encoding="utf-8")
+    automation = (STATIC / "automation.js").read_text(encoding="utf-8")
+    styles = (STATIC / "styles.css").read_text(encoding="utf-8")
+    assert "nav-group" in auth and "mobile-nav" in auth and "nav-collapsed" in auth
+    assert "Ver evidências" in chat and "Mostrar gráficos" in chat
+    assert "WORKFLOW_TEMPLATES" in automation and "node-drawer" in automation
+    assert "config.operation" in automation and "graph-node.running" in styles

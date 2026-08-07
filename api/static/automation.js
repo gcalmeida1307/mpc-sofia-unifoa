@@ -20,6 +20,13 @@ const recommendations={
   correlate:['report']
 };
 const NODE_WIDTH=190,NODE_HEIGHT=104;
+const WORKFLOW_TEMPLATES={
+  network:{title:'Investigar incidente de rede',description:'Localiza alertas, correlaciona horários e explica evidências.',types:['trigger','zabbix','correlate','claude','report']},
+  overnight:{title:'Resumo da madrugada',description:'Consolida alertas, métricas e logs do período noturno.',types:['trigger','zabbix','grafana','loki','correlate','report']},
+  capacity:{title:'Risco de capacidade',description:'Compara métricas e banco para destacar saturação e tendência.',types:['trigger','prometheus','postgres','correlate','claude','report']},
+  executive:{title:'Relatório executivo',description:'Transforma alertas e conhecimento local em resumo objetivo.',types:['trigger','zabbix','knowledge','claude','report']},
+  sql:{title:'Investigar lentidão SQL',description:'Correlaciona métricas, logs, banco e eventos para explicar degradação.',types:['trigger','grafana','prometheus','loki','postgres','correlate','report']}
+};
 
 const byId=id=>document.getElementById(id);
 function createNodeId(){
@@ -34,6 +41,22 @@ function restoreDraft(){try{const draft=JSON.parse(localStorage.getItem('sofia-a
 const escapeHtml=value=>String(value||'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
 function connector(type){return catalog.find(item=>item.type===type)||{label:type,status:'unknown',category:'Outro'}}
+function buildTemplate(key){
+  const template=WORKFLOW_TEMPLATES[key];if(!template)return;
+  nodes=template.types.filter(type=>catalog.some(item=>item.type===type)).map((type,index)=>({id:createNodeId(),type,label:connector(type).label,x:45+(index%3)*220,y:45+Math.floor(index/3)*130,config:{}}));
+  edges=nodes.slice(0,-1).map((node,index)=>({id:createNodeId(),source:node.id,target:nodes[index+1].id}));
+  graphId=null;byId('graph-name').value=template.title;byId('graph-description').value=template.description;persistDraft();renderGraph();showSuggestions(nodes.at(-1));
+}
+function ensureAutomationExperience(){
+  if(!byId('automation-templates')){const section=document.createElement('section');section.id='automation-templates';section.className='automation-templates';section.innerHTML=`<header><span><p class="eyebrow">Comece rápido</p><h2>Templates de investigação</h2><small>Escolha um objetivo e personalize os blocos.</small></span></header><div>${Object.entries(WORKFLOW_TEMPLATES).map(([key,item])=>`<button type="button" data-template="${key}"><i>✦</i><span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.description)}</small></span><b>Usar</b></button>`).join('')}</div>`;document.querySelector('.automation-toolbar').before(section);section.querySelectorAll('[data-template]').forEach(button=>button.onclick=()=>buildTemplate(button.dataset.template))}
+  if(!byId('node-drawer')){const drawer=document.createElement('aside');drawer.id='node-drawer';drawer.className='node-drawer';drawer.hidden=true;drawer.innerHTML='<div class="drawer-backdrop" data-close-drawer></div><section><header><span><small>CONFIGURAR BLOCO</small><h2 id="drawer-title">Bloco</h2></span><button class="ghost" type="button" data-close-drawer aria-label="Fechar">×</button></header><p id="drawer-description"></p><form id="node-config-form"></form></section>';document.body.append(drawer);drawer.querySelectorAll('[data-close-drawer]').forEach(button=>button.onclick=()=>{drawer.hidden=true})}
+}
+function openNodeSettings(id){
+  const node=nodes.find(item=>item.id===id);if(!node)return;const meta=connector(node.type),drawer=byId('node-drawer'),config=node.config||{};byId('drawer-title').textContent=meta.label;byId('drawer-description').textContent=meta.description||'Defina como este bloco participa do fluxo.';
+  const zabbix=node.type==='zabbix',form=byId('node-config-form');form.innerHTML=`<label>Nome no fluxo<input name="label" value="${escapeHtml(node.label||meta.label)}" required></label>${zabbix?`<label>Operação<select name="operation"><option value="problems">Problemas ativos</option><option value="history" ${config.operation==='history'?'selected':''}>Histórico de triggers</option><option value="hosts" ${config.operation==='hosts'?'selected':''}>Hosts e disponibilidade</option></select></label><label>Grupo ou escopo<input name="scope" value="${escapeHtml(config.scope||'Todos os grupos autorizados')}" placeholder="Ex.: Switches"></label><label>Período<select name="period"><option value="active">Agora</option><option value="24h" ${config.period==='24h'?'selected':''}>Últimas 24 horas</option><option value="7d" ${config.period==='7d'?'selected':''}>Últimos 7 dias</option></select></label><label>Severidade mínima<select name="severity"><option>Informação</option><option ${config.severity==='Aviso'?'selected':''}>Aviso</option><option ${config.severity==='Médio'?'selected':''}>Médio</option><option ${config.severity==='Alto'?'selected':''}>Alto</option></select></label>`:`<label>Objetivo do bloco<textarea name="objective" placeholder="Descreva o resultado esperado">${escapeHtml(config.objective||'')}</textarea></label>`}<div class="drawer-status"><i class="status-light ${meta.status==='active'?'online':'offline'}"></i><span><strong>${meta.status==='active'?'Conector disponível':'Configuração externa necessária'}</strong><small>${escapeHtml(meta.category)}</small></span></div><button>Salvar configuração</button>`;
+  form.onsubmit=event=>{event.preventDefault();const values=Object.fromEntries(new FormData(form));node.label=String(values.label||meta.label);delete values.label;node.config=values;persistDraft();renderGraph();drawer.hidden=true};drawer.hidden=false;form.querySelector('input,select,textarea')?.focus();
+}
+queueMicrotask(ensureAutomationExperience);
 function canvasBounds(){
   const canvas=byId('graph-canvas');
   return {width:Math.max(0,canvas.clientWidth-NODE_WIDTH-8),height:Math.max(0,canvas.clientHeight-NODE_HEIGHT-8)};
@@ -69,11 +92,12 @@ function renderGraph(){
   nodes.forEach(node=>{
     Object.assign(node,clampPosition(node.x,node.y));
     const meta=connector(node.type),el=document.createElement('article');
-    el.className=`graph-node ${selected.includes(node.id)?'selected':''} ${connectingSource===node.id?'connecting':''}`;el.dataset.id=node.id;el.style.left=`${node.x}px`;el.style.top=`${node.y}px`;
-    el.innerHTML=`<button class="node-port node-input" title="Entrada" aria-label="Conectar na entrada"></button><button class="node-remove" title="Remover">×</button><small>${escapeHtml(meta.category)}</small><strong>${escapeHtml(node.label||meta.label)}</strong><span class="connector-status ${meta.status}">${meta.status==='active'?'pronto':'configurar'}</span><button class="node-port node-output" title="Saída" aria-label="Iniciar conexão pela saída"></button>`;
+    el.className=`graph-node ${selected.includes(node.id)?'selected':''} ${connectingSource===node.id?'connecting':''} ${node.runtime||''}`;el.dataset.id=node.id;el.style.left=`${node.x}px`;el.style.top=`${node.y}px`;
+    el.innerHTML=`<button class="node-port node-input" title="Entrada" aria-label="Conectar na entrada"></button><button class="node-remove" title="Remover">×</button><button class="node-config" title="Configurar bloco" aria-label="Configurar bloco">⚙</button><small>${escapeHtml(meta.category)}</small><strong>${escapeHtml(node.label||meta.label)}</strong><span class="connector-status ${meta.status}">${meta.status==='active'?'pronto':'configurar'}</span><button class="node-port node-output" title="Saída" aria-label="Iniciar conexão pela saída"></button>`;
     let moved=false;
     el.onclick=e=>{if(!moved&&!e.target.closest('button')){toggleNode(node.id);showSuggestions(node)}};
     el.querySelector('.node-remove').onclick=e=>{e.stopPropagation();removeNode(node.id)};
+    el.querySelector('.node-config').onclick=e=>{e.stopPropagation();openNodeSettings(node.id)};
     el.querySelector('.node-output').onclick=e=>{e.stopPropagation();connectingSource=node.id;selected=[];renderGraph();showSuggestions(node)};
     el.querySelector('.node-input').onclick=e=>{e.stopPropagation();if(connectingSource)makeConnection(connectingSource,node.id);else alert('Primeiro clique na saída do bloco de origem.')};
     let dragging=false,dx=0,dy=0;
@@ -115,23 +139,25 @@ function renderCatalog(){const laneFor=category=>category==='Entrada'||category=
   };
 })}
 async function loadGraphs(){const data=await sofia.api('/workflows/automation/graphs');const select=byId('saved-graphs');select.innerHTML='<option value="">Fluxos salvos</option>'+data.graphs.map(g=>`<option value="${g.id}">${escapeHtml(g.name)}</option>`).join('');select.onchange=()=>{const graph=data.graphs.find(g=>g.id===select.value);if(!graph)return;graphId=graph.id;nodes=graph.nodes||[];edges=graph.edges||[];byId('graph-name').value=graph.name;byId('graph-description').value=graph.description;renderGraph();showSuggestions(nodes.at(-1))}}
-async function saveGraph(){const payload={id:graphId,name:byId('graph-name').value,description:byId('graph-description').value,nodes,edges};const result=await sofia.api('/workflows/automation/graphs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});graphId=result.id;await loadGraphs();return result}
+async function saveGraph(){const payload={id:graphId,name:byId('graph-name').value,description:byId('graph-description').value,nodes:nodes.map(({runtime,...node})=>node),edges};const result=await sofia.api('/workflows/automation/graphs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});graphId=result.id;await loadGraphs();return result}
 function renderTimeline(result){byId('simulation').innerHTML=`<p class="run-status ${result.status}">${result.status==='ready'||result.status==='completed'?'Fluxo pronto':result.status==='partial'?'Fluxo executado parcialmente':'Configuração necessária'}</p>`+result.timeline.map((x,i)=>`<article class="timeline-item"><b>${i+1}</b><span><strong>${escapeHtml(x.label)}</strong><small>${escapeHtml(x.connector)} · ${escapeHtml(x.status)}</small></span></article>`).join('')}
 async function simulate(){if(!nodes.length)return alert('Adicione blocos ao fluxo.');await saveGraph();const result=await sofia.api(`/workflows/automation/graphs/${graphId}/simulate`,{method:'POST'});renderTimeline(result)}
 async function executeGraph(){
   if(!nodes.length)return alert('Adicione blocos ao fluxo.');
   const input=byId('execution-input').value.trim();if(!input)return alert('Informe a pergunta ou evento que inicia o fluxo.');
   const button=byId('execute-graph');button.disabled=true;button.textContent='Executando…';byId('execution-result').innerHTML='<p>Consultando os módulos do fluxo…</p>';
+  let visualIndex=0;nodes.forEach((node,index)=>node.runtime=index===0?'running':'queued');renderGraph();const visualTimer=setInterval(()=>{if(visualIndex<nodes.length-1){nodes[visualIndex].runtime='completed';visualIndex+=1;nodes[visualIndex].runtime='running';renderGraph()}},650);
   try{
     await saveGraph();
     const result=await sofia.api(`/workflows/automation/graphs/${graphId}/execute`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input})});
+    nodes.forEach((node,index)=>node.runtime=result.timeline?.[index]?.status==='failed'?'failed':'completed');renderGraph();
     renderTimeline(result);
     const zabbix=(result.outputs||[]).find(item=>item.connector==='zabbix');
     const analysis=renderOperationalAnalysis(zabbix?.data||{});
     const details=(result.outputs||[]).map(item=>`<details class="execution-step"><summary><strong>${escapeHtml(item.label)}</strong><span class="step-status ${escapeHtml(item.status)}">${escapeHtml(item.status)}</span></summary><pre>${escapeHtml(item.summary)}</pre></details>`).join('');
     byId('execution-result').innerHTML=`${analysis}<article class="final-report"><small>Relatório final</small><pre>${escapeHtml(result.report||'Fluxo concluído sem relatório textual.')}</pre></article>${details}`;
-  }catch(error){byId('execution-result').innerHTML=`<p class="error">${escapeHtml(error.message)}</p>`}
-  finally{button.disabled=false;button.textContent='Executar fluxo'}
+  }catch(error){nodes.forEach((node,index)=>node.runtime=index===visualIndex?'failed':node.runtime);renderGraph();byId('execution-result').innerHTML=`<p class="error">${escapeHtml(error.message)}</p>`}
+  finally{clearInterval(visualTimer);button.disabled=false;button.textContent='Executar fluxo'}
 }
 function formatDuration(seconds){if(seconds==null)return 'horário indisponível';const days=Math.floor(seconds/86400),hours=Math.floor(seconds%86400/3600),minutes=Math.floor(seconds%3600/60);return [days&&days+'d',hours&&hours+'h',minutes+'min'].filter(Boolean).join(' ')}
 function renderBars(items,empty='Sem dados para este recorte.'){
@@ -153,11 +179,7 @@ function renderOperationalAnalysis(data){
   return `<section class="operational-analysis"><header><span><small>ANÁLISE OPERACIONAL</small><h3>${historical?'Histórico do período':'Antes, agora e comportamento'}</h3></span><span class="analysis-badge">${historical?data.days+' dias':behavior.status==='baseline_ready'?'Baseline disponível':'Coletando baseline'}</span></header><div class="analysis-grid"><article><h4>Severidade</h4>${donut}<div class="chart-legend">${severity.map((item,index)=>`<span><i style="background:${colors[index%colors.length]}"></i>${escapeHtml(item.label)}: ${item.value}</span>`).join('')}</div></article><article><h4>${distributionTitle}</h4>${renderBars(distribution)}</article><article class="history-chart"><h4>Volume observado</h4>${renderBars(series.map((item,index)=>({label:index===series.length-1?'Agora':new Date(item.generated_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),value:item.problems})),'A coleta ainda não possui amostras.')}</article></div><article class="behavior-card"><strong>Aprendizado comportamental</strong><p>${behavior.snapshot_count||0} snapshots e ${behavior.insight_count||0} padrões persistidos. Coleta a cada ${behavior.interval_seconds||0}s. Método atual: ${escapeHtml(behavior.method||'não informado')}.</p><small>Isso aprende recorrências e tendências; não altera pesos de um modelo neural automaticamente.</small></article><ol class="event-timeline">${timeline}</ol></section>`;
 }
 function loadSqlTemplate(){
-  const sequence=['trigger','grafana','prometheus','loki','postgres','correlate','report'];
-  const labels=['Pergunta: por que o SQL ficou lento?','Grafana: contexto','CPU / memória / disco','Logs e backup','Queries pesadas','Correlacionar horários','Resposta e relatório'];
-  nodes=sequence.map((type,index)=>({id:createNodeId(),type,label:labels[index],x:45+(index%3)*220,y:45+Math.floor(index/3)*130}));
-  edges=nodes.slice(0,-1).map((node,index)=>({id:createNodeId(),source:node.id,target:nodes[index+1].id}));
-  graphId=null;persistDraft();byId('graph-name').value='Investigar lentidão SQL';byId('graph-description').value='Correlaciona métricas, logs, banco e eventos para explicar degradação SQL.';renderGraph();
+  buildTemplate('sql');
 }
 async function loadAdmin(){if(!byId('tools'))return;const [m,r,u]=await Promise.all([sofia.api('/mcp/tools'),sofia.api('/auth/admin/access-requests'),sofia.api('/auth/admin/users')]);byId('tools').innerHTML=Object.entries(m.capabilities||{}).map(([k,v])=>`<li><strong>${escapeHtml(k)}</strong><span>${escapeHtml(v.join(', '))}</span></li>`).join('');byId('requests').innerHTML=(r.requests||[]).filter(x=>x.status==='pending').map(x=>`<article class="row"><span><strong>${escapeHtml(x.display_name)}</strong><small>${escapeHtml(x.username)} · ${escapeHtml(x.email)}</small></span><button onclick="approve(${x.id})">Aprovar</button></article>`).join('')||'<p>Sem solicitações pendentes.</p>';byId('users').innerHTML=(u.users||[]).map(x=>`<article class="row"><span><strong>${escapeHtml(x.display_name)}</strong><small>${escapeHtml(x.username)} · ${escapeHtml(x.role)} · ${escapeHtml(x.status)}</small></span><button class="ghost" onclick="revoke(${x.id})">Revogar sessões</button></article>`).join('')}
 async function approve(id){const result=await sofia.api(`/auth/admin/access-requests/${id}/approve`,{method:'POST'});prompt('Acesso aprovado. Copie e entregue este token uma única vez ao usuário:',result.setup_token);location.reload()}async function revoke(id){await sofia.api(`/auth/admin/users/${id}/revoke-sessions`,{method:'POST'});alert('Sessões revogadas')}

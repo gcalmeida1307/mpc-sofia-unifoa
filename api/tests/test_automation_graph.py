@@ -119,3 +119,28 @@ def test_historical_switch_flow_uses_event_history_and_group_filter(monkeypatch)
     assert result['data']['active_now_count'] == 1
     assert result['data']['event_timeline'][0]['status'] == 'occurred'
     assert result['data']['host_distribution'] == [{'label':'switch-a','value':1}]
+
+
+def test_zabbix_node_configuration_changes_real_query_scope(monkeypatch):
+    events = [
+        {"eventid":"1","clock":"1754388000","name":"Link down","severity":"4","severity_label":"High","hosts":["switch-a"],"groups":["Switches"],"historical":True},
+        {"eventid":"2","clock":"1754388001","name":"Informational","severity":"1","severity_label":"Information","hosts":["switch-b"],"groups":["Switches"],"historical":True},
+    ]
+    class Connector:
+        def list_trigger_events(self, days, limit, group_name):
+            assert days == 7 and group_name == 'Switches'
+            return events
+        def list_active_problems(self, limit, group_name):
+            assert group_name == 'Switches'
+            return events
+    monkeypatch.setattr("services.automation_graph.ZabbixConnector", Connector)
+    monkeypatch.setattr("services.automation_graph.semantic_gateway.interpret", deterministic_interpret)
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
+    result = AutomationGraphStore._execute_connector({
+        "id":"zabbix","type":"zabbix","config":{"operation":"history","period":"7d","scope":"Switches","severity":"Alto"}
+    }, "O que aconteceu?", [])
+    assert result['data']['query_scope'] == 'historical_triggers'
+    assert result['data']['days'] == 7
+    assert result['data']['related_problem_count'] == 1
+    assert result['data']['hosts'][0]['name'] == 'switch-a'
