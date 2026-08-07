@@ -41,6 +41,18 @@ def test_management_contains_five_row_audit_table():
     assert "Reconfigurar acesso" in script
     assert "invalidar senha e TOTP" in script
     assert "código de ativação foi enviado" in script
+    assert "Desabilitar" in script
+    assert "Reativar usuário" in script
+    assert "data-disable" in script
+
+
+def test_access_request_suggests_structured_available_usernames():
+    html = (STATIC / "solicitar-acesso.html").read_text(encoding="utf-8")
+    script = (STATIC / "access-request.js").read_text(encoding="utf-8")
+    assert 'placeholder="nome.sobrenome"' in html
+    assert "/auth/access-requests/username-options" in script
+    assert "Sugestões disponíveis" in script
+    assert "username.pattern" in script
 
 
 def test_ux_architecture_has_analytics_intelligence_and_clean_automation():

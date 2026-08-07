@@ -88,6 +88,11 @@ def access_request(payload: AccessIn, background_tasks: BackgroundTasks):
     background_tasks.add_task(email_notifier.notify_access_request,recipients,payload.username,payload.display_name,payload.email,payload.reason)
     return {'id':request_id,'status':'pending','notification_scheduled':bool(recipients and email_notifier.configured())}
 
+@router.get('/access-requests/username-options')
+def username_options(display_name: str, email: str, username: str = ''):
+    try: return auth_service.username_options(display_name,email,username)
+    except ValueError as exc: raise HTTPException(422,str(exc))
+
 
 def require_admin(request: Request):
     user=auth_service.authenticate(bearer(request))
@@ -167,6 +172,24 @@ def recover_access(user_id: int, request: Request):
 @router.post('/admin/users/{user_id}/revoke-sessions')
 def revoke_sessions(user_id: int, request: Request):
     require_admin(request); return {'revoked':auth_service.revoke_user_sessions(user_id)}
+
+@router.post('/admin/users/{user_id}/disable')
+def disable_user(user_id: int, request: Request):
+    admin=require_admin(request)
+    try: result=auth_service.disable_user(user_id,admin['id'])
+    except ValueError as exc: raise HTTPException(422,str(exc))
+    if not result: raise HTTPException(404,'Usuário ativo não encontrado')
+    auth_service.audit(admin['username'],'disable_user',True,user_id=admin['id'])
+    return result
+
+@router.post('/admin/users/{user_id}/enable')
+def enable_user(user_id: int, request: Request):
+    admin=require_admin(request)
+    try: result=auth_service.enable_user(user_id,admin['id'])
+    except ValueError as exc: raise HTTPException(422,str(exc))
+    if not result: raise HTTPException(404,'Usuário desabilitado não encontrado')
+    auth_service.audit(admin['username'],'enable_user',True,user_id=admin['id'])
+    return result
 
 @router.get('/admin/audit')
 def audit(request: Request, limit: int = 5):

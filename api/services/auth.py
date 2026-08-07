@@ -6,6 +6,7 @@ import hmac
 import os
 import re
 import secrets
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -84,6 +85,62 @@ class AuthService:
         if len(normalized) > 200 or not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', normalized):
             raise ValueError('Informe um e-mail valido')
         return normalized
+
+    @staticmethod
+    def normalize_username(value: str) -> str:
+        value = unicodedata.normalize('NFKD', value.strip().lower())
+        return ''.join(char for char in value if not unicodedata.combining(char))
+
+    @classmethod
+    def validate_username(cls, username: str) -> str:
+        normalized = cls.normalize_username(username)
+        if len(normalized) > 80 or not re.fullmatch(r'[a-z][a-z0-9]*\.[a-z][a-z0-9]*', normalized):
+            raise ValueError('Use o login no padrão nome.sobrenome, sem espaços ou caracteres especiais')
+        return normalized
+
+    @classmethod
+    def username_candidates(cls, display_name: str, email: str) -> list[str]:
+        def words(value: str) -> list[str]:
+            normalized = cls.normalize_username(value)
+            return [re.sub(r'[^a-z0-9]', '', part) for part in re.split(r'[\s._-]+', normalized) if re.sub(r'[^a-z0-9]', '', part)]
+
+        name_parts = words(display_name)
+        email_parts = words(email.split('@', 1)[0]) if '@' in email else []
+        options: list[str] = []
+        for parts in (email_parts, name_parts):
+            if len(parts) >= 2:
+                options.extend((f'{parts[0]}.{parts[-1]}', f'{parts[0]}.{parts[1]}', f'{parts[0][0]}.{parts[-1]}'))
+        result: list[str] = []
+        for option in options:
+            if option not in result and re.fullmatch(r'[a-z][a-z0-9]*\.[a-z][a-z0-9]*', option):
+                result.append(option)
+        return result
+
+    def username_options(self, display_name: str, email: str, requested: str = '') -> dict[str, Any]:
+        email = self.validate_email(email)
+        candidates = self.username_candidates(display_name, email)
+        normalized_requested = self.normalize_username(requested) if requested else ''
+        with self.connect() as conn:
+            rows = conn.execute("""SELECT username FROM auth_users
+                UNION SELECT username FROM access_requests WHERE status IN ('pending','approved')""").fetchall()
+        occupied = {row[0] for row in rows}
+        suggestions: list[str] = []
+        for candidate in candidates:
+            available = candidate
+            suffix = 2
+            while available in occupied or available in suggestions:
+                available = f'{candidate}{suffix}'
+                suffix += 1
+            suggestions.append(available)
+            if len(suggestions) == 3:
+                break
+        requested_valid = bool(normalized_requested and re.fullmatch(r'[a-z][a-z0-9]*\.[a-z][a-z0-9]*', normalized_requested))
+        return {
+            'normalized': normalized_requested,
+            'valid': requested_valid,
+            'available': requested_valid and normalized_requested not in occupied,
+            'suggestions': suggestions,
+        }
 
     @staticmethod
     def hash_password(password: str) -> str:
@@ -174,9 +231,15 @@ class AuthService:
 
     def request_access(self, username: str, display_name: str, email: str, reason: str) -> int:
         self.ensure_schema()
+        username=self.validate_username(username)
         email=self.validate_email(email)
         with self.connect() as conn:
-            row=conn.execute("INSERT INTO access_requests(username,display_name,email,reason) VALUES(%s,%s,%s,%s) RETURNING id", (username.lower().strip(),display_name.strip(),email.lower().strip(),reason.strip())).fetchone(); conn.commit(); return row[0]
+            existing=conn.execute("""SELECT 1 FROM auth_users WHERE username=%s OR LOWER(email)=%s
+                UNION ALL SELECT 1 FROM access_requests WHERE status IN ('pending','approved')
+                AND (username=%s OR LOWER(email)=%s) LIMIT 1""",(username,email,username,email)).fetchone()
+            if existing:
+                raise ValueError('Já existe um usuário ou uma solicitação com este login ou e-mail')
+            row=conn.execute("INSERT INTO access_requests(username,display_name,email,reason) VALUES(%s,%s,%s,%s) RETURNING id", (username,display_name.strip(),email,reason.strip())).fetchone(); conn.commit(); return row[0]
 
     def list_requests(self) -> list[dict[str, Any]]:
         with self.connect() as conn:
@@ -266,6 +329,28 @@ class AuthService:
     def revoke_user_sessions(self, user_id: int) -> int:
         with self.connect() as conn:
             cur=conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,)); conn.commit(); return cur.rowcount
+
+    def disable_user(self, user_id: int, acting_admin_id: int) -> dict[str, Any] | None:
+        if user_id == acting_admin_id:
+            raise ValueError('O administrador não pode desabilitar o próprio acesso')
+        with self.connect() as conn:
+            row=conn.execute("""UPDATE auth_users SET status='revoked',setup_token_hash=NULL,
+                password_reset_token_hash=NULL,password_reset_expires_at=NULL,password_reset_required=FALSE
+                WHERE id=%s AND status<>'revoked' RETURNING username""",(user_id,)).fetchone()
+            if not row:return None
+            conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,))
+            conn.commit()
+        return {'username':row[0],'status':'revoked'}
+
+    def enable_user(self, user_id: int, acting_admin_id: int) -> dict[str, Any] | None:
+        if user_id == acting_admin_id:
+            raise ValueError('O administrador já está ativo')
+        with self.connect() as conn:
+            row=conn.execute("""UPDATE auth_users SET status=CASE
+                    WHEN password_hash IS NOT NULL AND totp_secret IS NOT NULL THEN 'active' ELSE 'pending' END
+                WHERE id=%s AND status='revoked' RETURNING username,status""",(user_id,)).fetchone()
+            conn.commit()
+        return {'username':row[0],'status':row[1]} if row else None
 
     def audit_entries(self, limit: int = 100) -> list[dict[str, Any]]:
         with self.connect() as conn:

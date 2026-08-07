@@ -100,7 +100,7 @@ class Application:
             }
             path = request.url.path
             method = request.method.upper()
-            public_paths = {"/", "/login.html", "/health", "/metrics", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests", "/auth/password-reset/complete"}
+            public_paths = {"/", "/login.html", "/health", "/metrics", "/mcp/health", "/security/validate", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests", "/auth/access-requests/username-options", "/auth/password-reset/complete"}
             is_static = path.startswith("/ui/")
             if path not in public_paths and not is_static:
                 authorization = request.headers.get("authorization", "")
@@ -134,7 +134,7 @@ class Application:
                 return JSONResponse(status_code=413, content={"detail": "request body too large"})
 
             # Rate limit AI and authentication endpoints independently.
-            if path in {"/assistant/ask", "/ai/ask", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests", "/auth/password-reset/complete"}:
+            if path in {"/assistant/ask", "/ai/ask", "/auth/login", "/auth/first-access/start", "/auth/first-access/complete", "/auth/access-requests", "/auth/access-requests/username-options", "/auth/password-reset/complete"}:
                 limit = 10 if path.startswith("/auth/") else max(10, int(self.settings.REQUEST_RATE_LIMIT_PER_MINUTE))
                 client_ip = request.client.host if request.client and request.client.host else "unknown"
                 key = f"{client_ip}:{path}"

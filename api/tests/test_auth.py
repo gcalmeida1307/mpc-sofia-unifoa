@@ -36,3 +36,24 @@ def test_administrator_cannot_reconfigure_own_access():
     service=AuthService()
     with pytest.raises(ValueError, match='próprio acesso'):
         service.recover_access(1,1)
+
+
+def test_username_requires_first_and_last_name():
+    assert AuthService.validate_username(' Maria.Silva ') == 'maria.silva'
+    assert AuthService.validate_username('João.Souza') == 'joao.souza'
+    for username in ['alucard', 'nome', 'nome sobrenome', 'nome..sobrenome', '.sobrenome']:
+        with pytest.raises(ValueError, match='nome.sobrenome'):
+            AuthService.validate_username(username)
+
+
+def test_username_candidates_use_email_and_full_name():
+    candidates = AuthService.username_candidates('Vladimir Lima Amorim', 'dicolima81@gmail.com')
+    assert 'vladimir.amorim' in candidates
+    assert 'vladimir.lima' in candidates
+    assert all('.' in candidate for candidate in candidates)
+
+
+def test_administrator_cannot_disable_own_access():
+    service=AuthService()
+    with pytest.raises(ValueError, match='próprio acesso'):
+        service.disable_user(1,1)
