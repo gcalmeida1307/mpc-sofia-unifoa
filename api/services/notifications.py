@@ -48,5 +48,12 @@ class EmailNotifier:
             f"O administrador autorizou a redefinicao da senha de {username}.\n\nToken temporario: {token}\n\nUse o token, uma nova senha e seu codigo TOTP na tela de login. O token expira em 30 minutos e pode ser usado uma unica vez.",
         )
 
+    def notify_account_activation(self, recipient: str, username: str, display_name: str, token: str) -> bool:
+        return self.send(
+            [recipient],
+            "SOFIA: acesso aprovado - ative sua conta",
+            f"Olá, {display_name}.\n\nSeu acesso à SOFIA foi aprovado.\n\nUsuário: {username}\nCódigo de ativação: {token}\n\nAcesse a tela Primeiro acesso, informe o usuário e este código, configure o Google Authenticator e crie sua senha. Não compartilhe este código. Se você não solicitou o acesso, ignore a mensagem e avise o administrador.",
+        )
+
 
 email_notifier = EmailNotifier()

@@ -37,6 +37,8 @@ def test_management_contains_five_row_audit_table():
     assert '<thead>' in html and 'id="management-audit-body"' in html
     assert "/auth/admin/audit?limit=5" in script
     assert ".slice(0,5)" in script
+    assert "Reenviar ativação" in script
+    assert "código de ativação foi enviado" in script
 
 
 def test_ux_architecture_has_analytics_intelligence_and_clean_automation():

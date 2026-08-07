@@ -104,7 +104,13 @@ def approve(request_id: int, request: Request):
     result=auth_service.approve_request(request_id,admin['id'])
     if not result: raise HTTPException(404,'Solicitação pendente não encontrada')
     auth_service.audit(admin['username'],'approve_access',True,user_id=admin['id'])
-    return {'status':'approved', 'setup_token':result['setup_token']}
+    email_sent = False
+    if result.get('email') and email_notifier.configured():
+        try:
+            email_sent = email_notifier.notify_account_activation(result['email'], result['username'], result['display_name'], result['setup_token'])
+        except Exception:
+            email_sent = False
+    return {'status':'approved', 'email_sent':email_sent, 'setup_token':None if email_sent else result['setup_token']}
 
 @router.get('/admin/users')
 def users(request: Request):
@@ -127,7 +133,21 @@ def require_password_reset(user_id: int, request: Request, background_tasks: Bac
     email_sent=bool(result['email'] and email_notifier.configured())
     if email_sent: background_tasks.add_task(email_notifier.notify_password_reset,result['email'],result['username'],result['reset_token'])
     auth_service.audit(admin['username'],'require_password_reset',True,user_id=admin['id'])
-    return {'status':'reset_required','reset_token':result['reset_token'],'email_sent':email_sent}
+    return {'status':'reset_required','reset_token':None if email_sent else result['reset_token'],'email_sent':email_sent}
+
+@router.post('/admin/users/{user_id}/resend-activation')
+def resend_activation(user_id: int, request: Request):
+    admin=require_admin(request)
+    result=auth_service.renew_activation(user_id)
+    if not result: raise HTTPException(404,'Usuário pendente não encontrado')
+    email_sent=False
+    if result.get('email') and email_notifier.configured():
+        try:
+            email_sent=email_notifier.notify_account_activation(result['email'],result['username'],result['display_name'],result['setup_token'])
+        except Exception:
+            email_sent=False
+    auth_service.audit(admin['username'],'resend_activation',True,user_id=admin['id'])
+    return {'status':'activation_renewed','email_sent':email_sent,'setup_token':None if email_sent else result['setup_token']}
 
 @router.post('/admin/users/{user_id}/revoke-sessions')
 def revoke_sessions(user_id: int, request: Request):

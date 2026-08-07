@@ -191,7 +191,7 @@ class AuthService:
             conn.execute("""INSERT INTO auth_users(username,display_name,email,role,status,setup_token_hash) VALUES(%s,%s,%s,'user','pending',%s)
                 ON CONFLICT(username) DO UPDATE SET display_name=EXCLUDED.display_name,email=EXCLUDED.email,status='pending',setup_token_hash=EXCLUDED.setup_token_hash""",(row[0],row[1],row[2],self.token_hash(setup_token)))
             conn.execute("UPDATE access_requests SET status='approved',reviewed_at=NOW(),reviewed_by=%s WHERE id=%s",(admin_id,request_id)); conn.commit()
-            return {"approved": True, "setup_token": setup_token}
+            return {"approved": True, "setup_token": setup_token, "username": row[0], "display_name": row[1], "email": row[2]}
 
     def list_users(self) -> list[dict[str, Any]]:
         with self.connect() as conn:
@@ -218,6 +218,16 @@ class AuthService:
             if not row:return None
             conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,));conn.commit()
         return {'reset_token':token,'username':row[0],'email':row[1]}
+
+    def renew_activation(self, user_id: int) -> dict[str, Any] | None:
+        token=secrets.token_urlsafe(24)
+        with self.connect() as conn:
+            row=conn.execute("""UPDATE auth_users SET setup_token_hash=%s
+                WHERE id=%s AND status='pending' AND password_hash IS NULL
+                RETURNING username,display_name,email""",(self.token_hash(token),user_id)).fetchone()
+            conn.commit()
+        if not row:return None
+        return {'setup_token':token,'username':row[0],'display_name':row[1],'email':row[2]}
 
     def complete_password_reset(self, username: str, token: str, password: str, otp: str, ip: str | None=None) -> bool:
         self.validate_password(password);normalized=username.lower().strip()
