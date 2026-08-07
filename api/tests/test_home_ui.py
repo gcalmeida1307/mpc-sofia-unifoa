@@ -98,6 +98,8 @@ def test_product_navigation_chat_and_automation_are_progressively_disclosed():
     automation = (STATIC / "automation.js").read_text(encoding="utf-8")
     styles = (STATIC / "styles.css").read_text(encoding="utf-8")
     assert "nav-group" in auth and "mobile-nav" in auth and "nav-collapsed" in auth
+    assert "localStorage.removeItem('sofia-nav-collapsed')" in auth
+    assert "localStorage.setItem('sofia-nav-collapsed'" not in auth
     assert "Ver evidências" in chat and "Mostrar gráficos" in chat
     assert "WORKFLOW_TEMPLATES" in automation and "node-drawer" in automation
     assert "config.operation" in automation and "graph-node.running" in styles
