@@ -99,6 +99,8 @@ async function mgLoad() {
 }
 
 (async () => {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
   mgCurrentUser = await sofia.initAuth();
   if (!mgCurrentUser || mgCurrentUser.role !== 'admin') return location.replace('/ui/index.html');
   document.body.classList.add('authorized');
