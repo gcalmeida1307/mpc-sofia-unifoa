@@ -9,6 +9,7 @@ from services.postgres_store import postgres_store
 
 RULESET_VERSION = "executive-health-v1"
 SEVERITY_WEIGHT = {0: 0.1, 1: 0.25, 2: 0.75, 3: 1.5, 4: 3.0, 5: 5.0}
+SEVERITY_LABEL = {0: "Não classificado", 1: "Informação", 2: "Aviso", 3: "Médio", 4: "Alto", 5: "Desastre"}
 DOMAINS = {
     "Rede": ("switch", "access-point", "roteador", "router", "rede", "network"),
     "Servidores": ("servidor", "server", "hyperv", "windows", "linux"),
@@ -130,6 +131,7 @@ def executive_summary() -> dict[str, Any]:
         "health":{"overall":health,"trend":"stable" if abs(delta)<2 else "improving" if delta>0 else "declining","delta_vs_previous":delta},
         "devices":{"total":hosts,"delta":hosts-previous_hosts},
         "domains":_domain_scores(problems,hosts),"top_risks":risks,"risk_details":risk_details,
+        "severities":[{"level":level,"name":SEVERITY_LABEL[level],"value":sum(1 for item in problems if int(item.get("severity",0) or 0)==level)} for level in SEVERITY_LABEL],
         "changes":{"new_alerts":new_alerts,"new_devices":max(0,hosts-previous_hosts),"resolved":resolved,"critical_incidents":sum(1 for item in problems if int(item.get("severity",0) or 0)>=4)},
         "recommended_action":risks[0]["recommended_action"] if risks else "Manter o acompanhamento do ambiente",
         "history":_history(),

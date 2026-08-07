@@ -17,19 +17,20 @@
     input.value='';
     button.disabled=true;
     button.textContent='Enviando…';
+    const progress=document.querySelector('#answer-progress'),steps=[...progress.querySelectorAll('li')];let active=0;progress.hidden=false;steps.forEach(item=>item.className='');steps[0].className='active';const progressTimer=setInterval(()=>{if(active<steps.length-1){steps[active].className='done';active+=1;steps[active].className='active'}},900);
     try{
       const r=await sofia.api('/ai/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})});
       const node=document.createElement('div');
       node.className='msg assistant';
       node.textContent=r.answer;
-      list.append(node);
+      list.append(node);steps.forEach(item=>item.className='done');
     }catch(err){
       const node=document.createElement('div');
       node.className='msg error';
       node.textContent=err.message;
       list.append(node);
     }finally{
-      button.disabled=false;
+      clearInterval(progressTimer);setTimeout(()=>{progress.hidden=true},700);button.disabled=false;
       button.textContent='Enviar';
       input.focus();
       list.scrollTop=list.scrollHeight;

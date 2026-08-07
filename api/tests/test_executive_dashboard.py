@@ -24,6 +24,8 @@ def test_executive_contract_is_deterministic_and_auditable(monkeypatch):
     assert result["ruleset"] == "executive-health-v1"
     assert result["devices"] == {"total":234,"delta":1}
     assert result["changes"] == {"new_alerts":2,"new_devices":1,"resolved":1,"critical_incidents":1}
+    assert sum(item["value"] for item in result["severities"]) == 2
+    assert next(item for item in result["severities"] if item["level"] == 4)["value"] == 1
     assert result["top_risks"][0].keys() == {"title","impact","confidence","recommended_action"}
     assert result["top_risks"][0]["title"] == "Broadcast crescente"
     detail = result["risk_details"]["Broadcast crescente"]
