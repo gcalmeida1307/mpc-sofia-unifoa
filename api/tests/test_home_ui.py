@@ -47,10 +47,16 @@ def test_ux_architecture_has_analytics_intelligence_and_clean_automation():
     assert "O ambiente em gráficos" in analytics
     assert "Diário Cognitivo" in intelligence
     assert "Quem está trabalhando" in intelligence
+    intelligence_script = (STATIC / "intelligence.js").read_text(encoding="utf-8")
+    assert "JSON.stringify" not in intelligence_script
+    assert "Prioriza incidentes" in intelligence_script
     assert "Entradas" in automation and "Processamento" in automation and "Saídas" in automation
     assert 'id="management-users"' not in automation
     assert "/ui/analytics.html" in auth
     assert "/ui/inteligencia.html" in auth
+    styles = (STATIC / "styles.css").read_text(encoding="utf-8")
+    assert "#connector-catalog.connector-lanes" in styles
+    assert ".analytic-donut>.severity-legend" in styles
 
 
 def test_chat_displays_operational_progress_without_exposing_internal_reasoning():

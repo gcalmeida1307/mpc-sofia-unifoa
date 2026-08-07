@@ -11,6 +11,7 @@ const sofia=(()=>{
     nav.innerHTML=links.filter(([, ,visible])=>visible).map(([label,href])=>`<a href="${href}" class="${location.pathname===href?'active':''}">${label}</a>`).join('');
   }
   async function initAuth(){
+    if('scrollRestoration' in history)history.scrollRestoration='manual';window.scrollTo(0,0);
     if(!token){location.href='/ui/login.html';return null}
     const user=await api('/auth/me'),profilePage=location.pathname.endsWith('/perfil.html');if(user.email_required&&!profilePage){location.href='/ui/perfil.html';return null}
     document.querySelectorAll('[data-admin]').forEach(element=>element.hidden=user.role!=='admin');const nav=document.querySelector('.topbar nav');if(nav)buildNavigation(nav,user);
