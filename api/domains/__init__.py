@@ -1,0 +1,1 @@
+"""Installable SOFIA domain packages."""

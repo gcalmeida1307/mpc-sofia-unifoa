@@ -140,7 +140,7 @@ class SnapshotService:
             "containers": docker.get("container_count", 0),
             "groups": len(zabbix.get("group_summary", []) or []),
         }
-        postgres_store.save_snapshot(snapshot=snapshot, summary=summary)
+        postgres_store.save_snapshot(domain_id="infrastructure", snapshot=snapshot, summary=summary)
 
     def get(self, force_refresh: bool = False) -> dict[str, Any]:
         if force_refresh or self._is_stale():

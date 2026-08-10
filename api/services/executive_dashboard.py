@@ -96,13 +96,13 @@ def _top_risks(problems: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], di
 def _load_reference_snapshots() -> tuple[dict | None, dict | None, dict | None]:
     try:
         with postgres_store._connect() as conn:
-            current = conn.execute("SELECT generated_at,summary,payload FROM infra_snapshots ORDER BY generated_at DESC LIMIT 1").fetchone()
-            previous_hour = conn.execute("SELECT generated_at,summary,payload FROM infra_snapshots WHERE generated_at <= NOW()-INTERVAL '1 hour' ORDER BY generated_at DESC LIMIT 1").fetchone()
-            previous_day = conn.execute("SELECT generated_at,summary,payload FROM infra_snapshots WHERE generated_at <= NOW()-INTERVAL '24 hours' ORDER BY generated_at DESC LIMIT 1").fetchone()
+            current = conn.execute("SELECT generated_at,summary,payload FROM domain_snapshots WHERE domain_id='infrastructure' ORDER BY generated_at DESC LIMIT 1").fetchone()
+            previous_hour = conn.execute("SELECT generated_at,summary,payload FROM domain_snapshots WHERE domain_id='infrastructure' AND generated_at <= NOW()-INTERVAL '1 hour' ORDER BY generated_at DESC LIMIT 1").fetchone()
+            previous_day = conn.execute("SELECT generated_at,summary,payload FROM domain_snapshots WHERE domain_id='infrastructure' AND generated_at <= NOW()-INTERVAL '24 hours' ORDER BY generated_at DESC LIMIT 1").fetchone()
         def convert(row): return {"generated_at":row[0].isoformat(),"summary":row[1],"payload":row[2]} if row else None
         return convert(current), convert(previous_hour), convert(previous_day)
     except Exception:
-        recent = postgres_store.get_recent_snapshots(2)
+        recent = postgres_store.get_recent_snapshots("infrastructure", 2)
         return (recent[0] if recent else None, recent[1] if len(recent)>1 else None, None)
 
 
@@ -110,7 +110,7 @@ def _history(hours: int = 12) -> list[dict[str, Any]]:
     try:
         with postgres_store._connect() as conn:
             rows = conn.execute("""SELECT DISTINCT ON (date_trunc('hour',generated_at)) generated_at,summary,payload
-                FROM infra_snapshots WHERE generated_at>=NOW()-(%s||' hours')::interval
+                FROM domain_snapshots WHERE domain_id='infrastructure' AND generated_at>=NOW()-(%s||' hours')::interval
                 ORDER BY date_trunc('hour',generated_at),generated_at DESC""",(str(hours),)).fetchall()
         return [{"at":row[0].isoformat(),"score":_score(_problems({"payload":row[2]}),int((row[1] or {}).get("hosts",0) or 0))} for row in rows]
     except Exception:

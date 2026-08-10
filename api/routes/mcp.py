@@ -7,6 +7,7 @@ from fastapi.responses import JSONResponse
 
 from core.registry import registry
 from services.mcp_server import mcp_server
+from core.authorization import capabilities_for
 
 router = APIRouter(prefix="/mcp", tags=["MCP"])
 
@@ -34,7 +35,9 @@ async def rpc(request: Request) -> Response:
     except Exception as exc:
         raise HTTPException(status_code=400, detail="Invalid JSON payload") from exc
 
-    response = mcp_server.handle(payload)
+    user = getattr(request.state, "user", {}) or {}
+    granted = capabilities_for(str(user.get("role", "viewer"))) | set(user.get("authorized_tools", []) or [])
+    response = mcp_server.handle(payload, granted)
     if response is None:
         return Response(status_code=202)
     return JSONResponse(response)

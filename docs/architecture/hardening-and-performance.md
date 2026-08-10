@@ -11,6 +11,12 @@ Fonte (Zabbix/Docker)
   -> resposta com fontes e modo de execução explícitos
 ```
 
+## Domínios instaláveis
+
+O Core carrega contratos indicados em `SOFIA_INSTALLED_DOMAINS`; ele não importa Zabbix, rotas de infraestrutura ou jobs de hosts. Cada `DomainDefinition` declara módulos, rotas protegidas, capabilities, ferramentas, eventos e jobs. O primeiro pacote está em `domains/infrastructure`; novos pacotes como medicina ou inventário seguem o mesmo contrato.
+
+Snapshots usam `domain_snapshots(domain_id, generated_at, summary, payload)`. A inicialização migra de forma idempotente o histórico legado de `infra_snapshots`, sem apagar a tabela antiga ou volumes.
+
 Uma pergunta determinística usa dados locais/snapshot. Claude é acionado para interpretação ou explicação e o Ollama permanece como fallback. A resposta informa `sources_used`, `response_mode` e `degraded` para que caminhos diferentes não pareçam equivalentes.
 
 ## Autorização por capacidade
@@ -47,6 +53,7 @@ Fontes internas legítimas devem ser publicadas por um proxy HTTPS controlado. N
 - A ingestão RAG só recalcula embeddings quando o conteúdo da página mudou.
 - O compilador de workflows é independente do armazenamento e rejeita ciclos, arestas duplicadas e referências inválidas.
 - Índices cobrem datas, status, ferramenta, tipo e assinatura nas tabelas de maior crescimento.
+- O `PostgresStore` reutiliza conexões por `psycopg_pool.ConnectionPool`; tamanhos são controlados por `POSTGRES_POOL_MIN_SIZE` e `POSTGRES_POOL_MAX_SIZE`.
 - Na inicialização, a retenção remove snapshots acima de 30 dias e telemetria/auditoria operacional acima de 90 dias. Usuários e conhecimento nunca são removidos por essa rotina.
 
 Processamento pesado poderá migrar para uma fila quando medições demonstrarem saturação. Redis/Celery não são requisitos antes disso.

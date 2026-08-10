@@ -4,6 +4,7 @@ from typing import Any
 from uuid import uuid4
 
 import psycopg
+from psycopg_pool import ConnectionPool
 from psycopg.types.json import Jsonb
 
 from config.settings import settings
@@ -13,9 +14,25 @@ class PostgresStore:
     def __init__(self, dsn: str | None = None):
         self.dsn = dsn or settings.POSTGRES_DSN
         self._ready = False
+        self._pool: ConnectionPool | None = None
 
     def _connect(self):
-        return psycopg.connect(self.dsn)
+        if self._pool is None:
+            self._pool = ConnectionPool(
+                conninfo=self.dsn,
+                min_size=settings.postgres.pool_min_size,
+                max_size=settings.postgres.pool_max_size,
+                open=False,
+                name="sofia-platform",
+            )
+            self._pool.open(wait=True, timeout=5)
+        return self._pool.connection(timeout=5)
+
+    def close(self) -> None:
+        if self._pool is not None:
+            self._pool.close()
+            self._pool = None
+            self._ready = False
 
     def ensure_schema(self) -> bool:
         try:
@@ -47,8 +64,9 @@ class PostgresStore:
                     )
                     cur.execute(
                         """
-                        CREATE TABLE IF NOT EXISTS infra_snapshots (
+                        CREATE TABLE IF NOT EXISTS domain_snapshots (
                             id BIGSERIAL PRIMARY KEY,
+                            domain_id TEXT NOT NULL,
                             generated_at TIMESTAMPTZ NOT NULL,
                             summary JSONB NOT NULL DEFAULT '{}'::jsonb,
                             payload JSONB NOT NULL DEFAULT '{}'::jsonb,
@@ -56,6 +74,14 @@ class PostgresStore:
                         )
                         """
                     )
+                    cur.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_domain_snapshots_identity ON domain_snapshots(domain_id, generated_at)")
+                    cur.execute("""DO $$ BEGIN
+                        IF to_regclass('public.infra_snapshots') IS NOT NULL THEN
+                            INSERT INTO domain_snapshots(domain_id,generated_at,summary,payload,created_at)
+                            SELECT 'infrastructure',generated_at,summary,payload,created_at FROM infra_snapshots
+                            ON CONFLICT(domain_id,generated_at) DO NOTHING;
+                        END IF;
+                    END $$""")
                     cur.execute(
                         """
                         CREATE TABLE IF NOT EXISTS tool_execution_audit (
@@ -150,7 +176,7 @@ class PostgresStore:
                     )
                     cur.execute("CREATE INDEX IF NOT EXISTS idx_assistant_messages_created_at ON assistant_messages(created_at DESC)")
                     cur.execute("CREATE INDEX IF NOT EXISTS idx_assistant_insights_kind_updated ON assistant_insights(kind, updated_at DESC)")
-                    cur.execute("CREATE INDEX IF NOT EXISTS idx_infra_snapshots_generated_at ON infra_snapshots(generated_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_domain_snapshots_lookup ON domain_snapshots(domain_id, generated_at DESC)")
                     cur.execute("CREATE INDEX IF NOT EXISTS idx_tool_audit_created_at ON tool_execution_audit(created_at DESC)")
                     cur.execute("CREATE INDEX IF NOT EXISTS idx_tool_audit_tool_status ON tool_execution_audit(tool, success, created_at DESC)")
                     cur.execute("CREATE INDEX IF NOT EXISTS idx_ai_metrics_created_at ON ai_response_metrics(created_at DESC)")
@@ -171,7 +197,7 @@ class PostgresStore:
         try:
             with self._connect() as conn:
                 with conn.cursor() as cur:
-                    cur.execute("DELETE FROM infra_snapshots WHERE generated_at < NOW() - (%s || ' days')::interval", (str(limits["snapshots"]),))
+                    cur.execute("DELETE FROM domain_snapshots WHERE generated_at < NOW() - (%s || ' days')::interval", (str(limits["snapshots"]),))
                     snapshots = cur.rowcount
                     cur.execute("DELETE FROM tool_execution_audit WHERE created_at < NOW() - (%s || ' days')::interval", (str(limits["tool_audits"]),))
                     audits = cur.rowcount
@@ -280,7 +306,7 @@ class PostgresStore:
         except Exception:
             return []
 
-    def save_snapshot(self, snapshot: dict[str, Any], summary: dict[str, Any]) -> bool:
+    def save_snapshot(self, domain_id: str, snapshot: dict[str, Any], summary: dict[str, Any]) -> bool:
         if not self._ready and not self.ensure_schema():
             return False
         try:
@@ -289,17 +315,17 @@ class PostgresStore:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        INSERT INTO infra_snapshots (generated_at, summary, payload)
-                        VALUES (COALESCE(%s::timestamptz, NOW()), %s, %s)
+                        INSERT INTO domain_snapshots (domain_id, generated_at, summary, payload)
+                        VALUES (%s, COALESCE(%s::timestamptz, NOW()), %s, %s)
                         """,
-                        (generated_at, Jsonb(summary or {}), Jsonb(snapshot or {})),
+                        (domain_id, generated_at, Jsonb(summary or {}), Jsonb(snapshot or {})),
                     )
                 conn.commit()
             return True
         except Exception:
             return False
 
-    def get_recent_snapshots(self, limit: int = 30) -> list[dict[str, Any]]:
+    def get_recent_snapshots(self, domain_id: str, limit: int = 30) -> list[dict[str, Any]]:
         if not self._ready and not self.ensure_schema():
             return []
         try:
@@ -308,11 +334,12 @@ class PostgresStore:
                     cur.execute(
                         """
                         SELECT generated_at, summary, payload
-                        FROM infra_snapshots
+                        FROM domain_snapshots
+                        WHERE domain_id = %s
                         ORDER BY generated_at DESC
                         LIMIT %s
                         """,
-                        (limit,),
+                        (domain_id, limit),
                     )
                     rows = cur.fetchall()
             return [
@@ -342,11 +369,11 @@ class PostgresStore:
                             SELECT
                                 trim(both '"' from grp.group_name) AS group_name,
                                 trim(both '"' from COALESCE(hst.host_name, '')) AS host_name
-                            FROM infra_snapshots snap
+                            FROM domain_snapshots snap
                             CROSS JOIN LATERAL jsonb_array_elements(COALESCE(snap.payload->'zabbix'->'problems', '[]'::jsonb)) AS problem
                             LEFT JOIN LATERAL jsonb_array_elements_text(COALESCE(problem->'groups', '[]'::jsonb)) AS grp(group_name) ON TRUE
                             LEFT JOIN LATERAL jsonb_array_elements_text(COALESCE(problem->'hosts', '[]'::jsonb)) AS hst(host_name) ON TRUE
-                            WHERE snap.generated_at >= NOW() - (%s || ' days')::interval
+                            WHERE snap.domain_id = 'infrastructure' AND snap.generated_at >= NOW() - (%s || ' days')::interval
                         ) normalized
                         WHERE group_name <> ''
                         GROUP BY group_name

@@ -76,8 +76,8 @@ def _hourly_device_timeline(hours: int = 12) -> list[dict[str, Any]]:
                 FROM (
                     SELECT date_trunc('hour', generated_at) AS hour, generated_at, summary, payload,
                            COUNT(*) OVER (PARTITION BY date_trunc('hour', generated_at))::int AS readings
-                    FROM infra_snapshots
-                    WHERE generated_at >= NOW() - (%s || ' hours')::interval
+                    FROM domain_snapshots
+                    WHERE domain_id='infrastructure' AND generated_at >= NOW() - (%s || ' hours')::interval
                 ) hourly
                 ORDER BY hour, generated_at DESC
             """, (str(max(2, min(hours, 48))),)).fetchall()

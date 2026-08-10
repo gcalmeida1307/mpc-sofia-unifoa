@@ -67,7 +67,7 @@ def test_zabbix_execution_returns_all_related_switches(monkeypatch):
     connector = type("Connector", (), {"list_active_problems": lambda self, limit, group_name=None: problems})()
     monkeypatch.setattr("services.automation_graph.ZabbixConnector", lambda: connector)
     monkeypatch.setattr("services.automation_graph.semantic_gateway.interpret", deterministic_interpret)
-    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda *args, **kwargs: [])
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
     result = AutomationGraphStore._execute_connector(
         {"id": "zabbix", "type": "zabbix"}, "Quais switches não respondem ao ping ICMP?", []
@@ -80,7 +80,7 @@ def test_zabbix_execution_returns_all_related_switches(monkeypatch):
 
 
 def test_zabbix_analysis_builds_timeline_and_baseline(monkeypatch):
-    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda *args, **kwargs: [
         {"generated_at": f"2026-08-05T12:{minute:02d}:00+00:00", "summary": {"problems": minute}}
         for minute in range(10)
     ])
@@ -107,7 +107,7 @@ def test_historical_switch_flow_uses_event_history_and_group_filter(monkeypatch)
             return events
     monkeypatch.setattr("services.automation_graph.ZabbixConnector", Connector)
     monkeypatch.setattr("services.automation_graph.semantic_gateway.interpret", deterministic_interpret)
-    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda *args, **kwargs: [])
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
     result = AutomationGraphStore._execute_connector(
         {"id":"zabbix","type":"zabbix"}, 'Quantos switches apresentaram triggers nos últimos 7 dias?', []
@@ -135,7 +135,7 @@ def test_zabbix_node_configuration_changes_real_query_scope(monkeypatch):
             return events
     monkeypatch.setattr("services.automation_graph.ZabbixConnector", Connector)
     monkeypatch.setattr("services.automation_graph.semantic_gateway.interpret", deterministic_interpret)
-    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda limit: [])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda *args, **kwargs: [])
     monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
     result = AutomationGraphStore._execute_connector({
         "id":"zabbix","type":"zabbix","config":{"operation":"history","period":"7d","scope":"Switches","severity":"Alto"}

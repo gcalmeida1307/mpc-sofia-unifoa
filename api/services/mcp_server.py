@@ -19,6 +19,7 @@ class McpTool:
     description: str
     input_schema: dict[str, Any]
     handler: Callable[[dict[str, Any]], Any]
+    required_capability: str
 
 
 class McpServer:
@@ -31,12 +32,14 @@ class McpServer:
                 "Return SOFIA modules, services and registered capabilities.",
                 {"type": "object", "properties": {}, "additionalProperties": False},
                 self._platform_status,
+                "dashboard.read",
             ),
             "sofia.infrastructure.summary": McpTool(
                 "sofia.infrastructure.summary",
                 "Return a local infrastructure summary collected by the SOFIA runtime.",
                 {"type": "object", "properties": {}, "additionalProperties": False},
                 lambda _: get_infrastructure_summary(),
+                "infrastructure.summary.read",
             ),
             "sofia.knowledge.search": McpTool(
                 "sofia.knowledge.search",
@@ -48,16 +51,18 @@ class McpServer:
                     "additionalProperties": False,
                 },
                 lambda arguments: search_knowledge(arguments["query"]),
+                "knowledge.search",
             ),
             "sofia.zabbix.active_summary": McpTool(
                 "sofia.zabbix.active_summary",
                 "Return current Zabbix host and active problem impact summary.",
                 {"type": "object", "properties": {}, "additionalProperties": False},
                 self._zabbix_active_summary,
+                "infrastructure.monitoring.read",
             ),
         }
 
-    def handle(self, payload: Any) -> dict[str, Any] | None:
+    def handle(self, payload: Any, granted_capabilities: set[str] | None = None) -> dict[str, Any] | None:
         if not isinstance(payload, dict) or payload.get("jsonrpc") != JSON_RPC_VERSION:
             return self._error(None, -32600, "Invalid JSON-RPC request")
 
@@ -80,12 +85,12 @@ class McpServer:
                 "instructions": "SOFIA tools are read-only. Search approved knowledge before operational answers.",
             })
         if method == "tools/list":
-            return self._result(request_id, {"tools": [self._descriptor(tool) for tool in self._tools.values()]})
+            return self._result(request_id, {"tools": [self._descriptor(tool) for tool in self._tools.values() if self._authorized(tool, granted_capabilities)]})
         if method == "tools/call":
-            return self._call_tool(request_id, payload.get("params") or {})
+            return self._call_tool(request_id, payload.get("params") or {}, granted_capabilities)
         return self._error(request_id, -32601, f"Method not found: {method}")
 
-    def _call_tool(self, request_id: Any, params: dict[str, Any]) -> dict[str, Any]:
+    def _call_tool(self, request_id: Any, params: dict[str, Any], granted_capabilities: set[str] | None) -> dict[str, Any]:
         name = params.get("name")
         arguments = params.get("arguments") or {}
         if not isinstance(name, str) or name not in self._tools:
@@ -93,6 +98,8 @@ class McpServer:
         if not isinstance(arguments, dict):
             return self._error(request_id, -32602, "Tool arguments must be an object")
         tool = self._tools[name]
+        if not self._authorized(tool, granted_capabilities):
+            return self._error(request_id, -32001, f"Capability required: {tool.required_capability}")
         validation = self._validate(arguments, tool.input_schema)
         if validation:
             return self._result(request_id, {"content": [{"type": "text", "text": validation}], "isError": True})
@@ -125,7 +132,11 @@ class McpServer:
 
     @staticmethod
     def _descriptor(tool: McpTool) -> dict[str, Any]:
-        return {"name": tool.name, "description": tool.description, "inputSchema": tool.input_schema}
+        return {"name": tool.name, "description": tool.description, "inputSchema": tool.input_schema, "_meta": {"sofia/requiredCapability": tool.required_capability}}
+
+    @staticmethod
+    def _authorized(tool: McpTool, granted: set[str] | None) -> bool:
+        return granted is None or "*" in granted or tool.required_capability in granted or tool.name in granted
 
     @staticmethod
     def _zabbix_active_summary(_: dict[str, Any]) -> dict[str, Any]:

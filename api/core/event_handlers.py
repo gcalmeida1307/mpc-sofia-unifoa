@@ -12,22 +12,6 @@ def _build_signature(topic: str, payload: dict[str, Any]) -> str:
     return sha1(base.encode("utf-8")).hexdigest()
 
 
-def _handle_host_down(payload: dict[str, Any]) -> None:
-    host = payload.get("host", "unknown")
-    summary = f"Host {host} entrou em estado DOWN segundo snapshot do Zabbix."
-    signature = _build_signature("host.down", payload)
-    postgres_store.save_insight(signature, "event.host.down", summary, payload)
-    qdrant_store.add_text(summary, {"topic": "host.down", "host": host, "source": "event_bus"})
-
-
-def _handle_host_recovered(payload: dict[str, Any]) -> None:
-    host = payload.get("host", "unknown")
-    summary = f"Host {host} voltou ao estado UP segundo snapshot do Zabbix."
-    signature = _build_signature("host.recovered", payload)
-    postgres_store.save_insight(signature, "event.host.recovered", summary, payload)
-    qdrant_store.add_text(summary, {"topic": "host.recovered", "host": host, "source": "event_bus"})
-
-
 def _handle_ai_answered(payload: dict[str, Any]) -> None:
     question = payload.get("question", "")
     answer = payload.get("answer", "")
@@ -60,7 +44,5 @@ def _handle_investigation_created(payload: dict[str, Any]) -> None:
 
 
 def register_default_event_handlers(event_bus: Any) -> None:
-    event_bus.subscribe("host.down", _handle_host_down)
-    event_bus.subscribe("host.recovered", _handle_host_recovered)
     event_bus.subscribe("ai.answered", _handle_ai_answered)
     event_bus.subscribe("investigation.created", _handle_investigation_created)

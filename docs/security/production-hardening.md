@@ -3,6 +3,9 @@
 ## 1. Network exposure
 - Services in compose are bound to localhost by default.
 - Keep reverse proxy in front of API and terminate TLS there.
+- HSTS só é emitido pela aplicação em requisições HTTPS; o header não cria TLS.
+- Para borda pública, configure DNS, `SOFIA_PUBLIC_HOST` e `TLS_CONTACT_EMAIL` e execute `docker compose -f docker-compose.yml -f docker-compose.edge.yml up -d`.
+- O Caddy obtém e renova certificados automaticamente. Firewall/WAF deve permitir apenas 80/443 e a porta 8080 deve ser limitada à rede administrativa.
 
 ## 2. PostgreSQL hardening
 Implemented in compose and config files:
@@ -52,3 +55,11 @@ Use:
 - Redes privadas, loopback, link-local e URLs com credenciais são recusadas.
 - A autorização é validada por capability em cada superfície protegida; negativas são auditadas.
 - Consulte `docs/architecture/hardening-and-performance.md` para o contrato e as métricas.
+
+## 7. Sessão, navegador e uploads
+
+- A sessão atual usa token Bearer no header, não cookie; por isso flags `HttpOnly/SameSite` e CSRF de cookie não se aplicam ao contrato atual. O risco principal é XSS, mitigado por CSP e renderização textual. Uma futura migração para cookie deverá adotar `Secure`, `HttpOnly`, `SameSite=Strict` e token CSRF.
+- CORS não é habilitado: navegadores permanecem em mesma origem por padrão.
+- Uploads aceitam apenas TXT, Markdown, PDF e DOCX, com limite de 10 MB, além do limite global de request.
+- Endpoints de login, recuperação, ativação e solicitação possuem rate limiting; falhas de autenticação são auditadas.
+- Recuperação MFA permanece administrativa e auditável enquanto SMTP não estiver disponível.

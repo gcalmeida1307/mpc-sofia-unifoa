@@ -126,7 +126,7 @@ class AutomationGraphStore:
                 'status':'occurred' if item.get('historical') else 'active','name':item.get('name'),'hosts':item.get('hosts') or [],
                 'severity':item.get('severity_label') or 'Não classificado'})
         timeline.sort(key=lambda event: event.get('started_at') or '')
-        snapshots = postgres_store.get_recent_snapshots(limit=30)
+        snapshots = postgres_store.get_recent_snapshots(domain_id="infrastructure", limit=30)
         insights = postgres_store.get_recent_insights(limit=10)
         series = [{'generated_at':snap.get('generated_at'),'problems':int((snap.get('summary') or {}).get('problems',0) or 0)} for snap in reversed(snapshots)]
         predictive = analyze_problem_series(series)

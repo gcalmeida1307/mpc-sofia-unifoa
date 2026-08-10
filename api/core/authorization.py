@@ -4,10 +4,10 @@ from dataclasses import dataclass
 
 
 ROLE_CAPABILITIES = {
-    "viewer": {"dashboard.read", "profile.manage"},
-    "user": {"dashboard.read", "assistant.ask", "profile.manage"},
-    "analyst": {"dashboard.read", "assistant.ask", "zabbix.read", "workflow.execute", "profile.manage"},
-    "operator": {"dashboard.read", "assistant.ask", "zabbix.read", "workflow.execute", "workflow.publish", "profile.manage"},
+    "viewer": {"dashboard.read", "knowledge.search", "profile.manage"},
+    "user": {"dashboard.read", "assistant.ask", "knowledge.search", "profile.manage"},
+    "analyst": {"dashboard.read", "assistant.ask", "knowledge.search", "workflow.execute", "profile.manage"},
+    "operator": {"dashboard.read", "assistant.ask", "knowledge.search", "workflow.execute", "workflow.publish", "profile.manage"},
     "admin": {"*"},
 }
 
@@ -29,8 +29,6 @@ ROUTE_POLICIES = (
     RoutePolicy("/context", "dashboard.read"),
     RoutePolicy("/workflows", "workflow.execute", frozenset({"GET", "POST"})),
     RoutePolicy("/knowledge", "knowledge.manage"),
-    RoutePolicy("/zabbix", "zabbix.read"),
-    RoutePolicy("/infra", "infrastructure.read"),
     RoutePolicy("/engine", "intelligence.manage"),
     RoutePolicy("/learning", "intelligence.manage"),
     RoutePolicy("/marketplace", "platform.manage"),
@@ -49,6 +47,10 @@ def is_allowed(role: str, capability: str) -> bool:
 
 
 def required_capability(path: str, method: str) -> str | None:
+    from core.domain_registry import domain_registry
+    domain_capability = domain_registry.required_capability(path, method)
+    if domain_capability:
+        return domain_capability
     for policy in ROUTE_POLICIES:
         if policy.matches(path, method):
             return policy.capability

@@ -23,6 +23,7 @@ from core.event_bus import event_bus
 from core.event_handlers import register_default_event_handlers
 from core.registry import registry
 from core.snapshot_scheduler import SnapshotScheduler
+from core.domain_registry import domain_registry
 from core.authorization import is_allowed, required_capability
 from core.observability import HTTP_LATENCY, HTTP_REQUESTS
 
@@ -44,10 +45,15 @@ class Application:
         self.event_bus.clear()
 
         snapshot = bootstrap_registry()
+        self.snapshot_scheduler.configure_domain_jobs(
+            job for definition in domain_registry.definitions() for job in definition.scheduled_jobs()
+        )
         self.registry.register_service("settings", self.settings)
         self.registry.register_service("event_bus", self.event_bus)
         self.registry.register_service("registry_snapshot", snapshot)
         register_default_event_handlers(self.event_bus)
+        for definition in domain_registry.definitions():
+            definition.register_event_handlers(self.event_bus)
         self.registry.register_service("snapshot_scheduler", self.snapshot_scheduler)
         self.registry.register_service("autonomy_scheduler", self.autonomy_scheduler)
 
@@ -78,6 +84,7 @@ class Application:
             result = module.shutdown({"registry": self.registry, "event_bus": self.event_bus})
             if asyncio.iscoroutine(result):
                 await result
+        postgres_store.close()
 
     def create(self) -> FastAPI:
         @asynccontextmanager
@@ -102,7 +109,6 @@ class Application:
                 "/knowledge/upload",
                 "/knowledge/ingest",
                 "/knowledge/ingest/site",
-                "/zabbix/groups",
             }
             path = request.url.path
             method = request.method.upper()
@@ -166,7 +172,8 @@ class Application:
             response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
             response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
             response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-            response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+            if request.url.scheme == "https":
+                response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
             route = getattr(request.scope.get("route"), "path", path)
             HTTP_REQUESTS.labels(method=method, route=route, status=str(response.status_code)).inc()
             HTTP_LATENCY.labels(method=method, route=route).observe(time.perf_counter() - request_started)
@@ -195,7 +202,6 @@ class Application:
         from routes.dashboard import router as dashboard_router
         from routes.engine import router as engine_router
         from routes.health import router as health_router
-        from routes.infra import router as infra_router
         from routes.knowledge import router as knowledge_router
         from routes.learning import router as learning_router
         from routes.marketplace import router as marketplace_router
@@ -203,14 +209,14 @@ class Application:
         from routes.metrics import router as metrics_router
         from routes.security import router as security_router
         from routes.workflows import router as workflows_router
-        from routes.zabbix import router as zabbix_router
 
         app.include_router(health_router)
         app.include_router(metrics_router)
         app.include_router(auth_router)
         app.include_router(dashboard_router)
-        app.include_router(infra_router)
-        app.include_router(zabbix_router)
+        for definition in domain_registry.definitions():
+            for domain_router in definition.routers():
+                app.include_router(domain_router)
         app.include_router(core_router)
         app.include_router(knowledge_router)
         app.include_router(workflows_router)

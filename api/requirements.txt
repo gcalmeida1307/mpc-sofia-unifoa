@@ -3,6 +3,7 @@ uvicorn[standard]
 requests
 python-dotenv
 psycopg[binary]
+psycopg-pool
 qdrant-client
 pyotp
 python-multipart

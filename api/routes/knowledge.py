@@ -13,6 +13,8 @@ from services.knowledge import (
 )
 
 router = APIRouter(prefix="/knowledge", tags=["Knowledge"])
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024
+ALLOWED_UPLOAD_SUFFIXES = {".txt", ".md", ".pdf", ".docx"}
 
 
 class KnowledgeIngestRequest(BaseModel):
@@ -87,6 +89,11 @@ async def upload_training_asset(
         raise HTTPException(status_code=400, detail=f"invalid metadata JSON: {exc}") from exc
 
     content = await file.read()
+    suffix = ("." + (file.filename or "").rsplit(".", 1)[-1].lower()) if "." in (file.filename or "") else ""
+    if suffix not in ALLOWED_UPLOAD_SUFFIXES:
+        raise HTTPException(status_code=415, detail="tipo de arquivo não permitido")
+    if len(content) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="arquivo excede o limite de 10 MB")
     return ingest_source(
         {
             "source": source,

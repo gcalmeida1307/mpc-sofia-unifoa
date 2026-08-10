@@ -31,6 +31,8 @@ class ZabbixConfig:
 @dataclass(frozen=True)
 class PostgresConfig:
     dsn: str
+    pool_min_size: int
+    pool_max_size: int
 
 
 @dataclass(frozen=True)
@@ -62,6 +64,7 @@ class RuntimeConfig:
     autonomous_investigation_interval_seconds: int
     ai_metrics_window_hours: int
     request_rate_limit_per_minute: int
+    installed_domains: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -85,6 +88,8 @@ class Settings:
         )
         self.postgres = PostgresConfig(
             dsn=os.getenv("POSTGRES_DSN", "postgresql://sofia:sofia123@sofia_postgres:5432/sofia"),
+            pool_min_size=max(1, int(os.getenv("POSTGRES_POOL_MIN_SIZE", "1"))),
+            pool_max_size=max(2, int(os.getenv("POSTGRES_POOL_MAX_SIZE", "10"))),
         )
         self.qdrant = QdrantConfig(
             url=os.getenv("QDRANT_URL", "http://sofia_qdrant:6333"),
@@ -108,6 +113,7 @@ class Settings:
             autonomous_investigation_interval_seconds=int(os.getenv("AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS", "90")),
             ai_metrics_window_hours=int(os.getenv("AI_METRICS_WINDOW_HOURS", "24")),
             request_rate_limit_per_minute=int(os.getenv("REQUEST_RATE_LIMIT_PER_MINUTE", "120")),
+            installed_domains=tuple(item.strip() for item in os.getenv("SOFIA_INSTALLED_DOMAINS", "domains.infrastructure.definition:domain").split(",") if item.strip()),
         )
         self.security = SecurityConfig(
             admin_api_key=os.getenv("SECURITY_ADMIN_API_KEY", ""),
@@ -124,6 +130,7 @@ class Settings:
         self.AUTONOMOUS_INVESTIGATION_INTERVAL_SECONDS = self.runtime.autonomous_investigation_interval_seconds
         self.AI_METRICS_WINDOW_HOURS = self.runtime.ai_metrics_window_hours
         self.REQUEST_RATE_LIMIT_PER_MINUTE = self.runtime.request_rate_limit_per_minute
+        self.INSTALLED_DOMAINS = self.runtime.installed_domains
         self.SECURITY_ADMIN_API_KEY = self.security.admin_api_key
         self.SECURITY_MFA_TOTP_SECRET = self.security.mfa_totp_secret
         self.AUTH_BOOTSTRAP_TOKEN = self.security.auth_bootstrap_token
@@ -191,6 +198,7 @@ class Settings:
                 "autonomous_investigation_interval_seconds": self.runtime.autonomous_investigation_interval_seconds,
                 "ai_metrics_window_hours": self.runtime.ai_metrics_window_hours,
                 "request_rate_limit_per_minute": self.runtime.request_rate_limit_per_minute,
+                "installed_domains": [item.split(":", 1)[0] for item in self.runtime.installed_domains],
             },
         }
 

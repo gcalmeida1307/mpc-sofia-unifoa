@@ -3,7 +3,6 @@ from __future__ import annotations
 import asyncio
 import logging
 
-from context.infrastructure import snapshot_service
 from learning.service import learning_service
 from services.knowledge import refresh_due_knowledge_sources
 
@@ -15,6 +14,10 @@ class SnapshotScheduler:
         self.interval_seconds = max(5, int(interval_seconds))
         self._task: asyncio.Task | None = None
         self._running = False
+        self._domain_jobs = []
+
+    def configure_domain_jobs(self, jobs) -> None:
+        self._domain_jobs = list(jobs)
 
     async def start(self) -> None:
         if self._task and not self._task.done():
@@ -33,9 +36,9 @@ class SnapshotScheduler:
                 pass
             self._task = None
 
-    @staticmethod
-    def _refresh_learning_cycle() -> None:
-        snapshot_service.refresh()
+    def _refresh_learning_cycle(self) -> None:
+        for job in self._domain_jobs:
+            job()
         refresh_due_knowledge_sources()
         learning_service.learn()
 
