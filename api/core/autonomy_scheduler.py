@@ -20,7 +20,6 @@ class AutonomyScheduler:
         if self._task and not self._task.done():
             return
         self._running = True
-        await self._run_cycle()
         self._task = asyncio.create_task(self._run())
 
     async def stop(self) -> None:
@@ -42,8 +41,8 @@ class AutonomyScheduler:
 
     async def _run(self) -> None:
         while self._running:
-            await asyncio.sleep(self.interval_seconds)
             await self._run_cycle()
+            await asyncio.sleep(self.interval_seconds)
 
 
 autonomy_scheduler = AutonomyScheduler()

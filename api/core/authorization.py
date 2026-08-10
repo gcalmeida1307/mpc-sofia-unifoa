@@ -29,6 +29,8 @@ ROUTE_POLICIES = (
     RoutePolicy("/context", "dashboard.read"),
     RoutePolicy("/workflows", "workflow.execute", frozenset({"GET", "POST"})),
     RoutePolicy("/knowledge", "knowledge.manage"),
+    RoutePolicy("/domains", "platform.manage", frozenset({"POST", "DELETE", "PATCH", "PUT"})),
+    RoutePolicy("/domains", "knowledge.search", frozenset({"GET"})),
     RoutePolicy("/engine", "intelligence.manage"),
     RoutePolicy("/learning", "intelligence.manage"),
     RoutePolicy("/marketplace", "platform.manage"),

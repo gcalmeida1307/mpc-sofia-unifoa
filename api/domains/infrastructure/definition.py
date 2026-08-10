@@ -42,7 +42,8 @@ def _scheduled_jobs():
 
 def _autonomy_jobs():
     from ai.autonomous_investigator import autonomous_investigator
-    return [autonomous_investigator.run_cycle]
+    from services.behavior_patterns import behavior_pattern_analyzer
+    return [behavior_pattern_analyzer.run_cycle, autonomous_investigator.run_cycle]
 
 
 def _register_event_handlers(event_bus):

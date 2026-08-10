@@ -79,6 +79,14 @@ def test_ux_architecture_has_analytics_intelligence_and_clean_automation():
     assert ".analytic-donut>.severity-legend" in styles
 
 
+def test_knowledge_page_can_install_declarative_domains():
+    html=(STATIC / "base.html").read_text(encoding="utf-8")
+    script=(STATIC / "base.js").read_text(encoding="utf-8")
+    assert 'id="domain-form"' in html and "Criar módulo operacional" in html
+    assert "Entidades principais" in html and "Indicadores importantes" in html
+    assert "'/domains'" in script and "permissions" in script and "routes.search" in script
+
+
 def test_chat_displays_operational_progress_without_exposing_internal_reasoning():
     html = (STATIC / "conversar.html").read_text(encoding="utf-8")
     assert 'id="answer-progress"' in html

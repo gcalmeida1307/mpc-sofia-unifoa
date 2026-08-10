@@ -346,6 +346,27 @@ class PostgresStore:
         except Exception:
             return []
 
+    def get_sampled_snapshots(self, domain_id: str, scan_limit: int = 2200, stride: int = 5) -> list[dict[str, Any]]:
+        """Keep temporal coverage while avoiding transfer of every large JSON snapshot."""
+        if not self._ready and not self.ensure_schema():
+            return []
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """SELECT generated_at,summary,payload FROM (
+                            SELECT generated_at,summary,payload,
+                                   row_number() OVER (ORDER BY generated_at DESC) AS sample_number
+                            FROM domain_snapshots WHERE domain_id=%s
+                            ORDER BY generated_at DESC LIMIT %s
+                        ) sampled WHERE (sample_number-1) %% %s=0 ORDER BY generated_at DESC""",
+                        (domain_id, max(1, int(scan_limit)), max(1, int(stride))),
+                    )
+                    rows=cur.fetchall()
+            return [{"generated_at":at.isoformat() if at else None,"summary":summary,"payload":payload} for at,summary,payload in rows]
+        except Exception:
+            return []
+
     def get_group_trends(self, days: int = 30, limit: int = 10) -> list[dict[str, Any]]:
         if not self._ready and not self.ensure_schema():
             return []
