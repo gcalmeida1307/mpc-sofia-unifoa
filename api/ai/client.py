@@ -5,6 +5,7 @@ import re
 
 import requests
 from config.settings import settings
+from core.observability import LLM_REQUESTS, LLM_TOKENS
 
 
 class ReasoningProvider:
@@ -98,18 +99,24 @@ class ReasoningProvider:
             response.raise_for_status()
             self.last_anthropic_error = None
             data = response.json()
+            usage = data.get("usage", {})
+            LLM_REQUESTS.labels(provider="anthropic", status="success").inc()
+            LLM_TOKENS.labels(provider="anthropic", direction="input").inc(int(usage.get("input_tokens", 0) or 0))
+            LLM_TOKENS.labels(provider="anthropic", direction="output").inc(int(usage.get("output_tokens", 0) or 0))
             return {
                 "text": "".join(block.get("text", "") for block in data.get("content", []) if block.get("type") == "text"),
-                "usage": data.get("usage", {}),
+                "usage": usage,
                 "model": data.get("model", self.anthropic_model),
                 "provider": "anthropic",
             }
         except requests.HTTPError as exc:
             status = exc.response.status_code if exc.response is not None else 0
             self.last_anthropic_error = self._classify_provider_error(status)
+            LLM_REQUESTS.labels(provider="anthropic", status=self.last_anthropic_error).inc()
             return None
         except requests.RequestException:
             self.last_anthropic_error = "unavailable"
+            LLM_REQUESTS.labels(provider="anthropic", status="unavailable").inc()
             return None
 
     def _ask_ollama(self, messages: list[dict], max_tokens: int | None = None) -> dict | None:
@@ -154,6 +161,7 @@ class ReasoningProvider:
                 )
                 response.raise_for_status()
                 data = response.json()
+                LLM_REQUESTS.labels(provider="ollama", status="success").inc()
                 choices = data.get("choices", [])
                 text = ""
                 if choices and isinstance(choices[0], dict):
@@ -182,6 +190,9 @@ class ReasoningProvider:
             )
             response.raise_for_status()
             data = response.json()
+            LLM_REQUESTS.labels(provider="ollama", status="success").inc()
+            LLM_TOKENS.labels(provider="ollama", direction="input").inc(int(data.get("prompt_eval_count", 0) or 0))
+            LLM_TOKENS.labels(provider="ollama", direction="output").inc(int(data.get("eval_count", 0) or 0))
             return {
                 "text": data.get("message", {}).get("content", ""),
                 "usage": {
@@ -194,9 +205,11 @@ class ReasoningProvider:
         except requests.HTTPError as exc:
             status = exc.response.status_code if exc.response is not None else 0
             self.last_ollama_error = self._classify_provider_error(status)
+            LLM_REQUESTS.labels(provider="ollama", status=self.last_ollama_error).inc()
             return None
         except requests.RequestException:
             self.last_ollama_error = "unavailable"
+            LLM_REQUESTS.labels(provider="ollama", status="unavailable").inc()
             return None
 
     @staticmethod

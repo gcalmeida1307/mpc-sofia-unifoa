@@ -17,6 +17,8 @@ from connectors.zabbix import ZabbixConnector
 from services.knowledge import search_knowledge
 from services.postgres_store import postgres_store
 from services.predictive_analytics import analyze_problem_series
+from workflow.compiler import compile_graph, validate_graph
+from core.observability import WORKFLOW_RUNS
 
 
 CONNECTOR_CATALOG = [
@@ -65,19 +67,7 @@ class AutomationGraphStore:
 
     @staticmethod
     def validate(nodes: list[dict[str, Any]], edges: list[dict[str, Any]]) -> None:
-        if len(nodes) > 80 or len(edges) > 160:
-            raise ValueError("O grafo excede o limite seguro")
-        ids = {str(node.get("id", "")) for node in nodes}
-        if "" in ids or len(ids) != len(nodes):
-            raise ValueError("Nós precisam de identificadores únicos")
-        invalid_types = sorted({str(node.get("type")) for node in nodes} - set(CATALOG_BY_TYPE))
-        if invalid_types:
-            raise ValueError(f"Tipos de bloco inválidos: {', '.join(invalid_types)}")
-        for edge in edges:
-            if str(edge.get("source")) not in ids or str(edge.get("target")) not in ids:
-                raise ValueError("Conector aponta para um bloco inexistente")
-            if edge.get("source") == edge.get("target"):
-                raise ValueError("Um bloco não pode conectar a si mesmo")
+        validate_graph(nodes, edges, set(CATALOG_BY_TYPE))
 
     def list(self) -> list[dict[str, Any]]:
         self.ensure_schema()
@@ -116,15 +106,7 @@ class AutomationGraphStore:
 
     @staticmethod
     def _ordered_nodes(nodes: list[dict[str, Any]], edges: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        incoming={str(e['target']) for e in edges};ordered=[];pending={str(n['id']):n for n in nodes}
-        frontier=[key for key in pending if key not in incoming]
-        while frontier:
-            node_id=frontier.pop(0)
-            if node_id not in pending:continue
-            node=pending.pop(node_id);ordered.append(node)
-            frontier.extend(str(e['target']) for e in edges if str(e['source'])==node_id)
-        ordered.extend(pending.values())
-        return ordered
+        return compile_graph(nodes, edges, reject_cycles=True)
 
     @staticmethod
     def _zabbix_analysis(problems: list[dict[str, Any]]) -> dict[str, Any]:
@@ -256,6 +238,7 @@ class AutomationGraphStore:
                 outputs.append(output);timeline.append({key:output[key] for key in ('node_id','label','connector','status')})
                 if result.get('is_report'):report=result['summary']
             status='completed' if all(item['status']=='completed' for item in outputs) else 'partial'
+            WORKFLOW_RUNS.labels(status=status).inc()
             if not report:report='\n\n'.join(item['summary'] for item in outputs if item['connector']!='trigger')
             run_id=str(uuid4())
             conn.execute("INSERT INTO automation_runs(id,graph_id,status,timeline,outputs,report,created_by) VALUES(%s,%s,%s,%s,%s,%s,%s)",(run_id,graph_id,status,Jsonb(timeline),Jsonb(outputs),report,user_id));conn.commit()

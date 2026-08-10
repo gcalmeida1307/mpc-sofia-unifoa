@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from services.auth import auth_service
 from services.notifications import email_notifier
+from core.authorization import capabilities_for
 
 router = APIRouter(prefix='/auth', tags=['Authentication'])
 
@@ -61,7 +62,7 @@ def logout(request: Request):
 def me(request: Request):
     user=auth_service.authenticate(bearer(request))
     if not user: raise HTTPException(401,'Sessão inválida ou expirada')
-    return user
+    return {**user, 'capabilities': sorted(capabilities_for(user['role']))}
 
 @router.patch('/me')
 def update_me(payload: ProfileIn, request: Request):

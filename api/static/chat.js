@@ -16,7 +16,9 @@
     if(context.group)items.push(`Grupo: ${context.group}`);
     if(context.days)items.push(`Período: ${context.days} dia(s)`);
     const tools=(result.plan?.tools||[]).map(tool=>String(tool).split('.').at(-1));
-    return `<footer class="answer-meta"><span>${cEsc(humanSource(result.source))}</span><span>${items.length||tools.length} evidência(s)</span><span>${Math.round((Number(result.confidence)||0)*100)}% confiança</span></footer>
+    const sources=(result.sources_used||[humanSource(result.source)]).map(cEsc);
+    const mode=result.degraded?'Modo local/degradado':'Resposta completa';
+    return `<footer class="answer-meta"><span>${sources.join(' + ')}</span><span>${items.length||tools.length} evidência(s)</span><span>${Math.round((Number(result.confidence)||0)*100)}% confiança</span><span>${cEsc(mode)}</span></footer>
       <div class="answer-actions"><a href="/ui/analytics.html">Mostrar gráficos</a><details><summary>Ver evidências</summary><ul>${items.map(item=>`<li>${cEsc(item)}</li>`).join('')||'<li>Resposta conceitual, sem telemetria operacional.</li>'}${tools.length?`<li>Consultas: ${tools.map(cEsc).join(', ')}</li>`:''}</ul></details><button type="button" data-deepen>Executar análise detalhada</button></div>`;
   }
 

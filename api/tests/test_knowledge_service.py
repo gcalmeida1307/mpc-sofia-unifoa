@@ -26,8 +26,9 @@ class KnowledgeServiceTestCase(unittest.TestCase):
             ),
         }
 
-        def fake_get(url, timeout=None, headers=None):
+        def fake_get(url, timeout=None, headers=None, allow_redirects=False):
             response = Mock()
+            response.status_code = 200
             response.text = html_pages[url]
             response.headers = {"content-type": "text/html; charset=utf-8"}
             response.raise_for_status = Mock()
@@ -35,7 +36,7 @@ class KnowledgeServiceTestCase(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_root = Path(temp_dir)
-            with patch("services.knowledge.DOCS_ROOT", temp_root), patch("services.knowledge.requests.get", side_effect=fake_get):
+            with patch("services.knowledge.DOCS_ROOT", temp_root), patch("services.knowledge.requests.get", side_effect=fake_get), patch("core.url_security.socket.getaddrinfo", return_value=[(None, None, None, None, ("93.184.216.34", 443))]):
                 from services.knowledge import ingest_source
 
                 result = ingest_source(

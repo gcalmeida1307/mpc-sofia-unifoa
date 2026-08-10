@@ -1,12 +1,48 @@
 import requests
+import time
 from datetime import datetime, timedelta, timezone
 
 from config.settings import settings
+from core.observability import INTEGRATION_LATENCY, INTEGRATION_REQUESTS
 
 
 class ZabbixConnector:
+    _circuit_failures = 0
+    _circuit_open_until = 0.0
+
     def __init__(self):
         self.token = None
+
+    def _post(self, url: str, **kwargs):
+        if time.monotonic() < self.__class__._circuit_open_until:
+            INTEGRATION_REQUESTS.labels(integration="zabbix", operation="jsonrpc", status="circuit_open").inc()
+            raise requests.ConnectionError("Zabbix temporariamente indisponível; circuito aberto")
+        started = time.perf_counter()
+        last_error: Exception | None = None
+        try:
+            for attempt in range(2):
+                try:
+                    response = requests.post(url, **kwargs)
+                    if response.status_code >= 500 and attempt == 0:
+                        time.sleep(0.08)
+                        continue
+                    response.raise_for_status()
+                    self.__class__._circuit_failures = 0
+                    INTEGRATION_REQUESTS.labels(integration="zabbix", operation="jsonrpc", status="success").inc()
+                    return response
+                except requests.RequestException as exc:
+                    last_error = exc
+                    # A timeout already consumed the configured budget. Retrying it
+                    # synchronously would double chat latency; the next snapshot
+                    # cycle is the safe retry boundary.
+                    break
+            self.__class__._circuit_failures += 1
+            if self.__class__._circuit_failures >= 3:
+                self.__class__._circuit_open_until = time.monotonic() + 20
+            INTEGRATION_REQUESTS.labels(integration="zabbix", operation="jsonrpc", status="failure").inc()
+            raise last_error or requests.ConnectionError("Falha no Zabbix")
+        finally:
+            INTEGRATION_LATENCY.labels(integration="zabbix", operation="jsonrpc").observe(time.perf_counter() - started)
 
     def login(self):
         payload = {
@@ -18,12 +54,11 @@ class ZabbixConnector:
             },
             "id": 1,
         }
-        response = requests.post(
+        response = self._post(
             settings.ZABBIX_URL,
             json=payload,
             timeout=settings.REQUEST_TIMEOUT,
         )
-        response.raise_for_status()
         data = response.json()
         if "error" in data:
             raise Exception(data["error"])
@@ -34,8 +69,8 @@ class ZabbixConnector:
         if not self.token:
             self.login()
         payload = {"jsonrpc":"2.0","method":method,"params":params,"auth":self.token,"id":request_id}
-        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
-        response.raise_for_status();data=response.json()
+        response = self._post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
+        data=response.json()
         if "error" in data:
             raise Exception(data["error"])
         return data.get("result", [])
@@ -113,7 +148,7 @@ class ZabbixConnector:
             "auth": self.token,
             "id": 2,
         }
-        response = requests.post(
+        response = self._post(
             settings.ZABBIX_URL,
             json=payload,
             timeout=settings.REQUEST_TIMEOUT,
@@ -151,7 +186,7 @@ class ZabbixConnector:
             "auth": self.token,
             "id": 3,
         }
-        response = requests.post(
+        response = self._post(
             settings.ZABBIX_URL,
             json=payload,
             timeout=settings.REQUEST_TIMEOUT,
@@ -174,7 +209,7 @@ class ZabbixConnector:
         if groupids:
             params["groupids"] = groupids
         payload = {"jsonrpc":"2.0","method":"event.get","params":params,"auth":self.token,"id":7}
-        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
+        response = self._post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
         if "error" in data:
@@ -198,7 +233,7 @@ class ZabbixConnector:
             "auth": self.token,
             "id": 4,
         }
-        response = requests.post(
+        response = self._post(
             settings.ZABBIX_URL,
             json=payload,
             timeout=settings.REQUEST_TIMEOUT,
@@ -230,7 +265,7 @@ class ZabbixConnector:
             "auth": self.token,
             "id": 6,
         }
-        response = requests.post(
+        response = self._post(
             settings.ZABBIX_URL,
             json=payload,
             timeout=settings.REQUEST_TIMEOUT,
@@ -262,7 +297,7 @@ class ZabbixConnector:
             "auth": self.token,
             "id": 5,
         }
-        response = requests.post(
+        response = self._post(
             settings.ZABBIX_URL,
             json=payload,
             timeout=settings.REQUEST_TIMEOUT,
@@ -394,7 +429,7 @@ class ZabbixConnector:
             "auth": self.token,
             "id": 20,
         }
-        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
+        response = self._post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
         if "error" in data:
@@ -411,7 +446,7 @@ class ZabbixConnector:
             "auth": self.token,
             "id": 21,
         }
-        response = requests.post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
+        response = self._post(settings.ZABBIX_URL, json=payload, timeout=settings.REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
         if "error" in data:

@@ -12,6 +12,7 @@ from typing import Any
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import requests
+from core.url_security import validate_external_url
 
 from config.settings import settings
 from services.qdrant_store import qdrant_store
@@ -449,6 +450,16 @@ def _save_page(source_name: str, page: dict[str, Any]) -> Path:
     return path
 
 
+def _page_has_changed(source_name: str, page: dict[str, Any]) -> bool:
+    path = _page_path(source_name, page["url"], page.get("title") or "")
+    if not path.exists():
+        return True
+    try:
+        return path.read_text(encoding="utf-8") != _page_markdown(page)
+    except OSError:
+        return True
+
+
 def _index_page(page: dict[str, Any], metadata: dict[str, Any]) -> int:
     chunks = _chunk_text(page.get("text", ""))
     indexed = [
@@ -470,11 +481,18 @@ def _index_page(page: dict[str, Any], metadata: dict[str, Any]) -> int:
 
 
 def _fetch_html(url: str) -> str:
-    response = requests.get(
-        url,
-        timeout=settings.REQUEST_TIMEOUT,
-        headers={"User-Agent": DEFAULT_USER_AGENT},
-    )
+    response = None
+    for _ in range(5):
+        url = validate_external_url(url)
+        response = requests.get(url, timeout=settings.REQUEST_TIMEOUT, headers={"User-Agent": DEFAULT_USER_AGENT}, allow_redirects=False)
+        if response.status_code not in {301, 302, 303, 307, 308}:
+            break
+        location = response.headers.get("location")
+        if not location:
+            raise ValueError("redirecionamento sem destino")
+        url = urljoin(url, location)
+    if response is None or response.status_code in {301, 302, 303, 307, 308}:
+        raise ValueError("limite seguro de redirecionamentos excedido")
     response.raise_for_status()
     content_type = (response.headers.get("content-type") or "").lower()
     if "html" not in content_type and "text" not in content_type:
@@ -512,6 +530,7 @@ def _crawl_documentation_site(
     allowed_domains: list[str] | None = None,
     allowed_paths: list[str] | None = None,
 ) -> dict[str, Any]:
+    url = validate_external_url(url, set(allowed_domains or [] ) or None)
     metadata = metadata or {}
     queue = deque([(url, 0)])
     visited: set[str] = set()
@@ -543,10 +562,12 @@ def _crawl_documentation_site(
                 "text": text,
                 "links": document.get("links", []),
             }
-            saved_path = _save_page(source_name, page)
+            changed = _page_has_changed(source_name, page)
+            saved_path = _save_page(source_name, page) if changed else _page_path(source_name, page["url"], page.get("title") or "")
             saved_files.append(str(saved_path))
-            indexed_chunks += _index_page(page, {"source": source_name, "type": "documentation_site", **metadata})
-            pages.append({"url": normalized_url, "title": page["title"], "path": str(saved_path)})
+            if changed:
+                indexed_chunks += _index_page(page, {"source": source_name, "type": "documentation_site", **metadata})
+            pages.append({"url": normalized_url, "title": page["title"], "path": str(saved_path), "changed": changed})
 
             if depth < max_depth:
                 for link in _internal_links(normalized_url, page.get("links", []), allowed_hosts, allowed_prefixes):

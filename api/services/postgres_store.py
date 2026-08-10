@@ -148,12 +148,39 @@ class PostgresStore:
                         )
                         """
                     )
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_assistant_messages_created_at ON assistant_messages(created_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_assistant_insights_kind_updated ON assistant_insights(kind, updated_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_infra_snapshots_generated_at ON infra_snapshots(generated_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_tool_audit_created_at ON tool_execution_audit(created_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_tool_audit_tool_status ON tool_execution_audit(tool, success, created_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_ai_metrics_created_at ON ai_response_metrics(created_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_learning_cycles_created_at ON ai_learning_cycles(created_at DESC)")
+                    cur.execute("CREATE INDEX IF NOT EXISTS idx_investigations_status_created ON autonomous_investigations(status, created_at DESC)")
                 conn.commit()
             self._ready = True
             return True
         except Exception:
             self._ready = False
             return False
+
+    def apply_retention(self, raw_snapshot_days: int = 30, audit_days: int = 90) -> dict[str, int]:
+        """Delete only aged operational telemetry; user and knowledge records are never touched."""
+        if not self._ready and not self.ensure_schema():
+            return {"snapshots": 0, "tool_audits": 0, "ai_metrics": 0}
+        limits = {"snapshots": max(7, raw_snapshot_days), "tool_audits": max(30, audit_days), "ai_metrics": max(30, audit_days)}
+        try:
+            with self._connect() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("DELETE FROM infra_snapshots WHERE generated_at < NOW() - (%s || ' days')::interval", (str(limits["snapshots"]),))
+                    snapshots = cur.rowcount
+                    cur.execute("DELETE FROM tool_execution_audit WHERE created_at < NOW() - (%s || ' days')::interval", (str(limits["tool_audits"]),))
+                    audits = cur.rowcount
+                    cur.execute("DELETE FROM ai_response_metrics WHERE created_at < NOW() - (%s || ' days')::interval", (str(limits["ai_metrics"]),))
+                    metrics = cur.rowcount
+                conn.commit()
+            return {"snapshots": snapshots, "tool_audits": audits, "ai_metrics": metrics}
+        except Exception:
+            return {"snapshots": 0, "tool_audits": 0, "ai_metrics": 0}
 
     def add_message(self, role: str, text: str, metadata: dict[str, Any] | None = None) -> bool:
         if not self._ready and not self.ensure_schema():

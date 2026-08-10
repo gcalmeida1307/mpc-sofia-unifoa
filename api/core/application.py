@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 
 from services.auth import auth_service
 from services.automation_graph import automation_graph_store
+from services.postgres_store import postgres_store
 from fastapi.staticfiles import StaticFiles
 import pyotp
 
@@ -22,6 +23,8 @@ from core.event_bus import event_bus
 from core.event_handlers import register_default_event_handlers
 from core.registry import registry
 from core.snapshot_scheduler import SnapshotScheduler
+from core.authorization import is_allowed, required_capability
+from core.observability import HTTP_LATENCY, HTTP_REQUESTS
 
 
 class Application:
@@ -59,6 +62,8 @@ class Application:
                 await result
 
         auth_service.ensure_schema()
+        postgres_store.ensure_schema()
+        postgres_store.apply_retention()
         automation_graph_store.ensure_schema()
         await self.snapshot_scheduler.start()
         await self.autonomy_scheduler.start()
@@ -86,6 +91,7 @@ class Application:
 
         @app.middleware("http")
         async def add_security_headers(request, call_next):
+            request_started = time.perf_counter()
             protected_write_paths = {
                 "/marketplace/install",
                 "/workflows/run",
@@ -111,9 +117,10 @@ class Application:
                 request.state.user = user
                 if user.get('email_required') and path not in {'/auth/me', '/auth/logout'}:
                     return JSONResponse(status_code=428, content={'detail': 'cadastre um e-mail de recuperacao no perfil'})
-                admin_prefixes = ("/knowledge", "/marketplace", "/workflows", "/engine", "/learning", "/zabbix", "/infra", "/core", "/docs")
-                if user["role"] != "admin" and path.startswith(admin_prefixes):
-                    return JSONResponse(status_code=403, content={"detail": "perfil admin necessário"})
+                capability = required_capability(path, method)
+                if capability and not is_allowed(user["role"], capability):
+                    auth_service.audit(user["username"], f"capability_denied:{capability}", False, user_id=user["id"])
+                    return JSONResponse(status_code=403, content={"detail": "capacidade não autorizada", "required_capability": capability})
 
             # Enforce admin API key and optional TOTP for critical mutating endpoints.
             if method in {"POST", "PUT", "PATCH", "DELETE"} and path in protected_write_paths and not (getattr(request.state, "user", None) and request.state.user.get("role") == "admin"):
@@ -160,6 +167,9 @@ class Application:
             response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
             response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
             response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+            route = getattr(request.scope.get("route"), "path", path)
+            HTTP_REQUESTS.labels(method=method, route=route, status=str(response.status_code)).inc()
+            HTTP_LATENCY.labels(method=method, route=route).observe(time.perf_counter() - request_started)
             return response
 
         self._register_routes(app)

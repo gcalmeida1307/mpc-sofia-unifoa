@@ -57,6 +57,9 @@ def ask(payload: AIAskRequest):
                 "learning":{"stored":True,"semantic_query":semantic_data},"llm_used":semantic.interpretation_source in {"anthropic","ollama"},
                 "context":{"related_problem_count":len(execution["matches"]),"unique_host_count":len(execution["hosts"]),"group":execution["group"],"days":execution["days"]},
                 "source":"semantic-zabbix",
+                "response_mode":"evidence_based",
+                "sources_used":["Zabbix", *( ["Claude (interpretação)"] if semantic.interpretation_source == "anthropic" else ["Ollama (interpretação)"] if semantic.interpretation_source == "ollama" else ["Regras locais"] )],
+                "degraded":False,
             }
     except Exception:
         pass
@@ -68,6 +71,10 @@ def ask(payload: AIAskRequest):
         "assistant", answer,
         {"channel": "ai", "purpose": "training", "learning_signature": result.get("learning", {}).get("signature")},
     )
+    provider = result.get("critic", {}).get("provider", "none")
+    evidence_sources = result.get("explainability", {}).get("evidence_sources", []) or []
+    sources_used = (["Claude"] if provider == "anthropic" else ["Ollama"] if provider == "ollama" else ["Regras locais"])
+    sources_used.extend(str(item) for item in evidence_sources if item)
     return {
         "answer": answer,
         "plan": result.get("plan", {}),
@@ -80,4 +87,7 @@ def ask(payload: AIAskRequest):
         "llm_used": result.get("llm_used", False),
         "context": result.get("context", {}),
         "source": "claude-learning-pipeline",
+        "response_mode":"full" if provider == "anthropic" else "local_fallback" if provider in {"ollama", "none"} else "degraded",
+        "sources_used":list(dict.fromkeys(sources_used)),
+        "degraded":provider not in {"anthropic"},
     }

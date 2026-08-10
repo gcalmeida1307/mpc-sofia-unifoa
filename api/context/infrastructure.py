@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 import re
+from time import perf_counter
 from typing import Any
 
 from config.settings import settings
@@ -9,6 +10,7 @@ from connectors.zabbix import ZabbixConnector
 from core.event_bus import event_bus
 from services.docker_service import DockerService
 from services.postgres_store import postgres_store
+from core.observability import SNAPSHOT_AGE, SNAPSHOT_DURATION
 
 
 def _extract_group_name(question: str) -> str | None:
@@ -69,6 +71,7 @@ class SnapshotService:
         return datetime.now(timezone.utc) - self._last_refresh > timedelta(seconds=self.refresh_seconds)
 
     def refresh(self) -> dict[str, Any]:
+        started = perf_counter()
         snapshot: dict[str, Any] = {
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "zabbix": {},
@@ -114,6 +117,8 @@ class SnapshotService:
         self._last_refresh = datetime.now(timezone.utc)
 
         self._persist_snapshot(snapshot)
+        SNAPSHOT_DURATION.observe(perf_counter() - started)
+        SNAPSHOT_AGE.set(0)
         return snapshot
 
     @staticmethod
@@ -140,6 +145,8 @@ class SnapshotService:
     def get(self, force_refresh: bool = False) -> dict[str, Any]:
         if force_refresh or self._is_stale():
             return self.refresh()
+        if self._last_refresh:
+            SNAPSHOT_AGE.set(max(0, (datetime.now(timezone.utc) - self._last_refresh).total_seconds()))
         return self._snapshot or self.refresh()
 
 

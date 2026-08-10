@@ -45,3 +45,10 @@ Use:
 - GET /core/kernel
 - GET /engine/ai/metrics
 - GET /engine/evidence/audit
+
+## 6. Knowledge Hub e autorização
+
+- URLs cadastradas passam por proteção SSRF e validação de cada redirecionamento.
+- Redes privadas, loopback, link-local e URLs com credenciais são recusadas.
+- A autorização é validada por capability em cada superfície protegida; negativas são auditadas.
+- Consulte `docs/architecture/hardening-and-performance.md` para o contrato e as métricas.
