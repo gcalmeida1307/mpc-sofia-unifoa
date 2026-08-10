@@ -4,10 +4,9 @@ import json
 from dataclasses import dataclass
 from typing import Any, Callable
 
-from connectors.zabbix import ZabbixConnector
 from core.registry import registry
-from services.infrastructure import get_infrastructure_summary
 from services.knowledge import search_knowledge
+from core.domain_registry import DomainDefinition, DomainMcpTool
 
 JSON_RPC_VERSION = "2.0"
 SUPPORTED_PROTOCOL_VERSIONS = {"2024-11-05", "2025-03-26"}
@@ -34,13 +33,6 @@ class McpServer:
                 self._platform_status,
                 "dashboard.read",
             ),
-            "sofia.infrastructure.summary": McpTool(
-                "sofia.infrastructure.summary",
-                "Return a local infrastructure summary collected by the SOFIA runtime.",
-                {"type": "object", "properties": {}, "additionalProperties": False},
-                lambda _: get_infrastructure_summary(),
-                "infrastructure.summary.read",
-            ),
             "sofia.knowledge.search": McpTool(
                 "sofia.knowledge.search",
                 "Search indexed runbooks, documentation and approved knowledge sources.",
@@ -53,14 +45,16 @@ class McpServer:
                 lambda arguments: search_knowledge(arguments["query"]),
                 "knowledge.search",
             ),
-            "sofia.zabbix.active_summary": McpTool(
-                "sofia.zabbix.active_summary",
-                "Return current Zabbix host and active problem impact summary.",
-                {"type": "object", "properties": {}, "additionalProperties": False},
-                self._zabbix_active_summary,
-                "infrastructure.monitoring.read",
-            ),
         }
+        self._platform_tool_names = set(self._tools)
+
+    def configure_domains(self, definitions: list[DomainDefinition]) -> None:
+        self._tools = {name: tool for name, tool in self._tools.items() if name in self._platform_tool_names}
+        for definition in definitions:
+            for tool in definition.mcp_tools():
+                if tool.name in self._tools:
+                    raise ValueError(f"MCP tool duplicada: {tool.name}")
+                self._tools[tool.name] = McpTool(tool.name, tool.description, tool.input_schema, tool.handler, tool.required_capability)
 
     def handle(self, payload: Any, granted_capabilities: set[str] | None = None) -> dict[str, Any] | None:
         if not isinstance(payload, dict) or payload.get("jsonrpc") != JSON_RPC_VERSION:
@@ -137,17 +131,6 @@ class McpServer:
     @staticmethod
     def _authorized(tool: McpTool, granted: set[str] | None) -> bool:
         return granted is None or "*" in granted or tool.required_capability in granted or tool.name in granted
-
-    @staticmethod
-    def _zabbix_active_summary(_: dict[str, Any]) -> dict[str, Any]:
-        connector = ZabbixConnector()
-        summary = connector.get_problem_summary(limit=200)
-        return {
-            "host_count": connector.count_hosts(),
-            "active_problems": int(summary.get("total_problems", 0) or 0),
-            "affected_hosts": int(summary.get("affected_hosts", 0) or 0),
-            "severity_buckets": summary.get("severity_buckets", {}),
-        }
 
     @staticmethod
     def _platform_status(_: dict[str, Any]) -> dict[str, Any]:

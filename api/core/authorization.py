@@ -38,7 +38,11 @@ ROUTE_POLICIES = (
 
 
 def capabilities_for(role: str) -> set[str]:
-    return set(ROLE_CAPABILITIES.get(role, ROLE_CAPABILITIES["viewer"]))
+    from core.domain_registry import domain_registry
+    granted = set(ROLE_CAPABILITIES.get(role, ROLE_CAPABILITIES["viewer"]))
+    for definition in domain_registry.definitions():
+        granted.update(definition.role_grants.get(role, set()))
+    return granted
 
 
 def is_allowed(role: str, capability: str) -> bool:

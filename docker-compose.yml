@@ -21,6 +21,9 @@ services:
         SMTP_STARTTLS: ${SMTP_STARTTLS:-true}
         ADMIN_NOTIFICATION_EMAIL: ${ADMIN_NOTIFICATION_EMAIL:-}
         POSTGRES_DSN: postgresql://${POSTGRES_USER:-sofia}:${POSTGRES_PASSWORD:-change-this-strong-password}@sofia_postgres:5432/${POSTGRES_DB:-sofia}
+        POSTGRES_POOL_MIN_SIZE: ${POSTGRES_POOL_MIN_SIZE:-1}
+        POSTGRES_POOL_MAX_SIZE: ${POSTGRES_POOL_MAX_SIZE:-10}
+        SOFIA_INSTALLED_DOMAINS: ${SOFIA_INSTALLED_DOMAINS-domains.infrastructure.definition:domain}
         OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://sofia_ollama:11434}
         OLLAMA_MODEL: "${OLLAMA_MODEL:-qwen2.5:1.5b}"
         OLLAMA_FALLBACK_MODEL: "${OLLAMA_FALLBACK_MODEL:-}"

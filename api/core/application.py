@@ -45,8 +45,13 @@ class Application:
         self.event_bus.clear()
 
         snapshot = bootstrap_registry()
+        from services.mcp_server import mcp_server
+        mcp_server.configure_domains(domain_registry.definitions())
         self.snapshot_scheduler.configure_domain_jobs(
             job for definition in domain_registry.definitions() for job in definition.scheduled_jobs()
+        )
+        self.autonomy_scheduler.configure_domain_jobs(
+            job for definition in domain_registry.definitions() for job in definition.autonomy_jobs()
         )
         self.registry.register_service("settings", self.settings)
         self.registry.register_service("event_bus", self.event_bus)
@@ -69,6 +74,9 @@ class Application:
 
         auth_service.ensure_schema()
         postgres_store.ensure_schema()
+        for definition in domain_registry.definitions():
+            for migration in definition.migrations():
+                migration()
         postgres_store.apply_retention()
         automation_graph_store.ensure_schema()
         await self.snapshot_scheduler.start()
@@ -196,7 +204,6 @@ class Application:
         from routes.auth import router as auth_router
         from routes.ai import router as ai_router
         from routes.assistant import router as assistant_router
-        from routes.context import router as context_router
         from routes.core import router as core_router
         from routes.docs import router as docs_router
         from routes.dashboard import router as dashboard_router
@@ -226,6 +233,5 @@ class Application:
         app.include_router(assistant_router)
         app.include_router(ai_router)
         app.include_router(engine_router)
-        app.include_router(context_router)
         app.include_router(learning_router)
         app.include_router(security_router)

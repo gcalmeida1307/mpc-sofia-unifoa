@@ -75,13 +75,6 @@ class PostgresStore:
                         """
                     )
                     cur.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_domain_snapshots_identity ON domain_snapshots(domain_id, generated_at)")
-                    cur.execute("""DO $$ BEGIN
-                        IF to_regclass('public.infra_snapshots') IS NOT NULL THEN
-                            INSERT INTO domain_snapshots(domain_id,generated_at,summary,payload,created_at)
-                            SELECT 'infrastructure',generated_at,summary,payload,created_at FROM infra_snapshots
-                            ON CONFLICT(domain_id,generated_at) DO NOTHING;
-                        END IF;
-                    END $$""")
                     cur.execute(
                         """
                         CREATE TABLE IF NOT EXISTS tool_execution_audit (

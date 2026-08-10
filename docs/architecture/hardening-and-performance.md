@@ -13,7 +13,17 @@ Fonte (Zabbix/Docker)
 
 ## Domínios instaláveis
 
-O Core carrega contratos indicados em `SOFIA_INSTALLED_DOMAINS`; ele não importa Zabbix, rotas de infraestrutura ou jobs de hosts. Cada `DomainDefinition` declara módulos, rotas protegidas, capabilities, ferramentas, eventos e jobs. O primeiro pacote está em `domains/infrastructure`; novos pacotes como medicina ou inventário seguem o mesmo contrato.
+O Core carrega contratos indicados em `SOFIA_INSTALLED_DOMAINS`; ele não importa Zabbix, rotas de infraestrutura ou jobs de hosts. Cada `DomainDefinition` declara manifesto, versão, dependências, módulos, rotas protegidas, grants por papel, ferramentas MCP, eventos, jobs, migrações, navegação, widgets, coleções de conhecimento e health checks. O primeiro pacote está em `domains/infrastructure`; novos pacotes como medicina ou inventário seguem o mesmo contrato.
+
+O pacote `domains/demo` é uma prova mínima e não é instalado por padrão. Para validar a fábrica sem alterar o Core:
+
+```bash
+SOFIA_INSTALLED_DOMAINS= docker compose up -d --build sofia-api
+SOFIA_INSTALLED_DOMAINS=domains.demo.definition:domain docker compose up -d --build sofia-api
+SOFIA_INSTALLED_DOMAINS=domains.infrastructure.definition:domain docker compose up -d --build sofia-api
+```
+
+Com a lista vazia, as rotas e ferramentas de infraestrutura não são registradas. Com Demo, surgem apenas `/demo/hello` e `sofia.demo.hello`. As capabilities específicas são concedidas em `role_grants` pelo próprio domínio; autorizações individuais continuam possíveis por `authorized_tools`.
 
 Snapshots usam `domain_snapshots(domain_id, generated_at, summary, payload)`. A inicialização migra de forma idempotente o histórico legado de `infra_snapshots`, sem apagar a tabela antiga ou volumes.
 

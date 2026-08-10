@@ -73,6 +73,7 @@ class ModuleRegistry:
         return name in self._services or name in self._instances
 
     def get_snapshot(self) -> dict[str, Any]:
+        from core.domain_registry import domain_registry
         modules = self.list_modules()
         return {
             "modules": modules,
@@ -82,6 +83,7 @@ class ModuleRegistry:
             },
             "capability_catalog": self.get_capability_catalog(),
             "services": sorted(self._services.keys()),
+            "domains": domain_registry.catalog(),
         }
 
     def clear(self) -> None:
