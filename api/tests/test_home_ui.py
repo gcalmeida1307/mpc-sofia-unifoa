@@ -82,8 +82,8 @@ def test_ux_architecture_has_analytics_intelligence_and_clean_automation():
 def test_chat_displays_operational_progress_without_exposing_internal_reasoning():
     html = (STATIC / "conversar.html").read_text(encoding="utf-8")
     assert 'id="answer-progress"' in html
-    assert "Consultando fontes autorizadas" in html
-    assert "raciocínio interno e dados sensíveis não são exibidos" in html
+    assert "Consultando dados" in html
+    assert "sem expor dados sensíveis" in html
 
 
 def test_design_system_applies_semantic_tokens_to_both_themes():
@@ -106,8 +106,10 @@ def test_product_navigation_chat_and_automation_are_progressively_disclosed():
     assert "localStorage.setItem('sofia-nav-collapsed'" not in auth
     assert "aria-expanded" in auth and "setMenu" in auth
     assert "One predictable menu interaction" in styles
-    assert "Ver evidências" in chat and "Mostrar gráficos" in chat
-    assert "autoRun" in chat and "sofia-current-analysis" in chat
+    assert "Abrir análise visual" in chat
+    assert "sofia-chat-history" in chat and "autoRun" in chat
+    assert "analysis_entries" in chat and "conversation-analysis" in chat
+    assert "Mostrar gráficos desta análise" not in chat and "Ver evidências" not in chat
     assert "Investigar agora no Zabbix" in (STATIC / "executive.js").read_text(encoding="utf-8")
     assert "WORKFLOW_TEMPLATES" in automation and "node-drawer" in automation
     assert "Última madrugada (22h–06h)" in automation
