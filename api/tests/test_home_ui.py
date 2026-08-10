@@ -10,8 +10,12 @@ def test_home_is_compact_and_does_not_render_audit_or_prompt_list():
     assert 'id="executive-devices"' in html
     assert 'id="risk-ranking"' in html
     assert 'id="risk-detail"' in html
-    assert "Evolução da saúde geral" in html
-    assert "Pontuação de 0 a 100% nas últimas 12 horas" in html
+    assert "Resumo operacional" in html
+    assert "Evolução da saúde" in html
+    assert "Movimento do ambiente" in html
+    assert "Saúde por área" in html
+    assert "Cinco maiores riscos" in html
+    assert "Próxima ação" in html
     assert '/ui/analista.html' in html
     assert 'id="audit"' not in html
     assert 'id="training-prompts"' not in html
