@@ -19,9 +19,18 @@ def test_home_is_compact_and_does_not_render_audit_or_prompt_list():
     assert '/ui/analista.html' in html
     assert 'id="audit"' not in html
     assert 'id="training-prompts"' not in html
-    assert 'id="dashboard-studio"' in html and 'id="widget-picker"' in html
+    assert 'id="dashboard-studio"' not in html
+
+
+def test_modular_dashboards_are_separate_from_executive_view():
+    html=(STATIC / "dashboards.html").read_text(encoding="utf-8")
     studio=(STATIC / "dashboard-studio.js").read_text(encoding="utf-8")
+    auth=(STATIC / "auth.js").read_text(encoding="utf-8")
+    assert 'id="dashboard-studio"' in html and 'id="widget-picker"' in html
+    assert "Combine dados de qualquer módulo" in html
     assert "'/dashboards/layout'" in studio and "draggable" in studio
+    for visual in ["metric","bar","line","donut","table","list","text"]:assert f"widget.type==='{visual}'" in studio or visual in studio
+    assert "/ui/dashboards.html" in auth
     assert "javascript" not in studio
 
 
