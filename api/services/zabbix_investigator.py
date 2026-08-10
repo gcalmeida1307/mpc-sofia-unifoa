@@ -110,20 +110,20 @@ zabbix_investigator=ZabbixInvestigator()
 def format_investigation(result: dict[str, Any]) -> str:
     scope=result.get("scope",{});evidence=result.get("evidence",[]) or []
     if not evidence:return "A investigação não encontrou problemas ativos relacionados no Zabbix."
-    lines=["Diagnóstico baseado somente em evidências do Zabbix",f"Escopo: {scope.get('selected_problems',0)} problema(s), {scope.get('host_count',0)} equipamento(s), {scope.get('item_count',0)} item(ns), histórico de {scope.get('history_hours',0)} hora(s)."]
-    for entry in evidence[:8]:
+    recurring=sum(1 for entry in evidence if int((entry.get('recurrence') or {}).get('occurrences',0) or 0)>1)
+    lines=["Conclusão",f"O Zabbix confirmou {scope.get('selected_problems',0)} problema(s) em {scope.get('host_count',0)} equipamento(s). {recurring} ocorrência(s) são recorrentes no período analisado.","", "Evidências prioritárias"]
+    for entry in evidence[:5]:
         host=", ".join(entry.get("hosts",[]) or []) or "equipamento não identificado";entity=f" · componente {entry.get('entity')}" if entry.get("entity") else ""
         items=entry.get("items",[]) or []
         recurrence=(entry.get("recurrence") or {}).get("occurrences",0)
-        lines.append(f"\n{host}{entity}\n- Problema: {entry.get('problem')}\n- Início: {entry.get('started_at') or 'horário não informado'}\n- Recorrência: {recurrence} ocorrência(s) em {entry.get('recurrence',{}).get('days',7)} dias")
-        preferred=[item for item in items if any(token in str(item.get("name","")).lower() for token in ("operational status","speed","bits received","bits sent","error","discard","cpu","memory","disk","service"))][:10]
+        lines.append(f"- {host}{entity}: {entry.get('problem')} · desde {entry.get('started_at') or 'horário não informado'} · {recurrence} ocorrência(s) em {entry.get('recurrence',{}).get('days',7)} dias")
+        preferred=[item for item in items if any(token in str(item.get("name","")).lower() for token in ("operational status","speed","bits received","bits sent","error","discard","cpu","memory","disk","service"))][:3]
         for item in preferred:
             label=item.get("name") or item.get("key") or "Item";unit=item.get("units") or "";interpreted=f" ({item.get('interpreted_value')})" if item.get("interpreted_value") else ""
-            history=item.get("history_summary") or {};history_note=f"; {history.get('samples')} amostras, {history.get('state_changes',0)} mudança(s) de valor" if history else "; sem histórico no período"
-            lines.append(f"- {label}: {item.get('current_value')} {unit}{interpreted}{history_note}".rstrip())
-        gaps=(entry.get("data_coverage") or {}).get("gaps",[])
-        if gaps:lines.append("- Não comprovado: "+"; ".join(gaps))
+            history=item.get("history_summary") or {};history_note=f"; {history.get('samples')} amostras e {history.get('state_changes',0)} mudança(s)" if history else "; sem histórico"
+            lines.append(f"  - {label}: {item.get('current_value')} {unit}{interpreted}{history_note}".rstrip())
+    lines.extend(["", "Tendência", "- Recorrência detectada; priorize equipamentos com mais de uma ocorrência. " if recurring else "- Não há recorrência suficiente para afirmar tendência; continue coletando amostras."])
     missing=result.get("missing_data",[]) or []
-    if missing:lines.append("\nLimites da coleta: "+"; ".join(missing)+".")
-    lines.append("\nComo tratar com segurança:\n1. Priorize o componente com queda recente e maior recorrência.\n2. Valide os valores coletados e as lacunas indicadas; não presuma cabo, energia, core ou equipamento conectado.\n3. Após a intervenção, confirme estado normal e ausência de nova ocorrência no Zabbix.")
+    if missing:lines.extend(["", "Limites", "- "+"; ".join(missing)+"."])
+    lines.extend(["", "Próxima ação", "1. Abra o equipamento com maior recorrência e valide o componente e os valores destacados.", "2. Não atribua cabo, energia ou core quando a coleta não comprovar essa causa.", "3. Depois da intervenção, confirme normalização e ausência de nova ocorrência no Zabbix."])
     return "\n".join(lines)

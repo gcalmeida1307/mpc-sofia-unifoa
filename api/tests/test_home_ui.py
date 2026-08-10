@@ -31,7 +31,7 @@ def test_operations_view_keeps_only_operational_status():
     script = (STATIC / "operations.js").read_text(encoding="utf-8")
     assert "Mudanças no ambiente" not in script
     executive_script = (STATIC / "executive.js").read_text(encoding="utf-8")
-    assert "Investigar evidências no Zabbix" in executive_script
+    assert "Investigar agora no Zabbix" in executive_script
     assert "Saúde calculada com alertas ativos e severidade" in executive_script
 
 
@@ -107,5 +107,8 @@ def test_product_navigation_chat_and_automation_are_progressively_disclosed():
     assert "aria-expanded" in auth and "setMenu" in auth
     assert "One predictable menu interaction" in styles
     assert "Ver evidências" in chat and "Mostrar gráficos" in chat
+    assert "autoRun" in chat and "sofia-current-analysis" in chat
+    assert "Investigar agora no Zabbix" in (STATIC / "executive.js").read_text(encoding="utf-8")
     assert "WORKFLOW_TEMPLATES" in automation and "node-drawer" in automation
+    assert "Última madrugada (22h–06h)" in automation
     assert "config.operation" in automation and "graph-node.running" in styles

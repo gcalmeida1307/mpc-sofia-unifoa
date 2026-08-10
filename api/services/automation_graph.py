@@ -3,7 +3,8 @@ from __future__ import annotations
 from typing import Any
 from uuid import uuid4
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 from psycopg.types.json import Jsonb
 
@@ -168,9 +169,9 @@ class AutomationGraphStore:
             updates: dict[str, Any] = {}
             operation=str(config.get('operation') or '')
             period=str(config.get('period') or '')
-            if operation=='history' or period in {'24h','7d'}:
+            if operation=='history' or period in {'overnight','24h','7d'}:
                 updates.update(intent='historical_trigger_summary',state='historical',source='zabbix',metric='trigger_count')
-                updates['time_range']=SemanticTimeRange(days=1 if period=='24h' else 7)
+                updates['time_range']=SemanticTimeRange(days=1 if period in {'overnight','24h'} else 7)
             elif operation=='problems':
                 updates.update(intent='active_trigger_summary',state='active',source='zabbix',metric='active_problems')
             scope=str(config.get('scope') or '').lower()
@@ -188,9 +189,21 @@ class AutomationGraphStore:
                     label=semantic.entity_type.replace('_',' ') if semantic.entity_type!='unknown' else 'hosts'
                     execution['answer']=format_historical_triggers(execution['matches'],len(execution['matches']),execution['days'],label,execution['active'])
                 else:execution['answer']=format_related_problems(execution['matches'],len(execution['matches']),input_text)
-            matches=execution['matches'];summary=execution['answer'];active_now=execution['active']
+            matches=execution['matches'];active_now=execution['active']
+            overnight_window=None
+            if period=='overnight':
+                local_tz=ZoneInfo('America/Sao_Paulo');now=datetime.now(local_tz)
+                end=now.replace(hour=6,minute=0,second=0,microsecond=0)
+                if now.hour<6:end=now.replace(hour=6,minute=0,second=0,microsecond=0)
+                start=end-timedelta(hours=8)
+                start_epoch=int(start.timestamp());end_epoch=int(end.timestamp())
+                matches=[item for item in matches if start_epoch<=int(item.get('clock',0) or 0)<end_epoch]
+                overnight_window={'start':start.isoformat(),'end':end.isoformat(),'label':'última madrugada (22h–06h)'}
+                label=semantic.entity_type.replace('_',' ') if semantic.entity_type!='unknown' else 'hosts'
+                summary=f"Recorte aplicado: {start.strftime('%d/%m %H:%M')}–{end.strftime('%d/%m %H:%M')} (America/Sao_Paulo).\n\n"+format_historical_triggers(matches,len(matches),1,label,active_now)
+            else:summary=execution['answer']
             query_scope='historical_triggers' if execution['intent']=='historical_trigger_summary' else 'active_problems'
-            scope={'query_scope':query_scope,'days':execution['days'],'group_filter':execution['group'],
+            scope={'query_scope':query_scope,'days':execution['days'],'group_filter':execution['group'],'time_window':overnight_window,
                 'semantic_query':semantic.model_dump(mode='json'),'active_now_count':len(active_now),
                 'active_now_host_count':len(unique_affected_hosts(active_now)),
                 'critical_active_count':sum(1 for item in active_now if int(item.get('severity',0) or 0)>=4),

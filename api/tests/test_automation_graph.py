@@ -1,4 +1,6 @@
 import pytest
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 from services.automation_graph import AutomationGraphStore, CONNECTOR_CATALOG
 from semantic.fallback import deterministic_interpret
@@ -144,3 +146,30 @@ def test_zabbix_node_configuration_changes_real_query_scope(monkeypatch):
     assert result['data']['days'] == 7
     assert result['data']['related_problem_count'] == 1
     assert result['data']['hosts'][0]['name'] == 'switch-a'
+
+
+def test_overnight_flow_excludes_events_outside_22_to_06(monkeypatch):
+    local_tz = ZoneInfo('America/Sao_Paulo')
+    end = datetime.now(local_tz).replace(hour=6, minute=0, second=0, microsecond=0)
+    start = end - timedelta(hours=8)
+    inside = int((start + timedelta(hours=2)).timestamp())
+    outside = int((start - timedelta(hours=2)).timestamp())
+    events = [
+        {"eventid":"1","clock":str(inside),"name":"Link down","severity":"4","severity_label":"High","hosts":["switch-night"],"groups":["Switches"],"historical":True},
+        {"eventid":"2","clock":str(outside),"name":"Old link down","severity":"4","severity_label":"High","hosts":["switch-old"],"groups":["Switches"],"historical":True},
+    ]
+    class Connector:
+        def list_trigger_events(self, days, limit, group_name): return events
+        def list_active_problems(self, limit, group_name): return []
+    monkeypatch.setattr("services.automation_graph.ZabbixConnector", Connector)
+    monkeypatch.setattr("services.automation_graph.semantic_gateway.interpret", deterministic_interpret)
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_snapshots", lambda *args, **kwargs: [])
+    monkeypatch.setattr("services.automation_graph.postgres_store.get_recent_insights", lambda limit: [])
+    result = AutomationGraphStore._execute_connector(
+        {"id":"zabbix","type":"zabbix","config":{"operation":"history","period":"overnight","scope":"Switches"}},
+        "O que aconteceu na madrugada?", [],
+    )
+    assert result['data']['related_problem_count'] == 1
+    assert result['data']['hosts'][0]['name'] == 'switch-night'
+    assert result['data']['time_window']['label'] == 'última madrugada (22h–06h)'
+    assert 'Recorte aplicado' in result['summary']
