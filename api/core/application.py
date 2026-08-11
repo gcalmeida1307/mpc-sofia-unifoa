@@ -208,7 +208,6 @@ class Application:
         from routes.docs import router as docs_router
         from routes.domains import router as domains_router
         from routes.dashboard import router as dashboard_router
-        from routes.dashboards import router as dashboards_router
         from routes.engine import router as engine_router
         from routes.health import router as health_router
         from routes.knowledge import router as knowledge_router
@@ -223,7 +222,6 @@ class Application:
         app.include_router(metrics_router)
         app.include_router(auth_router)
         app.include_router(dashboard_router)
-        app.include_router(dashboards_router)
         for definition in domain_registry.definitions():
             for domain_router in definition.routers():
                 app.include_router(domain_router)

@@ -26,7 +26,6 @@ ROUTE_POLICIES = (
     RoutePolicy("/assistant", "assistant.ask"),
     RoutePolicy("/ai", "assistant.ask"),
     RoutePolicy("/dashboard", "dashboard.read"),
-    RoutePolicy("/dashboards", "dashboard.read"),
     RoutePolicy("/context", "dashboard.read"),
     RoutePolicy("/workflows", "workflow.execute", frozenset({"GET", "POST"})),
     RoutePolicy("/knowledge", "knowledge.manage"),
