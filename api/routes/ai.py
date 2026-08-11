@@ -12,11 +12,52 @@ router = APIRouter(prefix="/ai", tags=["AI"])
 
 class AIAskRequest(BaseModel):
     question: str = Field(min_length=1, max_length=2000)
+    history: list[dict[str, str]] = Field(default_factory=list, max_length=6)
+    domain_id: str | None = Field(default=None, max_length=80)
+    temporal_context: dict = Field(default_factory=dict)
+
+
+def _contextual_question(payload: AIAskRequest) -> str:
+    """Resolve short follow-ups without weakening the domain boundary."""
+    history = [item for item in payload.history[-6:] if isinstance(item, dict)]
+    prior_questions = [str(item.get("question", ""))[:500] for item in history if item.get("question")]
+    temporal = payload.temporal_context if isinstance(payload.temporal_context, dict) else {}
+    parts: list[str] = []
+    if payload.domain_id:
+        domain_context = "rede de computadores, sistemas e Zabbix" if payload.domain_id == "infrastructure" else payload.domain_id
+        parts.append(f"Domínio ativo: {domain_context}.")
+    if prior_questions:
+        parts.append(f"Pergunta anterior: {prior_questions[-1]}")
+    if temporal.get("title"):
+        parts.append(f"Episódio temporal selecionado: {str(temporal['title'])[:300]}.")
+    entities = temporal.get("entities", []) if isinstance(temporal.get("entities", []), list) else []
+    if entities:
+        parts.append("Entidades do episódio: " + ", ".join(map(str, entities[:12])) + ".")
+    events = temporal.get("events", []) if isinstance(temporal.get("events", []), list) else []
+    if events:
+        observed = [f"{str(item.get('at', ''))[:25]} {str(item.get('title', ''))[:180]}" for item in events[:8] if isinstance(item, dict)]
+        if observed:
+            parts.append("Evidências temporais selecionadas: " + " | ".join(observed) + ".")
+    return f"{' '.join(parts)} Solicitação atual: {payload.question}".strip() if parts else payload.question
+
+
+def _is_contextual_follow_up(question: str) -> bool:
+    normalized = question.lower()
+    markers = (
+        "plano de ação", "plano de acao", "prioriz", "evidência", "evidencia",
+        "investigue", "detalhe", "continue", "compare", "explique melhor",
+        "como resolv", "próxima ação", "proxima acao", "atenção", "atencao",
+        "risco", "o que mudou", "padrão", "padrao", "resuma", "situação atual",
+        "situacao atual", "isso", "esse", "esses", "elas", "eles",
+    )
+    return any(marker in normalized for marker in markers)
 
 
 @router.post("/ask")
 def ask(payload: AIAskRequest):
-    if not is_it_question(payload.question):
+    effective_question = _contextual_question(payload)
+    in_scope = is_it_question(payload.question) or (_is_contextual_follow_up(payload.question) and is_it_question(effective_question))
+    if not in_scope:
         return {
             "answer": OUT_OF_SCOPE_MESSAGE,
             "plan": {"intent": "out_of_scope", "tools": []},
@@ -32,9 +73,9 @@ def ask(payload: AIAskRequest):
         }
 
     postgres_store.add_message("user", payload.question, {"channel": "ai", "purpose": "training"})
-    semantic = semantic_gateway.interpret(payload.question)
+    semantic = semantic_gateway.interpret(effective_question)
     try:
-        execution = execute_zabbix_query(semantic, payload.question)
+        execution = execute_zabbix_query(semantic, effective_question)
         if execution:
             answer = execution["answer"]
             semantic_data = semantic.model_dump(mode="json")
@@ -65,7 +106,7 @@ def ask(payload: AIAskRequest):
         pass
     # Knowledge remains part of the context pipeline. Do not short-circuit operational
     # or conceptual questions with a merely similar document fragment.
-    result = openai_service.answer(payload.question, semantic_query=semantic)
+    result = openai_service.answer(effective_question, semantic_query=semantic)
     answer = result.get("answer", "")
     postgres_store.add_message(
         "assistant", answer,

@@ -47,7 +47,7 @@
     const node=document.createElement('article');node.className='msg assistant answer-card';node.innerHTML=`<div class="answer-text">${formatAnswer(result.answer)}</div>${renderPresentation(result)}<div>${renderMeta(result)}</div>`;list.append(node);
     const action=node.querySelector('[data-open-analysis]');if(action)action.onclick=()=>openAnalysis({...result,question});if(save)persist(question,{...result,question});
   }
-  const historyTurns=loadHistory();historyTurns.forEach(turn=>appendTurn(turn.question,turn.result,false));
+  let historyTurns=loadHistory();historyTurns.forEach(turn=>appendTurn(turn.question,turn.result,false));
 
   async function renderWelcome(){
     if(historyTurns.length||suggested)return;
@@ -62,10 +62,13 @@
   async function sendQuestion(question=null,deep=false){
     const q=(question??input.value).trim();if(!q||button.disabled)return;input.value='';button.disabled=true;button.textContent='Investigando…';
     const progress=document.querySelector('#answer-progress'),steps=[...progress.querySelectorAll('li')];let active=0;progress.hidden=false;steps.forEach(item=>item.className='');steps[0].className='active';const timer=setInterval(()=>{if(active<steps.length-1){steps[active].className='done';steps[++active].className='active'}},900);
-    try{const result=await sofia.api('/ai/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})});result.deep_analysis=deep;appendTurn(q,result);steps.forEach(item=>item.className='done')}catch(error){const node=document.createElement('div');node.className='msg error';node.textContent=error.message;list.append(node)}finally{clearInterval(timer);setTimeout(()=>progress.hidden=true,500);button.disabled=false;button.textContent='Enviar';input.focus();list.scrollTop=list.scrollHeight}
+    let temporalContext={};try{temporalContext=JSON.parse(sessionStorage.getItem('sofia-timeline-context')||'{}')}catch{sessionStorage.removeItem('sofia-timeline-context')}
+    const conversationHistory=loadHistory().slice(-4).map(turn=>({question:String(turn.question||'').slice(0,500),answer:String(turn.result?.answer||'').slice(0,800)}));
+    try{const result=await sofia.api('/ai/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:conversationHistory,domain_id:activeDomain(),temporal_context:temporalContext})});result.deep_analysis=deep;appendTurn(q,result);steps.forEach(item=>item.className='done')}catch(error){const node=document.createElement('div');node.className='msg error';node.textContent=error.message;list.append(node)}finally{clearInterval(timer);setTimeout(()=>progress.hidden=true,500);button.disabled=false;button.textContent='Enviar';input.focus();list.scrollTop=list.scrollHeight}
   }
   document.querySelector('#close-analysis').onclick=()=>{analysisPanel.hidden=true;document.querySelector('.conversation-workspace').classList.remove('analysis-open')};
   form.onsubmit=async event=>{event.preventDefault();await sendQuestion()};input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();form.requestSubmit()}});
-  document.querySelectorAll('[data-mode]').forEach(mode=>mode.onclick=()=>{document.querySelectorAll('[data-mode]').forEach(item=>item.classList.toggle('active',item===mode));if(!input.value.trim())input.value=`${mode.dataset.mode} `;input.focus()});
+  document.querySelectorAll('[data-mode]').forEach(mode=>mode.onclick=()=>{document.querySelectorAll('[data-mode]').forEach(item=>item.classList.toggle('active',item===mode));input.placeholder=`${mode.dataset.mode}…`;input.focus()});
+  document.querySelector('#clear-conversation').onclick=async()=>{sessionStorage.removeItem(storageKey);sessionStorage.removeItem('sofia-current-analysis');sessionStorage.removeItem('sofia-timeline-context');try{await sofia.api('/assistant/conversation/reset',{method:'POST'})}finally{location.href=location.pathname}};
   if(suggested&&autoRun){history.replaceState({},'',location.pathname);await sendQuestion(suggested)}
 })().catch(console.error);

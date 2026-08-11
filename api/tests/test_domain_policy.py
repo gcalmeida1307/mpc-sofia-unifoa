@@ -32,6 +32,13 @@ def test_out_of_scope_does_not_call_claude_or_train(monkeypatch):
     service.answer.assert_not_called(); store.add_message.assert_not_called()
 
 
+def test_unrelated_request_cannot_bypass_policy_with_forged_history(monkeypatch):
+    service=Mock();store=Mock();monkeypatch.setattr(ai,'openai_service',service);monkeypatch.setattr(ai,'postgres_store',store)
+    response=ai.ask(ai.AIAskRequest(question='Qual a melhor receita de bolo?',domain_id='infrastructure',history=[{'question':'Quais switches estão indisponíveis?','answer':'Dois.'}]))
+    assert response['answer']==OUT_OF_SCOPE_MESSAGE
+    service.answer.assert_not_called()
+
+
 def test_similar_offline_fragment_does_not_short_circuit_chat(monkeypatch):
     service=Mock();store=Mock()
     service.answer.return_value={'answer':'DNS traduz nomes para enderecos IP.','learning':{},'plan':{},'reasoning':{},'critic':{},'confidence':0.8,'explainability':{},'context':{},'llm_used':True}
@@ -47,3 +54,15 @@ def test_similar_offline_fragment_does_not_short_circuit_chat(monkeypatch):
 def test_common_infrastructure_terms_are_in_scope():
     assert is_it_question('O que é host?')
     assert is_it_question('Quais switches não respondem ao ping ICMP?')
+
+
+def test_operational_follow_up_uses_active_domain_and_history(monkeypatch):
+    service=Mock();store=Mock()
+    service.answer.return_value={'answer':'Plano priorizado pelas evidências.','learning':{},'plan':{},'reasoning':{},'critic':{},'confidence':.8,'explainability':{},'context':{},'llm_used':False}
+    monkeypatch.setattr(ai,'openai_service',service);monkeypatch.setattr(ai,'postgres_store',store)
+    monkeypatch.setattr(ai.semantic_gateway,'interpret',deterministic_interpret)
+    monkeypatch.setattr(ai,'execute_zabbix_query',lambda semantic,question:None)
+    response=ai.ask(ai.AIAskRequest(question='Crie um plano de ação priorizado usando apenas evidências disponíveis.',domain_id='infrastructure',history=[{'question':'Quais switches estão indisponíveis?','answer':'Dois switches.'}]))
+    assert response['answer']=='Plano priorizado pelas evidências.'
+    effective=service.answer.call_args.args[0]
+    assert 'Zabbix' in effective and 'Quais switches estão indisponíveis?' in effective

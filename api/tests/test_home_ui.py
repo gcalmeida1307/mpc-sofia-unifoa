@@ -113,6 +113,8 @@ def test_chat_displays_operational_progress_without_exposing_internal_reasoning(
     assert "sem expor dados sensíveis" in html
     assert 'id="chat-welcome"' in html and 'id="starter-prompts"' in html
     assert 'data-mode="Investigue"' in html and "Contexto pronto" in script
+    assert 'id="clear-conversation"' in html
+    assert "temporal_context" in script and "conversationHistory" in script
 
 
 def test_timeline_uses_progressive_detail_and_period_visualization():
@@ -122,6 +124,7 @@ def test_timeline_uses_progressive_detail_and_period_visualization():
     assert 'id="timeline-search"' in html and 'id="level-filters"' in html
     assert "Mostrar mais" in script and "Investigar este episódio" in script
     assert "não causalidade" in script
+    assert "eventEntities" in script and "ids.has(item.from)&&ids.has(item.to)" in script
 
 
 def test_design_system_applies_semantic_tokens_to_both_themes():
