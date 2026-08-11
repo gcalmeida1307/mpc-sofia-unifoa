@@ -107,9 +107,21 @@ def test_shell_renders_domain_experiences_instead_of_fixed_domain_pages():
 
 def test_chat_displays_operational_progress_without_exposing_internal_reasoning():
     html = (STATIC / "conversar.html").read_text(encoding="utf-8")
+    script = (STATIC / "chat.js").read_text(encoding="utf-8")
     assert 'id="answer-progress"' in html
     assert "Consultando dados" in html
     assert "sem expor dados sensíveis" in html
+    assert 'id="chat-welcome"' in html and 'id="starter-prompts"' in html
+    assert 'data-mode="Investigue"' in html and "Contexto pronto" in script
+
+
+def test_timeline_uses_progressive_detail_and_period_visualization():
+    html = (STATIC / "timeline.html").read_text(encoding="utf-8")
+    script = (STATIC / "timeline.js").read_text(encoding="utf-8")
+    assert 'id="timeline-chart"' in html
+    assert 'id="timeline-search"' in html and 'id="level-filters"' in html
+    assert "Mostrar mais" in script and "Investigar este episódio" in script
+    assert "não causalidade" in script
 
 
 def test_design_system_applies_semantic_tokens_to_both_themes():

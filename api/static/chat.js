@@ -1,10 +1,11 @@
 (async()=>{
   const richStyle=document.createElement('link');richStyle.rel='stylesheet';richStyle.href='/ui/chat-rich.css?v=20260811';document.head.append(richStyle);
-  await sofia.initAuth();
+  const currentUser=await sofia.initAuth();if(!currentUser)return;
   const list=document.querySelector('#messages'),form=document.querySelector('#chat-form'),input=document.querySelector('#question'),button=form.querySelector('button');
   const analysisPanel=document.querySelector('#conversation-analysis'),analysisContent=document.querySelector('#analysis-content');
   const params=new URLSearchParams(location.search),suggested=params.get('q'),autoRun=params.get('auto')==='1';
   const storageKey='sofia-chat-history';
+  const activeDomain=()=>localStorage.getItem('sofia-active-domain')||'infrastructure';
   if(suggested)input.value=suggested;
   const cEsc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const entriesOf=result=>result.context?.tools?.['zabbix.investigate']?.evidence||result.analysis_entries||[];
@@ -41,11 +42,22 @@
     try{const response=await sofia.api('/infra/patterns'),patterns=(response.patterns||[]).filter(pattern=>!hosts.length||hosts.includes(pattern.host));document.querySelector('#behavior-patterns').innerHTML=patterns.length?`<header><span><p class="eyebrow">Padrões aprendidos</p><h3>Comportamento recorrente identificado</h3></span></header>${patterns.slice(0,4).map(pattern=>`<article><strong>${cEsc(pattern.classification)}</strong><p>${cEsc(pattern.summary)}</p><div><span>${Math.round(pattern.confidence*100)}% confiança</span><span>${pattern.observed_days} dias observados</span><span>${Math.round(pattern.night_down_rate*100)}% fora do expediente</span></div><small>${cEsc(pattern.recommended_action)}</small></article>`).join('')}`:'<p>Nenhum padrão recorrente comprovado para estes equipamentos. A SOFIA continuará formando o baseline.</p>'}catch{document.querySelector('#behavior-patterns').innerHTML='<p>O padrão histórico não está disponível para este perfil ou ainda está em formação.</p>'}
   }
   function appendTurn(question,result,save=true){
+    document.querySelector('#chat-welcome')?.remove();
     const userNode=document.createElement('div');userNode.className='msg user';userNode.textContent=question;list.append(userNode);
     const node=document.createElement('article');node.className='msg assistant answer-card';node.innerHTML=`<div class="answer-text">${formatAnswer(result.answer)}</div>${renderPresentation(result)}<div>${renderMeta(result)}</div>`;list.append(node);
     const action=node.querySelector('[data-open-analysis]');if(action)action.onclick=()=>openAnalysis({...result,question});if(save)persist(question,{...result,question});
   }
-  loadHistory().forEach(turn=>appendTurn(turn.question,turn.result,false));
+  const historyTurns=loadHistory();historyTurns.forEach(turn=>appendTurn(turn.question,turn.result,false));
+
+  async function renderWelcome(){
+    if(historyTurns.length||suggested)return;
+    const context=document.querySelector('#chat-context'),prompts=document.querySelector('#starter-prompts');
+    const suggestions=activeDomain()==='infrastructure'?[['O que exige atenção agora?','Resuma os riscos relevantes desta área e indique por onde começar.'],['O que mudou?','Compare a última hora com o período anterior e destaque mudanças importantes.'],['Há algum padrão?','Identifique recorrências comprovadas e diferencie rotina de anomalia.'],['Monte meu plano','Crie um plano de ação priorizado usando apenas evidências disponíveis.']]:[['Visão geral','Resuma a situação atual desta área e os principais riscos.'],['Mudanças recentes','O que mudou nesta área no período mais recente?'],['Padrões','Quais padrões recorrentes já possuem evidência suficiente?'],['Próximas ações','Crie um plano de ação seguro para esta área.']];
+    prompts.innerHTML=suggestions.map(([title,question])=>`<button type="button" data-starter="${cEsc(question)}"><strong>${cEsc(title)}</strong><span>${cEsc(question)}</span><i>→</i></button>`).join('');
+    prompts.querySelectorAll('[data-starter]').forEach(item=>item.onclick=()=>{input.value=item.dataset.starter;input.focus()});
+    try{const data=await sofia.api(`/timeline/${encodeURIComponent(activeDomain())}?window=60`),counts=data.counts||{};context.innerHTML=`<i></i><span><strong>Contexto pronto</strong><small>${counts.events||0} mudanças · ${counts.episodes||0} episódio(s) · última hora</small></span><a href="/ui/timeline.html">Ver linha do tempo</a>`}catch{context.innerHTML='<i></i><span><strong>Contexto local disponível</strong><small>A linha do tempo será consultada durante a investigação.</small></span>'}
+  }
+  await renderWelcome();
 
   async function sendQuestion(question=null,deep=false){
     const q=(question??input.value).trim();if(!q||button.disabled)return;input.value='';button.disabled=true;button.textContent='Investigando…';
@@ -54,5 +66,6 @@
   }
   document.querySelector('#close-analysis').onclick=()=>{analysisPanel.hidden=true;document.querySelector('.conversation-workspace').classList.remove('analysis-open')};
   form.onsubmit=async event=>{event.preventDefault();await sendQuestion()};input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();form.requestSubmit()}});
+  document.querySelectorAll('[data-mode]').forEach(mode=>mode.onclick=()=>{document.querySelectorAll('[data-mode]').forEach(item=>item.classList.toggle('active',item===mode));if(!input.value.trim())input.value=`${mode.dataset.mode} `;input.focus()});
   if(suggested&&autoRun){history.replaceState({},'',location.pathname);await sendQuestion(suggested)}
 })().catch(console.error);

@@ -1,1 +1,36 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linha do Tempo · SOFIA</title><link rel="stylesheet" href="/ui/styles.css?v=20260811-timeline"><link rel="stylesheet" href="/ui/timeline.css?v=20260811"></head><body><header class="topbar"><a class="brand" href="/ui/index.html"><span></span>SOFIA</a><nav></nav><div class="identity"></div></header><main class="shell timeline-shell"><section class="page-head compact-head timeline-heading"><div><p class="eyebrow">Inteligência temporal</p><h1>Como o cenário chegou até aqui</h1><p>Fatos, relações e padrões separados por nível de evidência.</p></div><label>Período<select id="timeline-window"><option value="15">15 minutos</option><option value="30">30 minutos</option><option value="60" selected>1 hora</option><option value="120">2 horas</option><option value="240">4 horas</option><option value="360">6 horas</option><option value="720">12 horas</option><option value="1440">24 horas</option><option value="10080">7 dias</option></select></label></section><section id="timeline-summary" class="timeline-summary"></section><section class="smart-timeline-layout"><article class="panel"><header class="timeline-panel-head"><div><p class="eyebrow">História do período</p><h2>Episódios relacionados</h2></div><span id="timeline-updated"></span></header><ol id="smart-timeline" class="smart-timeline"></ol></article><aside class="panel timeline-context"><h2>Como interpretar</h2><div id="timeline-legend"></div><section id="timeline-relation"><p>Selecione um episódio para ver entidades e relações.</p></section></aside></section></main><script src="/ui/auth.js?v=20260811-timeline"></script><script src="/ui/timeline.js?v=20260811"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Linha do Tempo · SOFIA</title>
+  <link rel="stylesheet" href="/ui/styles.css?v=20260811-timeline2">
+  <link rel="stylesheet" href="/ui/timeline.css?v=20260811-timeline2">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/ui/index.html"><span></span>SOFIA</a><nav></nav><div class="identity"></div></header>
+  <main class="shell timeline-shell">
+    <header class="timeline-hero">
+      <div><p class="eyebrow">Inteligência temporal</p><h1>Linha do tempo do ambiente</h1><p>Entenda o que mudou, em que ordem e quais relações têm evidência.</p></div>
+      <div class="timeline-filters"><span>Período analisado</span><div id="window-options" class="window-options" role="group" aria-label="Período analisado"><button data-window="15">15 min</button><button data-window="60" class="active">1 h</button><button data-window="240">4 h</button><button data-window="1440">24 h</button><button data-window="10080">7 dias</button></div></div>
+    </header>
+    <section id="timeline-summary" class="timeline-summary" aria-label="Resumo do período"></section>
+    <section class="timeline-overview panel">
+      <header><div><p class="eyebrow">Ritmo das mudanças</p><h2>Distribuição no período</h2></div><span id="timeline-updated"></span></header>
+      <div id="timeline-chart" class="timeline-chart"></div>
+      <div id="timeline-insight" class="timeline-insight"></div>
+    </section>
+    <section class="timeline-workspace">
+      <aside class="episode-panel panel">
+        <header><div><p class="eyebrow">Episódios</p><h2>Sequências detectadas</h2></div><span id="episode-count"></span></header>
+        <div class="timeline-search"><input id="timeline-search" type="search" placeholder="Buscar equipamento ou mudança" aria-label="Buscar na linha do tempo"></div>
+        <div id="level-filters" class="level-filters"></div>
+        <ol id="smart-timeline" class="smart-timeline"></ol>
+      </aside>
+      <article id="timeline-detail" class="timeline-detail panel"><div class="timeline-empty"><strong>Selecione um episódio</strong><span>Os detalhes aparecerão aqui sem tirar você do contexto.</span></div></article>
+    </section>
+  </main>
+  <script src="/ui/auth.js?v=20260811-timeline2"></script>
+  <script src="/ui/timeline.js?v=20260811-timeline2"></script>
+</body>
+</html>

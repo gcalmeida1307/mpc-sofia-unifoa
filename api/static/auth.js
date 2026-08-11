@@ -7,11 +7,8 @@ const sofia=(()=>{
   function buildNavigation(nav,user){
     const links=[
       ['Visão geral','Executivo','⌂','/ui/index.html',true],
-      ['Operações','Investigação','▥','/ui/analytics.html',true],['Operações','Linha do tempo','◉','/ui/timeline.html',true],['Plataforma','Saúde técnica','⌁','/ui/analista.html',user.role==='admin'],['Plataforma','Agentes técnicos','⚙','/ui/inteligencia.html',user.role==='admin'],
-      ['Inteligência','Conversar','✦','/ui/conversar.html',true],
-      ['Conhecimento','Fontes e RAGs','▤','/ui/base.html',user.role==='admin'],
-      ['Automação','Fluxos','⌘','/ui/automacao.html',user.role==='admin'],
-      ['Administração','Gestão','⚙','/ui/gestao.html',user.role==='admin']
+      ['Operações','Investigação','▥','/ui/analytics.html',true],['Operações','Linha do tempo','◉','/ui/timeline.html',true],
+      ['Inteligência','Conversar','✦','/ui/conversar.html',true]
     ];
     const visible=links.filter(([, , , ,show])=>show),groups=[...new Set(visible.map(item=>item[0]))];
     nav.innerHTML=groups.map(group=>`<section class="nav-group"><small>${group}</small>${visible.filter(item=>item[0]===group).map(([,label,icon,href])=>`<a href="${href}" title="${label}" class="${location.pathname===href?'active':''}"><i aria-hidden="true">${icon}</i><span>${label}</span></a>`).join('')}</section>`).join('');
@@ -21,7 +18,7 @@ const sofia=(()=>{
     mobile.querySelector('[data-mobile-more]').onclick=()=>document.body.classList.toggle('nav-open');
   }
   function applyDomainBranding(experience){const branding=experience?.branding||{};document.documentElement.style.setProperty('--domain-accent',branding.accent||'#2dd4bf');document.documentElement.style.setProperty('--domain-secondary',branding.secondary||'#60a5fa');document.documentElement.dataset.domain=experience?.domain_id||'infrastructure'}
-  async function mountDomainSwitcher(){try{const catalog=await api('/domains/experience/catalog'),domains=catalog.domains||[];if(!domains.length)return;const selected=localStorage.getItem('sofia-active-domain'),active=domains.find(item=>item.domain_id===selected)||domains[0];applyDomainBranding(active);let switcher=document.querySelector('.domain-switcher');if(!switcher){switcher=document.createElement('label');switcher.className='domain-switcher';switcher.innerHTML='<span>Área ativa</span><select aria-label="Selecionar área de trabalho"></select>';document.querySelector('.topbar nav').after(switcher)}const select=switcher.querySelector('select');select.innerHTML=domains.map(item=>`<option value="${item.domain_id}">${item.branding?.icon||'◆'} ${item.title}</option>`).join('');select.value=active.domain_id;select.onchange=()=>{localStorage.setItem('sofia-active-domain',select.value);location.href=`/ui/domain.html?domain=${encodeURIComponent(select.value)}`}}catch(error){console.warn('Catálogo de domínios indisponível',error)}}
+  async function mountDomainSwitcher(){try{const catalog=await api('/domains/experience/catalog'),domains=catalog.domains||[];if(!domains.length)return;const selected=localStorage.getItem('sofia-active-domain'),active=domains.find(item=>item.domain_id===selected)||domains[0];applyDomainBranding(active);let switcher=document.querySelector('.domain-switcher');if(!switcher){switcher=document.createElement('label');switcher.className='domain-switcher';switcher.innerHTML='<span>Área ativa</span><select aria-label="Selecionar área de trabalho"></select>';document.querySelector('.topbar nav').after(switcher)}const select=switcher.querySelector('select');select.innerHTML=domains.map(item=>`<option value="${item.domain_id}">${item.branding?.icon||'◆'} ${item.title}</option>`).join('');select.value=active.domain_id;select.onchange=()=>{localStorage.setItem('sofia-active-domain',select.value);location.href=`/ui/domain.html?domain=${encodeURIComponent(select.value)}`};return active}catch(error){console.warn('Catálogo de domínios indisponível',error);return null}}
   async function initAuth(){
     if('scrollRestoration' in history)history.scrollRestoration='manual';window.scrollTo(0,0);
     if(!token){location.href='/ui/login.html';return null}
@@ -30,7 +27,7 @@ const sofia=(()=>{
     const identity=document.querySelector('.identity');identity.innerHTML='';const trigger=document.createElement('button');trigger.className='identity-trigger';trigger.type='button';trigger.textContent=`${user.display_name} · ${user.role}`;trigger.setAttribute('aria-expanded','false');const menu=document.createElement('div');menu.className='identity-menu';menu.hidden=true;
     const profile=document.createElement('a');profile.href='/ui/perfil.html';profile.textContent='Meu perfil';menu.append(profile);
     const theme=document.createElement('button');theme.type='button';theme.className='identity-menu-action';theme.textContent=document.documentElement.dataset.theme==='dark'?'Usar tema claro':'Usar tema escuro';theme.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next);theme.textContent=next==='dark'?'Usar tema claro':'Usar tema escuro'};menu.append(theme);
-    if(user.role==='admin'){const management=document.createElement('a');management.href='/ui/gestao.html';management.textContent='Administração';menu.append(management)}
+    if(user.role==='admin'){[['Saúde técnica','/ui/analista.html'],['Agentes técnicos','/ui/inteligencia.html'],['Fontes e RAGs','/ui/base.html'],['Fluxos','/ui/automacao.html'],['Administração','/ui/gestao.html']].forEach(([label,href])=>{const link=document.createElement('a');link.href=href;link.textContent=label;menu.append(link)})}
     const logout=document.createElement('button');logout.id='logout';logout.className='identity-menu-action';logout.textContent='Sair';logout.onclick=async()=>{await api('/auth/logout',{method:'POST'});localStorage.removeItem('sofia-token');location.href='/ui/login.html'};menu.append(logout);identity.append(trigger,menu);
     trigger.onclick=event=>{event.stopPropagation();menu.hidden=!menu.hidden;trigger.setAttribute('aria-expanded',String(!menu.hidden))};document.addEventListener('click',event=>{if(!identity.contains(event.target)){menu.hidden=true;trigger.setAttribute('aria-expanded','false')}});return user
   }
