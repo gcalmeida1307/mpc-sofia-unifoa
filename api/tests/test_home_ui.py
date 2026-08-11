@@ -48,6 +48,11 @@ def test_management_contains_five_row_audit_table():
     assert "Desabilitar" in script
     assert "Reativar usuário" in script
     assert "data-disable" in script
+    assert "domain-access-dialog" in script and "domain-role-list" in script
+    assert "Escolha o papel para" not in script
+    assert "input[name=\"domain-role\"]:checked" in script
+    access_styles=(STATIC / "management-access.css").read_text(encoding="utf-8")
+    assert ".domain-role-option" in access_styles and "::backdrop" in access_styles
 
 
 def test_access_request_suggests_structured_available_usernames():
