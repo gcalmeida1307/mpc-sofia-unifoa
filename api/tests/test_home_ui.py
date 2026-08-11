@@ -85,6 +85,19 @@ def test_knowledge_page_can_install_declarative_domains():
     assert 'id="domain-form"' in html and "Criar módulo operacional" in html
     assert "Entidades principais" in html and "Indicadores importantes" in html
     assert "'/domains'" in script and "permissions" in script and "routes.search" in script
+    assert 'id="domain-theme"' in script and "identidade visual" in script
+
+
+def test_shell_renders_domain_experiences_instead_of_fixed_domain_pages():
+    auth=(STATIC / "auth.js").read_text(encoding="utf-8")
+    html=(STATIC / "domain.html").read_text(encoding="utf-8")
+    workspace=(STATIC / "domain-workspace.js").read_text(encoding="utf-8")
+    styles=(STATIC / "domain-shell.css").read_text(encoding="utf-8")
+    assert "/domains/experience/catalog" in auth and "domain-switcher" in auth
+    assert 'id="domain-navigation"' in html and 'id="domain-page"' in html
+    for template in ["executive_overview","entity_list","analytics","knowledge"]:assert template in workspace
+    assert "suggested_questions" in workspace and "/ui/conversar.html?q=" in workspace
+    assert "--domain-accent" in styles and "--domain-secondary" in styles
 
 
 def test_chat_displays_operational_progress_without_exposing_internal_reasoning():

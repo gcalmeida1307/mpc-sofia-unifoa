@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query, Request
 from pydantic import BaseModel, Field
 
-from services.domain_catalog import declarative_domain_catalog
+from services.domain_catalog import THEMES, declarative_domain_catalog
 
 
 router=APIRouter(prefix="/domains",tags=["Domains"])
@@ -16,6 +16,7 @@ class DomainInstallRequest(BaseModel):
     metrics:list[str]=Field(default_factory=list,max_length=30)
     source_url:str|None=Field(default=None,max_length=500)
     refresh_seconds:int=Field(default=86400,ge=3600,le=2592000)
+    theme:str=Field(default="ocean",max_length=20)
 
 
 @router.get("")
@@ -26,6 +27,10 @@ def list_domains():return {"domains":declarative_domain_catalog.list()}
 def install_domain(payload:DomainInstallRequest,request:Request):
     try:return declarative_domain_catalog.install(payload.model_dump(),int(request.state.user["id"]))
     except ValueError as exc:raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@router.get("/experience/catalog")
+def experience_catalog():return {"domains":declarative_domain_catalog.experiences(),"themes":THEMES}
 
 
 @router.get("/{domain_id}")
