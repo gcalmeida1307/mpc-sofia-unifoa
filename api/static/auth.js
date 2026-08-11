@@ -6,7 +6,6 @@ const sofia=(()=>{
   function buildNavigation(nav,user){
     const links=[
       ['Visão geral','Executivo','⌂','/ui/index.html',true],
-      ['Visão geral','Painéis','▦','/ui/dashboards.html',true],
       ['Operações','Analytics','▥','/ui/analytics.html',true],['Operações','Ambiente','⌁','/ui/analista.html',true],
       ['Inteligência','Conversar','✦','/ui/conversar.html',true],['Inteligência','Diário e agentes','◉','/ui/inteligencia.html',user.role==='admin'],
       ['Conhecimento','Fontes e RAGs','▤','/ui/base.html',user.role==='admin'],
@@ -16,7 +15,7 @@ const sofia=(()=>{
     const visible=links.filter(([, , , ,show])=>show),groups=[...new Set(visible.map(item=>item[0]))];
     nav.innerHTML=groups.map(group=>`<section class="nav-group"><small>${group}</small>${visible.filter(item=>item[0]===group).map(([,label,icon,href])=>`<a href="${href}" title="${label}" class="${location.pathname===href?'active':''}"><i aria-hidden="true">${icon}</i><span>${label}</span></a>`).join('')}</section>`).join('');
     let mobile=document.querySelector('.mobile-nav');if(!mobile){mobile=document.createElement('nav');mobile.className='mobile-nav';mobile.setAttribute('aria-label','Navegação rápida');document.body.append(mobile)}
-    const quick=visible.filter(item=>['/ui/index.html','/ui/dashboards.html','/ui/analista.html','/ui/conversar.html'].includes(item[3]));
+    const quick=visible.filter(item=>['/ui/index.html','/ui/analytics.html','/ui/analista.html','/ui/conversar.html'].includes(item[3]));
     mobile.innerHTML=quick.map(([,label,icon,href])=>`<a href="${href}" class="${location.pathname===href?'active':''}"><i>${icon}</i><span>${label}</span></a>`).join('')+'<button type="button" data-mobile-more><i>☰</i><span>Mais</span></button>';
     mobile.querySelector('[data-mobile-more]').onclick=()=>document.body.classList.toggle('nav-open');
   }

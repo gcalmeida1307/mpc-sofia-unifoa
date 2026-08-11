@@ -9,28 +9,15 @@ from services.postgres_store import postgres_store
 
 
 WIDGET_CATALOG={
-    "metric":{"label":"Indicador","description":"Um número principal com contexto.","sizes":["small","medium"]},
-    "bar":{"label":"Gráfico de barras","description":"Compara categorias ou áreas.","sizes":["medium","large"]},
-    "line":{"label":"Gráfico de linha","description":"Mostra evolução ao longo do tempo.","sizes":["medium","large"]},
-    "donut":{"label":"Gráfico de rosca","description":"Mostra distribuição e proporções.","sizes":["small","medium"]},
-    "table":{"label":"Tabela","description":"Detalhes organizados em linhas e colunas.","sizes":["medium","large"]},
-    "list":{"label":"Lista priorizada","description":"Itens, riscos ou recomendações.","sizes":["medium","large"]},
-    "text":{"label":"Texto e orientação","description":"Título, contexto ou instruções da página.","sizes":["small","medium","large"]},
+    "health":{"label":"Saúde geral","description":"Pontuação, tendência e comparação.","sizes":["small","medium"]},
+    "changes":{"label":"Mudanças recentes","description":"Alertas novos, resolvidos e críticos.","sizes":["medium","large"]},
+    "domains":{"label":"Saúde por área","description":"Comparação dos domínios monitorados.","sizes":["medium","large"]},
+    "history":{"label":"Evolução da saúde","description":"Série das últimas doze horas.","sizes":["medium","large"]},
+    "risks":{"label":"Principais riscos","description":"Ranking de riscos e confiança.","sizes":["medium","large"]},
+    "patterns":{"label":"Padrões aprendidos","description":"Rotinas recorrentes comprovadas.","sizes":["medium","large"]},
+    "devices":{"label":"Dispositivos monitorados","description":"Total e mudança na última leitura.","sizes":["small","medium"]},
 }
-DATA_SOURCES={
-    "overview":{"label":"Resumo da plataforma"},
-    "domains":{"label":"Áreas e módulos"},
-    "changes":{"label":"Mudanças recentes"},
-    "history":{"label":"Histórico"},
-    "risks":{"label":"Riscos e prioridades"},
-    "patterns":{"label":"Padrões aprendidos"},
-}
-DEFAULT_LAYOUT={"pages":[{"id":"dashboard","name":"Dashboard","widgets":[
-    {"id":"welcome","type":"text","source":"overview","size":"large","title":"Meu espaço de análise"},
-    {"id":"overview","type":"metric","source":"overview","size":"small","title":"Visão geral"},
-    {"id":"domains","type":"bar","source":"domains","size":"medium","title":"Áreas acompanhadas"},
-    {"id":"changes","type":"table","source":"changes","size":"medium","title":"Últimas mudanças"},
-]}]}
+DEFAULT_LAYOUT={"pages":[]}
 
 
 class DashboardLayoutStore:
@@ -60,28 +47,20 @@ class DashboardLayoutStore:
                 if widget_id in widget_ids:raise ValueError("Identificador de widget duplicado.")
                 widget_ids.add(widget_id);allowed=WIDGET_CATALOG[widget_type]["sizes"];size=str(widget.get("size") or allowed[0])
                 if size not in allowed:size=allowed[0]
-                source=str(widget.get("source") or "overview")
-                if source not in DATA_SOURCES:raise ValueError(f"Fonte não autorizada: {source}")
-                widgets.append({"id":widget_id,"type":widget_type,"source":source,"size":size,"title":str(widget.get("title") or WIDGET_CATALOG[widget_type]["label"])[:80]})
+                widgets.append({"id":widget_id,"type":widget_type,"size":size,"title":str(widget.get("title") or WIDGET_CATALOG[widget_type]["label"])[:80]})
             normalized.append({"id":page_id,"name":str(page.get("name") or f"Página {page_index+1}")[:60],"widgets":widgets})
         return {"pages":normalized}
 
     def get(self,user_id:int)->dict[str,Any]:
         self.ensure_schema()
         with postgres_store._connect() as conn:row=conn.execute("SELECT layout,updated_at FROM user_dashboard_layouts WHERE user_id=%s",(user_id,)).fetchone()
-        raw=deepcopy(row[0] if row else DEFAULT_LAYOUT)
-        legacy={"health":("metric","overview"),"devices":("metric","overview"),"changes":("table","changes"),"domains":("bar","domains"),"history":("line","history"),"risks":("list","risks"),"patterns":("list","patterns")}
-        for page in raw.get("pages",[]):
-            for widget in page.get("widgets",[]):
-                if widget.get("type") in legacy:widget["type"],widget["source"]=legacy[widget["type"]]
-                widget.setdefault("source","overview")
-        return {"layout":raw,"updated_at":row[1].isoformat() if row else None,"catalog":WIDGET_CATALOG,"sources":DATA_SOURCES}
+        return {"layout":deepcopy(row[0] if row else DEFAULT_LAYOUT),"updated_at":row[1].isoformat() if row else None,"catalog":WIDGET_CATALOG}
 
     def save(self,user_id:int,layout:dict[str,Any])->dict[str,Any]:
         self.ensure_schema();normalized=self.validate(layout)
         with postgres_store._connect() as conn:row=conn.execute("""INSERT INTO user_dashboard_layouts(user_id,layout) VALUES(%s,%s)
             ON CONFLICT(user_id) DO UPDATE SET layout=EXCLUDED.layout,updated_at=NOW() RETURNING updated_at""",(user_id,Jsonb(normalized))).fetchone();conn.commit()
-        return {"layout":normalized,"updated_at":row[0].isoformat(),"catalog":WIDGET_CATALOG,"sources":DATA_SOURCES}
+        return {"layout":normalized,"updated_at":row[0].isoformat(),"catalog":WIDGET_CATALOG}
 
 
 dashboard_layout_store=DashboardLayoutStore()
