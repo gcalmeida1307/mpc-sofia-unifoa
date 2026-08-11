@@ -17,6 +17,10 @@ class DomainInstallRequest(BaseModel):
     source_url:str|None=Field(default=None,max_length=500)
     refresh_seconds:int=Field(default=86400,ge=3600,le=2592000)
     theme:str=Field(default="ocean",max_length=20)
+    roles:list[dict]=Field(default_factory=list,max_length=12)
+
+class DomainProposalRequest(BaseModel):
+    description:str=Field(min_length=20,max_length=3000)
 
 
 @router.get("")
@@ -29,8 +33,20 @@ def install_domain(payload:DomainInstallRequest,request:Request):
     except ValueError as exc:raise HTTPException(status_code=409,detail=str(exc)) from exc
 
 
+@router.post("/proposals")
+def propose_domain(payload:DomainProposalRequest,request:Request):
+    if request.state.user.get("role")!="admin":raise HTTPException(403,"Perfil admin necessário")
+    return declarative_domain_catalog.propose(payload.description)
+
+
 @router.get("/experience/catalog")
-def experience_catalog():return {"domains":declarative_domain_catalog.experiences(),"themes":THEMES}
+def experience_catalog(request:Request):
+    domains=declarative_domain_catalog.experiences();user=request.state.user
+    if user.get("role")!="admin":
+        from services.auth import auth_service
+        allowed={item["domain_id"] for item in auth_service.domain_access(int(user["id"]))}
+        domains=[item for item in domains if item["domain_id"] in allowed]
+    return {"domains":domains,"themes":THEMES}
 
 
 @router.get("/{domain_id}")
@@ -48,7 +64,11 @@ def domain_status(domain_id:str):
 
 
 @router.get("/{domain_id}/search")
-def domain_search(domain_id:str,query:str=Query(min_length=2,max_length=500)):
+def domain_search(domain_id:str,request:Request,query:str=Query(min_length=2,max_length=500)):
+    user=request.state.user
+    if user.get("role")!="admin":
+        from services.auth import auth_service
+        if domain_id not in {item["domain_id"] for item in auth_service.domain_access(int(user["id"]))}:raise HTTPException(403,"Sem acesso a este domínio")
     try:return declarative_domain_catalog.search(domain_id,query)
     except KeyError as exc:raise HTTPException(status_code=404,detail="domínio inexistente ou desabilitado") from exc
 

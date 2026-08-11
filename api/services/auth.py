@@ -51,6 +51,15 @@ class AuthService:
                 created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())""",
             """CREATE INDEX IF NOT EXISTS auth_sessions_token_idx ON auth_sessions(token_hash)
                 WHERE revoked_at IS NULL""",
+            """CREATE TABLE IF NOT EXISTS domain_roles (
+                domain_id TEXT NOT NULL, role_key TEXT NOT NULL, display_name TEXT NOT NULL,
+                parent_role TEXT, capabilities JSONB NOT NULL DEFAULT '[]'::jsonb,
+                created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), PRIMARY KEY(domain_id,role_key))""",
+            """CREATE TABLE IF NOT EXISTS domain_memberships (
+                user_id BIGINT NOT NULL REFERENCES auth_users(id) ON DELETE CASCADE,
+                domain_id TEXT NOT NULL, role_key TEXT NOT NULL, unit_scope TEXT,
+                granted_by BIGINT REFERENCES auth_users(id), created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                PRIMARY KEY(user_id,domain_id), FOREIGN KEY(domain_id,role_key) REFERENCES domain_roles(domain_id,role_key))""",
         ]
         try:
             with self.connect() as conn:
@@ -62,6 +71,15 @@ class AuthService:
                     cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS password_reset_token_hash TEXT")
                     cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS password_reset_expires_at TIMESTAMPTZ")
                     cur.execute("ALTER TABLE auth_users ADD COLUMN IF NOT EXISTS password_reset_required BOOLEAN NOT NULL DEFAULT FALSE")
+                    cur.execute("""INSERT INTO domain_roles(domain_id,role_key,display_name,parent_role,capabilities) VALUES
+                        ('infrastructure','viewer','Leitor',NULL,'["infrastructure.summary.read"]'),
+                        ('infrastructure','analyst','Analista','viewer','["infrastructure.summary.read","infrastructure.monitoring.read"]'),
+                        ('infrastructure','operator','Operador','analyst','["infrastructure.summary.read","infrastructure.monitoring.read","infrastructure.action.execute"]'),
+                        ('infrastructure','admin','Administrador da área','operator','["infrastructure.summary.read","infrastructure.monitoring.read","infrastructure.action.execute","infrastructure.manage"]')
+                        ON CONFLICT(domain_id,role_key) DO NOTHING""")
+                    cur.execute("""INSERT INTO domain_memberships(user_id,domain_id,role_key)
+                        SELECT id,'infrastructure',CASE WHEN role='admin' THEN 'admin' ELSE 'viewer' END FROM auth_users WHERE status!='revoked'
+                        ON CONFLICT(user_id,domain_id) DO NOTHING""")
                     cur.execute("""INSERT INTO auth_users (username, display_name, role, status)
                         VALUES ('glauco.almeida', 'Glauco Almeida', 'admin', 'pending')
                         ON CONFLICT (username) DO NOTHING""")
@@ -356,6 +374,26 @@ class AuthService:
         with self.connect() as conn:
             rows=conn.execute("SELECT username,action,success,ip_address,created_at FROM auth_audit_log ORDER BY created_at DESC LIMIT %s",(limit,)).fetchall()
         return [{'username':r[0],'action':r[1],'success':r[2],'ip_address':r[3],'created_at':r[4].isoformat()} for r in rows]
+
+    def domain_access(self,user_id:int)->list[dict[str,Any]]:
+        self.ensure_schema()
+        with self.connect() as conn:rows=conn.execute("""SELECT m.domain_id,m.role_key,r.display_name,r.capabilities,m.unit_scope
+            FROM domain_memberships m JOIN domain_roles r USING(domain_id,role_key) WHERE m.user_id=%s ORDER BY m.domain_id""",(user_id,)).fetchall()
+        return [{"domain_id":row[0],"role":row[1],"role_name":row[2],"capabilities":row[3] or [],"unit_scope":row[4]} for row in rows]
+
+    def domain_roles(self)->list[dict[str,Any]]:
+        self.ensure_schema()
+        with self.connect() as conn:rows=conn.execute("SELECT domain_id,role_key,display_name,parent_role,capabilities FROM domain_roles ORDER BY domain_id,role_key").fetchall()
+        return [{"domain_id":row[0],"role":row[1],"display_name":row[2],"parent_role":row[3],"capabilities":row[4] or []} for row in rows]
+
+    def set_domain_membership(self,user_id:int,domain_id:str,role_key:str,unit_scope:str|None,admin_id:int)->dict[str,Any]:
+        self.ensure_schema()
+        with self.connect() as conn:
+            if not conn.execute("SELECT 1 FROM auth_users WHERE id=%s AND status!='revoked'",(user_id,)).fetchone():raise ValueError("Usuário indisponível.")
+            if not conn.execute("SELECT 1 FROM domain_roles WHERE domain_id=%s AND role_key=%s",(domain_id,role_key)).fetchone():raise ValueError("Papel de domínio inválido.")
+            conn.execute("""INSERT INTO domain_memberships(user_id,domain_id,role_key,unit_scope,granted_by) VALUES(%s,%s,%s,%s,%s)
+                ON CONFLICT(user_id,domain_id) DO UPDATE SET role_key=EXCLUDED.role_key,unit_scope=EXCLUDED.unit_scope,granted_by=EXCLUDED.granted_by,created_at=NOW()""",(user_id,domain_id,role_key,unit_scope or None,admin_id));conn.execute("UPDATE auth_sessions SET revoked_at=NOW() WHERE user_id=%s AND revoked_at IS NULL",(user_id,));conn.commit()
+        return {"user_id":user_id,"domain_id":domain_id,"role":role_key,"unit_scope":unit_scope}
 
 
 auth_service = AuthService()

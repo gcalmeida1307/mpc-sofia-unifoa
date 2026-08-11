@@ -3,6 +3,7 @@ const mgEsc = value => String(value || '').replace(/[&<>"']/g, char => ({
 }[char]));
 
 let mgCurrentUser = null;
+let mgDomainRoles = [];
 
 function mgRenderAudit(entries) {
   document.querySelector('#management-audit-body').innerHTML = (entries || []).slice(0,5).map(entry => `
@@ -32,16 +33,17 @@ function mgUserCard(user) {
     <div class="user-role"><label>Perfil<select data-role="${user.id}" ${(isSelf || disabled) ? 'disabled' : ''}>
       <option value="user" ${user.role === 'user' ? 'selected' : ''}>Usuário</option>
       <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Administrador</option></select></label></div>
-    <div class="user-actions">${primaryAction}
+    <div class="user-actions">${primaryAction}<button class="ghost" data-domain-access="${user.id}">Acesso por área</button>
       ${disabled ? '' : `<button class="ghost" data-revoke="${user.id}">Revogar sessões</button>`}
       ${isSelf || disabled ? '' : `<button class="ghost danger" data-disable="${user.id}">Desabilitar</button>`}</div>
   </article>`;
 }
 
 async function mgLoad() {
-  const [requests, users, audit] = await Promise.all([
-    sofia.api('/auth/admin/access-requests'), sofia.api('/auth/admin/users'), sofia.api('/auth/admin/audit?limit=5')
+  const [requests, users, audit, domainRoles] = await Promise.all([
+    sofia.api('/auth/admin/access-requests'), sofia.api('/auth/admin/users'), sofia.api('/auth/admin/audit?limit=5'),sofia.api('/auth/admin/domain-roles')
   ]);
+  mgDomainRoles=domainRoles.roles||[];
   mgRenderAudit(audit.entries);
   document.querySelector('#management-requests').innerHTML = (requests.requests || []).filter(x => x.status === 'pending').map(x => `
     <article class="access-request"><div><strong>${mgEsc(x.display_name)}</strong><small>${mgEsc(x.username)}</small>
@@ -96,6 +98,7 @@ async function mgLoad() {
     await sofia.api(`/auth/admin/users/${button.dataset.enable}/enable`, {method: 'POST'});
     await mgLoad();
   });
+  document.querySelectorAll('[data-domain-access]').forEach(button=>button.onclick=async()=>{const user=(users.users||[]).find(item=>item.id===Number(button.dataset.domainAccess));if(!user||!mgDomainRoles.length)return alert('Nenhum papel de domínio disponível.');const options=mgDomainRoles.map((item,index)=>`${index+1}. ${item.domain_id} · ${item.display_name}`).join('\n'),choice=Number(prompt(`Escolha o papel para ${user.display_name}:\n${options}`));if(!choice||!mgDomainRoles[choice-1])return;const selected=mgDomainRoles[choice-1],scope=prompt('Escopo/unidade opcional (deixe vazio para todo o domínio):','')||null;if(!confirm(`Conceder ${selected.display_name} em ${selected.domain_id}? As sessões atuais serão revogadas.`))return;await sofia.api(`/auth/admin/users/${user.id}/domain-membership`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({domain_id:selected.domain_id,role:selected.role,unit_scope:scope})});alert('Acesso por domínio atualizado. O usuário deverá entrar novamente.');await mgLoad()});
 }
 
 (async () => {

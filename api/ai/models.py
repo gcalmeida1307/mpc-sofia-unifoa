@@ -38,3 +38,4 @@ class AIAnswerModel(BaseModel):
     confidence: float = 0.0
     explainability: dict = Field(default_factory=dict)
     learning: dict = Field(default_factory=dict)
+    presentation: dict = Field(default_factory=dict)

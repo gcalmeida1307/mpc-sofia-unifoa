@@ -207,6 +207,7 @@ class Application:
         from routes.core import router as core_router
         from routes.docs import router as docs_router
         from routes.domains import router as domains_router
+        from routes.timeline import router as timeline_router
         from routes.dashboard import router as dashboard_router
         from routes.engine import router as engine_router
         from routes.health import router as health_router
@@ -228,6 +229,7 @@ class Application:
         app.include_router(core_router)
         app.include_router(knowledge_router)
         app.include_router(domains_router)
+        app.include_router(timeline_router)
         app.include_router(workflows_router)
         app.include_router(marketplace_router)
         app.include_router(docs_router)

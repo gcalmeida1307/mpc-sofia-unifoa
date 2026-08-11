@@ -7,8 +7,8 @@ const sofia=(()=>{
   function buildNavigation(nav,user){
     const links=[
       ['Visão geral','Executivo','⌂','/ui/index.html',true],
-      ['Operações','Analytics','▥','/ui/analytics.html',true],['Operações','Ambiente','⌁','/ui/analista.html',true],
-      ['Inteligência','Conversar','✦','/ui/conversar.html',true],['Inteligência','Diário e agentes','◉','/ui/inteligencia.html',user.role==='admin'],
+      ['Operações','Investigação','▥','/ui/analytics.html',true],['Operações','Linha do tempo','◉','/ui/timeline.html',true],['Plataforma','Saúde técnica','⌁','/ui/analista.html',user.role==='admin'],['Plataforma','Agentes técnicos','⚙','/ui/inteligencia.html',user.role==='admin'],
+      ['Inteligência','Conversar','✦','/ui/conversar.html',true],
       ['Conhecimento','Fontes e RAGs','▤','/ui/base.html',user.role==='admin'],
       ['Automação','Fluxos','⌘','/ui/automacao.html',user.role==='admin'],
       ['Administração','Gestão','⚙','/ui/gestao.html',user.role==='admin']

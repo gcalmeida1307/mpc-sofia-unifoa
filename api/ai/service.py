@@ -119,6 +119,16 @@ class OpenAIService:
             "zabbix_investigation":{"scope":investigation.get("scope",{}),"evidence":investigation_evidence,"missing_data":investigation.get("missing_data",[])},
         }
 
+    @staticmethod
+    def _presentation(context:dict,confidence:float)->dict:
+        tools=context.get("tools",{}) if isinstance(context,dict) else {};investigation=tools.get("zabbix.investigate",{}) if isinstance(tools,dict) else {};entries=investigation.get("evidence",[]) if isinstance(investigation,dict) else []
+        hosts=sorted({str(host) for entry in entries if isinstance(entry,dict) for host in (entry.get("hosts") or [])})
+        timeline=[{"at":entry.get("started_at"),"title":entry.get("problem") or "Ocorrência","entity":", ".join(entry.get("hosts") or [])} for entry in entries if isinstance(entry,dict) and entry.get("started_at")][:12]
+        severities={}
+        for entry in entries:
+            if isinstance(entry,dict):key=str(entry.get("severity") or "Não classificado");severities[key]=severities.get(key,0)+1
+        return {"version":"1.0","summary_cards":[{"label":"Evidências","value":len(entries)},{"label":"Entidades","value":len(hosts)},{"label":"Confiança","value":round(confidence*100),"suffix":"%"}],"timeline":timeline,"chart":{"type":"bar","title":"Ocorrências por severidade","series":[{"label":key,"value":value} for key,value in severities.items()]},"entities":hosts[:20],"evidence_level":"observed" if entries else "inferred","actions":[{"label":"Abrir Linha do Tempo","href":"/ui/timeline.html"}]}
+
     def answer(self, question: str, semantic_query: SemanticQuery | None = None) -> dict:
         start = perf_counter()
         event_bus.publish_sync(
@@ -255,6 +265,7 @@ class OpenAIService:
             confidence=confidence,
             explainability=explainability,
             learning=learning,
+            presentation=self._presentation(context,confidence),
         )
         event_bus.publish_sync(
             "ai.answered",

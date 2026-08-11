@@ -16,6 +16,10 @@ class FirstAccessIn(BaseModel):
     username: str; password: str; otp: str
 class RoleIn(BaseModel):
     role: Literal['admin','user']
+class DomainMembershipIn(BaseModel):
+    domain_id:str=Field(min_length=3,max_length=40,pattern=r'^[a-z][a-z0-9-]+$')
+    role:str=Field(min_length=2,max_length=40,pattern=r'^[a-z][a-z0-9-]+$')
+    unit_scope:str|None=Field(default=None,max_length=120)
 class ProfileIn(BaseModel):
     display_name: str = Field(min_length=2, max_length=120)
     email: str = Field(min_length=5, max_length=200)
@@ -62,7 +66,7 @@ def logout(request: Request):
 def me(request: Request):
     user=auth_service.authenticate(bearer(request))
     if not user: raise HTTPException(401,'Sessão inválida ou expirada')
-    return {**user, 'capabilities': sorted(capabilities_for(user['role']))}
+    return {**user, 'capabilities': sorted(capabilities_for(user['role'])), 'domains':auth_service.domain_access(user['id'])}
 
 @router.patch('/me')
 def update_me(payload: ProfileIn, request: Request):
@@ -120,7 +124,19 @@ def approve(request_id: int, request: Request):
 
 @router.get('/admin/users')
 def users(request: Request):
-    require_admin(request); return {'users':auth_service.list_users()}
+    require_admin(request); return {'users':[{**user,'domains':auth_service.domain_access(user['id'])} for user in auth_service.list_users()]}
+
+@router.get('/admin/domain-roles')
+def domain_roles(request:Request):
+    require_admin(request);return {'roles':auth_service.domain_roles()}
+
+@router.put('/admin/users/{user_id}/domain-membership')
+def set_domain_membership(user_id:int,payload:DomainMembershipIn,request:Request):
+    admin=require_admin(request)
+    try:result=auth_service.set_domain_membership(user_id,payload.domain_id,payload.role,payload.unit_scope,admin['id'])
+    except ValueError as exc:raise HTTPException(422,str(exc))
+    auth_service.audit(admin['username'],'change_domain_membership',True,user_id=admin['id'])
+    return result
 
 @router.patch('/admin/users/{user_id}/role')
 def change_role(user_id: int, payload: RoleIn, request: Request):

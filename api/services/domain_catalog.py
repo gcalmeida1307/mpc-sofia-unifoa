@@ -66,7 +66,13 @@ class DeclarativeDomainCatalog:
             source={"name":f"{domain_id}-primary","label":f"{payload.get('display_name')} · fonte principal","url":source_url,"allowed_domains":[parsed.hostname],"refresh_seconds":max(3600,int(payload.get("refresh_seconds") or 86400)),"enabled":True,"metadata":{"domain_id":domain_id,"collection":f"{domain_id}.knowledge"}}
         display_name=str(payload.get("display_name") or "").strip();purpose=str(payload.get("purpose") or "").strip();theme_key=str(payload.get("theme") or "ocean")
         if theme_key not in THEMES:raise ValueError("Tema visual inválido.")
-        return {"domain_id":domain_id,"version":"1.0.0","display_name":display_name,"description":str(payload.get("description") or "").strip(),"purpose":purpose,"entities":entities,"metrics":metrics,"source":source,"experience":_experience(domain_id,display_name,purpose,entities,metrics,theme_key),"permissions":[f"{domain_id}.read",f"{domain_id}.manage"],"role_grants":{"user":[f"{domain_id}.read"],"analyst":[f"{domain_id}.read"],"operator":[f"{domain_id}.read"],"admin":[f"{domain_id}.read",f"{domain_id}.manage"]},"knowledge_collection":{"id":f"{domain_id}.knowledge","types":["documentation","runbook","policy","dataset"]},"routes":{"status":f"/domains/{domain_id}/status","search":f"/domains/{domain_id}/search","manifest":f"/domains/{domain_id}"},"health_checks":["manifest","knowledge_source"]}
+        roles=[]
+        for item in payload.get("roles",[])[:12]:
+            key=re.sub(r"[^a-z0-9-]","",str(item.get("key") or "").lower())[:40]
+            if not key:continue
+            capabilities=sorted({value for value in (str(cap).strip() for cap in item.get("capabilities",[])) if value.startswith(f"{domain_id}.")})[:20]
+            roles.append({"key":key,"label":str(item.get("label") or key.title())[:80],"parent":str(item.get("parent") or "")[:40] or None,"capabilities":capabilities or [f"{domain_id}.read"]})
+        return {"domain_id":domain_id,"version":"1.0.0","display_name":display_name,"description":str(payload.get("description") or "").strip(),"purpose":purpose,"entities":entities,"metrics":metrics,"source":source,"experience":_experience(domain_id,display_name,purpose,entities,metrics,theme_key),"domain_roles":roles,"permissions":[f"{domain_id}.read",f"{domain_id}.manage"],"role_grants":{"user":[f"{domain_id}.read"],"analyst":[f"{domain_id}.read"],"operator":[f"{domain_id}.read"],"admin":[f"{domain_id}.read",f"{domain_id}.manage"]},"knowledge_collection":{"id":f"{domain_id}.knowledge","types":["documentation","runbook","policy","dataset"]},"routes":{"status":f"/domains/{domain_id}/status","search":f"/domains/{domain_id}/search","manifest":f"/domains/{domain_id}"},"health_checks":["manifest","knowledge_source"]}
 
     def install(self,payload:dict[str,Any],user_id:int)->dict[str,Any]:
         self.ensure_schema();manifest=self._manifest(payload)
@@ -77,7 +83,12 @@ class DeclarativeDomainCatalog:
         with postgres_store._connect() as conn:
             exists=conn.execute("SELECT 1 FROM domain_installations WHERE domain_id=%s",(manifest["domain_id"],)).fetchone()
             if exists:raise ValueError("Já existe um domínio com esse identificador.")
-            conn.execute("INSERT INTO domain_installations(domain_id,display_name,description,purpose,manifest,created_by) VALUES(%s,%s,%s,%s,%s,%s)",(manifest["domain_id"],manifest["display_name"],manifest["description"],manifest["purpose"],Jsonb(manifest),user_id));conn.commit()
+            conn.execute("INSERT INTO domain_installations(domain_id,display_name,description,purpose,manifest,created_by) VALUES(%s,%s,%s,%s,%s,%s)",(manifest["domain_id"],manifest["display_name"],manifest["description"],manifest["purpose"],Jsonb(manifest),user_id))
+            configured=manifest.get("domain_roles") or [{"key":"viewer","label":"Leitor","parent":None,"capabilities":[f"{manifest['domain_id']}.read"]},{"key":"analyst","label":"Analista","parent":"viewer","capabilities":[f"{manifest['domain_id']}.read",f"{manifest['domain_id']}.analyze"]},{"key":"manager","label":"Gestor","parent":"analyst","capabilities":[f"{manifest['domain_id']}.read",f"{manifest['domain_id']}.analyze",f"{manifest['domain_id']}.manage"]}]
+            for role in configured:
+                conn.execute("""INSERT INTO domain_roles(domain_id,role_key,display_name,parent_role,capabilities) VALUES(%s,%s,%s,%s,%s)
+                    ON CONFLICT(domain_id,role_key) DO NOTHING""",(manifest["domain_id"],role["key"],role["label"],role.get("parent"),Jsonb(role["capabilities"])))
+            conn.commit()
         return {"status":"ready","domain":manifest}
 
     def list(self)->list[dict[str,Any]]:
@@ -108,6 +119,16 @@ class DeclarativeDomainCatalog:
         infrastructure["capabilities"]=["infrastructure.summary.read"]
         installed=[item.get("experience") or _experience(item["domain_id"],item["display_name"],item["purpose"],item.get("entities",[]),item.get("metrics",[]),"ocean") for item in self.list() if item.get("enabled")]
         return [infrastructure,*installed]
+
+    def propose(self,description:str)->dict[str,Any]:
+        from ai.client import ReasoningProvider
+        schema={"domain_id":"slug","display_name":"string","purpose":"string","entities":["string"],"metrics":["string"],"theme":"ocean|clinical|amber|violet|emerald|indigo","roles":[{"key":"slug","label":"string","parent":"slug|null","capabilities":["domain.action"]}],"suggested_questions":["string"],"warnings":["string"]}
+        provider=ReasoningProvider();result=provider.interpret(question=description,schema=schema,examples=[{"domain_id":"inventory","display_name":"Almoxarifado","purpose":"Acompanhar estoque e reposição.","entities":["item","fornecedor"],"metrics":["estoque mínimo","consumo"],"theme":"amber","roles":[{"key":"viewer","label":"Leitor","parent":None,"capabilities":["inventory.read"]}],"suggested_questions":["Quais itens estão abaixo do mínimo?"],"warnings":[]}]) if provider.enabled else None
+        data=(result or {}).get("data") or {};name=str(data.get("display_name") or description.split(".")[0])[:80];domain_id=re.sub(r"[^a-z0-9]+","-",name.lower()).strip("-")[:40]
+        proposal={"domain_id":domain_id if DOMAIN_ID.fullmatch(domain_id) and domain_id not in RESERVED else "novo-dominio","display_name":name,"purpose":str(data.get("purpose") or description)[:1000],"entities":[str(item)[:80] for item in data.get("entities",[])[:20]],"metrics":[str(item)[:80] for item in data.get("metrics",[])[:20]],"theme":data.get("theme") if data.get("theme") in THEMES else "ocean","roles":data.get("roles",[])[:12],"suggested_questions":data.get("suggested_questions",[])[:8],"warnings":data.get("warnings",[])[:8]}
+        if any(term in description.lower() for term in ("rh","recursos humanos","contratação","contratacao")):proposal["warnings"].append("Atributos protegidos não podem fundamentar decisões individuais de emprego.")
+        if any(term in description.lower() for term in ("medicina","médico","medico","paciente")):proposal["warnings"].append("A proposta oferece suporte à decisão; diagnóstico e conduta exigem responsabilidade clínica.")
+        return {"status":"proposal","provider":(result or {}).get("provider","deterministic"),"requires_human_approval":True,"proposal":proposal}
 
 
 declarative_domain_catalog=DeclarativeDomainCatalog()

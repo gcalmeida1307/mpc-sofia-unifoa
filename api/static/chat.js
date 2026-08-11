@@ -1,4 +1,5 @@
 (async()=>{
+  const richStyle=document.createElement('link');richStyle.rel='stylesheet';richStyle.href='/ui/chat-rich.css?v=20260811';document.head.append(richStyle);
   await sofia.initAuth();
   const list=document.querySelector('#messages'),form=document.querySelector('#chat-form'),input=document.querySelector('#question'),button=form.querySelector('button');
   const analysisPanel=document.querySelector('#conversation-analysis'),analysisContent=document.querySelector('#analysis-content');
@@ -16,7 +17,7 @@
   }
   function compactResult(result){
     const entries=entriesOf(result).slice(0,8).map(entry=>({problem:entry.problem,severity:entry.severity,started_at:entry.started_at,entity:entry.entity,hosts:(entry.hosts||[]).slice(0,4),groups:(entry.groups||[]).slice(0,4),recurrence:entry.recurrence,data_coverage:entry.data_coverage,items:(entry.items||[]).slice(0,5).map(item=>({name:item.name,key:item.key,current_value:item.current_value,interpreted_value:item.interpreted_value,units:item.units,last_collected_at:item.last_collected_at,history_summary:item.history_summary}))}));
-    return {answer:result.answer,question:result.question,confidence:result.confidence,degraded:result.degraded,source:result.source,sources_used:result.sources_used,plan:{tools:result.plan?.tools||[]},context:{related_problem_count:result.context?.related_problem_count,unique_host_count:result.context?.unique_host_count,group:result.context?.group,days:result.context?.days},analysis_entries:entries};
+    return {answer:result.answer,question:result.question,confidence:result.confidence,degraded:result.degraded,source:result.source,sources_used:result.sources_used,plan:{tools:result.plan?.tools||[]},context:{related_problem_count:result.context?.related_problem_count,unique_host_count:result.context?.unique_host_count,group:result.context?.group,days:result.context?.days},analysis_entries:entries,presentation:result.presentation};
   }
   function loadHistory(){try{return JSON.parse(sessionStorage.getItem(storageKey)||'[]')}catch{return []}}
   function persist(question,result){const turns=loadHistory();turns.push({question,result:compactResult(result)});sessionStorage.setItem(storageKey,JSON.stringify(turns.slice(-6)))}
@@ -27,6 +28,7 @@
     const operational=entries.length||context.related_problem_count!=null;
     return `<footer class="answer-meta"><span>${sources.join(' + ')}</span><span>${evidenceCount} evidência(s)</span><span>${Math.round((Number(result.confidence)||0)*100)}% confiança</span><span>${cEsc(mode)}</span></footer>${operational?'<div class="answer-actions"><button type="button" data-open-analysis>Abrir análise visual</button></div>':tools.length?`<div class="answer-actions"><span>Fontes consultadas: ${tools.map(cEsc).join(', ')}</span></div>`:''}`;
   }
+  function renderPresentation(result){const view=result.presentation||{},cards=view.summary_cards||[],series=view.chart?.series||[],timeline=view.timeline||[];if(!cards.length&&!series.length&&!timeline.length)return '';const max=Math.max(1,...series.map(item=>Number(item.value)||0));return `<section class="answer-visual"><div class="answer-summary-cards">${cards.map(item=>`<article><strong>${cEsc(item.value)}${cEsc(item.suffix||'')}</strong><span>${cEsc(item.label)}</span></article>`).join('')}</div>${series.length?`<article class="answer-inline-chart"><h4>${cEsc(view.chart.title)}</h4>${series.map(item=>`<div><span>${cEsc(item.label)}</span><i><b style="width:${(Number(item.value)||0)/max*100}%"></b></i><strong>${cEsc(item.value)}</strong></div>`).join('')}</article>`:''}${timeline.length?`<ol class="answer-inline-timeline">${timeline.slice(0,6).map(item=>`<li><time>${new Date(item.at).toLocaleString('pt-BR')}</time><span><strong>${cEsc(item.title)}</strong><small>${cEsc(item.entity)}</small></span></li>`).join('')}</ol>`:''}</section>`}
   function evidenceText(entry){const host=(entry.hosts||[]).join(', ')||'Equipamento não identificado',component=entry.entity?` · componente ${entry.entity}`:'';const items=(entry.items||[]).slice(0,4).map(item=>`${item.name||item.key}: ${item.interpreted_value||item.current_value||'sem valor'}${item.units?` ${item.units}`:''}`).join(' · ');return `${host}${component} — ${entry.problem||'problema'}${items?` — ${items}`:''}`}
   async function openAnalysis(result){
     const entries=entriesOf(result),context=result.context||{},hosts=[...new Set(entries.flatMap(entry=>entry.hosts||[]))],components=[...new Set(entries.map(entry=>entry.entity).filter(Boolean))];
@@ -40,7 +42,7 @@
   }
   function appendTurn(question,result,save=true){
     const userNode=document.createElement('div');userNode.className='msg user';userNode.textContent=question;list.append(userNode);
-    const node=document.createElement('article');node.className='msg assistant answer-card';node.innerHTML=`<div class="answer-text">${formatAnswer(result.answer)}</div><div>${renderMeta(result)}</div>`;list.append(node);
+    const node=document.createElement('article');node.className='msg assistant answer-card';node.innerHTML=`<div class="answer-text">${formatAnswer(result.answer)}</div>${renderPresentation(result)}<div>${renderMeta(result)}</div>`;list.append(node);
     const action=node.querySelector('[data-open-analysis]');if(action)action.onclick=()=>openAnalysis({...result,question});if(save)persist(question,{...result,question});
   }
   loadHistory().forEach(turn=>appendTurn(turn.question,turn.result,false));
