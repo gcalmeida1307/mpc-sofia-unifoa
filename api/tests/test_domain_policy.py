@@ -61,7 +61,8 @@ def test_operational_follow_up_uses_active_domain_and_history(monkeypatch):
     service.answer.return_value={'answer':'Plano priorizado pelas evidências.','learning':{},'plan':{},'reasoning':{},'critic':{},'confidence':.8,'explainability':{},'context':{},'llm_used':False}
     monkeypatch.setattr(ai,'openai_service',service);monkeypatch.setattr(ai,'postgres_store',store)
     monkeypatch.setattr(ai.semantic_gateway,'interpret',deterministic_interpret)
-    monkeypatch.setattr(ai,'execute_zabbix_query',lambda semantic,question:None)
+    provider=Mock();provider.execute_semantic.return_value=None
+    monkeypatch.setattr(ai.domain_provider_registry,'get',lambda domain_id:provider)
     response=ai.ask(ai.AIAskRequest(question='Crie um plano de ação priorizado usando apenas evidências disponíveis.',domain_id='infrastructure',history=[{'question':'Quais switches estão indisponíveis?','answer':'Dois switches.'}]))
     assert response['answer']=='Plano priorizado pelas evidências.'
     effective=service.answer.call_args.args[0]
