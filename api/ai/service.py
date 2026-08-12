@@ -19,13 +19,22 @@ from services.postgres_store import postgres_store
 from services.openai_reasoner import has_llm_enabled
 from semantic.interpreter import SemanticGateway
 from semantic.models import SemanticQuery
-from services.zabbix_investigator import format_investigation
+from core.domain_intelligence import domain_provider_registry
 
 
 class OpenAIService:
     def __init__(self):
         self.client = ReasoningProvider()
         self.semantic_gateway = SemanticGateway(self.client)
+
+    @staticmethod
+    def _domain_context(context: dict) -> dict:
+        current = context.get("domain", {}) if isinstance(context, dict) else {}
+        if current:
+            return current
+        provider = domain_provider_registry.get(str(context.get("domain_id") or "infrastructure"))
+        tools = context.get("tools", {}) if isinstance(context, dict) else {}
+        return provider.ai_context(tools) if provider else {"evidence": []}
 
     @staticmethod
     def _build_explainability(question: str, plan: dict, context: dict, reasoning: dict, critic: dict) -> dict:
@@ -47,7 +56,8 @@ class OpenAIService:
     @staticmethod
     def _compact_context_for_llm(context: dict) -> dict:
         tools = context.get("tools", {}) if isinstance(context, dict) else {}
-        problems = tools.get("zabbix.list_problems", {}).get("problems", [])
+        domain_context = OpenAIService._domain_context(context)
+        problems = domain_context.get("evidence", [])
         if not isinstance(problems, list):
             problems = []
 
@@ -94,7 +104,7 @@ class OpenAIService:
             )
 
         risks = context.get("risks", []) if isinstance(context.get("risks", []), list) else []
-        investigation = tools.get("zabbix.investigate", {}) if isinstance(tools.get("zabbix.investigate", {}), dict) else {}
+        investigation = domain_context
         investigation_evidence=[]
         for entry in (investigation.get("evidence",[]) or [])[:8]:
             if not isinstance(entry,dict):continue
@@ -116,12 +126,12 @@ class OpenAIService:
             "knowledge": compact_knowledge,
             "insights": compact_insights,
             "risk": risks[:2],
-            "zabbix_investigation":{"scope":investigation.get("scope",{}),"evidence":investigation_evidence,"missing_data":investigation.get("missing_data",[])},
+            "domain_evidence":{"domain_id":context.get("domain_id"),"scope":investigation.get("scope",{}),"evidence":investigation_evidence,"missing_data":investigation.get("missing_data",[])},
         }
 
     @staticmethod
     def _presentation(context:dict,confidence:float)->dict:
-        tools=context.get("tools",{}) if isinstance(context,dict) else {};investigation=tools.get("zabbix.investigate",{}) if isinstance(tools,dict) else {};entries=investigation.get("evidence",[]) if isinstance(investigation,dict) else []
+        investigation=OpenAIService._domain_context(context);entries=investigation.get("evidence",[]) if isinstance(investigation,dict) else []
         hosts=sorted({str(host) for entry in entries if isinstance(entry,dict) for host in (entry.get("hosts") or [])})
         timeline=[{"at":entry.get("started_at"),"title":entry.get("problem") or "Ocorrência","entity":", ".join(entry.get("hosts") or [])} for entry in entries if isinstance(entry,dict) and entry.get("started_at")][:12]
         severities={}
@@ -129,7 +139,7 @@ class OpenAIService:
             if isinstance(entry,dict):key=str(entry.get("severity") or "Não classificado");severities[key]=severities.get(key,0)+1
         return {"version":"1.0","summary_cards":[{"label":"Evidências","value":len(entries)},{"label":"Entidades","value":len(hosts)},{"label":"Confiança","value":round(confidence*100),"suffix":"%"}],"timeline":timeline,"chart":{"type":"bar","title":"Ocorrências por severidade","series":[{"label":key,"value":value} for key,value in severities.items()]},"entities":hosts[:20],"evidence_level":"observed" if entries else "inferred","actions":[{"label":"Abrir Linha do Tempo","href":"/ui/timeline.html"}]}
 
-    def answer(self, question: str, semantic_query: SemanticQuery | None = None) -> dict:
+    def answer(self, question: str, semantic_query: SemanticQuery | None = None, domain_id: str | None = None) -> dict:
         start = perf_counter()
         event_bus.publish_sync(
             "ai.question.received",
@@ -137,6 +147,7 @@ class OpenAIService:
         )
         semantic_query = semantic_query or self.semantic_gateway.interpret(question)
         plan = build_plan(question, semantic_query)
+        plan["domain_id"] = domain_id or "infrastructure"
         agent = agent_runtime.resolve(question=question, plan=plan)
         context = context_builder.build(question, plan, agent=agent)
         hypothesis = hypothesis_engine.build(question=question, plan=plan, context=context)
@@ -158,8 +169,9 @@ class OpenAIService:
             },
         )
 
-        investigation_result=context.get("tools",{}).get("zabbix.investigate",{})
-        candidate_answer = format_investigation(investigation_result) if isinstance(investigation_result,dict) and investigation_result.get("evidence") else reasoning.get("deterministic_answer")
+        investigation_result=context.get("domain",{})
+        provider=domain_provider_registry.get(str(context.get("domain_id") or "infrastructure"))
+        candidate_answer = provider.format_answer(investigation_result) if provider and investigation_result.get("evidence") else reasoning.get("deterministic_answer")
         llm_used = False
         llm_provider = "none"
         usage: dict = {}
@@ -167,7 +179,7 @@ class OpenAIService:
         if not candidate_answer:
             llm_context = self._compact_context_for_llm(context)
             llm_context_json = json.dumps(llm_context, ensure_ascii=False)
-            if not llm_context.get("zabbix_investigation", {}).get("evidence") and len(llm_context_json) > 1400:
+            if not llm_context.get("domain_evidence", {}).get("evidence") and len(llm_context_json) > 1400:
                 llm_context_json = llm_context_json[:1400]
             reasoning_note = reasoning_engine.to_developer_note(reasoning)
             if len(reasoning_note) > 140:
@@ -178,10 +190,10 @@ class OpenAIService:
                 {"role": "developer", "content": reasoning_note},
                 {"role": "user", "content": question},
             ]
-            if llm_context.get("zabbix_investigation", {}).get("evidence"):
-                messages.insert(3,{"role":"developer","content":"Use somente zabbix_investigation. Separe fatos comprovados, dados ausentes e hipótese. Não atribua core, energia, cabo, processo ou causa sem evidência. Cite componente, valores, horário, histórico e recorrência disponíveis; termine com ação segura e verificável."})
+            if llm_context.get("domain_evidence", {}).get("evidence"):
+                messages.insert(3,{"role":"developer","content":"Use somente domain_evidence. Separe fatos comprovados, dados ausentes e hipótese. Não atribua causa sem evidência. Cite entidade, valores, horário, histórico e recorrência disponíveis; termine com ação segura e verificável."})
 
-            llm_result = self.client.reason(messages,max_tokens=900) if llm_context.get("zabbix_investigation", {}).get("evidence") else self.client.reason(messages)
+            llm_result = self.client.reason(messages,max_tokens=900) if llm_context.get("domain_evidence", {}).get("evidence") else self.client.reason(messages)
             if llm_result and llm_result.get("text"):
                 candidate_answer = str(llm_result.get("text", "")).strip()
                 usage = llm_result.get("usage", {}) if isinstance(llm_result.get("usage", {}), dict) else {}
@@ -282,10 +294,10 @@ class OpenAIService:
         return result.model_dump()
 
     def _fallback_answer(self, question: str, context: dict) -> str:
-        tools = context.get("tools", {})
-        investigation=tools.get("zabbix.investigate",{})
+        investigation=context.get("domain",{})
         if isinstance(investigation,dict) and investigation.get("evidence"):
-            return format_investigation(investigation)
+            provider=domain_provider_registry.get(str(context.get("domain_id") or "infrastructure"))
+            if provider:return provider.format_answer(investigation) or ""
         knowledge = context.get("knowledge", []) if isinstance(context.get("knowledge", []), list) else []
         if knowledge:
             first = knowledge[0] if isinstance(knowledge[0], dict) else {}

@@ -4,8 +4,8 @@ from pydantic import BaseModel, Field
 from ai.service import openai_service
 from ai.domain_policy import OUT_OF_SCOPE_MESSAGE, is_it_question
 from services.postgres_store import postgres_store
-from semantic.executor import execute_zabbix_query
 from semantic.interpreter import semantic_gateway
+from core.domain_intelligence import domain_provider_registry
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
@@ -75,7 +75,8 @@ def ask(payload: AIAskRequest):
     postgres_store.add_message("user", payload.question, {"channel": "ai", "purpose": "training"})
     semantic = semantic_gateway.interpret(effective_question)
     try:
-        execution = execute_zabbix_query(semantic, effective_question)
+        provider = domain_provider_registry.get(payload.domain_id or "infrastructure")
+        execution = provider.execute_semantic(semantic, effective_question) if provider and hasattr(provider, "execute_semantic") else None
         if execution:
             answer = execution["answer"]
             semantic_data = semantic.model_dump(mode="json")
@@ -106,7 +107,7 @@ def ask(payload: AIAskRequest):
         pass
     # Knowledge remains part of the context pipeline. Do not short-circuit operational
     # or conceptual questions with a merely similar document fragment.
-    result = openai_service.answer(effective_question, semantic_query=semantic)
+    result = openai_service.answer(effective_question, semantic_query=semantic, domain_id=payload.domain_id)
     answer = result.get("answer", "")
     postgres_store.add_message(
         "assistant", answer,

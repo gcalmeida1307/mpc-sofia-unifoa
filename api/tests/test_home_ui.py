@@ -100,7 +100,8 @@ def test_shell_renders_domain_experiences_instead_of_fixed_domain_pages():
     styles=(STATIC / "domain-shell.css").read_text(encoding="utf-8")
     assert "/domains/experience/catalog" in auth and "domain-switcher" in auth
     assert 'id="domain-navigation"' in html and 'id="domain-page"' in html
-    for template in ["executive_overview","entity_list","analytics","knowledge"]:assert template in workspace
+    for section in ["Agora","História","Futuro","Administração"]:assert section in workspace
+    assert "não simula métricas" in workspace
     assert "suggested_questions" in workspace and "/ui/conversar.html?q=" in workspace
     assert "--domain-accent" in styles and "--domain-secondary" in styles
 

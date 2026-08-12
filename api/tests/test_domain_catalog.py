@@ -9,8 +9,8 @@ def test_manifest_builds_operational_domain_contract():
     assert manifest["permissions"]==["medicina.read","medicina.manage"]
     assert manifest["knowledge_collection"]["id"]=="medicina.knowledge"
     assert manifest["source"]["allowed_domains"]==["docs.example.org"]
-    assert manifest["experience"]["navigation"][0]["page"]=="overview"
-    assert manifest["experience"]["pages"]["records"]["template"]=="entity_list"
+    assert [item["page"] for item in manifest["experience"]["navigation"]]==["now","history","future"]
+    assert manifest["experience"]["pages"]["history"]["template"]=="domain_history"
     assert manifest["experience"]["branding"]["preset"]=="ocean"
 
 

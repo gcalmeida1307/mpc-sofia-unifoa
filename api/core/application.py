@@ -24,7 +24,7 @@ from core.event_handlers import register_default_event_handlers
 from core.registry import registry
 from core.snapshot_scheduler import SnapshotScheduler
 from core.domain_registry import domain_registry
-from core.authorization import is_allowed, required_capability
+from core.authorization import authorize
 from core.observability import HTTP_LATENCY, HTTP_REQUESTS
 
 
@@ -131,10 +131,11 @@ class Application:
                 request.state.user = user
                 if user.get('email_required') and path not in {'/auth/me', '/auth/logout'}:
                     return JSONResponse(status_code=428, content={'detail': 'cadastre um e-mail de recuperacao no perfil'})
-                capability = required_capability(path, method)
-                if capability and not is_allowed(user["role"], capability):
+                domain_id = request.headers.get("x-sofia-domain") or request.query_params.get("domain_id")
+                allowed, capability = authorize(user, path, method, domain_id)
+                if not allowed:
                     auth_service.audit(user["username"], f"capability_denied:{capability}", False, user_id=user["id"])
-                    return JSONResponse(status_code=403, content={"detail": "capacidade não autorizada", "required_capability": capability})
+                    return JSONResponse(status_code=403, content={"detail": "acesso ao domínio não autorizado", "required_capability": capability})
 
             # Enforce admin API key and optional TOTP for critical mutating endpoints.
             if method in {"POST", "PUT", "PATCH", "DELETE"} and path in protected_write_paths and not (getattr(request.state, "user", None) and request.state.user.get("role") == "admin"):
@@ -213,6 +214,7 @@ class Application:
         from routes.health import router as health_router
         from routes.knowledge import router as knowledge_router
         from routes.learning import router as learning_router
+        from routes.investigations import router as investigations_router
         from routes.marketplace import router as marketplace_router
         from routes.mcp import router as mcp_router
         from routes.metrics import router as metrics_router
@@ -230,6 +232,7 @@ class Application:
         app.include_router(knowledge_router)
         app.include_router(domains_router)
         app.include_router(timeline_router)
+        app.include_router(investigations_router)
         app.include_router(workflows_router)
         app.include_router(marketplace_router)
         app.include_router(docs_router)

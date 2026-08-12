@@ -65,10 +65,6 @@ def domain_status(domain_id:str):
 
 @router.get("/{domain_id}/search")
 def domain_search(domain_id:str,request:Request,query:str=Query(min_length=2,max_length=500)):
-    user=request.state.user
-    if user.get("role")!="admin":
-        from services.auth import auth_service
-        if domain_id not in {item["domain_id"] for item in auth_service.domain_access(int(user["id"]))}:raise HTTPException(403,"Sem acesso a este domínio")
     try:return declarative_domain_catalog.search(domain_id,query)
     except KeyError as exc:raise HTTPException(status_code=404,detail="domínio inexistente ou desabilitado") from exc
 

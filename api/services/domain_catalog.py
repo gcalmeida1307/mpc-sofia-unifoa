@@ -28,13 +28,14 @@ def _experience(domain_id:str,display_name:str,purpose:str,entities:list[str],me
     metric_label=metrics[0].title() if metrics else "Indicadores"
     return {"domain_id":domain_id,"title":display_name,"purpose":purpose,"branding":{"preset":theme_key,**theme},
         "navigation":[
-            {"label":"Visão geral","page":"overview","template":"executive_overview"},
-            {"label":entity_label,"page":"records","template":"entity_list"},
-            {"label":metric_label,"page":"analytics","template":"analytics"},
-            {"label":"Conhecimento","page":"knowledge","template":"knowledge"},
+            {"label":"Agora","page":"now","template":"domain_now"},
+            {"label":"História","page":"history","template":"domain_history"},
+            {"label":"Futuro","page":"future","template":"domain_future"},
         ],
         "pages":{
-            "overview":{"title":f"Visão geral de {display_name}","template":"executive_overview","widgets":["metric","status","ranking","assistant_insight"]},
+            "now":{"title":f"Agora em {display_name}","template":"domain_now","widgets":["observations","entities","assistant"]},
+            "history":{"title":f"História de {display_name}","template":"domain_history","widgets":["events","correlations","learning"]},
+            "future":{"title":f"Futuro de {display_name}","template":"domain_future","widgets":["forecast","hypotheses","scenarios"]},
             "records":{"title":entity_label,"template":"entity_list","entity":entities[0] if entities else "registro","widgets":["table","entity_card"]},
             "analytics":{"title":metric_label,"template":"analytics","widgets":["trend","bar_chart","line_chart"]},
             "knowledge":{"title":"Conhecimento","template":"knowledge","widgets":["assistant_insight","table"]},
