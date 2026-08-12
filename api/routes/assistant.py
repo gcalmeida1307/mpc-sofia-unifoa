@@ -284,7 +284,7 @@ def ask(payload: AssistantRequest):
         else:
             answer = "O Knowledge Service não encontrou contexto documental relevante no diretório docs ainda."
     else:
-        if has_openai_enabled():
+        if has_llm_enabled():
             answer = (
                 f"Eu consigo responder com base no registry atual, no Knowledge e no histórico da conversa. Hoje o SOFIA possui os módulos {', '.join(modules)}. "
                 f"Se você quiser, eu posso usar o Zabbix, Docker, o Marketplace ou o Workflow para responder de forma mais específica."
@@ -317,6 +317,6 @@ def ask(payload: AssistantRequest):
         "capabilities": capabilities,
         "recommendations": recommendations,
         "memory_hits": memory_hits,
-        "llm_enabled": has_openai_enabled(),
+        "llm_enabled": has_llm_enabled(),
         "source": "registry+knowledge+mcp",
     }

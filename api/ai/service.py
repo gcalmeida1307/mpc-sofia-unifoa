@@ -294,6 +294,7 @@ class OpenAIService:
         return result.model_dump()
 
     def _fallback_answer(self, question: str, context: dict) -> str:
+        tools = context.get("tools", {})
         investigation=context.get("domain",{})
         if isinstance(investigation,dict) and investigation.get("evidence"):
             provider=domain_provider_registry.get(str(context.get("domain_id") or "infrastructure"))
