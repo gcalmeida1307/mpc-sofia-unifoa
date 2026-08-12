@@ -14,7 +14,7 @@ class ZabbixConnector:
         self.token = None
 
     def _post(self, url: str, **kwargs):
-        kwargs.setdefault("timeout", settings.REQUEST_TIMEOUT)
+        timeout = kwargs.pop("timeout", settings.REQUEST_TIMEOUT)
         if time.monotonic() < self.__class__._circuit_open_until:
             INTEGRATION_REQUESTS.labels(integration="zabbix", operation="jsonrpc", status="circuit_open").inc()
             raise requests.ConnectionError("Zabbix temporariamente indisponível; circuito aberto")
@@ -23,7 +23,7 @@ class ZabbixConnector:
         try:
             for attempt in range(2):
                 try:
-                    response = requests.post(url, **kwargs)
+                    response = requests.post(url, timeout=timeout, **kwargs)
                     if response.status_code >= 500 and attempt == 0:
                         time.sleep(0.08)
                         continue
