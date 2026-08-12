@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from tempfile import gettempdir
 
 
 class SimpleVectorStore:
     def __init__(self, path: str | None = None):
-        self.path = Path(path or "/tmp/sofia_vector_store.json")
+        self.path = Path(path) if path else Path(gettempdir()) / "sofia_vector_store.json"
         self._store: list[dict] = []
         self._load()
 

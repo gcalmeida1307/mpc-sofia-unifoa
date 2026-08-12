@@ -1,4 +1,4 @@
-from hashlib import sha1
+from hashlib import sha256
 
 from services.postgres_store import postgres_store
 from services.qdrant_store import qdrant_store
@@ -6,7 +6,7 @@ from services.qdrant_store import qdrant_store
 
 def _signature(topic: str, payload: dict) -> str:
     value = f"{topic}:{payload.get('host', '')}:{payload.get('generated_at', '')}:{payload.get('problem_count', 0)}"
-    return sha1(value.encode("utf-8")).hexdigest()
+    return sha256(value.encode("utf-8")).hexdigest()
 
 
 def _host_down(payload: dict) -> None:

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from hashlib import sha1
+from hashlib import sha256
 from typing import Any
 
 from services.postgres_store import postgres_store
@@ -9,7 +9,7 @@ from services.qdrant_store import qdrant_store
 
 def _build_signature(topic: str, payload: dict[str, Any]) -> str:
     base = f"{topic}:{payload.get('host', '')}:{payload.get('generated_at', '')}:{payload.get('problem_count', 0)}"
-    return sha1(base.encode("utf-8")).hexdigest()
+    return sha256(base.encode("utf-8")).hexdigest()
 
 
 def _handle_ai_answered(payload: dict[str, Any]) -> None:

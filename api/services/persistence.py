@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from tempfile import gettempdir
 
 
 class SimplePersistence:
     def __init__(self, path: str | None = None):
-        self.path = Path(path or "/tmp/sofia_persistence.json")
+        self.path = Path(path) if path else Path(gettempdir()) / "sofia_persistence.json"
         self._data: list[dict] = []
         self._load()
 

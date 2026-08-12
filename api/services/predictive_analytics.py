@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from hashlib import sha1
+from hashlib import sha256
 from typing import Any
 
 
@@ -32,7 +32,7 @@ def _collecting(method: str, samples: int, required: int) -> dict[str, Any]:
 
 def analyze_problem_series(series: list[dict[str, Any]], *, seed: int = 42) -> dict[str, Any]:
     values = _values(series)
-    fingerprint = sha1(repr(values).encode()).hexdigest()
+    fingerprint = sha256(repr(values).encode()).hexdigest()
     if fingerprint in _CACHE:
         return _CACHE[fingerprint]
 

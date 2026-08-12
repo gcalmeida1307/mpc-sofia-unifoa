@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from hashlib import sha1
+from hashlib import sha256
 from typing import Any
 
 from ai.hypothesis import hypothesis_engine
@@ -164,7 +164,7 @@ class AutonomousInvestigator:
     @staticmethod
     def _signature(candidate: dict[str, Any]) -> str:
         base = f"{candidate.get('watcher')}|{candidate.get('title')}|{candidate.get('severity')}|{candidate.get('summary')}"
-        return sha1(base.encode("utf-8")).hexdigest()
+        return sha256(base.encode("utf-8")).hexdigest()
 
 
 autonomous_investigator = AutonomousInvestigator()

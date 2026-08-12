@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter, defaultdict
-from hashlib import sha1
+from hashlib import sha256
 from typing import Any
 
 from services.postgres_store import postgres_store
@@ -24,7 +24,7 @@ class LearningService:
 
     def _signature(self, family: str, summary: dict[str, Any]) -> str:
         raw = f"{family}:{summary.get('problem_count', 0)}:{summary.get('host_count', 0)}:{summary.get('severity_3', 0)}:{summary.get('severity_2', 0)}:{summary.get('severity_1', 0)}"
-        return sha1(raw.encode("utf-8")).hexdigest()
+        return sha256(raw.encode("utf-8")).hexdigest()
 
     def learn(self, question: str | None = None) -> dict[str, Any]:
         snapshot = snapshot_service.get(force_refresh=True)

@@ -42,7 +42,7 @@ jobs:
         run: pytest -q
       - name: Security
         run: |
-          bandit -q -r api -x api/tests
+          bandit -q -r api -x api/tests -ll
           pip-audit -r api/requirements.txt
 
   container:

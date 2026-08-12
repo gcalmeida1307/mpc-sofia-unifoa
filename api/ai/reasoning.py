@@ -2,10 +2,27 @@ from __future__ import annotations
 
 import math
 import re
+import ast
+import operator
 from typing import Any
 
 
 class ReasoningEngine:
+    _ARITHMETIC = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul,
+                   ast.Div: operator.truediv, ast.USub: operator.neg, ast.UAdd: operator.pos}
+
+    @classmethod
+    def _safe_arithmetic(cls, expression: str) -> int | float:
+        def visit(node):
+            if isinstance(node, ast.Expression): return visit(node.body)
+            if isinstance(node, ast.Constant) and type(node.value) in {int, float}: return node.value
+            if isinstance(node, ast.BinOp) and type(node.op) in cls._ARITHMETIC:
+                return cls._ARITHMETIC[type(node.op)](visit(node.left), visit(node.right))
+            if isinstance(node, ast.UnaryOp) and type(node.op) in cls._ARITHMETIC:
+                return cls._ARITHMETIC[type(node.op)](visit(node.operand))
+            raise ValueError("unsupported arithmetic expression")
+        return visit(ast.parse(expression, mode="eval"))
+
     def build(self, question: str, plan: dict[str, Any], context: dict[str, Any]) -> dict[str, Any]:
         tools = plan.get("tools", []) if isinstance(plan, dict) else []
         summary = context.get("summary", {}) if isinstance(context, dict) else {}
@@ -112,7 +129,7 @@ class ReasoningEngine:
         if not re.fullmatch(r"[0-9\s+\-*/().]+", expression):
             return None
         try:
-            value = eval(expression, {"__builtins__": {}}, {})
+            value = ReasoningEngine._safe_arithmetic(expression)
         except Exception:
             return None
         if not isinstance(value, (int, float)) or not math.isfinite(value):

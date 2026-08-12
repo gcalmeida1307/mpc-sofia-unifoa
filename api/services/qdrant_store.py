@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from hashlib import sha1
+from hashlib import sha256
 from typing import Any
 
 from qdrant_client import QdrantClient
@@ -21,7 +21,7 @@ class QdrantStore:
         # Lightweight deterministic embedding to enable similarity lookups.
         vector = [0.0] * self.vector_size
         for token in text.lower().split():
-            idx = int(sha1(token.encode("utf-8")).hexdigest(), 16) % self.vector_size
+            idx = int(sha256(token.encode("utf-8")).hexdigest(), 16) % self.vector_size
             vector[idx] += 1.0
         norm = sum(v * v for v in vector) ** 0.5
         if norm > 0:
@@ -63,7 +63,7 @@ class QdrantStore:
         client = self._client_or_none()
         if client is None:
             return False
-        point_id = int(sha1((text + str(metadata or {})).encode("utf-8")).hexdigest()[:15], 16)
+        point_id = int(sha256((text + str(metadata or {})).encode("utf-8")).hexdigest()[:15], 16)
         try:
             client.upsert(
                 collection_name=self.collection,
@@ -91,7 +91,7 @@ class QdrantStore:
             for start in range(0, len(items), 128):
                 points = [
                     qmodels.PointStruct(
-                        id=int(sha1((text + str(metadata or {})).encode("utf-8")).hexdigest()[:15], 16),
+                        id=int(sha256((text + str(metadata or {})).encode("utf-8")).hexdigest()[:15], 16),
                         vector=self._embed(text),
                         payload={"text": text, **(metadata or {})},
                     )

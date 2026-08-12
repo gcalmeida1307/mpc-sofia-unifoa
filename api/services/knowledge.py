@@ -4,7 +4,7 @@ import io
 import json
 import re
 from collections import deque
-from hashlib import sha1
+from hashlib import sha256
 from html.parser import HTMLParser
 from datetime import datetime, timezone
 from pathlib import Path
@@ -260,7 +260,7 @@ def _touch_source_record(name: str, updates: dict[str, Any]) -> dict[str, Any] |
 def _upload_target_path(file_name: str) -> Path:
     safe_name = _slugify(Path(file_name).stem) or "upload"
     suffix = Path(file_name).suffix.lower() or ".txt"
-    unique = sha1(f"{file_name}:{_now_iso()}".encode("utf-8")).hexdigest()[:10]
+    unique = sha256(f"{file_name}:{_now_iso()}".encode("utf-8")).hexdigest()[:10]
     target = _uploads_root() / f"{safe_name}-{unique}{suffix}"
     target.parent.mkdir(parents=True, exist_ok=True)
     return target
@@ -432,7 +432,7 @@ def _page_path(source_name: str, page_url: str, title: str) -> Path:
     parsed = urlparse(page_url)
     path_slug = _slugify(parsed.path.strip("/") or "index")
     title_slug = _slugify(title or path_slug)
-    unique = sha1(page_url.encode("utf-8")).hexdigest()[:8]
+    unique = sha256(page_url.encode("utf-8")).hexdigest()[:8]
     return _external_docs_root() / _slugify(source_name) / f"{title_slug}-{path_slug}-{unique}.md"
 
 

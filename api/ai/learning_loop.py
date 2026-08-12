@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from hashlib import sha1
+from hashlib import sha256
 from typing import Any
 
 from ai.planner_policy import planner_policy
@@ -108,7 +108,7 @@ class LearningLoop:
     @staticmethod
     def _signature(question: str, decision: dict[str, Any], insight_summary: str) -> str:
         base = f"{question.lower().strip()}|{decision.get('intent')}|{decision.get('selected_hypothesis')}|{insight_summary}"
-        return sha1(base.encode("utf-8")).hexdigest()
+        return sha256(base.encode("utf-8")).hexdigest()
 
     @staticmethod
     def _was_reused(question: str, history: list[dict[str, Any]]) -> bool:

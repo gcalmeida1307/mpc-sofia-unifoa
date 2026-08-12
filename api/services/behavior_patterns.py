@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
-from hashlib import sha1
+from hashlib import sha256
 import re
 from threading import Lock
 from typing import Any
@@ -70,7 +70,7 @@ class BehaviorPatternAnalyzer:
             if night_rate<.55 or business_rate>.30 or night_rate-business_rate<.40:continue
             confidence=round(min(.99,.55+(night_rate-business_rate)*.35+min(len(data["days"]),10)*.02),2)
             likely_admin=any(token in " ".join(data["groups"]).lower() for token in ("admin","jurid","rh","finance","secretar","portaria"))
-            patterns.append({"id":sha1(f"{host}|{entity}|night_schedule".encode()).hexdigest()[:16],"kind":"scheduled_availability","host":host,"entity":entity,"classification":"rotina administrativa provável" if likely_admin else "rotina programada provável","summary":f"{host} · {entity} fica indisponível predominantemente fora do horário comercial e retorna durante o expediente.","night_down_rate":round(night_rate,3),"business_down_rate":round(business_rate,3),"observed_days":len(data["days"]),"samples":night_seen+business_seen,"confidence":confidence,"groups":sorted(data["groups"]),"evidence":data["examples"],"recommended_action":"Validar com o responsável se o desligamento é intencional; se confirmado, criar janela de manutenção ou dependência para reduzir falso positivo sem ocultar falhas fora do padrão.","deviation_rule":"Alertar quando não retornar no início do expediente ou cair durante o horário comercial."})
+            patterns.append({"id":sha256(f"{host}|{entity}|night_schedule".encode()).hexdigest()[:16],"kind":"scheduled_availability","host":host,"entity":entity,"classification":"rotina administrativa provável" if likely_admin else "rotina programada provável","summary":f"{host} · {entity} fica indisponível predominantemente fora do horário comercial e retorna durante o expediente.","night_down_rate":round(night_rate,3),"business_down_rate":round(business_rate,3),"observed_days":len(data["days"]),"samples":night_seen+business_seen,"confidence":confidence,"groups":sorted(data["groups"]),"evidence":data["examples"],"recommended_action":"Validar com o responsável se o desligamento é intencional; se confirmado, criar janela de manutenção ou dependência para reduzir falso positivo sem ocultar falhas fora do padrão.","deviation_rule":"Alertar quando não retornar no início do expediente ou cair durante o horário comercial."})
         return sorted(patterns,key=lambda item:(item["confidence"],item["observed_days"]),reverse=True)
 
     def run_cycle(self, force: bool = False) -> dict[str, Any]:
