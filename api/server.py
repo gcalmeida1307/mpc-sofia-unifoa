@@ -26,6 +26,9 @@ from pypdf import PdfReader
 from docx import Document
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from .orchestration import answer as orchestrate_answer
+from .policies import policy_for
+from .retrieval import retrieve
 
 logger = logging.getLogger("sofia.mcp")
 ROOT = Path(__file__).resolve().parents[1]
@@ -163,8 +166,8 @@ mcp = MCPServer(name="sofia-local", version="1.0.0", description="Sofia local kn
 @mcp.tool()
 async def search_knowledge(module_id: str, query: str, limit: int = 5) -> dict[str, Any]:
     """Search the local knowledge folder for relevant documents."""
-    context, sources = knowledge_context(module_id, query, limit)
-    return {"module": module_id, "sources": sources, "context": context, "documents_found": len(sources)}
+    result = retrieve(KNOWLEDGE_ROOT, module_id, query, policy_for(module_id), limit)
+    return {"module": module_id, "sources": list(result.sources), "context": result.context, "documents_found": len(result.sources), "evidence_found": result.has_quality_evidence}
 
 
 @mcp.tool()
@@ -309,8 +312,7 @@ async def upload(module_id: str, file: UploadFile = File(...)) -> dict[str, Any]
     return {"uploaded": True, "module": module_id, "file": safe_name, "bytes": len(content), "status": module_status(module_id)}
 
 
-@app.post("/api/chat")
-async def chat(request: ChatRequest) -> dict[str, Any]:
+async def legacy_chat(request: ChatRequest) -> dict[str, Any]:
     context, sources = knowledge_context(request.module_id, request.message)
     system = "Você é Sofia. Responda em português, use somente o contexto local quando ele existir, cite os nomes dos arquivos utilizados e diga claramente quando não houver informação suficiente. Não invente dados."
     try:
@@ -320,6 +322,12 @@ async def chat(request: ChatRequest) -> dict[str, Any]:
             raise
         answer, model = local_rag_answer(request.message, context, sources), "local-rag"
     return {"answer": answer, "provider": "local-rag" if model == "local-rag" else request.provider, "model": model, "sources": sources, "module": request.module_id}
+
+
+@app.post("/api/chat")
+async def chat(request: ChatRequest) -> dict[str, Any]:
+    result = await orchestrate_answer(root=KNOWLEDGE_ROOT, module_id=request.module_id, provider=request.provider, question=request.message, history=request.history)
+    return {"answer": result.answer, "provider": result.provider, "model": result.model, "sources": result.sources, "evidence_found": result.evidence_found, "evidence_score": result.evidence_score, "verified": result.verified, "module": request.module_id}
 
 
 @app.get("/api/modules/{module_id}/tools/{tool_name}")
