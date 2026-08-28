@@ -1,0 +1,10 @@
+{
+  "description": "This interactive platform offers a modern, responsive interface for accessing specialized knowledge and tools, including chat support and customizable dashboards.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

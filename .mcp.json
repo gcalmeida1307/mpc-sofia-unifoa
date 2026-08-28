@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "sofia-local": {
+      "command": "C:\\Users\\glauco.almeida\\Documents\\sofia\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "api.server"],
+      "env": {
+        "SOFIA_TRANSPORT": "stdio"
+      }
+    }
+  }
+}

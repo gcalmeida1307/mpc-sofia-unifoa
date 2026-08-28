@@ -1,3 +1,0 @@
-# Optional: requires a CPU with AVX. The current Intel Xeon X3430 does not support it.
--r requirements.txt
-tensorflow-cpu==2.21.0

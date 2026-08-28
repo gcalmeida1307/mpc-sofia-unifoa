@@ -1,34 +1,23 @@
-# Python
-__pycache__/
-*.py[cod]
-*.so
-*.egg-info/
-.venv/
-venv/
-
-# Environment
-.env
-.env.*
-
-# Logs and runtime data
-logs/
-data/
-*.log
-
-# VS Code
-.vscode/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Docker local state
-*.pid
-
-# Node (if used by UI later)
 node_modules/
+.venv/
+dist/
+build/
+.cache/
+.env*
+.vite/
+vite.config.*.timestamp-*
+*.tsbuildinfo
+*-debug.log*
+logs/
+*.log
+__pycache__/
+*.pyc
+.claude-replay.*
+.tmp-*
 
-# Knowledge runtime cache (persisted on the server, not source-controlled)
-docs/_external/
-docs/_uploads/
-docs/_knowledge_sources.json
+# Platform-managed agentplat state, not project source. In the
+# client-initiated single-repo workspace layout (make's `Path: "."` spec) the
+# repo root IS the workspace root, so these land inside this repo rather than
+# beside it.
+/.plugins/
+/.opencode-skills/
