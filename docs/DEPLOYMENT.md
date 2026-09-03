@@ -18,9 +18,22 @@ SOFIA_POSTGRES_URL=postgresql://usuario:senha@servidor:5432/sofia
 SOFIA_ENCRYPTION_KEY=<chave-forte-fora-do-repositorio>
 ```
 
+Depois de trocar o backend, migre os stores locais uma única vez. A rotina é
+idempotente, cifra os campos sensíveis antes da gravação e preserva os SQLite
+como fonte de recuperação:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\migrate_operational_stores.py
+```
+
+Reinicie a API e confirme em `/api/health` que `mode` é
+`production-primary` e que `local_scope_pending_migration` está vazio. O
+endpoint também lista as tabelas ausentes sem mostrar a senha da conexão.
+
 Nesse modo, o sistema falha fechado se o PostgreSQL não estiver disponível e
 o Production Gate não libera a implantação enquanto os stores obrigatórios
-não estiverem migrados. SQLite local (`data/knowledge_expansion.sqlite3`) é
+não estiverem migrados. Os stores de autenticação, FHIR, integrações, insights,
+auditoria, analytics e observabilidade usam PostgreSQL; SQLite local é
 permitido apenas com `SOFIA_STORAGE_MODE=developer`, para desenvolvimento ou
 operação offline explicitamente assumida. Valide o backend em
 `/api/capabilities`, `/api/health` ou no Pipeline Explorer; nunca coloque a

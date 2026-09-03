@@ -3,18 +3,55 @@ from __future__ import annotations
 import os
 import re
 import sqlite3
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
+from .pg_runtime import is_postgres, postgres_connection
+from .secure_storage import encryption_configured
+
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE_PATH = ROOT / "data" / "sofia.sqlite3"
+PG_SCHEMA = """
+CREATE TABLE IF NOT EXISTS audit_events (
+    id BIGSERIAL PRIMARY KEY,
+    user_code TEXT NOT NULL,
+    module_id TEXT,
+    action TEXT NOT NULL,
+    resource_id TEXT,
+    created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_audit_events_created ON audit_events (created_at DESC);
+CREATE TABLE IF NOT EXISTS privacy_settings (
+    setting_key TEXT PRIMARY KEY,
+    setting_value TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+"""
+
+
+@contextmanager
+def _connection() -> Iterator[object]:
+    with postgres_connection() as primary:
+        if primary is not None:
+            yield primary
+            return
+    DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    connection = sqlite3.connect(DATABASE_PATH)
+    connection.row_factory = sqlite3.Row
+    try:
+        yield connection
+    finally:
+        connection.close()
 
 
 # These masks are deliberately request-scoped. The mapping is kept only in
 # memory until the provider answer has been rehydrated, and is never written to
 # analytics, audit logs, learning events or the offline knowledge base.
-_PLACEHOLDER_RE = re.compile(r"__SOFIA_(?:EMAIL|CPF|CNPJ|PHONE|IP|UUID|IDENTIFIER|PII)_\d+__")
+_PLACEHOLDER_RE = re.compile(
+    r"__SOFIA_(?:EMAIL|CPF|CNPJ|PHONE|IP|UUID|IDENTIFIER|PII)_\d+__"
+)
 _SECRET_RE = re.compile(
     r"(?ix)"
     r"(?:bearer\s+[A-Za-z0-9._~+/=-]{16,}|"
@@ -30,12 +67,19 @@ _KEYED_PII_RE = re.compile(
     r"(?P<value>\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*'|\[[^\]]*\]|[^,\n}]+)",
     re.IGNORECASE,
 )
-_EMAIL_RE = re.compile(r"(?<![\w.+-])[\w.!#$%&'*+/=?^`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?\.[A-Za-z]{2,}(?![\w-])")
+_EMAIL_RE = re.compile(
+    r"(?<![\w.+-])[\w.!#$%&'*+/=?^`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?\.[A-Za-z]{2,}(?![\w-])"
+)
 _CNPJ_RE = re.compile(r"(?<!\d)\d{2}[.\s]?\d{3}[.\s]?\d{3}[/\s]?\d{4}[-\s]?\d{2}(?!\d)")
 _CPF_RE = re.compile(r"(?<!\d)\d{3}[.\s]?\d{3}[.\s]?\d{3}[-\s]?\d{2}(?!\d)")
-_PHONE_RE = re.compile(r"(?<!\d)(?:\+?55[\s.-]?)?(?:\(?\d{2}\)?[\s.-]?)9?\d{4}[\s.-]?\d{4}(?!\d)")
+_PHONE_RE = re.compile(
+    r"(?<!\d)(?:\+?55[\s.-]?)?(?:\(?\d{2}\)?[\s.-]?)9?\d{4}[\s.-]?\d{4}(?!\d)"
+)
 _IP_RE = re.compile(r"(?<![\w.])(?:\d{1,3}\.){3}\d{1,3}(?![\w])")
-_UUID_RE = re.compile(r"(?<![\w-])[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}(?![\w-])", re.IGNORECASE)
+_UUID_RE = re.compile(
+    r"(?<![\w-])[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}(?![\w-])",
+    re.IGNORECASE,
+)
 
 
 class ExternalRedaction:
@@ -140,7 +184,8 @@ class ExternalRedaction:
         return [
             {**item, "content": self.clean(str(item.get("content", "")))}
             for item in history
-            if item.get("role") in {"user", "assistant"} and str(item.get("content", "")).strip()
+            if item.get("role") in {"user", "assistant"}
+            and str(item.get("content", "")).strip()
         ]
 
     def restore(self, text: str | None) -> str:
@@ -149,7 +194,9 @@ class ExternalRedaction:
         restored = str(text)
         # Longer values first avoids accidental prefix collisions if a future
         # placeholder family is introduced.
-        for token, original in sorted(self._restore_map.items(), key=lambda item: len(item[0]), reverse=True):
+        for token, original in sorted(
+            self._restore_map.items(), key=lambda item: len(item[0]), reverse=True
+        ):
             restored = restored.replace(token, original)
         return restored
 
@@ -176,29 +223,38 @@ def external_clinical_allowed() -> bool:
     return external_data_allowed() and _enabled("SOFIA_ALLOW_EXTERNAL_CLINICAL", False)
 
 
-def provider_guard(provider: str, *, patient_id: str | None = None, clinical: bool = False) -> None:
+def provider_guard(
+    provider: str, *, patient_id: str | None = None, clinical: bool = False
+) -> None:
     if provider not in {"gemini", "claude", "openai"}:
         return
     if not external_data_allowed():
-        raise ValueError("Provider externo bloqueado pelo modo LGPD local. Use Ollama ou habilite SOFIA_ALLOW_EXTERNAL_DATA após avaliar a finalidade e a base legal.")
+        raise ValueError(
+            "Provider externo bloqueado pelo modo LGPD local. Use Ollama ou habilite SOFIA_ALLOW_EXTERNAL_DATA após avaliar a finalidade e a base legal."
+        )
     if (patient_id or clinical) and not external_clinical_allowed():
-        raise ValueError("Contexto FHIR/paciente não é enviado a providers externos por padrão. Use Ollama local ou habilite SOFIA_ALLOW_EXTERNAL_CLINICAL de forma explícita.")
+        raise ValueError(
+            "Contexto FHIR/paciente não é enviado a providers externos por padrão. Use Ollama local ou habilite SOFIA_ALLOW_EXTERNAL_CLINICAL de forma explícita."
+        )
 
 
 def initialize_privacy_store() -> None:
-    with sqlite3.connect(DATABASE_PATH) as connection:
-        connection.execute(
-            """
-            CREATE TABLE IF NOT EXISTS audit_events (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_code TEXT NOT NULL,
-                module_id TEXT,
-                action TEXT NOT NULL,
-                resource_id TEXT,
-                created_at TEXT NOT NULL
+    with _connection() as connection:
+        if is_postgres(connection):
+            connection.executescript(PG_SCHEMA)
+        else:
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS audit_events (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_code TEXT NOT NULL,
+                    module_id TEXT,
+                    action TEXT NOT NULL,
+                    resource_id TEXT,
+                    created_at TEXT NOT NULL
+                )
+                """
             )
-            """
-        )
         cutoff = (datetime.now(UTC) - timedelta(days=retention_days())).isoformat()
         connection.execute("DELETE FROM audit_events WHERE created_at < ?", (cutoff,))
         connection.commit()
@@ -211,16 +267,27 @@ def retention_days() -> int:
         return 365
 
 
-def audit_event(user_code: str, action: str, module_id: str | None = None, resource_id: str | None = None) -> None:
+def audit_event(
+    user_code: str,
+    action: str,
+    module_id: str | None = None,
+    resource_id: str | None = None,
+) -> None:
     """Record metadata only; prompts, documents and clinical values are never written here."""
     try:
-        with sqlite3.connect(DATABASE_PATH) as connection:
+        with _connection() as connection:
             connection.execute(
                 "INSERT INTO audit_events (user_code, module_id, action, resource_id, created_at) VALUES (?, ?, ?, ?, ?)",
-                (user_code, module_id, action, resource_id, datetime.now(UTC).isoformat()),
+                (
+                    user_code,
+                    module_id,
+                    action,
+                    resource_id,
+                    datetime.now(UTC).isoformat(),
+                ),
             )
             connection.commit()
-    except sqlite3.Error:
+    except (sqlite3.Error, RuntimeError):
         # Audit failure must not turn a successful local operation into data loss.
         return
 
@@ -234,7 +301,15 @@ def status() -> dict[str, object]:
         "audit_retention_days": retention_days(),
         "data_minimization": True,
         "external_redaction": True,
+        "encryption_at_rest": encryption_configured(),
+        "storage": "postgresql:sofia_runtime"
+        if postgres_dsn_configured()
+        else "sqlite",
         "redaction_scope": "por requisição; identificadores diretos são mascarados e segredos não são restaurados",
         "fhir_external_default": "blocked",
         "note": "Controles técnicos de privacidade; a adequação jurídica depende da finalidade, base legal, governança e operação do responsável.",
     }
+
+
+def postgres_dsn_configured() -> bool:
+    return bool(os.getenv("SOFIA_POSTGRES_URL", os.getenv("DATABASE_URL", "")).strip())

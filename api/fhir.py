@@ -4,10 +4,14 @@ import json
 import re
 import sqlite3
 import uuid
+from collections.abc import Iterator
+from contextlib import contextmanager
 from datetime import UTC, datetime
 from typing import Any
 
 from .auth import DATABASE_PATH
+from .pg_runtime import is_postgres, postgres_connection
+from .secure_storage import decrypt_json, protect_for_storage
 
 FHIR_RELEASE = "4.0.1"
 FHIR_RESOURCE_TYPES = {
@@ -23,28 +27,49 @@ FHIR_RESOURCE_TYPES = {
     "Bundle",
 }
 _RESOURCE_ID = re.compile(r"^[A-Za-z0-9.-]{1,64}$")
+PG_SCHEMA = """
+CREATE TABLE IF NOT EXISTS fhir_resources (
+    resource_type TEXT NOT NULL,
+    resource_id TEXT NOT NULL,
+    resource_json TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (resource_type, resource_id)
+);
+CREATE INDEX IF NOT EXISTS idx_fhir_resources_updated ON fhir_resources (resource_type, updated_at DESC);
+"""
 
 
-def _connection() -> sqlite3.Connection:
+@contextmanager
+def _connection() -> Iterator[Any]:
+    with postgres_connection() as primary:
+        if primary is not None:
+            yield primary
+            return
     DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(DATABASE_PATH)
     connection.row_factory = sqlite3.Row
-    return connection
+    try:
+        yield connection
+    finally:
+        connection.close()
 
 
 def initialize_fhir_store() -> None:
     with _connection() as connection:
-        connection.execute(
-            """
-            CREATE TABLE IF NOT EXISTS fhir_resources (
-                resource_type TEXT NOT NULL,
-                resource_id TEXT NOT NULL,
-                resource_json TEXT NOT NULL,
-                updated_at TEXT NOT NULL,
-                PRIMARY KEY (resource_type, resource_id)
+        if is_postgres(connection):
+            connection.executescript(PG_SCHEMA)
+        else:
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS fhir_resources (
+                    resource_type TEXT NOT NULL,
+                    resource_id TEXT NOT NULL,
+                    resource_json TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    PRIMARY KEY (resource_type, resource_id)
+                )
+                """
             )
-            """
-        )
         connection.commit()
 
 
@@ -63,7 +88,16 @@ def validate_resource(resource_type: str, resource: dict[str, Any]) -> dict[str,
         raise ValueError("id FHIR inválido")
     resource["id"] = resource_id
     if resource_type == "Observation":
-        if resource.get("status") not in {"registered", "preliminary", "final", "amended", "corrected", "cancelled", "entered-in-error", "unknown"}:
+        if resource.get("status") not in {
+            "registered",
+            "preliminary",
+            "final",
+            "amended",
+            "corrected",
+            "cancelled",
+            "entered-in-error",
+            "unknown",
+        }:
             raise ValueError("Observation exige um status FHIR válido")
         if not resource.get("code"):
             raise ValueError("Observation exige code")
@@ -76,7 +110,12 @@ def save_resource(resource_type: str, resource: dict[str, Any]) -> dict[str, Any
     with _connection() as connection:
         connection.execute(
             "INSERT INTO fhir_resources (resource_type, resource_id, resource_json, updated_at) VALUES (?, ?, ?, ?) ON CONFLICT(resource_type, resource_id) DO UPDATE SET resource_json=excluded.resource_json, updated_at=excluded.updated_at",
-            (resource_type, resource["id"], json.dumps(resource, ensure_ascii=False), resource["meta"]["lastUpdated"]),
+            (
+                resource_type,
+                resource["id"],
+                protect_for_storage(json.dumps(resource, ensure_ascii=False)),
+                resource["meta"]["lastUpdated"],
+            ),
         )
         connection.commit()
     return resource
@@ -85,8 +124,11 @@ def save_resource(resource_type: str, resource: dict[str, Any]) -> dict[str, Any
 def get_resource(resource_type: str, resource_id: str) -> dict[str, Any] | None:
     _check_type(resource_type)
     with _connection() as connection:
-        row = connection.execute("SELECT resource_json FROM fhir_resources WHERE resource_type = ? AND resource_id = ?", (resource_type, resource_id)).fetchone()
-    return json.loads(row["resource_json"]) if row else None
+        row = connection.execute(
+            "SELECT resource_json FROM fhir_resources WHERE resource_type = ? AND resource_id = ?",
+            (resource_type, resource_id),
+        ).fetchone()
+    return json.loads(decrypt_json(row["resource_json"])) if row else None
 
 
 def _contains_patient(resource: dict[str, Any], patient_id: str) -> bool:
@@ -95,7 +137,10 @@ def _contains_patient(resource: dict[str, Any], patient_id: str) -> bool:
         value = resource.get(key)
         if isinstance(value, dict) and isinstance(value.get("reference"), str):
             references.append(value["reference"])
-    return any(reference.rstrip("/").endswith(f"Patient/{patient_id}") for reference in references)
+    return any(
+        reference.rstrip("/").endswith(f"Patient/{patient_id}")
+        for reference in references
+    )
 
 
 def _contains_code(resource: dict[str, Any], code: str) -> bool:
@@ -103,22 +148,42 @@ def _contains_code(resource: dict[str, Any], code: str) -> bool:
     return code.casefold() in serialized
 
 
-def search_resources(resource_type: str, patient_id: str | None = None, code: str | None = None, count: int = 50) -> dict[str, Any]:
+def search_resources(
+    resource_type: str,
+    patient_id: str | None = None,
+    code: str | None = None,
+    count: int = 50,
+) -> dict[str, Any]:
     _check_type(resource_type)
     count = max(1, min(count, 200))
     with _connection() as connection:
-        rows = connection.execute("SELECT resource_json FROM fhir_resources WHERE resource_type = ? ORDER BY updated_at DESC", (resource_type,)).fetchall()
-    resources = [json.loads(row["resource_json"]) for row in rows]
+        rows = connection.execute(
+            "SELECT resource_json FROM fhir_resources WHERE resource_type = ? ORDER BY updated_at DESC",
+            (resource_type,),
+        ).fetchall()
+    resources = [json.loads(decrypt_json(row["resource_json"])) for row in rows]
     if patient_id:
-        resources = [resource for resource in resources if _contains_patient(resource, patient_id)]
+        resources = [
+            resource
+            for resource in resources
+            if _contains_patient(resource, patient_id)
+        ]
     if code:
-        resources = [resource for resource in resources if _contains_code(resource, code)]
+        resources = [
+            resource for resource in resources if _contains_code(resource, code)
+        ]
     resources = resources[:count]
     return {
         "resourceType": "Bundle",
         "type": "searchset",
         "total": len(resources),
-        "entry": [{"fullUrl": f"/fhir/{resource['resourceType']}/{resource['id']}", "resource": resource} for resource in resources],
+        "entry": [
+            {
+                "fullUrl": f"/fhir/{resource['resourceType']}/{resource['id']}",
+                "resource": resource,
+            }
+            for resource in resources
+        ],
     }
 
 
@@ -127,8 +192,20 @@ def patient_context(patient_id: str) -> dict[str, Any]:
     patient = get_resource("Patient", patient_id)
     if patient:
         resources.append(patient)
-    for resource_type in ("Observation", "Condition", "Encounter", "DiagnosticReport", "AllergyIntolerance", "CarePlan", "MedicationRequest"):
-        resources.extend(search_resources(resource_type, patient_id=patient_id, count=200).get("entry", []))
+    for resource_type in (
+        "Observation",
+        "Condition",
+        "Encounter",
+        "DiagnosticReport",
+        "AllergyIntolerance",
+        "CarePlan",
+        "MedicationRequest",
+    ):
+        resources.extend(
+            search_resources(resource_type, patient_id=patient_id, count=200).get(
+                "entry", []
+            )
+        )
     return {
         "resourceType": "Bundle",
         "type": "collection",
@@ -145,5 +222,21 @@ def capability_statement() -> dict[str, Any]:
         "fhirVersion": FHIR_RELEASE,
         "format": ["json"],
         "implementation": {"description": "Sofia local FHIR store"},
-        "rest": [{"mode": "server", "resource": [{"type": resource_type, "interaction": [{"code": "read"}, {"code": "search-type"}, {"code": "create"}, {"code": "update"}]} for resource_type in sorted(FHIR_RESOURCE_TYPES)]}],
+        "rest": [
+            {
+                "mode": "server",
+                "resource": [
+                    {
+                        "type": resource_type,
+                        "interaction": [
+                            {"code": "read"},
+                            {"code": "search-type"},
+                            {"code": "create"},
+                            {"code": "update"},
+                        ],
+                    }
+                    for resource_type in sorted(FHIR_RESOURCE_TYPES)
+                ],
+            }
+        ],
     }
