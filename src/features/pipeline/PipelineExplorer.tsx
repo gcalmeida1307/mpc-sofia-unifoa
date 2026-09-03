@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { loadAdminPipeline, loadAdminReadiness, runAdminEvaluation } from "../../services/sofia-api"
+import { loadAdminPipeline, loadAdminReadiness, runAdminEvaluation, runAdminProductionGate } from "../../services/sofia-api"
 import type {
   EmbeddingsPayload,
   EvaluationPayload,
   InsightsPayload,
   ObservabilityPayload,
   PipelinePayload,
+  ProductionGatePayload,
   ReadinessPayload,
   SofiaAuthFetch,
 } from "../../types/contracts"
@@ -30,6 +31,8 @@ export default function PipelineExplorer({
   const [evaluation, setEvaluation] = useState<EvaluationPayload | null>(null)
   const [busy, setBusy] = useState(false)
   const [evaluating, setEvaluating] = useState(false)
+  const [gate, setGate] = useState<ProductionGatePayload | null>(null)
+  const [runningGate, setRunningGate] = useState(false)
 
   const load = async (moduleId = selected) => {
     setBusy(true)
@@ -52,6 +55,15 @@ export default function PipelineExplorer({
       setEvaluation(await runAdminEvaluation(authFetch))
     } finally {
       setEvaluating(false)
+    }
+  }
+
+  const validateGate = async () => {
+    setRunningGate(true)
+    try {
+      setGate(await runAdminProductionGate(authFetch))
+    } finally {
+      setRunningGate(false)
     }
   }
 
@@ -81,6 +93,7 @@ export default function PipelineExplorer({
           <div className="explorer-actions">
             <button className="neural-run" onClick={() => void load()} disabled={busy}>{busy ? "Atualizando..." : "Atualizar"}</button>
             <button className="neural-run secondary" onClick={() => void evaluate()} disabled={evaluating}>{evaluating ? "Avaliando..." : "Avaliar corpus"}</button>
+            <button className="neural-run secondary" onClick={() => void validateGate()} disabled={runningGate}>{runningGate ? "Validando gate..." : "Production Gate"}</button>
           </div>
         </div>
       </div>
@@ -133,6 +146,28 @@ export default function PipelineExplorer({
         })}{!observability?.traces?.length && <div className="empty-state">Ainda não há traces para este módulo.</div>}</div>
       </section>
       {evaluation && <section className="explorer-panel"><div className="section-heading"><div><h2>Última avaliação do corpus</h2><p>{evaluation.note}</p></div></div><div className="evaluation-grid">{evaluation.modules.map((item) => <div className="evaluation-row" key={item.module}><strong>{item.module}</strong><span>{item.status === "ready" ? "pronto" : "precisa de dados"}</span><b>{item.score}%</b></div>)}</div>{evaluation.semantic_evaluation && <div className="evaluation-summary"><strong>Avaliação semântica de evidências: {evaluation.semantic_evaluation.global_score}%</strong><span>{evaluation.semantic_evaluation.case_count} casos revisáveis · cobertura de termos e aderência às fontes</span></div>}</section>}
+      {gate && <section className="explorer-panel gate-panel">
+        <div className="section-heading">
+          <div><h2>Production Gate</h2><p>Liberação geral baseada nos dez níveis de cada módulo, segurança, armazenamento e regressão.</p></div>
+          <div className={`readiness-banner ${gate.release_allowed ? "ready" : "attention"}`}><strong>{gate.release_allowed ? "OK" : "BLOQ."}</strong><span>{gate.release_allowed ? "Liberação permitida" : "Liberação bloqueada"}</span></div>
+        </div>
+        <div className="gate-summary">
+          <span><strong>{gate.coverage?.reviewed_case_count ?? 0}</strong> casos revisados</span>
+          <span><strong>{gate.coverage?.draft_case_count ?? 0}</strong> em revisão</span>
+          <span><strong>{gate.modules.filter((item) => item.scale_ready).length}/{gate.modules.length}</strong> módulos 10/10</span>
+        </div>
+        {(gate.issues.length > 0 || gate.warnings.length > 0) && <div className="gate-issues">
+          {gate.issues.map((issue) => <div className="gate-issue blocked" key={`issue-${issue}`}><span>Bloqueio</span>{issue}</div>)}
+          {gate.warnings.map((warning) => <div className="gate-issue warning" key={`warning-${warning}`}><span>Atenção</span>{warning}</div>)}
+        </div>}
+        <div className="gate-module-list">
+          {gate.modules.map((item) => <div className={`gate-module-row ${item.scale_ready ? "ready" : "attention"}`} key={item.module_id}>
+            <strong>{items.find((module) => module.id === item.module_id)?.name ?? item.module_id}</strong>
+            <span>{item.ready_levels}/10 prontos · {item.partial_levels} parciais · {item.blocked_levels} bloqueados</span>
+          </div>)}
+        </div>
+        <small className="readiness-footnote">Executado em {new Date(gate.generated_at).toLocaleString("pt-BR")}. Um score parcial nunca é convertido em aprovação.</small>
+      </section>}
     </div>
   )
 }

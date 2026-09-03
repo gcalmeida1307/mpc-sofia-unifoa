@@ -84,6 +84,37 @@ export type EvaluationPayload = {
   }
 }
 
+export type ProductionGatePayload = {
+  generated_at: string
+  status: "ready" | "blocked" | string
+  release_allowed: boolean
+  issues: string[]
+  warnings: string[]
+  passed_checks?: Record<string, boolean>
+  coverage?: {
+    case_count?: number
+    reviewed_case_count?: number
+    draft_case_count?: number
+    modules_without_reviewed_cases?: string[]
+    modules_without_corpus?: string[]
+  }
+  modules: Array<{
+    module_id: string
+    ready_levels: number
+    partial_levels: number
+    blocked_levels: number
+    scale_ready: boolean
+    blocking_levels?: Array<{
+      id: number
+      title: string
+      status: string
+      score: number
+      evidence: string[]
+      action?: string | null
+    }>
+  }>
+}
+
 export type ReadinessLevel = {
   id: number
   title: string

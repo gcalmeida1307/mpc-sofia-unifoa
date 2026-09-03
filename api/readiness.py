@@ -15,7 +15,7 @@ from typing import Any
 
 from .domains import domain_for
 from .embeddings import embedding_status
-from .evaluation import _load_cases
+from .evaluation import _expects_evidence, _load_cases
 from .expansion import ExpansionStore
 from .ingestion import files_for
 from .knowledge_graph import graph_status
@@ -30,6 +30,12 @@ _OCR_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".t
 _READY = "ready"
 _PARTIAL = "partial"
 _BLOCKED = "blocked"
+
+
+def _finished_traces(root: Path, module_id: str) -> list[dict[str, Any]]:
+    """Return only completed executions; an in-flight request is not a failure."""
+    payload = observability_snapshot(root, module_id, 20)
+    return [trace for trace in payload.get("traces", []) if str(trace.get("status", "")).upper() != "RUNNING"]
 
 
 def _json_value(value: Any) -> Any:
@@ -83,10 +89,12 @@ def _quality_level(paths: list[Path], documents: list[dict[str, Any]], summary: 
     missing_ocr: list[str] = []
     low_quality: list[str] = []
     ready_count = 0
+    quality_ready_count = 0
     for path in paths:
         item = by_name.get(path.name)
         if not item:
             continue
+        item_quality_ok = str(item.get("status", "")).upper() == "READY"
         if str(item.get("status", "")).upper() == "READY":
             ready_count += 1
         artifacts = item.get("artifacts") or {}
@@ -99,8 +107,10 @@ def _quality_level(paths: list[Path], documents: list[dict[str, Any]], summary: 
             quality_value = None
         if quality_value is None:
             missing_quality.append(path.name)
+            item_quality_ok = False
         elif quality_value < 0.60:
             low_quality.append(path.name)
+            item_quality_ok = False
         if path.suffix.casefold() in _OCR_EXTENSIONS:
             ocr_quality = item.get("ocr_quality")
             if ocr_quality is None:
@@ -111,8 +121,12 @@ def _quality_level(paths: list[Path], documents: list[dict[str, Any]], summary: 
                 ocr_value = None
             if ocr_value is None:
                 missing_ocr.append(path.name)
+                item_quality_ok = False
             elif ocr_value < 0.60:
                 low_quality.append(f"OCR: {path.name}")
+                item_quality_ok = False
+        if item_quality_ok:
+            quality_ready_count += 1
 
     if failed or low_quality:
         status = _BLOCKED
@@ -120,8 +134,8 @@ def _quality_level(paths: list[Path], documents: list[dict[str, Any]], summary: 
         status = _PARTIAL
     else:
         status = _READY
-    score = 100 * ready_count / max(1, len(paths))
-    evidence = [f"{ready_count}/{len(paths)} documento(s) com estado READY.", f"{int(summary.get('processing_errors', 0) or 0)} erro(s) de processamento registrados."]
+    score = 100 * quality_ready_count / max(1, len(paths))
+    evidence = [f"{ready_count}/{len(paths)} documento(s) com estado READY.", f"{quality_ready_count}/{len(paths)} passam também pelo score de qualidade.", f"{int(summary.get('processing_errors', 0) or 0)} erro(s) de processamento registrados."]
     if missing_pipeline:
         evidence.append(f"Fora do pipeline: {', '.join(missing_pipeline[:3])}.")
     if missing_quality:
@@ -221,8 +235,7 @@ def _validation_level(root: Path, module_id: str, documents: list[dict[str, Any]
 
 
 def _observability_level(root: Path, module_id: str) -> dict[str, Any]:
-    payload = observability_snapshot(root, module_id, 20)
-    traces = payload.get("traces", [])
+    traces = _finished_traces(root, module_id)
     if not traces:
         return _level(6, "Observabilidade", _BLOCKED, 0, "Nenhuma execução observável foi registrada para este módulo.", ["Não há latência, provider, modelo ou confiança para auditar."], "Execute uma pergunta no chat e atualize o Explorer.")
     operational = 0
@@ -242,15 +255,23 @@ def _observability_level(root: Path, module_id: str) -> dict[str, Any]:
 
 
 def _regression_level(root: Path, module_id: str) -> dict[str, Any]:
-    cases = [case for case in _load_cases(root) if str(case.get("module")) == module_id]
+    all_cases = [case for case in _load_cases(root) if str(case.get("module")) == module_id]
+    cases = [case for case in _load_cases(root, reviewed_only=True) if str(case.get("module")) == module_id]
     if not cases:
-        return _level(7, "Suíte de regressão", _BLOCKED, 0, "Não há casos revisados para este módulo.", ["Sem perguntas douradas, não existe gate de regressão."], "Cadastre perguntas esperadas e fontes aprovadas em tests/evals/manifest.json.")
-    expected_sources = sum(1 for case in cases if case.get("expected_sources"))
-    # Defining a reviewed case is already part of the level; declaring the
-    # expected source completes the stricter provenance half of the score.
-    score = 40 + 60 * expected_sources / max(1, len(cases))
-    status = _READY if expected_sources == len(cases) else _PARTIAL
-    return _level(7, "Suíte de regressão", status, score, "A suíte existe, mas só deve liberar produção depois de uma avaliação revisada e repetível.", [f"{len(cases)} caso(s) revisável(is) no manifesto.", f"{expected_sources}/{len(cases)} caso(s) declaram fonte esperada.", "O score de geração não é inventado: precisa de revisão humana especializada."], "Execute Avaliar corpus e revise os casos que retornarem review antes de usar um gate de produção.")
+        drafts = len(all_cases)
+        evidence = ["Sem perguntas douradas revisadas, não existe gate de regressão."]
+        if drafts:
+            evidence.append(f"{drafts} caso(s) estão cadastrados, mas ainda aguardam revisão humana.")
+        return _level(7, "Suíte de regressão", _BLOCKED, 0, "O manifesto separa casos de rascunho de casos aprovados por revisão humana.", evidence, "Revise o caso do módulo e marque reviewed=true somente após conferir a resposta, a evidência e as fontes esperadas.")
+    expected_source_cases = [case for case in cases if _expects_evidence(case)]
+    expected_sources = sum(1 for case in expected_source_cases if case.get("expected_sources"))
+    # A reviewed case without a source expectation is not reproducible for a
+    # corpus-backed answer.  Insufficient-evidence cases are the exception:
+    # their expected result is precisely the absence of local evidence.
+    score = 100 * (0.5 + 0.5 * expected_sources / max(1, len(expected_source_cases))) if expected_source_cases else 100
+    status = _READY if expected_sources == len(expected_source_cases) else _PARTIAL
+    evidence = [f"{len(cases)} caso(s) revisado(s) no manifesto.", f"{expected_sources}/{len(expected_source_cases)} caso(s) com fonte esperada quando há evidência.", "Casos de evidência insuficiente são avaliados pela ausência esperada de evidência."]
+    return _level(7, "Suíte de regressão", status, score, "A suíte existe, mas só deve liberar produção depois de uma avaliação revisada e repetível.", evidence, "Execute Avaliar corpus e revise os casos que retornarem review antes de usar um gate de produção.")
 
 
 def _security_level() -> dict[str, Any]:
@@ -297,8 +318,7 @@ def _intelligence_level(root: Path, module_id: str, documents: list[dict[str, An
 
 
 def _self_evaluation_level(root: Path, module_id: str) -> dict[str, Any]:
-    payload = observability_snapshot(root, module_id, 20)
-    traces = payload.get("traces", [])
+    traces = _finished_traces(root, module_id)
     explainable = sum(1 for trace in traces if trace.get("provider") and trace.get("confidence") is not None and trace.get("metrics_json"))
     score = 100 * explainable / max(1, len(traces)) if traces else 0
     status = _READY if traces and explainable == len(traces) else (_PARTIAL if explainable else _BLOCKED)

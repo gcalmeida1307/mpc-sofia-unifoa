@@ -606,6 +606,7 @@ class ExpansionStore:
             if getattr(connection, "backend", None) == "postgresql":
                 connection.executescript(_postgres_schema())
                 connection.executescript(_PG_EXTRA_SCHEMA)
+                self._backfill_provenance(connection)
                 connection.commit()
                 return
             connection.executescript(SCHEMA)
@@ -660,9 +661,32 @@ class ExpansionStore:
             for column, definition in artifact_additions.items():
                 if column not in artifact_columns:
                     connection.execute(f"ALTER TABLE knowledge_artifacts ADD COLUMN {column} {definition}")
+            self._backfill_provenance(connection)
             connection.commit()
         finally:
             connection.close()
+
+    @staticmethod
+    def _backfill_provenance(connection: Any) -> None:
+        """Make unknown authors explicit instead of silently missing.
+
+        A snapshot imported from a URL or a local file often does not carry an
+        author field.  That is still a provenance fact: the author was not
+        supplied by the source.  Recording that state keeps the level-3 gate
+        honest while preserving the distinction between an unknown author and
+        a document that was never organized.
+        """
+        connection.execute(
+            """
+            UPDATE documents
+            SET author = CASE
+                WHEN LOWER(COALESCE(source_origin, 'local')) = 'url'
+                    THEN 'Fonte pública — autoria não informada'
+                ELSE 'Origem local — autoria não informada'
+            END
+            WHERE author IS NULL OR TRIM(author) = ''
+            """
+        )
 
     def is_paused(self) -> bool:
         connection = _connect(self.path)
@@ -1185,6 +1209,11 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
     mime_type = path.suffix.lower().lstrip(".")
     file_hash = hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
     source_origin = "url" if path.parent.name.casefold() == "links" else "local"
+    provenance_author = (
+        "Fonte pública — autoria não informada"
+        if source_origin == "url"
+        else "Origem local — autoria não informada"
+    )
     connection = _connect(store.path)
     document_id: int | None = None
     job_id: int | None = None
@@ -1209,8 +1238,8 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
             document_id = int(row["id"])
             version = int(row["version_number"] or 1) + 1
             connection.execute(
-                "UPDATE documents SET status = 'RECEIVED', current_stage = 'RECEIVED', source_id = COALESCE(?, source_id), version_number = ?, file_hash = ?, source_origin = ?, bytes = ?, updated_at = ? WHERE id = ?",
-                (source_id, version, file_hash, source_origin, path.stat().st_size if path.exists() else 0, now, document_id),
+                "UPDATE documents SET status = 'RECEIVED', current_stage = 'RECEIVED', source_id = COALESCE(?, source_id), version_number = ?, file_hash = ?, source_origin = ?, author = COALESCE(NULLIF(author, ''), ?), bytes = ?, updated_at = ? WHERE id = ?",
+                (source_id, version, file_hash, source_origin, provenance_author, path.stat().st_size if path.exists() else 0, now, document_id),
             )
         else:
             duplicate = connection.execute(
@@ -1218,8 +1247,8 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
                 (module_id, file_hash),
             ).fetchone() if file_hash else None
             cursor = connection.execute(
-                "INSERT INTO documents (module_id, source_id, path, file_name, mime_type, status, bytes, file_hash, duplicate_of, source_origin, sensitivity, current_stage, received_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, 'RECEIVED', ?, ?, ?, ?, ?, 'RECEIVED', ?, ?, ?)",
-                (module_id, source_id, relative, path.name, mime_type, path.stat().st_size if path.exists() else 0, file_hash, int(duplicate["id"]) if duplicate else None, source_origin, "health" if module_id == "medicina" else "internal", now, now, now),
+                "INSERT INTO documents (module_id, source_id, path, file_name, mime_type, status, bytes, file_hash, duplicate_of, source_origin, author, sensitivity, current_stage, received_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, 'RECEIVED', ?, ?, ?, ?, ?, ?, 'RECEIVED', ?, ?, ?)",
+                (module_id, source_id, relative, path.name, mime_type, path.stat().st_size if path.exists() else 0, file_hash, int(duplicate["id"]) if duplicate else None, source_origin, provenance_author, "health" if module_id == "medicina" else "internal", now, now, now),
             )
             document_id = int(cursor.lastrowid)
             if duplicate:

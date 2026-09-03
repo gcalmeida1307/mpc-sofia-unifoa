@@ -437,6 +437,10 @@ def migrate_analytics_and_observability(connection: Any) -> tuple[int, int]:
                 json_text(item.get("metrics_json")),
             ),
         )
+    for table in ("sofia_query_analytics", "sofia_learning_events", "sofia_trace_spans"):
+        connection.raw.execute(
+            f"SELECT setval(pg_get_serial_sequence('{table}', 'id'), COALESCE(MAX(id), 0) + 1, false) FROM {table}"
+        )
     return len(query_items), len(trace_items)
 
 

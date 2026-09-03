@@ -7,6 +7,7 @@ from pathlib import Path
 from api.contracts import PIPELINE_STAGES
 from api.domain_packages import package_for
 from api.domains import DOMAIN_CONTRACTS, domain_for
+from api.evaluation import evaluation_coverage
 from api.knowledge_graph import build_graph, graph_status
 from api.mcp_contracts import TOOL_CONTRACTS
 
@@ -63,3 +64,30 @@ def test_eval_manifest_covers_every_domain_and_required_categories() -> None:
     assert len(manifest["categories"]) == 14
     assert PIPELINE_STAGES[0] == "RECEIVED"
     assert PIPELINE_STAGES[-1] == "READY"
+
+
+def test_eval_coverage_separates_reviewed_cases_from_drafts() -> None:
+    with tempfile.TemporaryDirectory() as directory:
+        project = Path(directory)
+        root = project / "knowledge"
+        (root / "direito").mkdir(parents=True)
+        (root / "direito" / "lei.md").write_text("Uma regra documentada.", encoding="utf-8")
+        (project / "tests" / "evals").mkdir(parents=True)
+        (project / "tests" / "evals" / "manifest.json").write_text(
+            json.dumps(
+                {
+                    "version": "1.1",
+                    "modules": ["direito", "secretaria"],
+                    "cases": [
+                        {"module": "direito", "question": "qual regra?", "reviewed": True, "expected_sources": ["lei.md"]},
+                        {"module": "direito", "question": "qual outra regra?", "reviewed": False, "expected_sources": ["lei.md"]},
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        coverage = evaluation_coverage(root)
+        assert coverage["reviewed_case_count"] == 1
+        assert coverage["draft_case_count"] == 1
+        assert coverage["modules_without_reviewed_cases"] == []
+        assert coverage["modules_without_corpus"] == ["secretaria"]

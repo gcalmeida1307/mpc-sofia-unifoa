@@ -4,6 +4,7 @@ import type {
   InsightsPayload,
   ObservabilityPayload,
   PipelinePayload,
+  ProductionGatePayload,
   ReadinessPayload,
   SofiaAuthFetch,
 } from "../types/contracts"
@@ -58,4 +59,11 @@ export async function runAdminEvaluation(
 ): Promise<EvaluationPayload | null> {
   const response = await authFetch("/api/admin/evaluation")
   return response.ok ? ((await response.json()) as EvaluationPayload) : null
+}
+
+export async function runAdminProductionGate(
+  authFetch: SofiaAuthFetch,
+): Promise<ProductionGatePayload | null> {
+  const response = await authFetch("/api/admin/production-gate")
+  return response.ok ? ((await response.json()) as ProductionGatePayload) : null
 }

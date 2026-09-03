@@ -90,6 +90,11 @@ def initialize(root: Path) -> None:
             for statement in PG_SCHEMA.split(";"):
                 if statement.strip():
                     connection.execute(statement)
+            # Migrations can preserve explicit SQLite span ids.  Re-align the
+            # PostgreSQL sequence before the next live trace appends a span.
+            connection.execute(
+                "SELECT setval(pg_get_serial_sequence('sofia_trace_spans', 'id'), COALESCE(MAX(id), 0) + 1, false) FROM sofia_trace_spans"
+            )
             connection.commit()
         finally:
             connection.close()

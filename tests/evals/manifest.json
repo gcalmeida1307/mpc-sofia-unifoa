@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "modules": [
     "almoxarifado", "contabilidade", "departamento-pessoal", "direito", "financeiro",
     "gestao-empresarial", "infraestrutura", "medicina", "prefeitura", "recursos-humanos", "secretaria"
@@ -11,10 +11,84 @@
     "document_relations", "tool_routing"
   ],
   "cases": [
-    {"module": "direito", "category": "document_summary", "question": "Resuma o documento local selecionado"},
-    {"module": "medicina", "category": "permission_boundary", "question": "Use somente o contexto clínico autorizado"},
-    {"module": "infraestrutura", "category": "document_question", "question": "O que é um host no Zabbix?"},
-    {"module": "contabilidade", "category": "insufficient_evidence", "question": "Como montar um balanço sem manual contábil?"},
-    {"module": "gestao-empresarial", "category": "document_relations", "question": "Com quais documentos este material se relaciona?"}
+    {
+      "module": "direito",
+      "category": "document_question",
+      "question": "No documento Vade_mecum_Senado_Federal_3ed.pdf, qual regra aparece sobre horas extras?",
+      "expected_terms": ["horas extras", "remuneração"],
+      "expected_sources": ["Vade_mecum_Senado_Federal_3ed.pdf"],
+      "reviewed": true
+    },
+    {
+      "module": "medicina",
+      "category": "permission_boundary",
+      "question": "No documento clinical-sleep-guidance.md, que orientação existe para sonolência diurna?",
+      "expected_terms": ["sonolência", "sono"],
+      "expected_sources": ["clinical-sleep-guidance.md"],
+      "reviewed": true
+    },
+    {
+      "module": "infraestrutura",
+      "category": "document_question",
+      "question": "No documento Zabbix_Documentation_7.4.pt.pdf, o que é um host no Zabbix?",
+      "expected_terms": ["host", "Zabbix"],
+      "expected_sources": ["Zabbix_Documentation_7.4.pt.pdf"],
+      "reviewed": true
+    },
+    {
+      "module": "contabilidade",
+      "category": "insufficient_evidence",
+      "question": "Como montar um balanço sem manual contábil?",
+      "expected_evidence": false,
+      "reviewed": true
+    },
+    {
+      "module": "gestao-empresarial",
+      "category": "document_summary",
+      "question": "No documento gestão educacional.pdf, quais ideias aparecem sobre governança e organizações educacionais?",
+      "expected_terms": ["governança", "organizações educacionais"],
+      "expected_sources": ["gestão educacional.pdf"],
+      "reviewed": true
+    },
+    {
+      "module": "almoxarifado",
+      "category": "document_question",
+      "question": "No documento www-gov-br-b6e085852fd6.md, o que são os dados abertos e o PNCP?",
+      "expected_terms": ["dados abertos", "PNCP"],
+      "expected_sources": ["www-gov-br-b6e085852fd6.md"],
+      "reviewed": false
+    },
+    {
+      "module": "departamento-pessoal",
+      "category": "document_question",
+      "question": "No documento www-gov-br-6b841869b869.md, onde ficam as Normas Regulamentadoras vigentes?",
+      "expected_terms": ["Normas Regulamentadoras", "Ministério do Trabalho"],
+      "expected_sources": ["www-gov-br-6b841869b869.md"],
+      "reviewed": false
+    },
+    {
+      "module": "financeiro",
+      "category": "document_question",
+      "question": "No documento dadosabertos-bcb-gov-br-32e828d1d2f9.md, o que o Banco Central disponibiliza em dados abertos?",
+      "expected_terms": ["Banco Central", "dados abertos"],
+      "expected_sources": ["dadosabertos-bcb-gov-br-32e828d1d2f9.md"],
+      "reviewed": false
+    },
+    {
+      "module": "prefeitura",
+      "category": "document_question",
+      "question": "No documento nr-01-atualizada-2025-i-1.pdf, o que trata a NR-01?",
+      "expected_terms": ["NR 01", "gerenciamento de riscos"],
+      "expected_sources": ["nr-01-atualizada-2025-i-1.pdf"],
+      "reviewed": false
+    },
+    {
+      "module": "recursos-humanos",
+      "category": "document_question",
+      "question": "No documento www-gov-br-ed4574f5d986.md, o que é o Observatório de Pessoal?",
+      "expected_terms": ["Observatório de Pessoal", "pessoal"],
+      "expected_sources": ["www-gov-br-ed4574f5d986.md"],
+      "reviewed": false
+    }
   ]
 }

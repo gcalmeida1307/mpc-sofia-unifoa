@@ -30,13 +30,64 @@ def _manifest_path(root: Path) -> Path:
     return root.parent / "tests" / "evals" / "manifest.json"
 
 
-def _load_cases(root: Path) -> list[dict[str, Any]]:
+def _manifest(root: Path) -> dict[str, Any]:
     try:
         payload = json.loads(_manifest_path(root).read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return []
-    cases = payload.get("cases", []) if isinstance(payload, dict) else []
-    return [case for case in cases if isinstance(case, dict) and case.get("module") and case.get("question")]
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _load_cases(root: Path, *, reviewed_only: bool = False) -> list[dict[str, Any]]:
+    cases = _manifest(root).get("cases", [])
+    valid = [case for case in cases if isinstance(case, dict) and case.get("module") and case.get("question")]
+    if reviewed_only:
+        return [case for case in valid if case.get("reviewed") is True]
+    return valid
+
+
+def _expects_evidence(case: dict[str, Any]) -> bool:
+    return bool(case.get("expected_evidence", case.get("category") not in {"insufficient_evidence"}))
+
+
+def evaluation_coverage(root: Path) -> dict[str, Any]:
+    """Report manifest coverage without pretending a draft case is approved."""
+    manifest = _manifest(root)
+    cases = _load_cases(root)
+    reviewed = _load_cases(root, reviewed_only=True)
+    configured_modules = [str(module) for module in manifest.get("modules", []) if str(module).strip()]
+    rows: list[dict[str, Any]] = []
+    for module_id in configured_modules:
+        module_cases = [case for case in cases if str(case.get("module")) == module_id]
+        module_reviewed = [case for case in reviewed if str(case.get("module")) == module_id]
+        source_cases = [case for case in module_reviewed if _expects_evidence(case)]
+        draft_source_cases = [case for case in module_cases if not case.get("reviewed") and _expects_evidence(case)]
+        declared_sources = [case for case in source_cases if case.get("expected_sources")]
+        paths = files_for(root, module_id)
+        rows.append(
+            {
+                "module": module_id,
+                "has_corpus": bool(paths),
+                "documents": len(paths),
+                "case_count": len(module_cases),
+                "reviewed_case_count": len(module_reviewed),
+                "draft_case_count": len(module_cases) - len(module_reviewed),
+                "source_expectation_count": len(declared_sources),
+                "source_expectations_required": len(source_cases),
+                "draft_source_expectation_count": sum(1 for case in draft_source_cases if case.get("expected_sources")),
+                "status": "no-data" if not paths else ("ready" if module_reviewed and len(declared_sources) == len(source_cases) else "needs-review"),
+            }
+        )
+    return {
+        "manifest_version": manifest.get("version"),
+        "configured_modules": configured_modules,
+        "case_count": len(cases),
+        "reviewed_case_count": len(reviewed),
+        "draft_case_count": len(cases) - len(reviewed),
+        "modules": rows,
+        "modules_without_reviewed_cases": [row["module"] for row in rows if row["has_corpus"] and not row["reviewed_case_count"]],
+        "modules_without_corpus": [row["module"] for row in rows if not row["has_corpus"]],
+    }
 
 
 def evaluate_semantic_cases(root: Path) -> dict[str, Any]:
@@ -47,7 +98,7 @@ def evaluate_semantic_cases(root: Path) -> dict[str, Any]:
     and ``expected_sources`` as reviewed expectations in the manifest.
     """
     rows: list[dict[str, Any]] = []
-    for index, case in enumerate(_load_cases(root), start=1):
+    for index, case in enumerate(_load_cases(root, reviewed_only=True), start=1):
         module_id = str(case["module"])
         question = str(case["question"])
         result = retrieve(root, module_id, question, policy_for(module_id), limit=6)
@@ -59,13 +110,14 @@ def evaluate_semantic_cases(root: Path) -> dict[str, Any]:
         term_coverage = round(matched_terms / max(1, len(terms)), 3)
         expected_sources = [str(source).casefold() for source in case.get("expected_sources", []) if str(source).strip()]
         source_match = None if not expected_sources else any(any(source in item.casefold() for source in expected_sources) for item in result.sources)
-        expects_evidence = bool(case.get("expected_evidence", case.get("category") not in {"insufficient_evidence"}))
+        expects_evidence = _expects_evidence(case)
         evidence_ok = bool(result.evidence) == expects_evidence
+        provenance_ok = bool(expected_sources) if expects_evidence else True
         if not expects_evidence:
             score = 1.0 if evidence_ok else 0.0
         else:
-            source_score = 1.0 if source_match is None and result.evidence else float(bool(source_match))
-            score = 0.45 * float(bool(result.evidence)) + 0.35 * term_coverage + 0.20 * source_score
+            source_score = float(bool(source_match)) if expected_sources else 0.0
+            score = 0.40 * float(bool(result.evidence)) + 0.30 * term_coverage + 0.20 * source_score + 0.10 * float(provenance_ok)
         rows.append({
             "case_id": f"case-{index:03d}",
             "module": module_id,
@@ -73,15 +125,21 @@ def evaluate_semantic_cases(root: Path) -> dict[str, Any]:
             "evidence_count": len(result.evidence),
             "term_coverage": term_coverage,
             "source_match": source_match,
+            "expected_sources": expected_sources,
+            "reviewed": True,
+            "provenance_ok": provenance_ok,
             "expected_evidence": expects_evidence,
             "score": round(score * 100, 1),
-            "status": "pass" if score >= 0.6 else "review",
+            "status": "pass" if score >= 0.6 and provenance_ok else "review",
         })
+    coverage = evaluation_coverage(root)
     return {
         "kind": "semantic_evidence",
         "cases": rows,
         "case_count": len(rows),
+        "reviewed_case_count": len(rows),
         "global_score": round(sum(row["score"] for row in rows) / max(1, len(rows)), 1),
+        "coverage": coverage,
         "note": "Métrica de recuperação, cobertura de termos e aderência de fontes; não representa a qualidade da redação de uma LLM.",
     }
 
@@ -115,4 +173,5 @@ def evaluate_corpus(root: Path) -> dict[str, Any]:
         "modules": rows,
         "global_score": round(sum(row["score"] for row in rows) / max(1, len(rows)), 1),
         "semantic_evaluation": semantic,
+        "evaluation_coverage": evaluation_coverage(root),
     }
