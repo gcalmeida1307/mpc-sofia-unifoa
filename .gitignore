@@ -10,6 +10,11 @@ vite.config.*.timestamp-*
 *-debug.log*
 logs/
 *.log
+data/*.sqlite3
+data/links.json
+data/neural/
+data/semantic-embeddings/
+data/text-cache/
 __pycache__/
 *.pyc
 .claude-replay.*

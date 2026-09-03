@@ -1,0 +1,26 @@
+/* Sofia UI tokens: one vocabulary for the dashboard, chat and admin views. */
+:root {
+  --sofia-space-1: 4px;
+  --sofia-space-2: 8px;
+  --sofia-space-3: 12px;
+  --sofia-space-4: 16px;
+  --sofia-space-5: 24px;
+  --sofia-space-6: 32px;
+  --sofia-radius-sm: 6px;
+  --sofia-radius-md: 10px;
+  --sofia-radius-lg: 14px;
+  --sofia-shadow-panel: 0 18px 50px rgb(4 8 20 / 12%);
+  --sofia-content-max: 1180px;
+  --sofia-focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent, #818cf8) 28%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
