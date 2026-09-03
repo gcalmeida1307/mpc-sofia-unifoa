@@ -27,6 +27,7 @@ from .links import LinkRepository, fetch_link, normalize_url, save_fetched_link
 from .privacy import ExternalRedaction, external_clinical_allowed, external_data_allowed
 from .query_analysis import classify_query, normalize
 from .research import _search_links
+from .storage import strict_storage
 
 logger = logging.getLogger("sofia.expansion")
 
@@ -203,12 +204,21 @@ CREATE TABLE IF NOT EXISTS document_pipeline_events (
 CREATE TABLE IF NOT EXISTS knowledge_artifacts (
     document_id INTEGER PRIMARY KEY REFERENCES documents(id),
     version_number INTEGER NOT NULL,
+    artifact_version TEXT NOT NULL DEFAULT '1.0',
     summary TEXT NOT NULL DEFAULT '',
     keywords_json TEXT NOT NULL DEFAULT '[]',
     entities_json TEXT NOT NULL DEFAULT '[]',
     concepts_json TEXT NOT NULL DEFAULT '[]',
     relations_json TEXT NOT NULL DEFAULT '[]',
     questions_json TEXT NOT NULL DEFAULT '[]',
+    claims_json TEXT NOT NULL DEFAULT '[]',
+    dates_json TEXT NOT NULL DEFAULT '[]',
+    people_json TEXT NOT NULL DEFAULT '[]',
+    organizations_json TEXT NOT NULL DEFAULT '[]',
+    topics_json TEXT NOT NULL DEFAULT '[]',
+    contradictions_json TEXT NOT NULL DEFAULT '[]',
+    embedding_json TEXT NOT NULL DEFAULT '{}',
+    provenance_json TEXT NOT NULL DEFAULT '{}',
     quality REAL NOT NULL DEFAULT 0,
     ocr_quality REAL,
     generated_at TEXT NOT NULL
@@ -291,6 +301,7 @@ _PG_ID_TABLES = {
     "expansion_cycles",
 }
 _PG_FAILURE: str | None = None
+_PG_FAILURE_AT: datetime | None = None
 _PG_EXTRA_SCHEMA = """
 CREATE TABLE IF NOT EXISTS semantic_embeddings (
     id BIGSERIAL PRIMARY KEY,
@@ -383,17 +394,19 @@ def expansion_storage_status() -> dict[str, Any]:
     """Return storage health without exposing the configured DSN or password."""
     dsn = _postgres_dsn()
     if not dsn:
-        return {"backend": "sqlite", "postgres_configured": False, "postgres_error": None}
+        return {"backend": "sqlite", "postgres_configured": False, "postgres_error": None, "strict": strict_storage()}
     if psycopg is None:
         return {
             "backend": "sqlite-fallback",
             "postgres_configured": True,
             "postgres_error": "psycopg não está instalado",
+            "strict": strict_storage(),
         }
     return {
         "backend": "postgresql" if _PG_FAILURE is None else "sqlite-fallback",
         "postgres_configured": True,
         "postgres_error": _PG_FAILURE,
+        "strict": strict_storage(),
     }
 
 DEFAULTS = {
@@ -495,14 +508,23 @@ def expansion_settings() -> dict[str, Any]:
 
 
 def _connect(path: Path) -> Any:
-    global _PG_FAILURE
+    global _PG_FAILURE, _PG_FAILURE_AT
     dsn = _postgres_dsn()
-    if dsn and psycopg is not None and _PG_FAILURE is None:
+    retry_after_failure = _PG_FAILURE_AT is None or (datetime.now(UTC) - _PG_FAILURE_AT).total_seconds() >= 15
+    if dsn and psycopg is not None and (_PG_FAILURE is None or retry_after_failure):
         try:
-            return _PostgresConnection(psycopg.connect(dsn, connect_timeout=5, row_factory=dict_row))
-        except Exception as exc:  # noqa: BLE001  # pragma: no cover - depends on deployment credentials.
+            connection = _PostgresConnection(psycopg.connect(dsn, connect_timeout=5, row_factory=dict_row))
+            _PG_FAILURE = None
+            _PG_FAILURE_AT = None
+            return connection
+        except Exception as exc:  # pragma: no cover - depends on deployment credentials.
             _PG_FAILURE = f"{type(exc).__name__}: {str(exc)[:240]}"
+            _PG_FAILURE_AT = datetime.now(UTC)
             logger.warning("PostgreSQL da expansão indisponível; usando SQLite fallback: %s", _PG_FAILURE)
+            if strict_storage():
+                raise RuntimeError(f"PostgreSQL obrigatório indisponível: {_PG_FAILURE}") from exc
+    elif dsn and strict_storage():
+        raise RuntimeError("PostgreSQL obrigatório indisponível: driver psycopg não instalado")
     path.parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(path, timeout=30)
     connection.row_factory = sqlite3.Row
@@ -623,6 +645,21 @@ class ExpansionStore:
             for column, definition in additions.items():
                 if column not in document_columns:
                     connection.execute(f"ALTER TABLE documents ADD COLUMN {column} {definition}")
+            artifact_columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(knowledge_artifacts)").fetchall()}
+            artifact_additions = {
+                "artifact_version": "TEXT NOT NULL DEFAULT '1.0'",
+                "claims_json": "TEXT NOT NULL DEFAULT '[]'",
+                "dates_json": "TEXT NOT NULL DEFAULT '[]'",
+                "people_json": "TEXT NOT NULL DEFAULT '[]'",
+                "organizations_json": "TEXT NOT NULL DEFAULT '[]'",
+                "topics_json": "TEXT NOT NULL DEFAULT '[]'",
+                "contradictions_json": "TEXT NOT NULL DEFAULT '[]'",
+                "embedding_json": "TEXT NOT NULL DEFAULT '{}'",
+                "provenance_json": "TEXT NOT NULL DEFAULT '{}'",
+            }
+            for column, definition in artifact_additions.items():
+                if column not in artifact_columns:
+                    connection.execute(f"ALTER TABLE knowledge_artifacts ADD COLUMN {column} {definition}")
             connection.commit()
         finally:
             connection.close()
@@ -899,7 +936,7 @@ class ExpansionStore:
                 item = dict(row)
                 events = connection.execute("SELECT stage, status, started_at, finished_at, metrics_json, error_message FROM document_pipeline_events WHERE document_id = ? ORDER BY id", (row["id"],)).fetchall()
                 item["events"] = [dict(event) for event in events]
-                item["artifacts"] = dict(connection.execute("SELECT summary, keywords_json, entities_json, concepts_json, relations_json, questions_json, quality, ocr_quality, generated_at FROM knowledge_artifacts WHERE document_id = ?", (row["id"],)).fetchone() or {})
+                item["artifacts"] = dict(connection.execute("SELECT artifact_version, summary, keywords_json, entities_json, concepts_json, relations_json, questions_json, claims_json, dates_json, people_json, organizations_json, topics_json, contradictions_json, embedding_json, provenance_json, quality, ocr_quality, generated_at FROM knowledge_artifacts WHERE document_id = ?", (row["id"],)).fetchone() or {})
                 payload.append(item)
             return payload
         finally:
@@ -1236,8 +1273,8 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
             connection.execute("INSERT INTO document_chunks (document_id, version_number, ordinal, content_hash, char_count, status) VALUES (?, ?, ?, ?, ?, 'READY')", (document_id, version, ordinal, hashlib.sha256(chunk.text.encode("utf-8", errors="replace")).hexdigest(), len(chunk.text)))
         connection.execute("DELETE FROM knowledge_artifacts WHERE document_id = ?", (document_id,))
         connection.execute(
-            "INSERT INTO knowledge_artifacts (document_id, version_number, summary, keywords_json, entities_json, concepts_json, relations_json, questions_json, quality, ocr_quality, generated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (document_id, version, artifacts["summary"], json.dumps(artifacts["keywords"], ensure_ascii=False), json.dumps(artifacts["entities"], ensure_ascii=False), json.dumps(artifacts["concepts"], ensure_ascii=False), json.dumps(artifacts["relations"], ensure_ascii=False), json.dumps(artifacts["questions"], ensure_ascii=False), artifacts["quality"], ocr_quality, _now()),
+            "INSERT INTO knowledge_artifacts (document_id, version_number, artifact_version, summary, keywords_json, entities_json, concepts_json, relations_json, questions_json, claims_json, dates_json, people_json, organizations_json, topics_json, contradictions_json, embedding_json, provenance_json, quality, ocr_quality, generated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (document_id, version, artifacts.get("artifact_version", "1.0"), artifacts["summary"], json.dumps(artifacts["keywords"], ensure_ascii=False), json.dumps(artifacts["entities"], ensure_ascii=False), json.dumps(artifacts["concepts"], ensure_ascii=False), json.dumps(artifacts["relations"], ensure_ascii=False), json.dumps(artifacts["questions"], ensure_ascii=False), json.dumps(artifacts.get("claims", []), ensure_ascii=False), json.dumps(artifacts.get("dates", []), ensure_ascii=False), json.dumps(artifacts.get("people", []), ensure_ascii=False), json.dumps(artifacts.get("organizations", []), ensure_ascii=False), json.dumps(artifacts.get("topics", []), ensure_ascii=False), json.dumps(artifacts.get("contradictions", []), ensure_ascii=False), json.dumps(artifacts.get("embedding", {}), ensure_ascii=False), json.dumps(artifacts.get("provenance", {}), ensure_ascii=False), artifacts["quality"], ocr_quality, _now()),
         )
         connection.commit()
         mark_stage("INDEXING", "complete", {"backend": "filesystem-plus-local-vector", "chunks": len(valid_chunks)})
@@ -1248,6 +1285,14 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
         connection.execute("UPDATE processing_jobs SET status = 'READY', finished_at = ?, metrics_json = ? WHERE id = ?", (_now(), json.dumps({"chunks": len(valid_chunks), "text_chars": len(text), "quality": artifacts["quality"]}, ensure_ascii=False), job_id))
         connection.commit()
         connection.close()
+        try:
+            from .knowledge_graph import build_graph
+
+            build_graph(root, module_id)
+        except Exception:
+            # Graph derivation is a non-blocking artifact. A valid document
+            # must remain READY even when a derived graph needs retrying.
+            logger.warning("Não foi possível atualizar o evidence graph de %s", module_id, exc_info=True)
         return {"status": "READY", "document_id": document_id, "chunks": len(valid_chunks), "text_chars": len(text), "quality": artifacts["quality"], "ocr_quality": ocr_quality, "artifacts": {key: artifacts[key] for key in ("summary", "keywords", "entities", "concepts", "relations", "questions")}}
     except Exception as exc:  # noqa: BLE001
         message = str(exc)[:800]

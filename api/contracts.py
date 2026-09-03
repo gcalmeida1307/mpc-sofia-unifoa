@@ -26,6 +26,11 @@ class EvidenceContract:
     coverage: float
     accepted: bool
     reason: str = ""
+    authority_score: float = 0.0
+    freshness_score: float = 0.0
+    provenance_score: float = 0.0
+    support_score: float = 0.0
+    contradiction_score: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -65,4 +70,3 @@ class ToolContract:
     timeout_seconds: float
     audit_event: str
     allowlist: tuple[str, ...] = ()
-

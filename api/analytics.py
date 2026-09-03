@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from .query_analysis import classify_query
+from .storage import strict_storage
 
 logger = logging.getLogger("sofia.analytics")
 
@@ -95,6 +96,8 @@ def _postgres_enabled() -> bool:
 
 def initialize_analytics_store(root: Path) -> None:
     dsn = _postgres_dsn()
+    if strict_storage() and not dsn:
+        raise RuntimeError("SOFIA_STORAGE_MODE exige SOFIA_POSTGRES_URL/DATABASE_URL")
     if dsn and psycopg is not None:
         try:
             with psycopg.connect(dsn, connect_timeout=5) as connection:
@@ -111,6 +114,8 @@ def initialize_analytics_store(root: Path) -> None:
             # The local fallback keeps the browser usable while PostgreSQL is
             # being configured or temporarily unavailable.
             logger.debug("PostgreSQL analytics unavailable; using SQLite fallback", exc_info=True)
+            if strict_storage():
+                raise RuntimeError("PostgreSQL obrigatório indisponível para analytics")
     path = database_path(root)
     path.parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(path)
@@ -148,6 +153,8 @@ def record_query(
     """
     profile = classify_query(module_id, question)
     dsn = _postgres_dsn()
+    if strict_storage() and not dsn:
+        raise RuntimeError("SOFIA_STORAGE_MODE exige PostgreSQL para analytics")
     if dsn and psycopg is not None:
         try:
             with psycopg.connect(dsn, connect_timeout=5) as connection:
@@ -172,6 +179,8 @@ def record_query(
             # Do not make an answer fail because the optional analytics DB is
             # offline. The local SQLite store is the development fallback.
             logger.debug("PostgreSQL analytics insert failed; using SQLite fallback", exc_info=True)
+            if strict_storage():
+                raise RuntimeError("PostgreSQL obrigatório indisponível para analytics")
     initialize_analytics_store(root)
     connection = sqlite3.connect(database_path(root))
     try:
@@ -201,6 +210,8 @@ def update_feedback(root: Path, analytics_id: int, feedback: str, user_code: str
     if feedback not in {"good", "medium", "bad"}:
         raise ValueError("feedback deve ser good, medium ou bad")
     dsn = _postgres_dsn()
+    if strict_storage() and not dsn:
+        raise RuntimeError("SOFIA_STORAGE_MODE exige PostgreSQL para feedback")
     if dsn and psycopg is not None:
         try:
             where = "id = %s"
@@ -218,6 +229,8 @@ def update_feedback(root: Path, analytics_id: int, feedback: str, user_code: str
                 return True
         except Exception:
             logger.debug("PostgreSQL analytics feedback update failed; using SQLite fallback", exc_info=True)
+            if strict_storage():
+                raise RuntimeError("PostgreSQL obrigatório indisponível para analytics")
     path = database_path(root)
     if not path.exists():
         return False
@@ -362,6 +375,8 @@ def record_learning_event(
     sources = json.dumps(assessment.get("source_names", [])[:20], ensure_ascii=False)
     created_at = datetime.now(UTC)
     dsn = _postgres_dsn()
+    if strict_storage() and not dsn:
+        raise RuntimeError("SOFIA_STORAGE_MODE exige PostgreSQL para learning events")
     if dsn and psycopg is not None:
         try:
             with psycopg.connect(dsn, connect_timeout=5) as connection:
@@ -387,6 +402,8 @@ def record_learning_event(
             return True
         except Exception:
             logger.debug("PostgreSQL learning event failed; using SQLite fallback", exc_info=True)
+            if strict_storage():
+                raise RuntimeError("PostgreSQL obrigatório indisponível para analytics")
     initialize_analytics_store(root)
     connection = sqlite3.connect(database_path(root))
     try:

@@ -10,6 +10,18 @@
 PostgreSQL é usado pelo runtime no schema isolado `sofia_runtime` quando
 `SOFIA_POSTGRES_URL` ou `DATABASE_URL` autentica corretamente; a migration
 `migrations/001_knowledge_expansion.sql` permanece como referência para o
-provisionamento institucional. SQLite local (`data/knowledge_expansion.sqlite3`)
-é o fallback explícito para desenvolvimento/offline. Valide o backend em
-`/api/capabilities` ou no Pipeline Explorer; nunca coloque a senha no código.
+provisionamento institucional. Para produção, configure:
+
+```env
+SOFIA_STORAGE_MODE=production
+SOFIA_POSTGRES_URL=postgresql://usuario:senha@servidor:5432/sofia
+SOFIA_ENCRYPTION_KEY=<chave-forte-fora-do-repositorio>
+```
+
+Nesse modo, o sistema falha fechado se o PostgreSQL não estiver disponível e
+o Production Gate não libera a implantação enquanto os stores obrigatórios
+não estiverem migrados. SQLite local (`data/knowledge_expansion.sqlite3`) é
+permitido apenas com `SOFIA_STORAGE_MODE=developer`, para desenvolvimento ou
+operação offline explicitamente assumida. Valide o backend em
+`/api/capabilities`, `/api/health` ou no Pipeline Explorer; nunca coloque a
+senha no código.

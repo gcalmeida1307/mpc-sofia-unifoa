@@ -35,10 +35,18 @@ Para criação administrativa direta, use `POST /api/auth/users` com `email`, `n
 ## Fluxo real
 
 1. O usuário envia um prompt autenticado.
-2. O tool MCP `rag_answer` chama `search_knowledge` somente na pasta `knowledge/<módulo>` com índice TF-IDF/cosseno.
-3. A política do módulo aplica o gate de evidência; sem documento relacionado, a resposta é bloqueada e não usa conhecimento geral.
-4. O contexto recuperado é enviado ao provider escolhido: Ollama local, OpenAI Responses, Gemini ou Claude, conforme a política de privacidade.
-5. A resposta passa por uma verificação de termos e retorna fontes, score, provider e status de verificação.
+2. O CORE classifica intenção e complexidade e seleciona o pacote isolado do módulo em `api/domain_packages/`.
+3. O tool MCP `rag_answer` chama recuperação híbrida somente em `knowledge/<módulo>`: lexical, BM25-like, TF-IDF e embedding local quando disponível.
+4. O Evidence Judge reclassifica relevância, autoridade, proveniência, suporte e conflitos; se faltar evidência, o harness faz no máximo um segundo passe de recuperação.
+5. O contexto aprovado é enviado ao provider escolhido: Ollama local, OpenAI Responses, Gemini ou Claude, conforme a política de privacidade.
+6. A resposta passa por crítica/verificação e retorna fontes, evidências aceitas/rejeitadas, score, provider, status e telemetria operacional.
+
+O `Production Gate` consolida o checklist de dez níveis por módulo e bloqueia a
+liberação quando houver corpus incompleto, quarentena, regressão pendente,
+falha de segurança ou PostgreSQL indisponível em modo de produção. Abaixo de
+100% não há “retreinamento mágico”: o painel informa a ação necessária e a
+fila sequencial reprocessa somente quando uma fonte nova, uma correção ou um
+treino explicitamente autorizado altera o módulo.
 
 Perguntas clínicas são classificadas por intenção antes da busca. Por exemplo, uma queixa de sonolência, piscadas de sono ou microssono usa a fonte clínica local `knowledge/medicina/textos/clinical-sleep-guidance.md`; CID-10, CID-11 e CIF permanecem como classificações e não são usados como explicação clínica principal. A memória da conversa também incorpora acompanhamentos clínicos completos, não apenas perguntas curtas.
 
@@ -54,7 +62,7 @@ Links HTML, texto, JSON e XML podem ser associados a um módulo. O conteúdo é 
 
 ### Expansão contínua
 
-Cada pergunta cria um tema semântico anonimizado e uma tarefa persistente. Com PostgreSQL válido, o runtime usa o schema isolado `sofia_runtime`; enquanto a conexão não estiver disponível, usa `data/knowledge_expansion.sqlite3` como fallback local. Consultas equivalentes são agrupadas, recebem prioridade por frequência/recência e podem ser expandidas pelo ciclo automático. A expansão pesquisa fontes públicas, seleciona domínios confiáveis por módulo, respeita `robots.txt`, normaliza URLs, elimina duplicatas, captura no máximo dez páginas por tema e grava cada snapshot offline em `knowledge/<módulo>/links`.
+Cada pergunta cria um tema semântico anonimizado e uma tarefa persistente. Com PostgreSQL válido, o runtime usa o schema isolado `sofia_runtime`; o SQLite (`data/knowledge_expansion.sqlite3`) só é permitido no modo `SOFIA_STORAGE_MODE=developer`. Em produção, a indisponibilidade do PostgreSQL bloqueia o fluxo. Consultas equivalentes são agrupadas, recebem prioridade por frequência/recência e podem ser expandidas pelo ciclo automático. A expansão pesquisa fontes públicas, seleciona domínios confiáveis por módulo, respeita `robots.txt`, normaliza URLs, elimina duplicatas, captura no máximo dez páginas por tema e grava cada snapshot offline em `knowledge/<módulo>/links`.
 
 O crawler permanece no domínio permitido da fonte e não atravessa autenticação, paywall, captcha ou bloqueios. Links descobertos não são aceitos automaticamente quando não passam pelo filtro de relevância; o administrador pode liberar ou bloquear um domínio em `POST /api/admin/expansion/domains`. O painel administrativo do Dashboard permite executar, pausar, retomar e reprocessar a fila. Estados de fonte e documento incluem `PENDING`, `UPDATING`, `READY`, `PARTIAL`, `FAILED` e `QUARANTINED`. Falhas são isoladas por arquivo e não interrompem os demais módulos.
 
@@ -81,4 +89,4 @@ revisadas por especialistas.
 
 O Dashboard registra estatísticas de temas consultados numa biblioteca isolada (`api/analytics.py`). Com `SOFIA_POSTGRES_URL` ou `DATABASE_URL`, a tabela `sofia_query_analytics` do PostgreSQL é a principal; sem conexão disponível, `data/agent_memory.sqlite3` é o fallback local. São armazenados apenas matrícula, módulo, tema semântico, intenção, quantidade de fontes, provider, verificação, horário e feedback; perguntas, respostas e conteúdo clínico não são gravados. O usuário pode marcar uma resposta como útil, não útil ou não responder (mediana). “Não útil” oferece uma nova tentativa no chat, mas uma ampliação externa com dados sensíveis continua exigindo autorização. A API `GET /api/analytics/themes?module_id=medicina&days=30` e `POST /api/analytics/feedback` exigem sessão; as estatísticas exigem especificamente a conta `AG000001`. O relatório não é exposto como ferramenta MCP pública para evitar que outro cliente contorne essa regra.
 
-As ferramentas MCP isoladas são `list_knowledge_modules`, `search_knowledge`, `rag_answer`, `analyst_scenario`, `tensor_multiply`, `random_generate`, `neural_train`, `neural_status`, `neural_infer`, `neural_graph`, `semantic_embedding_status`, `semantic_embed`, `monte_carlo_estimate`, `institutional_integration_status` e `institutional_integration_sync`. Estatísticas são uma função administrativa da API autenticada, não uma ferramenta MCP pública.
+As ferramentas MCP isoladas são `list_knowledge_modules`, `search_knowledge`, `rag_answer`, `analyst_scenario`, `tensor_multiply`, `random_generate`, `neural_train`, `neural_status`, `neural_infer`, `neural_graph`, `knowledge_graph`, `semantic_embedding_status`, `semantic_embed`, `monte_carlo_estimate`, `production_gate`, `institutional_integration_status` e `institutional_integration_sync`. `knowledge_graph` e `production_gate` exigem capacidade administrativa. Estatísticas são uma função administrativa da API autenticada, não uma ferramenta MCP pública.

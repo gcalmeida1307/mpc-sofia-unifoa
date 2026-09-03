@@ -96,7 +96,9 @@ from .insights import snapshot as insights_snapshot
 from .integrations import initialize as initialize_integrations
 from .integrations import status as integration_status
 from .integrations import sync as sync_integration
+from .knowledge_graph import build_graph, read_graph
 from .links import LinkRepository, ingest_link, link_not_modified
+from .llmops import trace_metrics
 from .mcp_contracts import TOOL_CONTRACTS
 from .mcp_contracts import contracts as tool_contracts
 from .mcp_security import bind_user, module_allowed, reset_user
@@ -120,10 +122,12 @@ from .privacy import (
     provider_guard,
 )
 from .privacy import status as privacy_status
+from .production_gate import production_gate as run_production_gate
 from .query_analysis import assess_module_scope
 from .readiness import readiness_checklist
 from .research import research_module
 from .retrieval import retrieve
+from .storage import status as storage_status
 
 ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE_ROOT = ROOT / 'knowledge'
@@ -459,7 +463,7 @@ async def search_knowledge(module_id: str, query: str, limit: int = 6) -> dict[s
     """Retrieve evidence from a local knowledge module using TF-IDF and policy gates."""
     module_root(module_id)
     result = retrieve(KNOWLEDGE_ROOT, module_id, query, policy_for(module_id), limit)
-    return {'module': module_id, 'sources': list(result.sources), 'context': result.context, 'evidence_found': result.has_quality_evidence, 'evidence_score': max((item.score for item in result.evidence), default=0.0), 'expanded_query': result.expanded_query}
+    return {'module': module_id, 'sources': list(result.sources), 'context': result.context, 'evidence_found': result.has_quality_evidence, 'evidence_score': max((item.score for item in result.evidence), default=0.0), 'expanded_query': result.expanded_query, 'rejected_evidence': [{'source': item.chunk.path.name, 'reason': item.rejection_reason, 'score': item.score} for item in result.rejected_evidence], 'conflicts': list(result.conflicts), 'judge_confidence': result.judge_confidence}
 
 
 @mcp.tool()
@@ -542,6 +546,14 @@ async def neural_graph(module_id: str) -> dict[str, Any]:
 
 
 @mcp.tool()
+async def knowledge_graph(module_id: str) -> dict[str, Any]:
+    """Return the persisted evidence graph for an authorized module."""
+    enforce_mcp_admin()
+    module_root(module_id)
+    return await asyncio.to_thread(read_graph, KNOWLEDGE_ROOT, module_id)
+
+
+@mcp.tool()
 async def semantic_embedding_status(module_id: str) -> dict[str, Any]:
     """Return the local Ollama embedding index state for one module."""
     module_root(module_id)
@@ -562,6 +574,13 @@ async def readiness_check(module_id: str) -> dict[str, Any]:
     enforce_mcp_admin()
     module_root(module_id)
     return await asyncio.to_thread(readiness_checklist, KNOWLEDGE_ROOT, module_id)
+
+
+@mcp.tool()
+async def production_gate() -> dict[str, Any]:
+    """Evaluate all ten levels and safety gates for the administrator."""
+    enforce_mcp_admin()
+    return await asyncio.to_thread(run_production_gate, KNOWLEDGE_ROOT)
 
 
 @mcp.tool()
@@ -764,12 +783,12 @@ async def rag_answer(module_id: str, provider: str, question: str, history: list
     try:
         result = await orchestrate_answer(root=KNOWLEDGE_ROOT, module_id=module_id, provider=effective_provider, question=question, history=history or [], extra_context=clinical_context, language=language, response_style=response_style, external_allowed=allowed_external, user_code=user_code, retry=retry, retry_of=retry_of)
     except Exception:
-        trace.finish(status='ERROR', provider=effective_provider, metrics={'retry': retry})
+        trace.finish(status='ERROR', provider=effective_provider, metrics=trace_metrics(module_id, question, effective_provider, retry=retry))
         raise
     package = getattr(result, 'context_package', {})
     trace.span('retrieve', 'complete' if result.evidence_found else 'blocked', {'evidence': len(package.get('accepted_evidence', [])), 'sources': len(result.sources)})
     trace.span('verify', result.verification_status, {'confidence': result.confidence, 'verified': result.verified})
-    trace.finish(status='READY', intent=package.get('intent'), complexity=package.get('complexity'), router=package.get('complexity'), provider=result.provider, model=result.model, confidence=result.confidence, metrics={'evidence_score': result.evidence_score, 'source_count': len(result.sources), 'retry': retry})
+    trace.finish(status='READY', intent=package.get('intent'), complexity=package.get('complexity'), router=package.get('complexity'), provider=result.provider, model=result.model, confidence=result.confidence, metrics=trace_metrics(module_id, question, result.provider, evidence_score=result.evidence_score, source_count=len(result.sources), retry=retry))
     payload = answer_payload(module_id, result, patient_id, language, response_style, retry, retry_attempt, question, trace.trace_id)
     payload['learning']['retry_of'] = retry_of
     payload['learning']['provider_mode'] = 'auto com provedores externos autorizados' if retry and allowed_external and effective_provider == 'auto' else 'política local vigente'
@@ -980,7 +999,7 @@ app.add_middleware(
 @app.get('/api/health')
 async def health() -> dict[str, Any]:
     refresh_modules()
-    return {'status': 'ok', 'server': 'sofia-local', 'mcp': '/mcp', 'knowledge': str(KNOWLEDGE_ROOT), 'modules': len(MODULES), 'fhir': '/fhir/metadata'}
+    return {'status': 'ok', 'server': 'sofia-local', 'mcp': '/mcp', 'knowledge': str(KNOWLEDGE_ROOT), 'modules': len(MODULES), 'fhir': '/fhir/metadata', 'storage': storage_status()}
 
 
 @app.get('/api/analytics/themes')
@@ -1226,6 +1245,27 @@ async def admin_readiness(module_id: str | None = None, current: dict[str, Any] 
     resolved_module = module_id or next(iter(MODULES), '')
     module_root(resolved_module)
     return await asyncio.to_thread(readiness_checklist, KNOWLEDGE_ROOT, resolved_module)
+
+
+@app.get('/api/admin/knowledge-graph')
+async def admin_knowledge_graph(module_id: str | None = None, rebuild: bool = False, current: dict[str, Any] = Depends(require_user)) -> dict[str, Any]:  # noqa: B008
+    """Return the evidence graph and optionally rebuild its derived artifact."""
+    require_statistics_admin(current)
+    refresh_modules()
+    resolved_module = module_id or next(iter(MODULES), '')
+    module_root(resolved_module)
+    result = await asyncio.to_thread(build_graph if rebuild else read_graph, KNOWLEDGE_ROOT, resolved_module)
+    audit_event(current['sub'], 'knowledge_graph_read', resolved_module)
+    return result
+
+
+@app.get('/api/admin/production-gate')
+async def admin_production_gate(current: dict[str, Any] = Depends(require_user)) -> dict[str, Any]:  # noqa: B008
+    """Evaluate the single release gate for AG000001."""
+    require_statistics_admin(current)
+    result = await asyncio.to_thread(run_production_gate, KNOWLEDGE_ROOT)
+    audit_event(current['sub'], 'production_gate_run', result.get('status', 'unknown'))
+    return result
 
 
 @app.post('/api/admin/embeddings/build')
@@ -1487,6 +1527,7 @@ async def capabilities(_: dict[str, Any] = Depends(require_user)) -> dict[str, A
         'ocr': ocr_status(),
         'links': {'enabled': True, 'storage': LinkRepository(KNOWLEDGE_ROOT).backend, 'postgres_configured': bool(os.getenv('SOFIA_POSTGRES_URL') or os.getenv('DATABASE_URL'))},
         'expansion_storage': expansion_storage_status(),
+        'storage': storage_status(),
         'embeddings': embedding_status(KNOWLEDGE_ROOT),
         'providers': {'auto': True, 'ollama': True, 'openai': openai_key and privacy['external_data_allowed'], 'gemini': gemini_key and privacy['external_data_allowed'], 'claude': claude_key and privacy['external_data_allowed'], 'openai_key': openai_key, 'gemini_key': gemini_key, 'claude_key': claude_key},
         'openai_store_responses': openai_store,
@@ -1513,6 +1554,11 @@ async def capabilities(_: dict[str, Any] = Depends(require_user)) -> dict[str, A
             'hybrid_retrieval': {'lexical': 'BM25-like', 'vector': 'TF-IDF local + Ollama neural', 'rerank': True, 'metadata_filter': True},
             'pipeline_explorer': '/api/admin/pipeline',
             'readiness_checklist': '/api/admin/readiness',
+            'knowledge_graph': '/api/admin/knowledge-graph',
+            'production_gate': '/api/admin/production-gate',
+            'domain_packages': True,
+            'evidence_judge': True,
+            'agent_harness': True,
             'observability': '/api/admin/observability',
             'semantic_evaluation': '/api/admin/evaluation',
             'embeddings': '/api/admin/embeddings',
@@ -1575,7 +1621,8 @@ async def upload(module_id: str, file: UploadFile = File(...), current: dict[str
     destination.write_bytes(content)
     pipeline = await asyncio.to_thread(record_document_pipeline, KNOWLEDGE_ROOT, module_id, destination)
     audit_event(current['sub'], 'upload', module_id, safe_name)
-    schedule_auto_training(module_id)
+    if pipeline.get('status') == 'READY':
+        schedule_auto_training(module_id, reason='document_ready')
     return {'uploaded': True, 'module': module_id, 'file': safe_name, 'bytes': len(content), 'ocr': ocr_status() if suffix in IMAGE_EXTENSIONS else {'available': False, 'status': 'not-applicable'}, 'processing': pipeline, 'status': status_for(module_id)}
 
 
@@ -1607,7 +1654,8 @@ async def add_link(module_id: str, request: LinkCreateRequest, current: dict[str
     )
     pipeline = await asyncio.to_thread(record_document_pipeline, KNOWLEDGE_ROOT, module_id, local_path, source_id)
     audit_event(current['sub'], 'link_ingest', module_id, str(record.get('url', request.url)))
-    schedule_auto_training(module_id)
+    if pipeline.get('status') == 'READY':
+        schedule_auto_training(module_id, reason='link_ready')
     return {'ingested': True, 'module': module_id, 'link': {**record, 'requested_pages': max_pages, 'max_depth': request.max_depth, 'dense': request.dense, 'offline_document': True, 'offline_path': f'knowledge/{module_id}/links/{record["file_name"]}', 'sync_status': 'saved', 'processing': pipeline}, 'status': status_for(module_id)}
 
 
@@ -1716,7 +1764,7 @@ async def chat(request: ChatRequest, current: dict[str, Any] = Depends(require_u
 
 @app.post('/api/tools/{tool_name}')
 async def run_tool(tool_name: str, request: ToolRequest, current: dict[str, Any] = Depends(require_user)) -> Any:  # noqa: B008
-    tools = {'list_knowledge_modules': list_knowledge_modules, 'tensor_multiply': tensor_multiply, 'random_generate': random_generate, 'neural_train': neural_train, 'neural_status': neural_status, 'neural_infer': neural_infer, 'neural_graph': neural_graph, 'semantic_embedding_status': semantic_embedding_status, 'semantic_embed': semantic_embed, 'readiness_check': readiness_check, 'monte_carlo_estimate': monte_carlo_estimate, 'search_knowledge': search_knowledge, 'agent_plan': agent_plan, 'agent_memory_status': agent_memory_status, 'query_theme_report': query_theme_report, 'rag_answer': rag_answer, 'analyst_scenario': analyst_scenario, 'institutional_integration_status': institutional_integration_status, 'institutional_integration_sync': institutional_integration_sync}
+    tools = {'list_knowledge_modules': list_knowledge_modules, 'tensor_multiply': tensor_multiply, 'random_generate': random_generate, 'neural_train': neural_train, 'neural_status': neural_status, 'neural_infer': neural_infer, 'neural_graph': neural_graph, 'knowledge_graph': knowledge_graph, 'semantic_embedding_status': semantic_embedding_status, 'semantic_embed': semantic_embed, 'readiness_check': readiness_check, 'production_gate': production_gate, 'monte_carlo_estimate': monte_carlo_estimate, 'search_knowledge': search_knowledge, 'agent_plan': agent_plan, 'agent_memory_status': agent_memory_status, 'query_theme_report': query_theme_report, 'rag_answer': rag_answer, 'analyst_scenario': analyst_scenario, 'institutional_integration_status': institutional_integration_status, 'institutional_integration_sync': institutional_integration_sync}
     tool = tools.get(tool_name)
     if tool is None:
         raise HTTPException(404, 'Ferramenta MCP desconhecida')

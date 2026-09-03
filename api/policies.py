@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from .domain_packages import package_for
 from .domains import DOMAIN_CONTRACTS, domain_for
 from .query_analysis import normalize
 
@@ -38,7 +39,7 @@ def policy_for(module_id: str) -> ModulePolicy:
     )
 
 
-def expand_query(module_id: str, query: str) -> str:
+def _legacy_expand_query(module_id: str, query: str) -> str:
     expansions = {
         "gripe": "influenza sintomas febre tosse J09 J10 J11",
         "resfriado": "rinofaringite coriza sintomas",
@@ -106,3 +107,14 @@ def expand_query(module_id: str, query: str) -> str:
     extra_values.extend(value for key, value in module_expansions.get(module_id, {}).items() if key in normalized)
     extra = " ".join(extra_values)
     return f"{query} {extra}".strip()
+
+
+def expand_query(module_id: str, query: str) -> str:
+    """Expand vocabulary through the isolated domain package.
+
+    The legacy vocabulary remains a compatibility bridge for modules that do
+    not yet have a dedicated package. New domain-specific rules belong in
+    ``api/domain_packages`` and do not enter the CORE retrieval engine.
+    """
+    package_expansion = package_for(module_id).expand_query(query)
+    return package_expansion if package_expansion != query else _legacy_expand_query(module_id, query)

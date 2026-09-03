@@ -232,6 +232,12 @@ def graph(root: Path, module_id: str, max_concepts: int = 18, max_documents: int
         metadata.update({key: loaded_metadata.get(key) for key in ("architecture", "samples", "epochs", "mse", "trained_at")})
         metadata["stale"] = loaded_metadata.get("source_signature") != _source_signature(root, module_id)
         weights = {key: value.round(6).tolist() for key, value in learned_weights.items() if key in {"w1", "w2"}}
+    try:
+        from .knowledge_graph import read_graph
+
+        evidence_graph = read_graph(root, module_id)
+    except (OSError, RuntimeError, TypeError, ValueError, json.JSONDecodeError):
+        evidence_graph = {"status": "pending", "nodes": [], "edges": []}
     return {
         "module_id": module_id,
         "trained": trained,
@@ -243,5 +249,6 @@ def graph(root: Path, module_id: str, max_concepts: int = 18, max_documents: int
         "concept_count": len(concepts),
         "document_count": len(documents),
         "weights": weights,
+        "evidence_graph": evidence_graph,
         "meaning": "As conexões semânticas representam coocorrência de conceitos nos mesmos chunks; as arestas de evidência ligam cada conceito aos documentos que o sustentam.",
     }

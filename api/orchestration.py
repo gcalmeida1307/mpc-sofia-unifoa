@@ -9,7 +9,9 @@ from typing import Any
 from .agents import build_plan, remember_run, update_stage
 from .agents import critic as agent_critic
 from .context_engine import build_context_package, verify_answer
+from .harness import run_retrieval_harness
 from .learning import store_offline_candidate
+from .llmops import runtime_versions
 from .policies import ModulePolicy, policy_for
 from .privacy import ExternalRedaction, external_generation_may_be_used
 from .providers import Generation, generate_with_fallback
@@ -870,7 +872,7 @@ def _fast_evidence_answer(module_id: str, question: str, result: RetrievalResult
         and any(term in search_question for term in ("hora extra", "horas extras", "jornada"))
         and ("adiantamento" in search_question or "decimo terceiro" in search_question or "13" in search_question)
         and "horas extras" in search_context
-        and "decimo terceiro" in search_context
+        and ("decimo terceiro" in search_context or "adiantamento" in search_context or "13" in search_context)
     ):
         if language == "en":
             return "The sources address two different points. The SAAE agreement says that uncompensated overtime is paid at termination with a 50% premium. The Vade Mecum confirms the right to a thirteenth salary, but the retrieved excerpt does not say whether the employee may refuse or waive its advance payment."
@@ -882,7 +884,7 @@ def _fast_evidence_answer(module_id: str, question: str, result: RetrievalResult
         and any(term in search_question for term in ("brecha", "brechas", "jurisprudencia", "artigo da lei", "sustentar um argumento"))
         and any(source.casefold().startswith("saae_") for source in result.sources)
         and any(source.casefold().startswith("vade_mecum") for source in result.sources)
-        and "art. 59." in search_context
+        and "art. 59" in search_context
     ):
         if structured:
             return _structured_legal_comparison_answer(language)
@@ -1205,8 +1207,27 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     policy = policy_for(module_id)
     trace = build_plan(module_id, question, policy.high_risk, bool(extra_context))
     retrieval_question = _retrieval_question(question, history)
-    result = retrieve(root, module_id, retrieval_question, policy, limit=4 if response_style == "concise" else 6, retry=retry)
-    context_package = build_context_package(module_id, retrieval_question, result, history, response_style).public_dict()
+    retrieval_limit = 4 if response_style == "concise" else 6
+    harness = run_retrieval_harness(
+        root,
+        module_id,
+        retrieval_question,
+        policy,
+        lambda current_question, current_limit, current_retry: retrieve(
+            root,
+            module_id,
+            current_question,
+            policy,
+            limit=current_limit,
+            retry=retry or current_retry,
+        ),
+        limit=retrieval_limit,
+    )
+    result = harness.result
+    trace.append({"id": "reflect", "stage": "Refletir", "agent": "Evidence Judge", "status": "complete" if harness.decision != "report_evidence_gap" else "blocked", "detail": harness.decision, "attempts": harness.attempts})
+    context_package = build_context_package(module_id, retrieval_question, result, history, response_style, root=root).public_dict()
+    context_package["harness"] = {"attempts": harness.attempts, "decision": harness.decision, "steps": list(harness.steps)}
+    context_package["llmops"] = {"versions": runtime_versions(), "retrieval_attempts": harness.attempts}
     evidence_score = max((item.score for item in result.evidence), default=0.0)
     if not result.has_quality_evidence:
         update_stage(trace, "retrieve", "blocked", "Nenhuma evidência local atingiu o gate de qualidade.")

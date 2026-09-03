@@ -72,6 +72,30 @@ def _relations(text: str, concepts: list[str], source_name: str) -> list[dict[st
     return relations
 
 
+def _claims(sentences: list[str]) -> list[str]:
+    """Keep concise declarative units for later evidence comparison."""
+    return [sentence[:600] for sentence in sentences[:16] if len(sentence.split()) >= 6]
+
+
+def _dates(text: str) -> list[str]:
+    values = re.findall(r"\b(?:\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{4}|\d{1,2}\s+de\s+[A-Za-zÀ-ÿ]+\s+de\s+\d{4})\b", text)
+    return list(dict.fromkeys(values))[:24]
+
+
+def _organizations(text: str) -> list[str]:
+    values = re.findall(r"\b(?:[A-ZÀ-Ý][\wÀ-ÿ-]*\s+){1,5}(?:S\.A\.|S\.A|LTDA|Ltda\.?|Ministério|Tribunal|Senado|OMS|Organização Mundial da Saúde|Zabbix|CPC|SAAE)\b", text)
+    return list(dict.fromkeys(re.sub(r"\s+", " ", value).strip() for value in values))[:24]
+
+
+def _people(text: str) -> list[str]:
+    # This is intentionally conservative. It only records capitalized name
+    # shapes and is not used as a public answer; sensitive modules can omit it
+    # at the API boundary through the privacy policy.
+    values = re.findall(r"\b[A-ZÀ-Ý][a-zà-ÿ]{2,}(?:\s+[A-ZÀ-Ý][a-zà-ÿ]{2,}){1,3}\b", text)
+    blocked = {"Base Documental", "Document Intelligence", "Fonte Oficial", "Estado De"}
+    return list(dict.fromkeys(value for value in values if value not in blocked))[:24]
+
+
 def build_artifacts(path: Path, text: str, module_id: str) -> dict[str, Any]:
     """Build privacy-neutral metadata from one extracted document."""
     clean = re.sub(r"\s+", " ", text).strip()
@@ -94,15 +118,27 @@ def build_artifacts(path: Path, text: str, module_id: str) -> dict[str, Any]:
     quality += 0.20 if sentences else 0.0
     quality -= 0.15 if len(set(words)) < max(3, len(words) * 0.15) else 0.0
     return {
+        "artifact_version": "1.1",
         "summary": summary,
         "keywords": keywords,
         "entities": entities,
         "concepts": concepts,
         "relations": _relations(text, concepts, path.name),
+        "claims": _claims(sentences),
+        "dates": _dates(text),
+        "people": _people(text),
+        "organizations": _organizations(text),
+        "topics": concepts[:12],
+        "contradictions": [],
+        "embedding": {"status": "pending", "provider": "local-neural"},
+        "provenance": {
+            "file_name": path.name,
+            "source_type": "url_snapshot" if path.parent.name.casefold() == "links" else path.suffix.lower().lstrip("."),
+            "derived_at": "runtime",
+        },
         "questions": question_templates,
         "quality": round(max(0.0, min(1.0, quality)), 4),
         "ocr_quality": None,
         "word_count": len(words),
         "text_chars": len(clean),
     }
-

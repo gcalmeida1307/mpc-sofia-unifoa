@@ -18,6 +18,7 @@ from .embeddings import embedding_status
 from .evaluation import _load_cases
 from .expansion import ExpansionStore
 from .ingestion import files_for
+from .knowledge_graph import graph_status
 from .neural import status as neural_status
 from .observability import snapshot as observability_snapshot
 from .policies import policy_for
@@ -281,12 +282,15 @@ def _intelligence_level(root: Path, module_id: str, documents: list[dict[str, An
     neural_ready = bool(neural.get("trained")) and not bool(neural.get("stale"))
     has_docs = bool(documents)
     has_embedding = any(row.get("module_id") == module_id and row.get("items", 0) for row in embeddings.get("modules", []))
-    score = 40 * has_docs + 30 * has_embedding + 30 * neural_ready
+    graph = graph_status(root, module_id)
+    graph_ready = graph.get("status") == "ready" and int(graph.get("edge_count", 0) or 0) > 0
+    score = 25 * has_docs + 25 * has_embedding + 25 * neural_ready + 25 * graph_ready
     status = _READY if score == 100 else (_PARTIAL if score else _BLOCKED)
     evidence = [
         f"Corpus local: {'disponível' if has_docs else 'ausente'}.",
         f"Embeddings: {'disponíveis' if has_embedding else 'ausentes'}.",
         f"Rede neural: {'treinada e atualizada' if neural_ready else 'não treinada ou desatualizada'}.",
+        f"Evidence graph: {'disponível' if graph_ready else 'pendente ou sem relações'}.",
         "Resumo, comparação, conflitos e recomendações dependem de evidência recuperada; não são respostas livres.",
     ]
     return _level(9, "Inteligência assistida por evidências", status, score, "As capacidades de síntese, comparação e análise de cenários são combinadas com RAG, embeddings e a rede do módulo.", evidence, "Treine/reindexe o módulo e revise as fontes antes de considerar as recomendações maduras.")
