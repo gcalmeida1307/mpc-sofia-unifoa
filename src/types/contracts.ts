@@ -42,8 +42,18 @@ export type EmbeddingsPayload = {
   max_chunks_per_module?: number
   ollama_available: boolean
   available_models?: string[]
-  storage?: { backend?: string; postgres_configured?: boolean; postgres_error?: string | null }
-  modules?: Array<{ module_id: string; status: string; items: number; chunk_count?: number; dimension: number }>
+  storage?: {
+    backend?: string
+    postgres_configured?: boolean
+    postgres_error?: string | null
+  }
+  modules?: Array<{
+    module_id: string
+    status: string
+    items: number
+    chunk_count?: number
+    dimension: number
+  }>
 }
 
 export type ObservabilityPayload = {

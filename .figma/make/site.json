@@ -1,4 +1,6 @@
 {
+  "title": "SOFIA GESTÃO INTELIGENTE",
+  "language": "pt-BR",
   "description": "This interactive platform offers a modern, responsive interface for accessing specialized knowledge and tools, including chat support and customizable dashboards.",
   "robots": {
     "index": false

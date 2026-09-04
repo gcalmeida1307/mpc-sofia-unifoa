@@ -945,7 +945,9 @@ async def rag_answer(
         await asyncio.to_thread(
             record_search_topic, KNOWLEDGE_ROOT, module_id, question, user_code
         )
-    except (OSError, RuntimeError, ValueError, sqlite3.Error) as exc:
+    except Exception as exc:  # noqa: BLE001
+        # Topic analytics and expansion are auxiliary. A database dialect or
+        # migration issue must never turn a valid RAG question into HTTP 500.
         logger.warning("Não foi possível registrar o tema para expansão: %s", exc)
     clinical_scope = module_id == "medicina" or bool(patient_id)
     effective_provider = provider

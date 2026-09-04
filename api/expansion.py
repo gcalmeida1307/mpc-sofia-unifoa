@@ -327,7 +327,10 @@ def _postgres_sql(sql: str) -> str:
     """Translate the small SQLite dialect used by the store to psycopg."""
     sql = sql.replace("BEGIN IMMEDIATE", "BEGIN")
     sql = re.sub(r"MAX\((reliability|pages|confidence),\s*\?\)", r"GREATEST(\1, ?)", sql)
-    sql = sql.replace("MAX(confidence, excluded.confidence)", "GREATEST(confidence, excluded.confidence)")
+    sql = sql.replace(
+        "MAX(confidence, excluded.confidence)",
+        "GREATEST(topic_keywords.confidence, excluded.confidence)",
+    )
     return sql.replace("?", "%s")
 
 

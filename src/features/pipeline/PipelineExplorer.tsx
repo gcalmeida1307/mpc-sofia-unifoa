@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react"
-import { loadAdminPipeline, loadAdminReadiness, runAdminEvaluation, runAdminProductionGate } from "../../services/sofia-api"
+import {
+  loadAdminPipeline,
+  loadAdminReadiness,
+  runAdminEvaluation,
+  runAdminProductionGate,
+} from "../../services/sofia-api"
+import { describeApiError } from "../../services/api-client"
 import type {
   EmbeddingsPayload,
   EvaluationPayload,
@@ -24,7 +30,8 @@ export default function PipelineExplorer({
 }) {
   const [selected, setSelected] = useState(mod.id)
   const [payload, setPayload] = useState<PipelinePayload | null>(null)
-  const [observability, setObservability] = useState<ObservabilityPayload | null>(null)
+  const [observability, setObservability] =
+    useState<ObservabilityPayload | null>(null)
   const [insights, setInsights] = useState<InsightsPayload | null>(null)
   const [embeddings, setEmbeddings] = useState<EmbeddingsPayload | null>(null)
   const [readiness, setReadiness] = useState<ReadinessPayload | null>(null)
@@ -33,9 +40,11 @@ export default function PipelineExplorer({
   const [evaluating, setEvaluating] = useState(false)
   const [gate, setGate] = useState<ProductionGatePayload | null>(null)
   const [runningGate, setRunningGate] = useState(false)
+  const [error, setError] = useState("")
 
   const load = async (moduleId = selected) => {
     setBusy(true)
+    setError("")
     try {
       const result = await loadAdminPipeline(authFetch, moduleId, 80)
       setPayload(result.pipeline)
@@ -43,7 +52,16 @@ export default function PipelineExplorer({
       setInsights(result.insights)
       setEmbeddings(result.embeddings)
       setReadiness(null)
-      void loadAdminReadiness(authFetch, moduleId).then(setReadiness).catch(() => setReadiness(null))
+      void loadAdminReadiness(authFetch, moduleId)
+        .then(setReadiness)
+        .catch(() => setReadiness(null))
+    } catch (reason) {
+      setError(
+        describeApiError(
+          reason,
+          "Não foi possível carregar o Pipeline Explorer.",
+        ),
+      )
     } finally {
       setBusy(false)
     }
@@ -51,8 +69,11 @@ export default function PipelineExplorer({
 
   const evaluate = async () => {
     setEvaluating(true)
+    setError("")
     try {
       setEvaluation(await runAdminEvaluation(authFetch))
+    } catch (reason) {
+      setError(describeApiError(reason, "Não foi possível avaliar o corpus."))
     } finally {
       setEvaluating(false)
     }
@@ -60,8 +81,13 @@ export default function PipelineExplorer({
 
   const validateGate = async () => {
     setRunningGate(true)
+    setError("")
     try {
       setGate(await runAdminProductionGate(authFetch))
+    } catch (reason) {
+      setError(
+        describeApiError(reason, "Não foi possível validar o Production Gate."),
+      )
     } finally {
       setRunningGate(false)
     }
@@ -73,101 +99,437 @@ export default function PipelineExplorer({
 
   const documents = payload?.documents ?? []
   const selectedModule = items.find((item) => item.id === selected) ?? mod
-  const embeddingRecord = embeddings?.modules?.find((item) => item.module_id === selected)
-  const stageLabel = (stage: string) => (stage === "READY" ? "Pronto" : stage.replace(/_/g, " "))
+  const embeddingRecord = embeddings?.modules?.find(
+    (item) => item.module_id === selected,
+  )
+  const stageLabel = (stage: string) =>
+    stage === "READY" ? "Pronto" : stage.replace(/_/g, " ")
 
   return (
     <div className="page-body explorer-page">
       <div className="page-heading-row">
         <div>
-          <h1>Pipeline <em>Explorer</em></h1>
-          <p className="page-subtitle">Acompanhe a ingestão real por documento: extração, OCR, qualidade, conhecimento, relações, índice e validação.</p>
+          <h1>
+            Pipeline <em>Explorer</em>
+          </h1>
+          <p className="page-subtitle">
+            Acompanhe a ingestão real por documento: extração, OCR, qualidade,
+            conhecimento, relações, índice e validação.
+          </p>
         </div>
         <div className="explorer-toolbar">
           <label className="explorer-module-control" htmlFor="pipeline-module">
             <span>Módulo monitorado</span>
-            <select id="pipeline-module" className="provider-select" value={selected} onChange={(event) => setSelected(event.target.value)}>
-              {items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+            <select
+              id="pipeline-module"
+              className="provider-select"
+              value={selected}
+              onChange={(event) => setSelected(event.target.value)}
+            >
+              {items.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
             </select>
           </label>
           <div className="explorer-actions">
-            <button className="neural-run" onClick={() => void load()} disabled={busy}>{busy ? "Atualizando..." : "Atualizar"}</button>
-            <button className="neural-run secondary" onClick={() => void evaluate()} disabled={evaluating}>{evaluating ? "Avaliando..." : "Avaliar corpus"}</button>
-            <button className="neural-run secondary" onClick={() => void validateGate()} disabled={runningGate}>{runningGate ? "Validando gate..." : "Production Gate"}</button>
+            <button
+              className="neural-run"
+              onClick={() => void load()}
+              disabled={busy}
+            >
+              {busy ? "Atualizando..." : "Atualizar"}
+            </button>
+            <button
+              className="neural-run secondary"
+              onClick={() => void evaluate()}
+              disabled={evaluating}
+            >
+              {evaluating ? "Avaliando..." : "Avaliar corpus"}
+            </button>
+            <button
+              className="neural-run secondary"
+              onClick={() => void validateGate()}
+              disabled={runningGate}
+            >
+              {runningGate ? "Validando gate..." : "Production Gate"}
+            </button>
           </div>
         </div>
       </div>
+      {error && (
+        <div className="state-alert error" role="alert">
+          {error}
+        </div>
+      )}
       <div className="explorer-health-grid">
-        <article className="metric-card"><small>Documentos no pipeline</small><strong>{documents.length}</strong><span>{selectedModule.name}</span></article>
-        <article className="metric-card"><small>Traces observáveis</small><strong>{observability?.total ?? 0}</strong><span>últimas execuções</span></article>
-        <article className="metric-card"><small>Insights observados</small><strong>{insights?.count ?? 0}</strong><span>coocorrências, não causalidade</span></article>
-        <article className="metric-card"><small>Smoke score técnico</small><strong>{evaluation ? `${evaluation.global_score}%` : "—"}</strong><span>corpus + pipeline + recuperação</span></article>
-        <article className="metric-card"><small>Índice neural</small><strong>{embeddingRecord?.items ?? 0}</strong><span>{embeddingRecord?.status ?? "pending"} · {embeddings?.model ?? "embedding local"}</span></article>
+        <article className="metric-card">
+          <small>Documentos no pipeline</small>
+          <strong>{documents.length}</strong>
+          <span>{selectedModule.name}</span>
+        </article>
+        <article className="metric-card">
+          <small>Traces observáveis</small>
+          <strong>{observability?.total ?? 0}</strong>
+          <span>últimas execuções</span>
+        </article>
+        <article className="metric-card">
+          <small>Insights observados</small>
+          <strong>{insights?.count ?? 0}</strong>
+          <span>coocorrências, não causalidade</span>
+        </article>
+        <article className="metric-card">
+          <small>Smoke score técnico</small>
+          <strong>{evaluation ? `${evaluation.global_score}%` : "—"}</strong>
+          <span>corpus + pipeline + recuperação</span>
+        </article>
+        <article className="metric-card">
+          <small>Índice neural</small>
+          <strong>{embeddingRecord?.items ?? 0}</strong>
+          <span>
+            {embeddingRecord?.status ?? "pending"} ·{" "}
+            {embeddings?.model ?? "embedding local"}
+          </span>
+        </article>
       </div>
       {readiness && (
         <section className="explorer-panel readiness-panel">
           <div className="section-heading readiness-heading">
-            <div><h2>Checklist de escala</h2><p>Dez níveis verificáveis para saber exatamente o que está pronto, parcial ou bloqueado.</p></div>
-            <div className={`readiness-banner ${readiness.scale_ready ? "ready" : "attention"}`}><strong>{readiness.ready_levels}/10</strong><span>{readiness.scale_ready ? "Escala aprovada" : "Ainda não aprovado para escala"}</span></div>
+            <div>
+              <h2>Checklist de escala</h2>
+              <p>
+                Dez níveis verificáveis para saber exatamente o que está pronto,
+                parcial ou bloqueado.
+              </p>
+            </div>
+            <div
+              className={`readiness-banner ${
+                readiness.scale_ready ? "ready" : "attention"
+              }`}
+            >
+              <strong>{readiness.ready_levels}/10</strong>
+              <span>
+                {readiness.scale_ready
+                  ? "Escala aprovada"
+                  : "Ainda não aprovado para escala"}
+              </span>
+            </div>
           </div>
           <p className="readiness-summary">{readiness.summary}</p>
           <div className="readiness-list">
             {readiness.levels.map((level) => (
-              <article className={`readiness-row readiness-${level.status}`} key={level.id}>
-                <div className="readiness-level"><span className="readiness-number">{String(level.id).padStart(2, "0")}</span><div><strong>{level.title}</strong><small>{level.status_label}</small></div></div>
-                <div className="readiness-content"><p>{level.details}</p><ul>{level.evidence.map((item, index) => <li key={`${level.id}-${index}`}>{item}</li>)}</ul>{level.action && <small className="readiness-action">Próximo passo: {level.action}</small>}</div>
-                <div className="readiness-score" aria-label={`Score ${level.score}%`}><strong>{level.score}%</strong><span>evidência</span></div>
+              <article
+                className={`readiness-row readiness-${level.status}`}
+                key={level.id}
+              >
+                <div className="readiness-level">
+                  <span className="readiness-number">
+                    {String(level.id).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <strong>{level.title}</strong>
+                    <small>{level.status_label}</small>
+                  </div>
+                </div>
+                <div className="readiness-content">
+                  <p>{level.details}</p>
+                  <ul>
+                    {level.evidence.map((item, index) => (
+                      <li key={`${level.id}-${index}`}>{item}</li>
+                    ))}
+                  </ul>
+                  {level.action && (
+                    <small className="readiness-action">
+                      Próximo passo: {level.action}
+                    </small>
+                  )}
+                </div>
+                <div
+                  className="readiness-score"
+                  aria-label={`Score ${level.score}%`}
+                >
+                  <strong>{level.score}%</strong>
+                  <span>evidência</span>
+                </div>
               </article>
             ))}
           </div>
-          <small className="readiness-footnote">Avaliado em {new Date(readiness.evaluated_at).toLocaleString("pt-BR")}. Números ausentes não são estimados.</small>
+          <small className="readiness-footnote">
+            Avaliado em{" "}
+            {new Date(readiness.evaluated_at).toLocaleString("pt-BR")}. Números
+            ausentes não são estimados.
+          </small>
         </section>
       )}
       <section className="explorer-panel">
-        <div className="section-heading"><div><h2>Estados do documento</h2><p>Falhas permanecem identificadas e podem ser reprocessadas; metadados incompletos não viram “pronto”.</p></div><span className="status-pill active">somente administrador</span></div>
-        {documents.length === 0 ? <div className="empty-state">Nenhum documento registrado neste módulo.</div> : (
-          <div className="explorer-table-wrap"><table className="explorer-table"><thead><tr><th>Documento</th><th>Estado</th><th>Qualidade</th><th>Chunks</th><th>Etapas registradas</th></tr></thead><tbody>
-            {documents.map((document) => {
-              const status = String(document.status ?? "PENDING")
-              const events = Array.isArray(document.events) ? (document.events as Array<Record<string, unknown>>) : []
-              return <tr key={String(document.id)}><td><strong>{String(document.file_name ?? "Documento")}</strong><small>{String(document.mime_type ?? "")} · {String(document.source_origin ?? "origem não informada")} · v{String(document.version_number ?? "—")}</small><small>{String(document.sensitivity ?? "sensibilidade não informada")}</small></td><td><span className={`pipeline-status ${status.toLowerCase()}`}>{stageLabel(status)}</span></td><td>{document.extraction_quality == null ? "—" : `${Math.round(Number(document.extraction_quality) * 100)}%`}</td><td>{String(document.chunk_count ?? 0)}</td><td><div className="stage-chips">{events.map((event) => <span key={`${String(event.stage)}-${String(event.started_at)}`} title={String(event.error_message ?? "")} className={String(event.status).toLowerCase()}>{stageLabel(String(event.stage))}</span>)}</div></td></tr>
-            })}
-          </tbody></table></div>
+        <div className="section-heading">
+          <div>
+            <h2>Estados do documento</h2>
+            <p>
+              Falhas permanecem identificadas e podem ser reprocessadas;
+              metadados incompletos não viram “pronto”.
+            </p>
+          </div>
+          <span className="status-pill active">somente administrador</span>
+        </div>
+        {documents.length === 0 ? (
+          <div className="empty-state">
+            Nenhum documento registrado neste módulo.
+          </div>
+        ) : (
+          <div className="explorer-table-wrap">
+            <table className="explorer-table">
+              <thead>
+                <tr>
+                  <th>Documento</th>
+                  <th>Estado</th>
+                  <th>Qualidade</th>
+                  <th>Chunks</th>
+                  <th>Etapas registradas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {documents.map((document) => {
+                  const status = String(document.status ?? "PENDING")
+                  const events = Array.isArray(document.events)
+                    ? document.events as Array<Record<string, unknown>>
+                    : []
+                  return (
+                    <tr key={String(document.id)}>
+                      <td>
+                        <strong>
+                          {String(document.file_name ?? "Documento")}
+                        </strong>
+                        <small>
+                          {String(document.mime_type ?? "")} ·{" "}
+                          {String(
+                            document.source_origin ?? "origem não informada",
+                          )}{" "}
+                          · v{String(document.version_number ?? "—")}
+                        </small>
+                        <small>
+                          {String(
+                            document.sensitivity ??
+                              "sensibilidade não informada",
+                          )}
+                        </small>
+                      </td>
+                      <td>
+                        <span
+                          className={`pipeline-status ${status.toLowerCase()}`}
+                        >
+                          {stageLabel(status)}
+                        </span>
+                      </td>
+                      <td>
+                        {document.extraction_quality == null
+                          ? "—"
+                          : `${Math.round(Number(document.extraction_quality) * 100)}%`}
+                      </td>
+                      <td>{String(document.chunk_count ?? 0)}</td>
+                      <td>
+                        <div className="stage-chips">
+                          {events.map((event) => (
+                            <span
+                              key={`${String(event.stage)}-${String(event.started_at)}`}
+                              title={String(event.error_message ?? "")}
+                              className={String(event.status).toLowerCase()}
+                            >
+                              {stageLabel(String(event.stage))}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
       <section className="explorer-panel">
-        <div className="section-heading"><div><h2>Últimas execuções</h2><p>Latência, modelo, evidência, confiança, tokens e custo quando retornados; sem armazenar o conteúdo da pergunta.</p></div></div>
-        <div className="trace-list">{(observability?.traces ?? []).slice(0, 6).map((trace) => {
-          let metrics: Record<string, unknown> = {}
-          try { metrics = JSON.parse(String(trace.metrics_json ?? "{}")) as Record<string, unknown> } catch { metrics = {} }
-          const tokens = metrics.tokens ?? metrics.usage_tokens
-          const cost = metrics.cost ?? metrics.cost_brl
-          return <div className="trace-row" key={String(trace.trace_id)}><span className="status-dot" /><div className="trace-primary"><strong>{String(trace.provider ?? "local")}</strong><small>{String(trace.model ?? "modelo não registrado")} · {String(trace.complexity ?? "L1")}</small></div><div className="trace-metric"><strong>{trace.latency_ms == null ? "—" : `${Math.round(Number(trace.latency_ms))} ms`}</strong><small>latência</small></div><div className="trace-metric"><strong>{trace.confidence == null ? "—" : `${Math.round(Number(trace.confidence) * 100)}%`}</strong><small>confiança</small></div><div className="trace-metric"><strong>{String(metrics.source_count ?? 0)} fonte(s)</strong><small>evidência</small></div><div className="trace-metric trace-optional"><strong>{tokens == null ? "—" : String(tokens)}</strong><small>tokens · custo {cost == null ? "—" : String(cost)}</small></div></div>
-        })}{!observability?.traces?.length && <div className="empty-state">Ainda não há traces para este módulo.</div>}</div>
-      </section>
-      {evaluation && <section className="explorer-panel"><div className="section-heading"><div><h2>Última avaliação do corpus</h2><p>{evaluation.note}</p></div></div><div className="evaluation-grid">{evaluation.modules.map((item) => <div className="evaluation-row" key={item.module}><strong>{item.module}</strong><span>{item.status === "ready" ? "pronto" : "precisa de dados"}</span><b>{item.score}%</b></div>)}</div>{evaluation.semantic_evaluation && <div className="evaluation-summary"><strong>Avaliação semântica de evidências: {evaluation.semantic_evaluation.global_score}%</strong><span>{evaluation.semantic_evaluation.case_count} casos revisáveis · cobertura de termos e aderência às fontes</span></div>}</section>}
-      {gate && <section className="explorer-panel gate-panel">
         <div className="section-heading">
-          <div><h2>Production Gate</h2><p>Liberação geral baseada nos dez níveis de cada módulo, segurança, armazenamento e regressão.</p></div>
-          <div className={`readiness-banner ${gate.release_allowed ? "ready" : "attention"}`}><strong>{gate.release_allowed ? "OK" : "BLOQ."}</strong><span>{gate.release_allowed ? "Liberação permitida" : "Liberação bloqueada"}</span></div>
+          <div>
+            <h2>Últimas execuções</h2>
+            <p>
+              Latência, modelo, evidência, confiança, tokens e custo quando
+              retornados; sem armazenar o conteúdo da pergunta.
+            </p>
+          </div>
         </div>
-        <div className="gate-summary">
-          <span><strong>{gate.coverage?.reviewed_case_count ?? 0}</strong> casos revisados</span>
-          <span><strong>{gate.coverage?.draft_case_count ?? 0}</strong> em revisão</span>
-          <span><strong>{gate.modules.filter((item) => item.scale_ready).length}/{gate.modules.length}</strong> módulos 10/10</span>
+        <div className="trace-list">
+          {(observability?.traces ?? []).slice(0, 6).map((trace) => {
+            let metrics: Record<string, unknown> = {}
+            try {
+              metrics = (JSON.parse(
+                String(trace.metrics_json ?? "{}"),
+              ) as Record<string, unknown>)
+            } catch {
+              metrics = {}
+            }
+            const tokens = metrics.tokens ?? metrics.usage_tokens
+            const cost = metrics.cost ?? metrics.cost_brl
+            return (
+              <div className="trace-row" key={String(trace.trace_id)}>
+                <span className="status-dot" />
+                <div className="trace-primary">
+                  <strong>{String(trace.provider ?? "local")}</strong>
+                  <small>
+                    {String(trace.model ?? "modelo não registrado")} ·{" "}
+                    {String(trace.complexity ?? "L1")}
+                  </small>
+                </div>
+                <div className="trace-metric">
+                  <strong>
+                    {trace.latency_ms == null
+                      ? "—"
+                      : `${Math.round(Number(trace.latency_ms))} ms`}
+                  </strong>
+                  <small>latência</small>
+                </div>
+                <div className="trace-metric">
+                  <strong>
+                    {trace.confidence == null
+                      ? "—"
+                      : `${Math.round(Number(trace.confidence) * 100)}%`}
+                  </strong>
+                  <small>confiança</small>
+                </div>
+                <div className="trace-metric">
+                  <strong>{String(metrics.source_count ?? 0)} fonte(s)</strong>
+                  <small>evidência</small>
+                </div>
+                <div className="trace-metric trace-optional">
+                  <strong>{tokens == null ? "—" : String(tokens)}</strong>
+                  <small>
+                    tokens · custo {cost == null ? "—" : String(cost)}
+                  </small>
+                </div>
+              </div>
+            )
+          })}
+          {!observability?.traces?.length && (
+            <div className="empty-state">
+              Ainda não há traces para este módulo.
+            </div>
+          )}
         </div>
-        {(gate.issues.length > 0 || gate.warnings.length > 0) && <div className="gate-issues">
-          {gate.issues.map((issue) => <div className="gate-issue blocked" key={`issue-${issue}`}><span>Bloqueio</span>{issue}</div>)}
-          {gate.warnings.map((warning) => <div className="gate-issue warning" key={`warning-${warning}`}><span>Atenção</span>{warning}</div>)}
-        </div>}
-        <div className="gate-module-list">
-          {gate.modules.map((item) => <div className={`gate-module-row ${item.scale_ready ? "ready" : "attention"}`} key={item.module_id}>
-            <strong>{items.find((module) => module.id === item.module_id)?.name ?? item.module_id}</strong>
-            <span>{item.ready_levels}/10 prontos · {item.partial_levels} parciais · {item.blocked_levels} bloqueados</span>
-          </div>)}
-        </div>
-        <small className="readiness-footnote">Executado em {new Date(gate.generated_at).toLocaleString("pt-BR")}. Um score parcial nunca é convertido em aprovação.</small>
-      </section>}
+      </section>
+      {evaluation && (
+        <section className="explorer-panel">
+          <div className="section-heading">
+            <div>
+              <h2>Última avaliação do corpus</h2>
+              <p>{evaluation.note}</p>
+            </div>
+          </div>
+          <div className="evaluation-grid">
+            {evaluation.modules.map((item) => (
+              <div className="evaluation-row" key={item.module}>
+                <strong>{item.module}</strong>
+                <span>
+                  {item.status === "ready" ? "pronto" : "precisa de dados"}
+                </span>
+                <b>{item.score}%</b>
+              </div>
+            ))}
+          </div>
+          {evaluation.semantic_evaluation && (
+            <div className="evaluation-summary">
+              <strong>
+                Avaliação semântica de evidências:{" "}
+                {evaluation.semantic_evaluation.global_score}%
+              </strong>
+              <span>
+                {evaluation.semantic_evaluation.case_count} casos revisáveis ·
+                cobertura de termos e aderência às fontes
+              </span>
+            </div>
+          )}
+        </section>
+      )}
+      {gate && (
+        <section className="explorer-panel gate-panel">
+          <div className="section-heading">
+            <div>
+              <h2>Production Gate</h2>
+              <p>
+                Liberação geral baseada nos dez níveis de cada módulo,
+                segurança, armazenamento e regressão.
+              </p>
+            </div>
+            <div
+              className={`readiness-banner ${
+                gate.release_allowed ? "ready" : "attention"
+              }`}
+            >
+              <strong>{gate.release_allowed ? "OK" : "BLOQ."}</strong>
+              <span>
+                {gate.release_allowed
+                  ? "Liberação permitida"
+                  : "Liberação bloqueada"}
+              </span>
+            </div>
+          </div>
+          <div className="gate-summary">
+            <span>
+              <strong>{gate.coverage?.reviewed_case_count ?? 0}</strong> casos
+              revisados
+            </span>
+            <span>
+              <strong>{gate.coverage?.draft_case_count ?? 0}</strong> em revisão
+            </span>
+            <span>
+              <strong>
+                {gate.modules.filter((item) => item.scale_ready).length}/
+                {gate.modules.length}
+              </strong>{" "}
+              módulos 10/10
+            </span>
+          </div>
+          {(gate.issues.length > 0 || gate.warnings.length > 0) && (
+            <div className="gate-issues">
+              {gate.issues.map((issue) => (
+                <div className="gate-issue blocked" key={`issue-${issue}`}>
+                  <span>Bloqueio</span>
+                  {issue}
+                </div>
+              ))}
+              {gate.warnings.map((warning) => (
+                <div className="gate-issue warning" key={`warning-${warning}`}>
+                  <span>Atenção</span>
+                  {warning}
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="gate-module-list">
+            {gate.modules.map((item) => (
+              <div
+                className={`gate-module-row ${
+                  item.scale_ready ? "ready" : "attention"
+                }`}
+                key={item.module_id}
+              >
+                <strong>
+                  {items.find((module) => module.id === item.module_id)?.name ??
+                    item.module_id}
+                </strong>
+                <span>
+                  {item.ready_levels}/10 prontos · {item.partial_levels}{" "}
+                  parciais · {item.blocked_levels} bloqueados
+                </span>
+              </div>
+            ))}
+          </div>
+          <small className="readiness-footnote">
+            Executado em {new Date(gate.generated_at).toLocaleString("pt-BR")}.
+            Um score parcial nunca é convertido em aprovação.
+          </small>
+        </section>
+      )}
     </div>
   )
 }

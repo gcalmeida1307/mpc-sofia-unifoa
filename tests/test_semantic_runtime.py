@@ -13,6 +13,17 @@ def test_postgres_adapter_translates_sqlite_placeholders_and_functions() -> None
     assert sql.count("%s") == 3
 
 
+def test_postgres_adapter_qualifies_upsert_confidence_column() -> None:
+    sql = _postgres_sql(
+        "INSERT INTO topic_keywords (confidence) VALUES (?) "
+        "ON CONFLICT(topic_id, term) DO UPDATE SET "
+        "confidence = MAX(confidence, excluded.confidence)"
+    )
+
+    assert "GREATEST(topic_keywords.confidence, excluded.confidence)" in sql
+    assert "MAX(confidence, excluded.confidence)" not in sql
+
+
 def test_postgres_schema_removes_sqlite_autoincrement() -> None:
     schema = _postgres_schema()
 

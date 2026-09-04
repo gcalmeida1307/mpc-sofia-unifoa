@@ -1,13 +1,13 @@
-# Gestão de Documentação no AFD | PDF | Gestão de recursos humanos
+# Definições Técnicas e Operacionais | PDF | Definição
 
-Fonte: https://pt.scribd.com/document/689198651/Modulo-2-Nocoes-de-Gestao-de-Documentacao
-Capturado em: 2026-09-03T14:25:09.831970+00:00
+Fonte: https://pt.scribd.com/document/966183953/G10-Q4-M2
+Capturado em: 2026-09-03T14:24:23.976684+00:00
 Páginas no domínio: 10
 
-## Gestão de Documentação no AFD | PDF | Gestão de recursos humanos
-URL: https://pt.scribd.com/document/689198651/Modulo-2-Nocoes-de-Gestao-de-Documentacao
+## Definições Técnicas e Operacionais | PDF | Definição
+URL: https://pt.scribd.com/document/966183953/G10-Q4-M2
 
-Gestão de Documentação no AFD | PDF | Gestão de recursos humanos
+Definições Técnicas e Operacionais | PDF | Definição
 Pular para o conteúdo principal
 Abrir o menu de navegação
 Fechar sugestões
@@ -22,965 +22,624 @@ Português
 Carregar
 Fazer login
 Fazer login
-Gestão de Documentação no AFD
 0 notas
 0% acharam este documento útil (0 voto)
-35 visualizações
+5 visualizações
 20 páginas
-Título e descrição aprimorados por IA
-Este documento apresenta conceitos sobre gestão de documentação no setor público brasileiro de acordo com a legislação. Aborda os conceitos de gestão de documentos, normativos legais, tratam…
-Descrição completa
-Enviado por
-Guilherme Freitas
-Visualização de página
+Definições Técnicas e Operacionais
+O Módulo 2 do Quarto Trimestre aborda definições técnicas e operacionais, enfatizando a importância de clareza na comunicação escrita. Ele detalha diferentes tipos de definições, incluindo definições parentéticas, de sentença e estendidas, além de diretrizes para sua elaboração. O módulo também propõe reflexões sobre como melhorar a comunicação pessoal e a conexão genuína com os outros, sugerindo a avaliação de ferramentas de comunicação.
+Traduzido por
+ScribdTranslations
+Documento aprimorado por IA
+Direitos autorais
+© All Rights Reserved
+Levamos muito a sério os direitos de conteúdo. Se você suspeita que este conteúdo é seu,
+reivindique-o aqui
+.
+Formatos disponíveis
+Baixe no formato PDF, TXT ou leia on-line no Scribd
 Baixar
-Introdução ao Sistema Sigepe - AFD
-Módulo
-2 Noções de Gestão de Documentação
-Brasília - 2019
-Fundação Escola Nacional de Administração Pública
-Presidente
-Aline Soares
-Diretor de Educação Continuada, Seleção, Formação e Certificação de Competências
-Paulo Marques
-Coordenadora-Geral de Educação a Distância
-Natália Teles da Mota Teixeira
-Coordenador
-Carlos Augusto Silva - 2018 - CGDMS/DESIN/SEGEP/MP
-Conteudista
-Jesse Rodrigues Ferreira - 2018 - CGDMS/DESIN/SEGEP/MP
-Elena Ramos Coutinho - 2018 - CGDMS/DESIN/SEGEP/MP
-Diagramação realizada no âmbito do acordo de Cooperação TécnicaFUB/CDT/Laboratório Latitude e
-Enap.
-© Enap, 2019
-Escola Nacional de Administração Pública
-Diretoria de Educação Continuada, Seleção, Formação e Certificação de Competências
-SAIS - Área 2-A - 70610-900 — Brasília, DF
-Telefone: __SOFIA_PHONE_1__ - Fax: __SOFIA_PHONE_2__
-SUMÁRIO
-1. Conceitos de Gestão de Documentação........................................................................... 5
-2. Normativos Legais de Gestão de Documentação.............................................................. 5
-3. Tratamento Documental.................................................................................................. 6
-4. Conceitos importantes no processo de Gestão de Documentos........................................ 7
-5. Preparação de documentos............................................................................................. 9
-5.1 Higienização de documentos................................................................................................ 9
-5.2 Armazenagem de documentos............................................................................................. 9
-5.3 Acondicionamento de documentos................................................................................... 10
-6. Digitalização de Documentos......................................................................................... 10
-7. Captura de imagens....................................................................................................... 10
-8. Aplicação de OCR........................................................................................................... 11
-9. Validade Jurídica do Documento Digital......................................................................... 12
-10. Registro de Documentos no AFD.................................................................................. 12
-11. Registro de Metadados................................................................................................ 12
-12. Legado......................................................................................................................... 13
-12.1 Digitalização do Legado.................................................................................................... 14
-12.2 Prazo legal para conclusão da digitalização do Legado.................................................... 14
-13. Documentos médicos.................................................................................................. 14
-14. Arquivamento de novos documentos na pasta funcional física..................................... 15
-15. Recebimentos de novos documentos funcionais.......................................................... 15
-16. Eliminação de documentos funcionais físicos............................................................... 16
-17. Documentos funcionais digitalizados ou os natos digitais............................................. 17
-18. Atos Normativos do Tribunal de Contas da União - TCU................................................ 17
-19. Conclusão ................................................................................................................... 18
-20. Resumo ....................................................................................................................... 18
-Bibliografia ....................................................................................................................... 20
-4
-Módulo
-2 Noções de Gestão de
-Documentação
-1. Conceitos de Gestão de Documentação
-Olá! Você conheceu, no módulo 1, os conceitos básicos do AFD. Agora, neste módulo, vamos
-aprender sobre Gestão de Documentação. Avante!
-A Gestão da Documentação ou Gestão Documental diz respeito à proposição e ao
-acompanhamento de políticas de gestão dos documentos pelos órgãos, com vistas à
-preservação e à integridade dos documentos públicos, bem como a garantia de acesso a todo
-acervo documental.
-A Lei nº 8.159, de 08 de janeiro de 1991, que dispõe sobre a política nacional de arquivos
-públicos e privados e dá outras providências, cita que:
-Art. 3º - Considera-se gestão de documentos o conjunto de procedimentos e operações
-técnicas referentes à sua produção, tramitação, uso, avaliação e arquivamento em
-fase corrente e intermediária, visando a sua eliminação ou recolhimento para guarda
-permanente.
-2. Normativos Legais de Gestão de Documentação
-Você sabia que a gestão de documentação está prevista na Constituição de 1988 e em outros
-normativos legais? Vejamos o que dizem alguns artigos a respeito.
-Art. 23 - É competência comum da União, dos Estados, do Distrito Federal e dos
-Municípios: III – proteger os documentos, as obras e outros bens de valor histórico,
-artístico e cultural, os monumentos, as paisagens naturais notáveis e os sítios
-arqueológicos;
-Art. 216, § 2º - Cabe à administração pública, na forma da lei, tanto a gestão da
-documentação governamental quanto as providências para franquear sua consulta a
-quantos dela necessitem.
-A Lei nº 8.159/91, que dispõe sobre a política nacional de arquivos públicos e privados e dá
-outras providências, também prevê a Gestão da Informação e Documentação:
-5
-De acordo com a art. 3º da Lei 8.159/1991, considera-se gestão de documentos
-o conjunto de procedimentos e operações técnicas referentes à sua produção,
-tramitação, uso, avaliação e arquivamento em fase corrente e intermediária, visando
-a sua eliminação ou recolhimento para guarda permanente.
-Assim, o Sistema de Gestão do Assentamento Funcional Digital - SGAFD, alinhado às diretrizes
-do Arquivo Nacional busca, em um processo de tratamento documental, promover o acesso
-às informações integrantes das pastas funcionais dos servidores e empregados do poder
-executivo federal, utilizando técnicas especializadas em documentos.
-Art. 1º. É dever do Poder Público a gestão documental e a proteção especial a
-documentos de arquivos, como instrumento de apoio à administração, à cultura, ao
-desenvolvimento científico e como elementos de prova e informação.
-Art.25. Ficará sujeito à responsabilidade penal, civil e administrativa, na forma da
-legislação em vigor, aquele que desfigurar ou destruir documentos de valor permanente
-ou considerado como de interesse público e social.
-3. Tratamento Documental
-A realidade de muitas instituições públicas federais, por terem dimensões físicas reduzidas,
-quadro de pessoal de recursos humanos reduzidos e localização geográfica de difícil acesso,
-dificulta o tratamento da massa documental acumulada, conforme o que determina a Lei nº
-12.527/2011, Lei de Acesso à Informação.
-É possível, com o sistema AFD, que o servidor tenha acesso direito, on-line ao seu assentamento
-funcional, da mesma maneira que os agentes públicos legalmente autorizados terão, assim
-como os servidores dos recursos humanos e os órgãos de controle.
-Desse modo, o AFD é um meio de consultar o histórico funcional dos servidores disponibilizado
-para todos os órgãos e entidades integrantes do SIPEC.
-Os arquivos inseridos no Sistema AFD serão armazenados somente no Repositório Central,
-com observância às regras de segurança, armazenamento e preservação de documentos,
-conforme o disposto sobre a adoção do Modelo de Requisitos para Sistemas Informatizados
-de Gestão Arquivística de Documentos – e-ARQ Brasil pelos órgãos e entidades integrantes do
-Sistema Nacional de Arquivos – SINAR, de acordo com a Resolução nº 25, de 27 de abril de
-2007 do CONARQ, que resolve:
-6
-Art. 1º Recomendar aos órgãos e entidades integrantes do Sistema Nacional de
-Arquivos - SINAR a adoção do Modelo de Requisitos para Sistemas Informatizados
-de Gestão Arquivística de Documentos - e-ARQ Brasil, Versão 1.0, aprovado na 43ª
-reunião plenária do CONARQ, realizada no dia 4 de dezembro de 2006, de que trata
-esta Resolução, disponibilizada em pdf na página web do CONARQ, [Link].
-[Link].
-§1º Considera-se gestão arquivística de documentos o conjunto de procedimentos e
-operações técnicas referentes à produção, tramitação, uso, avaliação e arquivamento
-de documentos em fase corrente e intermediária, visando a sua eliminação ou
-recolhimento para guarda permanente.
-§2º Consideram-se requisitos o conjunto de condições a serem cumpridas pela
-organização produtora/recebedora de documentos, pelo sistema de gestão arquivística
-e pelos próprios documentos a fim de garantir a sua confiabilidade e autenticidade,
-bem como seu acesso.
-§3º Considera-se sistema informatizado de gestão arquivística de documentos
-o sistema desenvolvido para produzir, receber, armazenar, dar acesso e destinar
-documentos arquivísticos em ambiente eletrônico.
-As regras dos requisitos para repositórios arquivísticos digitais confiáveis estão previstos na
-Resolução nº 43, de 04 de setembro de 2015 do CONARQ, devendo estar protegidos de acesso,
-uso, alteração, reprodução e destruição não autorizados.
-Com isso, podemos afirmar que o Sigepe – AFD trabalha dentro dos parâmetros determinados
-pela legislação Arquivística Brasileira, possuindo diversos instrumentos determinantes de
-deveres e práticas que devem ser seguidos pelos órgãos públicos.
-Bom, agora que você viu alguns conceitos normativos sobre a gestão de documentação e
-de como é tratada a massa documental acumulada nas instituições, vamos aprender alguns
-conceitos importantes no processo de Gestão de documentos.
-4. Conceitos importantes no processo de Gestão de Documentos
-Vejamos alguns conceitos que trabalham dentro dos parâmetros determinados da legislação
-Arquivística Brasileira.
-1. Acesso - Função arquivística destinada a tornar acessíveis os documentos e a
-promover sua utilização.
-2. Autorização de acesso - Nível de restrição de acesso (uso e intervenção) aos
-documentos e operações do sistema.
-3. Documento - Unidade de registro de informações, independentemente do
-formato ou suporte utilizado.
-7
-4. Documento arquivístico - É um documento produzido e/ou recebido e mantido
-por pessoa física ou jurídica, no decorrer das suas atividades, em qualquer que
-seja o suporte, e dotado de organicidade.
-5. Documento digital - É a informação registrada, codificada em dígitos binários e
-acessível por meio de sistema computacional.
-6. Documento arquivístico digital - É um documento digital que é tratado e
-gerenciado como um documento arquivístico, ou seja, incorporado ao sistema de
-arquivos.
-7. Gestão arquivística de documentos - é o conjunto de procedimentos e operações
-técnicas referentes à produção, tramitação, uso, avaliação e arquivamento
-dos documentos em fase corrente e intermediária, visando sua eliminação ou
-recolhimento para guarda permanente.
-8. Suporte - Base física sobre a qual a informação é registrada.
-9. Formato - É a forma como se apresenta determinado documento de acordo com
-as características físicas e técnicas dos registros, tais como livros, fichas, cadernos
-e processos.
-10. Digitalização - Processo de conversão de um documento para o formato digital
-por meio de dispositivo apropriado como, por exemplo, um scanner.
-11. Preservação - Prevenção de deterioração e danos em documentos, por meio de
-adequado controle ambiental e/ou tratamento físico e/ou químico adequado.
-12. Armazenamento - Guarda de documentos em depósitos apropriados.
-13. Prazo de guarda - Definido na tabela de temporalidade e baseado em estimativas
-de uso, em que os documentos deverão ser mantidos no arquivo corrente ou no
-arquivo intermediário, ao fim do qual a destinação é efetivada. Também chamado
-período de retenção ou prazo de retenção.
-14. Classificação de documentos - Organização dos documentos de um arquivo, ou
-coleção, de acordo com um plano de classificação, código de classificação ou
-quadro de arranjo.
-15. Tabela de Temporalidade e Destinação - Instrumento de destinação, aprovado por
-autoridade competente, que determina prazos e condições de guarda tendo em
-vista a transferência, o recolhimento, o descarte ou a eliminação de documentos.
-16. Acondicionamento - Embalagem ou guarda de documentos visando à sua
-preservação e acesso.
-17. Princípio do Respeito à Ordem Original – Os documentos devem ser mantidos na
-origem ou arranjo original instituído pela entidade produtora. Esta ordem deve
-ser mantida ou reconstruída.
-18. Preparação – Processo de trabalho constituído das atividades de higienização e
-recuperação de documentos.
-8
-19. OCR (Optical Character Recognition) - É uma tecnologia para reconhecer
-caracteres a partir de um arquivo de imagem ou mapa de bits, sejam eles
-escaneados, escritos à mão, datilografados ou impressos.
-20. PDF/A – É um tipo de arquivamento a longo prazo para documentos eletrônicos.
-21. Registro de Metadados – É o processo pelo qual são registradas, no SGAFD, as
-informações de cada documento de acordo com as exigências do sistema.
-22. Assinatura digital – É o processo pelo qual os documentos digitalizados são
-assinados eletronicamente por meio do certificado digital, assegurando a
-integridade e a autenticidade destes.
-23. Documento Funcional – São documentos gerados ou produzidos em decorrência
-da vida funcional do servidor público.
-24. ICP-Brasil – Infraestrutura de Chaves Públicas Brasileira.
-5. Preparação de documentos
-Previamente ao procedimento de digitalização, o operador do SIGEPE - AFD deverá realizar a
-preparação do documento que consiste na higienização, armazenagem, acondicionamento,
-limpeza do documento, digitalização de documentos, capturas de imagens e aplicação de OCR,
-de forma a garantir o máximo de fidelidade entre o documento original e o representante
-digital a ser gerado no processo de captura das imagens.
-5.1 Higienização de documentos
-Preparação de documentos consiste nos procedimentos de: higienização, armazenagem,
-acondicionamento, digitalização de documentos, captura de imagens e aplicação de OCR.
-A higienização consiste na limpeza dos documentos como:
-1- Desdobrar e planificar os documentos.
-2- Retirar clipes, grampos e outros prendedores.
-3- Remover poeira, fitas adesivas e outras sujeiras superficiais que prejudicam a
-clareza da captura das informações durante a digitalização.
-5.2 Armazenagem de documentos
-A armazenagem de documentos consiste em:
-1. Guardar os documentos em mobiliário ou equipamentos adequados.
-2. Guardar os documentos em áreas que lhes são destinadas.
-3. Guardar os documentos, preferencialmente, a quinze centímetros (15 cm) acima
-do chão.
-9
-5.3 Acondicionamento de documentos
-O acondicionamento se refere às embalagens (invólucros) destinadas a proteger os documentos
-contra danos físicos e a facilitar seu manuseio. As caixas e os documentos que estiverem
-empilhados fora de estantes devem ser separados com folha de papelão entre cada nível da
-pilha, no máximo em quatro níveis, de forma a não danificar as caixas nem os documentos
-nela acondicionados.
-6. Digitalização de documentos
-No âmbito do AFD, a digitalização é entendida como um processo de conversão dos documentos
-físicos em formato digital. No entanto, o produto dessa conversão não será igual ao original
-e não substitui o original, que deve ser preservado. A digitalização, portanto, é dirigida ao
-acesso, à difusão e à preservação do acervo documental.
-Dessa forma, no caso das pastas funcionais que apresentam
-os documentos impressos e que passarão pelo processo de
-digitalização, serão gerados representantes digitais1
-(DIGITAL SURROGATES), definidos como a representação em
-formato digital de um documento originalmente não digital.
-É uma forma de diferenciá-lo do documento de arquivo
-nascido originalmente em formato digital.
-Após a captura das imagens, os documentos devem retornar
-à composição original quando integrante de conjunto
-documental, tais como processos e cadernos. Falaremos
-um pouco mais a respeito da captura de imagens no tópico
-seguinte. Fique atento!
-7. Captura de imagens
-Quando você estiver digitalizando algum arquivo, especificamente no procedimento de captura
-de imagens, exige-se que o trabalho realizado por você garanta o máximo de fidelidade entre
-o representante digital gerado e o documento original.
-Para isso, você deve levar em consideração as características físicas do documento, atentando
-para que seja evitada qualquer ação que possa significar riscos ao documento original, desde
-as condições de manuseio, a definição dos equipamentos de captura, o estado de conservação
-até o valor intrínseco do documento original.
-1. Representante digital - (Digital Surrogate) - é a representação, em formato de arquivo digital, de um documento
-originalmente não digital. É uma forma de diferenciá-lo do documento de arquivo nascido originalmente em formato de
-arquivo digital (born digital).
-Fonte: CONSELHO NACIONAL DE ARQUIVOS - CONARQ. Recomendações para Digitalização de Documentos Arquivísticos
-Permanentes – 2010.
-10
-Papéis fotossensíveis – são aqueles comumente utilizados em fax e também encontrados
-em pastas funcionais. Devem ser analisados antes do procedimento de captura, pois, em
-muitos casos, devido à ação do tempo, a informação não estará nítida. Nessa situação, será
-considerado o estado de conservação.
-Os documentos funcionais digitalizados, mesmo sendo cópias, devem estar inseridos no AFD,
-obedecendo aos mesmos princípios para documentos impressos.
-Agora, entraremos numa parte específica do conteúdo que requer ainda mais atenção da
-sua parte. Considerando o alto nível de exigência quanto à qualidade de captura de imagens,
-sugere-se que seja utilizado o modelo de verificação da qualidade do representante digital,
-conforme previsto na Resolução nº 31, de 28 de abril de 2010.
-Vale registrar que os itens de verificação são parametrizáveis no software da maioria dos
-scanners, eliminando, dessa forma, grande parte do trabalho.
-Os arquivos das imagens a serem gerados para o AFD serão no formato Portable
-Document Format - PDF/A, pesquisável, em tons de cinza, com resolução mínima
-de 300 dpi, escala 1x1, contemplando o reconhecimento de caracteres de texto nas
-imagens (OCR) e compactação sem perdas. A captura das imagens será realizada
-com o auxílio de scanners que atendam a produção diária de documentos de cada
-unidade de recursos humanos integrantes do SIPEC. As especificações técnicas
-do Ministério do Planejamento, Desenvolvimento e Gestão estão disponíveis
-em: [Link]
-funcional-digital#2.
-Para evitar que o documento digitalizado se deteriore, o operador deverá utilizar o recurso
-da mesa digitalizadora e não do alimentador automático do scanner. Você sabe por quê? O
-alimentador automático poderá triturar documentos que tenha uma estrutura física sensível.
-Por fim, as normas de digitalização referentes aos documentos que possuem informações
-relativas a despachos e anotações no verso das páginas devem ser digitalizados em frente
-e verso, formando um único arquivo PDF/A de várias páginas. Já as páginas em branco, dos
-versos que não possuem informações, deverão ser eliminadas durante o processo.
-8. Aplicação de OCR
-O OCR (Optical Character Recognition) é um recurso que traduzido significa “Reconhecimento
-Óptico de Caracteres”. O OCR é uma tecnologia que permite converter tipos diferentes de
-documentos, como papéis escaneados, arquivos em PDF e imagens capturadas com câmera
-digital em dados pesquisáveis e editáveis.
-É de suma importância utilizar esse recurso na digitalização, de forma que seja possível otimizar
-o processo de busca de informações com o uso da ferramenta disponível AFD, que permite,
-por exemplo, localizar textos contidos em documentos digitalizados pertencentes ao AFD.
-11
-9. Validade Jurídica do Documento Digital
-Uma atividade comumente realizada pelas Unidades de
-Recursos Humanos é a comparação das cópias de
-documentos com o seu respectivo original, conferindo
-atestado de autenticidade às cópias físicas. Estamos
-falando do tradicional carimbo "confere com o original".
-Transpondo essa ação, o "carimbo digital" será dado
-ao documento digitalizado após conferência do seu
-correspondente em papel, conforme o disposto na
-Portaria nº 09 SGP/MPDG, de 2018, Art. 9º.
-Tal procedimento respalda-se nas disposições do artigo 3º da Lei nº 12.682, de 09 de julho
-de 2012, “sobre a elaboração e o arquivamento de documentos em meios eletromagnéticos.
-Estabelece como condição para a manutenção da integridade, da autenticidade e da
-confidencialidade dos documentos digitalizados o emprego de certificado digital emitido no
-âmbito da Infraestrutura de Chaves Públicas Brasileira – ICP – Brasil. ”
-10. Registro de documentos no AFD
-O registro de documentos no AFD consiste na inclusão dos metadados administrativos do
-documento inserido, informações essas que serão utilizadas pela ferramenta de pesquisa do
-sistema.
-A inclusão de documentos funcionais no AFD deverá observar a tabela de documentos
-funcionais aprovados, publicada pelo Departamento de Gestão dos Sistemas de Pessoal –
-DESIS no sítio da internet ([Link]
-funcional-digital/tabela-de-documentos-funcionais).
-Portaria Normativa nº 9, de 01 de agosto de 2018. Parágrafo único. Havendo necessidade
-de inclusão de novos tipos de documentos na tabela de documentos funcionais aprovados,
-os órgãos e entidades do SIPEC deverão solicitar a inclusão ao DESIS, apresentando a devida
-justificativa, ficando a cargo deste deliberar sobre o assunto.
-11. Registro de Metadados
-Na etapa de Registro de Metadados, vamos preencher os seguintes campos:
-1. Tipo de Documento.
-2. Data de Emissão.
-3. Seção AFD Legado.
-4. Número.
-5. Interessado.
-6. Tipo de Conferência.
-7. Observação.
-12
-“Tipo de Documento” consiste na identificação do assunto principal do documento funcional,
-por exemplo, o documento trata de uma portaria de cessão ou de uma portaria de redistribuição.
-Feito isso, você deverá observar que ele faz parte da tabela de documentos funcionais
-aprovados pelo DESIS/SGP/ME. Para fazer upload de documento no AFD, você deverá selecionar
-no sistema o tipo documental do documento. Acompanhe essa etapa nas demonstrações do
-modulo 3 – parte 3.
-Agora, se o documento não faz parte do rol de tipo de documentos do AFD, o sistema não fará
-o upload do documento.
-Caso a Unidade de Gestão de Pessoal achar necessário a inclusão do documento no rol de
-Tipos de Documentos do AFD, basta acessar o link: [Link]/gestao-de-pessoas/
-assentamento-funcional-digital , preencher o formulário de “Solicitação de Inclusão de Tipo
-de Documentos no AFD” e encaminhar ao e-mail: [Link]@[Link]
-7.3 Data de Emissão - campo obrigatório.
-7.4 Número – campo opcional.
-7.5 Interessado - O campo interessado vem preenchido, por padrão, com o nome do
-servidor, podendo ser alterado, caso necessário.
-7.6 Tipo de Conferência – campo de seleção obrigatória.
-7.7 Observação – campo de preenchimento opcional.
-12. Legado
-Você já viu, no módulo anterior, que o conceito de Legado são todos os documentos existentes
-nos assentamentos funcionais físicos dos servidores, com data anterior ao lançamento e
-disponibilização do AFD aos órgãos e entidades do SIPEC até 30 de junho de 2016.
-Na Seção AFD Legado é obrigatório preencher o campo quando o tipo de documento for
-“Legado”, devendo disponibilizar no AFD na seguinte estrutura:
-Seção 1 – deverá ser composta da documentação referente à Provisão da Força de Trabalho,
-Gestão do Desenvolvimento de Pessoas, Compensações, Gestão de Desempenho e Evolução
-Funcional.
-Seção 2 – deverá ser composta de toda a documentação relacionada à aposentadoria, caso
-exista.
-Seção 3 – deverá ser composta de toda a documentação relacionada à pensão e vinculada à
-matrícula do instituidor, caso exista.
-Para cada seção, a UPAG deverá colocar um separador (sinalética) indicador do início da seção,
-conforme o Anexo II da Portaria Normativa nº 09 SGP/MPDG, de 2018.
-Para fins da digitalização do legado, quando optarem por execução própria dos trabalhos,
-os órgãos e entidades deverão dispor de equipamentos de digitalização compatíveis com as
-13
-especificações recomendadas pelo DESIS e a produção diária de documentos na unidade de
-gestão de pessoas.
-12.1 Digitalização do Legado
-A digitalização do legado também poderá ser realizada com o auxílio de serviços de terceiros,
-ficando a cargo de cada órgão ou entidade do SIPEC a contratação e a gestão desses serviços.
-Os documentos das pastas funcionais que já tenham sido ou estejam em processo de
-digitalização ou microfilmagem, pelas unidades de gestão de pessoas, poderão ser inseridos
-no AFD desde que atendam às especificações exigidas no art. 13 da Portaria Normativa nº 09
-SGP/MPDG, de 2018.
-Por fim, o legado digitalizado deve espelhar fielmente o conjunto de documentos não digitais
-relativos à vida funcional do servidor, na forma que se encontram em cada unidade de gestão
-de pessoas, não sendo permitida a inserção de documentos em substituição a outros por
-problemas de legibilidade ou integridade física.
-12.2 Prazo legal para conclusão da digitalização do Legado
-O prazo para conclusão da digitalização do legado de documentos funcionais pelos órgãos e
-entidades do SIPEC e demais órgãos e entidades abrangidos pela Portaria Normativa nº 9 de
-01 de agosto de 2018, nos termos do § 2º do art. 1º, observará o que estabelece a tabela de
-estimativas ou 30 (trinta) meses a partir 03 de agosto de 2018.
-13. Documentos médicos
-Os documentos médicos identificados nas pastas funcionais não poderão fazer parte do legado,
-salvo os que constam na tabela de documentos funcionais, de acordo com Decreto nº 7.003,
-de 9 de novembro de 2009. Vejamos o que estabelece esse decreto e a orientação normativa
-a respeito do tema.
-§ 6º A unidade de recursos humanos do órgão ou entidade do servidor deverá
-encaminhar o atestado à unidade de atenção à saúde do servidor para registro dos
-dados indispensáveis, observadas as normas vigentes de preservação do sigilo e da
-segurança das informações.
-Já a Orientação Normativa da Secretaria de Recursos Humanos SRH/MPOG nº 3, de 23
-de fevereiro de 2010, com vistas à preservação do sigilo e da segurança das informações,
-estabelece que:
-“...orientação aos órgãos e entidades do sistema de Pessoal Civil da Administração
-Pública Federal quanto à aplicação do Decreto nº 7.003 de 9/11/2009, que regulamenta
-14
-a licença para tratamento de saúde de que tratam os arts. 202 a 205, da Lei nº 8.112
-de 11/12/1990, e dá outras providências.”
-14. Arquivamento de novos documentos na pasta funcional física
-Fica vedado o arquivamento de novos documentos na forma não digital nas pastas funcionais
-físicas a partir de 1° de julho de 2016. As unidades de gestão de pessoas dos órgãos do SIPEC
-devem utilizar exclusivamente o SIGEPE - AFD como repositório de documentos funcionais,
-conforme o disposto na Portaria Normativa nº 09 SGP/MPDG, de 2018:
-Art. 8º A partir de 1° de julho de 2016, fica vedado o arquivamento na forma não
-digital de novos documentos funcionais nas pastas funcionais, devendo ser utilizado
-exclusivamente o AFD como repositório de documentos funcionais.
-§ 1º Documentos localizados posteriormente à digitalização do legado, com data de
-emissão anterior a 1º/07/2016, deverão seguir as orientações constantes dos artigos
-5º e 6º desta Portaria Normativa.
-§ 2º As pastas funcionais serão arquivadas no momento da digitalização, utilizando-
-se para esse fim a Declaração de conclusão da digitalização do Legado, constante do
-Anexo I desta Portaria Normativa, que será obrigatoriamente o último documento da
-última seção do legado.
-§ 3º Os órgãos e entidades deverão estabelecer procedimentos de preservação
-e guarda dos documentos constantes das pastas funcionais, de acordo com as
-orientações emanadas pelo CONARQ e Arquivo Nacional.
-15. Recebimentos de novos documentos funcionais
-O recebimento de novos documentos funcionais apresentados pelos servidores a partir de 1º
-de julho de 2016 deverão atender ao disposto na Portaria Interministerial nº 1.677, de 7 de
-outubro de 2015, observados os seguintes procedimentos:
-I - Apresentação pelo interessado do documento avulso original ou cópia autenticada
-administrativamente ou cópia autenticada em cartório para digitalização imediata,
-devolvendo-o no ato. O documento resultante da digitalização será anexado ao
-processo digital ou integrado em fluxo de trabalho informatizado. Neste caso, há
-a formação de um processo totalmente digital;
-II - Apresentação pelo interessado do documento avulso original e sua cópia simples
-para autenticação administrativa e posterior digitalização. Neste caso, a unidade
-de protocolo fará a conferência da cópia com o documento original, efetuando
-autenticação administrativa da cópia, registrando também a hora do recebimento
-no protocolo e devolvendo o documento original de imediato ao interessado;
-15
-III - Depois de realizada a digitalização, as cópias simples autenticadas
-administrativamente poderão ser descartadas ou disponibilizadas para devolução
-ao interessado, a critério do órgão ou entidade. O documento resultante da
-digitalização será anexado ao processo digital ou integrado em fluxo de trabalho
-informatizado. Neste caso, há a formação de um processo totalmente digital; ou
-IV - Recebimento e retenção de documento avulso original ou cópia autenticada
-administrativamente ou de cópia autenticada em cartório para posterior
-digitalização e anexação a processo digital ou integração em fluxo de trabalho
-informatizado. Os documentos devem ser classificados, arquivados e mantidos
-nos termos da temporalidade e destinação de documentos de arquivo aprovados
-pelo CONARQ ou pelo Arquivo Nacional para uso no órgão ou entidade. Neste
-caso, há a formação de um processo totalmente digital ou um processo híbrido,
-ao critério do órgão ou entidade.
-Procedimentos legais para os documentos funcionais
-Novos documentos funcionais NÃO DIGITAIS
-Os novos documentos funcionais não digitais produzidos pelo órgão de vinculação do servidor
-deverão ser classificados, arquivados e mantidos nos termos da temporalidade e destinação
-de documentos de arquivo aprovados pelo CONARQ ou pelo Arquivo Nacional.
-Existência de documentos DIGITAIS
-Nos casos da existência de documentos digitais em sistemas de processo eletrônico, elencados
-na tabela de documentos funcionais, esses devem ser inseridos no AFD com base nas
-orientações constantes na Portaria Normativa Nº 9, de 01 de agosto de 2018.
-16. Eliminação de documentos funcionais físicos
-Nos casos da eliminação de documentos do AFD, você deverá seguir as orientações previstas
-no art. 3º da Resolução nº 40, de 9 de dezembro de 2014 do CONARQ, observando também o
-disposto art. 18 do Decreto nº 4.073, de 3 de janeiro de 2002.
-Resolução 40, Art. 3º, de 9 de dezembro de 2014 do CONARQ:
-Art. 3º. Após obter a autorização, os órgãos e entidades, para proceder à eliminação,
-deverão elaborar e publicar o Edital de Ciência de Eliminação de Documentos [Anexo
-2], em periódico oficial, sendo que na ausência destes, os municípios poderão publicá-
-los em outro veículo de divulgação local, para dar publicidade ao fato de que serão
-eliminados os documentos relacionados na Listagem de Eliminação de Documentos.
-16
-Decreto nº 4.073, Art. 18, de 3 de janeiro de 2002:
-Art. 18. Em cada órgão e entidade da Administração Pública Federal será constituída
-comissão permanente de avaliação de documentos, que terá a responsabilidade
-de orientar e realizar o processo de análise, avaliação e seleção da documentação
-produzida e acumulada no seu âmbito de atuação, tendo em vista a identificação dos
-documentos para guarda permanente e a eliminação dos destituídos de valor.
-17. Documentos funcionais digitalizados ou os natos digitais
-Os documentos funcionais digitalizados ou os natos digitais a serem inseridos no AFD deverão
-estar no formato PDF/A, OCR e atendendo às disposições do art. 3º da Lei nº 12.682, de 9 de
-julho de 2012.
-O processo de digitalização deverá ser realizado de forma a manter a integridade, a autenticidade
-e, se necessário, a confidencialidade do documento digital, com o emprego de certificado
-digital emitido no âmbito da Infraestrutura de Chaves Públicas Brasileira - ICP – Brasil.
-18. Atos Normativos do Tribunal de Contas da União - TCU
-Nos casos de admissão de pessoal, processos de aposentadoria, reforma, pensão e concessões,
-expedidos pelas unidades de gestão de pessoal para o TCU, os documentos deverão ser
-incluídos no Sigepe-AFD, dispensando assim, a remessa física dos processos ao tribunal,
-conforme o dispostos na IN/TCU nº 78/2018, art. 7º e § 1.
-Art. 7º As informações pertinentes aos atos de admissão e de concessão deverão ser
-cadastradas no e-Pessoal para fins de exame e registro no prazo de 90 (noventa) dias,
-contados:
-I - da data de sua publicação ou, em sendo esta dispensada, da data de assinatura do
-ato;
-II - da data do efetivo exercício do cargo pelo interessado, nos casos de admissão de
-pessoal;
-III - da data do apostilamento, no caso de alteração.
-§ 1º As informações referentes aos atos de admissão de pessoal contratado por tempo
-determinado para atender necessidade temporária de excepcional interesse público,
-previstos na Lei 8.745, de 9 de dezembro de 1993, deverão ser cadastradas de forma
-prioritária, devendo tais atos serem remetidos ou disponibilizados ao controle interno
-no prazo improrrogável de 30 dias, pelo órgão de pessoal.
-17
-19. Conclusão
-Chegamos ao final dessa etapa. No módulo 3, você vai aprender sobre a Operacionalização do
-Sigepe -AFD.
-Este módulo possui uma peculiaridade: ele é composto por demonstrações de como você
-deverá navegar pelo Sistema Sigepe - AFD. Mas, antes de prosseguir para o módulo, revise no
-tópico seguinte alguns temas importantes vistos até aqui.
-20. Resumo
-Chegamos ao final do Módulo 2! Vamos relembrar alguns tópicos importantes que vimos
-quanto aos procedimentos relativos aos serviços de preparação e de digitalização dos
-documentos funcionais.
-• Considera-se gestão de documentos o conjunto de procedimentos e operações
-técnicas referentes à sua produção, tramitação, uso, avaliação e arquivamento em
-fase corrente e intermediária, visando a sua eliminação ou recolhimento para guarda
-permanente, conforme o art. 3º da Lei 8.159/1991.
-• Os conceitos importantes no processo de gestão de documentos, que estão
-necessariamente presentes na constituição do Sigepe- AFD, são: acesso, documento,
-suporte, formato, digitalização, preservação, armazenamento, prazo de guarda,
-classificação de documentos, tabela de temporalidade e destinação, acondicionamento,
-princípio do respeito à ordem original, preparação, OCR, PDF, PDF/A, Metadados,
-assinatura digital, documento funcional.
-• A recepção do documento poderá ser direta, quando o servidor se apresenta à
-Unidade de Recursos Humanos para atualização de seu Assentamento Funcional, ou
-indireta, quando por intermédio de processos e procedimentos que, ao fim de seu
-trâmite, produzam documentos elencados como passíveis de arquivamento no
-SIGEPE - AFD.
-• Ainda sobre a recepção de documentos, aprendemos que ela poderá ocorrer em
-cópias ou originais, sendo ambas válidas para fins de arquivamento do Sigepe- AFD
-mantendo-se preferência da digitalização em documento original quando houver as
-duas situações simultaneamente.
-• A preparação de documentos é uma etapa prévia ao procedimento de digitalização
-na qual o operador do Sigepe- AFD deverá realizar os procedimentos de higienização
-e recuperação dos documentos antes da digitalização.
-• A higienização de documentos consiste nos procedimentos de armazenagem,
-acondicionamento e limpeza dos documentos.
-• A recuperação de documentos consiste na reparação de pequenos danos encontrados
-nos documentos, tais como rasgos e furos que, se não reparados, podem comprometer
-a digitalização.
-• A digitalização, no âmbito do AFD, é entendida como um processo de conversão dos
-documentos arquivísticos em formato digital.
-18
-• O recurso OCR (Optical Character Recognition), ou seja, Reconhecimento Óptico de
-Caracteres, é uma tecnologia que permite converter diferentes tipos de documentos,
-como papéis escaneados, arquivos em PDF e imagens capturadas com câmera digital
-em dados pesquisáveis e editáveis. Sendo, portanto, uma etapa fundamental à
-digitalização de documentos.
-• Aprendemos que a Certificação Digital é um procedimento eletrônico que, por meio
-de operações lógicas e matemáticas, assegura a integridade das informações e a
-autoria das transações. Essa tecnologia confere validade jurídica ao documento
-assinado digitalmente de forma equivalente ao papel assinado de próprio punho.
-• E, por fim, que o registro de documentos consiste na inclusão, no Sigepe- AFD dos
-metadados administrativos referentes a cada documento, informações essas que
-serão utilizadas pela ferramenta de pesquisa.
-19
-Bibliografia
-1. BRASIL. Lei 8.159/1991, de 8 de janeiro de 1991. Dispõe sobre a política nacional de
-arquivos públicos e privados e dá outras providências. Diário Oficial da União, Brasília, DF, de
-8 de janeiro de 1991. Disponível em: . Acesso em: 29 mar. 2016.
-____. Lei nº 12.527, de 18 de novembro de 2011. Regula o acesso a informações previsto no
-inciso XXXIII do art. 5o, no inciso II do § 3o do art. 37 e no § 2o do art. 216 da Constituição
-Federal; altera a Lei no 8.112, de 11 de dezembro de 1990; revoga a Lei no 11.111, de 5 de
-maio de 2005, e dispositivos da Lei no 8.159, de 8 de janeiro de 1991; e dá outras providências.
-Diário Oficial da União, Brasília, DF, de 18 de novembro de 2011. Disponível em: . Acesso em:
-29 mar. 2016.
-____. Ministério do Planejamento, Orçamento e Gestão. Portaria Normativa nº 4, de 10 de
-março de 2016. Cria o Assentamento Funcional Digital-AFD. Brasília, DF. 2016. Disponível em:
-. Acesso em: 29 mar. 2016.
-____. Lei nº 12.682 de 09 de julho de 2012. Dispõe sobre a elaboração e o arquivamento de
-documentos em meios eletromagnéticos. Disponível em: . Acesso em: 29 mar. 2016.
-2. CONARQ, Conselho Nacional de Arquivos. Resolução nº 31, de 28 de abril de 2010.
-Dispõe sobre a adoção das Recomendações para Digitalização de Documentos Arquivísticos
-Permanentes. Disponível em: . Acesso em: 29 mar. 2016.
-____. Resolução nº 14, de 24 de outubro de 2001. Aprova a versão revisada e ampliada
-da Resolução nº 4, de 28 de março de 1996, que dispõe sobre o Código de Classificação de
-Documentos de Arquivo para a Administração Pública: Atividades-Meio, a ser adotado como
-modelo para os arquivos correntes dos órgãos e entidades integrantes do Sistema Nacional
-de Arquivos (SINAR), e os prazos de guarda e a destinação de documentos estabelecidos
-na Tabela Básica de Temporalidade e Destinação de Documentos de Arquivo Relativos as
-Atividades-Meio da Administração Pública. Disponível em: . Acesso em: 29 mar. 2016.
-ENAP. Fundação Escola Nacional de Administração Pública. Curso de Gestão da Informação
-e Documentação Conceitos básicos em Gestão Documental. Módulo 1. Conceitos Básicos.
-Brasília, 2015.
-MERLO, Franciele; KONRAD, Glaucia Vieira Ramos. Documento, História e Memória: a
-importância da preservação do patrimônio documental para o acesso à informação. Informação
-& informação, v. 20, n. 1, p. 26-42, 2015.
-e-ARQ Brasil Modelo de Requisitos para Sistemas Informatizados de Gestão Arquivística de
-Documentos Versão 1.1 Adotada pelo Conselho Nacional de Arquivos em dezembro
-20
-Você também pode gostar
-Noções de Arquivologia e Gestão Documental
-Ainda não há avaliações
-Noções de Arquivologia e Gestão Documental
-13 páginas
-Introdução à Gestão Documental Pública
-100% (1)
-Introdução à Gestão Documental Pública
-48 páginas
-GESTAO DOCUMENTAL APLICADA Ieda PDF
-50% (2)
-GESTAO DOCUMENTAL APLICADA Ieda PDF
-54 páginas
-Gestão de Documentos para Arquivologia ANA
-Ainda não há avaliações
-Gestão de Documentos para Arquivologia ANA
-117 páginas
-Capacitação Digital para Neoprofessores
-Ainda não há avaliações
-Capacitação Digital para Neoprofessores
-141 páginas
-Gestão de Riscos em IFE: Curso Prático
-Ainda não há avaliações
-Gestão de Riscos em IFE: Curso Prático
-63 páginas
-Manual de Gestão Documental da Funai
-0% (1)
-Manual de Gestão Documental da Funai
-181 páginas
-07 - Gestao de Documentos e Arquivistica PDF
-Ainda não há avaliações
-07 - Gestao de Documentos e Arquivistica PDF
-86 páginas
-Manutenção Lean: Princípios e Práticas
-0% (1)
-Manutenção Lean: Princípios e Práticas
-41 páginas
-Produtividade na Manutenção Industrial
-Ainda não há avaliações
-Produtividade na Manutenção Industrial
-114 páginas
-Exemplos de Manutenção Preditiva
-Ainda não há avaliações
-Exemplos de Manutenção Preditiva
-47 páginas
-Gestão de Documentos e Arquivística
-100% (1)
-Gestão de Documentos e Arquivística
-104 páginas
-Gestão de Ativos segundo ISO 55000
-Ainda não há avaliações
-Gestão de Ativos segundo ISO 55000
-22 páginas
-Gestão da Manutenção Lean
-100% (1)
-Gestão da Manutenção Lean
-41 páginas
-Manual de Gestão de Documentos APM
-Ainda não há avaliações
-Manual de Gestão de Documentos APM
-150 páginas
-Gestão Eficaz da Manutenção Industrial
-100% (3)
-Gestão Eficaz da Manutenção Industrial
-223 páginas
-Evolução da Gestão de Manutenção
-Ainda não há avaliações
-Evolução da Gestão de Manutenção
-53 páginas
-Gestão de Contratos e Fornecedores - Guia para Gestores de Manutenção
-100% (1)
-Gestão de Contratos e Fornecedores - Guia para Gestores de Manutenção
-12 páginas
-Classificação de Documentos Arquivísticos
-Ainda não há avaliações
-Classificação de Documentos Arquivísticos
-35 páginas
-Legislação Arquivística no Brasil
-100% (1)
-Legislação Arquivística no Brasil
-131 páginas
-Gestão Documental no Poder Judiciário
-Ainda não há avaliações
-Gestão Documental no Poder Judiciário
-140 páginas
-Implementação da ISO 55000 na Gestão de Ativos
-100% (1)
-Implementação da ISO 55000 na Gestão de Ativos
-7 páginas
-Gestão da Carteira de Serviços de Manutenção
-Ainda não há avaliações
-Gestão da Carteira de Serviços de Manutenção
-101 páginas
-Diagnóstico em Arquivos e Gestão Documental
-100% (1)
-Diagnóstico em Arquivos e Gestão Documental
-24 páginas
-Significado e Classificação de Arquivos
-Ainda não há avaliações
-Significado e Classificação de Arquivos
-72 páginas
-Planejamento e Controle da Manutenção
-100% (1)
-Planejamento e Controle da Manutenção
-141 páginas
-Programa 5S: Melhoria do Ambiente de Trabalho
-100% (1)
-Programa 5S: Melhoria do Ambiente de Trabalho
-61 páginas
-Gestão Documental: Conceitos e Práticas
-50% (2)
-Gestão Documental: Conceitos e Práticas
-9 páginas
-Introducao - A - Administracao - 2018 EAD PDF
-Ainda não há avaliações
-Introducao - A - Administracao - 2018 EAD PDF
-116 páginas
-Estratégias de Gestão da Manutenção
-100% (2)
-Estratégias de Gestão da Manutenção
-18 páginas
-Análise de Custos em Manutenção Industrial
-100% (1)
-Análise de Custos em Manutenção Industrial
-21 páginas
-Gestão da Qualidade e ISO 9001:2000
-100% (3)
-Gestão da Qualidade e ISO 9001:2000
-180 páginas
-Gestão Eficiente de Documentos Públicos
-100% (2)
-Gestão Eficiente de Documentos Públicos
-31 páginas
-Gestão de Documentos em Arquivologia 2023
-100% (1)
-Gestão de Documentos em Arquivologia 2023
-138 páginas
-Gestão de Manutenção de Equipamentos
-100% (1)
-Gestão de Manutenção de Equipamentos
-142 páginas
-Gestão da Qualidade: Conceitos e Ferramentas
-Ainda não há avaliações
-Gestão da Qualidade: Conceitos e Ferramentas
-30 páginas
-N 28 Gestao Da Inovacao
-Ainda não há avaliações
-N 28 Gestao Da Inovacao
-16 páginas
-Gestão Eficiente da Manutenção Industrial
-100% (2)
-Gestão Eficiente da Manutenção Industrial
-132 páginas
-Gestão de Pessoas e Competências EAD
-Ainda não há avaliações
-Gestão de Pessoas e Competências EAD
-71 páginas
-Ferramentas para Gestão de Riscos
-100% (8)
-Ferramentas para Gestão de Riscos
-23 páginas
-Gestão Eficiente da Manutenção Preventiva
-100% (1)
-Gestão Eficiente da Manutenção Preventiva
-121 páginas
-Guia de Gestão de Documentos Federais
-Ainda não há avaliações
-Guia de Gestão de Documentos Federais
-73 páginas
-Metodologias Ágeis: Scrum e Kanban
-100% (2)
-Metodologias Ágeis: Scrum e Kanban
-166 páginas
-Livro Gestao de Documentos e Arquivistica - Zélia Freiberger - Rede E-Tec Brasil
-67% (3)
-Livro Gestao de Documentos e Arquivistica - Zélia Freiberger - Rede E-Tec Brasil
-104 páginas
-Gestão Eficiente da Manutenção de Equipamentos
-Ainda não há avaliações
-Gestão Eficiente da Manutenção de Equipamentos
-14 páginas
-Manual de Elaboração de Indicadores
-Ainda não há avaliações
-Manual de Elaboração de Indicadores
-16 páginas
-Gestão de Documentos Escolares e Legislação
-Ainda não há avaliações
-Gestão de Documentos Escolares e Legislação
-15 páginas
-Apostila Ufpe - Informática PDF
-100% (1)
-Apostila Ufpe - Informática PDF
-114 páginas
-Plano de Ação em Gestão Documental Pública
-Ainda não há avaliações
-Plano de Ação em Gestão Documental Pública
-32 páginas
-Técnicas de Arquivo e Classificação
-100% (4)
-Técnicas de Arquivo e Classificação
-90 páginas
-Introdução à Gestão de Processos
-90% (10)
-Introdução à Gestão de Processos
-76 páginas
-Gestão de Subprocessos em TI
-100% (2)
-Gestão de Subprocessos em TI
-98 páginas
-Gestão de Documentos Escolares em Londrina
-Ainda não há avaliações
-Gestão de Documentos Escolares em Londrina
-13 páginas
-Ferramentas de Gestão da Qualidade
-Ainda não há avaliações
-Ferramentas de Gestão da Qualidade
-46 páginas
-Boas Práticas em Gestão de Pastas
-Ainda não há avaliações
-Boas Práticas em Gestão de Pastas
-10 páginas
-Teoria da Contingência na Administração
-100% (1)
-Teoria da Contingência na Administração
-28 páginas
-Gestão Eficiente de Frotas Empresariais
-Ainda não há avaliações
-Gestão Eficiente de Frotas Empresariais
-3 páginas
-Gestão da Qualidade e Excelência Gerencial
-Ainda não há avaliações
-Gestão da Qualidade e Excelência Gerencial
-43 páginas
-Gestão de Planejamento e Controle de Manutenção
-100% (1)
-Gestão de Planejamento e Controle de Manutenção
-47 páginas
-339 1904 1 PB
-Ainda não há avaliações
-339 1904 1 PB
-19 páginas
-Sistema Vipal: Etapas e Vantagens
-Ainda não há avaliações
-Sistema Vipal: Etapas e Vantagens
-46 páginas
-Tabela de Pressão e Ponto de Ebulição
-Ainda não há avaliações
-Tabela de Pressão e Ponto de Ebulição
-2 páginas
-06 T2 Série 700 - SEL-700G (Compatibility Mode)
-100% (2)
-06 T2 Série 700 - SEL-700G (Compatibility Mode)
-22 páginas
-Apreciação da Lei de Conservação em Moçambique
-Ainda não há avaliações
-Apreciação da Lei de Conservação em Moçambique
-45 páginas
-Exercícios de Função Composta e Inversa
-Ainda não há avaliações
-Exercícios de Função Composta e Inversa
-4 páginas
-Adensamento e Recalque em Solos
-Ainda não há avaliações
-Adensamento e Recalque em Solos
-14 páginas
-Boleto DETRAN-GO: Documento de Arrecadação
-Ainda não há avaliações
-Boleto DETRAN-GO: Documento de Arrecadação
-1 página
-Propriedades e Aplicações do Acetileno
-Ainda não há avaliações
-Propriedades e Aplicações do Acetileno
-7 páginas
-A História da DKW VEMAG no Brasil
-Ainda não há avaliações
-A História da DKW VEMAG no Brasil
-12 páginas
-Legislação sobre Recursos Hídricos no Ceará
-Ainda não há avaliações
-Legislação sobre Recursos Hídricos no Ceará
-80 páginas
-Boleto de Mensalidade Pitágoras 09/2021
-Ainda não há avaliações
-Boleto de Mensalidade Pitágoras 09/2021
-1 página
-Rotinas Práticas de Autocuidado Diário
-Ainda não há avaliações
-Rotinas Práticas de Autocuidado Diário
-8 páginas
-Judith Krantz - Nas Asas Da Paixao
-Ainda não há avaliações
-Judith Krantz - Nas Asas Da Paixao
-449 páginas
-Fisiologia do Exercício e Nutrição
-100% (2)
-Fisiologia do Exercício e Nutrição
-2 páginas
-Cinemática: Movimentos Circulares e Acelerações
-Ainda não há avaliações
-Cinemática: Movimentos Circulares e Acelerações
-45 páginas
-IDP2 Peptídeo: Cicatrização Avançada
-100% (1)
-IDP2 Peptídeo: Cicatrização Avançada
-2 páginas
-Tempestade Vermelha: Conflito Global em 1984
-Ainda não há avaliações
-Tempestade Vermelha: Conflito Global em 1984
-31 páginas
-Checklist Completo de Decolagem e Pouso
-Ainda não há avaliações
-Checklist Completo de Decolagem e Pouso
-2 páginas
-Comando Militar e Liderança: Filosofia e Ética
-Ainda não há avaliações
-Comando Militar e Liderança: Filosofia e Ética
-6 páginas
-Projeto de Amplificador Classe AB 100W
-Ainda não há avaliações
-Projeto de Amplificador Classe AB 100W
-5 páginas
-Evolução de Sistemas de Cria Eficientes
-Ainda não há avaliações
-Evolução de Sistemas de Cria Eficientes
+Salvar
+Salvar G10 Q4 M2 para ler mais tarde
+Compartilhar
+0%
+0% acharam este documento útil, Marcar esse documento como útil
+0%
+0% acharam que esse documento não foi útil, Marcar esse documento como não foi útil
+Imprimir
+Incorporar
+Traduzir
+Relatório
+0 notas
+0% acharam este documento útil (0 voto)
+5 visualizações
 20 páginas
-Ficha de Avaliação de Estágio em Pedagogia
+Definições Técnicas e Operacionais
+O Módulo 2 do Quarto Trimestre aborda definições técnicas e operacionais, enfatizando a importância de clareza na comunicação escrita. Ele detalha diferentes tipos de definições, incluindo definições parentéticas, de sentença e estendidas, além de diretrizes para sua elaboração. O módulo também propõe reflexões sobre como melhorar a comunicação pessoal e a conexão genuína com os outros, sugerindo a avaliação de ferramentas de comunicação.
+Traduzido por
+ScribdTranslations
+Documento aprimorado por IA
+Direitos autorais
+© All Rights Reserved
+Levamos muito a sério os direitos de conteúdo. Se você suspeita que este conteúdo é seu,
+reivindique-o aqui
+.
+Formatos disponíveis
+Baixe no formato PDF, TXT ou leia on-line no Scribd
+Ir para itens anteriores
+Baixar
+Salvar
+Salvar G10 Q4 M2 para ler mais tarde
+Compartilhar
+0%
+0% acharam este documento útil, Marcar esse documento como útil
+0%
+0% acharam que esse documento não foi útil, Marcar esse documento como não foi útil
+Imprimir
+Incorporar
+Traduzir
+Relatório
+Ir para os próximos itens
+Baixar
+Salvar G10 Q4 M2 para ler mais tarde
+Compartilhar
+Mais opções
+Tela inteira
+Módulo 2 do Quarto Trimestre
+Dando Técnico e Operacional
+Definições
+Após passar por este módulo, espera-se que você
+to:
+1. forneça definições técnicas e operacionais de
+palavras;
+2. desenhe as semelhanças e diferenças de
+definições técnicas e operacionais usando um
+Diagrama de Venn; e
+3. Propor formas de melhorar o pessoal
+comunicação e trazer de volta o genuíno
+conexão com os outros.
+Estabelecer conhecimento por meio de definição não é apenas
+importante, mas é muito crucial quando você escreve. Quando você
+defina uma certa terminologia, certifique-se de que está clara e
+conciso e tenha certeza de que nada se perde na tradução. Você
+não quer que seus leitores fiquem se perguntando o que você
+significava suas alegações.
+DEFINIÇÃO O Dicionário Merriam Webster dá sua definição mais simples
+significado da palavra definição como "uma afirmação do"
+significado de uma palavra ou de um grupo de palavras, ou de um símbolo.
+outras palavras, uma definição explica através de esclarecimento e
+explicação adicional. Isso dá a essência da palavra sendo
+definido.
+TIPOS DE DEFINIÇÃO
+1. DEFINIÇÃO TÉCNICA é uma explicação ou descrição de uma palavra
+que é usado de maneiras específicas em diferentes campos. Tende a ser
+abstrato, conceitual ou teórico. É essencial em qualquer acadêmico
+ou artigo de pesquisa.
+Diretrizes para a Redação de Definições Técnicas?
+1. Identifique a categoria a que um termo pertence.
+2. Identifique suas partes e características distintas.
+3. Identifique suas funções.
+4. Declare o que não é.
+Tipos de Definições Técnicas
+a. Definição parentética é uma explicação curta de uma palavra
+isso precisa de esclarecimento, mas não é o foco do
+documento/papel que você está escrevendo. A definição pode ser uma
+sinônimo ou uma frase que é colocada depois da palavra sendo
+definido.
+Estude os exemplos das definições de frases abaixo:
+Dionysiana (uma coleção de cânones conciliares e papais
+as decretais) foram aplicadas em todo o reino.
+O Concílio de Niceia introduziu o concílio ecumênico
+(reunião de representantes da comunhão entre)
+a Igreja.
+b. A definição de sentença é mais formal e longa do que a parental.
+definição porque a definição de uma palavra não usa apenas palavras
+ou frases, mas usa sentenças. Isso é normalmente visto em um glossário,
+dentro do texto, ou em notas de margem. Para escrever uma definição de frase, um
+o padrão ou formato deve ser usado para permitir que o leitor compare o
+palavras para termos que eles podem já conhecer, ao mesmo tempo em que entendem como
+ele difere daquelas palavras, o que melhora a compreensão.
+c. Definição Estendida é a versão mais longa da definição. É
+a versão mais longa da definição porque se expande em poucos
+frases de várias páginas. É usado quando um termo deve
+ser explicado em detalhes.
+2. DEFINIÇÃO OPERACIONAL descreve como medir ou reconhecer
+um termo, ideia, variável, objeto, fenômeno ou condição particular.
+Diz o que fazer ou o que observar. A palavra operacional significa
+descrevendo o que fazer em um determinado contexto. Assim, a operação
+a definição deve ser concreta, clara e precisa para que o leitor saiba
+exatamente o que observar ou medir.
+Diretrizes para Escrever Definições Operacionais
+1. Identifique os meios de medir o termo com base no estudo que você
+estão conduzindo.
+2. Identifique o que pode ser feito para causar o fenômeno a ocorrer ou
+induzir um estado particular.
+3. Declare como a coisa funciona ou como o fenômeno funciona.
+4. Descreva o objeto ou fenômeno.
+SAÍDA
+With the downsides of communicaton tools and
+tecnologias para relacionamentos pessoais, como você pode melhorar
+comunicação pessoal para resgatar a verdadeira essência de
+conexão genuína com os outros? a. Liste cinco (5)
+ferramentas e tecnologias de comunicação que podem ser descartadas.
+b. Defina estas ferramentas e tecnologias de comunicação usando
+definição operacional ou técnica. c. Decida qual entre
+as cinco ferramentas e tecnologias de comunicação serão bastante
+melhore sua maneira de se conectar com as pessoas se você optar por não
+usá-los mais.
+Você também pode gostar
+Definições Técnicas e Operacionais em Aula
 Ainda não há avaliações
-Ficha de Avaliação de Estágio em Pedagogia
-2 páginas
-A Radiologia Industrial PDF
-100% (2)
-A Radiologia Industrial PDF
-109 páginas
-Métodos de Produção de Plantas Transgênicas
+Definições Técnicas e Operacionais em Aula
+5 páginas
+Relatórios Técnicos e Viabilidade
 Ainda não há avaliações
-Métodos de Produção de Plantas Transgênicas
-10 páginas
-Edital de Bolsas MBA USP/Esalq 2024
+Relatórios Técnicos e Viabilidade
+9 páginas
+Definições Técnicas e Operacionais em Educação
 Ainda não há avaliações
-Edital de Bolsas MBA USP/Esalq 2024
-31 páginas
-Manual do Medidor de pH HI 207/208
+Definições Técnicas e Operacionais em Educação
+13 páginas
+Aula sobre Definições Técnicas e Operacionais
 Ainda não há avaliações
-Manual do Medidor de pH HI 207/208
-2 páginas
-Relatório de Estágio em Agropecuária IFMT
+Aula sobre Definições Técnicas e Operacionais
+11 páginas
+Diferenças entre Definições Técnicas e Operacionais
 Ainda não há avaliações
-Relatório de Estágio em Agropecuária IFMT
+Diferenças entre Definições Técnicas e Operacionais
 22 páginas
-Clara Menina e o Pecado do Amor
+Características da Redação Técnica
 Ainda não há avaliações
-Clara Menina e o Pecado do Amor
-39 páginas
-Aprendendo com Palavra Cantada
+Características da Redação Técnica
+9 páginas
+Ampliação de Definições e Exemplos
 Ainda não há avaliações
-Aprendendo com Palavra Cantada
-44 páginas
-Boleto de Depósito Nubank - Eliane Garcia
-Ainda não há avaliações
-Boleto de Depósito Nubank - Eliane Garcia
+Ampliação de Definições e Exemplos
 1 página
+Tipos e Estruturas de Definições Técnicas
+Ainda não há avaliações
+Tipos e Estruturas de Definições Técnicas
+20 páginas
+Definições Técnicas e Operacionais em Aula
+Ainda não há avaliações
+Definições Técnicas e Operacionais em Aula
+6 páginas
+Definição Estendida e Memorando ENGL 1033
+Ainda não há avaliações
+Definição Estendida e Memorando ENGL 1033
+2 páginas
+Redação Técnica: Definição e Importância
+Ainda não há avaliações
+Redação Técnica: Definição e Importância
+4 páginas
+Portugues Instrumental
+Ainda não há avaliações
+Portugues Instrumental
+74 páginas
+Portugues e Matemática Instrumental
+Ainda não há avaliações
+Portugues e Matemática Instrumental
+140 páginas
+Definição de Termos em Pesquisas
+Ainda não há avaliações
+Definição de Termos em Pesquisas
+13 páginas
+Guia Completo de Escrita Técnica
+Ainda não há avaliações
+Guia Completo de Escrita Técnica
+4 páginas
+Técnicas de Redação Técnica Essenciais
+Ainda não há avaliações
+Técnicas de Redação Técnica Essenciais
+5 páginas
+Propriedades da Escrita Técnica Eficaz
+Ainda não há avaliações
+Propriedades da Escrita Técnica Eficaz
+3 páginas
+Definição de Termos em Pesquisa
+Ainda não há avaliações
+Definição de Termos em Pesquisa
+4 páginas
+Itil4 Foundation Glossary Traduzido
+Ainda não há avaliações
+Itil4 Foundation Glossary Traduzido
+16 páginas
+Noções Básicas de Redação Técnica
+Ainda não há avaliações
+Noções Básicas de Redação Técnica
+103 páginas
+Introdução à Redação Técnica Eficaz
+Ainda não há avaliações
+Introdução à Redação Técnica Eficaz
+6 páginas
+Diferenças entre Redação Técnica e Científica
+Ainda não há avaliações
+Diferenças entre Redação Técnica e Científica
+2 páginas
+Definições e Estruturas de Pesquisa
+Ainda não há avaliações
+Definições e Estruturas de Pesquisa
+11 páginas
+Definições Técnicas e Operacionais
+Ainda não há avaliações
+Definições Técnicas e Operacionais
+28 páginas
+Apostila de Tornearia Mecânica
+100% (3)
+Apostila de Tornearia Mecânica
+438 páginas
+Download
+Ainda não há avaliações
+Download
+22 páginas
+Manual de Escrita Técnica Concisa
+100% (1)
+Manual de Escrita Técnica Concisa
+11 páginas
+Guia Completo de Relatórios Técnicos
+Ainda não há avaliações
+Guia Completo de Relatórios Técnicos
+20 páginas
+Vocabulário de Inglês para Administradores
+Ainda não há avaliações
+Vocabulário de Inglês para Administradores
+25 páginas
+História da Metrologia e Unidades
+Ainda não há avaliações
+História da Metrologia e Unidades
+32 páginas
+Fundamentos de Comunicação e Expressão Aplicados À Instrumentação
+Ainda não há avaliações
+Fundamentos de Comunicação e Expressão Aplicados À Instrumentação
+253 páginas
+Importância e Tipos de Redação Empresarial
+Ainda não há avaliações
+Importância e Tipos de Redação Empresarial
+13 páginas
+Aula 2 - Introdução Aos Cálculos de Operações Unitárias
+Ainda não há avaliações
+Aula 2 - Introdução Aos Cálculos de Operações Unitárias
+14 páginas
+Importância da Escrita Técnica e Seus Tipos
+Ainda não há avaliações
+Importância da Escrita Técnica e Seus Tipos
+1 página
+Aula - SI
+Ainda não há avaliações
+Aula - SI
+62 páginas
+Unidades de Medida na Metalmecânica
+Ainda não há avaliações
+Unidades de Medida na Metalmecânica
+4 páginas
+Diferenças entre Escrita Técnica e Acadêmica
+Ainda não há avaliações
+Diferenças entre Escrita Técnica e Acadêmica
+22 páginas
+Tipos de Redação Técnica Explicados
+Ainda não há avaliações
+Tipos de Redação Técnica Explicados
+4 páginas
+Grandezas e Unidades no Sistema FLT
+Ainda não há avaliações
+Grandezas e Unidades no Sistema FLT
+14 páginas
+Guia Completo sobre Redação Técnica
+Ainda não há avaliações
+Guia Completo sobre Redação Técnica
+11 páginas
+Como Escrever Especificações Técnicas
+Ainda não há avaliações
+Como Escrever Especificações Técnicas
+2 páginas
+Redação Técnica: Habilidades e Características
+Ainda não há avaliações
+Redação Técnica: Habilidades e Características
+11 páginas
+Sistemas de Unidades de Medidas e SI
+Ainda não há avaliações
+Sistemas de Unidades de Medidas e SI
+28 páginas
+Método de Trabalho em Terminologia
+100% (1)
+Método de Trabalho em Terminologia
+12 páginas
+VIM Vocabulario Internacional Metrologia PDF
+Ainda não há avaliações
+VIM Vocabulario Internacional Metrologia PDF
+73 páginas
+Elementos da Redação Técnica
+Ainda não há avaliações
+Elementos da Redação Técnica
+6 páginas
+Introdução à Metrologia e Definições SI
+Ainda não há avaliações
+Introdução à Metrologia e Definições SI
+11 páginas
+Redação de Relatórios Policiais Técnicos
+Ainda não há avaliações
+Redação de Relatórios Policiais Técnicos
+75 páginas
+Elaboração de Documentos Oficiais e Pareceres
+Ainda não há avaliações
+Elaboração de Documentos Oficiais e Pareceres
+12 páginas
+Sistema Internacional de Medidas
+Ainda não há avaliações
+Sistema Internacional de Medidas
+5 páginas
+ISO 1087-1: Teoria e Aplicação
+Ainda não há avaliações
+ISO 1087-1: Teoria e Aplicação
+15 páginas
+Introdução à Metrologia Dimensional
+Ainda não há avaliações
+Introdução à Metrologia Dimensional
+328 páginas
+Ementa do Curso de Refrigeração e Climatização
+Ainda não há avaliações
+Ementa do Curso de Refrigeração e Climatização
+63 páginas
+Guia Completo sobre Redação Técnica
+Ainda não há avaliações
+Guia Completo sobre Redação Técnica
+12 páginas
+Linguagem Técnica e Acadêmica: Especificidades
+100% (2)
+Linguagem Técnica e Acadêmica: Especificidades
+5 páginas
+Instruções para Relatórios Técnicos em Eletrônica
+Ainda não há avaliações
+Instruções para Relatórios Técnicos em Eletrônica
+5 páginas
+Ferramentas de Organização e Comunicação
+Ainda não há avaliações
+Ferramentas de Organização e Comunicação
+22 páginas
+Redação Técnica vs. Literária: Othon Garcia
+Ainda não há avaliações
+Redação Técnica vs. Literária: Othon Garcia
+14 páginas
+Tipos e Estratégias de Manutenção
+Ainda não há avaliações
+Tipos e Estratégias de Manutenção
+85 páginas
+Análise Organizacional em "O Diabo Veste Prada"
+Ainda não há avaliações
+Análise Organizacional em "O Diabo Veste Prada"
+18 páginas
+Instruções Caldeira Optima 4100 B
+100% (1)
+Instruções Caldeira Optima 4100 B
+22 páginas
+Reclamação sobre Serviço de Ônibus em Ipoh
+Ainda não há avaliações
+Reclamação sobre Serviço de Ônibus em Ipoh
+2 páginas
+História da Meditação Transcendental
+Ainda não há avaliações
+História da Meditação Transcendental
+7 páginas
+Análise de Perigo no Trabalho: JHA
+Ainda não há avaliações
+Análise de Perigo no Trabalho: JHA
+3 páginas
+Missão Cristã na Era Digital
+Ainda não há avaliações
+Missão Cristã na Era Digital
+4 páginas
+Exercício de Relaxamento Infantil
+100% (3)
+Exercício de Relaxamento Infantil
+3 páginas
+Processo de Licitação de Obra Pública
+Ainda não há avaliações
+Processo de Licitação de Obra Pública
+39 páginas
+Introdução à Estequiometria Química
+100% (1)
+Introdução à Estequiometria Química
+16 páginas
+Análise de A Jornada Longa Para a Noite
+Ainda não há avaliações
+Análise de A Jornada Longa Para a Noite
+5 páginas
+Evolução da Dança Moderna nas Filipinas
+Ainda não há avaliações
+Evolução da Dança Moderna nas Filipinas
+8 páginas
+Compreensão Leitora: Papelucho Historiador
+Ainda não há avaliações
+Compreensão Leitora: Papelucho Historiador
+2 páginas
+Estratégia Organizacional e FODA
+Ainda não há avaliações
+Estratégia Organizacional e FODA
+3 páginas
+Lendas de Campeche: Histórias e Mistérios
+100% (1)
+Lendas de Campeche: Histórias e Mistérios
+39 páginas
+Testemunho de Danilo Montero: Encontro com Deus
+Ainda não há avaliações
+Testemunho de Danilo Montero: Encontro com Deus
+2 páginas
+Ensino da Geometria: Desafios e Propostas
+Ainda não há avaliações
+Ensino da Geometria: Desafios e Propostas
+6 páginas
+Introdução ao Meio Ambiente e Ecossistemas
+Ainda não há avaliações
+Introdução ao Meio Ambiente e Ecossistemas
+8 páginas
+Projeto da Comteco: Telecomunicações em Cochabamba
+100% (1)
+Projeto da Comteco: Telecomunicações em Cochabamba
+29 páginas
+Prevenção da Gravidez na Adolescência
+Ainda não há avaliações
+Prevenção da Gravidez na Adolescência
+1 página
+Substantivos Contáveis e Incontáveis na Comida
+Ainda não há avaliações
+Substantivos Contáveis e Incontáveis na Comida
+6 páginas
+Guia Prático para Huertos Escolares
+Ainda não há avaliações
+Guia Prático para Huertos Escolares
+9 páginas
+Jesus Cura: Significado e Propósito
+Ainda não há avaliações
+Jesus Cura: Significado e Propósito
+9 páginas
+Análise do Conto "Queenie" de Munro
+Ainda não há avaliações
+Análise do Conto "Queenie" de Munro
+6 páginas
+Zep Tepi: Alinhamento Astronômico em 36.400 a.C.
+Ainda não há avaliações
+Zep Tepi: Alinhamento Astronômico em 36.400 a.C.
+5 páginas
+O Caráter de Cristo e a Expiação
+100% (3)
+O Caráter de Cristo e a Expiação
+14 páginas
+Aplicativo de Faturamento em Python
+Ainda não há avaliações
+Aplicativo de Faturamento em Python
+7 páginas
+Fundamentos da Educação Inclusiva e Especial
+Ainda não há avaliações
+Fundamentos da Educação Inclusiva e Especial
+32 páginas
+Epistemologia da Didática em Ciências Sociais
+Ainda não há avaliações
+Epistemologia da Didática em Ciências Sociais
+18 páginas
+Litanias da Bem-Aventurada Virgem Maria
+Ainda não há avaliações
+Litanias da Bem-Aventurada Virgem Maria
+2 páginas
+A Influência de Beleza Negra
+Ainda não há avaliações
+A Influência de Beleza Negra
+272 páginas
+ZG ARTIGO 6379 - 2022-08-25
+Ainda não há avaliações
+ZG ARTIGO 6379 - 2022-08-25
+8 páginas
+Estrutura do Texto Argumentativo
+100% (2)
+Estrutura do Texto Argumentativo
+2 páginas
+Tabela de Preços Consórcios Porto Seguro
+Ainda não há avaliações
+Tabela de Preços Consórcios Porto Seguro
+1 página
+Disciplinas Kuei-Jin: Artes do Inverno
+Ainda não há avaliações
+Disciplinas Kuei-Jin: Artes do Inverno
+6 páginas
+Datasheet MVISIA SENS-CVU300
+100% (1)
+Datasheet MVISIA SENS-CVU300
+40 páginas
+Moldes de Cueca Slip Infantil
+Ainda não há avaliações
+Moldes de Cueca Slip Infantil
+11 páginas
+Gestão Provisional de Recursos Humanos
+Ainda não há avaliações
+Gestão Provisional de Recursos Humanos
+14 páginas
+Joio e Trigo: A Parábola do Inimigo
+Ainda não há avaliações
+Joio e Trigo: A Parábola do Inimigo
+13 páginas
+Especificação de Lastro de Pedra Britada
+Ainda não há avaliações
+Especificação de Lastro de Pedra Britada
+6 páginas
+Guia Completo para o Exame PMI-ACP
+Ainda não há avaliações
+Guia Completo para o Exame PMI-ACP
+4 páginas
+Modelagem: Capturando Códigos de Sucesso
+Ainda não há avaliações
+Modelagem: Capturando Códigos de Sucesso
+6 páginas
+Artigo de Opinião: Estrutura e Características
+Ainda não há avaliações
+Artigo de Opinião: Estrutura e Características
+9 páginas
+Receitas Magrass Águas Claras
+Ainda não há avaliações
+Receitas Magrass Águas Claras
+28 páginas
+Resíduos de Vidro no Concreto Sustentável
+Ainda não há avaliações
+Resíduos de Vidro no Concreto Sustentável
+11 páginas
+Alisson Viana - Campo Harmônico Maior (Amostra em PDF
+100% (1)
+Alisson Viana - Campo Harmônico Maior (Amostra em PDF
+13 páginas
+Ficha de Segurança da Pasta Lubrificante Tigre
+Ainda não há avaliações
+Ficha de Segurança da Pasta Lubrificante Tigre
+4 páginas
+Treinamento de Apresentações Profissionais
+Ainda não há avaliações
+Treinamento de Apresentações Profissionais
+11 páginas
+Sinais e Diagnóstico do Abdome Agudo
+Ainda não há avaliações
+Sinais e Diagnóstico do Abdome Agudo
+15 páginas
+Ranking Abras 2026
+Ainda não há avaliações
+Ranking Abras 2026
+34 páginas
+Variáveis do Macroambiente na GSE
+Ainda não há avaliações
+Variáveis do Macroambiente na GSE
+7 páginas
+Controle e Regulagem de Lentes Essilor
+Ainda não há avaliações
+Controle e Regulagem de Lentes Essilor
+3 páginas
+Titulação Potenciométrica de Ácidos
+100% (2)
+Titulação Potenciométrica de Ácidos
+16 páginas
+Manual do Analisador Bioquímico Automático
+Ainda não há avaliações
+Manual do Analisador Bioquímico Automático
+234 páginas
+Treinamento MTCNA Mikrotik
+Ainda não há avaliações
+Treinamento MTCNA Mikrotik
+362 páginas
+CV Isadorabastianialves
+Ainda não há avaliações
+CV Isadorabastianialves
+3 páginas
+Manual de Triagem - Global v2.0
+Ainda não há avaliações
+Manual de Triagem - Global v2.0
+105 páginas
+Design Estratégico e Inovação Social
+Ainda não há avaliações
+Design Estratégico e Inovação Social
+16 páginas
+Detectores em Cromatografia Líquida HPLC
+Ainda não há avaliações
+Detectores em Cromatografia Líquida HPLC
+34 páginas
+Análise Financeira de Empresas: Estudo de Caso
+Ainda não há avaliações
+Análise Financeira de Empresas: Estudo de Caso
+9 páginas
 Menu inferior
 Voltar para o topo
 Sobre
@@ -1471,14 +1130,6 @@ Lenise Tedesco
 (2)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Declaração de Último Dia Trabalhado - DUT para mais tarde
-Procuração para Farmácia Popular 2025
-Procuração para Farmácia Popular 2025
-Adicionado por
-Fernanda Rezende
-80%
-(10)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Procuração para Farmácia Popular 2025 para mais tarde
 Modelo de Requisição de Material
 Modelo de Requisição de Material
 Adicionado por
@@ -1590,6 +1241,14 @@ Joao Penca
 (14)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Declaração de Amasia Simples para mais tarde
+Formulario para Recebimento de Indenização Suhai Seguradora 10 - 2025
+Formulario para Recebimento de Indenização Suhai Seguradora 10 - 2025
+Adicionado por
+Gislaine de souza
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Formulario para Recebimento de Indenização Suhai Seguradora 10 - 2025 para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Mais populares em Carreira e Crescimento
@@ -1882,14 +1541,6 @@ patricktonolli
 (73)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve 50 Licoes para Voce Compreender - Di Saval para mais tarde
-Atestado Médico para Afastamento
-Atestado Médico para Afastamento
-Adicionado por
-Luiza nunes
-68%
-(38)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Atestado Médico para Afastamento para mais tarde
 Como Se Tornar Sobrenatural - Joe Dispenza
 Como Se Tornar Sobrenatural - Joe Dispenza
 Adicionado por
@@ -2082,6 +1733,14 @@ Silvana
 (12)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Atividades sobre Misturas 4º Ano para mais tarde
+Checklist Completo para ENEM 2026
+Checklist Completo para ENEM 2026
+Adicionado por
+Antônio Paulo
+92%
+(13)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Checklist Completo para ENEM 2026 para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Mais populares em Bem-estar
@@ -2128,14 +1787,6 @@ Michelle Ribeiro
 (45)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Cartão de Controle da Pressão Arterial para mais tarde
-Atestado Médico para Afastamento
-Atestado Médico para Afastamento
-Adicionado por
-Luiza nunes
-68%
-(38)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Atestado Médico para Afastamento para mais tarde
 Alfabeto Móvel para Imprimir GRANDE 2
 Alfabeto Móvel para Imprimir GRANDE 2
 Adicionado por
@@ -2327,6 +1978,14 @@ leo
 (3)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Cardápio da Dieta das 3 Fases para mais tarde
+Atividades sobre Capelinha de Melão
+Atividades sobre Capelinha de Melão
+Adicionado por
+Nadja Cibelle Machado Rocha
+100%
+(6)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Atividades sobre Capelinha de Melão para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Mais populares em Tecnologia e Engenharia
@@ -3345,14 +3004,6 @@ Laecio D. C. D. Santos
 (11)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Modelo de Requisição de Material para mais tarde
-Recibo de Compra e Venda de Imóvel
-Recibo de Compra e Venda de Imóvel
-Adicionado por
-suzanakr
-88%
-(17)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Recibo de Compra e Venda de Imóvel para mais tarde
 Senhas para Impressão de 1 a 30
 Senhas para Impressão de 1 a 30
 Adicionado por
@@ -3457,14 +3108,6 @@ Matheus Damaceno
 (10)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Declaração de Trabalho para Escola para mais tarde
-Procuração Simples para AES Eletropaulo
-Procuração Simples para AES Eletropaulo
-Adicionado por
-Edutent
-54%
-(13)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Procuração Simples para AES Eletropaulo para mais tarde
 Declaração de Aluguel Residencial
 Declaração de Aluguel Residencial
 Adicionado por
@@ -3553,6 +3196,22 @@ Josilma Alzira
 (2)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Mini Álbum da Copa para Imprimir para mais tarde
+Procuração Simples para Pessoa Física
+Procuração Simples para Pessoa Física
+Adicionado por
+gel3236
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procuração Simples para Pessoa Física para mais tarde
+Laudo para Autorização de Procedimento Ambulatorial
+Laudo para Autorização de Procedimento Ambulatorial
+Adicionado por
+Acrilar
+80%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Laudo para Autorização de Procedimento Ambulatorial para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Menu inferior
@@ -4573,14 +4232,6 @@ Lincoln Santos
 (5)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Lista de Fornecedores de Moda Brasil para mais tarde
-Sparrow L.J.shen TRT
-Sparrow L.J.shen TRT
-Adicionado por
-Bia
-100%
-(3)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Sparrow L.J.shen TRT para mais tarde
 Sistema Audaces: Modelagem e Digitalização
 Sistema Audaces: Modelagem e Digitalização
 Adicionado por
@@ -4643,14 +4294,6 @@ Rodrigo Amorim
 (57)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Currículo em Ação: Caderno do Aluno 1 para mais tarde
-Adivinha Quem Sou Hoje à Noite
-Adivinha Quem Sou Hoje à Noite
-Adicionado por
-Gabrielly Moraes
-100%
-(1)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Adivinha Quem Sou Hoje à Noite para mais tarde
 Exploração de Diamantes em Angola
 Exploração de Diamantes em Angola
 Adicionado por
@@ -4690,14 +4333,6 @@ Pirilampo Papelaria Personalizada
 (1)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Relações e Continuidade em Textos para mais tarde
-Um Amor Selvagem - Por Astridy Gurgel
-Um Amor Selvagem - Por Astridy Gurgel
-Adicionado por
-Andreia Pereira da Silva
-100%
-(9)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Um Amor Selvagem - Por Astridy Gurgel para mais tarde
 LIVRO - Observatorio de Sinais - Teoria-Dario Caldas
 LIVRO - Observatorio de Sinais - Teoria-Dario Caldas
 Adicionado por
@@ -4722,6 +4357,29 @@ Nelma Rodrigues
 (2)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve A Resistência do Guarda-Chuva Antigo para mais tarde
+Sociologia Da Moda PDF
+Sociologia Da Moda PDF
+Adicionado por
+Thabata Ferraz
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Sociologia Da Moda PDF para mais tarde
+História da Quadrilha Junina no Brasil
+História da Quadrilha Junina no Brasil
+Adicionado por
+l457
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve História da Quadrilha Junina no Brasil para mais tarde
+O Vazio da Ostentação e da Aparência
+O Vazio da Ostentação e da Aparência
+Adicionado por
+Adam Sultan Calu
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve O Vazio da Ostentação e da Aparência para mais tarde
 Ir para os próximos itens
 Páginas de conhecimento relacionadas
 Descubra os principais tópicos sobre Ciências humanas reunidos a partir dos documentos mais populares do Scribd.
@@ -5381,14 +5039,6 @@ Matheus Paviani
 0 notas
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Guia da Marca Sicoob 2023 para mais tarde
-Contos Picantes de Novinhas
-Contos Picantes de Novinhas
-Adicionado por
-kilswit lima
-100%
-(1)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Contos Picantes de Novinhas para mais tarde
 Atividades de Simetria em Malha Quadriculada
 Atividades de Simetria em Malha Quadriculada
 Adicionado por
@@ -5397,14 +5047,6 @@ Paloma Ury Rodrigues de Andrade
 (1)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Atividades de Simetria em Malha Quadriculada para mais tarde
-A Rejeitada do Alpha Supremo
-A Rejeitada do Alpha Supremo
-Adicionado por
-joana etiene lima silva
-56%
-(9)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve A Rejeitada do Alpha Supremo para mais tarde
 Atividade de Colorir e Escrever o 21
 Atividade de Colorir e Escrever o 21
 Adicionado por
@@ -6355,14 +5997,6 @@ Lays Pires
 (1)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Atividades Infantis da Igreja Quadrangular para mais tarde
-VENDIDA - Homens Implacaveis 3 - Lady Dark N Evil
-VENDIDA - Homens Implacaveis 3 - Lady Dark N Evil
-Adicionado por
-Josinaldo Da Silva
-100%
-(1)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve VENDIDA - Homens Implacaveis 3 - Lady Dark N Evil para mais tarde
 Dinâmica da Viagem Atrapalhada
 Dinâmica da Viagem Atrapalhada
 Adicionado por
@@ -6433,14 +6067,6 @@ spazzingomesjuliana
 (2)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve 100 Dias Após o Fim: Uma Reflexão para mais tarde
-O Irmao Mais Temido - Tomo II (A - Taylor R.C
-O Irmao Mais Temido - Tomo II (A - Taylor R.C
-Adicionado por
-Vitoria Modesto
-100%
-(5)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve O Irmao Mais Temido - Tomo II (A - Taylor R.C para mais tarde
 Perguntas para Brincadeira de Torta na Cara
 Perguntas para Brincadeira de Torta na Cara
 Adicionado por
@@ -6612,14 +6238,6 @@ Sidney Chire
 (4)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Mapa de Acabamentos para Requalificação para mais tarde
-Certificado de Conclusão NR-37 Segurança
-Certificado de Conclusão NR-37 Segurança
-Adicionado por
-Segurança [Perfinaço]
-50%
-(2)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Certificado de Conclusão NR-37 Segurança para mais tarde
 Checklist Completo de Enxoval Casa Nova
 Checklist Completo de Enxoval Casa Nova
 Adicionado por
@@ -7078,4 +6696,945 @@ Salve Examen Final de Inglês - Senati 2024 para mais tarde
 Mostrar mais
 Sobre
 Arte
-Explore milhares de passatempos criativos fascinantes e únicos, ao alcance de seus dedos. Seja você um colecionador de antiguidades, artista têxtil ou designer de interiores, nossa seleção cuidadosamente elaborada e em constante crescimento de PDFs sobre arte pode ajudá-lo a aprimorar suas habilidades existentes, e até mesmo desenvolver novas. Se você está em busca de um documento específico para enriquecer sua vida ou está aberto a novos campos e atividades artísticas, nossa biblioteca tem respostas e ideias que você não encontrará em nenhum outro lugar. Tanto os entusiastas do DIY quanto os profissionais descobrirão conhecimentos especializados em assuntos amplos como arquitetura e design, além de temas específicos como gravura e fotografia de paisagem. Quem sabe você encontra algo que desperte um interesse ou possi
+Explore milhares de passatempos criativos fascinantes e únicos, ao alcance de seus dedos. Seja você um colecionador de antiguidades, artista têxtil ou designer de interiores, nossa seleção cuidadosamente elaborada e em constante crescimento de PDFs sobre arte pode ajudá-lo a aprimorar suas habilidades existentes, e até mesmo desenvolver novas. Se você está em busca de um documento específico para enriquecer sua vida ou está aberto a novos campos e atividades artísticas, nossa biblioteca tem respostas e ideias que você não encontrará em nenhum outro lugar. Tanto os entusiastas do DIY quanto os profissionais descobrirão conhecimentos especializados em assuntos amplos como arquitetura e design, além de temas específicos como gravura e fotografia de paisagem. Quem sabe você encontra algo que desperte um interesse ou possibilidade de carreira que nunca havia considerado antes. O Scribd pode ser acessado através de qualquer navegador da web, dispositivo Android ou iOS, o que significa que você pode aprender sobre esses tópicos e muito mais no conforto de sua casa ou onde quer que a vida o leve. Inscreva-se hoje mesmo para começar a liberar sua criatividade.
+Ler mais
+Explore milhares de passatempos criativos fascinantes e únicos, ao alcance de seus dedos. Seja você um colecionador de antiguidades, artista têxtil ou designer de interiores, nossa seleção cuidadosamente elaborada e em constante crescimento de PDFs sobre arte pode ajudá-lo a aprimorar suas habilidades existentes, e até mesmo desenvolver novas. Se você está em busca de um documento específico para enriquecer sua vida ou está aberto a novos campos e atividades artísticas, nossa biblioteca tem respostas e ideias que você não encontrará em nenhum outro lugar. Tanto os entusiastas do DIY quanto os profissionais descobrirão conhecimentos especializados em assuntos amplos como arquitetura e design, além de temas específicos como gravura e fotografia de paisagem. Quem sabe você encontra algo que desperte um interesse ou possibilidade de carreira que nunca havia considerado antes. O Scribd pode ser acessado através de qualquer navegador da web, dispositivo Android ou iOS, o que significa que você pode aprender sobre esses tópicos e muito mais no conforto de sua casa ou onde quer que a vida o leve. Inscreva-se hoje mesmo para começar a liberar sua criatividade.
+Ler mais
+Menu inferior
+Voltar para o topo
+Sobre
+Sobre o Scribd, Inc.
+Slideshare
+Faça parte de nossa equipe!
+Fale conosco
+Suporte
+Ajuda / Perguntas frequentes
+Acessibilidade
+Ajuda para comprar
+AdChoices
+Jurídico
+Termos
+Privacidade
+Direitos Autorais
+Social
+Instagram
+Instagram
+Facebook
+Facebook
+Pinterest
+Pinterest
+Faça o download gratuito de nossos aplicativos
+Sobre
+Sobre o Scribd, Inc.
+Slideshare
+Faça parte de nossa equipe!
+Fale conosco
+Jurídico
+Termos
+Privacidade
+Direitos Autorais
+Suporte
+Ajuda / Perguntas frequentes
+Acessibilidade
+Ajuda para comprar
+AdChoices
+Social
+Instagram
+Instagram
+Facebook
+Facebook
+Pinterest
+Pinterest
+Faça o download gratuito de nossos aplicativos
+Documentos
+Idioma
+:
+Português
+Copyright © 2026 Scribd Inc.
+Levamos muito a sério os direitos de conteúdo.
+Saiba mais
+em nossas Perguntas Frequentes ou
+denuncie a violação aqui
+.
+Levamos muito a sério os direitos de conteúdo.
+Saiba mais
+em nossas Perguntas Frequentes ou
+denuncie a violação aqui
+.
+Idioma
+:
+Português
+Copyright © 2026 Scribd Inc.
+
+## Direito Documentos e PDFs | Scribd
+URL: https://pt.scribd.com/docs/Law
+
+Direito Documentos e PDFs | Scribd
+Pular para o conteúdo principal
+Abrir o menu de navegação
+Fechar sugestões
+Pesquisar
+Pesquisar
+pt
+Change Language,
+Português
+Mudar o idioma
+,
+Português
+Carregar
+Fazer login
+Fazer login
+Baixe e use grátis por 30 dias
+Documentos
+Direito
+Direito Documentos
+Expanda seu conhecimento jurídico com nossa ampla coleção de documentos sobre direito. Desde direito penal e regulamentações ambientais até contratos empresariais e casos judiciais, nossa biblioteca tem tudo o que você precisa para navegar melhor pelos sistemas legais ao redor do mundo. Com uma assinatura do Scribd, você terá tudo o que precisa para o trabalho, estudo e além.
+Expanda seu conhecimento jurídico com nossa ampla coleção de documentos sobre direito. Desde direito penal e regulamentações ambientais até contratos empresariais e casos judiciais, nossa biblioteca tem tudo o que você precisa para navegar melhor pelos sistemas legais ao redor do mundo. Com uma assinatura do Scribd, você terá tudo o que precisa para o trabalho, estudo e além.
+Ler mais
+Documentos sobre Direito
+Pular no carrossel
+Ir para itens anteriores
+Receituário de Controle Especial
+Receituário de Controle Especial
+Adicionado por
+Marcos Gomes
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Receituário de Controle Especial para mais tarde
+Modelo de Recibo Simples para Imprimir
+Modelo de Recibo Simples para Imprimir
+Adicionado por
+LMP
+80%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Recibo Simples para Imprimir para mais tarde
+Modelo de Ofício de Solicitação
+Modelo de Ofício de Solicitação
+Adicionado por
+Aroudo Gouveia
+80%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Ofício de Solicitação para mais tarde
+Modelo de Recibo de Pagamento Simples
+Modelo de Recibo de Pagamento Simples
+Adicionado por
+Hulda C M Costa
+64%
+(11)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Recibo de Pagamento Simples para mais tarde
+Modelo de Requisição de Material
+Modelo de Requisição de Material
+Adicionado por
+Laecio D. C. D. Santos
+91%
+(11)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Requisição de Material para mais tarde
+Folhas de Caligrafia para Imprimir
+Folhas de Caligrafia para Imprimir
+Adicionado por
+fabiormatos
+67%
+(18)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Folhas de Caligrafia para Imprimir para mais tarde
+Senhas para Impressão de 1 a 30
+Senhas para Impressão de 1 a 30
+Adicionado por
+Alberto Sposito
+75%
+(12)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Senhas para Impressão de 1 a 30 para mais tarde
+Etiquetas de Remetente e Destinatário
+Etiquetas de Remetente e Destinatário
+Adicionado por
+Daniel Lemos
+45%
+(11)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Etiquetas de Remetente e Destinatário para mais tarde
+Procuração para Equatorial Energia
+Procuração para Equatorial Energia
+Adicionado por
+Germano Rodrigues
+90%
+(20)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procuração para Equatorial Energia para mais tarde
+Ficha de Controle de EPI para Impressão
+Ficha de Controle de EPI para Impressão
+Adicionado por
+hiagohenrique
+80%
+(35)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Ficha de Controle de EPI para Impressão para mais tarde
+Certidão de Óbito: Modelo e Registro
+Certidão de Óbito: Modelo e Registro
+Adicionado por
+Willian Zanella
+29%
+(14)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Certidão de Óbito: Modelo e Registro para mais tarde
+Modelo de Encaminhamento Médico
+Modelo de Encaminhamento Médico
+Adicionado por
+Anderson Lima de Araújo
+70%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Encaminhamento Médico para mais tarde
+Declaração de Trabalho para Escola
+Declaração de Trabalho para Escola
+Adicionado por
+Matheus Damaceno
+60%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Trabalho para Escola para mais tarde
+Declaração de Último Dia Trabalhado - DUT
+Declaração de Último Dia Trabalhado - DUT
+Adicionado por
+Lenise Tedesco
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Último Dia Trabalhado - DUT para mais tarde
+Modelo de Declaração de Hipossuficiência
+Modelo de Declaração de Hipossuficiência
+Adicionado por
+Oseias Reis
+76%
+(17)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Declaração de Hipossuficiência para mais tarde
+Comprovante de Transferência Pix Nubank
+Comprovante de Transferência Pix Nubank
+Adicionado por
+Jr Cell & Informatica
+33%
+(6)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Comprovante de Transferência Pix Nubank para mais tarde
+Ficha de Entrega de EPI Modelo
+Ficha de Entrega de EPI Modelo
+Adicionado por
+Erich Wagner
+88%
+(8)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Ficha de Entrega de EPI Modelo para mais tarde
+Lista de Pecados para Confissão
+Lista de Pecados para Confissão
+Adicionado por
+Comunidade igreja em células
+62%
+(13)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Lista de Pecados para Confissão para mais tarde
+Manual do Tarô Zé Pilintra
+Manual do Tarô Zé Pilintra
+Adicionado por
+chsdl17081993
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Manual do Tarô Zé Pilintra para mais tarde
+Modelo de Recibo de Férias em Word
+Modelo de Recibo de Férias em Word
+Adicionado por
+Ridck Jhonsson
+100%
+(9)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Recibo de Férias em Word para mais tarde
+Laudo para Autorização de Internação
+Laudo para Autorização de Internação
+Adicionado por
+spyonthief
+89%
+(9)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Laudo para Autorização de Internação para mais tarde
+Modelo de Contrato de Arrendamento em Angola
+Modelo de Contrato de Arrendamento em Angola
+Adicionado por
+Mauro Semedo
+89%
+(19)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Contrato de Arrendamento em Angola para mais tarde
+Declaração de Aluguel Residencial
+Declaração de Aluguel Residencial
+Adicionado por
+rosazulma04
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Aluguel Residencial para mais tarde
+Oração da Couraça de São Patrício
+Oração da Couraça de São Patrício
+Adicionado por
+Hélcio Eugênio
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Oração da Couraça de São Patrício para mais tarde
+Carta de Demissão com Aviso Prévio
+Carta de Demissão com Aviso Prévio
+Adicionado por
+rh x3promotora
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Carta de Demissão com Aviso Prévio para mais tarde
+Declaração de Vínculo Contratual
+Declaração de Vínculo Contratual
+Adicionado por
+liliana ribeiro
+100%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Vínculo Contratual para mais tarde
+Laudo para Autorização de Procedimento Ambulatorial
+Laudo para Autorização de Procedimento Ambulatorial
+Adicionado por
+Acrilar
+80%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Laudo para Autorização de Procedimento Ambulatorial para mais tarde
+Ficha de Controle de Pressão Arterial
+Ficha de Controle de Pressão Arterial
+Adicionado por
+Charles Cerqueira Do Nascimento
+75%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Ficha de Controle de Pressão Arterial para mais tarde
+Prova de Conhecimentos Assistente Técnico
+Prova de Conhecimentos Assistente Técnico
+Adicionado por
+Philman
+87%
+(124)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Prova de Conhecimentos Assistente Técnico para mais tarde
+Mini Álbum da Copa para Imprimir
+Mini Álbum da Copa para Imprimir
+Adicionado por
+Josilma Alzira
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Mini Álbum da Copa para Imprimir para mais tarde
+Ir para os próximos itens
+Adicionados recentemente
+Pular no carrossel
+Ir para itens anteriores
+Horários de Oração e Intercessão
+Horários de Oração e Intercessão
+Adicionado por
+Bárbara Lima
+100%
+(8)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Horários de Oração e Intercessão para mais tarde
+1 Ao 94 Um Adeus Sem Perdão
+1 Ao 94 Um Adeus Sem Perdão
+Adicionado por
+Tata Farias
+50%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve 1 Ao 94 Um Adeus Sem Perdão para mais tarde
+Certidão de Especialidades Médicas
+Certidão de Especialidades Médicas
+Adicionado por
+mmbmoreira00
+9%
+(11)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Certidão de Especialidades Médicas para mais tarde
+Projetos de Móveis Industriais para Iniciantes
+Projetos de Móveis Industriais para Iniciantes
+Adicionado por
+MENDEZ J
+80%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Projetos de Móveis Industriais para Iniciantes para mais tarde
+Declaração de Compromisso de Habitualidade
+Declaração de Compromisso de Habitualidade
+Adicionado por
+Caio Cezar Basilio Rodrigues
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Compromisso de Habitualidade para mais tarde
+Compromisso com a Verdade
+Compromisso com a Verdade
+Adicionado por
+Quel Quel
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Compromisso com a Verdade para mais tarde
+Manual do Tarô Zé Pilintra
+Manual do Tarô Zé Pilintra
+Adicionado por
+chsdl17081993
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Manual do Tarô Zé Pilintra para mais tarde
+Declaração de Último Dia Trabalhado - DUT
+Declaração de Último Dia Trabalhado - DUT
+Adicionado por
+Lenise Tedesco
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Último Dia Trabalhado - DUT para mais tarde
+Procuração Particular para Neoenergia
+Procuração Particular para Neoenergia
+Adicionado por
+LP Gráfica Rápida
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procuração Particular para Neoenergia para mais tarde
+Pintura das Vogais com Cotonete
+Pintura das Vogais com Cotonete
+Adicionado por
+Ana carolina Dias luz dos santos
+100%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Pintura das Vogais com Cotonete para mais tarde
+Script de Vendas para Maquininha Ton
+Script de Vendas para Maquininha Ton
+Adicionado por
+Anna Paula
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Script de Vendas para Maquininha Ton para mais tarde
+Estratégia e Gestão no Bac Bo
+Estratégia e Gestão no Bac Bo
+Adicionado por
+João Ricardo
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Estratégia e Gestão no Bac Bo para mais tarde
+Atestado Médico de 10 Dias em Goiânia
+Atestado Médico de 10 Dias em Goiânia
+Adicionado por
+sarahdamasceno322
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Atestado Médico de 10 Dias em Goiânia para mais tarde
+A Virgem Comprada do Magnata
+A Virgem Comprada do Magnata
+Adicionado por
+josesandrineelizabethp
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve A Virgem Comprada do Magnata para mais tarde
+Declaração de Aluguel Residencial
+Declaração de Aluguel Residencial
+Adicionado por
+rosazulma04
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Aluguel Residencial para mais tarde
+Itens Gerais para Tormenta 20
+Itens Gerais para Tormenta 20
+Adicionado por
+ricardo.berger.oliveira
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Itens Gerais para Tormenta 20 para mais tarde
+Resumo de "Promessas Vazias"
+Resumo de "Promessas Vazias"
+Adicionado por
+leitorvoraz31
+0%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Resumo de "Promessas Vazias" para mais tarde
+Legislação Empresarial e Responsabilidades
+Legislação Empresarial e Responsabilidades
+Adicionado por
+rayssa-rego
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Legislação Empresarial e Responsabilidades para mais tarde
+Bingo das Profissões para Imprimir
+Bingo das Profissões para Imprimir
+Adicionado por
+Celly Prado
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Bingo das Profissões para Imprimir para mais tarde
+Autorização para Festa Junina Escolar
+Autorização para Festa Junina Escolar
+Adicionado por
+coordenacao.cemus5
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Autorização para Festa Junina Escolar para mais tarde
+Modelo de Contrato de Locação de Veículo
+Modelo de Contrato de Locação de Veículo
+Adicionado por
+edcleidison15
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Contrato de Locação de Veículo para mais tarde
+Atestado Médico - Hospital São Vicente
+Atestado Médico - Hospital São Vicente
+Adicionado por
+victor1206.gameplay
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Atestado Médico - Hospital São Vicente para mais tarde
+Procedimentos para Licenciamento LICIN
+Procedimentos para Licenciamento LICIN
+Adicionado por
+adriano martins
+88%
+(8)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procedimentos para Licenciamento LICIN para mais tarde
+Atividade do Monstro das Cores: Nome e Alfabeto
+Atividade do Monstro das Cores: Nome e Alfabeto
+Adicionado por
+professoragimarchiori
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Atividade do Monstro das Cores: Nome e Alfabeto para mais tarde
+Procuração para Transferência de Linha
+Procuração para Transferência de Linha
+Adicionado por
+regiane
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procuração para Transferência de Linha para mais tarde
+Intenções para a Santa Missa
+Intenções para a Santa Missa
+Adicionado por
+Anselmo Ribeiro da Silva
+83%
+(6)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Intenções para a Santa Missa para mais tarde
+Acordo de Revogação de Contrato de Trabalho
+Acordo de Revogação de Contrato de Trabalho
+Adicionado por
+wwn6bqwqkt
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Acordo de Revogação de Contrato de Trabalho para mais tarde
+Notificação Extrajudicial de Desocupação
+Notificação Extrajudicial de Desocupação
+Adicionado por
+josianeferres03
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Notificação Extrajudicial de Desocupação para mais tarde
+Solicitação de Transporte para Evento Igreja
+Solicitação de Transporte para Evento Igreja
+Adicionado por
+elias.silva.limoeiro81
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Solicitação de Transporte para Evento Igreja para mais tarde
+Minuta de Contrato de Comodato
+Minuta de Contrato de Comodato
+Adicionado por
+mariademartinssousa
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Minuta de Contrato de Comodato para mais tarde
+Ir para os próximos itens
+Explorar Direito
+Vá para outra categoria e encontre a combinação certa para o seu estado de espírito:
+Pular no carrossel
+Ir para itens anteriores
+Contratos e Acordos
+Direito Penal
+Direito Ambiental
+Legislação Filipina
+Ir para os próximos itens
+Explore mais em Direito
+Folha de Protocolo para Impressão
+Folha de Protocolo para Impressão
+Adicionado por
+Savio Rodrigues
+100%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Folha de Protocolo para Impressão para mais tarde
+Declaração de Perda de CRV/CRLV
+Declaração de Perda de CRV/CRLV
+Adicionado por
+PABLLO SOUZA
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Perda de CRV/CRLV para mais tarde
+Contrato de Compra e Venda de Trator
+Contrato de Compra e Venda de Trator
+Adicionado por
+LÚ ESCAVAÇÃO
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Contrato de Compra e Venda de Trator para mais tarde
+Procuração Particular para Neoenergia
+Procuração Particular para Neoenergia
+Adicionado por
+LP Gráfica Rápida
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procuração Particular para Neoenergia para mais tarde
+Oração do Credo Niceno-Constantinopolitano
+Oração do Credo Niceno-Constantinopolitano
+Adicionado por
+Kaísa Mara
+40%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Oração do Credo Niceno-Constantinopolitano para mais tarde
+Comprovante de Transferência Pix Nubank
+Comprovante de Transferência Pix Nubank
+Adicionado por
+Jr Cell & Informatica
+33%
+(6)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Comprovante de Transferência Pix Nubank para mais tarde
+Declaração de Último Dia Trabalhado - DUT
+Declaração de Último Dia Trabalhado - DUT
+Adicionado por
+Lenise Tedesco
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Último Dia Trabalhado - DUT para mais tarde
+Carta de Renúncia da CIPA e Estabilidade
+Carta de Renúncia da CIPA e Estabilidade
+Adicionado por
+Genival Silva
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Carta de Renúncia da CIPA e Estabilidade para mais tarde
+Procuração para Equatorial Energia
+Procuração para Equatorial Energia
+Adicionado por
+Germano Rodrigues
+90%
+(20)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procuração para Equatorial Energia para mais tarde
+Arcano Pessoal 8: A Justiça e Equilíbrio
+Arcano Pessoal 8: A Justiça e Equilíbrio
+Adicionado por
+Ale Murena
+67%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Arcano Pessoal 8: A Justiça e Equilíbrio para mais tarde
+Ler Demon Slayer: Castelo Infinito
+Ler Demon Slayer: Castelo Infinito
+Adicionado por
+vss.vini2010
+67%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Ler Demon Slayer: Castelo Infinito para mais tarde
+Carta de Demissão com Aviso Prévio
+Carta de Demissão com Aviso Prévio
+Adicionado por
+rh x3promotora
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Carta de Demissão com Aviso Prévio para mais tarde
+Declaração de Residência para Inquilino
+Declaração de Residência para Inquilino
+Adicionado por
+btinha69
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Residência para Inquilino para mais tarde
+Oração do Sonho de Nossa Senhora
+Oração do Sonho de Nossa Senhora
+Adicionado por
+Raquel Ribeiro
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Oração do Sonho de Nossa Senhora para mais tarde
+Minuta de Contrato de Comodato
+Minuta de Contrato de Comodato
+Adicionado por
+mariademartinssousa
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Minuta de Contrato de Comodato para mais tarde
+Oração Forte Contra Maldições e Demônios
+Oração Forte Contra Maldições e Demônios
+Adicionado por
+Obreiro João Marcos Aderaldo
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Oração Forte Contra Maldições e Demônios para mais tarde
+Declaração de Inexistência de Seguros
+Declaração de Inexistência de Seguros
+Adicionado por
+Rafaela Lima
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Inexistência de Seguros para mais tarde
+Atividade sobre Tipos de Moradia 2º Ano
+Atividade sobre Tipos de Moradia 2º Ano
+Adicionado por
+João Paulo Montefusco
+100%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Atividade sobre Tipos de Moradia 2º Ano para mais tarde
+Autorização para Retirada em Loja
+Autorização para Retirada em Loja
+Adicionado por
+ana claudia
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Autorização para Retirada em Loja para mais tarde
+Declaração de Residência para Terceiros
+Declaração de Residência para Terceiros
+Adicionado por
+2o Ofício Notas e Protesto Piripiri
+67%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Residência para Terceiros para mais tarde
+Declaração de Aluguel Sem Contrato
+Declaração de Aluguel Sem Contrato
+Adicionado por
+Milton Fernandes de Lima
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Aluguel Sem Contrato para mais tarde
+Prescrição de Traturil e Monuril
+Prescrição de Traturil e Monuril
+Adicionado por
+tai moreira
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Prescrição de Traturil e Monuril para mais tarde
+Declaração de Rescisão de Vínculo INSS
+Declaração de Rescisão de Vínculo INSS
+Adicionado por
+Cristiane Cavalcante Silverio
+80%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Rescisão de Vínculo INSS para mais tarde
+Autorização para Retirada nos Correios
+Autorização para Retirada nos Correios
+Adicionado por
+corelmix2023
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Autorização para Retirada nos Correios para mais tarde
+Termo de Quitação de Imóvel
+Termo de Quitação de Imóvel
+Adicionado por
+Kleyccielle Almeida
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Termo de Quitação de Imóvel para mais tarde
+Pintura das Vogais com Cotonete
+Pintura das Vogais com Cotonete
+Adicionado por
+Ana carolina Dias luz dos santos
+100%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Pintura das Vogais com Cotonete para mais tarde
+Manual do Tarô Zé Pilintra
+Manual do Tarô Zé Pilintra
+Adicionado por
+chsdl17081993
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Manual do Tarô Zé Pilintra para mais tarde
+Laudo Social para Curatela de Idoso
+Laudo Social para Curatela de Idoso
+Adicionado por
+Mariana Zagati
+90%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Laudo Social para Curatela de Idoso para mais tarde
+Distrato Social de Empresário Individual
+Distrato Social de Empresário Individual
+Adicionado por
+Anthony Marx
+67%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Distrato Social de Empresário Individual para mais tarde
+Comunicado sobre Marcação de Ponto
+Comunicado sobre Marcação de Ponto
+Adicionado por
+thais pereira araujo
+75%
+(8)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Comunicado sobre Marcação de Ponto para mais tarde
+Solicitação de Doações para Crianças
+Solicitação de Doações para Crianças
+Adicionado por
+vitor silva
+67%
+(6)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Solicitação de Doações para Crianças para mais tarde
+Atividade sobre os 10 Mandamentos
+Atividade sobre os 10 Mandamentos
+Adicionado por
+Madáh Cardoso
+67%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Atividade sobre os 10 Mandamentos para mais tarde
+Mini Álbum da Copa para Imprimir
+Mini Álbum da Copa para Imprimir
+Adicionado por
+Josilma Alzira
+50%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Mini Álbum da Copa para Imprimir para mais tarde
+Modelo de Ofício de Solicitação
+Modelo de Ofício de Solicitação
+Adicionado por
+Aroudo Gouveia
+80%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Modelo de Ofício de Solicitação para mais tarde
+Dokkōdō: O Caminho da Solidão
+Dokkōdō: O Caminho da Solidão
+Adicionado por
+champs
+100%
+(2)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Dokkōdō: O Caminho da Solidão para mais tarde
+Declaração de Compra e Venda de Terreno
+Declaração de Compra e Venda de Terreno
+Adicionado por
+emersombispo2016
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Compra e Venda de Terreno para mais tarde
+Demanda Espiritual na Umbanda
+Demanda Espiritual na Umbanda
+Adicionado por
+Piedro Lanceiro
+0 notas
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Demanda Espiritual na Umbanda para mais tarde
+Mapa Mental do Artigo de Opinião
+Mapa Mental do Artigo de Opinião
+Adicionado por
+Vanessa Sampaio
+80%
+(10)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Mapa Mental do Artigo de Opinião para mais tarde
+Certificado de Consagração ao Diaconato
+Certificado de Consagração ao Diaconato
+Adicionado por
+Rudney Carreira
+100%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Certificado de Consagração ao Diaconato para mais tarde
+Ficha de Controle de Pressão Arterial
+Ficha de Controle de Pressão Arterial
+Adicionado por
+Charles Cerqueira Do Nascimento
+75%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Ficha de Controle de Pressão Arterial para mais tarde
+Declaração de Aluguel Residencial
+Declaração de Aluguel Residencial
+Adicionado por
+rosazulma04
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Aluguel Residencial para mais tarde
+Termo de Entrega de Chaves Locação
+Termo de Entrega de Chaves Locação
+Adicionado por
+Henrique
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Termo de Entrega de Chaves Locação para mais tarde
+Gabarito de Questões sobre LGPD
+Gabarito de Questões sobre LGPD
+Adicionado por
+Beatriz
+67%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Gabarito de Questões sobre LGPD para mais tarde
+Declaração de Vínculo Contratual
+Declaração de Vínculo Contratual
+Adicionado por
+liliana ribeiro
+100%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Declaração de Vínculo Contratual para mais tarde
+Solicitação de Exame SUS
+Solicitação de Exame SUS
+Adicionado por
+Barbarela Freire
+0%
+(1)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Solicitação de Exame SUS para mais tarde
+Termo de Ent

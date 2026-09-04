@@ -1,7 +1,7 @@
 # Gestão de Documentação no AFD | PDF | Gestão de recursos humanos
 
 Fonte: https://pt.scribd.com/document/689198651/Modulo-2-Nocoes-de-Gestao-de-Documentacao
-Capturado em: 2026-09-03T14:25:09.831970+00:00
+Capturado em: 2026-09-03T11:59:14.821323+00:00
 Páginas no domínio: 10
 
 ## Gestão de Documentação no AFD | PDF | Gestão de recursos humanos
@@ -22,18 +22,68 @@ Português
 Carregar
 Fazer login
 Fazer login
-Gestão de Documentação no AFD
 0 notas
 0% acharam este documento útil (0 voto)
 35 visualizações
 20 páginas
-Título e descrição aprimorados por IA
-Este documento apresenta conceitos sobre gestão de documentação no setor público brasileiro de acordo com a legislação. Aborda os conceitos de gestão de documentos, normativos legais, tratam…
-Descrição completa
+Gestão de Documentação no AFD
+Este documento apresenta conceitos sobre gestão de documentação no setor público brasileiro de acordo com a legislação. Aborda os conceitos de gestão de documentos, normativos legais, tratamento documental e conceitos importantes no processo de gestão de documentos, como preparação, digitalização e registro no sistema AFD. O documento tem como objetivo capacitar servidores públicos sobre as melhores práticas de gestão de documentos funcionais digitais.
 Enviado por
 Guilherme Freitas
+Título e descrição aprimorados por IA
+Direitos autorais
+© All Rights Reserved
+Levamos muito a sério os direitos de conteúdo. Se você suspeita que este conteúdo é seu,
+reivindique-o aqui
+.
+Formatos disponíveis
+Baixe no formato PDF, TXT ou leia on-line no Scribd
+Baixar
+Salvar
+Salvar Módulo 2 -Noções de Gestão de Documentação para ler mais tarde
+Compartilhar
+0%
+0% acharam este documento útil, Marcar esse documento como útil
+0%
+0% acharam que esse documento não foi útil, Marcar esse documento como não foi útil
+Imprimir
+Incorporar
+Relatório
+0 notas
+0% acharam este documento útil (0 voto)
+35 visualizações
+20 páginas
+Gestão de Documentação no AFD
+Este documento apresenta conceitos sobre gestão de documentação no setor público brasileiro de acordo com a legislação. Aborda os conceitos de gestão de documentos, normativos legais, tratamento documental e conceitos importantes no processo de gestão de documentos, como preparação, digitalização e registro no sistema AFD. O documento tem como objetivo capacitar servidores públicos sobre as melhores práticas de gestão de documentos funcionais digitais.
+Enviado por
+Guilherme Freitas
+Título e descrição aprimorados por IA
+Direitos autorais
+© All Rights Reserved
+Levamos muito a sério os direitos de conteúdo. Se você suspeita que este conteúdo é seu,
+reivindique-o aqui
+.
+Formatos disponíveis
+Baixe no formato PDF, TXT ou leia on-line no Scribd
+Ir para itens anteriores
+Baixar
+Salvar
+Salvar Módulo 2 -Noções de Gestão de Documentação para ler mais tarde
+Compartilhar
+0%
+0% acharam este documento útil, Marcar esse documento como útil
+0%
+0% acharam que esse documento não foi útil, Marcar esse documento como não foi útil
+Imprimir
+Incorporar
+Relatório
+Ir para os próximos itens
 Visualização de página
 Baixar
+Salvar Módulo 2 -Noções de Gestão de Documentação para ler mais tarde
+Compartilhar
+Mais opções
+Tela inteira
 Introdução ao Sistema Sigepe - AFD
 Módulo
 2 Noções de Gestão de Documentação
@@ -625,362 +675,362 @@ Noções de Arquivologia e Gestão Documental
 Ainda não há avaliações
 Noções de Arquivologia e Gestão Documental
 13 páginas
-Introdução à Gestão Documental Pública
-100% (1)
-Introdução à Gestão Documental Pública
-48 páginas
 GESTAO DOCUMENTAL APLICADA Ieda PDF
 50% (2)
 GESTAO DOCUMENTAL APLICADA Ieda PDF
 54 páginas
-Gestão de Documentos para Arquivologia ANA
+Classificação de Materiais XYZ
 Ainda não há avaliações
-Gestão de Documentos para Arquivologia ANA
-117 páginas
-Capacitação Digital para Neoprofessores
+Classificação de Materiais XYZ
+46 páginas
+Principios Da Administraçaõ
 Ainda não há avaliações
-Capacitação Digital para Neoprofessores
-141 páginas
-Gestão de Riscos em IFE: Curso Prático
+Principios Da Administraçaõ
+19 páginas
+Preservação de Documentos em Papel
+100% (1)
+Preservação de Documentos em Papel
+132 páginas
+Noções de Administração de Recursos Materiais
 Ainda não há avaliações
-Gestão de Riscos em IFE: Curso Prático
-63 páginas
-Manual de Gestão Documental da Funai
-0% (1)
-Manual de Gestão Documental da Funai
-181 páginas
+Noções de Administração de Recursos Materiais
+45 páginas
+Gestão de Almoxarifado na Administração Pública
+Ainda não há avaliações
+Gestão de Almoxarifado na Administração Pública
+26 páginas
+Educação Corporativa e Competências Críticas
+Ainda não há avaliações
+Educação Corporativa e Competências Críticas
+23 páginas
+Atendimento ao Público no Setor Público
+Ainda não há avaliações
+Atendimento ao Público no Setor Público
+21 páginas
+Gestão de Cadeia de Suprimentos
+Ainda não há avaliações
+Gestão de Cadeia de Suprimentos
+21 páginas
+Processo Administrativo em Gestão Documental
+Ainda não há avaliações
+Processo Administrativo em Gestão Documental
+259 páginas
+Gestão Ambiental e Responsabilidade Social
+Ainda não há avaliações
+Gestão Ambiental e Responsabilidade Social
+22 páginas
+Armazenamento Seguro de Alimentos
+Ainda não há avaliações
+Armazenamento Seguro de Alimentos
+3 páginas
+Socialização Organizacional e Onboarding
+Ainda não há avaliações
+Socialização Organizacional e Onboarding
+15 páginas
 07 - Gestao de Documentos e Arquivistica PDF
 Ainda não há avaliações
 07 - Gestao de Documentos e Arquivistica PDF
 86 páginas
-Manutenção Lean: Princípios e Práticas
-0% (1)
-Manutenção Lean: Princípios e Práticas
-41 páginas
-Produtividade na Manutenção Industrial
+TI como Ferramenta de Gestão Empresarial
 Ainda não há avaliações
-Produtividade na Manutenção Industrial
-114 páginas
-Exemplos de Manutenção Preditiva
-Ainda não há avaliações
-Exemplos de Manutenção Preditiva
-47 páginas
-Gestão de Documentos e Arquivística
-100% (1)
-Gestão de Documentos e Arquivística
-104 páginas
-Gestão de Ativos segundo ISO 55000
-Ainda não há avaliações
-Gestão de Ativos segundo ISO 55000
-22 páginas
-Gestão da Manutenção Lean
-100% (1)
-Gestão da Manutenção Lean
-41 páginas
-Manual de Gestão de Documentos APM
-Ainda não há avaliações
-Manual de Gestão de Documentos APM
-150 páginas
-Gestão Eficaz da Manutenção Industrial
-100% (3)
-Gestão Eficaz da Manutenção Industrial
-223 páginas
-Evolução da Gestão de Manutenção
-Ainda não há avaliações
-Evolução da Gestão de Manutenção
-53 páginas
-Gestão de Contratos e Fornecedores - Guia para Gestores de Manutenção
-100% (1)
-Gestão de Contratos e Fornecedores - Guia para Gestores de Manutenção
-12 páginas
-Classificação de Documentos Arquivísticos
-Ainda não há avaliações
-Classificação de Documentos Arquivísticos
-35 páginas
-Legislação Arquivística no Brasil
-100% (1)
-Legislação Arquivística no Brasil
-131 páginas
-Gestão Documental no Poder Judiciário
-Ainda não há avaliações
-Gestão Documental no Poder Judiciário
-140 páginas
-Implementação da ISO 55000 na Gestão de Ativos
-100% (1)
-Implementação da ISO 55000 na Gestão de Ativos
-7 páginas
-Gestão da Carteira de Serviços de Manutenção
-Ainda não há avaliações
-Gestão da Carteira de Serviços de Manutenção
-101 páginas
-Diagnóstico em Arquivos e Gestão Documental
-100% (1)
-Diagnóstico em Arquivos e Gestão Documental
-24 páginas
-Significado e Classificação de Arquivos
-Ainda não há avaliações
-Significado e Classificação de Arquivos
-72 páginas
-Planejamento e Controle da Manutenção
-100% (1)
-Planejamento e Controle da Manutenção
-141 páginas
-Programa 5S: Melhoria do Ambiente de Trabalho
-100% (1)
-Programa 5S: Melhoria do Ambiente de Trabalho
-61 páginas
-Gestão Documental: Conceitos e Práticas
-50% (2)
-Gestão Documental: Conceitos e Práticas
+TI como Ferramenta de Gestão Empresarial
 9 páginas
-Introducao - A - Administracao - 2018 EAD PDF
+Funções da Administração e Papéis do Administrador
 Ainda não há avaliações
-Introducao - A - Administracao - 2018 EAD PDF
-116 páginas
-Estratégias de Gestão da Manutenção
-100% (2)
-Estratégias de Gestão da Manutenção
-18 páginas
-Análise de Custos em Manutenção Industrial
-100% (1)
-Análise de Custos em Manutenção Industrial
-21 páginas
-Gestão da Qualidade e ISO 9001:2000
-100% (3)
-Gestão da Qualidade e ISO 9001:2000
-180 páginas
-Gestão Eficiente de Documentos Públicos
-100% (2)
-Gestão Eficiente de Documentos Públicos
-31 páginas
-Gestão de Documentos em Arquivologia 2023
-100% (1)
-Gestão de Documentos em Arquivologia 2023
-138 páginas
-Gestão de Manutenção de Equipamentos
-100% (1)
-Gestão de Manutenção de Equipamentos
-142 páginas
-Gestão da Qualidade: Conceitos e Ferramentas
+Funções da Administração e Papéis do Administrador
+103 páginas
+Administração de Materiais: Princípios e Gestão
 Ainda não há avaliações
-Gestão da Qualidade: Conceitos e Ferramentas
-30 páginas
-N 28 Gestao Da Inovacao
+Administração de Materiais: Princípios e Gestão
+2 páginas
+Gerência de Riscos e Segurança do Trabalho
 Ainda não há avaliações
-N 28 Gestao Da Inovacao
-16 páginas
-Gestão Eficiente da Manutenção Industrial
-100% (2)
-Gestão Eficiente da Manutenção Industrial
-132 páginas
-Gestão de Pessoas e Competências EAD
+Gerência de Riscos e Segurança do Trabalho
+68 páginas
+Tipos de Documentos Administrativos
 Ainda não há avaliações
-Gestão de Pessoas e Competências EAD
-71 páginas
-Ferramentas para Gestão de Riscos
-100% (8)
-Ferramentas para Gestão de Riscos
-23 páginas
-Gestão Eficiente da Manutenção Preventiva
-100% (1)
-Gestão Eficiente da Manutenção Preventiva
-121 páginas
-Guia de Gestão de Documentos Federais
+Tipos de Documentos Administrativos
+29 páginas
+A NORMA NBR ISO 9001 - Turma 02
 Ainda não há avaliações
-Guia de Gestão de Documentos Federais
-73 páginas
-Metodologias Ágeis: Scrum e Kanban
-100% (2)
-Metodologias Ágeis: Scrum e Kanban
-166 páginas
-Livro Gestao de Documentos e Arquivistica - Zélia Freiberger - Rede E-Tec Brasil
-67% (3)
-Livro Gestao de Documentos e Arquivistica - Zélia Freiberger - Rede E-Tec Brasil
-104 páginas
-Gestão Eficiente da Manutenção de Equipamentos
-Ainda não há avaliações
-Gestão Eficiente da Manutenção de Equipamentos
-14 páginas
-Manual de Elaboração de Indicadores
-Ainda não há avaliações
-Manual de Elaboração de Indicadores
-16 páginas
-Gestão de Documentos Escolares e Legislação
-Ainda não há avaliações
-Gestão de Documentos Escolares e Legislação
-15 páginas
-Apostila Ufpe - Informática PDF
-100% (1)
-Apostila Ufpe - Informática PDF
-114 páginas
-Plano de Ação em Gestão Documental Pública
-Ainda não há avaliações
-Plano de Ação em Gestão Documental Pública
-32 páginas
-Técnicas de Arquivo e Classificação
-100% (4)
-Técnicas de Arquivo e Classificação
-90 páginas
-Introdução à Gestão de Processos
-90% (10)
-Introdução à Gestão de Processos
+A NORMA NBR ISO 9001 - Turma 02
 76 páginas
-Gestão de Subprocessos em TI
-100% (2)
-Gestão de Subprocessos em TI
-98 páginas
-Gestão de Documentos Escolares em Londrina
+Ciclo PODC na Administração
 Ainda não há avaliações
-Gestão de Documentos Escolares em Londrina
-13 páginas
-Ferramentas de Gestão da Qualidade
+Ciclo PODC na Administração
+11 páginas
+Gestão de Estoques e Curva ABC
 Ainda não há avaliações
-Ferramentas de Gestão da Qualidade
+Gestão de Estoques e Curva ABC
+21 páginas
+Classificação de Documentos em Arquivologia
+Ainda não há avaliações
+Classificação de Documentos em Arquivologia
+6 páginas
+Práticas Administrativas e Gestão
+Ainda não há avaliações
+Práticas Administrativas e Gestão
 46 páginas
-Boas Práticas em Gestão de Pastas
-Ainda não há avaliações
-Boas Práticas em Gestão de Pastas
-10 páginas
-Teoria da Contingência na Administração
+Administração de Materiais e Patrimônio
+100% (4)
+Administração de Materiais e Patrimônio
+12 páginas
+Teoria do Desenvolvimento Organizacional
 100% (1)
-Teoria da Contingência na Administração
-28 páginas
-Gestão Eficiente de Frotas Empresariais
+Teoria do Desenvolvimento Organizacional
+21 páginas
+Definindo Metas SMART para Negócios
 Ainda não há avaliações
-Gestão Eficiente de Frotas Empresariais
+Definindo Metas SMART para Negócios
+37 páginas
+Guia de Redação de Atos Normativos
+Ainda não há avaliações
+Guia de Redação de Atos Normativos
+41 páginas
+Classificação de Materiais e Estoques
+100% (1)
+Classificação de Materiais e Estoques
+60 páginas
+Implementação do Programa 5S
+Ainda não há avaliações
+Implementação do Programa 5S
 3 páginas
-Gestão da Qualidade e Excelência Gerencial
+Gestão Eficiente de Documentos
 Ainda não há avaliações
-Gestão da Qualidade e Excelência Gerencial
-43 páginas
-Gestão de Planejamento e Controle de Manutenção
+Gestão Eficiente de Documentos
+13 páginas
+Atributos na Classificação de Materiais
+0% (1)
+Atributos na Classificação de Materiais
+46 páginas
+Fundamentos da Linguagem Corporativa
+Ainda não há avaliações
+Fundamentos da Linguagem Corporativa
+16 páginas
+Curso de Almoxarife de Obras: Qualificação
+0% (1)
+Curso de Almoxarife de Obras: Qualificação
+54 páginas
+Segurança da Informação e Gestão de Riscos
+Ainda não há avaliações
+Segurança da Informação e Gestão de Riscos
+35 páginas
+Apostila - Módulo 5 - Gestão Pessoas
+Ainda não há avaliações
+Apostila - Módulo 5 - Gestão Pessoas
+66 páginas
+Manual de Gestão Documental da Funai
+0% (1)
+Manual de Gestão Documental da Funai
+181 páginas
+Apostila de Comunicação Empresarial
+Ainda não há avaliações
+Apostila de Comunicação Empresarial
+29 páginas
+Teoria Neoclássica da Administração
+Ainda não há avaliações
+Teoria Neoclássica da Administração
+11 páginas
+Aplicação do Teste dos 5 Porquês
+Ainda não há avaliações
+Aplicação do Teste dos 5 Porquês
+12 páginas
+Princípios da Administração Científica de Taylor
+Ainda não há avaliações
+Princípios da Administração Científica de Taylor
+4 páginas
+Processos Gerenciais e Sistemas de Informação
 100% (1)
-Gestão de Planejamento e Controle de Manutenção
+Processos Gerenciais e Sistemas de Informação
 47 páginas
+Teoria Clássica da Administração de Fayol
+Ainda não há avaliações
+Teoria Clássica da Administração de Fayol
+6 páginas
+Dimensões da Qualidade em Produtos
+100% (1)
+Dimensões da Qualidade em Produtos
+16 páginas
+Gestão de Projetos: Conceitos e Práticas
+Ainda não há avaliações
+Gestão de Projetos: Conceitos e Práticas
+35 páginas
+Saúde e Segurança no Trabalho: NRs e CLT
+Ainda não há avaliações
+Saúde e Segurança no Trabalho: NRs e CLT
+134 páginas
+Abordagens da Teoria da Administração
+100% (1)
+Abordagens da Teoria da Administração
+23 páginas
+Evolução e Conceitos da Logística
+Ainda não há avaliações
+Evolução e Conceitos da Logística
+33 páginas
+Administração de Materiais e Patrimônio
+Ainda não há avaliações
+Administração de Materiais e Patrimônio
+33 páginas
+Gestão de Armazéns e Armazenagem
+Ainda não há avaliações
+Gestão de Armazéns e Armazenagem
+60 páginas
+História da Governança Corporativa no Brasil
+Ainda não há avaliações
+História da Governança Corporativa no Brasil
+33 páginas
+Diferença entre Acidente e Incidente
+Ainda não há avaliações
+Diferença entre Acidente e Incidente
+1 página
+Métodos e Noções de Arquivamento
+Ainda não há avaliações
+Métodos e Noções de Arquivamento
+20 páginas
+Técnicas de Roçagem Manual e Equipamentos
+Ainda não há avaliações
+Técnicas de Roçagem Manual e Equipamentos
+3 páginas
+Direitos do Consumidor e CDC Explicado
+Ainda não há avaliações
+Direitos do Consumidor e CDC Explicado
+8 páginas
+Fundamentos da Administração em Logística
+Ainda não há avaliações
+Fundamentos da Administração em Logística
+62 páginas
+Gestão da Inovação: Fundamentos e Práticas
+Ainda não há avaliações
+Gestão da Inovação: Fundamentos e Práticas
+84 páginas
+Gestão de Documentos e Arquivística
+100% (1)
+Gestão de Documentos e Arquivística
+104 páginas
 339 1904 1 PB
 Ainda não há avaliações
 339 1904 1 PB
 19 páginas
-Sistema Vipal: Etapas e Vantagens
+POP Atendimento Psicologia Piraúba
 Ainda não há avaliações
-Sistema Vipal: Etapas e Vantagens
-46 páginas
-Tabela de Pressão e Ponto de Ebulição
-Ainda não há avaliações
-Tabela de Pressão e Ponto de Ebulição
-2 páginas
-06 T2 Série 700 - SEL-700G (Compatibility Mode)
-100% (2)
-06 T2 Série 700 - SEL-700G (Compatibility Mode)
-22 páginas
-Apreciação da Lei de Conservação em Moçambique
-Ainda não há avaliações
-Apreciação da Lei de Conservação em Moçambique
-45 páginas
-Exercícios de Função Composta e Inversa
-Ainda não há avaliações
-Exercícios de Função Composta e Inversa
-4 páginas
-Adensamento e Recalque em Solos
-Ainda não há avaliações
-Adensamento e Recalque em Solos
-14 páginas
-Boleto DETRAN-GO: Documento de Arrecadação
-Ainda não há avaliações
-Boleto DETRAN-GO: Documento de Arrecadação
-1 página
-Propriedades e Aplicações do Acetileno
-Ainda não há avaliações
-Propriedades e Aplicações do Acetileno
-7 páginas
-A História da DKW VEMAG no Brasil
-Ainda não há avaliações
-A História da DKW VEMAG no Brasil
-12 páginas
-Legislação sobre Recursos Hídricos no Ceará
-Ainda não há avaliações
-Legislação sobre Recursos Hídricos no Ceará
-80 páginas
-Boleto de Mensalidade Pitágoras 09/2021
-Ainda não há avaliações
-Boleto de Mensalidade Pitágoras 09/2021
-1 página
-Rotinas Práticas de Autocuidado Diário
-Ainda não há avaliações
-Rotinas Práticas de Autocuidado Diário
-8 páginas
-Judith Krantz - Nas Asas Da Paixao
-Ainda não há avaliações
-Judith Krantz - Nas Asas Da Paixao
-449 páginas
-Fisiologia do Exercício e Nutrição
-100% (2)
-Fisiologia do Exercício e Nutrição
-2 páginas
-Cinemática: Movimentos Circulares e Acelerações
-Ainda não há avaliações
-Cinemática: Movimentos Circulares e Acelerações
-45 páginas
-IDP2 Peptídeo: Cicatrização Avançada
-100% (1)
-IDP2 Peptídeo: Cicatrização Avançada
-2 páginas
-Tempestade Vermelha: Conflito Global em 1984
-Ainda não há avaliações
-Tempestade Vermelha: Conflito Global em 1984
-31 páginas
-Checklist Completo de Decolagem e Pouso
-Ainda não há avaliações
-Checklist Completo de Decolagem e Pouso
-2 páginas
-Comando Militar e Liderança: Filosofia e Ética
-Ainda não há avaliações
-Comando Militar e Liderança: Filosofia e Ética
-6 páginas
-Projeto de Amplificador Classe AB 100W
-Ainda não há avaliações
-Projeto de Amplificador Classe AB 100W
+POP Atendimento Psicologia Piraúba
 5 páginas
-Evolução de Sistemas de Cria Eficientes
+Especialização em Projetos de Vidros
 Ainda não há avaliações
-Evolução de Sistemas de Cria Eficientes
-20 páginas
-Ficha de Avaliação de Estágio em Pedagogia
+Especialização em Projetos de Vidros
+16 páginas
+Educação e Paidéia na Grécia Antiga
 Ainda não há avaliações
-Ficha de Avaliação de Estágio em Pedagogia
-2 páginas
-A Radiologia Industrial PDF
-100% (2)
-A Radiologia Industrial PDF
-109 páginas
-Métodos de Produção de Plantas Transgênicas
+Educação e Paidéia na Grécia Antiga
+15 páginas
+Evolução dos Estudos Linguísticos
 Ainda não há avaliações
-Métodos de Produção de Plantas Transgênicas
-10 páginas
-Edital de Bolsas MBA USP/Esalq 2024
+Evolução dos Estudos Linguísticos
+12 páginas
+Currículo Indígena Tenharin no Amazonas
 Ainda não há avaliações
-Edital de Bolsas MBA USP/Esalq 2024
-31 páginas
-Manual do Medidor de pH HI 207/208
+Currículo Indígena Tenharin no Amazonas
+165 páginas
+Justificativa Pedagógica no SIMADE
 Ainda não há avaliações
-Manual do Medidor de pH HI 207/208
-2 páginas
-Relatório de Estágio em Agropecuária IFMT
-Ainda não há avaliações
-Relatório de Estágio em Agropecuária IFMT
-22 páginas
-Clara Menina e o Pecado do Amor
-Ainda não há avaliações
-Clara Menina e o Pecado do Amor
-39 páginas
-Aprendendo com Palavra Cantada
-Ainda não há avaliações
-Aprendendo com Palavra Cantada
-44 páginas
-Boleto de Depósito Nubank - Eliane Garcia
-Ainda não há avaliações
-Boleto de Depósito Nubank - Eliane Garcia
+Justificativa Pedagógica no SIMADE
 1 página
+Comissionamento de Subestação 138kV
+Ainda não há avaliações
+Comissionamento de Subestação 138kV
+101 páginas
+Aplicação do TDE II na Educação Infantil
+100% (10)
+Aplicação do TDE II na Educação Infantil
+16 páginas
+Custo de Produção Cana-de-Açúcar Goiás
+Ainda não há avaliações
+Custo de Produção Cana-de-Açúcar Goiás
+4 páginas
+Pedagogia Empreendedora em Educação
+Ainda não há avaliações
+Pedagogia Empreendedora em Educação
+23 páginas
+Plano de Aula de Artes - 9º Ano
+Ainda não há avaliações
+Plano de Aula de Artes - 9º Ano
+2 páginas
+Aula 06 - Equipamentos e Utensílios Usados Na Panificação - 3 ANO - Agroindustria
+Ainda não há avaliações
+Aula 06 - Equipamentos e Utensílios Usados Na Panificação - 3 ANO - Agroindustria
+37 páginas
+PGR - Churrascaria o Faustino Assinado
+Ainda não há avaliações
+PGR - Churrascaria o Faustino Assinado
+48 páginas
+Relatório Da Inspeção Nacional em Comunidades Terapêuticas - 2025
+Ainda não há avaliações
+Relatório Da Inspeção Nacional em Comunidades Terapêuticas - 2025
+173 páginas
+Triangulação de Dados de Carga Viral
+Ainda não há avaliações
+Triangulação de Dados de Carga Viral
+5 páginas
+Modelo Pedagógico PROETI Espírito Santo
+Ainda não há avaliações
+Modelo Pedagógico PROETI Espírito Santo
+116 páginas
+Atividades Criativas de Páscoa para Crianças
+Ainda não há avaliações
+Atividades Criativas de Páscoa para Crianças
+11 páginas
+Atos do Poder Executivo de Rondônia
+Ainda não há avaliações
+Atos do Poder Executivo de Rondônia
+369 páginas
+História da Psicologia no Brasil
+Ainda não há avaliações
+História da Psicologia no Brasil
+23 páginas
+Divisão Sétupla e Sete Raios Cósmicos
+Ainda não há avaliações
+Divisão Sétupla e Sete Raios Cósmicos
+15 páginas
+Legião Revolucionária: Princípios para o Brasil
+Ainda não há avaliações
+Legião Revolucionária: Princípios para o Brasil
+13 páginas
+Importância da Geomorfologia no Solo
+Ainda não há avaliações
+Importância da Geomorfologia no Solo
+14 páginas
+Leitura Literária e Formação do Jovem Leitor
+Ainda não há avaliações
+Leitura Literária e Formação do Jovem Leitor
+53 páginas
+Limitações e Potencialidades na Pesquisa Educacional
+Ainda não há avaliações
+Limitações e Potencialidades na Pesquisa Educacional
+9 páginas
+Laudo Pericial Documentoscópico
+90% (10)
+Laudo Pericial Documentoscópico
+25 páginas
+Organize Seus Estudos para o ENA-PROFEPT
+Ainda não há avaliações
+Organize Seus Estudos para o ENA-PROFEPT
+24 páginas
+Manual de Empresas Trilógicas: Guia Prático
+Ainda não há avaliações
+Manual de Empresas Trilógicas: Guia Prático
+44 páginas
+Planejamento de Sistemas de Informação
+Ainda não há avaliações
+Planejamento de Sistemas de Informação
+11 páginas
+Manual de Práticas de EVH Vol II
+Ainda não há avaliações
+Manual de Práticas de EVH Vol II
+61 páginas
+Avaliação do Desenvolvimento Infantil aos 3 Anos
+Ainda não há avaliações
+Avaliação do Desenvolvimento Infantil aos 3 Anos
+4 páginas
 Menu inferior
 Voltar para o topo
 Sobre
@@ -1471,14 +1521,6 @@ Lenise Tedesco
 (2)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Declaração de Último Dia Trabalhado - DUT para mais tarde
-Procuração para Farmácia Popular 2025
-Procuração para Farmácia Popular 2025
-Adicionado por
-Fernanda Rezende
-80%
-(10)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Procuração para Farmácia Popular 2025 para mais tarde
 Modelo de Requisição de Material
 Modelo de Requisição de Material
 Adicionado por
@@ -1590,6 +1632,14 @@ Joao Penca
 (14)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Declaração de Amasia Simples para mais tarde
+Formulario para Recebimento de Indenização Suhai Seguradora 10 - 2025
+Formulario para Recebimento de Indenização Suhai Seguradora 10 - 2025
+Adicionado por
+Gislaine de souza
+100%
+(3)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Formulario para Recebimento de Indenização Suhai Seguradora 10 - 2025 para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Mais populares em Carreira e Crescimento
@@ -1882,14 +1932,6 @@ patricktonolli
 (73)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve 50 Licoes para Voce Compreender - Di Saval para mais tarde
-Atestado Médico para Afastamento
-Atestado Médico para Afastamento
-Adicionado por
-Luiza nunes
-68%
-(38)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Atestado Médico para Afastamento para mais tarde
 Como Se Tornar Sobrenatural - Joe Dispenza
 Como Se Tornar Sobrenatural - Joe Dispenza
 Adicionado por
@@ -2082,6 +2124,14 @@ Silvana
 (12)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Atividades sobre Misturas 4º Ano para mais tarde
+Checklist Completo para ENEM 2026
+Checklist Completo para ENEM 2026
+Adicionado por
+Antônio Paulo
+92%
+(13)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Checklist Completo para ENEM 2026 para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Mais populares em Bem-estar
@@ -2128,14 +2178,6 @@ Michelle Ribeiro
 (45)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Cartão de Controle da Pressão Arterial para mais tarde
-Atestado Médico para Afastamento
-Atestado Médico para Afastamento
-Adicionado por
-Luiza nunes
-68%
-(38)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Atestado Médico para Afastamento para mais tarde
 Alfabeto Móvel para Imprimir GRANDE 2
 Alfabeto Móvel para Imprimir GRANDE 2
 Adicionado por
@@ -2327,6 +2369,14 @@ leo
 (3)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Cardápio da Dieta das 3 Fases para mais tarde
+Atividades sobre Capelinha de Melão
+Atividades sobre Capelinha de Melão
+Adicionado por
+Nadja Cibelle Machado Rocha
+100%
+(6)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Atividades sobre Capelinha de Melão para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Mais populares em Tecnologia e Engenharia
@@ -2599,8 +2649,8 @@ Modelo de Recibo Simples para Imprimir
 Modelo de Recibo Simples para Imprimir
 Adicionado por
 LMP
-80%
-(10)
+89%
+(9)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Modelo de Recibo Simples para Imprimir para mais tarde
 Declaração de Faturamento Santander
@@ -3345,14 +3395,6 @@ Laecio D. C. D. Santos
 (11)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Modelo de Requisição de Material para mais tarde
-Recibo de Compra e Venda de Imóvel
-Recibo de Compra e Venda de Imóvel
-Adicionado por
-suzanakr
-88%
-(17)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Recibo de Compra e Venda de Imóvel para mais tarde
 Senhas para Impressão de 1 a 30
 Senhas para Impressão de 1 a 30
 Adicionado por
@@ -3457,14 +3499,6 @@ Matheus Damaceno
 (10)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Declaração de Trabalho para Escola para mais tarde
-Procuração Simples para AES Eletropaulo
-Procuração Simples para AES Eletropaulo
-Adicionado por
-Edutent
-54%
-(13)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Procuração Simples para AES Eletropaulo para mais tarde
 Declaração de Aluguel Residencial
 Declaração de Aluguel Residencial
 Adicionado por
@@ -3553,6 +3587,22 @@ Josilma Alzira
 (2)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Mini Álbum da Copa para Imprimir para mais tarde
+Procuração Simples para Pessoa Física
+Procuração Simples para Pessoa Física
+Adicionado por
+gel3236
+100%
+(4)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Procuração Simples para Pessoa Física para mais tarde
+Laudo para Autorização de Procedimento Ambulatorial
+Laudo para Autorização de Procedimento Ambulatorial
+Adicionado por
+Acrilar
+80%
+(5)
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
+Salve Laudo para Autorização de Procedimento Ambulatorial para mais tarde
 Ir para os próximos itens
 Visualizar mais
 Menu inferior
@@ -6612,14 +6662,6 @@ Sidney Chire
 (4)
 function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
 Salve Mapa de Acabamentos para Requalificação para mais tarde
-Certificado de Conclusão NR-37 Segurança
-Certificado de Conclusão NR-37 Segurança
-Adicionado por
-Segurança [Perfinaço]
-50%
-(2)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Certificado de Conclusão NR-37 Segurança para mais tarde
 Checklist Completo de Enxoval Casa Nova
 Checklist Completo de Enxoval Casa Nova
 Adicionado por
@@ -7037,45 +7079,4 @@ Adicionado por
 Hugo Santos
 100%
 (2)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Desenho de Cozinha em Planta Baixa para mais tarde
-Sinopse do Livro "Kotlin em Ação"
-Sinopse do Livro "Kotlin em Ação"
-Adicionado por
-ZIP DOWNLOAD
-0 notas
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Sinopse do Livro "Kotlin em Ação" para mais tarde
-Como Acessar a Nómina OXXO
-Como Acessar a Nómina OXXO
-Adicionado por
-Alan Edson Garcia cavazos
-0 notas
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Como Acessar a Nómina OXXO para mais tarde
-Atividades de Leitura: Pedra, Papel e Tesoura
-Atividades de Leitura: Pedra, Papel e Tesoura
-Adicionado por
-Lillia Cardoso
-0 notas
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Atividades de Leitura: Pedra, Papel e Tesoura para mais tarde
-Análise da Matriz BCG: Kodak e Xerox
-Análise da Matriz BCG: Kodak e Xerox
-Adicionado por
-Douglas Diniz
-100%
-(6)
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Análise da Matriz BCG: Kodak e Xerox para mais tarde
-Examen Final de Inglês - Senati 2024
-Examen Final de Inglês - Senati 2024
-Adicionado por
-Angelo Tafur Yuto
-0 notas
-function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento útil
-Salve Examen Final de Inglês - Senati 2024 para mais tarde
-Mostrar mais
-Sobre
-Arte
-Explore milhares de passatempos criativos fascinantes e únicos, ao alcance de seus dedos. Seja você um colecionador de antiguidades, artista têxtil ou designer de interiores, nossa seleção cuidadosamente elaborada e em constante crescimento de PDFs sobre arte pode ajudá-lo a aprimorar suas habilidades existentes, e até mesmo desenvolver novas. Se você está em busca de um documento específico para enriquecer sua vida ou está aberto a novos campos e atividades artísticas, nossa biblioteca tem respostas e ideias que você não encontrará em nenhum outro lugar. Tanto os entusiastas do DIY quanto os profissionais descobrirão conhecimentos especializados em assuntos amplos como arquitetura e design, além de temas específicos como gravura e fotografia de paisagem. Quem sabe você encontra algo que desperte um interesse ou possi
+function wt(e,t){var n=e+t;return n<=0?0:Math.round(e/n*100)}% acharam este documento
