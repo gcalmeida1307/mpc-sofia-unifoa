@@ -73,7 +73,7 @@ DOMAIN_CONTRACTS: dict[str, DomainContract] = {
     "direito": DomainContract(
         "direito", "Direito", "Jurídico", "#a78bfa", "⚖", "Gestor jurídico",
         "Leis, normas, conexões entre dispositivos e riscos.",
-        ("lei", "legislação", "jurisprudência", "acordo coletivo", "contrato", "artigo", "empregado"),
+        ("lei", "legislação", "jurisprudência", "acordo coletivo", "contrato", "artigo", "empregado", "mandado de segurança", "prazo processual", "CLT"),
         source_profile="legal_primary_source",
         skills=("legal_comparison", "legal_interpretation"),
         tools=("search_knowledge", "analyst_scenario"),

@@ -191,6 +191,10 @@ TRAINING_LOCK: asyncio.Lock | None = None
 LINK_REFRESH_TASK: asyncio.Task[Any] | None = None
 EXPANSION_TASK: asyncio.Task[Any] | None = None
 DOCUMENT_AUDIT_TASK: asyncio.Task[Any] | None = None
+# Construir um grafo percorre os documentos do módulo e pode derivar artefatos
+# persistidos. Limitar essa operação evita que uma abertura do mapa neural, ou
+# várias abas, esgotem CPU, memória e conexões do armazenamento ao mesmo tempo.
+NEURAL_GRAPH_LIMITER = asyncio.Semaphore(2)
 
 
 def normalize_access_scopes(scopes: list[str]) -> list[str]:
@@ -554,6 +558,8 @@ async def search_knowledge(
             }
             for item in result.rejected_evidence
         ],
+        "required_sources": list(result.required_sources),
+        "missing_sources": list(result.missing_sources),
         "conflicts": list(result.conflicts),
         "judge_confidence": result.judge_confidence,
     }
@@ -657,7 +663,8 @@ async def neural_infer(module_id: str, values: list[float]) -> dict[str, Any]:
 async def neural_graph(module_id: str) -> dict[str, Any]:
     """Build a semantic graph from module documents and the trained network state."""
     module_root(module_id)
-    return await asyncio.to_thread(neural_model_graph, KNOWLEDGE_ROOT, module_id)
+    async with NEURAL_GRAPH_LIMITER:
+        return await asyncio.to_thread(neural_model_graph, KNOWLEDGE_ROOT, module_id)
 
 
 @mcp.tool()
@@ -945,7 +952,7 @@ async def rag_answer(
         await asyncio.to_thread(
             record_search_topic, KNOWLEDGE_ROOT, module_id, question, user_code
         )
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         # Topic analytics and expansion are auxiliary. A database dialect or
         # migration issue must never turn a valid RAG question into HTTP 500.
         logger.warning("Não foi possível registrar o tema para expansão: %s", exc)
@@ -1254,7 +1261,11 @@ async def start_background_refresh() -> None:
     ensure_training_worker()
     refresh_modules()
     initialize_expansion(KNOWLEDGE_ROOT)
-    if os.getenv("SOFIA_AUTO_TRAIN_ON_STARTUP", "true").strip().casefold() not in {
+    # Never start a full-module training burst implicitly while the API is
+    # coming online.  It competes with login, health and chat on small hosts.
+    # Deployments that explicitly want a startup rebuild can still opt in via
+    # SOFIA_AUTO_TRAIN_ON_STARTUP=true.
+    if os.getenv("SOFIA_AUTO_TRAIN_ON_STARTUP", "false").strip().casefold() not in {
         "0",
         "false",
         "no",
@@ -1307,6 +1318,7 @@ app.add_middleware(
 @app.get("/api/health")
 async def health() -> dict[str, Any]:
     refresh_modules()
+    storage = await asyncio.to_thread(storage_status)
     return {
         "status": "ok",
         "server": "sofia-local",
@@ -1314,7 +1326,7 @@ async def health() -> dict[str, Any]:
         "knowledge": str(KNOWLEDGE_ROOT),
         "modules": len(MODULES),
         "fhir": "/fhir/metadata",
-        "storage": storage_status(),
+        "storage": storage,
     }
 
 
@@ -1413,7 +1425,19 @@ async def analytics_feedback(
     has_recoverable_evidence = (
         assessment["provider"] != "policy" and bool(assessment.get("source_names"))
     ) or bool(research_result.get("stored"))
+    # A negative opinion must produce a bounded recovery whenever the answer
+    # has a usable local basis. Structured answers are especially important:
+    # their retry must rerun the complete-file analyzer instead of asking a
+    # provider to repeat a partial chunk. If there is no local basis, the
+    # admin research pass above is the only permitted expansion attempt.
     retry_recommended = request.feedback == "bad" and has_recoverable_evidence
+    retry_strategy = "none"
+    if retry_recommended:
+        retry_strategy = (
+            "local-structured-or-rag"
+            if assessment.get("provider") != "policy"
+            else "external-research"
+        )
     training_scheduled = False
     if research_result.get("stored"):
         # New public material is a source update even when the aggregate
@@ -1444,6 +1468,7 @@ async def analytics_feedback(
         "updated": True,
         "feedback": request.feedback,
         "retry_recommended": retry_recommended,
+        "retry_strategy": retry_strategy,
         "external_research": research_result,
         "sensitive_expansion_requires_authorization": current.get("sub") != ADMIN_CODE,
         "learning": {
@@ -2002,12 +2027,17 @@ async def two_factor_enable(
 async def modules_endpoint(
     current: dict[str, Any] = Depends(require_user),
 ) -> list[dict[str, Any]]:
-    refresh_modules()
-    return [
-        status_for(module_id)
-        for module_id in MODULES
-        if has_module_access(current, module_id)
-    ]
+    def collect() -> list[dict[str, Any]]:
+        refresh_modules()
+        return [
+            status_for(module_id)
+            for module_id in MODULES
+            if has_module_access(current, module_id)
+        ]
+
+    # status_for includes filesystem, PostgreSQL and Ollama status checks. Do
+    # not run those blocking operations on the event loop that serves /api/chat.
+    return await asyncio.to_thread(collect)
 
 
 @app.get("/api/domain-contracts")
@@ -2036,6 +2066,10 @@ async def tools_endpoint(
 
 @app.get("/api/capabilities")
 async def capabilities(_: dict[str, Any] = Depends(require_user)) -> dict[str, Any]:
+    return await asyncio.to_thread(_capabilities_payload)
+
+
+def _capabilities_payload() -> dict[str, Any]:
     privacy = privacy_status()
     openai_key = bool(os.getenv("OPENAI_API_KEY"))
     openai_store = os.getenv("OPENAI_STORE_RESPONSES", "false").strip().casefold() in {

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import os
 import re
 from dataclasses import dataclass, field
@@ -9,14 +10,17 @@ from typing import Any
 from .agents import build_plan, remember_run, update_stage
 from .agents import critic as agent_critic
 from .context_engine import build_context_package, verify_answer
+from .contracts import IntelligenceDecision
+from .domains import domain_for
 from .harness import run_retrieval_harness
 from .learning import store_offline_candidate
 from .llmops import runtime_versions
 from .policies import ModulePolicy, policy_for
 from .privacy import ExternalRedaction, external_generation_may_be_used
 from .providers import Generation, generate_with_fallback
-from .query_analysis import assess_module_scope, is_medical_sleep_query
+from .query_analysis import assess_module_scope, classify_query, is_medical_sleep_query
 from .retrieval import RetrievalResult, normalize, retrieve
+from .structured_data import StructuredAnswer, analyze_structured_question
 
 
 @dataclass(frozen=True)
@@ -138,16 +142,29 @@ def _generation_timeout(response_style: str) -> float:
         return float(default)
 
 
-def _system(module_id: str, policy: ModulePolicy, language: str, response_style: str) -> str:
+def _system(
+    module_id: str,
+    policy: ModulePolicy,
+    language: str,
+    response_style: str,
+    response_mode: str = "evidence",
+) -> str:
     risk = "Você está em um domínio de saúde: não diagnostique, não prescreva e sinalize urgência quando aplicável." if policy.high_risk else ""
     language_name = LANGUAGE_NAMES[language]
-    if response_style == "concise":
+    if response_mode == "conversational":
+        style = "Responda como uma conversa profissional: comece pela resposta, use parágrafos curtos e exemplos somente quando ajudarem. Não crie as seções Conclusão, Base documental ou Limites automaticamente. Não repita a pergunta nem descreva o pipeline. Se a pergunta exigir uma regra interna, não invente; indique com clareza o que precisa ser confirmado nos documentos."
+    elif response_style == "concise":
         style = "Comece diretamente pela conclusão, sem título, sem prefácio e sem metacomentários. Responda em até 5 linhas ou bullets; elimine repetições, catálogos e detalhes laterais. Se houver mais de um assunto, use um parágrafo curto para cada um. Quando a fonte não definir um termo, diga apenas como ele aparece no documento; não complete com conhecimento geral. Em procedimentos, preserve o caminho de menu, a ordem e a ação final."
     elif response_style == "structured":
         style = "Use uma resposta estruturada, clara e humana. Organize, quando houver conteúdo para isso, nesta ordem: Conclusão; Base documental; Pontos de atenção ou interpretação; O que não é possível concluir; Próximo passo. Use títulos curtos, parágrafos breves ou bullets e omita blocos sem evidência. Adapte os nomes ao módulo: em saúde, riscos e encaminhamento; em infraestrutura, impacto e mitigação; em jurídico, interpretação e pendências. Não invente uma seção apenas para preencher o modelo."
     else:
         style = "Responda de forma detalhada, mas sem repetir ideias e sem ultrapassar 10 bullets ou parágrafos curtos. Quando a fonte não definir um termo, não complete com conhecimento geral. Organize a resposta em conclusão, evidências, pontos de atenção, limites e próximo passo, omitindo blocos sem conteúdo."
-    return f"Você é Sofia no módulo {module_id}. Responda sempre em {language_name} ({language}), mesmo que a fonte esteja em outro idioma. Responda exclusivamente sobre o conteúdo comprovado pelos documentos recuperados desse módulo. Se a pergunta fugir do módulo ou não estiver sustentada pela evidência, recuse educadamente e não use conhecimento geral, memória ou outro módulo. Nunca invente definições, exemplos, datas, penalidades ou consequências. Quando a evidência trouxer um procedimento, preserve a ordem dos passos, não invente campos, botões ou etapas e não repita a mesma ação. Use títulos simples, uma única vez, sem níveis Markdown (não escreva ##) e não repita o envelope de recuperação, o nome do documento ou as fontes dentro da resposta. {style} {risk} Cite somente fontes que realmente sustentem a resposta e diferencie fato documentado de incerteza."
+    evidence_boundary = (
+        "Use somente as evidências recuperadas e diferencie fato documentado de inferência."
+        if response_mode == "evidence"
+        else "Esta é uma resposta conversacional; não atribua conteúdo a documentos que não foram consultados."
+    )
+    return f"Você é Sofia no módulo {module_id}. Responda sempre em {language_name} ({language}), mesmo que a fonte esteja em outro idioma. {evidence_boundary} Se a pergunta fugir do módulo, recuse educadamente e não misture módulos. Nunca invente definições, exemplos, datas, penalidades ou consequências. Quando a evidência trouxer um procedimento, preserve a ordem dos passos, não invente campos, botões ou etapas e não repita a mesma ação. Use títulos simples, uma única vez, sem níveis Markdown (não escreva ##) e não repita o envelope de recuperação, o nome do documento ou as fontes dentro da resposta. {style} {risk}"
 
 
 def _prompt(
@@ -158,6 +175,7 @@ def _prompt(
     language: str = "pt-BR",
     response_style: str = "structured",
     evidence_override: str | None = None,
+    response_mode: str = "evidence",
 ) -> str:
     if result.has_quality_evidence:
         evidence = result.context if evidence_override is None else evidence_override
@@ -172,7 +190,9 @@ def _prompt(
     analysis_context = f"\n\nCONTEXTO ANALÍTICO AUXILIAR:\n{extra_context}" if extra_context else ""
     if extra_context and policy.high_risk:
         instruction += " Dados FHIR são contexto clínico para revisão do profissional; não diagnostique, prescreva ou altere tratamento automaticamente."
-    if response_style == "concise":
+    if response_mode == "conversational":
+        style_instruction = " Responda em linguagem natural, com parágrafos curtos e sem títulos obrigatórios."
+    elif response_style == "concise":
         style_instruction = " Entregue apenas um resumo direto, em até 5 linhas/bullets."
     elif response_style == "structured":
         style_instruction = " Entregue a resposta em blocos curtos, nesta ordem quando aplicável: Conclusão; Base documental; Pontos de atenção; Limites; Próximo passo. Não repita as fontes no corpo se elas já forem informadas pela interface."
@@ -181,7 +201,13 @@ def _prompt(
     return f"Idioma obrigatório da resposta: {LANGUAGE_NAMES[language]} ({language}).\nEstilo obrigatório: {RESPONSE_STYLES[response_style]}.{style_instruction}\n\nPergunta: {question}\n\n{instruction}\n\nEVIDÊNCIA LOCAL:\n{evidence}{analysis_context}"
 
 
-def _external_assist_system(module_id: str, policy: ModulePolicy, language: str, response_style: str) -> str:
+def _external_assist_system(
+    module_id: str,
+    policy: ModulePolicy,
+    language: str,
+    response_style: str,
+    response_mode: str = "evidence",
+) -> str:
     """Prompt for the controlled provider fallback when local RAG is empty."""
     risk = (
         "Em saúde, não diagnostique, não prescreva e indique avaliação profissional."
@@ -194,7 +220,8 @@ def _external_assist_system(module_id: str, policy: ModulePolicy, language: str,
         "Gere uma orientação geral útil apenas dentro do domínio deste módulo, sem atribuir afirmações a documentos locais, sem inventar fontes, sem misturar módulos e sem expor dados pessoais. "
         "Comece deixando claro que a resposta é assistida e ainda não foi confirmada pela base offline. "
         "Use linguagem humana, direta e parágrafos curtos. Não use títulos Markdown com ##. "
-        f"Estilo: {RESPONSE_STYLES[response_style]}. {risk}"
+        + ("Não use as seções Conclusão/Base documental/Limites; responda como conversa." if response_mode == "conversational" else "")
+        + f"Estilo: {RESPONSE_STYLES[response_style]}. {risk}"
     )
 
 
@@ -203,6 +230,7 @@ def _external_assist_prompt(
     extra_context: str,
     language: str,
     response_style: str,
+    response_mode: str = "evidence",
 ) -> str:
     context = f"\n\nCONTEXTO AUTORIZADO E MINIMIZADO:\n{extra_context}" if extra_context else ""
     return (
@@ -211,8 +239,9 @@ def _external_assist_prompt(
         f"Pergunta: {question}\n\n"
         "Não há trecho local suficiente para citar. Responda com conhecimento geral do domínio, "
         "sem fingir que a informação veio de um arquivo, link ou imagem do SOFIA. "
-        "Se a pergunta pedir uma decisão individual, explique quais dados e documentos precisam ser confirmados."
-        f"{context}"
+        "Se a pergunta pedir uma decisão individual, explique quais dados e documentos precisam ser confirmados. "
+        + ("Use parágrafos curtos e não crie títulos obrigatórios." if response_mode == "conversational" else "")
+        + f"{context}"
     )
 
 
@@ -222,10 +251,13 @@ def _format_external_assist_answer(
     question: str,
     language: str,
     response_style: str,
+    response_mode: str = "evidence",
 ) -> str:
     """Make an external fallback transparent without exposing local metadata."""
     empty_result = RetrievalResult((), (), question, question)
-    if response_style == "structured":
+    if response_mode == "conversational":
+        formatted = _repair_split_words(answer)
+    elif response_style == "structured":
         formatted = _structured_answer(answer, empty_result, language)
     elif response_style == "concise":
         formatted = _compact_answer(answer, question, "")
@@ -236,7 +268,83 @@ def _format_external_assist_answer(
         "en": f"Response origin\nThe offline base did not find enough evidence for this query. This guidance was generated as assistance by the {provider} engine and must be confirmed against the module documents.",
         "es": f"Origen de la respuesta\nLa base offline no encontró evidencia suficiente para esta consulta. Esta orientación fue generada como apoyo por el motor {provider} y debe confirmarse en los documentos del módulo.",
     }[language]
+    if response_mode == "conversational":
+        note = {
+            "pt-BR": f"Esta é uma orientação geral gerada pelo motor {provider}; ela não foi confirmada por um documento local nesta consulta.",
+            "en": f"This is general guidance generated by the {provider} engine; it was not confirmed by a local document in this query.",
+            "es": f"Esta es una orientación general generada por el motor {provider}; no fue confirmada por un documento local en esta consulta.",
+        }[language]
     return f"{formatted}\n\n{note}".strip()
+
+
+def _direct_system(module_id: str, policy: ModulePolicy, language: str, route: str) -> str:
+    risk = (
+        "Em saúde, não diagnostique, não prescreva, não dê dose individual e indique avaliação profissional quando houver risco."
+        if policy.high_risk
+        else ""
+    )
+    return (
+        f"Você é Sofia no módulo {module_id}. Responda em {LANGUAGE_NAMES[language]}. "
+        f"A intenção desta mensagem é {route}. Responda de forma humana, objetiva e acolhedora, "
+        "sem citar arquivos ou fontes que não foram fornecidos, sem inventar dados e sem descrever o raciocínio interno. "
+        "Se a pessoa pedir uma regra específica do módulo, diga que ela deve ser confirmada na base documental em vez de afirmar uma norma sem fonte. "
+        "Use no máximo 3 parágrafos curtos e não use o envelope ‘Conclusão/Base documental/Limites’. "
+        f"{risk}"
+    )
+
+
+def _direct_prompt(question: str, language: str, history: list[dict[str, str]], route: str) -> str:
+    previous = "\n".join(
+        f"{item.get('role', 'user')}: {item.get('content', '')}"
+        for item in history[-4:]
+        if item.get("role") in {"user", "assistant"} and str(item.get("content", "")).strip()
+    )
+    context = f"\nHISTÓRICO RECENTE:\n{previous}\n" if previous else ""
+    return (
+        f"Idioma: {LANGUAGE_NAMES[language]}. Rota: {route}.\n"
+        f"Pergunta ou tarefa:\n{question}\n"
+        f"{context}\nResponda agora, sem prefácio técnico e sem inventar uma fonte."
+    )
+
+
+def _provider_context(redaction: ExternalRedaction | None, context: str, policy: ModulePolicy) -> str:
+    if not redaction:
+        return context
+    return redaction.clean_clinical(context) if policy.high_risk else redaction.clean(context)
+
+
+def _route_context_package(
+    module_id: str,
+    question: str,
+    history: list[dict[str, str]],
+    decision: dict[str, Any],
+    response_style: str,
+) -> dict[str, Any]:
+    contract = policy_for(module_id)
+    return {
+        "question": question,
+        "domain": module_id,
+        "intent": decision.get("route", "conversation"),
+        "complexity": "L1",
+        "risk": "high" if contract.high_risk else "standard",
+        "conversation_context": history[-6:],
+        "accepted_evidence": [],
+        "rejected_evidence": [],
+        "relations": [],
+        "conflicts": [],
+        "available_tools": list(domain_for(module_id).tools),
+        "domain_policy": {
+            "route": decision.get("route"),
+            "retrieval_required": bool(decision.get("retrieval_required", False)),
+            "response_mode": decision.get("response_mode", "conversational"),
+            "reason": decision.get("reason", ""),
+            "privacy_boundary": "LGPD minimization; FHIR external blocked by default",
+        },
+        "expected_response_type": response_style,
+        "route": decision.get("route", "conversation"),
+        "retrieval_required": bool(decision.get("retrieval_required", False)),
+        "response_mode": decision.get("response_mode", "conversational"),
+    }
 
 
 def _focused_procedure_evidence(text: str) -> str:
@@ -503,15 +611,16 @@ Esta é uma orientação de segurança, não um diagnóstico nem uma prescriçã
     return "Os episódios podem ser microssonos relacionados ao sono insuficiente, mas isso não é um diagnóstico. Tente dormir regularmente de 7 a 9 horas por 1 a 2 semanas, registre os episódios e procure avaliação se persistirem. Enquanto ocorrerem, não dirija nem opere máquinas."
 
 
-def _structured_legal_comparison_answer(language: str) -> str:
+def _structured_legal_comparison_answer(language: str, include_jurisprudence: bool = False) -> str:
     if language == "en":
-        return """Conclusion
+        jurisprudence_line = "- Jurisprudence links: the retrieved material does not show a specific precedent applied to these SAAE facts." if include_jurisprudence else ""
+        return f"""Conclusion
 The comparison identifies legally relevant points to investigate, but it does not prove an automatic loophole or invalidity.
 
 Documentary basis
 - SAAE agreement: uncompensated overtime is paid at termination with a 50% premium, and institutional bridge days cannot generate deductions in the retrieved clause.
 - Vade Mecum: CLT article 59 limits overtime to two hours per day, provides a minimum 50% premium and contains compensation rules.
-- Jurisprudence links: the retrieved material does not show a specific precedent applied to these SAAE facts.
+{jurisprudence_line}
 
 Points requiring interpretation
 - Confirm whether the SAAE compensation rule applies to the employee's role, time-record regime and concrete dates.
@@ -523,13 +632,14 @@ The excerpts alone do not establish a breach, nullity or winning argument.
 Next step
 Compare the exact clause with the contract, job duties, time records, agreement coverage and current legal precedents."""
     if language == "es":
-        return """Conclusión
+        jurisprudence_line = "- Enlaces jurisprudenciales: el material recuperado no muestra un precedente específico aplicado a estos hechos del SAAE." if include_jurisprudence else ""
+        return f"""Conclusión
 La comparación identifica puntos jurídicamente relevantes para investigar, pero no demuestra una laguna o nulidad automática.
 
 Base documental
 - Convenio SAAE: las horas extras no compensadas se pagan al finalizar el contrato con un adicional del 50%, y los días puente institucionales no pueden generar descuentos en la cláusula recuperada.
 - Vade Mecum: el artículo 59 de la CLT limita las horas extras a dos por día, prevé un adicional mínimo del 50% y contiene reglas de compensación.
-- Enlaces jurisprudenciales: el material recuperado no muestra un precedente específico aplicado a estos hechos del SAAE.
+{jurisprudence_line}
 
 Puntos que requieren interpretación
 - Comprobar si la regla de compensación del SAAE se aplica al cargo, al régimen de registro de jornada y a las fechas concretas.
@@ -540,13 +650,14 @@ Los fragmentos por sí solos no demuestran una infracción, nulidad o argumento 
 
 Próximo paso
 Comparar la cláusula exacta con el contrato, las funciones, los registros de jornada, la cobertura del convenio y la jurisprudencia vigente."""
-    return """Conclusão
+    jurisprudence_line = "- Links jurisprudenciais: o material recuperado não mostra precedente específico aplicado a esses fatos do SAAE." if include_jurisprudence else ""
+    return f"""Conclusão
 A comparação identifica pontos juridicamente relevantes para investigar, mas não comprova uma brecha ou nulidade automática.
 
 Base documental
 - Acordo SAAE: as horas extras não compensadas são pagas na rescisão com adicional de 50%, e os dias ponte institucionais não podem gerar descontos no trecho recuperado.
 - Vade Mecum: o art. 59 da CLT limita as horas extras a duas por dia, prevê adicional mínimo de 50% e contém regras de compensação.
-- Links jurisprudenciais: o material recuperado não mostra precedente específico aplicado a esses fatos do SAAE.
+{jurisprudence_line}
 
 Pontos que pedem interpretação
 - Confirmar se a regra de compensação do SAAE se aplica ao cargo, ao regime de registro de ponto e às datas do caso.
@@ -881,18 +992,30 @@ def _fast_evidence_answer(module_id: str, question: str, result: RetrievalResult
         return "As fontes tratam de dois pontos diferentes. O acordo do SAAE prevê que as horas extras não compensadas sejam pagas na rescisão com adicional de 50%. O Vade Mecum confirma o direito ao décimo terceiro salário, mas o trecho recuperado não informa se o empregado pode recusar ou abrir mão do adiantamento."
     if (
         module_id in {"direito", "departamento-pessoal"}
-        and any(term in search_question for term in ("brecha", "brechas", "jurisprudencia", "artigo da lei", "sustentar um argumento"))
+        and (
+            any(term in search_question for term in ("brecha", "brechas", "jurisprudencia", "artigo da lei", "sustentar um argumento"))
+            or (
+                len(result.required_sources) >= 2
+                and any(term in search_question for term in ("compar", "confront", "versus", "diferenca entre", "com o arquivo"))
+            )
+        )
         and any(source.casefold().startswith("saae_") for source in result.sources)
         and any(source.casefold().startswith("vade_mecum") for source in result.sources)
-        and "art. 59" in search_context
+        and any(marker in search_context for marker in ("art. 59", "clausula 5", "horas extras nao compensadas"))
     ):
+        include_jurisprudence = any(
+            term in search_question for term in ("jurisprud", "precedent", "link")
+        ) or any(
+            any(marker in source.casefold() for marker in ("stj", "stf", "planalto", "gov-br"))
+            for source in result.sources
+        )
         if structured:
-            return _structured_legal_comparison_answer(language)
+            return _structured_legal_comparison_answer(language, include_jurisprudence)
         if language == "en":
-            return "The comparison identifies points to investigate, not a proven loophole. The SAAE excerpt provides for payment of uncompensated overtime at termination with a 50% premium and protects employees from deductions tied to institutional bridge days. The Vade Mecum reproduces CLT article 59: overtime is limited to two hours per day, with a minimum 50% premium and specific compensation rules. The retrieved jurisprudence links do not show a specific precedent applying these facts to the SAAE."
+            return "The comparison identifies points to investigate, not a proven loophole. The SAAE excerpt provides for payment of uncompensated overtime at termination with a 50% premium and protects employees from deductions tied to institutional bridge days. The Vade Mecum reproduces CLT article 59: overtime is limited to two hours per day, with a minimum 50% premium and specific compensation rules." + (" The retrieved jurisprudence links do not show a specific precedent applying these facts to the SAAE." if include_jurisprudence else "")
         if language == "es":
-            return "La comparación muestra puntos para investigar, no una laguna probada. El fragmento del SAAE prevé el pago de horas extras no compensadas al finalizar el contrato con un adicional del 50% y protege al empleado de descuentos vinculados a días puente institucionales. El Vade Mecum reproduce el artículo 59 de la CLT: las horas extras se limitan a dos por día, con un adicional mínimo del 50% y reglas específicas de compensación. Los enlaces jurisprudenciales recuperados no muestran un precedente específico aplicado a estos hechos del SAAE."
-        return "A comparação aponta pontos para investigar, não uma brecha comprovada. O trecho do SAAE prevê o pagamento das horas extras não compensadas na rescisão, com adicional de 50%, e protege o empregado de descontos ligados a dias ponte da instituição. O Vade Mecum reproduz o art. 59 da CLT: horas extras limitadas a duas por dia, adicional mínimo de 50% e regras próprias de compensação. Os links jurisprudenciais recuperados não mostram um precedente específico aplicado a esses fatos do SAAE."
+            return "La comparación muestra puntos para investigar, no una laguna probada. El fragmento del SAAE prevé el pago de horas extras no compensadas al finalizar el contrato con un adicional del 50% y protege al empleado de descuentos vinculados a días puente institucionales. El Vade Mecum reproduce el artículo 59 de la CLT: las horas extras se limitan a dos por día, con un adicional mínimo del 50% y reglas específicas de compensación." + (" Los enlaces jurisprudenciales recuperados no muestran un precedente específico aplicado a estos hechos del SAAE." if include_jurisprudence else "")
+        return "A comparação aponta pontos para investigar, não uma brecha comprovada. O trecho do SAAE prevê o pagamento das horas extras não compensadas na rescisão, com adicional de 50%, e protege o empregado de descontos ligados a dias ponte da instituição. O Vade Mecum reproduz o art. 59 da CLT: horas extras limitadas a duas por dia, adicional mínimo de 50% e regras próprias de compensação." + (" Os links jurisprudenciais recuperados não mostram um precedente específico aplicado a esses fatos do SAAE." if include_jurisprudence else "")
     if (
         module_id in {"direito", "departamento-pessoal"}
         and any(
@@ -1171,6 +1294,39 @@ def _with_scope(scope_note: str, message: str) -> str:
     return f"{scope_note}\n\n{message}"
 
 
+def _structured_context_package(
+    module_id: str,
+    question: str,
+    response_style: str,
+    structured: StructuredAnswer,
+    history: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Expose exact-table provenance without placing row data in the UI."""
+    return {
+        "question": question,
+        "domain": module_id,
+        "intent": "structured_data_aggregation",
+        "complexity": "L2",
+        "risk": "standard",
+        "conversation_context": history[-6:],
+        "accepted_evidence": [],
+        "rejected_evidence": [],
+        "relations": [],
+        "conflicts": [],
+        "available_tools": [],
+        "domain_policy": {
+            "structured_source_read": "complete",
+            "pii_rows_returned": False,
+            "evidence_judge": "complete file read + deterministic aggregation",
+        },
+        "expected_response_type": response_style,
+        "route": "structured_data",
+        "retrieval_required": True,
+        "response_mode": "evidence",
+        "structured_data": structured.metadata(),
+    }
+
+
 def local_no_evidence(policy: ModulePolicy, language: str = "pt-BR", module_id: str = "", question: str = "") -> str:
     normalized_question = normalize(question)
     scope_note = _scope_note(assess_module_scope(module_id, question), language)
@@ -1208,7 +1364,152 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     trace = build_plan(module_id, question, policy.high_risk, bool(extra_context))
     retrieval_question = _retrieval_question(question, history)
     retrieval_limit = 4 if response_style == "concise" else 6
-    harness = run_retrieval_harness(
+    profile = classify_query(module_id, retrieval_question)
+    decision = IntelligenceDecision(
+        route=str(profile.get("route", "evidence")),
+        retrieval_required=bool(profile.get("retrieval_required", True)),
+        response_mode=str(profile.get("response_mode", "evidence")),
+        reason=str(profile.get("reason", "pergunta de domínio")),
+        privacy_boundary="LGPD: minimização e política de provider; HL7 FHIR: contexto clínico local por padrão",
+    )
+    trace.append(
+        {
+            "id": "intelligence_route",
+            "stage": "Rota de inteligência",
+            "agent": "SOFIA Contract",
+            "status": "complete",
+            "detail": decision.reason,
+            "route": decision.route,
+            "retrieval_required": decision.retrieval_required,
+        }
+    )
+    update_stage(trace, "route", "complete", f"Rota {decision.route}: {decision.reason}.")
+
+    # Greetings and writing tasks do not benefit from a document retriever.
+    # They still cross the same provider/privacy boundary, and their route is
+    # exposed in the context package for auditability.
+    if not decision.retrieval_required:
+        redaction = ExternalRedaction() if external_generation_may_be_used(provider, external_allowed) else None
+        provider_question = redaction.clean(retrieval_question) if redaction else retrieval_question
+        provider_extra_context = _provider_context(redaction, extra_context, policy)
+        provider_history = redaction.clean_history(history) if redaction else history
+        context_package = _route_context_package(module_id, retrieval_question, history, decision.public_dict(), response_style)
+        try:
+            generated = await generate_with_fallback(
+                provider,
+                _direct_system(module_id, policy, language, decision.route),
+                _direct_prompt(provider_question, language, provider_history, decision.route) + (
+                    f"\nCONTEXTO AUTORIZADO E MINIMIZADO:\n{provider_extra_context}" if provider_extra_context else ""
+                ),
+                provider_history[-10:],
+                max_output_tokens=320 if response_style == "concise" else 560,
+                timeout_seconds=_generation_timeout(response_style),
+                external_allowed=external_allowed,
+            )
+            if redaction:
+                generated = Generation(redaction.restore(generated.answer), generated.provider, generated.model)
+            direct_answer = _repair_split_words(generated.answer).strip()
+            if not direct_answer:
+                raise RuntimeError("provider retornou resposta vazia")
+            update_stage(trace, "retrieve", "complete", "Rota direta: nenhuma evidência documental foi necessária.")
+            update_stage(trace, "reason", "complete", f"Resposta conversacional gerada por {generated.provider}.")
+            update_stage(trace, "critic", "complete", "Limites de domínio e privacidade aplicados; resposta não é uma citação documental.")
+            update_stage(trace, "output", "complete", "Resposta humana entregue pela rota apropriada.")
+            analytics_id = remember_run(root, module_id, question, [], generated.provider, True, user_code)
+            return OrchestrationResult(
+                direct_answer,
+                generated.provider,
+                generated.model,
+                [],
+                0.0,
+                False,
+                True,
+                trace,
+                analytics_id,
+                bool(redaction),
+                redaction.masked_fields if redaction else 0,
+                context_package=context_package,
+                verification_status="unverified",
+                confidence=0.25,
+            )
+        except RuntimeError:
+            update_stage(trace, "retrieve", "complete", "Rota direta sem necessidade de RAG; provider indisponível.")
+            update_stage(trace, "reason", "blocked", "Nenhum provider autorizado respondeu à tarefa conversacional.")
+            update_stage(trace, "critic", "complete", "Falha apresentada sem inventar uma resposta.")
+            update_stage(trace, "output", "complete", "Usuário pode tentar novamente quando o provider estiver disponível.")
+            analytics_id = remember_run(root, module_id, question, [], "policy", True, user_code)
+            return OrchestrationResult(
+                "Não consegui responder agora porque o motor de linguagem não está disponível. Tente novamente em instantes.",
+                "policy",
+                "provider-unavailable",
+                [],
+                0.0,
+                False,
+                True,
+                trace,
+                analytics_id,
+                bool(redaction),
+                redaction.masked_fields if redaction else 0,
+                context_package=context_package,
+                verification_status="unverified",
+                confidence=0.0,
+            )
+
+    # Tables and JSON records require a different evidence boundary from
+    # prose.  Do this before chunk retrieval so a count can never be inferred
+    # from the first few rows returned by the lexical/semantic index.  The
+    # analyzer reads the complete current CSV/XLSX/JSON source and returns
+    # aggregate-only output, so this path is safe for all modules and also
+    # remains deterministic on a feedback retry.
+    structured = analyze_structured_question(
+        root,
+        module_id,
+        retrieval_question,
+        language,
+        response_style,
+    )
+    if structured is not None:
+        update_stage(
+            trace,
+            "retrieve",
+            "complete",
+            f"Leitura integral de {structured.source.name}: {structured.row_count} registro(s) analisado(s).",
+        )
+        trace.append(
+            {
+                "id": "reflect",
+                "stage": "Refletir",
+                "agent": "Structured Evidence Judge",
+                "status": "complete",
+                "detail": "Agregação calculada no arquivo completo; nenhum chunk parcial foi usado.",
+                "operation": structured.operation,
+            }
+        )
+        update_stage(trace, "reason", "complete", "Contagem determinística validada contra todas as linhas da fonte.")
+        update_stage(trace, "critic", "complete", "Resultado agregado aprovado; valores pessoais não foram retornados.")
+        update_stage(trace, "output", "complete", "Resposta objetiva entregue com a fonte e o critério aplicado.")
+        analytics_id = remember_run(root, module_id, question, [structured.source.name], "local-rag", True, user_code)
+        return OrchestrationResult(
+            structured.answer,
+            "local-rag",
+            "structured-data",
+            [structured.source.name],
+            1.0,
+            True,
+            True,
+            trace,
+            analytics_id,
+            context_package=_structured_context_package(module_id, retrieval_question, response_style, structured, history),
+            verification_status="verified",
+            confidence=0.99,
+        )
+
+    # PDF extraction, OCR, indexing and the hybrid ranker are synchronous and
+    # can take several seconds on a cold module. Keep them out of FastAPI's
+    # event loop so health checks, status refreshes and other users remain
+    # responsive while this question is being prepared.
+    harness = await asyncio.to_thread(
+        run_retrieval_harness,
         root,
         module_id,
         retrieval_question,
@@ -1221,7 +1522,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             limit=current_limit,
             retry=retry or current_retry,
         ),
-        limit=retrieval_limit,
+        retrieval_limit,
     )
     result = harness.result
     trace.append({"id": "reflect", "stage": "Refletir", "agent": "Evidence Judge", "status": "complete" if harness.decision != "report_evidence_gap" else "blocked", "detail": harness.decision, "attempts": harness.attempts})
@@ -1236,17 +1537,26 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         # general orientation; it receives no local document context. Cloud
         # routes are still protected by the redaction and external-data gates,
         # while AUTO can fall back to Ollama without sending data away.
-        can_assist_without_local_evidence = provider in {"auto", "ollama"} or external_generation_may_be_used(provider, external_allowed)
+        # A named document or a multi-source comparison is an evidence
+        # contract.  If one of its required sources is missing, a provider
+        # must not turn partial context into an apparently complete answer.
+        # General fallback remains available for open questions that did not
+        # name a document.
+        requires_source_coverage = bool(result.required_sources)
+        can_assist_without_local_evidence = (
+            not requires_source_coverage
+            and (provider in {"auto", "ollama"} or external_generation_may_be_used(provider, external_allowed))
+        )
         if can_assist_without_local_evidence:
             redaction = ExternalRedaction() if external_generation_may_be_used(provider, external_allowed) else None
             provider_question = redaction.clean(retrieval_question) if redaction else retrieval_question
-            provider_extra_context = redaction.clean(extra_context) if redaction else extra_context
+            provider_extra_context = _provider_context(redaction, extra_context, policy)
             provider_history = redaction.clean_history(history) if redaction else history
             try:
                 generated = await generate_with_fallback(
                     provider,
-                    _external_assist_system(module_id, policy, language, response_style),
-                    _external_assist_prompt(provider_question, provider_extra_context, language, response_style),
+                    _external_assist_system(module_id, policy, language, response_style, decision.response_mode),
+                    _external_assist_prompt(provider_question, provider_extra_context, language, response_style, decision.response_mode),
                     provider_history[-10:],
                     max_output_tokens=320 if response_style == "concise" else 560 if response_style == "structured" else 768,
                     timeout_seconds=_generation_timeout(response_style),
@@ -1260,6 +1570,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
                     retrieval_question,
                     language,
                     response_style,
+                    decision.response_mode,
                 )
                 # There are no local claims to compare in this branch. The
                 # safety prompt and the module policy are the verification
@@ -1322,7 +1633,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     # shortcut so AUTO can call the configured providers and compare a fresh
     # generation against the same local evidence. Privacy gates still apply.
     local_fast_path_allowed = not retry and (not summary_request or external_allowed is False or not cloud_credentials_configured)
-    if provider == "auto" and response_style in {"concise", "structured"} and local_fast_path_allowed:
+    if provider == "auto" and response_style in {"concise", "structured"} and local_fast_path_allowed and decision.response_mode == "evidence":
         fast_answer = _fast_evidence_answer(module_id, retrieval_question, result, language, structured=response_style == "structured")
         if fast_answer:
             if response_style == "structured":
@@ -1337,10 +1648,10 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     # to use the original evidence, so masking never weakens the RAG gate.
     redaction = ExternalRedaction() if external_generation_may_be_used(provider, external_allowed) else None
     provider_question = redaction.clean(retrieval_question) if redaction else retrieval_question
-    provider_evidence = redaction.clean(result.context) if redaction else None
-    provider_extra_context = redaction.clean(extra_context) if redaction else extra_context
+    provider_evidence = _provider_context(redaction, result.context, policy) if redaction else None
+    provider_extra_context = _provider_context(redaction, extra_context, policy)
     provider_history = redaction.clean_history(history) if redaction else history
-    system_prompt = _system(module_id, policy, language, response_style)
+    system_prompt = _system(module_id, policy, language, response_style, decision.response_mode)
     if redaction:
         system_prompt += " Dados identificáveis foram mascarados com marcadores __SOFIA_*__. Preserve esses marcadores sem inventar valores; eles serão reidratados localmente após a resposta. Nunca tente descobrir ou reconstruir dados removidos."
     offline_material: dict[str, Any] | None = None
@@ -1357,6 +1668,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
                 language,
                 response_style,
                 evidence_override=provider_evidence,
+                response_mode=decision.response_mode,
             ),
             provider_history[-4:] if response_style == "concise" else provider_history[-10:],
             max_output_tokens=max_output_tokens,
@@ -1367,13 +1679,13 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             generated = Generation(redaction.restore(generated.answer), generated.provider, generated.model)
         if response_style == "concise":
             generated = Generation(_compact_answer(generated.answer, retrieval_question, result.context), generated.provider, generated.model)
-        elif response_style == "structured":
+        elif response_style == "structured" and decision.response_mode == "evidence":
             generated = Generation(_structured_answer(generated.answer, result, language), generated.provider, generated.model)
     except RuntimeError:
         fallback = _fast_evidence_answer(module_id, retrieval_question, result, language, structured=response_style == "structured")
         if not fallback:
             fallback = _compact_answer(_extractive_answer(retrieval_question, result, language), retrieval_question, result.context)
-        if response_style == "structured" and not any(normalize(section) in normalize(fallback) for section in ("conclusao", "conclusion", "conclusión")):
+        if response_style == "structured" and decision.response_mode == "evidence" and not any(normalize(section) in normalize(fallback) for section in ("conclusao", "conclusion", "conclusión")):
             fallback = _structured_answer(fallback, result, language)
         update_stage(trace, "reason", "complete", "Provider indisponível ou lento; síntese extrativa local utilizada.")
         update_stage(trace, "critic", "complete", "Síntese extrativa limitada aos trechos recuperados.")
@@ -1407,7 +1719,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             language,
             structured=response_style == "structured",
         ) or _compact_answer(_extractive_answer(retrieval_question, result, language), retrieval_question, result.context)
-        if response_style == "structured":
+        if response_style == "structured" and decision.response_mode == "evidence":
             safe_answer = _structured_answer(safe_answer, result, language)
         update_stage(trace, "critic", "repaired", f"Resposta do provider rejeitada; síntese local aplicada. Avaliador: {critic_result['reason']}")
         update_stage(trace, "output", "complete", "Resposta limitada aos trechos recuperados.")

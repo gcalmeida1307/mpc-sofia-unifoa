@@ -43,14 +43,14 @@ def run_retrieval_harness(
     del root, module_id
     steps: list[dict[str, object]] = [{"stage": "plan", "status": "complete", "attempt": 1}]
     first = retriever(question, limit, False)
-    steps.append({"stage": "retrieve", "status": "complete" if first.evidence else "empty", "accepted": len(first.evidence), "rejected": len(first.rejected_evidence), "conflicts": len(first.conflicts), "attempt": 1})
-    if first.evidence and first.judge_confidence >= max(0.30, policy.min_evidence_score * 0.90) and not first.conflicts:
+    steps.append({"stage": "retrieve", "status": "complete" if first.has_quality_evidence else "incomplete", "accepted": len(first.evidence), "rejected": len(first.rejected_evidence), "conflicts": len(first.conflicts), "missing_sources": list(first.missing_sources), "attempt": 1})
+    if first.has_quality_evidence and first.judge_confidence >= max(0.30, policy.min_evidence_score * 0.90) and not first.conflicts:
         steps.append({"stage": "reflect", "status": "sufficient", "decision": "reason_with_accepted_evidence", "attempt": 1})
         return HarnessRun(first, tuple(steps), 1, "reason_with_accepted_evidence")
     steps.append({"stage": "reflect", "status": "needs_more_evidence", "decision": "broaden_same_module_sources", "attempt": 1})
     second = retriever(question, max(limit * 2, 8), True)
-    steps.append({"stage": "retrieve", "status": "complete" if second.evidence else "empty", "accepted": len(second.evidence), "rejected": len(second.rejected_evidence), "conflicts": len(second.conflicts), "attempt": 2})
-    if second.evidence and (not first.evidence or second.judge_confidence >= first.judge_confidence):
+    steps.append({"stage": "retrieve", "status": "complete" if second.has_quality_evidence else "incomplete", "accepted": len(second.evidence), "rejected": len(second.rejected_evidence), "conflicts": len(second.conflicts), "missing_sources": list(second.missing_sources), "attempt": 2})
+    if second.evidence and (not first.has_quality_evidence or second.judge_confidence >= first.judge_confidence):
         steps.append({"stage": "reflect", "status": "sufficient" if not second.conflicts else "review_required", "decision": "reason_with_second_pass", "attempt": 2})
         return HarnessRun(second, tuple(steps), 2, "reason_with_second_pass")
     steps.append({"stage": "reflect", "status": "insufficient", "decision": "report_evidence_gap", "attempt": 2})

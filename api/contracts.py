@@ -48,6 +48,11 @@ class ContextPackage:
     available_tools: list[str] = field(default_factory=list)
     domain_policy: dict[str, Any] = field(default_factory=dict)
     expected_response_type: str = "structured"
+    route: str = "evidence"
+    retrieval_required: bool = True
+    response_mode: str = "evidence"
+    required_sources: list[str] = field(default_factory=list)
+    missing_sources: list[str] = field(default_factory=list)
 
     def public_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -59,6 +64,25 @@ class VerificationResult:
     confidence: float
     unsupported_claims: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class IntelligenceDecision:
+    """Public, auditable decision made before generation.
+
+    This is a routing contract, not a chain-of-thought record.  It makes it
+    possible to prove that a request was sent to the right path without
+    storing the prompt or any clinical payload.
+    """
+
+    route: str
+    retrieval_required: bool
+    response_mode: str
+    reason: str
+    privacy_boundary: str = "module-scoped; external provider policy still applies"
+
+    def public_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass(frozen=True)

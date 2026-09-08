@@ -14,6 +14,8 @@ import logging
 import math
 import os
 import tempfile
+import threading
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -27,6 +29,14 @@ logger = logging.getLogger("sofia.embeddings")
 
 DEFAULT_MODEL = "nomic-embed-text"
 DEFAULT_HOST = "http://127.0.0.1:11434"
+
+# The module/status endpoints are polled by the browser.  Probing Ollama once
+# for every module made a normal UI refresh take roughly ``module_count * 2s``
+# when Ollama was cold or unavailable.  Keep the health probe process-local and
+# reuse it for a short interval; embedding generation still has its own request
+# timeout and remains independent from this status cache.
+_OLLAMA_PROBE_CACHE: dict[str, tuple[float, bool, list[str], str | None]] = {}
+_OLLAMA_PROBE_LOCK = threading.Lock()
 
 
 def _truthy(value: str | None, default: bool = False) -> bool:
@@ -78,15 +88,31 @@ def _corpus_signature(root: Path, module_id: str) -> str:
     return digest.hexdigest()
 
 
-def _ollama_models(settings: dict[str, Any]) -> tuple[bool, list[str], str | None]:
+def _ollama_probe_ttl() -> float:
+    try:
+        return max(5.0, min(300.0, float(os.getenv("SOFIA_OLLAMA_PROBE_TTL_SECONDS", "30"))))
+    except ValueError:
+        return 30.0
+
+
+def _ollama_models(settings: dict[str, Any], *, force: bool = False) -> tuple[bool, list[str], str | None]:
+    cache_key = str(settings["host"])
+    now = time.monotonic()
+    with _OLLAMA_PROBE_LOCK:
+        cached = _OLLAMA_PROBE_CACHE.get(cache_key)
+        if cached and not force and now - cached[0] < _ollama_probe_ttl():
+            return cached[1], list(cached[2]), cached[3]
     try:
         with httpx.Client(base_url=settings["host"], timeout=2.0) as client:
             response = client.get("/api/tags")
             response.raise_for_status()
             models = [str(item.get("name", "")) for item in response.json().get("models", []) if item.get("name")]
-            return True, models, None
+            result = (True, models, None)
     except (httpx.HTTPError, ValueError, OSError) as exc:
-        return False, [], f"{type(exc).__name__}: {str(exc)[:180]}"
+        result = (False, [], f"{type(exc).__name__}: {str(exc)[:180]}")
+    with _OLLAMA_PROBE_LOCK:
+        _OLLAMA_PROBE_CACHE[cache_key] = (time.monotonic(), result[0], list(result[1]), result[2])
+    return result
 
 
 def _embed_batch(texts: list[str], settings: dict[str, Any], timeout: float | None = None) -> list[list[float]]:

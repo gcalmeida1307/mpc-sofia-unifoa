@@ -13,6 +13,7 @@ from api.analytics import (
     theme_report,
     update_feedback,
 )
+from api.domain_packages.base import named_source_paths
 from api.expansion import (
     ExpansionStore,
     _clean_public_content,
@@ -34,16 +35,150 @@ from api.orchestration import (
     normalize_response_style,
 )
 from api.policies import policy_for
-from api.privacy import ExternalRedaction
+from api.privacy import ExternalRedaction, provider_guard
 from api.providers import Generation
-from api.query_analysis import assess_module_scope
+from api.query_analysis import assess_module_scope, route_query
 from api.research import research_module
 from api.retrieval import RetrievalResult, retrieve
+from api.structured_data import analyze_structured_question, resolve_structured_source
 
 ROOT = Path(__file__).resolve().parents[1] / "knowledge"
 
 
 class RagRegressionTests(unittest.TestCase):
+    def test_intelligence_contract_separates_direct_tasks_from_evidence_tasks(self) -> None:
+        conversation = route_query("financeiro", "Oi, como você pode ajudar?")
+        writing = route_query("recursos-humanos", "Escreva uma mensagem para uma candidata")
+        explanation = route_query("infraestrutura", "O que é um host?")
+        named_document = route_query("gestao-empresarial", "Resuma o arquivo gestão educacional")
+
+        self.assertEqual(conversation["route"], "conversation")
+        self.assertFalse(conversation["retrieval_required"])
+        self.assertEqual(writing["route"], "writing")
+        self.assertFalse(writing["retrieval_required"])
+        self.assertEqual(explanation["route"], "explanation")
+        self.assertTrue(explanation["retrieval_required"])
+        self.assertEqual(named_document["route"], "evidence")
+        self.assertTrue(named_document["retrieval_required"])
+
+    def test_direct_writing_does_not_call_rag_and_keeps_route_contract(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            (root / "recursos-humanos").mkdir(parents=True)
+            generated = Generation("Claro. Segue uma mensagem profissional e acolhedora.", "ollama", "qwen")
+            with patch("api.orchestration.generate_with_fallback", new=AsyncMock(return_value=generated)) as provider, patch("api.orchestration.retrieve") as retriever:
+                response = asyncio.run(
+                    answer(
+                        root=root,
+                        module_id="recursos-humanos",
+                        provider="ollama",
+                        question="Escreva uma mensagem curta para uma candidata aprovada.",
+                        history=[],
+                        external_allowed=False,
+                    )
+                )
+            retriever.assert_not_called()
+            provider.assert_awaited_once()
+            self.assertEqual(response.context_package["route"], "writing")
+            self.assertFalse(response.context_package["retrieval_required"])
+            self.assertEqual(response.verification_status, "unverified")
+            self.assertIn("mensagem", response.answer.casefold())
+
+    def test_structured_count_reads_the_complete_file_and_resolves_approximate_filename(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "infraestrutura" / "textos"
+            module.mkdir(parents=True)
+            source = module / "RiskyUsers.csv"
+            source.write_text(
+                '"ID","Usuário","Nível de risco","Status"\n'
+                '1,"Pessoa 1","Alto","Ativo"\n'
+                '2,"Pessoa 2","Médio","Ativo"\n'
+                '3,"Pessoa 3","Alto","Inativo"\n'
+                '4,"Pessoa 4","Alto","Ativo"\n',
+                encoding="utf-8",
+            )
+
+            question = "Quantos usuários em nível de risco alto tem no arquivo RiskUsers?"
+            resolved = resolve_structured_source(root, "infraestrutura", question)
+            result = analyze_structured_question(root, "infraestrutura", question)
+
+            self.assertIsNotNone(resolved)
+            self.assertEqual(resolved.path.name, "RiskyUsers.csv")
+            self.assertIsNotNone(result)
+            self.assertEqual(result.row_count, 4)
+            self.assertEqual(result.matched_count, 3)
+            self.assertIn("Há 3 usuários", result.answer)
+            self.assertIn("Leitura integral da tabela: 4 linhas", result.answer)
+            self.assertNotIn("Pessoa 1", result.answer)
+
+    def test_structured_count_supports_json_without_returning_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "financeiro" / "textos"
+            module.mkdir(parents=True)
+            (module / "titulos.json").write_text(
+                json.dumps(
+                    [
+                        {"categoria": "Aberto", "valor": 10},
+                        {"categoria": "Pago", "valor": 20},
+                        {"categoria": "Aberto", "valor": 30},
+                    ],
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            result = analyze_structured_question(
+                root,
+                "financeiro",
+                "Quantos registros com categoria Aberto existem no arquivo titulos?",
+            )
+            self.assertIsNotNone(result)
+            self.assertEqual(result.matched_count, 2)
+            self.assertNotIn('"valor"', result.answer)
+
+    def test_structured_retry_recomputes_the_same_complete_source(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "infraestrutura" / "textos"
+            module.mkdir(parents=True)
+            (module / "RiskyUsers.csv").write_text(
+                "nivel,status\nAlto,Ativo\nMédio,Ativo\nAlto,Inativo\n",
+                encoding="utf-8",
+            )
+            question = "Quantos usuários em nível de risco alto no arquivo RiskUsers?"
+            first = asyncio.run(
+                answer(
+                    root=root,
+                    module_id="infraestrutura",
+                    provider="auto",
+                    question=question,
+                    history=[],
+                    response_style="structured",
+                    external_allowed=False,
+                    user_code="AG000001",
+                )
+            )
+            retry = asyncio.run(
+                answer(
+                    root=root,
+                    module_id="infraestrutura",
+                    provider="auto",
+                    question=question,
+                    history=[],
+                    response_style="structured",
+                    external_allowed=False,
+                    user_code="AG000001",
+                    retry=True,
+                    retry_of=first.analytics_id,
+                )
+            )
+            self.assertEqual(first.model, "structured-data")
+            self.assertEqual(retry.model, "structured-data")
+            self.assertEqual(retry.sources, ["RiskyUsers.csv"])
+            self.assertIn("Há 2 usuários", retry.answer)
+            self.assertEqual(retry.context_package["structured_data"]["row_count"], 3)
+
     def test_expansion_normalizes_equivalent_urls(self) -> None:
         self.assertEqual(
             normalize_url("HTTPS://Example.org:443/manual/?utm_source=x&b=2&a=1#section"),
@@ -126,6 +261,85 @@ class RagRegressionTests(unittest.TestCase):
         self.assertIn("dois pontos diferentes", response.answer)
         self.assertIn("não informa", response.answer)
 
+    def test_multi_source_contract_ignores_connector_tokens_and_requires_both_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "direito" / "textos"
+            module.mkdir(parents=True)
+            (module / "Saae_2026_2027.md").write_text(
+                "Cláusula 5: a compensação de jornada deve respeitar o limite de 10 horas e o prazo de 360 dias.",
+                encoding="utf-8",
+            )
+            (module / "Vade_mecum_Senado_Federal_3ed.md").write_text(
+                "Art. 59 da CLT: a jornada diária pode ser acrescida de horas extras, observado o adicional legal.",
+                encoding="utf-8",
+            )
+            (module / "blog-central-com-br.md").write_text(
+                "Certidão digital e autenticação de documentos cartorários.",
+                encoding="utf-8",
+            )
+            question = "compare o arquivo do saae com o arquivo do vade mencum e diga quais regras divergem"
+            named = named_source_paths(list(module.iterdir()), question)
+            self.assertEqual(
+                [path.name for path in named],
+                ["Saae_2026_2027.md", "Vade_mecum_Senado_Federal_3ed.md"],
+            )
+            result = retrieve(root, "direito", question, policy_for("direito"), limit=4)
+            self.assertTrue(result.has_quality_evidence)
+            self.assertEqual(set(result.required_sources), {"Saae_2026_2027.md", "Vade_mecum_Senado_Federal_3ed.md"})
+            self.assertEqual(result.missing_sources, ())
+            self.assertNotIn("blog-central-com-br.md", result.sources)
+            self.assertTrue({"Saae_2026_2027.md", "Vade_mecum_Senado_Federal_3ed.md"} <= set(result.sources))
+
+            retry = retrieve(root, "direito", question, policy_for("direito"), limit=4, retry=True)
+            self.assertTrue(retry.has_quality_evidence)
+            self.assertNotIn("blog-central-com-br.md", retry.sources)
+            self.assertEqual(set(retry.missing_sources), set())
+
+    def test_legal_comparison_answer_uses_both_documents_without_inventing_links(self) -> None:
+        question = "compare o arquivo do saae com o arquivo do vade mencum e diga oq temos de erros ou ambiguidade no arquivo do SAAE"
+        response = asyncio.run(
+            answer(
+                root=ROOT,
+                module_id="direito",
+                provider="auto",
+                question=question,
+                history=[],
+                response_style="structured",
+                external_allowed=False,
+            )
+        )
+        self.assertEqual(response.provider, "local-rag")
+        self.assertIn("Acordo SAAE", response.answer)
+        self.assertIn("Vade Mecum", response.answer)
+        self.assertNotIn("Links jurisprudenciais", response.answer)
+        self.assertEqual(response.context_package.get("missing_sources"), [])
+
+    def test_multi_source_contract_applies_to_infrastructure_documents(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "infraestrutura" / "textos"
+            module.mkdir(parents=True)
+            (module / "zabbix_alpha.md").write_text(
+                "A configuração do host alpha usa uma interface de monitoramento e um template.",
+                encoding="utf-8",
+            )
+            (module / "zabbix_beta.md").write_text(
+                "A configuração do host beta usa uma interface de monitoramento e um item.",
+                encoding="utf-8",
+            )
+            (module / "portal-com-br.md").write_text(
+                "Página institucional sem instruções de Zabbix.",
+                encoding="utf-8",
+            )
+            question = "compare o arquivo zabbix_alpha com o arquivo zabbix_beta sobre configuração de host"
+            result = retrieve(root, "infraestrutura", question, policy_for("infraestrutura"), limit=4)
+            self.assertTrue(result.has_quality_evidence)
+            self.assertEqual(set(result.required_sources), {"zabbix_alpha.md", "zabbix_beta.md"})
+            self.assertEqual(result.missing_sources, ())
+            self.assertNotIn("portal-com-br.md", result.sources)
+            self.assertTrue({"zabbix_alpha.md", "zabbix_beta.md"} <= set(result.sources))
+
     def test_short_follow_up_reuses_only_the_last_user_question(self) -> None:
         question = _retrieval_question(
             "E sobre isso?",
@@ -195,6 +409,81 @@ Limites
                 result = retrieve(root, "gestao-empresarial", question, policy, limit=6)
                 self.assertTrue(result.has_quality_evidence)
                 self.assertEqual(result.sources, ("gestão educacional.md",))
+
+    def test_unreviewed_offline_candidate_cannot_outrank_authoritative_source(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "direito"
+            (module / "offline").mkdir(parents=True)
+            (module / "manual.md").write_text(
+                "A política documentada sobre férias exige solicitação formal e aprovação da chefia.",
+                encoding="utf-8",
+            )
+            (module / "offline" / "sofia-candidato.md").write_text(
+                "A síntese anterior afirma que a política de férias exige solicitação formal, mas é apenas candidata.",
+                encoding="utf-8",
+            )
+            result = retrieve(
+                root,
+                "direito",
+                "O que a política documentada informa sobre férias?",
+                policy_for("direito"),
+                limit=4,
+            )
+            self.assertTrue(result.evidence)
+            self.assertNotIn("sofia-candidato.md", result.sources)
+            self.assertIn("manual.md", result.sources)
+
+    def test_legal_writ_deadline_requires_the_specific_deadline_passage(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "direito"
+            module.mkdir(parents=True)
+            (module / "vade.md").write_text(
+                "O mandado de segurança protege direito líquido e certo contra ilegalidade ou abuso de poder.",
+                encoding="utf-8",
+            )
+            question = "Qual é o prazo para impetrar mandado de segurança no direito do trabalho?"
+            incomplete = retrieve(root, "direito", question, policy_for("direito"), limit=4)
+            self.assertFalse(incomplete.evidence)
+
+            (module / "lei-mandado-seguranca.md").write_text(
+                "Art. 23. O direito de requerer mandado de segurança extinguir-se-á decorridos 120 dias, contados da ciência, pelo interessado, do ato impugnado.",
+                encoding="utf-8",
+            )
+            complete = retrieve(root, "direito", question, policy_for("direito"), limit=4)
+            self.assertTrue(complete.evidence)
+            self.assertIn("lei-mandado-seguranca.md", complete.sources)
+
+    def test_specific_retrieval_gap_routes_to_authorized_provider(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "direito"
+            module.mkdir(parents=True)
+            (module / "vade.md").write_text(
+                "O mandado de segurança protege direito líquido e certo contra ilegalidade ou abuso de poder.",
+                encoding="utf-8",
+            )
+            generated = Generation(
+                "Em regra, a questão exige verificar a lei específica e a data de ciência do ato.",
+                "openai",
+                "test-model",
+            )
+            with patch("api.orchestration.generate_with_fallback", new=AsyncMock(return_value=generated)) as provider:
+                response = asyncio.run(
+                    answer(
+                        root=root,
+                        module_id="direito",
+                        provider="auto",
+                        question="Qual é o prazo para impetrar mandado de segurança?",
+                        history=[],
+                        external_allowed=True,
+                    )
+                )
+            self.assertFalse(response.evidence_found)
+            self.assertEqual(response.provider, "openai")
+            provider.assert_awaited_once()
+            self.assertIn("não encontrou evidência suficiente", response.answer.casefold())
 
     def test_no_local_evidence_uses_labeled_local_provider_fallback(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -335,6 +624,25 @@ Limites
         self.assertIn("10.20.30.40", restored)
         self.assertNotIn("abcdefghijklmnop1234567890", restored)
         self.assertNotIn("sk-proj-abcdefghijklmnop1234", restored)
+
+    def test_clinical_redaction_masks_generic_fhir_ids_and_rehydrates_only_tokens(self) -> None:
+        redaction = ExternalRedaction()
+        original = '{"resourceType":"Patient","id":"patient-123","subject":{"reference":"Patient/patient-123"},"name":[{"family":"Silva"}]}'
+        cleaned = redaction.clean_clinical(original)
+        self.assertNotIn("patient-123", cleaned)
+        self.assertNotIn("Patient/patient-123", cleaned)
+        self.assertNotIn('"Silva"', cleaned)
+        restored = redaction.restore(cleaned)
+        self.assertIn("patient-123", restored)
+        self.assertIn("Silva", restored)
+
+    def test_fhir_external_provider_requires_explicit_clinical_opt_in(self) -> None:
+        with patch.dict(
+            os.environ,
+            {"SOFIA_ALLOW_EXTERNAL_DATA": "true", "SOFIA_ALLOW_EXTERNAL_CLINICAL": "false"},
+            clear=False,
+        ), self.assertRaises(ValueError):
+            provider_guard("openai", patient_id="patient-123", clinical=True)
 
     def test_external_redaction_is_consistent_across_history_and_context(self) -> None:
         redaction = ExternalRedaction()

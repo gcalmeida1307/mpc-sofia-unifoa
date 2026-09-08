@@ -14,7 +14,16 @@ class AccountingPackage(DomainRetrievalPackage):
     def profile(self, query: str) -> QueryProfile:
         normalized = normalize(query)
         balance = any(term in normalized for term in ("balan", "patrimonial", "demonstracao"))
-        return QueryProfile(summary=super().profile(query).summary, features=frozenset({"balance"} if balance else ()), required_markers=("balanco patrimonial", "ativo circulante", "passivo circulante", "patrimonio liquido", "demonstracoes contabeis", "notas explicativas") if balance else ())
+        base = super().profile(query)
+        features = set(base.features)
+        if balance:
+            features.add("balance")
+        return QueryProfile(
+            summary=base.summary,
+            features=frozenset(features),
+            required_markers=("balanco patrimonial", "ativo circulante", "passivo circulante", "patrimonio liquido", "demonstracoes contabeis", "notas explicativas") if balance else (),
+            comparison=base.comparison,
+        )
 
     def filter_text(self, path: Path, text: str, profile: QueryProfile) -> bool:
         del path

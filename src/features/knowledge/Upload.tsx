@@ -116,7 +116,7 @@ export default function Upload({
   }
 
   return (
-    <div className="page-body narrow">
+    <div className="page-body upload-page">
       <h1>
         Upload de <em>Fontes</em>
       </h1>

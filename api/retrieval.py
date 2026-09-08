@@ -51,14 +51,22 @@ class RetrievalResult:
     rejected_evidence: tuple[Evidence, ...] = ()
     conflicts: tuple[dict[str, Any], ...] = ()
     judge_confidence: float = 0.0
+    required_sources: tuple[str, ...] = ()
+    missing_sources: tuple[str, ...] = ()
 
     @property
     def has_quality_evidence(self) -> bool:
-        return bool(self.evidence)
+        # Evidence from only one side of a named comparison is not enough to
+        # authorize synthesis.  The accepted chunks remain available for the
+        # diagnostic context, while the gate reports the source gap.
+        return bool(self.evidence) and not self.missing_sources
 
     @property
     def context(self) -> str:
-        return "\n\n--- DOCUMENTO: ".join(f"{item.chunk.path.name}\n{item.chunk.text}" for item in self.evidence)
+        return "\n\n--- DOCUMENTO: ".join(
+            f"{item.chunk.path.name} · trecho {item.chunk.ordinal}\n{item.chunk.text}"
+            for item in self.evidence
+        )
 
 
 def normalize(text: str) -> str:
@@ -146,40 +154,117 @@ def _summary_result(chunks: tuple[DocumentChunk, ...], normalized_index: tuple[s
     return RetrievalResult(evidence, tuple(dict.fromkeys(chunk.path.name for chunk in representatives[:limit])), query, expanded, judge_confidence=0.78)
 
 
-def _judge(result: RetrievalResult, question: str, module_id: str, policy: ModulePolicy) -> RetrievalResult:
+def _judge(
+    result: RetrievalResult,
+    question: str,
+    module_id: str,
+    policy: ModulePolicy,
+    required_sources: tuple[str, ...] = (),
+) -> RetrievalResult:
     from .evidence import judge_candidates
 
     decision = judge_candidates(question, module_id, policy, result.evidence)
     sources = tuple(dict.fromkeys(item.chunk.path.name for item in decision.accepted))
+    covered = tuple(source for source in required_sources if source in sources)
+    missing = tuple(source for source in required_sources if source not in sources)
     confidence = round(sum(item.score for item in decision.accepted) / max(1, len(decision.accepted)), 4)
-    return RetrievalResult(tuple(decision.accepted), sources, result.query, result.expanded_query, tuple(decision.rejected), tuple(decision.conflicts), confidence)
+    if required_sources:
+        confidence = round(confidence * (len(covered) / len(required_sources)), 4)
+    return RetrievalResult(
+        tuple(decision.accepted),
+        sources,
+        result.query,
+        result.expanded_query,
+        tuple(decision.rejected),
+        tuple(decision.conflicts),
+        confidence,
+        tuple(required_sources),
+        missing,
+    )
 
 
-def retrieve(root: Path, module_id: str, query: str, policy: ModulePolicy, limit: int = 6, retry: bool = False) -> RetrievalResult:
+def _is_offline_candidate(path: Path) -> bool:
+    """Return whether a file is an unreviewed provider synthesis.
+
+    Offline candidates are useful as a bounded recovery source, but they are
+    not authoritative documents. Keeping them out of the first pass prevents
+    a previous bad answer from outranking the source that should be checked.
+    """
+    return any(part.casefold() == "offline" for part in path.parts)
+
+
+def retrieve(
+    root: Path,
+    module_id: str,
+    query: str,
+    policy: ModulePolicy,
+    limit: int = 6,
+    retry: bool = False,
+    _candidate_paths: list[Path] | None = None,
+) -> RetrievalResult:
     """Retrieve evidence through a module package and the common judge."""
+    all_paths = files_for(root, module_id)
+    if _candidate_paths is None:
+        # The normal pass uses only original, ingested sources. A candidate
+        # may be consulted only if the authoritative pass has no accepted
+        # evidence, preserving the feedback loop without polluting ranking.
+        primary_paths = [path for path in all_paths if not _is_offline_candidate(path)]
+        primary = retrieve(
+            root,
+            module_id,
+            query,
+            policy,
+            limit=limit,
+            retry=retry,
+            _candidate_paths=primary_paths,
+        )
+        if primary.has_quality_evidence:
+            return primary
+        offline_paths = [path for path in all_paths if _is_offline_candidate(path)]
+        if not offline_paths:
+            return primary
+        return retrieve(
+            root,
+            module_id,
+            query,
+            policy,
+            limit=limit,
+            retry=retry,
+            _candidate_paths=[*primary_paths, *offline_paths],
+        )
+
     package: DomainRetrievalPackage = package_for(module_id)
     expanded = expand_query(module_id, query)
     if expanded == query:
         expanded = package.expand_query(query)
+    if retry:
+        # The second pass is deliberately different: it asks the ranker for
+        # literal, source-backed passages and section/article anchors.  It is
+        # still bounded to the package-selected sources, so retry cannot turn
+        # a named-document question into a corpus-wide noise search.
+        expanded = f"{expanded} trecho literal fonte primaria secao artigo clausula regra documentada evidencia".strip()
     query_terms = _terms(query)
     expanded_terms = _terms(expanded)
-    selection = package.select_sources(files_for(root, module_id), query, retry=retry)
+    selection = package.select_sources(_candidate_paths, query, retry=retry)
     source_paths = list(selection.paths)
+    named_paths = named_source_paths(_candidate_paths, query)
+    required_paths = selection.required_paths or named_paths
+    required_sources = tuple(dict.fromkeys(path.name for path in required_paths))
     if not source_paths:
-        return RetrievalResult((), (), query, expanded)
+        return RetrievalResult((), (), query, expanded, required_sources=required_sources, missing_sources=required_sources)
     signature = tuple(sorted((str(path), path.stat().st_mtime_ns, path.stat().st_size) for path in source_paths if path.exists()))
     source_keys = tuple(str(path) for path in source_paths if path.exists())
     chunks = _index(str(root), module_id, signature, source_keys)
     normalized_index = _normalized_index(str(root), module_id, signature, source_keys)
     eligible = [(chunk, text) for chunk, text in zip(chunks, normalized_index) if package.filter_text(chunk.path, text, selection.profile)]
     if not eligible:
-        return RetrievalResult((), (), query, expanded)
+        return RetrievalResult((), (), query, expanded, required_sources=required_sources, missing_sources=required_sources)
     chunks = tuple(chunk for chunk, _ in eligible)
     normalized_index = tuple(text for _, text in eligible)
     profile = selection.profile
     explicit_paths = {path.resolve() for path in named_source_paths(source_paths, query)}
     if profile.summary:
-        return _judge(_summary_result(chunks, normalized_index, query, expanded, limit), query, module_id, policy)
+        return _judge(_summary_result(chunks, normalized_index, query, expanded, limit), query, module_id, policy, required_sources)
 
     pre_ranked: list[tuple[float, int, str, float, float, float, float]] = []
     for index, (chunk, text) in enumerate(zip(chunks, normalized_index)):
@@ -193,7 +278,7 @@ def retrieve(root: Path, module_id: str, query: str, policy: ModulePolicy, limit
         if matched or expanded_matched or package.seed_candidates(text, profile) or chunk.path.resolve() in explicit_paths:
             pre_ranked.append((cheap_score, index, text, matched, expanded_matched, lexical, coverage))
     if not pre_ranked:
-        return RetrievalResult((), (), query, expanded)
+        return RetrievalResult((), (), query, expanded, required_sources=required_sources, missing_sources=required_sources)
     pre_ranked.sort(key=lambda item: item[0], reverse=True)
     pre_ranked = pre_ranked[: max(60, limit * 25)]
     normalized_candidates = [item[2] for item in pre_ranked]
@@ -231,6 +316,49 @@ def retrieve(root: Path, module_id: str, query: str, policy: ModulePolicy, limit
             selected.append(best)
         else:
             selected[replacement] = best
+    # Comparisons need a representative passage from every named source, not
+    # just a single global top-k. Reserve two passages per required document
+    # when available so a large source cannot hide the other side of the
+    # comparison.
+    if profile.comparison and required_sources:
+        for required_source in required_sources:
+            source_items = [item for item in finalized if item.chunk.path.name == required_source]
+            for best in source_items[:2]:
+                if any(item.chunk.path.name == required_source and item.chunk.ordinal == best.chunk.ordinal for item in selected):
+                    continue
+                replacement = next(
+                    (index for index in range(len(selected) - 1, -1, -1) if selected[index].chunk.path.name not in required_sources),
+                    None,
+                )
+                if replacement is None:
+                    replacement = len(selected) - 1 if selected else None
+                if replacement is None:
+                    selected.append(best)
+                else:
+                    selected[replacement] = best
+        # When the user explicitly asks for links/jurisprudence, preserve one
+        # authoritative public source as a complementary perspective. It is
+        # never allowed to satisfy the required-document coverage by itself.
+        query_lower = normalize(query)
+        if any(marker in query_lower for marker in ("link", "jurisprud", "precedent")):
+            public_items = [
+                item
+                for item in finalized
+                if item.chunk.path.parent.name.casefold() == "links"
+                and any(marker in item.chunk.path.name.casefold() for marker in ("stj", "stf", "gov-br", "planalto"))
+            ]
+            best_public = public_items[0] if public_items else None
+            if best_public is not None and not any(
+                item.chunk.path.name == best_public.chunk.path.name for item in selected
+            ):
+                replacement = next(
+                    (index for index in range(len(selected) - 1, -1, -1) if selected[index].chunk.path.name not in required_sources),
+                    None,
+                )
+                if replacement is None:
+                    selected.append(best_public)
+                else:
+                    selected[replacement] = best_public
     candidates = selected
     raw = RetrievalResult(tuple(candidates), tuple(dict.fromkeys(item.chunk.path.name for item in candidates)), query, expanded)
-    return _judge(raw, query, module_id, policy)
+    return _judge(raw, query, module_id, policy, required_sources)

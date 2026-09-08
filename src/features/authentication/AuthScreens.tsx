@@ -119,20 +119,26 @@ export function Login({
           />
         </label>
         {requires2FA && (
-          <label>
-            Código 2FA
-            <input
-              inputMode="numeric"
-              pattern="\d{6}"
-              maxLength={6}
-              value={otp}
-              onChange={(event) =>
-                setOtp(event.target.value.replace(/\D/g, "").slice(0, 6))
-              }
-              autoComplete="one-time-code"
-              required
-            />
-          </label>
+          <>
+            <div className="login-success">
+              Senha aceita. Agora informe o código de 6 dígitos exibido no
+              aplicativo autenticador. Esse código não é a sua senha.
+            </div>
+            <label>
+              Código 2FA do autenticador
+              <input
+                inputMode="numeric"
+                pattern="\d{6}"
+                maxLength={6}
+                value={otp}
+                onChange={(event) =>
+                  setOtp(event.target.value.replace(/\D/g, "").slice(0, 6))
+                }
+                autoComplete="one-time-code"
+                required
+              />
+            </label>
+          </>
         )}
         {error && <div className="login-error">{error}</div>}
         <button className="login-submit" disabled={busy}>
@@ -164,8 +170,8 @@ export function Login({
           Tenho token de reset · Redefinir senha
         </button>
         <small>
-          Use o código do usuário ou o e-mail cadastrado. A senha é definida
-          localmente e nunca aparece nesta tela.
+          Use a matrícula ou o e-mail cadastrado. A senha é a que foi criada na
+          ativação; o autenticador fornece apenas o código temporário do 2FA.
         </small>
       </form>
     </div>
@@ -681,6 +687,11 @@ export function ActivateAccount({ onBack }: { onBack: () => void }) {
             <div className="login-kicker">2FA DA SOFIA</div>
             <h1>Escaneie o QR.</h1>
             <p>{message}</p>
+            <small>
+              O aplicativo autenticador gera somente o código temporário do
+              2FA. No login, use a senha criada na etapa anterior e informe o
+              código no campo separado.
+            </small>
             <img
               className="two-factor-qr"
               src={artifact.qr_data_uri}

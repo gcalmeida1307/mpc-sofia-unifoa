@@ -128,6 +128,11 @@ def build_context_package(
             "evidence_judge": "relevance+authority+freshness+provenance+support+conflict",
         },
         expected_response_type=expected_response_type,
+        route=str(profile.get("route", "evidence")),
+        retrieval_required=bool(profile.get("retrieval_required", True)),
+        response_mode=str(profile.get("response_mode", "evidence")),
+        required_sources=list(result.required_sources),
+        missing_sources=list(result.missing_sources),
     )
 
 
@@ -137,7 +142,8 @@ def verify_answer(answer: str, result: RetrievalResult, module_id: str) -> Verif
         return VerificationResult("rejected", 0.0, ["resposta vazia"], ["provider não retornou conteúdo"])
     if not result.evidence:
         return VerificationResult("unverified", 0.25, [], ["não há evidência local aceita"])
-    evidence_terms = set(re.findall(r"[\wÀ-ÿ]{4,}", normalize(result.context)))
+    evidence_text = normalize(result.context)
+    evidence_terms = set(re.findall(r"[\wÀ-ÿ]{4,}", evidence_text))
     answer_terms = set(re.findall(r"[\wÀ-ÿ]{4,}", normalize(answer)))
     overlap = len(answer_terms & evidence_terms) / max(1, len(answer_terms))
     warnings: list[str] = []
@@ -145,7 +151,48 @@ def verify_answer(answer: str, result: RetrievalResult, module_id: str) -> Verif
         warnings.append(f"{len(result.conflicts)} possível(is) conflito(s) textual(is) exige(m) revisão")
     if module_id == "medicina" and any(marker in normalize(answer) for marker in ("diagnostico definitivo", "tome ", "prescrevo")):
         warnings.append("linguagem clínica incompatível com apoio informacional")
-    if overlap < 0.08 or any(item.support_score and item.support_score < 0.12 for item in result.evidence):
-        return VerificationResult("repaired", max(0.2, overlap), ["alegações com baixa sustentação textual"], warnings)
+    claim_units = [
+        unit.strip(" -*•\t")
+        for unit in re.split(r"(?:\n+|(?<=[.!?])\s+)", normalize(answer))
+        if len(unit.strip()) >= 35
+        and not unit.strip().startswith((
+            "conclusao",
+            "base documental",
+            "pontos de atencao",
+            "limites",
+            "proximo passo",
+            "origem da resposta",
+        ))
+    ]
+    unsupported: list[str] = []
+    claim_scores: list[float] = []
+    stopwords = {
+        "essa", "esse", "isso", "apenas", "sobre", "quando", "documento", "documentos",
+        "fonte", "fontes", "resposta", "tambem", "pode", "podem", "deve", "devem",
+    }
+    for claim in claim_units:
+        claim_terms = {
+            term for term in re.findall(r"[\wÀ-ÿ]{4,}", claim)
+            if term not in stopwords
+        }
+        if not claim_terms:
+            continue
+        claim_overlap = len(claim_terms & evidence_terms) / max(1, len(claim_terms))
+        claim_scores.append(claim_overlap)
+        # Numeric/legal claims need an exact counterpart in the evidence; a
+        # generic word overlap is not enough to validate a deadline, amount or
+        # article number.
+        numeric_claims = set(re.findall(r"\b\d+(?:[.,]\d+)?%?\b", claim))
+        numeric_evidence = set(re.findall(r"\b\d+(?:[.,]\d+)?%?\b", evidence_text))
+        if claim_overlap < 0.12 or (numeric_claims and not numeric_claims <= numeric_evidence):
+            unsupported.append(claim[:180])
+    if (
+        overlap < 0.08
+        or unsupported
+        or any(item.support_score and item.support_score < 0.12 for item in result.evidence)
+    ):
+        confidence = max(0.2, min(0.85, (sum(claim_scores) / len(claim_scores)) if claim_scores else overlap))
+        return VerificationResult("repaired", confidence, unsupported[:5] or ["alegações com baixa sustentação textual"], warnings)
     judge_confidence = getattr(result, "judge_confidence", 0.0)
-    return VerificationResult("verified", min(0.99, max(0.45 + overlap, judge_confidence)), [], warnings)
+    claim_confidence = sum(claim_scores) / len(claim_scores) if claim_scores else overlap
+    return VerificationResult("verified", min(0.99, max(0.45 + overlap, claim_confidence, judge_confidence)), [], warnings)

@@ -67,6 +67,140 @@ GENERIC_ANALYSIS_TERMS = (
 )
 
 
+DIRECT_CONVERSATION_MARKERS = (
+    "oi",
+    "ola",
+    "olá",
+    "bom dia",
+    "boa tarde",
+    "boa noite",
+    "obrigado",
+    "obrigada",
+    "quem e voce",
+    "quem é você",
+    "como voce pode ajudar",
+    "como você pode ajudar",
+)
+
+DIRECT_WRITING_MARKERS = (
+    "escreva",
+    "redija",
+    "reescreva",
+    "reformule",
+    "melhore este texto",
+    "melhore esse texto",
+    "corrija este texto",
+    "corrija esse texto",
+    "crie um email",
+    "crie um e-mail",
+    "escreva um email",
+    "escreva um e-mail",
+    "crie uma mensagem",
+    "escreva uma mensagem",
+    "traduza",
+)
+
+EVIDENCE_REQUEST_MARKERS = (
+    "arquivo",
+    "documento",
+    "documentos",
+    "fonte",
+    "fontes",
+    "link",
+    "links",
+    "base local",
+    "base de conhecimento",
+    "segundo",
+    "conforme",
+    "de acordo com",
+    "no acordo",
+    "na lei",
+    "no contrato",
+    "na imagem",
+    "no csv",
+    "no xlsx",
+    "compare",
+    "comparar",
+    "jurisprudencia",
+    "jurisprudência",
+    "resuma",
+    "resumo",
+    "listar documentos",
+    "o que temos sobre",
+)
+
+
+def route_query(module_id: str, question: str) -> dict[str, Any]:
+    """Choose the smallest safe intelligence route for a user request."""
+
+    del module_id
+    normalized = normalize(question).strip()
+    compact = re.sub(r"[!?.,;:]+", " ", normalized)
+    compact = re.sub(r"\s+", " ", compact).strip()
+    words = compact.split()
+
+    if (
+        any(compact == marker or compact.startswith(f"{marker} ") for marker in DIRECT_CONVERSATION_MARKERS)
+        or (len(words) <= 5 and any(compact.startswith(marker) for marker in ("oi ", "ola ", "olá ")))
+    ):
+        return {
+            "route": "conversation",
+            "retrieval_required": False,
+            "response_mode": "conversational",
+            "reason": "saudação ou conversa sem pedido de evidência interna",
+        }
+
+    if any(marker in compact for marker in DIRECT_WRITING_MARKERS) and not any(marker in compact for marker in EVIDENCE_REQUEST_MARKERS):
+        return {
+            "route": "writing",
+            "retrieval_required": False,
+            "response_mode": "conversational",
+            "reason": "tarefa de escrita sem exigência explícita de fonte interna",
+        }
+
+    if any(marker in compact for marker in EVIDENCE_REQUEST_MARKERS):
+        return {
+            "route": "evidence",
+            "retrieval_required": True,
+            "response_mode": "evidence",
+            "reason": "a pergunta referencia conhecimento, documento ou fonte verificável",
+        }
+
+    if any(
+        compact.startswith(marker)
+        for marker in (
+            "o que e ",
+            "o que é ",
+            "qual a diferenca",
+            "qual é a diferença",
+            "explique ",
+            "como funciona",
+            "como fazer",
+            "por que ",
+            "porque ",
+        )
+    ):
+        return {
+            "route": "explanation",
+            "retrieval_required": True,
+            "response_mode": "conversational",
+            "reason": "explicação: consulta local primeiro, síntese humana depois",
+        }
+
+    return {
+        "route": "evidence",
+        "retrieval_required": True,
+        "response_mode": "evidence",
+        "reason": "pergunta de domínio: evidência local é a primeira autoridade",
+    }
+
+
+def _with_route(profile: dict[str, Any], module_id: str, question: str) -> dict[str, Any]:
+    enriched = dict(profile)
+    enriched.update(route_query(module_id, question))
+    return enriched
+
+
 def assess_module_scope(module_id: str, question: str) -> dict[str, Any]:
     """Explain whether a question appears aligned with the active module."""
     normalized = normalize(question)
@@ -115,7 +249,7 @@ def classify_query(module_id: str, question: str) -> dict[str, Any]:
     tokens = set(re.findall(r"[\w]+", normalized))
 
     if module_id == "medicina" and is_medical_sleep_query(question):
-        return {
+        return _with_route({
             "intent": "clinical_symptom_assessment",
             "theme": "Sono e sonolência",
             "concepts": [
@@ -126,32 +260,32 @@ def classify_query(module_id: str, question: str) -> dict[str, Any]:
             ],
             "risk_flags": ["acidente_por_sonolencia"],
             "source_profile": "clinical_guideline",
-        }
+        }, module_id, question)
 
     if module_id == "medicina":
         if any(term in normalized for term in ("sintoma", "dor", "febre", "tosse", "gripe", "influenza")):
-            return {
+            return _with_route({
                 "intent": "clinical_symptom_assessment",
                 "theme": "Sintomas e avaliação clínica",
                 "concepts": ["sintomas", "avaliação clínica"],
                 "risk_flags": ["avaliacao_profissional"],
                 "source_profile": "clinical_guideline",
-            }
+            }, module_id, question)
         if any(term in normalized for term in ("paciente", "prontuario", "fhir", "exame", "tratamento")):
-            return {
+            return _with_route({
                 "intent": "clinical_record_or_protocol",
                 "theme": "Protocolos e registros clínicos",
                 "concepts": ["protocolo", "registro clínico", "FHIR"],
                 "risk_flags": ["dados_de_saude"],
                 "source_profile": "clinical_guideline",
-            }
-        return {
+            }, module_id, question)
+        return _with_route({
             "intent": "medical_knowledge_lookup",
             "theme": "Conhecimento médico",
             "concepts": sorted(tokens)[:8],
             "risk_flags": ["avaliacao_profissional"],
             "source_profile": "clinical_guideline",
-        }
+        }, module_id, question)
 
     if module_id in {"direito", "departamento-pessoal"}:
         if any(term in normalized for term in ("hora extra", "horas extras", "jornada", "hora negativa", "banco de horas")):
@@ -162,13 +296,13 @@ def classify_query(module_id: str, question: str) -> dict[str, Any]:
             theme = "Direitos trabalhistas e remuneração"
         else:
             theme = "Legislação e documentos"
-        return {
+        return _with_route({
             "intent": "legal_document_analysis",
             "theme": theme,
             "concepts": sorted(tokens)[:8],
             "risk_flags": ["revisao_juridica"],
             "source_profile": "legal_primary_source",
-        }
+        }, module_id, question)
 
     if module_id == "infraestrutura":
         if any(term in normalized for term in ("zabbix", "host", "monitoramento", "agent")):
@@ -179,18 +313,18 @@ def classify_query(module_id: str, question: str) -> dict[str, Any]:
             theme = "Sistemas e disponibilidade"
         else:
             theme = "Infraestrutura e operações"
-        return {
+        return _with_route({
             "intent": "technical_procedure_or_diagnosis",
             "theme": theme,
             "concepts": sorted(tokens)[:8],
             "risk_flags": [],
             "source_profile": "technical_documentation",
-        }
+        }, module_id, question)
 
-    return {
+    return _with_route({
         "intent": "module_knowledge_lookup",
         "theme": "Outros temas do módulo",
         "concepts": sorted(tokens)[:8],
         "risk_flags": [],
         "source_profile": "module_document",
-    }
+    }, module_id, question)

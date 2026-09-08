@@ -1314,7 +1314,11 @@ def enable_activation_two_factor(
         if not verify_totp(decrypt_text(str(row["two_factor_secret"] or "")), code):
             raise ValueError("Código 2FA inválido")
         connection.execute(
-            "UPDATE users SET two_factor_enabled = 1 WHERE user_code = ?",
+            # The password was created in the activation form. Older builds
+            # could leave the bootstrap flag enabled even after the password
+            # and TOTP were successfully configured, trapping the user in the
+            # first-access screen after a valid login.
+            "UPDATE users SET two_factor_enabled = 1, must_change_password = 0 WHERE user_code = ?",
             (user_code.strip().upper(),),
         )
         connection.execute(

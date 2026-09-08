@@ -67,6 +67,11 @@ _KEYED_PII_RE = re.compile(
     r"(?P<value>\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*'|\[[^\]]*\]|[^,\n}]+)",
     re.IGNORECASE,
 )
+_FHIR_IDENTIFIER_RE = re.compile(
+    r"(?P<prefix>[\"']?(?:id|resourceId|reference|fullUrl)[\"']?\s*[:=]\s*)"
+    r"(?P<value>\"(?:\\.|[^\"\\])*\"|'(?:\\.|[^'\\])*'|[^,\n}]+)",
+    re.IGNORECASE,
+)
 _EMAIL_RE = re.compile(
     r"(?<![\w.+-])[\w.!#$%&'*+/=?^`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?\.[A-Za-z]{2,}(?![\w-])"
 )
@@ -187,6 +192,26 @@ class ExternalRedaction:
             if item.get("role") in {"user", "assistant"}
             and str(item.get("content", "")).strip()
         ]
+
+    def clean_clinical(self, text: str | None) -> str:
+        """Apply the normal minimization plus the FHIR identifier boundary.
+
+        Generic FHIR ``id`` and ``reference`` fields are not always covered by
+        the natural-language PII patterns.  They are therefore replaced only
+        on the clinical context path, while the local RAG keeps the original
+        resource for authorized processing.
+        """
+
+        cleaned = self.clean(text)
+
+        def replace(match: re.Match[str]) -> str:
+            key = match.group("prefix")
+            value = match.group("value").strip()
+            quoted = len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}
+            token = self._placeholder("IDENTIFIER", value[1:-1] if quoted else value)
+            return f"{key}{value[0]}{token}{value[-1]}" if quoted else f"{key}{token}"
+
+        return _FHIR_IDENTIFIER_RE.sub(replace, cleaned)
 
     def restore(self, text: str | None) -> str:
         if not text or not self._restore_map:

@@ -881,7 +881,7 @@ class ExpansionStore:
                 )
             else:
                 cursor = connection.execute(
-                    "INSERT INTO sources (module_id, source_type, url, normalized_url, canonical_url, local_path, title, status, reliability, content_hash, etag, last_modified, pages, last_checked_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO sources (module_id, source_type, url, normalized_url, canonical_url, local_path, title, status, reliability, content_hash, etag, last_modified, pages, last_checked_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     (module_id, source_type, url, normalized_url, canonical, local_path, title, status, reliability, content_hash, etag, last_modified, pages, now, now, now),
                 )
                 source_id = int(cursor.lastrowid)

@@ -24,6 +24,10 @@ class EvidenceDecision:
 
 def _authority(path: Path) -> float:
     name = normalize(path.name)
+    if any(part.casefold() == "offline" for part in path.parts):
+        # Provider-generated material is a candidate for recovery, never an
+        # authority equivalent to the original document or official source.
+        return 0.42
     if path.parent.name.casefold() == "links":
         if any(marker in name for marker in ("gov-br", "planalto", "stf", "stj", "zabbix-com", "who-int", "cdc")):
             return 0.92

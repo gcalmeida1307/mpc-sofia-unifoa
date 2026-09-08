@@ -118,6 +118,7 @@ function App() {
   const [apiOnline, setApiOnline] = useState(false)
   const [capabilities, setCapabilities] = useState<WorkspaceCapabilities | null>(null)
   const feedbackInFlight = useRef(new Set<number>())
+  const refreshInFlight = useRef(false)
   const mod = useMemo(
     () => items.find((item) => item.id === moduleId) ?? items[0],
     [items, moduleId],
@@ -126,9 +127,13 @@ function App() {
   const authFetch = (path: string, init: RequestInit = {}) =>
     apiRequest(path, init, { token })
   const refresh = async () => {
-    if (!token) return
+    if (!token || refreshInFlight.current) return
+    refreshInFlight.current = true
     try {
-      const response = await authFetch("/api/modules")
+      const [response, capabilityResponse] = await Promise.all([
+        authFetch("/api/modules"),
+        authFetch("/api/capabilities"),
+      ])
       if (!response.ok) throw new Error()
       const data = (await response.json()) as Array<Record<string, unknown>>
       setItems(
@@ -163,12 +168,13 @@ function App() {
           } as Module
         }),
       )
-      const capabilityResponse = await authFetch("/api/capabilities")
       if (capabilityResponse.ok)
         setCapabilities((await capabilityResponse.json()) as WorkspaceCapabilities)
       setApiOnline(true)
     } catch {
       setApiOnline(false)
+    } finally {
+      refreshInFlight.current = false
     }
   }
   useEffect(() => {
@@ -197,7 +203,7 @@ function App() {
     if (!token) return
     const knowledgeRefreshTimer = window.setInterval(() => {
       void refresh()
-    }, 15_000)
+    }, 30_000)
     return () => window.clearInterval(knowledgeRefreshTimer)
   }, [token])
   useEffect(() => {
@@ -466,7 +472,23 @@ function App() {
         })
       }
     } catch {
-      // Feedback is optional; a temporary analytics outage must not interrupt chat.
+      // Feedback is optional, but the user still needs to know why a retry did
+      // not appear. Keep the answer and surface a non-blocking status instead
+      // of silently leaving the old response unchanged.
+      setChat((prev) =>
+        prev.map((item) =>
+          item.analytics_id === analyticsId
+            ? {
+                ...item,
+                learning: {
+                  ...item.learning,
+                  message:
+                    "O feedback foi marcado localmente, mas não foi possível iniciar a nova tentativa agora. Tente novamente em instantes.",
+                },
+              }
+            : item,
+        ),
+      )
     } finally {
       feedbackInFlight.current.delete(analyticsId)
     }

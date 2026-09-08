@@ -240,6 +240,18 @@ export default function AppShell({
       </aside>
 
       <main className="content">
+        {activePage !== "chat" && activePage !== "upload" && (
+          <div className={`shell-ambient shell-ambient-${activePage}`} aria-hidden="true">
+            <div className="ambient-orb">
+              <span className="ambient-orb-ring ring-one" />
+              <span className="ambient-orb-ring ring-two" />
+              <span className="ambient-orb-ring ring-three" />
+              {Array.from({ length: 18 }, (_, index) => (
+                <i key={index} style={{ "--node-index": index } as CSSProperties} />
+              ))}
+            </div>
+          </div>
+        )}
         <header className="topbar">
           <button
             className="mobile-menu-button"
@@ -294,6 +306,29 @@ export default function AppShell({
             </div>
           </div>
         </header>
+        {activePage !== "chat" && (
+          <div className="workspace-strip" aria-label="Contexto do workspace">
+            <div className="workspace-strip-main">
+              <span
+                className="workspace-strip-dot"
+                style={{ background: activeModule.color }}
+                aria-hidden="true"
+              />
+              <strong>{activeModule.name}</strong>
+              <span>módulo ativo</span>
+              <span className="workspace-strip-separator" aria-hidden="true">
+                /
+              </span>
+              <span>{activeModule.docs} documentos no conhecimento local</span>
+            </div>
+            <div className="workspace-strip-meta">
+              <span className={apiOnline ? "is-online" : "is-offline"}>
+                {apiOnline ? "Serviços locais online" : "API local indisponível"}
+              </span>
+              <span>{provider === "auto" ? "CORE automático" : provider}</span>
+            </div>
+          </div>
+        )}
         {children}
       </main>
     </div>

@@ -38,12 +38,43 @@ class InfrastructurePackage(DomainRetrievalPackage):
             features.add("procedure")
         if "7.4" in normalized:
             features.add("version_7_4")
-        return QueryProfile(summary=super().profile(query).summary, features=frozenset(features), seed_markers=("uma entidade no zabbix que representa", "representa seu alvo de monitoramento"))
+        base = super().profile(query)
+        features.update(base.features)
+        return QueryProfile(
+            summary=base.summary,
+            features=frozenset(features),
+            seed_markers=("uma entidade no zabbix que representa", "representa seu alvo de monitoramento"),
+            comparison=base.comparison,
+        )
 
     def select_sources(self, paths: list[Path], query: str, retry: bool = False) -> SourceSelection:
         profile = self.profile(query)
         selected = named_source_paths(paths, query)
         zabbix = tuple(path for path in paths if "zabbix_documentation" in path.name.casefold())
+        normalized = normalize(query)
+        # Do not parse every version of the Zabbix manual for a normal
+        # question. These PDFs are very large and contain overlapping content.
+        # An explicitly named source always wins; comparisons and version
+        # questions are the cases where loading more than one version is useful.
+        explicit_document = any(
+            marker in normalized
+            for marker in ("arquivo", "documento", "manual", "pdf", "6.0", "7.0", "7.4", "8.0", "zabbix_documentation")
+        )
+        if selected and explicit_document:
+            required = tuple(selected)
+            for version in ("8.0", "7.4", "7.0", "6.0"):
+                if version in normalized:
+                    versioned = tuple(path for path in selected if version in path.name)
+                    if versioned:
+                        return SourceSelection(versioned, profile, required)
+            return SourceSelection(selected, profile, required)
+        compare_versions = any(marker in normalized for marker in ("compar", "versoes", "versao", "diferenca entre"))
+        if zabbix and any(term in normalized for term in ("zabbix", "trigger", "item", "template", "host", "monitoramento")) and not compare_versions:
+            if "version_7_4" in profile.features:
+                versioned = tuple(path for path in zabbix if "7.4" in path.name)
+                return SourceSelection(versioned or zabbix[:1], profile)
+            latest = tuple(path for path in zabbix if "8.0" in path.name)
+            return SourceSelection(latest or zabbix[:1], profile)
         if "host" in profile.features and zabbix:
             if "version_7_4" in profile.features:
                 versioned = tuple(path for path in zabbix if "7.4" in path.name)
@@ -51,7 +82,7 @@ class InfrastructurePackage(DomainRetrievalPackage):
             preferred = tuple(path for path in zabbix if "7.4" in path.name)
             return SourceSelection(preferred or zabbix, profile)
         if selected:
-            return SourceSelection(selected, profile)
+            return SourceSelection(selected, profile, tuple(selected))
         return SourceSelection(tuple(paths), profile)
 
     def score_bonus(self, path: Path, text: str, query_terms: set[str], profile: QueryProfile) -> float:

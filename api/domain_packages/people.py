@@ -13,12 +13,13 @@ class PeoplePackage(DomainRetrievalPackage):
 
     def profile(self, query: str) -> QueryProfile:
         normalized = normalize(query)
-        features: set[str] = set()
+        base = super().profile(query)
+        features: set[str] = set(base.features)
         if any(term in normalized for term in ("contrat", "admiss", "recrut", "selec")):
             features.add("hiring")
         if "departamento pessoal" in normalized:
             features.add("department_definition")
-        return QueryProfile(summary=super().profile(query).summary, features=frozenset(features))
+        return QueryProfile(summary=base.summary, features=frozenset(features), comparison=base.comparison)
 
     def filter_text(self, path: Path, text: str, profile: QueryProfile) -> bool:
         del path

@@ -38,17 +38,19 @@ class MedicalPackage(DomainRetrievalPackage):
     def profile(self, query: str) -> QueryProfile:
         normalized = normalize(query)
         sleep = any(term in normalized for term in ("sono", "dormir", "sonolencia", "piscada", "microssono"))
+        base = super().profile(query)
         return QueryProfile(
-            summary=super().profile(query).summary,
-            features=frozenset({"clinical_sleep"} if sleep else ()),
+            summary=base.summary,
+            features=base.features | frozenset({"clinical_sleep"} if sleep else ()),
             seed_markers=("microssono", "sonolencia diurna", "privacao de sono", "sono insuficiente", "apneia obstrutiva do sono") if sleep else (),
+            comparison=base.comparison,
         )
 
     def select_sources(self, paths: list[Path], query: str, retry: bool = False) -> SourceSelection:
         profile = self.profile(query)
         selected = named_source_paths(paths, query)
         if selected:
-            return SourceSelection(selected, profile)
+            return SourceSelection(selected, profile, tuple(selected))
         if "clinical_sleep" in profile.features:
             clinical = tuple(path for path in paths if _clinical(path) and not _classification(path))
             if clinical:

@@ -24,6 +24,7 @@ class PersonnelPackage(LegalPackage):
             seed_markers=profile.seed_markers,
             required_markers=profile.required_markers,
             summary_markers=profile.summary_markers,
+            comparison=profile.comparison,
         )
 
     def filter_text(self, path: Path, text: str, profile: QueryProfile) -> bool:
