@@ -17,6 +17,7 @@ import tempfile
 import threading
 import time
 from datetime import UTC, datetime
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -47,7 +48,10 @@ def _truthy(value: str | None, default: bool = False) -> bool:
 
 def embedding_settings() -> dict[str, Any]:
     try:
-        max_chunks = max(100, min(30000, int(os.getenv("SOFIA_EMBEDDING_MAX_CHUNKS", "100"))))
+        # 500 gives the neural reranker useful coverage without forcing a
+        # no-GPU workstation to embed the entire corpus during startup. The
+        # persistent lexical index still covers every chunk.
+        max_chunks = max(100, min(30000, int(os.getenv("SOFIA_EMBEDDING_MAX_CHUNKS", "500"))))
     except ValueError:
         max_chunks = 100
     try:
@@ -292,6 +296,24 @@ def _cosine(left: list[float], right: list[float]) -> float:
     return dot / (left_norm * right_norm) if left_norm and right_norm else 0.0
 
 
+@lru_cache(maxsize=128)
+def _cached_query_scores(cache_path: str, corpus_signature: str, model: str, host: str, query: str, timeout: float) -> tuple[tuple[str, int, float], ...]:
+    """Cache repeated query vectors while the corpus signature is unchanged."""
+    try:
+        cache = json.loads(Path(cache_path).read_text(encoding="utf-8"))
+        if cache.get("corpus_signature") != corpus_signature or cache.get("model") != model:
+            return ()
+        query_vector = _embed_batch([_embedding_text(query)], {"host": host, "model": model, "timeout_seconds": timeout}, timeout=timeout)[0]
+    except (OSError, ValueError, TypeError, KeyError, httpx.HTTPError, RuntimeError):
+        return ()
+    scores: list[tuple[str, int, float]] = []
+    for item in cache.get("items", []):
+        vector = item.get("vector")
+        if isinstance(vector, list):
+            scores.append((str(item.get("source_path", "")), int(item.get("ordinal", 0)), max(0.0, _cosine(query_vector, [float(value) for value in vector]))))
+    return tuple(scores)
+
+
 def semantic_scores(root: Path, module_id: str, query: str) -> dict[tuple[str, int], float]:
     """Return optional local neural scores; failures never block lexical RAG."""
     settings = embedding_settings()
@@ -301,13 +323,14 @@ def semantic_scores(root: Path, module_id: str, query: str) -> dict[tuple[str, i
     if not cache or cache.get("model") != settings["model"]:
         return {}
     try:
-        query_vector = _embed_batch([_embedding_text(query)], settings, timeout=settings["query_timeout_seconds"])[0]
-    except (httpx.HTTPError, OSError, RuntimeError, ValueError):
+        rows = _cached_query_scores(
+            str(_cache_path(root, module_id)),
+            str(cache.get("corpus_signature", "")),
+            str(settings["model"]),
+            str(settings["host"]),
+            query.strip(),
+            float(settings["query_timeout_seconds"]),
+        )
+    except (OSError, ValueError, TypeError):
         return {}
-    scores: dict[tuple[str, int], float] = {}
-    for item in cache["items"]:
-        vector = item.get("vector")
-        if not isinstance(vector, list):
-            continue
-        scores[(str(root / item["source_path"]), int(item["ordinal"]))] = max(0.0, _cosine(query_vector, [float(value) for value in vector]))
-    return scores
+    return {(str(root / source_path), ordinal): score for source_path, ordinal, score in rows}

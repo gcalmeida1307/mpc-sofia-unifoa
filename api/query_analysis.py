@@ -321,6 +321,18 @@ def classify_query(module_id: str, question: str) -> dict[str, Any]:
             "source_profile": "technical_documentation",
         }, module_id, question)
 
+    if module_id == "gestao-empresarial" and (
+        ("desvio" in normalized or "variacao" in normalized)
+        and "producao" in normalized
+    ):
+        return _with_route({
+            "intent": "production_variance_analysis",
+            "theme": "Desvios de produção e indicadores",
+            "concepts": ["produção", "meta", "realizado", "desvio", "indicadores"],
+            "risk_flags": [],
+            "source_profile": "module_document",
+        }, module_id, question)
+
     return _with_route({
         "intent": "module_knowledge_lookup",
         "theme": "Outros temas do módulo",

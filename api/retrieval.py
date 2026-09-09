@@ -7,7 +7,11 @@ indexing, candidate ranking and the common Evidence Judge boundary.
 
 from __future__ import annotations
 
+import hashlib
+import json
+import os
 import re
+import tempfile
 import unicodedata
 from collections import Counter
 from dataclasses import dataclass
@@ -21,7 +25,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from .domain_packages import DomainRetrievalPackage, package_for
 from .domain_packages.base import named_source_paths
 from .embeddings import semantic_scores
-from .ingestion import DocumentChunk, files_for, ingest_module
+from .ingestion import ALLOW_HEAVY_EXTRACTION, DocumentChunk, files_for, ingest_module
+from .secure_storage import decrypt_text, protect_for_storage
 from .policies import ModulePolicy, expand_query
 
 
@@ -58,15 +63,91 @@ class RetrievalResult:
     def has_quality_evidence(self) -> bool:
         # Evidence from only one side of a named comparison is not enough to
         # authorize synthesis.  The accepted chunks remain available for the
-        # diagnostic context, while the gate reports the source gap.
-        return bool(self.evidence) and not self.missing_sources
+        # diagnostic context, while the gate reports the source gap.  A source
+        # can be present and still be too weak to authorize an answer; keeping
+        # this threshold here prevents the external fallback from treating a
+        # low-confidence navigation/menu match as authoritative evidence.
+        return bool(self.evidence) and not self.missing_sources and self.judge_confidence >= 0.32
 
     @property
     def context(self) -> str:
         return "\n\n--- DOCUMENTO: ".join(
-            f"{item.chunk.path.name} · trecho {item.chunk.ordinal}\n{item.chunk.text}"
+            f"{item.chunk.path.name} · {item.chunk.locator or ('trecho ' + str(item.chunk.ordinal))}\n{item.chunk.text}"
             for item in self.evidence
         )
+
+
+def _index_cache_path(root: Path, module_id: str) -> Path:
+    return root.parent / "data" / "retrieval-index" / f"{module_id}.json"
+
+
+def _signature_digest(signature: tuple[tuple[str, int, int], ...]) -> str:
+    payload = json.dumps(signature, ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _persist_index(root: Path, module_id: str, signature: tuple[tuple[str, int, int], ...], chunks: tuple[DocumentChunk, ...]) -> None:
+    """Persist the prepared lexical index so cold queries do not parse files."""
+    # ``Path.resolve`` also normalizes Windows 8.3 aliases (for example
+    # ``GLAUCO~1.ALM``).  Without this, ``relative_to`` can fail even though
+    # the source and knowledge root point to the same directory.
+    root = root.resolve()
+    path = _index_cache_path(root, module_id)
+    def relative_path(value: Path) -> str:
+        return os.path.relpath(str(value.resolve()), str(root))
+
+    payload = {
+        "version": 2,
+        "module_id": module_id,
+        "signature": _signature_digest(signature),
+        "sources": [
+            {"path": relative_path(Path(source)), "mtime_ns": mtime_ns, "size": size}
+            for source, mtime_ns, size in signature
+        ],
+        "chunks": [
+            {"source_path": relative_path(chunk.path), "ordinal": chunk.ordinal, "text": chunk.text, "page": chunk.page, "locator": chunk.locator}
+            for chunk in chunks
+        ],
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary_name = tempfile.mkstemp(prefix=f"{path.stem}-", suffix=".tmp", dir=path.parent)
+    os.close(fd)
+    Path(temporary_name).write_text(protect_for_storage(json.dumps(payload, ensure_ascii=False, separators=(",", ":"))), encoding="utf-8")
+    try:
+        Path(temporary_name).replace(path)
+    finally:
+        Path(temporary_name).unlink(missing_ok=True)
+
+
+def _load_persisted_index(root: Path, module_id: str, signature: tuple[tuple[str, int, int], ...]) -> tuple[DocumentChunk, ...] | None:
+    root = root.resolve()
+    path = _index_cache_path(root, module_id)
+    try:
+        raw = path.read_text(encoding="utf-8")
+        try:
+            decoded = decrypt_text(raw)
+        except RuntimeError:
+            # A cache generated with an encryption key must not crash a
+            # read-only query when the key is temporarily unavailable.  A
+            # legacy plaintext cache remains safe to use; an encrypted cache
+            # simply returns None and will be rebuilt by the preparation path.
+            decoded = raw if raw.lstrip().startswith("{") else ""
+        payload = json.loads(decoded)
+        if payload.get("version") != 2 or payload.get("module_id") != module_id:
+            return None
+        stored = {str((root / s["path"]).resolve()): (s["mtime_ns"], s["size"]) for s in payload["sources"]}
+        requested = {str(Path(source).resolve()): (mtime, size) for source, mtime, size in signature}
+        if any(stored.get(source) != stamp for source, stamp in requested.items()):
+            return None
+        chunks = []
+        for item in payload.get("chunks", []):
+            source = root / str(item["source_path"])
+            text = str(item.get("text", ""))
+            if str(source.resolve()) in requested and source.exists() and text.strip():
+                chunks.append(DocumentChunk(source, text, int(item.get("ordinal", 0)), item.get("page"), item.get("locator", "")))
+        return tuple(chunks)
+    except (OSError, KeyError, TypeError, ValueError, RuntimeError):
+        return None
 
 
 def normalize(text: str) -> str:
@@ -128,14 +209,75 @@ def _summary_quality(text: str) -> float:
 
 @lru_cache(maxsize=32)
 def _index(root_text: str, module_id: str, signature: tuple[tuple[str, int, int], ...], source_paths: tuple[str, ...] = ()) -> tuple[DocumentChunk, ...]:
-    del signature
+    root = Path(root_text)
+    cached = _load_persisted_index(root, module_id, signature)
+    if cached is not None:
+        return cached
     selected_paths = tuple(Path(path) for path in source_paths) if source_paths else None
-    return tuple(ingest_module(Path(root_text), module_id, selected_paths=selected_paths))
+    return tuple(ingest_module(root, module_id, selected_paths=selected_paths))
 
 
 @lru_cache(maxsize=32)
 def _normalized_index(root_text: str, module_id: str, signature: tuple[tuple[str, int, int], ...], source_paths: tuple[str, ...] = ()) -> tuple[str, ...]:
     return tuple(normalize(chunk.text) for chunk in _index(root_text, module_id, signature, source_paths))
+
+
+def warm_module_index(root: Path, module_id: str, force: bool = False) -> dict[str, Any]:
+    """Prepare and persist the complete primary lexical index for one module."""
+    paths = [path for path in files_for(root, module_id) if not _is_offline_candidate(path)]
+    signature = tuple(sorted((str(path), path.stat().st_mtime_ns, path.stat().st_size) for path in paths if path.exists()))
+    source_paths = tuple(str(path) for path in paths if path.exists())
+    if force:
+        _index.cache_clear()
+        _normalized_index.cache_clear()
+    # Always perform extraction in the preparation path when forcing a new
+    # extractor version; never serve old text merely because its hash matches.
+    chunks = tuple(ingest_module(root, module_id, selected_paths=tuple(paths))) if force else _index(str(root), module_id, signature, source_paths)
+    cache_path = _index_cache_path(root, module_id)
+    if force or not cache_path.exists() or _load_persisted_index(root, module_id, signature) is None:
+        _persist_index(root, module_id, signature, chunks)
+    return {
+        "module_id": module_id,
+        "status": "ready" if chunks else "empty",
+        "sources": len(paths),
+        "chunks": len(chunks),
+        "cache": str(cache_path),
+        "signature": _signature_digest(signature),
+    }
+
+
+def publish_document_index(root: Path, module_id: str, path: Path, chunks: list[DocumentChunk]) -> None:
+    """Publish only prepared sources; no unrelated document is parsed here."""
+    import threading
+    root = root.resolve()
+    path = path.resolve()
+    with _PUBLISH_LOCK:
+        existing: tuple[DocumentChunk, ...] = ()
+        signatures = []
+        try:
+            raw = _index_cache_path(root, module_id).read_text(encoding="utf-8")
+            try:
+                decoded = decrypt_text(raw)
+            except RuntimeError:
+                decoded = raw if raw.lstrip().startswith("{") else ""
+            payload = json.loads(decoded)
+            if payload.get("version") == 2:
+                for source in payload["sources"]:
+                    item = root / source["path"]
+                    if item.exists() and item.resolve() != path.resolve() and (item.stat().st_mtime_ns, item.stat().st_size) == (source["mtime_ns"], source["size"]):
+                        signatures.append((str(item), source["mtime_ns"], source["size"]))
+                existing = _load_persisted_index(root, module_id, tuple(signatures)) or ()
+        except (OSError, ValueError, KeyError, TypeError, RuntimeError):
+            pass
+        stat = path.stat()
+        signatures.append((str(path), stat.st_mtime_ns, stat.st_size))
+        _persist_index(root, module_id, tuple(sorted(signatures)), (*existing, *chunks))
+        _index.cache_clear()
+        _normalized_index.cache_clear()
+
+
+import threading
+_PUBLISH_LOCK = threading.RLock()
 
 
 def _summary_result(chunks: tuple[DocumentChunk, ...], normalized_index: tuple[str, ...], query: str, expanded: str, limit: int) -> RetrievalResult:
@@ -163,7 +305,7 @@ def _judge(
 ) -> RetrievalResult:
     from .evidence import judge_candidates
 
-    decision = judge_candidates(question, module_id, policy, result.evidence)
+    decision = judge_candidates(question, module_id, policy, result.evidence, required_sources)
     sources = tuple(dict.fromkeys(item.chunk.path.name for item in decision.accepted))
     covered = tuple(source for source in required_sources if source in sources)
     missing = tuple(source for source in required_sources if source not in sources)
@@ -193,7 +335,15 @@ def _is_offline_candidate(path: Path) -> bool:
     return any(part.casefold() == "offline" for part in path.parts)
 
 
-def retrieve(
+def retrieve(root: Path, module_id: str, query: str, policy: ModulePolicy, limit: int = 6, retry: bool = False, _candidate_paths: list[Path] | None = None) -> RetrievalResult:
+    token = ALLOW_HEAVY_EXTRACTION.set(False)
+    try:
+        return _retrieve(root, module_id, query, policy, limit, retry, _candidate_paths)
+    finally:
+        ALLOW_HEAVY_EXTRACTION.reset(token)
+
+
+def _retrieve(
     root: Path,
     module_id: str,
     query: str,
@@ -247,8 +397,13 @@ def retrieve(
     expanded_terms = _terms(expanded)
     selection = package.select_sources(_candidate_paths, query, retry=retry)
     source_paths = list(selection.paths)
-    named_paths = named_source_paths(_candidate_paths, query)
-    required_paths = selection.required_paths or named_paths
+    # ``required_paths`` is an explicit-source contract, not a list of every
+    # source whose filename happens to contain a domain word.  For example,
+    # “como criar um trigger no Zabbix” must not require all Zabbix manuals;
+    # the infrastructure package is allowed to select the one authoritative
+    # passage that actually explains the operation.  Domain packages that
+    # detect a named file populate ``required_paths`` themselves.
+    required_paths = selection.required_paths
     required_sources = tuple(dict.fromkeys(path.name for path in required_paths))
     if not source_paths:
         return RetrievalResult((), (), query, expanded, required_sources=required_sources, missing_sources=required_sources)

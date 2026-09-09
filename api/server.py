@@ -131,7 +131,7 @@ from .production_gate import production_gate as run_production_gate
 from .query_analysis import assess_module_scope
 from .readiness import readiness_checklist
 from .research import research_module
-from .retrieval import retrieve
+from .retrieval import retrieve, warm_module_index
 from .storage import status as storage_status
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -191,6 +191,7 @@ TRAINING_LOCK: asyncio.Lock | None = None
 LINK_REFRESH_TASK: asyncio.Task[Any] | None = None
 EXPANSION_TASK: asyncio.Task[Any] | None = None
 DOCUMENT_AUDIT_TASK: asyncio.Task[Any] | None = None
+RETRIEVAL_WARM_TASK: asyncio.Task[Any] | None = None
 # Construir um grafo percorre os documentos do módulo e pode derivar artefatos
 # persistidos. Limitar essa operação evita que uma abertura do mapa neural, ou
 # várias abas, esgotem CPU, memória e conexões do armazenamento ao mesmo tempo.
@@ -500,17 +501,48 @@ async def expansion_loop() -> None:
 
 
 async def audit_existing_documents_once() -> None:
-    """Register the current local corpus once without delaying application startup."""
+    """Reconcile the current local corpus without delaying application startup."""
     try:
-        snapshot = await asyncio.to_thread(expansion_status, KNOWLEDGE_ROOT)
-        if snapshot.get("documents_by_status"):
-            return
         for module_id in MODULES:
-            await asyncio.to_thread(audit_module_documents, KNOWLEDGE_ROOT, module_id)
+            result = await asyncio.to_thread(
+                audit_module_documents,
+                KNOWLEDGE_ROOT,
+                module_id,
+                quarantine_on_failure=False,
+            )
+            changed = any(item.get("status") in {"READY", "FAILED", "QUARANTINED"} for item in result.get("documents", []))
+            if changed:
+                schedule_auto_training(module_id, reason="corpus_reconciled")
     except asyncio.CancelledError:
         raise
     except Exception as exc:
         logger.warning("Auditoria inicial do corpus não concluída: %s", exc)
+
+
+async def warm_retrieval_indexes() -> None:
+    """Build one persistent lexical index per module in the background."""
+    for module_id in sorted(MODULES):
+        try:
+            await asyncio.to_thread(warm_module_index, KNOWLEDGE_ROOT, module_id)
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            logger.warning("Índice de recuperação do módulo %s não foi aquecido: %s", module_id, exc)
+
+
+async def prepare_knowledge_background() -> None:
+    """Serialize reconciliation and index warming to protect small hosts."""
+    if expansion_settings()["enabled"] and os.getenv(
+        "SOFIA_EXPANSION_AUDIT_ON_STARTUP", "false"
+    ).strip().casefold() not in {"0", "false", "no", "off"}:
+        await audit_existing_documents_once()
+    if os.getenv("SOFIA_RETRIEVAL_PREWARM", "true").strip().casefold() not in {"0", "false", "no", "off"}:
+        await warm_retrieval_indexes()
+    if os.getenv("SOFIA_AUTO_TRAIN_ON_STARTUP", "false").strip().casefold() not in {"0", "false", "no", "off"}:
+        for module_id in MODULES:
+            neural = neural_model_status(KNOWLEDGE_ROOT, module_id)
+            if not neural.get("trained") or neural.get("stale"):
+                schedule_auto_training(module_id, reason="startup_ready")
 
 
 def full_context(module_id: str) -> str:
@@ -1257,24 +1289,11 @@ async def protect_mcp_transport(request: Request, call_next):
 
 @app.on_event("startup")
 async def start_background_refresh() -> None:
-    global LINK_REFRESH_TASK, EXPANSION_TASK, DOCUMENT_AUDIT_TASK
+    global LINK_REFRESH_TASK, EXPANSION_TASK, DOCUMENT_AUDIT_TASK, RETRIEVAL_WARM_TASK
     ensure_training_worker()
     refresh_modules()
     initialize_expansion(KNOWLEDGE_ROOT)
-    # Never start a full-module training burst implicitly while the API is
-    # coming online.  It competes with login, health and chat on small hosts.
-    # Deployments that explicitly want a startup rebuild can still opt in via
-    # SOFIA_AUTO_TRAIN_ON_STARTUP=true.
-    if os.getenv("SOFIA_AUTO_TRAIN_ON_STARTUP", "false").strip().casefold() not in {
-        "0",
-        "false",
-        "no",
-        "off",
-    }:
-        for module_id in MODULES:
-            neural = neural_model_status(KNOWLEDGE_ROOT, module_id)
-            if not neural.get("trained") or neural.get("stale"):
-                schedule_auto_training(module_id)
+    RETRIEVAL_WARM_TASK = asyncio.create_task(prepare_knowledge_background())
     if os.getenv("SOFIA_AUTO_REFRESH_LINKS", "true").strip().casefold() not in {
         "0",
         "false",
@@ -1284,10 +1303,6 @@ async def start_background_refresh() -> None:
         LINK_REFRESH_TASK = asyncio.create_task(link_refresh_loop())
     if expansion_settings()["enabled"]:
         EXPANSION_TASK = asyncio.create_task(expansion_loop())
-        if os.getenv(
-            "SOFIA_EXPANSION_AUDIT_ON_STARTUP", "true"
-        ).strip().casefold() not in {"0", "false", "no", "off"}:
-            DOCUMENT_AUDIT_TASK = asyncio.create_task(audit_existing_documents_once())
 
 
 @app.on_event("shutdown")
@@ -1296,6 +1311,7 @@ async def stop_background_refresh() -> None:
         LINK_REFRESH_TASK,
         EXPANSION_TASK,
         DOCUMENT_AUDIT_TASK,
+        RETRIEVAL_WARM_TASK,
         TRAINING_WORKER,
     ):
         if task and not task.done():
@@ -1680,11 +1696,12 @@ async def admin_knowledge_graph(
 
 @app.get("/api/admin/production-gate")
 async def admin_production_gate(
+    refresh: bool = False,
     current: dict[str, Any] = Depends(require_user),
 ) -> dict[str, Any]:
-    """Evaluate the single release gate for AG000001."""
+    """Return the cached gate; use refresh=true for an explicit full evaluation."""
     require_statistics_admin(current)
-    result = await asyncio.to_thread(run_production_gate, KNOWLEDGE_ROOT)
+    result = await asyncio.to_thread(run_production_gate, KNOWLEDGE_ROOT, refresh)
     audit_event(current["sub"], "production_gate_run", result.get("status", "unknown"))
     return result
 

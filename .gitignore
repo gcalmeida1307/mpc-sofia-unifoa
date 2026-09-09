@@ -16,6 +16,8 @@ data/neural/
 data/semantic-embeddings/
 data/text-cache/
 data/knowledge-graph/
+data/retrieval-index/
+data/gate-cache/
 __pycache__/
 *.pyc
 .claude-replay.*

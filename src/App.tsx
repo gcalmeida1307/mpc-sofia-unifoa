@@ -210,6 +210,11 @@ function App() {
     setChat([])
   }, [moduleId])
   useEffect(() => {
+    if (user && user.user_code !== "AG000001" && (page === "pipeline" || page === "access")) {
+      setPage("dashboard")
+    }
+  }, [page, user])
+  useEffect(() => {
     if (!token) return
     const rotationTimer = window.setInterval(
       async () => {
@@ -554,9 +559,14 @@ function App() {
         <Connections items={items} capabilities={capabilities} />
       )}
       {page === "pipeline" && user.user_code === "AG000001" && (
-        <PipelineExplorer mod={mod} authFetch={authFetch} items={items} />
+        <PipelineExplorer
+          mod={mod}
+          authFetch={authFetch}
+          items={items}
+          isAdmin={user.user_code === "AG000001"}
+        />
       )}
-      {page === "access" && user.role === "admin" && (
+      {page === "access" && user.user_code === "AG000001" && (
         <>
           <AccessControl authFetch={authFetch} />
           <UserAdministration authFetch={authFetch} />

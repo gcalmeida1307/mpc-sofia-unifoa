@@ -23,10 +23,12 @@ export default function PipelineExplorer({
   mod,
   items,
   authFetch,
+  isAdmin,
 }: {
   mod: PipelineModule
   items: PipelineModule[]
   authFetch: SofiaAuthFetch
+  isAdmin: boolean
 }) {
   const [selected, setSelected] = useState(mod.id)
   const [payload, setPayload] = useState<PipelinePayload | null>(null)
@@ -96,6 +98,11 @@ export default function PipelineExplorer({
   useEffect(() => {
     void load()
   }, [selected])
+
+  // Keep the invariant inside the feature as well as in App.tsx. All hooks
+  // remain unconditional, while the diagnostic surface is still impossible
+  // to render for a non-admin if the component is reused elsewhere.
+  if (!isAdmin) return null
 
   const documents = payload?.documents ?? []
   const selectedModule = items.find((item) => item.id === selected) ?? mod

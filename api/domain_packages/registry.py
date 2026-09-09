@@ -7,6 +7,7 @@ from .base import DomainRetrievalPackage
 from .generic import GenericPackage
 from .infrastructure import InfrastructurePackage
 from .legal import LegalPackage
+from .management import ManagementPackage
 from .medical import MedicalPackage
 from .people import PeoplePackage
 from .personnel import PersonnelPackage
@@ -17,6 +18,7 @@ _PACKAGES: dict[str, DomainRetrievalPackage] = {
     "departamento-pessoal": PersonnelPackage(),
     "medicina": MedicalPackage(),
     "infraestrutura": InfrastructurePackage(),
+    "gestao-empresarial": ManagementPackage(),
     "contabilidade": AccountingPackage(),
     "recursos-humanos": PeoplePackage(),
 }

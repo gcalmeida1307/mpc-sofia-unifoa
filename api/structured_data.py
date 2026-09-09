@@ -19,7 +19,8 @@ import io
 import json
 import re
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from functools import lru_cache
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
@@ -73,6 +74,12 @@ class StructuredDocument:
     path: Path
     headers: tuple[str, ...]
     rows: tuple[dict[str, str], ...]
+    locations: tuple[dict[str, Any], ...] = ()
+
+    @property
+    def schema(self) -> dict[str, dict[str, Any]]:
+        from .table_analytics import infer_schema
+        return infer_schema(self)
 
 
 @dataclass(frozen=True)
@@ -84,6 +91,7 @@ class StructuredAnswer:
     operation: str
     filter_column: str | None = None
     filter_value: str | None = None
+    analysis: dict[str, Any] = field(default_factory=dict)
 
     def metadata(self) -> dict[str, Any]:
         """Return safe observability data; never include table rows."""
@@ -96,6 +104,7 @@ class StructuredAnswer:
             "filter_value": self.filter_value,
             "complete_source_read": True,
             "pii_rows_returned": False,
+            **self.analysis,
         }
 
 
@@ -154,7 +163,7 @@ def _from_csv(path: Path) -> StructuredDocument | None:
         | {headers[index]: "" for index in range(len(row), len(headers))}
         for row in rows[1:]
     )
-    return StructuredDocument(path, tuple(headers), records)
+    return StructuredDocument(path, tuple(headers), records, tuple({"row": i + 2} for i in range(len(records))))
 
 
 def _from_xlsx(path: Path) -> StructuredDocument | None:
@@ -172,15 +181,16 @@ def _from_xlsx(path: Path) -> StructuredDocument | None:
             if not values:
                 continue
             headers = _unique_headers(values[0])
-            sheet_rows.append((headers, values[1:]))
+            sheet_rows.append((sheet.title, headers, values[1:]))
             for header in headers:
                 if normalize(header) not in {normalize(item) for item in all_headers}:
                     all_headers.append(header)
         if not sheet_rows:
             return None
         records: list[dict[str, str]] = []
-        for headers, rows in sheet_rows:
-            for row in rows:
+        locations = []
+        for sheet_name, headers, rows in sheet_rows:
+            for row_number, row in enumerate(rows, 2):
                 record = {header: "" for header in all_headers}
                 record.update(
                     {
@@ -190,7 +200,8 @@ def _from_xlsx(path: Path) -> StructuredDocument | None:
                 )
                 if any(record.values()):
                     records.append(record)
-        return StructuredDocument(path, tuple(all_headers), tuple(records))
+                    locations.append({"sheet": sheet_name, "row": row_number})
+        return StructuredDocument(path, tuple(all_headers), tuple(records), tuple(locations))
     finally:
         workbook.close()
 
@@ -226,6 +237,14 @@ def _from_json(path: Path) -> StructuredDocument | None:
 
 
 def load_structured_document(path: Path) -> StructuredDocument | None:
+    if not path.is_file():
+        return None
+    stat = path.stat()
+    return _load_structured_cached(path, stat.st_mtime_ns, stat.st_size)
+
+
+@lru_cache(maxsize=16)
+def _load_structured_cached(path: Path, mtime: int, size: int) -> StructuredDocument | None:
     suffix = path.suffix.casefold()
     if suffix not in STRUCTURED_EXTENSIONS or not path.is_file():
         return None
@@ -317,12 +336,23 @@ def _is_structured_query(question: str) -> bool:
     query = normalize(question)
     return any(marker in query for marker in COUNT_MARKERS + SUMMARY_MARKERS) or any(
         marker in query
-        for marker in ("coluna", "campo", "nivel de risco", "status", "registros", "linhas", "planilha")
+        for marker in ("coluna", "campo", "nivel de risco", "status", "registros", "linhas", "planilha", "soma", "media", "maior", "menor", "correlacao")
     )
 
 
 def _find_filter(document: StructuredDocument, question: str) -> tuple[str, str] | None:
     query = normalize(question)
+    # A severity is a different column from a risk state. Natural language
+    # “em risco médio” asks for severity, not state = “Em risco”.
+    if "risco" in query:
+        risk_header = next((h for h in document.headers if "nivel" in normalize(h) and "risco" in normalize(h)), None)
+        if risk_header:
+            aliases = {"medio": ("medio", "media", "medium", "moderado", "moderate", "average", "avarege", "averege"), "alto": ("alto", "alta", "high"), "baixo": ("baixo", "baixa", "low")}
+            for target, synonyms in aliases.items():
+                if any(_contains_phrase(query, alias) for alias in synonyms):
+                    value = next((row[risk_header] for row in document.rows if normalize(row[risk_header]) == target), None)
+                    if value is not None:
+                        return risk_header, value
     candidates: list[tuple[int, str, str]] = []
     for header in document.headers:
         header_norm = normalize(header).strip()
@@ -416,17 +446,30 @@ def analyze_structured_question(
     if document is None:
         return None
     normalized_question = normalize(question)
+    from .table_analytics import analytical_answer
+    analytical = analytical_answer(document, question)
+    if analytical is not None:
+        return analytical
     filter_spec = _find_filter(document, question)
     if filter_spec:
         filter_column, filter_value = filter_spec
         value_norm = normalize(filter_value).strip()
-        matched_count = sum(
-            normalize(row.get(filter_column, "")).strip() == value_norm
-            for row in document.rows
-        )
+        filters = [(filter_column, filter_value)]
+        for header in document.headers:
+            if header == filter_column:
+                continue
+            if "estado" in normalize(header) and not _contains_phrase(question, header):
+                continue
+            if normalize(header) in {"status", "situacao"} or _contains_phrase(question, header):
+                values = {row.get(header, "") for row in document.rows if row.get(header, "") and _contains_phrase(question, row[header])}
+                if len(values) == 1:
+                    filters.append((header, next(iter(values))))
+        matched_count = sum(all(normalize(row.get(h, "")).strip() == normalize(v) for h, v in filters) for row in document.rows)
     else:
         filter_column = filter_value = None
         matched_count = len(document.rows)
+        if re.search(r"\b(?:risco|status|nivel)\b", normalized_question) and not any(m in normalized_question for m in ("todos", "total", "resuma", "resumo")):
+            return StructuredAnswer(f"Não reconheci o critério de filtro em {document.path.name}. Informe a coluna e o valor desejados; não vou substituir esse filtro pela contagem total.", document.path, len(document.rows), None, "clarification", analysis={"verified": False, "schema": document.schema})
     operation = "count_filtered" if filter_spec else "count_rows"
     # A source mention plus “resumo” is still useful even without a filter;
     # the same exact table count is safer than handing a partial chunk to an
@@ -441,4 +484,5 @@ def analyze_structured_question(
         operation,
         filter_column,
         filter_value,
+        {"filters": filters if filter_spec else [], "schema": document.schema},
     )

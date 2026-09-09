@@ -1202,8 +1202,26 @@ def run_expansion_cycle(root: Path, module_id: str | None = None) -> dict[str, A
     return {"status": "READY" if topics else "IDLE", "metrics": metrics, "snapshot": store.snapshot()}
 
 
-def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: int | None = None) -> dict[str, Any]:
-    """Run one source through the observable, independently retryable pipeline."""
+def record_document_pipeline(
+    root: Path,
+    module_id: str,
+    path: Path,
+    source_id: int | None = None,
+    *,
+    quarantine_on_failure: bool = True,
+) -> dict[str, Any]:
+    """Run one source through the observable, independently retryable pipeline.
+
+    ``quarantine_on_failure`` is intentionally explicit. Uploads and an
+    administrator-requested reprocess may isolate an invalid source, while a
+    background startup audit must never move a user's file behind their back.
+    Both paths still persist ``FAILED``/``QUARANTINED`` and keep the document
+    out of retrieval until the quality gate passes.
+    """
+    # Keep all persisted paths in the same canonical namespace.  On Windows,
+    # a caller may enter the project through an 8.3 alias while ``Path.resolve``
+    # returns the long path; mixing both makes relative-path checks fail.
+    root = root.resolve()
     store = ExpansionStore(root)
     store.initialize()
     now = _now()
@@ -1238,6 +1256,16 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
     try:
         row = connection.execute("SELECT * FROM documents WHERE module_id = ? AND path = ?", (module_id, relative)).fetchone()
         if row:
+            # Reconciliation is idempotent. A restart must not create a new
+            # version, re-run OCR or rebuild artifacts for an unchanged file.
+            artifact = connection.execute("SELECT artifact_version FROM knowledge_artifacts WHERE document_id = ?", (row["id"],)).fetchone()
+            if artifact and artifact["artifact_version"] == "2.0" and str(row["file_hash"] or "") == str(file_hash or "") and str(row["status"] or "") in {"READY", "DUPLICATE"}:
+                return {
+                    "status": "UNCHANGED",
+                    "document_id": int(row["id"]),
+                    "file": path.name,
+                    "version": int(row["version_number"] or 1),
+                }
             document_id = int(row["id"])
             version = int(row["version_number"] or 1) + 1
             connection.execute(
@@ -1277,20 +1305,38 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
 
     try:
         connection = _connect(store.path)
-        mark_stage("EXTRACTING", "complete")
+        mark_stage("EXTRACTING", "running")
         is_image = path.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
+        page_metrics = []
         if is_image or path.suffix.lower() == ".pdf":
-            mark_stage("OCR", "complete", {"mode": "ocr-or-native", "source_type": "image" if is_image else "pdf"})
+            from .document_pages import extract_pages, pages_ready
+            from dataclasses import asdict
+            pages = extract_pages(path)
+            page_metrics = [{k: v for k, v in asdict(p).items() if k != "text"} for p in pages]
+            mark_stage("OCR", "complete" if pages_ready(pages) else "failed", {"pages": page_metrics})
+            if not pages_ready(pages):
+                raise ValueError("quality gate por página reprovado: " + ", ".join(str(p.number) for p in pages if p.status == "QUARANTINED"))
         text = extract_text(path)
+        mark_stage("EXTRACTING", "complete", {"text_chars": len(text)})
         invalid_chars = sum(1 for char in text if ord(char) < 9 or (13 < ord(char) < 32))
         quality = max(0.0, min(1.0, (len(text.strip()) / 300.0) - (invalid_chars / max(1, len(text)))))
-        ocr_quality = round(quality, 4) if is_image or path.suffix.lower() == ".pdf" else None
+        ocr_quality = min((p["quality"] for p in page_metrics), default=None)
         if len(text.strip()) < 20 or invalid_chars > max(10, len(text) * 0.02):
             raise ValueError(f"quality gate reprovado: texto={len(text.strip())} caracteres inválidos={invalid_chars}")
         mark_stage("QUALITY_CHECK", "complete", {"text_chars": len(text), "invalid_chars": invalid_chars, "quality": round(quality, 4)})
         mark_stage("NORMALIZING", "complete")
         mark_stage("MARKDOWN_READY", "complete", {"format": "normalized-text"})
         artifacts = build_artifacts(path, text, module_id)
+        artifacts["provenance"]["pages"] = page_metrics
+        if path.suffix.lower() in {".csv", ".xlsx", ".json"}:
+            from .structured_data import load_structured_document
+            table = load_structured_document(path)
+            if table is None:
+                raise ValueError("estrutura tabular inválida")
+            artifacts["provenance"]["table_schema"] = table.schema
+            artifacts["provenance"]["rows"] = len(table.rows)
+            artifacts["provenance"]["sheets"] = sorted({p.get("sheet", "") for p in table.locations})
+            mark_stage("STRUCTURING", "complete", {"schema": table.schema, "rows": len(table.rows)})
         mark_stage("UNDERSTANDING", "complete", {"keywords": len(artifacts["keywords"]), "entities": len(artifacts["entities"]), "concepts": len(artifacts["concepts"])})
         chunks = ingest_module(root, module_id, selected_paths=(path,))
         valid_chunks = [chunk for chunk in chunks if isinstance(chunk, DocumentChunk) and len(chunk.text.strip()) >= 20]
@@ -1309,7 +1355,9 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
             (document_id, version, artifacts.get("artifact_version", "1.0"), artifacts["summary"], json.dumps(artifacts["keywords"], ensure_ascii=False), json.dumps(artifacts["entities"], ensure_ascii=False), json.dumps(artifacts["concepts"], ensure_ascii=False), json.dumps(artifacts["relations"], ensure_ascii=False), json.dumps(artifacts["questions"], ensure_ascii=False), json.dumps(artifacts.get("claims", []), ensure_ascii=False), json.dumps(artifacts.get("dates", []), ensure_ascii=False), json.dumps(artifacts.get("people", []), ensure_ascii=False), json.dumps(artifacts.get("organizations", []), ensure_ascii=False), json.dumps(artifacts.get("topics", []), ensure_ascii=False), json.dumps(artifacts.get("contradictions", []), ensure_ascii=False), json.dumps(artifacts.get("embedding", {}), ensure_ascii=False), json.dumps(artifacts.get("provenance", {}), ensure_ascii=False), artifacts["quality"], ocr_quality, _now()),
         )
         connection.commit()
-        mark_stage("INDEXING", "complete", {"backend": "filesystem-plus-local-vector", "chunks": len(valid_chunks)})
+        from .retrieval import publish_document_index
+        publish_document_index(root, module_id, path, valid_chunks)
+        mark_stage("INDEXING", "complete", {"backend": "persistent-prepared-index", "chunks": len(valid_chunks)})
         connection.execute("UPDATE documents SET status = 'VALIDATING', content_hash = ?, bytes = ?, chunk_count = ?, extraction_quality = ?, ocr_quality = ?, summary = ?, keywords_json = ?, entities_json = ?, concepts_json = ?, relations_json = ?, questions_json = ?, embeddings_status = 'READY', indexing_status = 'READY', validation_status = 'PENDING', updated_at = ? WHERE id = ?", (content_hash, path.stat().st_size, len(valid_chunks), artifacts["quality"], ocr_quality, artifacts["summary"], json.dumps(artifacts["keywords"], ensure_ascii=False), json.dumps(artifacts["entities"], ensure_ascii=False), json.dumps(artifacts["concepts"], ensure_ascii=False), json.dumps(artifacts["relations"], ensure_ascii=False), json.dumps(artifacts["questions"], ensure_ascii=False), _now(), document_id))
         mark_stage("VALIDATING", "complete", {"questions": len(artifacts["questions"]), "citation_ready": True})
         connection.execute("UPDATE documents SET status = 'READY', current_stage = 'READY', validation_status = 'READY', updated_at = ? WHERE id = ?", (_now(), document_id))
@@ -1330,7 +1378,7 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
         message = str(exc)[:800]
         logger.warning("Pipeline isolado falhou para %s: %s", path, message)
         quarantined_path = path
-        if path.exists() and "quarantine" not in {part.casefold() for part in path.parts}:
+        if quarantine_on_failure and path.exists() and "quarantine" not in {part.casefold() for part in path.parts}:
             quarantine_dir = path.parent / "quarantine"
             quarantine_dir.mkdir(parents=True, exist_ok=True)
             candidate = quarantine_dir / path.name
@@ -1360,11 +1408,23 @@ def record_document_pipeline(root: Path, module_id: str, path: Path, source_id: 
         return {"status": "QUARANTINED" if quarantined_path != path else "FAILED", "document_id": document_id, "error": message, "path": str(quarantined_path), "stage": stage}
 
 
-def audit_module_documents(root: Path, module_id: str) -> dict[str, Any]:
+def audit_module_documents(
+    root: Path,
+    module_id: str,
+    *,
+    quarantine_on_failure: bool = True,
+) -> dict[str, Any]:
     results = []
     for path in files_for(root, module_id):
         try:
-            results.append(record_document_pipeline(root, module_id, path))
+            results.append(
+                record_document_pipeline(
+                    root,
+                    module_id,
+                    path,
+                    quarantine_on_failure=quarantine_on_failure,
+                )
+            )
         except Exception as exc:
             logger.exception("Falha no documento %s", path)
             results.append({"status": "FAILED", "path": str(path), "error": str(exc)})

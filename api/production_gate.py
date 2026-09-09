@@ -3,6 +3,10 @@
 from __future__ import annotations
 
 import os
+import hashlib
+import json
+import tempfile
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -10,17 +14,80 @@ from typing import Any
 from .domains import DOMAIN_CONTRACTS
 from .evaluation import evaluate_semantic_cases, evaluation_coverage
 from .expansion import ExpansionStore
+from .ingestion import files_for
 from .readiness import readiness_checklist
 from .storage import status as storage_status
 
 
-def production_gate(root: Path) -> dict[str, Any]:
+def _gate_cache_path(root: Path) -> Path:
+    return root.parent / "data" / "gate-cache" / "production-gate.json"
+
+
+def _gate_fingerprint(root: Path) -> str:
+    digest = hashlib.sha256()
+    for module_id in sorted(DOMAIN_CONTRACTS):
+        for path in files_for(root, module_id):
+            try:
+                stat = path.stat()
+            except OSError:
+                continue
+            digest.update(str(path.relative_to(root)).encode("utf-8", "replace"))
+            digest.update(str(stat.st_mtime_ns).encode())
+            digest.update(str(stat.st_size).encode())
+    manifest = root.parent / "tests" / "evals" / "manifest.json"
+    if manifest.exists():
+        stat = manifest.stat()
+        digest.update(str(stat.st_mtime_ns).encode())
+        digest.update(str(stat.st_size).encode())
+    return digest.hexdigest()
+
+
+def _cache_ttl() -> float:
+    try:
+        return max(30.0, min(86400.0, float(os.getenv("SOFIA_PRODUCTION_GATE_CACHE_SECONDS", "900"))))
+    except ValueError:
+        return 900.0
+
+
+def _load_gate_cache(root: Path, fingerprint: str) -> dict[str, Any] | None:
+    path = _gate_cache_path(root)
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if payload.get("fingerprint") != fingerprint or time.time() - float(payload.get("created_at_epoch", 0)) > _cache_ttl():
+            return None
+        result = payload.get("result")
+        if isinstance(result, dict):
+            return {**result, "cache_hit": True, "cache_age_seconds": round(max(0.0, time.time() - float(payload.get("created_at_epoch", 0))), 1)}
+    except (OSError, ValueError, TypeError):
+        return None
+    return None
+
+
+def _save_gate_cache(root: Path, fingerprint: str, result: dict[str, Any]) -> None:
+    path = _gate_cache_path(root)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary_name = tempfile.mkstemp(prefix="production-gate-", suffix=".tmp", dir=path.parent)
+    os.close(fd)
+    temporary = Path(temporary_name)
+    try:
+        temporary.write_text(json.dumps({"fingerprint": fingerprint, "created_at_epoch": time.time(), "result": result}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def production_gate(root: Path, force: bool = False) -> dict[str, Any]:
     root = Path(root)
     # Accept both the API's knowledge root and the project root when the gate
     # is run from a maintenance script.  This prevents a false all-empty gate
     # caused solely by passing ``Path('.')``.
     if (root / "knowledge").is_dir() and not any((root / module_id).is_dir() for module_id in DOMAIN_CONTRACTS):
         root = root / "knowledge"
+    fingerprint = _gate_fingerprint(root)
+    if not force:
+        cached = _load_gate_cache(root, fingerprint)
+        if cached is not None:
+            return cached
     module_rows: list[dict[str, Any]] = []
     for module_id in sorted(DOMAIN_CONTRACTS):
         try:
@@ -70,7 +137,7 @@ def production_gate(root: Path) -> dict[str, Any]:
             issues.append(f"não foi possível auditar o armazenamento do módulo {module_id}")
     if quarantined:
         issues.append(f"{quarantined} documento(s) em quarentena")
-    return {
+    result = {
         "generated_at": datetime.now(UTC).isoformat(),
         "status": "blocked" if issues else "ready",
         "release_allowed": not issues,
@@ -115,4 +182,8 @@ def production_gate(root: Path) -> dict[str, Any]:
         },
         "evaluation_error": semantic_error,
         "policy": "O gate não transforma score parcial em aprovação e não libera produção com falhas de segurança, corpus, evidência ou regressão.",
+        "cache_hit": False,
+        "cache_age_seconds": 0,
     }
+    _save_gate_cache(root, fingerprint, result)
+    return result

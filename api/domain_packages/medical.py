@@ -32,16 +32,17 @@ class MedicalPackage(DomainRetrievalPackage):
         if any(term in normalized for term in ("sono", "dormir", "sonolencia", "piscada", "microssono")):
             additions.append("sonolencia diurna microssono privacao de sono sono insuficiente apneia obstrutiva do sono narcolepsia ritmo circadiano medicamentos sedativos")
         if "gripe" in normalized or "influenza" in normalized:
-            additions.append("influenza sintomas febre tosse J09 J10 J11")
+            additions.append("influenza infeccao respiratoria virus sintomas febre tosse")
         return f"{query} {' '.join(additions)}".strip()
 
     def profile(self, query: str) -> QueryProfile:
         normalized = normalize(query)
         sleep = any(term in normalized for term in ("sono", "dormir", "sonolencia", "piscada", "microssono"))
         base = super().profile(query)
+        definition = any(m in normalized for m in ("defina", "definicao", "o que e", "explique", "conceito")) and not any(m in normalized for m in ("codigo", "cid", "icd"))
         return QueryProfile(
             summary=base.summary,
-            features=base.features | frozenset({"clinical_sleep"} if sleep else ()),
+            features=base.features | frozenset({"clinical_sleep"} if sleep else ()) | frozenset({"clinical_definition"} if definition else ()),
             seed_markers=("microssono", "sonolencia diurna", "privacao de sono", "sono insuficiente", "apneia obstrutiva do sono") if sleep else (),
             comparison=base.comparison,
         )
@@ -58,6 +59,8 @@ class MedicalPackage(DomainRetrievalPackage):
         return SourceSelection(tuple(paths), profile)
 
     def filter_text(self, path: Path, text: str, profile: QueryProfile) -> bool:
+        if "clinical_definition" in profile.features and _classification(path):
+            return False
         if "clinical_sleep" not in profile.features:
             return True
         return not _classification(path) and (_clinical(path) or any(marker in text for marker in profile.seed_markers))

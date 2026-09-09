@@ -68,46 +68,9 @@ def build_context_package(
         )
         for item in result.rejected_evidence
     ]
-    context_text = normalize(result.context)
-    candidate_terms = list(dict.fromkeys([*contract.keywords, *re.findall(r"[\wÀ-ÿ]{4,}", normalize(question))]))
-    present = [term for term in candidate_terms if len(normalize(term)) >= 4 and normalize(term) in context_text]
-    relations: list[dict[str, object]] = []
-    for index, left in enumerate(present[:16]):
-        for right in present[index + 1 : 16]:
-            relations.append(
-                {
-                    "from": left,
-                    "to": right,
-                    "type": "co_occurrence",
-                    "confidence": 0.62,
-                    "status": "observed",
-                    "evidence_count": len(accepted),
-                }
-            )
-            if len(relations) >= 24:
-                break
-        if len(relations) >= 24:
-            break
-    if root is not None:
-        try:
-            from .knowledge_graph import read_graph
-
-            graph = read_graph(root, module_id)
-            graph_edges = [
-                {
-                    "from": item.get("source"),
-                    "to": item.get("target"),
-                    "type": item.get("relation", "related_to"),
-                    "confidence": item.get("confidence", 0.0),
-                    "provenance": item.get("provenance", []),
-                    "status": "observed",
-                }
-                for item in graph.get("edges", [])
-                if isinstance(item, dict)
-            ]
-            relations.extend(graph_edges[:24])
-        except (OSError, RuntimeError, ValueError, TypeError):
-            pass
+    from .relational_reasoning import analyze
+    relational = analyze(result)
+    relations = relational["relations"]
     return ContextPackage(
         question=question,
         domain=module_id,
@@ -142,6 +105,27 @@ def verify_answer(answer: str, result: RetrievalResult, module_id: str) -> Verif
         return VerificationResult("rejected", 0.0, ["resposta vazia"], ["provider não retornou conteúdo"])
     if not result.evidence:
         return VerificationResult("unverified", 0.25, [], ["não há evidência local aceita"])
+    from .relational_reasoning import evidence_units
+    units = evidence_units(result)
+    by_id = {u.id: u.text for u in units}
+    body = answer.split("Fontes e trechos:")[0]
+    # Check each numeric/entity assertion against its cited premise(s), not
+    # the union of numbers scattered across unrelated documents.
+    for line in body.splitlines():
+        citations = re.findall(r"\[(E\d+)\]", line)
+        if citations:
+            if any(c not in by_id for c in citations):
+                return VerificationResult("rejected", 0.0, ["citação inexistente"])
+            claim = re.sub(r"\[E\d+\]", "", line)
+            reference = " ".join(by_id[c] for c in citations)
+            numbers = set(re.findall(r"\b\d+(?:[.,]\d+)?\b", claim))
+            if not numbers <= set(re.findall(r"\b\d+(?:[.,]\d+)?\b", reference)):
+                return VerificationResult("rejected", 0.0, ["valor sem suporte no trecho citado"])
+        elif re.search(r"\b\d+(?:[.,]\d+)?\b", line) and not line.strip().startswith(("- [", "Fonte", "Source")):
+            numbers = set(re.findall(r"\b\d+(?:[.,]\d+)?\b", line))
+            tokens = set(re.findall(r"\w{4,}", normalize(line)))
+            if not any(numbers <= set(re.findall(r"\b\d+(?:[.,]\d+)?\b", u.text)) and len(tokens & set(re.findall(r"\w{4,}", normalize(u.text)))) / max(1, len(tokens)) >= .45 for u in units):
+                return VerificationResult("rejected", 0.0, ["alegação numérica sem premissa correspondente"])
     evidence_text = normalize(result.context)
     evidence_terms = set(re.findall(r"[\wÀ-ÿ]{4,}", evidence_text))
     answer_terms = set(re.findall(r"[\wÀ-ÿ]{4,}", normalize(answer)))
@@ -153,15 +137,19 @@ def verify_answer(answer: str, result: RetrievalResult, module_id: str) -> Verif
         warnings.append("linguagem clínica incompatível com apoio informacional")
     claim_units = [
         unit.strip(" -*•\t")
-        for unit in re.split(r"(?:\n+|(?<=[.!?])\s+)", normalize(answer))
+        for unit in re.split(r"(?:\n+|(?<=[.!?])\s+)", normalize(body))
         if len(unit.strip()) >= 35
-        and not unit.strip().startswith((
+        and not unit.strip(" -*•\t").startswith((
             "conclusao",
             "base documental",
             "pontos de atencao",
             "limites",
             "proximo passo",
             "origem da resposta",
+            "esta sintese esta limitada",
+            "fatos que nao aparecem",
+            "this synthesis is limited",
+            "facts that do not appear",
         ))
     ]
     unsupported: list[str] = []
@@ -171,6 +159,8 @@ def verify_answer(answer: str, result: RetrievalResult, module_id: str) -> Verif
         "fonte", "fontes", "resposta", "tambem", "pode", "podem", "deve", "devem",
     }
     for claim in claim_units:
+        if re.search(r"\[e\d+\]", claim) or any(m in claim for m in ("a analise cobre", "ausencia de conflito", "nao demonstra causalidade", "ha uma divergencia textual", "os documentos apresentam", "os trechos permitem", "valores ausentes")):
+            continue
         claim_terms = {
             term for term in re.findall(r"[\wÀ-ÿ]{4,}", claim)
             if term not in stopwords
@@ -182,7 +172,7 @@ def verify_answer(answer: str, result: RetrievalResult, module_id: str) -> Verif
         # Numeric/legal claims need an exact counterpart in the evidence; a
         # generic word overlap is not enough to validate a deadline, amount or
         # article number.
-        numeric_claims = set(re.findall(r"\b\d+(?:[.,]\d+)?%?\b", claim))
+        numeric_claims = set(re.findall(r"\b\d+(?:[.,]\d+)?%?\b", re.sub(r"\[e\d+\]", "", claim)))
         numeric_evidence = set(re.findall(r"\b\d+(?:[.,]\d+)?%?\b", evidence_text))
         if claim_overlap < 0.12 or (numeric_claims and not numeric_claims <= numeric_evidence):
             unsupported.append(claim[:180])

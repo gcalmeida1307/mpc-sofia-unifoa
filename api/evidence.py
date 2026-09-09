@@ -59,7 +59,7 @@ def _negated_overlap(left: str, right: str) -> bool:
     return len(left_tokens & right_tokens) >= 4
 
 
-def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candidates: Iterable[Evidence]) -> EvidenceDecision:
+def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candidates: Iterable[Evidence], required_sources: tuple[str, ...] = ()) -> EvidenceDecision:
     """Score relevance, authority, freshness, provenance and support.
 
     This function does not call an LLM and never exposes a chain of thought.
@@ -74,7 +74,14 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
     accepted: list[Evidence] = []
     rejected: list[Evidence] = []
     conflicts: list[dict[str, Any]] = []
-    threshold = max(0.18, min(0.62, float(policy.min_evidence_score) * 0.72))
+    # A candidate must have both a reasonable composite score and a semantic
+    # anchor in the actual question. The previous multiplier made a 0.30
+    # module policy effectively accept evidence around 0.21, which allowed
+    # broad domain vocabulary to outrank genuinely relevant passages.
+    threshold = max(0.28, min(0.68, float(policy.min_evidence_score) * 0.95))
+    from .domain_packages.base import comparison_requested
+    from .document_pages import text_quality
+    compare_named = comparison_requested(question) and len(required_sources) >= 2
     for candidate in candidates:
         text = normalize(candidate.chunk.text)
         matched = sum(1 for term in terms if term in text)
@@ -99,7 +106,13 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
             True,
             "",
         )
-        if judge_score >= threshold and (candidate.coverage >= 0.08 or candidate.score >= 0.25):
+        has_question_anchor = (
+            question_coverage >= 0.10
+            or candidate.coverage >= 0.18
+            or candidate.semantic_score >= 0.48
+            or (compare_named and candidate.chunk.path.name in required_sources and text_quality(candidate.chunk.text) >= 0.75)
+        )
+        if judge_score >= threshold and has_question_anchor:
             accepted.append(enriched)
         else:
             rejected.append(

@@ -10,6 +10,7 @@ import re
 import shutil
 import unicodedata
 from dataclasses import dataclass
+from contextvars import ContextVar
 from pathlib import Path
 
 from docx import Document
@@ -31,6 +32,7 @@ except ImportError:  # OCR remains optional for environments without the native 
 logger = logging.getLogger("sofia.ingestion")
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_ROOT = ROOT / "data" / "text-cache"
+ALLOW_HEAVY_EXTRACTION: ContextVar[bool] = ContextVar("allow_heavy_extraction", default=True)
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
 TEXT_EXTENSIONS = {".txt", ".md", ".csv", ".json", ".xml", ".yaml", ".yml", ".log", ".pdf", ".docx", ".xlsx"}
 ALLOWED_EXTENSIONS = TEXT_EXTENSIONS | IMAGE_EXTENSIONS
@@ -49,6 +51,8 @@ class DocumentChunk:
     path: Path
     text: str
     ordinal: int
+    page: int | None = None
+    locator: str = ""
 
 
 def ocr_status() -> dict[str, str | bool]:
@@ -92,7 +96,7 @@ def _cached_text(path: Path) -> str | None:
     try:
         payload = json.loads(cache.read_text(encoding="utf-8"))
         stat = path.stat()
-        if payload.get("mtime_ns") == stat.st_mtime_ns and payload.get("size") == stat.st_size:
+        if payload.get("version") == "formats-2" and payload.get("mtime_ns") == stat.st_mtime_ns and payload.get("size") == stat.st_size:
             return normalize_document_text(path, str(payload.get("text", "")))
     except (OSError, ValueError, TypeError):
         return None
@@ -103,7 +107,7 @@ def _save_cached_text(path: Path, text: str) -> None:
     try:
         stat = path.stat()
         CACHE_ROOT.mkdir(parents=True, exist_ok=True)
-        _cache_path(path).write_text(json.dumps({"mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "text": text}, ensure_ascii=False), encoding="utf-8")
+        _cache_path(path).write_text(json.dumps({"version": "formats-2", "mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "text": text}, ensure_ascii=False), encoding="utf-8")
     except OSError as exc:
         logger.debug("Could not cache %s: %s", path, exc)
 
@@ -223,6 +227,19 @@ def normalize_document_text(path: Path, text: str) -> str:
 
 
 def extract_text(path: Path) -> str:
+    if path.suffix.lower() == ".pdf" or path.suffix.lower() in IMAGE_EXTENSIONS:
+        from .document_pages import extract_pages, read_native_pages, read_pages, pages_ready
+        pages = extract_pages(path) if ALLOW_HEAVY_EXTRACTION.get() else read_pages(path)
+        # Native PDF text is cheap and does not violate the no-heavy-work
+        # query contract.  It keeps older, encrypted page caches usable while
+        # still refusing scanned pages until the OCR preparation pipeline runs.
+        if not ALLOW_HEAVY_EXTRACTION.get() and path.suffix.lower() == ".pdf" and (pages is None or not pages_ready(pages)):
+            native_pages = read_native_pages(path)
+            if native_pages is not None:
+                pages = native_pages
+        if not pages or not pages_ready(pages):
+            return ""
+        return "\n\n".join(f"[Página {p.number}]\n{p.text}" for p in pages if p.status == "READY")
     cached = _cached_text(path)
     if cached is not None:
         cached = normalize_document_text(path, cached)
@@ -233,6 +250,8 @@ def extract_text(path: Path) -> str:
             return cached
     try:
         suffix = path.suffix.lower()
+        if not ALLOW_HEAVY_EXTRACTION.get() and suffix in {".docx", ".xlsx"}:
+            return ""
         if suffix == ".pdf":
             if fitz is not None:
                 with fitz.open(str(path)) as document:
@@ -250,7 +269,36 @@ def extract_text(path: Path) -> str:
             else:
                 text = "\n".join(page.extract_text() or "" for page in PdfReader(str(path)).pages)
         elif suffix == ".docx":
-            text = "\n".join(paragraph.text for paragraph in Document(str(path)).paragraphs)
+            # Preserve paragraph/table order and label cells with their header.
+            document = Document(str(path))
+            from docx.text.paragraph import Paragraph
+            from docx.table import Table
+            blocks = []
+            for child in document.element.body:
+                if child.tag.endswith("}p"):
+                    blocks.append(Paragraph(child, document).text)
+                elif child.tag.endswith("}tbl"):
+                    rows = Table(child, document).rows
+                    if rows:
+                        headers = [cell.text for cell in rows[0].cells]
+                        blocks.extend("; ".join(f"{headers[i]}: {cell.text}" for i, cell in enumerate(row.cells)) for row in rows[1:])
+            text = "\n\n".join(blocks)
+        elif suffix == ".xml":
+            import xml.etree.ElementTree as ET
+            raw = _read_text_file(path)
+            if re.search(r"<!\s*(?:DOCTYPE|ENTITY)", raw, re.I):
+                raise ValueError("XML DTD/entities não permitidas")
+            node = ET.fromstring(raw)
+            def xml_lines(element, parent=""):
+                tag = element.tag.split("}")[-1]
+                location = f"{parent}/{tag}"
+                lines = [f"{location}/@{key}: {value}" for key, value in element.attrib.items()]
+                if element.text and element.text.strip():
+                    lines.append(f"{location}: {element.text.strip()}")
+                for child in element:
+                    lines.extend(xml_lines(child, location))
+                return lines
+            text = "\n".join(xml_lines(node))
         elif suffix == ".xlsx":
             workbook = load_workbook(path, read_only=True, data_only=True)
             rows = []
@@ -286,6 +334,27 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
     chunks: list[DocumentChunk] = []
     source_paths = selected_paths if selected_paths is not None else tuple(files_for(root, module_id))
     for path in source_paths:
+        if path.suffix.lower() == ".pdf" or path.suffix.lower() in IMAGE_EXTENSIONS:
+            from .document_pages import extract_pages, read_native_pages, read_pages, pages_ready
+            pages = extract_pages(path) if ALLOW_HEAVY_EXTRACTION.get() else read_pages(path)
+            if not ALLOW_HEAVY_EXTRACTION.get() and path.suffix.lower() == ".pdf" and (pages is None or not pages_ready(pages)):
+                native_pages = read_native_pages(path)
+                if native_pages is not None:
+                    pages = native_pages
+            if not pages or not pages_ready(pages):
+                continue
+            ordinal = 0
+            for page in pages:
+                if page.status != "READY":
+                    continue
+                for start in range(0, len(page.text), max(1, max_chars - overlap)):
+                    text = page.text[start:start + max_chars].strip()
+                    if text:
+                        chunks.append(DocumentChunk(path, text, ordinal, page.number, f"página {page.number}"))
+                        ordinal += 1
+                    if start + max_chars >= len(page.text):
+                        break
+            continue
         text = extract_text(path)
         if not text.strip():
             continue

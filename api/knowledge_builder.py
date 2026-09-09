@@ -117,13 +117,15 @@ def build_artifacts(path: Path, text: str, module_id: str) -> dict[str, Any]:
     quality = min(1.0, len(words) / 180) if words else 0.0
     quality += 0.20 if sentences else 0.0
     quality -= 0.15 if len(set(words)) < max(3, len(words) * 0.15) else 0.0
+    from .relational_reasoning import Unit, extract_relations
+    typed_relations = extract_relations([Unit(f"E{i+1}", path.name, i, None, s) for i, s in enumerate(sentences)])
     return {
-        "artifact_version": "1.1",
+        "artifact_version": "2.0",
         "summary": summary,
         "keywords": keywords,
         "entities": entities,
         "concepts": concepts,
-        "relations": _relations(text, concepts, path.name),
+        "relations": [*typed_relations, *_relations(text, concepts, path.name)],
         "claims": _claims(sentences),
         "dates": _dates(text),
         "people": _people(text),

@@ -89,7 +89,7 @@ DOMAIN_CONTRACTS: dict[str, DomainContract] = {
     "gestao-empresarial": DomainContract(
         "gestao-empresarial", "Gestão Empresarial", "Gestão", "#fb923c", "▤", "Gestor executivo",
         "Processos, metas, riscos e melhoria contínua.",
-        ("processo", "metas", "indicadores", "riscos", "governança", "planejamento", "melhoria"),
+        ("processo", "metas", "indicadores", "riscos", "governança", "planejamento", "melhoria", "produção", "desvio", "realizado", "perdas", "produtividade"),
         skills=("process_mapping", "continuous_improvement"),
         tools=("search_knowledge", "analyst_scenario"),
     ),
