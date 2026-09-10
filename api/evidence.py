@@ -59,6 +59,31 @@ def _negated_overlap(left: str, right: str) -> bool:
     return len(left_tokens & right_tokens) >= 4
 
 
+def _hard_query_anchors(question: str) -> tuple[str, ...]:
+    """Extract identifiers that must be present in supporting evidence.
+
+    Generic word overlap is useful for exploratory questions, but it is not
+    safe for laws, articles, file names or software versions. Those queries
+    carry a literal anchor and a candidate without that anchor cannot support
+    the answer merely because it shares words such as ``informação`` or
+    ``versão``.
+    """
+    normalized = normalize(question)
+    anchors: list[str] = []
+    anchors.extend(re.findall(r"\b\d{1,4}(?:\.\d{1,4})+\b", normalized))
+    for phrase in (
+        "acesso a informacao",
+        "mandado de seguranca",
+        "defeso eleitoral",
+        "zabbix",
+        "riskusers",
+        "riskyusers",
+    ):
+        if phrase in normalized:
+            anchors.append(phrase)
+    return tuple(dict.fromkeys(anchors))
+
+
 def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candidates: Iterable[Evidence], required_sources: tuple[str, ...] = ()) -> EvidenceDecision:
     """Score relevance, authority, freshness, provenance and support.
 
@@ -71,6 +96,10 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
         for term in re.findall(r"[\wÀ-ÿ]{4,}", normalize(question))
         if term not in {"como", "qual", "quais", "sobre", "para", "documento", "arquivo"}
     }
+    hard_anchors = _hard_query_anchors(question)
+    normalized_question = normalize(question)
+    version_anchors = tuple(dict.fromkeys(re.findall(r"\b\d+\.\d+\b", normalized_question)))
+    version_comparison = len(version_anchors) >= 2 and any(marker in normalized_question for marker in ("versao", "versoes", "diferenca entre", "compar"))
     accepted: list[Evidence] = []
     rejected: list[Evidence] = []
     conflicts: list[dict[str, Any]] = []
@@ -106,7 +135,24 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
             True,
             "",
         )
-        has_question_anchor = (
+        anchor_supported = not hard_anchors or any(
+            anchor in text or anchor in normalize(candidate.chunk.path.name)
+            for anchor in hard_anchors
+        )
+        if version_comparison:
+            # A versioned filename alone is not enough: a random page from a
+            # 7.4 manual must not support a comparison with 8.0. The passage
+            # must mention one of the requested versions and discuss a
+            # version/change/compatibility concept in the text itself.
+            compare_markers = ("alter", "mudan", "novidad", "upgrade", "compatib", "diferenc", "o que ha de novo")
+            version_context = any(
+                any(marker in text[max(0, index - 220): index + 220] for marker in compare_markers)
+                for version in version_anchors
+                for index in [text.find(version)]
+                if index >= 0
+            )
+            anchor_supported = anchor_supported and any(version in text for version in version_anchors) and version_context
+        has_question_anchor = anchor_supported and (
             question_coverage >= 0.10
             or candidate.coverage >= 0.18
             or candidate.semantic_score >= 0.48
@@ -115,6 +161,9 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
         if judge_score >= threshold and has_question_anchor:
             accepted.append(enriched)
         else:
+            reason = "não atingiu relevância, suporte ou proveniência mínimos"
+            if hard_anchors and not anchor_supported:
+                reason = "não contém no trecho o identificador e o contexto necessários para sustentar a pergunta"
             rejected.append(
                 enriched.__class__(
                     enriched.chunk,
@@ -129,7 +178,7 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
                     enriched.support_score,
                     enriched.contradiction_score,
                     False,
-                    "não atingiu relevância, suporte ou proveniência mínimos",
+                    reason,
                 )
             )
     for index, left in enumerate(accepted):

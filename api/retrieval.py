@@ -23,9 +23,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 from .domain_packages import DomainRetrievalPackage, package_for
-from .domain_packages.base import named_source_paths
+from .domain_packages.base import named_source_paths, requested_line_range
 from .embeddings import semantic_scores
-from .ingestion import ALLOW_HEAVY_EXTRACTION, DocumentChunk, files_for, ingest_module
+from .ingestion import ALLOW_HEAVY_EXTRACTION, DocumentChunk, files_for, ingest_module, read_exact_source_lines
 from .secure_storage import decrypt_text, protect_for_storage
 from .policies import ModulePolicy, expand_query
 
@@ -71,10 +71,17 @@ class RetrievalResult:
 
     @property
     def context(self) -> str:
-        return "\n\n--- DOCUMENTO: ".join(
-            f"{item.chunk.path.name} · {item.chunk.locator or ('trecho ' + str(item.chunk.ordinal))}\n{item.chunk.text}"
-            for item in self.evidence
-        )
+        grouped: dict[str, list[Evidence]] = {}
+        for item in self.evidence:
+            grouped.setdefault(item.chunk.path.name, []).append(item)
+        blocks: list[str] = []
+        for source, items in grouped.items():
+            passages = [f"DOCUMENTO: {source}"]
+            for item in items:
+                locator = item.chunk.locator or (f"página {item.chunk.page}" if item.chunk.page else f"trecho {item.chunk.ordinal}")
+                passages.append(f"LOCALIZAÇÃO: {locator}\n{item.chunk.text}")
+            blocks.append("\n".join(passages))
+        return "\n\n---\n\n".join(blocks)
 
 
 def _index_cache_path(root: Path, module_id: str) -> Path:
@@ -97,7 +104,7 @@ def _persist_index(root: Path, module_id: str, signature: tuple[tuple[str, int, 
         return os.path.relpath(str(value.resolve()), str(root))
 
     payload = {
-        "version": 2,
+        "version": 4,
         "module_id": module_id,
         "signature": _signature_digest(signature),
         "sources": [
@@ -133,7 +140,7 @@ def _load_persisted_index(root: Path, module_id: str, signature: tuple[tuple[str
             # simply returns None and will be rebuilt by the preparation path.
             decoded = raw if raw.lstrip().startswith("{") else ""
         payload = json.loads(decoded)
-        if payload.get("version") != 2 or payload.get("module_id") != module_id:
+        if payload.get("version") != 4 or payload.get("module_id") != module_id:
             return None
         stored = {str((root / s["path"]).resolve()): (s["mtime_ns"], s["size"]) for s in payload["sources"]}
         requested = {str(Path(source).resolve()): (mtime, size) for source, mtime, size in signature}
@@ -261,7 +268,7 @@ def publish_document_index(root: Path, module_id: str, path: Path, chunks: list[
             except RuntimeError:
                 decoded = raw if raw.lstrip().startswith("{") else ""
             payload = json.loads(decoded)
-            if payload.get("version") == 2:
+            if payload.get("version") == 4:
                 for source in payload["sources"]:
                     item = root / source["path"]
                     if item.exists() and item.resolve() != path.resolve() and (item.stat().st_mtime_ns, item.stat().st_size) == (source["mtime_ns"], source["size"]):
@@ -411,13 +418,54 @@ def _retrieve(
     source_keys = tuple(str(path) for path in source_paths if path.exists())
     chunks = _index(str(root), module_id, signature, source_keys)
     normalized_index = _normalized_index(str(root), module_id, signature, source_keys)
-    eligible = [(chunk, text) for chunk, text in zip(chunks, normalized_index) if package.filter_text(chunk.path, text, selection.profile)]
+    explicit_paths = {path.resolve() for path in named_source_paths(source_paths, query)}
+    exact_lines = requested_line_range(query)
+    if exact_lines and explicit_paths:
+        # An explicit source + line request is deterministic.  Do not let a
+        # broad chunk, another page, or another document outrank the line the
+        # user actually named.  The normal Evidence Judge still validates the
+        # resulting passage and provenance.
+        start, end = exact_lines
+        exact_evidence: list[Evidence] = []
+        for path in source_paths:
+            if path.resolve() not in explicit_paths:
+                continue
+            passage = read_exact_source_lines(path, start, end)
+            if not passage:
+                continue
+            locator = f"linhas {start}-{end}"
+            chunk = DocumentChunk(path, passage, 0, None, locator)
+            exact_evidence.append(Evidence(chunk, 1.0, 1.0, 1.0, 1.0, 1.0))
+        if exact_evidence:
+            exact_raw = RetrievalResult(
+                tuple(exact_evidence),
+                tuple(dict.fromkeys(item.chunk.path.name for item in exact_evidence)),
+                query,
+                expanded,
+            )
+            return _judge(exact_raw, query, module_id, policy, required_sources)
+    # Structured files are valuable evidence, but raw rows are not a safe
+    # default context for ordinary prose questions.  The complete-file
+    # analyzer handles analytical/table intent; explicit file mentions remain
+    # allowed for cross-document reasoning. This keeps useful CSV/XLSX facts
+    # available without leaking a personnel table into an unrelated answer.
+    from .structured_data import _is_structured_query
+    structured_intent = _is_structured_query(query)
+    eligible = [
+        (chunk, text)
+        for chunk, text in zip(chunks, normalized_index)
+        if package.filter_text(chunk.path, text, selection.profile)
+        and (
+            chunk.path.suffix.casefold() not in {".csv", ".xlsx", ".json"}
+            or structured_intent
+            or chunk.path.resolve() in explicit_paths
+        )
+    ]
     if not eligible:
         return RetrievalResult((), (), query, expanded, required_sources=required_sources, missing_sources=required_sources)
     chunks = tuple(chunk for chunk, _ in eligible)
     normalized_index = tuple(text for _, text in eligible)
     profile = selection.profile
-    explicit_paths = {path.resolve() for path in named_source_paths(source_paths, query)}
     if profile.summary:
         return _judge(_summary_result(chunks, normalized_index, query, expanded, limit), query, module_id, policy, required_sources)
 
@@ -435,7 +483,23 @@ def _retrieve(
     if not pre_ranked:
         return RetrievalResult((), (), query, expanded, required_sources=required_sources, missing_sources=required_sources)
     pre_ranked.sort(key=lambda item: item[0], reverse=True)
-    pre_ranked = pre_ranked[: max(60, limit * 25)]
+    ranking_window = pre_ranked[: max(60, limit * 25)]
+    if profile.comparison and required_sources:
+        # A global top-k is unsafe for comparisons: a large manual can fill
+        # the whole window before the other named source gets a chance. Keep
+        # a small ranked reservation for every required document, then fill
+        # the rest with the global ranking.
+        reserved: list[tuple[float, int, str, float, float, float, float]] = []
+        reserved_keys: set[tuple[int, str]] = set()
+        for required_source in required_sources:
+            source_items = [item for item in pre_ranked if chunks[item[1]].path.name == required_source]
+            for item in source_items[: max(4, limit)]:
+                reserved.append(item)
+                reserved_keys.add((item[1], item[2]))
+        pre_ranked = reserved + [item for item in ranking_window if (item[1], item[2]) not in reserved_keys]
+        pre_ranked = pre_ranked[: max(60, limit * 25)]
+    else:
+        pre_ranked = ranking_window
     normalized_candidates = [item[2] for item in pre_ranked]
     vectorizer = TfidfVectorizer(ngram_range=(1, 2), sublinear_tf=True, min_df=1)
     matrix = vectorizer.fit_transform(normalized_candidates + [normalize(expanded)])
@@ -476,21 +540,46 @@ def _retrieve(
     # when available so a large source cannot hide the other side of the
     # comparison.
     if profile.comparison and required_sources:
+        present_sources = {item.chunk.path.name for item in selected}
         for required_source in required_sources:
             source_items = [item for item in finalized if item.chunk.path.name == required_source]
-            for best in source_items[:2]:
-                if any(item.chunk.path.name == required_source and item.chunk.ordinal == best.chunk.ordinal for item in selected):
-                    continue
+            if not source_items:
+                continue
+            # Two independent passages per side give the composer enough
+            # material to explain a real difference without dumping a full
+            # manual. Never overwrite the only representative already kept
+            # for another required source.
+            target_count = min(2, len(source_items))
+            while sum(1 for item in selected if item.chunk.path.name == required_source) < target_count:
+                best = next(
+                    (
+                        item for item in source_items
+                        if not any(item.chunk.path.name == current.chunk.path.name and item.chunk.ordinal == current.chunk.ordinal for current in selected)
+                    ),
+                    None,
+                )
+                if best is None:
+                    break
                 replacement = next(
                     (index for index in range(len(selected) - 1, -1, -1) if selected[index].chunk.path.name not in required_sources),
                     None,
                 )
                 if replacement is None:
-                    replacement = len(selected) - 1 if selected else None
+                    source_counts = Counter(item.chunk.path.name for item in selected)
+                    replacement = next(
+                        (
+                            index
+                            for index in range(len(selected) - 1, -1, -1)
+                            if selected[index].chunk.path.name != required_source
+                            and source_counts[selected[index].chunk.path.name] > 1
+                        ),
+                        None,
+                    )
                 if replacement is None:
                     selected.append(best)
                 else:
                     selected[replacement] = best
+                present_sources.add(required_source)
         # When the user explicitly asks for links/jurisprudence, preserve one
         # authoritative public source as a complementary perspective. It is
         # never allowed to satisfy the required-document coverage by itself.

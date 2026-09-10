@@ -31,6 +31,8 @@ class EvidenceContract:
     provenance_score: float = 0.0
     support_score: float = 0.0
     contradiction_score: float = 0.0
+    page: int | None = None
+    locator: str = ""
 
 
 @dataclass(frozen=True)
@@ -49,10 +51,12 @@ class ContextPackage:
     domain_policy: dict[str, Any] = field(default_factory=dict)
     expected_response_type: str = "structured"
     route: str = "evidence"
+    task_route: str = "document_rag"
     retrieval_required: bool = True
     response_mode: str = "evidence"
     required_sources: list[str] = field(default_factory=list)
     missing_sources: list[str] = field(default_factory=list)
+    conversation_memory: dict[str, Any] = field(default_factory=dict)
 
     def public_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -80,6 +84,7 @@ class IntelligenceDecision:
     response_mode: str
     reason: str
     privacy_boundary: str = "module-scoped; external provider policy still applies"
+    task_route: str = "document_rag"
 
     def public_dict(self) -> dict[str, Any]:
         return asdict(self)

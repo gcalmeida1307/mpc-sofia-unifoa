@@ -26,6 +26,21 @@ class HarnessRun:
 Retriever = Callable[[str, int, bool], RetrievalResult]
 
 
+def _has_authoritative_jurisprudence_source(result: RetrievalResult) -> bool:
+    """Return whether a result adds a first-party legal research source.
+
+    A retry that was explicitly asked to include jurisprudence may discover an
+    official STJ/STF/Planalto source after the first pass.  The retry must not
+    be discarded solely because its average score is a little lower: the
+    source is complementary evidence about the jurisprudential search and is
+    not allowed to replace the named primary documents.
+    """
+    return any(
+        any(marker in source.casefold() for marker in ("stj", "stf", "planalto"))
+        for source in result.sources
+    )
+
+
 def run_retrieval_harness(
     root: Path,
     module_id: str,
@@ -50,7 +65,20 @@ def run_retrieval_harness(
     steps.append({"stage": "reflect", "status": "needs_more_evidence", "decision": "broaden_same_module_sources", "attempt": 1})
     second = retriever(question, max(limit * 2, 8), True)
     steps.append({"stage": "retrieve", "status": "complete" if second.has_quality_evidence else "incomplete", "accepted": len(second.evidence), "rejected": len(second.rejected_evidence), "conflicts": len(second.conflicts), "missing_sources": list(second.missing_sources), "attempt": 2})
-    if second.evidence and (not first.has_quality_evidence or second.judge_confidence >= first.judge_confidence):
+    jurisprudence_requested = any(
+        marker in question.casefold()
+        for marker in ("jurisprud", "precedent", "link")
+    )
+    second_adds_authoritative_jurisprudence = (
+        jurisprudence_requested
+        and _has_authoritative_jurisprudence_source(second)
+        and not _has_authoritative_jurisprudence_source(first)
+    )
+    if second.evidence and (
+        not first.has_quality_evidence
+        or second.judge_confidence >= first.judge_confidence
+        or second_adds_authoritative_jurisprudence
+    ):
         steps.append({"stage": "reflect", "status": "sufficient" if not second.conflicts else "review_required", "decision": "reason_with_second_pass", "attempt": 2})
         return HarnessRun(second, tuple(steps), 2, "reason_with_second_pass")
     steps.append({"stage": "reflect", "status": "insufficient", "decision": "report_evidence_gap", "attempt": 2})

@@ -67,11 +67,12 @@ class InfrastructurePackage(DomainRetrievalPackage):
         # question. These PDFs are very large and contain overlapping content.
         # An explicitly named source always wins; comparisons and version
         # questions are the cases where loading more than one version is useful.
+        compare_versions = any(marker in normalized for marker in ("compar", "versoes", "versao", "diferenca entre"))
         explicit_document = any(
             marker in normalized
             for marker in ("arquivo", "documento", "manual", "pdf", "6.0", "7.0", "7.4", "8.0", "zabbix_documentation")
         )
-        if selected and explicit_document:
+        if selected and explicit_document and not compare_versions:
             required = tuple(selected)
             for version in ("8.0", "7.4", "7.0", "6.0"):
                 if version in normalized:
@@ -79,7 +80,23 @@ class InfrastructurePackage(DomainRetrievalPackage):
                     if versioned:
                         return SourceSelection(versioned, profile, required)
             return SourceSelection(selected, profile, required)
-        compare_versions = any(marker in normalized for marker in ("compar", "versoes", "versao", "diferenca entre"))
+        if compare_versions and zabbix:
+            # A version comparison names a pair of sources semantically; it
+            # must not be interpreted as naming every manual in the corpus.
+            # Select only the requested versions and require coverage for
+            # those versions, otherwise the judge can reject a valid answer
+            # merely because unrelated manuals were not loaded.
+            requested_versions = tuple(version for version in ("6.0", "7.0", "7.4", "8.0") if version in normalized)
+            versioned = tuple(
+                path
+                for version in requested_versions
+                for path in zabbix
+                if version in path.name
+            )
+            if len(versioned) >= 2:
+                return SourceSelection(tuple(dict.fromkeys(versioned)), profile, tuple(dict.fromkeys(versioned)))
+            if versioned:
+                return SourceSelection(versioned, profile, versioned)
         if "trigger" in profile.features and official_zabbix and not compare_versions:
             trigger_sources = tuple(
                 path

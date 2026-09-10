@@ -65,6 +65,28 @@ def token_terms(query: str) -> set[str]:
     return {token for token in re.findall(r"[\w]+", normalize(query)) if len(token) > 2}
 
 
+def requested_line_range(query: str) -> tuple[int, int] | None:
+    """Extract an explicit text-line request from a user question.
+
+    A locator is part of the retrieval contract, not a ranking hint.  When a
+    user asks for ``linha 62`` the CORE must be able to return that line from
+    the named source instead of selecting a large, approximate chunk.
+    """
+
+    normalized = normalize(query)
+    match = re.search(
+        r"\b(?:linha|linhas|line|lines)\s*(\d+)\s*(?:(?:-|a|ate|to)\s*(\d+))?\b",
+        normalized,
+    )
+    if not match:
+        return None
+    start = int(match.group(1))
+    end = int(match.group(2) or start)
+    if start < 1 or end < start:
+        return None
+    return start, end
+
+
 def named_source_paths(paths: Iterable[Path], query: str) -> tuple[Path, ...]:
     """Resolve explicit filenames without treating common words as sources.
 
@@ -109,16 +131,23 @@ def named_source_paths(paths: Iterable[Path], query: str) -> tuple[Path, ...]:
             default=0.0,
         )
         label_in_query = bool(compact_label and compact_label in compact_query)
-        if not overlap and not label_in_query and token_fuzzy < 0.82:
+        # ``ENAP`` is the institution named in Escola Virtual Gov captures.
+        # The URL-derived filename does not contain that acronym, so it needs
+        # an explicit, conservative alias instead of a broad semantic match.
+        enap_alias = "enap" in query_tokens and "escolavirtual" in compact_label
+        escola_virtual_alias = "escola virtual" in normalized_query and "escolavirtual" in compact_label
+        if not overlap and not label_in_query and not enap_alias and not escola_virtual_alias and token_fuzzy < 0.82:
             continue
         score = float(len(overlap) * 5)
         if label_in_query:
             score += 12
+        if enap_alias or escola_virtual_alias:
+            score += 14
         if token_fuzzy >= 0.82:
             score += 4
         # A filename token must be meaningful.  This guard prevents a URL
         # slug from winning merely because it shares a short common token.
-        if not overlap and not label_in_query and token_fuzzy < 0.88:
+        if not overlap and not label_in_query and not enap_alias and not escola_virtual_alias and token_fuzzy < 0.88:
             continue
         ranked.append((score, path))
     if not ranked:

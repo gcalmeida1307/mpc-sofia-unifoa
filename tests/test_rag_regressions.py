@@ -13,19 +13,20 @@ from api.analytics import (
     theme_report,
     update_feedback,
 )
-from api.domain_packages.base import named_source_paths
+from api.domain_packages.base import named_source_paths, requested_line_range
 from api.expansion import (
     ExpansionStore,
     _clean_public_content,
     record_document_pipeline,
     record_search_topic,
 )
-from api.ingestion import clean_extracted_text
+from api.ingestion import clean_extracted_text, clean_web_capture, extract_text, ingest_module
 from api.learning import store_offline_candidate
 from api.links import normalize_url
 from api.neural import status as neural_status
 from api.neural import train as train_neural_model
 from api.orchestration import (
+    _comparison_evidence_answer,
     _retrieval_question,
     _structured_answer,
     _summary_units,
@@ -53,13 +54,169 @@ class RagRegressionTests(unittest.TestCase):
         named_document = route_query("gestao-empresarial", "Resuma o arquivo gestão educacional")
 
         self.assertEqual(conversation["route"], "conversation")
+        self.assertEqual(conversation["task_route"], "conversation")
         self.assertFalse(conversation["retrieval_required"])
         self.assertEqual(writing["route"], "writing")
+        self.assertEqual(writing["task_route"], "writing")
         self.assertFalse(writing["retrieval_required"])
         self.assertEqual(explanation["route"], "explanation")
-        self.assertTrue(explanation["retrieval_required"])
+        self.assertEqual(explanation["task_route"], "general_explanation")
+        self.assertFalse(explanation["retrieval_required"])
         self.assertEqual(named_document["route"], "evidence")
+        self.assertEqual(named_document["task_route"], "document_rag")
         self.assertTrue(named_document["retrieval_required"])
+
+    def test_named_local_entity_enap_activates_document_retrieval(self) -> None:
+        question = "Me fale sobre o ENAP e sua carga horária"
+        route = route_query("financeiro", question)
+        self.assertTrue(route["retrieval_required"])
+        result = retrieve(ROOT, "financeiro", question, policy_for("financeiro"), limit=6)
+        self.assertTrue(result.has_quality_evidence)
+        self.assertEqual(result.sources, ("www-escolavirtual-gov-br-fe2a6cd26ca2.md",))
+        self.assertNotIn("tesourotransparente", " ".join(result.sources).casefold())
+        response = asyncio.run(
+            answer(
+                root=ROOT,
+                module_id="financeiro",
+                provider="auto",
+                question=question,
+                history=[],
+                response_style="structured",
+                external_allowed=False,
+            )
+        )
+        self.assertIn("348h", response.answer)
+        self.assertIn("20h", response.answer)
+        self.assertIn("www-escolavirtual-gov-br-fe2a6cd26ca2.md", response.answer)
+
+    def test_documentary_follow_up_reenters_rag_with_the_active_topic(self) -> None:
+        history = [
+            {
+                "role": "user",
+                "content": "Durante o período de defeso eleitoral, alguns vídeos, podcasts e links dos cursos poderão ficar temporariamente indisponíveis.",
+            },
+            {
+                "role": "assistant",
+                "content": "Fato documentado: durante o período de defeso eleitoral, alguns vídeos poderão ficar temporariamente indisponíveis. Fontes e trechos - www-escolavirtual-gov-br-fe2a6cd26ca2.md — linhas 5-102",
+            },
+            {"role": "user", "content": "Bom dia, me ajuda"},
+            {"role": "assistant", "content": "Bom dia! Claro que ajudo. Você quer saber mais sobre a indisponibilidade?"},
+        ]
+        question = "Sim, quero saber a indisponibilidade, o que você pode falar além?"
+        route = route_query("financeiro", question, history=history)
+        self.assertEqual(route["task_route"], "document_rag")
+        self.assertTrue(route["retrieval_required"])
+        response = asyncio.run(
+            answer(
+                root=ROOT,
+                module_id="financeiro",
+                provider="auto",
+                question=question,
+                history=history,
+                response_style="structured",
+                external_allowed=False,
+            )
+        )
+        self.assertIn("temporariamente indisponíveis", response.answer)
+        self.assertIn("www-escolavirtual-gov-br-fe2a6cd26ca2.md", response.answer)
+        self.assertNotIn("Tesouro", response.answer)
+        self.assertNotIn("Portal do Governo Brasileiro", response.answer)
+
+    def test_explicit_file_line_returns_exact_source_line(self) -> None:
+        question = "O que diz a linha 62 do arquivo www-escolavirtual-gov-br-fe2a6cd26ca2?"
+        self.assertEqual(requested_line_range(question), (62, 62))
+        self.assertEqual(route_query("financeiro", question)["task_route"], "document_rag")
+        result = retrieve(ROOT, "financeiro", question, policy_for("financeiro"), limit=6)
+        self.assertTrue(result.has_quality_evidence)
+        self.assertEqual(result.sources, ("www-escolavirtual-gov-br-fe2a6cd26ca2.md",))
+        self.assertEqual(result.evidence[0].chunk.locator, "linhas 62-62")
+        self.assertEqual(result.evidence[0].chunk.text, "20h")
+        response = asyncio.run(
+            answer(
+                root=ROOT,
+                module_id="financeiro",
+                provider="auto",
+                question=question,
+                history=[],
+                response_style="structured",
+                external_allowed=False,
+            )
+        )
+        self.assertEqual(response.model, "exact-source-evidence")
+        self.assertIn("> 20h", response.answer)
+        self.assertIn("linhas 62-62", response.answer)
+        self.assertNotIn("linhas 5-89", response.answer)
+
+    def test_web_capture_keeps_repeated_course_workload_labels(self) -> None:
+        source = ROOT / "financeiro" / "links" / "www-escolavirtual-gov-br-fe2a6cd26ca2.md"
+        text = extract_text(source)
+        self.assertGreaterEqual(text.count("Carga Horária"), 3)
+        self.assertIn("Administração Pública e Contexto Institucional", text)
+        self.assertIn("20h", text)
+
+    def test_open_help_is_conversational_and_never_calls_retrieval(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            (root / "direito").mkdir(parents=True)
+            generated = Generation(
+                "Claro. Me conte o que aconteceu e eu ajudo a organizar o problema.",
+                "ollama",
+                "qwen",
+            )
+            with patch("api.orchestration.generate_with_fallback", new=AsyncMock(return_value=generated)) as provider, patch("api.orchestration.retrieve") as retriever:
+                response = asyncio.run(
+                    answer(
+                        root=root,
+                        module_id="direito",
+                        provider="ollama",
+                        question="Me ajuda com um problema de direito?",
+                        history=[],
+                        external_allowed=False,
+                    )
+                )
+            retriever.assert_not_called()
+            provider.assert_awaited_once()
+            self.assertEqual(response.context_package["task_route"], "conversation")
+            self.assertFalse(response.context_package["retrieval_required"])
+            self.assertEqual(response.sources, [])
+            self.assertNotIn("Base documental", response.answer)
+
+    def test_open_help_has_local_fallback_when_provider_is_unavailable(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            (root / "direito").mkdir(parents=True)
+            with patch("api.orchestration.generate_with_fallback", new=AsyncMock(side_effect=RuntimeError("offline"))), patch("api.orchestration.retrieve") as retriever:
+                response = asyncio.run(
+                    answer(
+                        root=root,
+                        module_id="direito",
+                        provider="ollama",
+                        question="Me ajuda com um problema de direito?",
+                        history=[],
+                        external_allowed=False,
+                    )
+                )
+            retriever.assert_not_called()
+            self.assertIn("me conte o que aconteceu", response.answer.casefold())
+            self.assertEqual(response.provider, "policy")
+            self.assertEqual(response.sources, [])
+            self.assertFalse(response.evidence_found)
+
+    def test_follow_up_keeps_conversation_route_and_tools_are_separate(self) -> None:
+        history = [
+            {"role": "assistant", "content": "Claro. Me conte o que aconteceu."},
+        ]
+        follow_up = route_query("direito", "A empresa bloqueou meu acesso.", history=history)
+        tool = route_query("infraestrutura", "Execute o backup do servidor Atlas")
+        self.assertEqual(follow_up["task_route"], "conversation")
+        self.assertFalse(follow_up["retrieval_required"])
+        self.assertEqual(tool["task_route"], "tool_action")
+        self.assertTrue(tool["retrieval_required"])
+
+    def test_document_question_keeps_document_route(self) -> None:
+        route = route_query("direito", "O que diz o acordo coletivo sobre hora extra?")
+        self.assertEqual(route["task_route"], "document_rag")
+        self.assertTrue(route["retrieval_required"])
 
     def test_direct_writing_does_not_call_rag_and_keeps_route_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -392,6 +549,100 @@ class RagRegressionTests(unittest.TestCase):
             self.assertEqual(result.required_sources, ())
             self.assertEqual(result.sources, ("www-zabbix-com-instructions.md",))
             self.assertIn("Create trigger", result.context)
+
+    def test_web_capture_removes_navigation_but_keeps_article_body(self) -> None:
+        captured = """# Gestão Documental
+Fonte: https://www.gov.br/exemplo
+Capturado em: 2026-09-09
+Páginas no domínio: 10
+Gestão Documental
+Ir para o
+Conteúdo
+Acesso à Informação
+Institucional
+Estrutura organizacional
+Você está aqui:
+Gestão Documental
+Gestão Documental
+Info
+Lei nº 12.527, de 18 de novembro de 2011
+O segundo capítulo trata do acesso à informação e da divulgação.
+Acesso à Informação
+Institucional
+Estrutura organizacional
+"""
+        cleaned = clean_web_capture(captured)
+        self.assertIn("Lei nº 12.527", cleaned)
+        self.assertIn("acesso à informação e da divulgação", cleaned)
+        self.assertNotIn("Ir para o", cleaned)
+        self.assertNotIn("Conteúdo", cleaned)
+
+    def test_named_law_retrieval_rejects_unrelated_csv_and_navigation(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "infraestrutura"
+            (module / "links").mkdir(parents=True)
+            (module / "textos").mkdir(parents=True)
+            (module / "links" / "www-gov-br-lei.md").write_text(
+                "# Gestão Documental\nFonte: https://www.gov.br/exemplo\nCapturado em: 2026-09-09\nPáginas no domínio: 1\nVocê está aqui:\nGestão Documental\nGestão Documental\nInfo\nLei nº 12.527, de 18 de novembro de 2011\nO segundo capítulo trata do acesso à informação e da divulgação.\n",
+                encoding="utf-8",
+            )
+            (module / "links" / "portal.md").write_text(
+                "# Portal\nFonte: https://www.gov.br/portal\nCapturado em: 2026-09-09\nPáginas no domínio: 1\nAcesso à Informação\nInstitucional\nEstrutura organizacional\n",
+                encoding="utf-8",
+            )
+            (module / "textos" / "RiskyUsers.csv").write_text(
+                "ID,Usuário,Nível de risco\n1,Pessoa 1,Alto\n",
+                encoding="utf-8",
+            )
+            result = retrieve(root, "infraestrutura", "O que diz a Lei nº 12.527, de 18 de novembro de 2011?", policy_for("infraestrutura"), limit=6)
+            self.assertTrue(result.has_quality_evidence)
+            self.assertEqual(result.sources, ("www-gov-br-lei.md",))
+            self.assertFalse(any(item.chunk.path.name == "RiskyUsers.csv" for item in result.evidence))
+            self.assertIn("Lei nº 12.527", result.context)
+            self.assertIn("DOCUMENTO: www-gov-br-lei.md", result.context)
+            self.assertIn("linhas", result.context)
+
+    def test_structured_rows_are_not_default_prose_context_but_explicit_file_is_allowed(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "infraestrutura" / "textos"
+            module.mkdir(parents=True)
+            (module / "RiskyUsers.csv").write_text(
+                "ID,Usuário,Nível de risco\n1,Pessoa 1,Alto\n2,Pessoa 2,Médio\n",
+                encoding="utf-8",
+            )
+            (module / "manual.txt").write_text(
+                "A rotina de backup deve ser validada diariamente pela equipe de infraestrutura.",
+                encoding="utf-8",
+            )
+            ordinary = retrieve(root, "infraestrutura", "Como funciona a rotina de backup?", policy_for("infraestrutura"), limit=6)
+            self.assertNotIn("RiskyUsers.csv", ordinary.sources)
+            explicit = retrieve(root, "infraestrutura", "Quantos usuários em risco médio no arquivo RiskyUsers?", policy_for("infraestrutura"), limit=6)
+            self.assertIn("RiskyUsers.csv", explicit.sources)
+
+    def test_zabbix_version_comparison_requires_only_the_requested_versions(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "infraestrutura" / "textos"
+            module.mkdir(parents=True)
+            for version in ("6.0", "7.0", "7.4", "8.0"):
+                (module / f"Zabbix_Documentation_{version}.pt.md").write_text(
+                    f"Zabbix {version}. Alterações da versão 7.4 para a 8.0.",
+                    encoding="utf-8",
+                )
+            result = retrieve(root, "infraestrutura", "Qual é a diferença entre a versão 7.4 e a versão 8.0 do Zabbix?", policy_for("infraestrutura"), limit=6)
+            self.assertEqual(set(result.required_sources), {"Zabbix_Documentation_7.4.pt.md", "Zabbix_Documentation_8.0.pt.md"})
+            self.assertEqual(result.missing_sources, ())
+            self.assertTrue({"Zabbix_Documentation_7.4.pt.md", "Zabbix_Documentation_8.0.pt.md"} <= set(result.sources))
+            answer_text = _comparison_evidence_answer(
+                "Qual é a diferença entre a versão 7.4 e a versão 8.0 do Zabbix?",
+                result,
+                "pt-BR",
+            )
+            self.assertIsNotNone(answer_text)
+            self.assertIn("Na versão 7.4", answer_text)
+            self.assertIn("Na versão 8.0", answer_text)
 
     def test_short_follow_up_reuses_only_the_last_user_question(self) -> None:
         question = _retrieval_question(

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .contracts import ContextPackage, EvidenceContract, VerificationResult
 from .domains import domain_for
-from .query_analysis import classify_query, normalize
+from .query_analysis import build_conversation_memory, classify_query, normalize
 from .retrieval import RetrievalResult
 
 
@@ -30,7 +30,8 @@ def build_context_package(
     expected_response_type: str = "structured",
     root: Path | None = None,
 ) -> ContextPackage:
-    profile = classify_query(module_id, question)
+    profile = classify_query(module_id, question, history=history)
+    conversation_memory = build_conversation_memory(module_id, question, history)
     contract = domain_for(module_id)
     accepted = [
         EvidenceContract(
@@ -47,6 +48,8 @@ def build_context_package(
             provenance_score=round(float(item.provenance_score), 4),
             support_score=round(float(item.support_score), 4),
             contradiction_score=round(float(item.contradiction_score), 4),
+            page=item.chunk.page,
+            locator=item.chunk.locator or (f"página {item.chunk.page}" if item.chunk.page else f"trecho {item.chunk.ordinal}"),
         )
         for item in result.evidence
     ]
@@ -65,6 +68,8 @@ def build_context_package(
             provenance_score=round(float(item.provenance_score), 4),
             support_score=round(float(item.support_score), 4),
             contradiction_score=round(float(item.contradiction_score), 4),
+            page=item.chunk.page,
+            locator=item.chunk.locator or (f"página {item.chunk.page}" if item.chunk.page else f"trecho {item.chunk.ordinal}"),
         )
         for item in result.rejected_evidence
     ]
@@ -92,10 +97,12 @@ def build_context_package(
         },
         expected_response_type=expected_response_type,
         route=str(profile.get("route", "evidence")),
+        task_route=str(profile.get("task_route", "document_rag")),
         retrieval_required=bool(profile.get("retrieval_required", True)),
         response_mode=str(profile.get("response_mode", "evidence")),
         required_sources=list(result.required_sources),
         missing_sources=list(result.missing_sources),
+        conversation_memory=conversation_memory,
     )
 
 

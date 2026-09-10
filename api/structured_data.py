@@ -389,6 +389,32 @@ def _record_label(question: str) -> str:
     return "registros"
 
 
+def _source_locator(document: StructuredDocument) -> str:
+    """Describe the complete range used by a deterministic table answer.
+
+    Structured answers are calculated from every record, so their provenance
+    must point to the complete table rather than pretending that the first
+    retrieved chunk was sufficient.  Personal rows are never copied into the
+    answer; only the file and safe structural location are exposed.
+    """
+    if document.path.suffix.casefold() == ".csv":
+        return f"linhas 1-{len(document.rows) + 1} (cabeçalho + dados; leitura integral)"
+    if document.path.suffix.casefold() == ".xlsx" and document.locations:
+        sheets: dict[str, list[int]] = {}
+        for location in document.locations:
+            sheet = str(location.get("sheet", "planilha"))
+            row = location.get("row")
+            if isinstance(row, int):
+                sheets.setdefault(sheet, []).append(row)
+        ranges = []
+        for sheet, rows in sheets.items():
+            if rows:
+                ranges.append(f"{sheet}, linhas {min(rows)}-{max(rows)}")
+        if ranges:
+            return "; ".join(ranges)
+    return f"registros 1-{len(document.rows)} (leitura integral)"
+
+
 def _format_answer(
     document: StructuredDocument,
     question: str,
@@ -401,9 +427,11 @@ def _format_answer(
     label = _record_label(question)
     source = document.path.name
     total = len(document.rows)
+    locator = _source_locator(document)
     if language == "en":
         conclusion = f"There are {matched_count} {label} matching the requested criterion in {source}, out of {total} records."
         basis = f"- Complete read of the table: {total} data rows."
+        basis += f"\n- Location: {locator}."
         if filter_column and filter_value:
             basis += f"\n- Criterion: column “{filter_column}” equal to “{filter_value}”."
         attention = "- The count uses only the identified column and value; it does not infer other status fields."
@@ -414,6 +442,7 @@ def _format_answer(
     if language == "es":
         conclusion = f"Hay {matched_count} {label} que cumplen el criterio solicitado en {source}, de un total de {total} registros."
         basis = f"- Lectura completa de la tabla: {total} filas de datos."
+        basis += f"\n- Ubicación: {locator}."
         if filter_column and filter_value:
             basis += f"\n- Criterio: columna “{filter_column}” igual a “{filter_value}”."
         attention = "- El conteo usa solo la columna y el valor identificados; no infiere otros campos de estado."
@@ -423,6 +452,7 @@ def _format_answer(
         return f"Conclusión\n{conclusion}\n\nBase documental\n{basis}\n\nPuntos de atención\n{attention}\n\nLímites\n{limits}"
     conclusion = f"Há {matched_count} {label} que atendem ao critério solicitado no arquivo {source}, de um total de {total} registros."
     basis = f"- Leitura integral da tabela: {total} linhas de dados."
+    basis += f"\n- Localização: {locator}."
     if filter_column and filter_value:
         basis += f"\n- Critério aplicado: coluna “{filter_column}” igual a “{filter_value}”."
     attention = "- A contagem usa somente a coluna e o valor identificados; não infere outros campos de estado."

@@ -80,6 +80,8 @@ type ChatItem = {
   privacy?: AnswerPrivacy
   attachment?: string
   error?: boolean
+  task_route?: string
+  retrieval_required?: boolean
   agent_trace?: Array<{
     id: string
     stage: string
@@ -377,6 +379,8 @@ function App() {
           sources: data.sources,
           provider: data.provider,
           verified: data.verified,
+          task_route: data.context_package?.task_route,
+          retrieval_required: data.context_package?.retrieval_required,
           agent_trace: data.agent_trace,
           analytics_id: data.analytics_id,
           retry_question: text,

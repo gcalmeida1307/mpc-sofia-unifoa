@@ -40,6 +40,8 @@ type ChatItem = {
   learning?: LearningInfo
   privacy?: { external_context_redacted?: boolean; note?: string }
   attachment?: string
+  task_route?: string
+  retrieval_required?: boolean
   agent_trace?: AgentStage[]
   error?: boolean
 }
@@ -141,11 +143,10 @@ function AnswerDetails({
   item: ChatItem
   provider: Provider
 }) {
+  const hasDocumentRoute = item.retrieval_required !== false
   const hasDetails = Boolean(
-    item.sources?.length ||
-      item.agent_trace?.length ||
-      item.provider ||
-      item.verified,
+    hasDocumentRoute &&
+      (item.sources?.length || item.agent_trace?.length || item.provider || item.verified),
   )
   if (!hasDetails) return null
 
@@ -168,7 +169,7 @@ function AnswerDetails({
           <span>Motor: {item.provider ?? provider}</span>
           {item.verified && <span>Validação: evidência conferida</span>}
         </div>
-        {item.agent_trace && <StageSummary trace={item.agent_trace} />}
+        {hasDocumentRoute && item.agent_trace && <StageSummary trace={item.agent_trace} />}
       </div>
     </details>
   )
@@ -386,12 +387,14 @@ export default function Chat({
         </div>
       )}
 
-      <Pipeline
-        trace={lastAssistant?.agent_trace}
-        provider={lastAssistant?.provider}
-        sourceCount={lastAssistant?.sources?.length}
-        verified={lastAssistant?.verified}
-      />
+      {(!lastAssistant || lastAssistant.retrieval_required !== false) && (
+        <Pipeline
+          trace={lastAssistant?.agent_trace}
+          provider={lastAssistant?.provider}
+          sourceCount={lastAssistant?.sources?.length}
+          verified={lastAssistant?.verified}
+        />
+      )}
 
       <div
         className="chat-messages"

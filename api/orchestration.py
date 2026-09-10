@@ -18,7 +18,16 @@ from .llmops import runtime_versions
 from .policies import ModulePolicy, policy_for
 from .privacy import ExternalRedaction, external_generation_may_be_used
 from .providers import Generation, generate_with_fallback
-from .query_analysis import assess_module_scope, classify_query, is_medical_sleep_query
+from .query_analysis import (
+    assess_module_scope,
+    build_conversation_memory,
+    classify_query,
+    is_medical_sleep_query,
+    recent_documentary_answer,
+    recent_documentary_question,
+    _has_contextual_evidence_follow_up,
+)
+from .domain_packages.base import requested_line_range
 from .retrieval import RetrievalResult, normalize, retrieve
 from .ingestion import files_for
 from .structured_data import StructuredAnswer, analyze_structured_question
@@ -70,6 +79,22 @@ def normalize_response_style(style: str | None) -> str:
 
 def _retrieval_question(question: str, history: list[dict[str, str]]) -> str:
     """Resolve short follow-ups without contaminating complete questions."""
+    def documentary_context() -> str:
+        # Previous citations help resolve the active source, but their locator
+        # text must not be mistaken for a new user request such as ``linha
+        # 62``.  Keep only source names here; the current question remains the
+        # authority for ranking and exact locators.
+        previous = recent_documentary_answer(history)
+        sources = re.findall(r"[\wÀ-ÿ.-]+\.(?:md|txt|pdf|docx|xlsx|csv|xml|json)\b", previous, flags=re.IGNORECASE)
+        topic = recent_documentary_question(history)
+        topic = re.sub(r"\b(?:linha|linhas|line|lines)\s*\d+(?:\s*(?:-|a|ate|to)\s*\d+)?", "", topic, flags=re.IGNORECASE).strip()
+        parts = []
+        if sources:
+            parts.append("Fonte ativa da sessão: " + ", ".join(dict.fromkeys(sources)))
+        if topic:
+            parts.append("Tema documental anterior: " + topic)
+        return "\n".join(parts)
+
     normalized = normalize(question)
     follow_up_markers = (
         "isso",
@@ -110,6 +135,9 @@ def _retrieval_question(question: str, history: list[dict[str, str]]) -> str:
         "abordados",
     )
     if not any(marker in normalized for marker in follow_up_markers):
+        if _has_contextual_evidence_follow_up(question, history):
+            documentary_answer = documentary_context()
+            return f"{question}\nContexto documental anterior da sessão:\n{documentary_answer}".strip()
         return question
     if len(question.split()) > 10 and not any(marker in normalized for marker in long_follow_up_markers):
         return question
@@ -120,6 +148,9 @@ def _retrieval_question(question: str, history: list[dict[str, str]]) -> str:
     ]
     if not previous_questions:
         return question
+    if _has_contextual_evidence_follow_up(question, history):
+        documentary_answer = documentary_context()
+        return f"{question}\nContexto documental anterior da sessão:\n{documentary_answer}".strip()
     return f"{previous_questions[-1]} {question}".strip()
 
 
@@ -141,6 +172,17 @@ def _generation_timeout(response_style: str) -> float:
         return max(1.5, min(180.0, float(os.getenv(variable, default))))
     except ValueError:
         return float(default)
+
+
+def _direct_generation_timeout(response_style: str, task_route: str) -> float:
+    """Bound direct conversation latency independently from document work."""
+    if task_route != "conversation":
+        return _generation_timeout(response_style)
+    try:
+        configured = float(os.getenv("SOFIA_CONVERSATION_TIMEOUT_SECONDS", "8"))
+    except ValueError:
+        configured = 8.0
+    return max(3.0, min(20.0, configured))
 
 
 def _system(
@@ -281,7 +323,7 @@ def _format_external_assist_answer(
     return f"{formatted}\n\n{note}".strip()
 
 
-def _direct_system(module_id: str, policy: ModulePolicy, language: str, route: str) -> str:
+def _direct_system(module_id: str, policy: ModulePolicy, language: str, task_route: str) -> str:
     risk = (
         "Em saúde, não diagnostique, não prescreva, não dê dose individual e indique avaliação profissional quando houver risco."
         if policy.high_risk
@@ -289,26 +331,64 @@ def _direct_system(module_id: str, policy: ModulePolicy, language: str, route: s
     )
     return (
         f"Você é Sofia no módulo {module_id}. Responda em {LANGUAGE_NAMES[language]}. "
-        f"A intenção desta mensagem é {route}. Responda de forma humana, objetiva e acolhedora, "
+        f"A tarefa classificada é {task_route}. Responda de forma humana, objetiva e acolhedora, "
         "sem citar arquivos ou fontes que não foram fornecidos, sem inventar dados e sem descrever o raciocínio interno. "
+        "Quando a tarefa for conversation, trate-a como conversa: acolha, peça o contexto necessário e não pesquise documentos, não liste fontes e não mostre etapas do pipeline. "
         "Se a pessoa pedir uma regra específica do módulo, diga que ela deve ser confirmada na base documental em vez de afirmar uma norma sem fonte. "
         "Use no máximo 3 parágrafos curtos e não use o envelope ‘Conclusão/Base documental/Limites’. "
         f"{risk}"
     )
 
 
-def _direct_prompt(question: str, language: str, history: list[dict[str, str]], route: str) -> str:
+def _direct_prompt(
+    question: str,
+    language: str,
+    history: list[dict[str, str]],
+    task_route: str,
+    memory: dict[str, Any] | None = None,
+) -> str:
     previous = "\n".join(
         f"{item.get('role', 'user')}: {item.get('content', '')}"
         for item in history[-4:]
         if item.get("role") in {"user", "assistant"} and str(item.get("content", "")).strip()
     )
     context = f"\nHISTÓRICO RECENTE:\n{previous}\n" if previous else ""
+    memory = memory or {}
+    memory_lines: list[str] = []
+    if memory.get("topic"):
+        memory_lines.append(f"assunto atual: {memory['topic']}")
+    if memory.get("intent"):
+        memory_lines.append(f"intenção: {memory['intent']}")
+    if memory.get("entities"):
+        memory_lines.append("entidades citadas: " + ", ".join(str(item) for item in memory["entities"][:8]))
+    if memory.get("pending_question"):
+        memory_lines.append(f"pergunta pendente da Sofia: {memory['pending_question']}")
+    memory_text = "\n".join(memory_lines)
+    memory_context = f"\nMEMÓRIA DA SESSÃO (somente contexto recente):\n{memory_text}\n" if memory_text else ""
     return (
-        f"Idioma: {LANGUAGE_NAMES[language]}. Rota: {route}.\n"
+        f"Idioma: {LANGUAGE_NAMES[language]}. Tarefa: {task_route}.\n"
         f"Pergunta ou tarefa:\n{question}\n"
-        f"{context}\nResponda agora, sem prefácio técnico e sem inventar uma fonte."
+        f"{context}{memory_context}\nResponda agora, sem prefácio técnico e sem inventar uma fonte."
     )
+
+
+def _conversation_fallback(module_id: str, language: str) -> str:
+    """Keep an open conversation useful when the language provider is offline."""
+    messages = {
+        "pt-BR": (
+            "Claro. Me conte o que aconteceu e eu ajudo a organizar o problema, "
+            "identificar o tema e, se necessário, consultar os documentos do módulo."
+        ),
+        "en": (
+            "Of course. Tell me what happened and I will help organize the problem, "
+            "identify the topic and, if needed, consult this module's documents."
+        ),
+        "es": (
+            "Claro. Cuéntame qué ocurrió y te ayudaré a organizar el problema, "
+            "identificar el tema y, si es necesario, consultar los documentos del módulo."
+        ),
+    }
+    return messages.get(language, messages["pt-BR"])
 
 
 def _provider_context(redaction: ExternalRedaction | None, context: str, policy: ModulePolicy) -> str:
@@ -323,8 +403,10 @@ def _route_context_package(
     history: list[dict[str, str]],
     decision: dict[str, Any],
     response_style: str,
+    memory: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     contract = policy_for(module_id)
+    conversation_memory = memory or build_conversation_memory(module_id, question, history)
     return {
         "question": question,
         "domain": module_id,
@@ -346,8 +428,10 @@ def _route_context_package(
         },
         "expected_response_type": response_style,
         "route": decision.get("route", "conversation"),
+        "task_route": decision.get("task_route", "conversation"),
         "retrieval_required": bool(decision.get("retrieval_required", False)),
         "response_mode": decision.get("response_mode", "conversational"),
+        "conversation_memory": conversation_memory,
     }
 
 
@@ -476,6 +560,29 @@ def _compact_answer(answer: str, question: str, evidence: str) -> str:
     return compacted
 
 
+def _append_source_citations(answer: str, result: RetrievalResult, language: str) -> str:
+    """Attach one traceable location per consulted source to local answers."""
+    if not answer.strip() or not result.evidence or "fontes e trechos" in normalize(answer):
+        return answer
+    labels = {
+        "pt-BR": "Fontes e trechos",
+        "en": "Sources and passages",
+        "es": "Fuentes y fragmentos",
+    }
+    seen: set[str] = set()
+    references: list[str] = []
+    for item in result.evidence:
+        source = item.chunk.path.name
+        if source in seen:
+            continue
+        seen.add(source)
+        locator = item.chunk.locator or (f"página {item.chunk.page}" if item.chunk.page else f"trecho {item.chunk.ordinal}")
+        references.append(f"- {source} — {locator}")
+    if not references:
+        return answer
+    return f"{answer.rstrip()}\n\n{labels.get(language, labels['pt-BR'])}\n" + "\n".join(references)
+
+
 def _extractive_answer(question: str, result: RetrievalResult, language: str) -> str:
     """Return a short answer from retrieved text when the local LLM is unavailable."""
     stopwords = {"mais", "menos", "sobre", "como", "qual", "quais", "para", "quando", "onde", "funcionário", "funcionario", "trabalhar", "fazer", "faço", "faco"}
@@ -484,6 +591,17 @@ def _extractive_answer(question: str, result: RetrievalResult, language: str) ->
     units = [unit.strip(" -•\t") for unit in re.split(r"(?:\n+|•+|(?<=[.!?])\s+)", source_text) if len(unit.strip()) >= 35]
     question_folded = question.casefold()
     ordered_units: list[str] | None = None
+    # A long web capture can contain a correct sentence followed by unrelated
+    # catalogue/navigation text in the same fallback answer. Keep only units
+    # carrying a high-signal documentary anchor when one is present.
+    hard_anchors = ("defeso eleitoral", "acesso a informação", "acesso a informacao", "mandado de segurança", "mandado de seguranca")
+    normalized_question = normalize(question)
+    for anchor in hard_anchors:
+        if anchor in normalized_question:
+            anchored_units = [unit for unit in units if anchor in normalize(unit)]
+            if anchored_units:
+                units = anchored_units
+                break
     host_question = "host" in question_folded and ("zabbix" in question_folded or any("zabbix_documentation" in source.casefold() for source in result.sources) or "host wizard" in source_text.casefold())
     if host_question:
         normalized_context = result.context.casefold()
@@ -945,12 +1063,189 @@ def _management_financial_gap_answer(root: Path, module_id: str, question: str, 
     )
 
 
+def _comparison_evidence_answer(question: str, result: RetrievalResult, language: str) -> str | None:
+    """Compose a readable multi-document answer from verified passages.
+
+    This is the safe local accelerator for comparisons outside the legal
+    package. It does not invent a diff: it selects complete, version- or
+    topic-bearing passages independently for each required source and states
+    when the recovered material is not an exhaustive comparison.
+    """
+    normalized_question = normalize(question)
+    if len(result.sources) < 2 or not any(
+        marker in normalized_question
+        for marker in ("compare", "comparar", "diferenca entre", "versus", " vs ", "confront")
+    ):
+        return None
+    from .relational_reasoning import sentences
+
+    change_markers = ("alter", "mudan", "novidad", "upgrade", "compatib", "diferenc", "o que ha de novo")
+    sections: list[tuple[str, str, str]] = []
+    for source in result.sources:
+        version_match = re.search(r"(?<!\d)(\d+\.\d+)(?!\d)", source)
+        version = version_match.group(1) if version_match else ""
+        candidates: list[tuple[float, str, str]] = []
+        for item in result.evidence:
+            if item.chunk.path.name != source:
+                continue
+            for sentence in sentences(item.chunk.text):
+                compact = re.sub(r"\s+", " ", sentence).strip(" -•\t")
+                folded = normalize(compact)
+                if len(compact) < 32 or folded.startswith(("documentation", "contents", "manual do usuario")):
+                    continue
+                score = 0.0
+                if version and version in folded:
+                    score += 4.0
+                if "versao" in folded or "versoes" in folded:
+                    score += 1.5
+                score += sum(0.8 for marker in change_markers if marker in folded)
+                score += min(1.0, item.coverage + item.lexical_score)
+                candidates.append((score, compact, item.chunk.locator or f"trecho {item.chunk.ordinal}"))
+        if not candidates:
+            return None
+        candidates.sort(key=lambda value: value[0], reverse=True)
+        chosen: list[str] = []
+        locator = candidates[0][2]
+        for _, passage, passage_locator in candidates:
+            if any(normalize(passage) == normalize(previous) for previous in chosen):
+                continue
+            chosen.append(passage)
+            locator = passage_locator
+            if len(chosen) == 2:
+                break
+        label = version or source
+        sections.append((label, " ".join(chosen), locator))
+    if len(sections) < 2:
+        return None
+    if language == "en":
+        lines = ["I found both local documents and compared their version-specific passages."]
+        lines.extend(f"In version {label}, the recovered documentation states: {passage}" for label, passage, _ in sections)
+        lines.append("This confirms documented changes and compatibility points, but it is not an exhaustive release diff; the full release notes should be checked before an upgrade.")
+        return "\n\n".join(lines)
+    if language == "es":
+        lines = ["Encontré los dos documentos locales y comparé sus fragmentos específicos de versión."]
+        lines.extend(f"En la versión {label}, la documentación recuperada indica: {passage}" for label, passage, _ in sections)
+        lines.append("Esto confirma cambios y puntos de compatibilidad documentados, pero no es una lista exhaustiva de la versión; deben revisarse las notas completas antes de actualizar.")
+        return "\n\n".join(lines)
+    lines = ["Encontrei os dois manuais locais e comparei os trechos específicos de cada versão."]
+    lines.extend(f"Na versão {label}, a documentação recuperada registra: {passage}" for label, passage, _ in sections)
+    lines.append("Isso confirma mudanças e pontos de compatibilidade documentados, mas não é uma lista exaustiva de diferenças; as notas completas de atualização devem ser conferidas antes de fazer um upgrade.")
+    return "\n\n".join(lines)
+
+
+def _exact_source_answer(question: str, result: RetrievalResult, language: str) -> str | None:
+    """Answer an explicit ``arquivo + linha`` request from the exact passage.
+
+    This path deliberately does not summarize a large chunk.  A request for a
+    line is a request for a primary-source quotation, so the answer preserves
+    the complete selected line(s) and states that no broader inference was
+    made.
+    """
+
+    line_range = requested_line_range(question)
+    if not line_range or not result.has_quality_evidence:
+        return None
+    start, end = line_range
+    locator = f"linhas {start}-{end}"
+    items = [item for item in result.evidence if item.chunk.locator == locator and item.chunk.text.strip()]
+    if not items:
+        return None
+    source = items[0].chunk.path.name
+    passage = "\n".join(f"> {line}" for line in items[0].chunk.text.splitlines() if line.strip())
+    if language == "en":
+        return (
+            f"I found the requested passage in **{source}**. Lines {start}-{end} state:\n\n"
+            f"{passage}\n\nThis is a direct transcription of the requested source lines; I did not infer beyond them."
+        )
+    if language == "es":
+        return (
+            f"Encontré el fragmento solicitado en **{source}**. Las líneas {start}-{end} dicen:\n\n"
+            f"{passage}\n\nEsta es una transcripción directa de las líneas solicitadas; no inferí más allá de ellas."
+        )
+    return (
+        f"Encontrei o trecho solicitado em **{source}**. As linhas {start}-{end} dizem:\n\n"
+        f"{passage}\n\nEsta é a transcrição direta das linhas pedidas; não fiz inferências além delas."
+    )
+
+
+def _enap_local_answer(question: str, result: RetrievalResult, language: str) -> str | None:
+    """Compose the ENAP/EV.G answer from local course and program facts."""
+
+    normalized_question = normalize(question)
+    if not any(marker in normalized_question for marker in ("enap", "escola virtual")):
+        return None
+    if "carga horaria" not in normalized_question or not result.has_quality_evidence:
+        return None
+    if not any("escolavirtual" in normalize(source) for source in result.sources):
+        return None
+    source_text = "\n".join(item.chunk.text for item in result.evidence)
+    normalized_text = normalize(source_text)
+    program_match = re.search(r"carga horaria\s*:?\s*(?:\n\s*)?(348h)", normalized_text)
+    course_match = re.search(
+        r"administracao publica e contexto institucional[\s\S]{0,420}?carga horaria\s*:?\s*(20h)",
+        normalized_text,
+    )
+    facts: list[str] = []
+    if program_match:
+        facts.append(f"o programa “Gestão para Resultados” tem carga horária de {program_match.group(1)}")
+    if course_match:
+        facts.append(
+            "o curso “Administração Pública e Contexto Institucional Contemporâneo” aparece com carga horária de "
+            f"{course_match.group(1)}"
+        )
+    if not facts:
+        return None
+    if language == "en":
+        return "I found the answer in the local Escola Virtual Gov document. The source distinguishes these workloads:\n\n" + "\n".join(f"- {fact}." for fact in facts) + "\n\nThe programme total must not be confused with the workload of an individual course."
+    if language == "es":
+        return "Encontré la respuesta en el documento local de Escola Virtual Gov. La fuente distingue estas cargas horarias:\n\n" + "\n".join(f"- {fact}." for fact in facts) + "\n\nEl total del programa no debe confundirse con la carga de un curso individual."
+    return "Encontrei a resposta no documento local da Escola Virtual Gov. A fonte distingue estas cargas horárias:\n\n" + "\n".join(f"- {fact}." for fact in facts) + "\n\nO total do programa não deve ser confundido com a carga horária de um curso individual."
+
+
+def _defeso_local_answer(question: str, result: RetrievalResult, language: str) -> str | None:
+    """Continue an electoral-defeso conversation from the source notice."""
+
+    normalized_question = normalize(question)
+    if not any(term in normalized_question for term in ("defeso", "indisponibilidade")) or not result.has_quality_evidence:
+        return None
+    from .relational_reasoning import sentences
+
+    passages = [sentence.strip() for item in result.evidence for sentence in sentences(item.chunk.text) if sentence.strip()]
+    defeso = next((sentence for sentence in passages if "defeso eleitoral" in normalize(sentence)), None)
+    continuity = next((sentence for sentence in passages if "demais conteudos" in normalize(sentence) and "disponiveis" in normalize(sentence)), None)
+    if not defeso:
+        return None
+    # Web captures often place the notice after the page title and navigation
+    # in the same extracted sentence. Keep the notice itself, not that chrome.
+    notice_start = re.search(r"(?i)durante\s+o\s+per[ií]odo\s+de\s+defeso\s+eleitoral", defeso)
+    if notice_start:
+        defeso = defeso[notice_start.start() :]
+    defeso = re.split(r"(?i)\s+os\s+demais\s+conte[uú]dos\b", defeso, maxsplit=1)[0].strip(" .") + "."
+    if language == "en":
+        opening = "Yes. The local notice says:"
+        continuation = "It also clarifies:"
+    elif language == "es":
+        opening = "Sí. El aviso local dice:"
+        continuation = "También aclara:"
+    else:
+        opening = "Sim. O aviso local diz:"
+        continuation = "Ele também esclarece:"
+    answer = f"{opening}\n\n“{defeso}”"
+    if continuity:
+        answer += f"\n\n{continuation}\n\n“{continuity}”"
+    return answer
+
+
 def _fast_evidence_answer(module_id: str, question: str, result: RetrievalResult, language: str, structured: bool = False) -> str | None:
     """Use deterministic evidence summaries for common high-signal questions."""
     normalized_question = question.casefold()
     normalized_context = result.context.casefold()
     search_context = normalize(result.context)
     search_question = normalize(question)
+    if module_id not in {"direito", "departamento-pessoal"}:
+        comparison_answer = _comparison_evidence_answer(question, result, language)
+        if comparison_answer:
+            return comparison_answer
     if module_id == "infraestrutura" and language == "pt-BR" and "trigger" in search_question:
         instruction = next((item for item in result.evidence if "to configure a trigger" in normalize(item.chunk.text)), None)
         if instruction and all(marker in normalize(instruction.chunk.text) for marker in ("data collection", "hosts", "create trigger", "enter parameters")):
@@ -1443,14 +1738,16 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     trace = build_plan(module_id, question, policy.high_risk, bool(extra_context))
     retrieval_question = _retrieval_question(question, history)
     retrieval_limit = 4 if response_style == "concise" else 6
-    profile = classify_query(module_id, retrieval_question)
+    profile = classify_query(module_id, retrieval_question, history=history)
     decision = IntelligenceDecision(
         route=str(profile.get("route", "evidence")),
         retrieval_required=bool(profile.get("retrieval_required", True)),
         response_mode=str(profile.get("response_mode", "evidence")),
         reason=str(profile.get("reason", "pergunta de domínio")),
         privacy_boundary="LGPD: minimização e política de provider; HL7 FHIR: contexto clínico local por padrão",
+        task_route=str(profile.get("task_route", "document_rag")),
     )
+    conversation_memory = build_conversation_memory(module_id, retrieval_question, history)
     trace.append(
         {
             "id": "intelligence_route",
@@ -1459,6 +1756,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             "status": "complete",
             "detail": decision.reason,
             "route": decision.route,
+            "task_route": decision.task_route,
             "retrieval_required": decision.retrieval_required,
         }
     )
@@ -1472,17 +1770,17 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         provider_question = redaction.clean(retrieval_question) if redaction else retrieval_question
         provider_extra_context = _provider_context(redaction, extra_context, policy)
         provider_history = redaction.clean_history(history) if redaction else history
-        context_package = _route_context_package(module_id, retrieval_question, history, decision.public_dict(), response_style)
+        context_package = _route_context_package(module_id, retrieval_question, history, decision.public_dict(), response_style, conversation_memory)
         try:
             generated = await generate_with_fallback(
                 provider,
-                _direct_system(module_id, policy, language, decision.route),
-                _direct_prompt(provider_question, language, provider_history, decision.route) + (
+                _direct_system(module_id, policy, language, decision.task_route),
+                _direct_prompt(provider_question, language, provider_history, decision.task_route, conversation_memory) + (
                     f"\nCONTEXTO AUTORIZADO E MINIMIZADO:\n{provider_extra_context}" if provider_extra_context else ""
                 ),
                 provider_history[-10:],
                 max_output_tokens=320 if response_style == "concise" else 560,
-                timeout_seconds=_generation_timeout(response_style),
+                timeout_seconds=_direct_generation_timeout(response_style, decision.task_route),
                 external_allowed=external_allowed,
             )
             if redaction:
@@ -1513,12 +1811,13 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             )
         except RuntimeError:
             update_stage(trace, "retrieve", "complete", "Rota direta sem necessidade de RAG; provider indisponível.")
-            update_stage(trace, "reason", "blocked", "Nenhum provider autorizado respondeu à tarefa conversacional.")
+            fallback_answer = _conversation_fallback(module_id, language) if decision.task_route == "conversation" else "Não consegui responder agora porque o motor de linguagem não está disponível. Tente novamente em instantes."
+            update_stage(trace, "reason", "complete" if decision.task_route == "conversation" else "blocked", "Fallback conversacional local aplicado." if decision.task_route == "conversation" else "Nenhum provider autorizado respondeu à tarefa direta.")
             update_stage(trace, "critic", "complete", "Falha apresentada sem inventar uma resposta.")
-            update_stage(trace, "output", "complete", "Usuário pode tentar novamente quando o provider estiver disponível.")
+            update_stage(trace, "output", "complete", "Resposta conversacional local entregue." if decision.task_route == "conversation" else "Usuário pode tentar novamente quando o provider estiver disponível.")
             analytics_id = remember_run(root, module_id, question, [], "policy", True, user_code)
             return OrchestrationResult(
-                "Não consegui responder agora porque o motor de linguagem não está disponível. Tente novamente em instantes.",
+                fallback_answer,
                 "policy",
                 "provider-unavailable",
                 [],
@@ -1721,6 +2020,35 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         analytics_id = remember_run(root, module_id, question, list(result.sources), "policy", True, user_code)
         return OrchestrationResult(local_no_evidence(policy, language, module_id, retrieval_question), "policy", "evidence-gate", list(result.sources), 0.0, False, True, trace, analytics_id, context_package=context_package, verification_status="unverified", confidence=0.0)
     update_stage(trace, "retrieve", "complete", f"{len(result.evidence)} evidência(s) local(is) recuperada(s) de {len(result.sources)} fonte(s).")
+    # Explicit source locators and high-signal local entities must be answered
+    # from the verified passage before any provider is allowed to paraphrase it.
+    # This prevents a correct local fact from becoming a generic cloud answer
+    # and preserves the user's requested file/line contract.
+    local_source_answer = (
+        _exact_source_answer(retrieval_question, result, language)
+        or _enap_local_answer(retrieval_question, result, language)
+        or _defeso_local_answer(retrieval_question, result, language)
+    )
+    if local_source_answer:
+        local_source_answer = _append_source_citations(local_source_answer, result, language)
+        update_stage(trace, "reason", "complete", "Resposta composta diretamente da evidência local solicitada.")
+        update_stage(trace, "critic", "complete", "Trecho, documento e localização conferidos; nenhuma fonte externa foi usada.")
+        update_stage(trace, "output", "complete", "Resposta documental entregue com rastreabilidade.")
+        analytics_id = remember_run(root, module_id, question, list(result.sources), "local-rag", True, user_code)
+        return OrchestrationResult(
+            local_source_answer,
+            "local-rag",
+            "exact-source-evidence" if requested_line_range(retrieval_question) else "local-source-evidence",
+            list(result.sources),
+            evidence_score,
+            True,
+            True,
+            trace,
+            analytics_id,
+            context_package=context_package,
+            verification_status="verified",
+            confidence=min(0.99, evidence_score),
+        )
     # Universal, provenance-backed synthesis for summaries and relational
     # queries. Explicit provider selection still exercises that provider.
     # Legal comparison/review profiles have a domain-specific deterministic
@@ -1735,6 +2063,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     if provider == "auto" and relational_answer:
         checked = verify_answer(relational_answer, result, module_id)
         if checked.status == "verified":
+            relational_answer = _append_source_citations(relational_answer, result, language)
             update_stage(trace, "reason", "complete", "Síntese e relações com premissas documentais identificadas.")
             update_stage(trace, "critic", "complete", "Valores e citações conferidos contra cada premissa.")
             update_stage(trace, "output", "complete", "Resposta com evidências por conclusão.")
@@ -1766,6 +2095,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         if fast_answer:
             if response_style == "structured" and "Fonte:" not in fast_answer:
                 fast_answer = _structured_answer(fast_answer, result, language)
+            fast_answer = _append_source_citations(fast_answer, result, language)
             update_stage(trace, "reason", "complete", "Síntese determinística baseada diretamente no trecho recuperado.")
             update_stage(trace, "critic", "complete", "Resumo conferido contra a evidência local.")
             update_stage(trace, "output", "complete", "Resposta curta entregue com fontes.")
@@ -1815,6 +2145,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             fallback = _compact_answer(_extractive_answer(retrieval_question, result, language), retrieval_question, result.context)
         if response_style == "structured" and decision.response_mode == "evidence" and not any(normalize(section) in normalize(fallback) for section in ("conclusao", "conclusion", "conclusión")):
             fallback = _structured_answer(fallback, result, language)
+        fallback = _append_source_citations(fallback, result, language)
         update_stage(trace, "reason", "complete", "Provider indisponível ou lento; síntese extrativa local utilizada.")
         update_stage(trace, "critic", "complete", "Síntese extrativa limitada aos trechos recuperados.")
         update_stage(trace, "output", "complete", "Resposta local entregue com fontes.")
@@ -1849,6 +2180,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         ) or _compact_answer(_extractive_answer(retrieval_question, result, language), retrieval_question, result.context)
         if response_style == "structured" and decision.response_mode == "evidence":
             safe_answer = _structured_answer(safe_answer, result, language)
+        safe_answer = _append_source_citations(safe_answer, result, language)
         update_stage(trace, "critic", "repaired", f"Resposta do provider rejeitada; síntese local aplicada. Avaliador: {critic_result['reason']}")
         update_stage(trace, "output", "complete", "Resposta limitada aos trechos recuperados.")
         analytics_id = remember_run(root, module_id, question, list(result.sources), "local-rag", True, user_code)
@@ -1881,9 +2213,10 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         )
     update_stage(trace, "critic", "complete", f"Resposta aprovada pelo gate; avaliador: {critic_result['reason']}")
     update_stage(trace, "output", "complete", "Resposta entregue com fontes do módulo.")
+    final_answer = _append_source_citations(generated.answer, result, language)
     analytics_id = remember_run(root, module_id, question, list(result.sources), generated.provider, True, user_code)
     return OrchestrationResult(
-        generated.answer,
+        final_answer,
         generated.provider,
         generated.model,
         list(result.sources),

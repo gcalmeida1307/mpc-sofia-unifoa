@@ -96,7 +96,7 @@ def _cached_text(path: Path) -> str | None:
     try:
         payload = json.loads(cache.read_text(encoding="utf-8"))
         stat = path.stat()
-        if payload.get("version") == "formats-2" and payload.get("mtime_ns") == stat.st_mtime_ns and payload.get("size") == stat.st_size:
+        if payload.get("version") == "formats-5" and payload.get("mtime_ns") == stat.st_mtime_ns and payload.get("size") == stat.st_size:
             return normalize_document_text(path, str(payload.get("text", "")))
     except (OSError, ValueError, TypeError):
         return None
@@ -107,7 +107,7 @@ def _save_cached_text(path: Path, text: str) -> None:
     try:
         stat = path.stat()
         CACHE_ROOT.mkdir(parents=True, exist_ok=True)
-        _cache_path(path).write_text(json.dumps({"version": "formats-2", "mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "text": text}, ensure_ascii=False), encoding="utf-8")
+        _cache_path(path).write_text(json.dumps({"version": "formats-5", "mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "text": text}, ensure_ascii=False), encoding="utf-8")
     except OSError as exc:
         logger.debug("Could not cache %s: %s", path, exc)
 
@@ -169,6 +169,22 @@ WEB_CAPTURE_NOISE = {
     "refazer a busca",
 }
 
+# A web capture repeats navigation labels, but repeated content labels carry
+# the value of each course/program and must not be globally de-duplicated.
+# Dropping the second ``Carga Horária`` was the reason the ENAP course lost its
+# 20h value even though the raw file contained it.
+WEB_CAPTURE_REPEATABLE_CONTENT = {
+    "carga horaria",
+    "conteudista",
+    "certificador",
+    "lancamento",
+    "oferta",
+    "disponibilidade",
+    "idioma",
+    "publico alvo",
+    "criterios para obtencao do certificado",
+}
+
 
 def _noise_key(value: str) -> str:
     without_accents = "".join(
@@ -181,10 +197,39 @@ def _noise_key(value: str) -> str:
 
 def clean_web_capture(text: str) -> str:
     """Remove browser chrome from offline web snapshots before chunking."""
+    raw_lines = text.replace("\r\n", "\n").split("\n")
+    header = raw_lines[:4] if raw_lines and raw_lines[0].lstrip().startswith("#") else []
+    body = raw_lines[len(header):]
+    title_key = _noise_key(re.sub(r"^#+\s*", "", header[0]).strip()) if header else ""
+
+    # Institutional crawls may contain several pages in one snapshot. Each
+    # page repeats the full menu, then a breadcrumb and an ``Info`` marker.
+    # Extract every article segment independently; cutting the whole body at
+    # the first repeated menu would silently lose later pages (including the
+    # law passage that the user explicitly needs).
+    breadcrumbs = [index for index, line in enumerate(body) if _noise_key(line).rstrip(":") == "voce esta aqui"]
+    if breadcrumbs:
+        articles: list[str] = []
+        for position, breadcrumb in enumerate(breadcrumbs):
+            boundary = breadcrumbs[position + 1] if position + 1 < len(breadcrumbs) else len(body)
+            info = next((index for index in range(breadcrumb + 1, boundary) if _noise_key(body[index]) == "info"), None)
+            if info is None:
+                continue
+            segment = body[max(breadcrumb, info - 2):boundary]
+            segment_keys = [_noise_key(line) for line in segment]
+            cut = next(
+                (index for index in range(5, max(5, len(segment_keys) - 2)) if segment_keys[index:index + 3] == ["acesso a informacao", "institucional", "estrutura organizacional"]),
+                len(segment),
+            )
+            articles.extend(segment[:cut])
+            articles.append("")
+        if articles:
+            body = articles
+
     lines: list[str] = []
     seen: set[str] = set()
     skip_number_after_accessibility = False
-    for raw_line in text.replace("\r\n", "\n").split("\n"):
+    for raw_line in [*header, *body]:
         line = re.sub(r"\s+", " ", raw_line).strip()
         if not line:
             if lines and lines[-1] != "":
@@ -206,7 +251,7 @@ def clean_web_capture(text: str) -> str:
         skip_number_after_accessibility = False
         if key in WEB_CAPTURE_NOISE or key in {"chevron_right", "chevron_left", "expand_less"}:
             continue
-        if key in seen:
+        if key in seen and key not in WEB_CAPTURE_REPEATABLE_CONTENT:
             continue
         seen.add(key)
         lines.append(line)
@@ -326,8 +371,53 @@ def extract_text(path: Path) -> str:
         return ""
 
 
+def read_exact_source_lines(path: Path, start: int, end: int) -> str:
+    """Read an explicit line range without passing through chunk ranking.
+
+    Text-like sources retain their original file line numbers.  For binary
+    formats there is no stable source-line concept, so the prepared extracted
+    representation is used as the documented fallback.  This function is
+    intentionally bounded to the requested range and never performs OCR when
+    called by the question path.
+    """
+
+    if start < 1 or end < start:
+        return ""
+    suffix = path.suffix.lower()
+    if suffix in {".txt", ".md", ".csv", ".json", ".xml", ".yaml", ".yml", ".log"}:
+        raw = _read_text_file(path)
+    else:
+        raw = extract_text(path)
+    lines = raw.replace("\r\n", "\n").splitlines()
+    if start > len(lines):
+        return ""
+    return "\n".join(lines[start - 1 : min(end, len(lines))]).strip()
+
+
 def _paragraphs(text: str) -> list[str]:
     return [" ".join(part.split()) for part in text.replace("\r\n", "\n").split("\n\n") if part.strip()]
+
+
+def _text_units(text: str, suffix: str) -> list[tuple[str, int, int]]:
+    """Build text units and preserve line provenance for answer citations."""
+    lines = text.replace("\r\n", "\n").splitlines()
+    if suffix == ".csv":
+        return [(line.strip(), index, index) for index, line in enumerate(lines, start=1) if line.strip()]
+    units: list[tuple[str, int, int]] = []
+    current: list[str] = []
+    start = 0
+    for index, line in enumerate(lines, start=1):
+        if line.strip():
+            if not current:
+                start = index
+            current.append(line.strip())
+            continue
+        if current:
+            units.append((" ".join(current), start, index - 1))
+            current = []
+    if current:
+        units.append((" ".join(current), start, len(lines)))
+    return units or [(line.strip(), index, index) for index, line in enumerate(lines, start=1) if line.strip()]
 
 
 def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: int = 250, selected_paths: tuple[Path, ...] | None = None) -> list[DocumentChunk]:
@@ -359,18 +449,21 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
         if not text.strip():
             continue
         # Preserva linhas de tabelas e parágrafos; só divide por tamanho quando necessário.
-        if path.suffix.lower() == ".csv":
-            units = [line.strip() for line in text.splitlines() if line.strip()]
-        else:
-            units = _paragraphs(text) or [line.strip() for line in text.splitlines() if line.strip()]
+        units = _text_units(text, path.suffix.lower())
         current = ""
+        current_start = 0
+        current_end = 0
         ordinal = 0
-        for unit in units:
+        for unit, line_start, line_end in units:
             if len(current) + len(unit) + 1 <= max_chars:
+                if not current:
+                    current_start = line_start
+                current_end = line_end
                 current = f"{current}\n{unit}".strip()
                 continue
             if current:
-                chunks.append(DocumentChunk(path, current, ordinal))
+                locator = f"linhas {current_start}-{current_end}" if current_start else ""
+                chunks.append(DocumentChunk(path, current, ordinal, None, locator))
                 ordinal += 1
             current = ""
             # A single HTML paragraph or PDF table can be much larger than
@@ -378,10 +471,14 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
             step = max(1, max_chars - overlap)
             start = 0
             while len(unit) - start > max_chars:
-                chunks.append(DocumentChunk(path, unit[start:start + max_chars], ordinal))
+                locator = f"linhas {line_start}-{line_end}"
+                chunks.append(DocumentChunk(path, unit[start:start + max_chars], ordinal, None, locator))
                 ordinal += 1
                 start += step
             current = unit[start:]
+            current_start = line_start
+            current_end = line_end
         if current:
-            chunks.append(DocumentChunk(path, current, ordinal))
+            locator = f"linhas {current_start}-{current_end}" if current_start else ""
+            chunks.append(DocumentChunk(path, current, ordinal, None, locator))
     return chunks
