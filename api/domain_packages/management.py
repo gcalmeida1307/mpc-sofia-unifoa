@@ -15,7 +15,6 @@ from pathlib import Path
 from ..query_analysis import normalize
 from .base import DomainRetrievalPackage, QueryProfile
 
-
 _PRODUCTION_CONTEXT = (
     "producao",
     "produzido",

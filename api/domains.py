@@ -65,7 +65,7 @@ DOMAIN_CONTRACTS: dict[str, DomainContract] = {
     "departamento-pessoal": DomainContract(
         "departamento-pessoal", "Departamento Pessoal", "Pessoas", "#f472b6", "♙", "Gestor de pessoal",
         "Rotinas trabalhistas, admissões, férias e folha.",
-        ("folha", "admissão", "férias", "rescisão", "eSocial", "jornada", "hora extra"),
+        ("folha", "admissão", "férias", "rescisão", "eSocial", "jornada", "hora extra", "assédio", "importunação", "denúncia", "retaliação"),
         source_profile="legal_primary_source",
         skills=("labor_policy_review",),
         tools=("search_knowledge", "analyst_scenario"),
@@ -73,7 +73,7 @@ DOMAIN_CONTRACTS: dict[str, DomainContract] = {
     "direito": DomainContract(
         "direito", "Direito", "Jurídico", "#a78bfa", "⚖", "Gestor jurídico",
         "Leis, normas, conexões entre dispositivos e riscos.",
-        ("lei", "legislação", "jurisprudência", "acordo coletivo", "contrato", "artigo", "empregado", "mandado de segurança", "prazo processual", "CLT"),
+        ("lei", "legislação", "jurisprudência", "acordo coletivo", "contrato", "artigo", "empregado", "mandado de segurança", "prazo processual", "CLT", "assédio", "assédio moral", "assédio sexual", "importunação", "abuso de poder", "denúncia", "perseguição", "retaliação", "processar a empresa", "CIPA"),
         source_profile="legal_primary_source",
         skills=("legal_comparison", "legal_interpretation"),
         tools=("search_knowledge", "analyst_scenario"),
@@ -104,7 +104,7 @@ DOMAIN_CONTRACTS: dict[str, DomainContract] = {
     "medicina": DomainContract(
         "medicina", "Medicina", "Saúde", "#34d399", "✚", "Gestor clínico",
         "Protocolos, literatura, indicadores populacionais e interoperabilidade FHIR.",
-        ("paciente", "sintoma", "gripe", "febre", "tratamento", "exame", "FHIR", "protocolo"),
+        ("paciente", "sintoma", "sintomas", "tosse", "tossir", "tosse seca", "muco", "catarro", "febre", "tratamento", "exame", "FHIR", "protocolo"),
         source_profile="clinical_guideline",
         high_risk=True,
         external_requires_consent=True,

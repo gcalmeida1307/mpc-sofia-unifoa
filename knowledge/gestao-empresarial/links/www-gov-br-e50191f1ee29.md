@@ -1,7 +1,7 @@
 # Gestão Documental — Ministério da Gestão e da Inovação em Serviços Públicos
 
 Fonte: https://www.gov.br/gestao/pt-br/assuntos/gestaoeinovacao/informacoes-sistemas-e-servicos-de-gestao/processo-eletronico-nacional/destaques/gestao-documental-1
-Capturado em: 2026-09-03T12:02:33.602775+00:00
+Capturado em: 2026-09-17T14:13:36.207805+00:00
 Páginas no domínio: 10
 
 ## Gestão Documental — Ministério da Gestão e da Inovação em Serviços Públicos
@@ -26,14 +26,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Acesso à Informação
 Institucional
@@ -962,14 +962,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Acesso à Informação
 Institucional
@@ -2014,14 +2014,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -2030,13 +2030,13 @@ Assinatura Eletrônica
 2
 Consultar Meu Imposto de Renda
 3
-Entregar Meu Imposto de Renda
-4
-Consultar restituição do imposto de renda
-5
 Consultar dados do Cadastro Único
-6
+4
 Consultar CPF
+5
+Consultar restituição do imposto de renda
+6
+Consultar CNPJ
 DESTAQUE
 Cultura, Artes, História e Esportes
 Tela Brasil
@@ -2065,12 +2065,12 @@ Anterior
 Paginação
 Paginação
 Todos os Perfis
-Educação
-80% das escolas públicas estão conectadas com wi-fi e velocidade adequada, aponta levantamento
-Tecnologia
-Embraer celebra a entrega do jato comercial E-Jet número 2.000
-Mulheres
-FAQ Lei Maria da Penha: 25 respostas a perguntas mais frequentes
+Economia
+Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
+Cultura
+São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
+Economia
+Política de minerais críticos prevê rastreabilidade e agregação de valor
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -2227,14 +2227,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Acesso à Informação
 Institucional
@@ -2482,16 +2482,19 @@ Assinatura Eletrônica
 2
 Consultar Meu Imposto de Renda
 3
-Entregar Meu Imposto de Renda
-4
-Consultar restituição do imposto de renda
-5
 Consultar dados do Cadastro Único
-6
+4
 Consultar CPF
+5
+Consultar restituição do imposto de renda
+6
+Consultar CNPJ
 Serviços em destaque do govbr
 Outros
 Tela Brasil
+Imposto de Renda e Malha Fiscal
+Entregar Meu Imposto de Renda
+(DIRPF)
 Vida Financeira
 Novo
 Renegociação de Dívidas - Famílias
@@ -2710,7 +2713,7 @@ Fale Agora
 Refazer a busca
 
 ## www.gov.br
-URL: https://www.gov.br/pt-br/search?SearchableText=Desenrola+Brasil&origem=termos
+URL: https://www.gov.br/pt-br/sitemap
 
 Ir para o
 Conteúdo
@@ -2730,14 +2733,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -2805,11 +2808,54 @@ Linkedin
 WhatsApp canal
 TikTok
 Kwai
-Você está aqui:
-Página Inicial
-Busca
-Busca
 Info
+Mapa do Site
+Uma visão geral do conteúdo disponível no site. Mantenha o ponteiro do mouse sobre o item por alguns segundos para visualizar sua descrição.
+Serviços
+Buscar serviços por
+Serviços por público alvo
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
 Serviços
 Buscar serviços por
 Categorias
@@ -2880,9 +2926,10 @@ Rejeitar
 Fale Agora
 Refazer a busca
 
-## www.gov.br
-URL: https://www.gov.br/pt-br/search?SearchableText=assinatura&origem=termos
+## Serviços
+URL: https://www.gov.br/pt-br/servicos
 
+Serviços
 Ir para o
 Conteúdo
 1
@@ -2901,14 +2948,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -2978,9 +3025,58 @@ TikTok
 Kwai
 Você está aqui:
 Página Inicial
-Busca
-Busca
+Serviços
 Info
+Listagem de Órgãos
+Filtrar
+Pesquisar Órgãos
+Limpar
+Aplicar
+Advocacia-Geral da União (AGU)
+Agência Brasileira de Inteligência (ABIN)
+Agência Brasileira Gestora de Fundos Garantidores e Garantias S.A. (ABGF)
+Agência Espacial Brasileira (AEB)
+Agência Nacional de Águas e Saneamento Básico (ANA)
+Agência Nacional de Aviação Civil (ANAC)
+Agência Nacional de Energia Elétrica (ANEEL)
+Agência Nacional de Mineração (ANM)
+Agência Nacional de Proteção de Dados (ANPD)
+Agência Nacional de Saúde Suplementar (ANS)
+Agência Nacional de Telecomunicações (ANATEL)
+Agência Nacional de Transportes Aquaviários (ANTAQ)
+Agência Nacional de Transportes Terrestres (ANTT)
+Agência Nacional de Vigilância Sanitária (ANVISA)
+Agência Nacional do Cinema (ANCINE)
+Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)
+Amazônia Azul Tecnologias de Defesa S.A. (AMAZUL)
+Arquivo Nacional (AN)
+Assessoria Especial do Presidente da República (AEPR)
+Autoridade Brasileira de Controle de Dopagem (ABCD)
+Autoridade de Governança do Legado Olímpico (AGLO)
+Autoridade Nacional de Segurança Nuclear (ANSN)
+Autoridade Portuária de Santos S.A. (APS S.A.)
+Banco Central do Brasil (BCB)
+Banco da Amazônia S.A. (BASA)
+Banco do Brasil S.A. (BB)
+Banco do Nordeste do Brasil S.A. (BNB)
+Banco Nacional de Desenvolvimento Econômico e Social (BNDES)
+Caixa de Construções de Casas para o Pessoal da Marinha (CCCPCM)
+Caixa de Financiamento Imobiliário da Aeronáutica (CFIAE)
+Itens por página
+30
+60
+Todos
+« Anterior
+1
+2
+3
+4
+5
+6
+7
+...
+12
+Próximo »
 Serviços
 Buscar serviços por
 Categorias
@@ -3051,9 +3147,10 @@ Rejeitar
 Fale Agora
 Refazer a busca
 
-## www.gov.br
-URL: https://www.gov.br/pt-br/search?SearchableText=imposto+de+renda&origem=termos
+## Navegação
+URL: https://www.gov.br/pt-br/navegacao
 
+Navegação
 Ir para o
 Conteúdo
 1
@@ -3072,14 +3169,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -3149,9 +3246,12 @@ TikTok
 Kwai
 Você está aqui:
 Página Inicial
-Busca
-Busca
+Navegação
 Info
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
 Serviços
 Buscar serviços por
 Categorias
@@ -3222,9 +3322,10 @@ Rejeitar
 Fale Agora
 Refazer a busca
 
-## www.gov.br
-URL: https://www.gov.br/pt-br/search?SearchableText=inss&origem=termos
+## Categorias
+URL: https://www.gov.br/pt-br/categorias
 
+Categorias
 Ir para o
 Conteúdo
 1
@@ -3243,14 +3344,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -3320,9 +3421,463 @@ TikTok
 Kwai
 Você está aqui:
 Página Inicial
-Busca
-Busca
+Categorias
+Categorias
 Info
+Central de Serviços
+Agricultura e Pecuária
+Assistência Social
+Comunicações e Transparência Pública
+Ciência e Tecnologia
+Cultura, Artes, História e Esportes
+Defesa Civil e Defesa Nacional
+Educação e Pesquisa
+Empresa, Indústria e Comércio
+Energia, Minerais e Combustíveis
+Finanças, Impostos e Gestão Pública
+Justiça e Segurança
+Meio Ambiente e Clima
+Infraestrutura, Trânsito e Transportes
+Trabalho, Emprego e Previdência
+Saúde e Vigilância Sanitária
+Viagens e Turismo
+Categoria
+Agricultura e Pecuária
+Categoria
+Assistência Social
+Categoria
+Comunicações e Transparência Pública
+Categoria
+Ciência e Tecnologia
+Categoria
+Cultura, Artes, História e Esportes
+Categoria
+Defesa Civil e Defesa Nacional
+Categoria
+Educação e Pesquisa
+Categoria
+Empresa, Indústria e Comércio
+Categoria
+Energia, Minerais e Combustíveis
+Categoria
+Finanças, Impostos e Gestão Pública
+Categoria
+Justiça e Segurança
+Categoria
+Meio Ambiente e Clima
+Categoria
+Infraestrutura, Trânsito e Transportes
+Categoria
+Trabalho, Emprego e Previdência
+Categoria
+Saúde e Vigilância Sanitária
+Categoria
+Viagens e Turismo
+Agricultura e Pecuária
+Apoio e Promoção
+Cadastramento e Certificação
+Licenciamento e Habilitação
+Outros Serviços
+Assistência Social
+Programas Sociais
+Rede de Assistência e Proteção Social
+Subsistência
+Demais Iniciativas
+Comunicações e Transparência Pública
+Comunicação Pública
+Telecomunicações
+Transparência
+Ciência e Tecnologia
+Assistência Especializada
+Fiscalização
+Promoção
+Cultura, Artes, História e Esportes
+Apoio e Assistência Técnica
+Apreciação
+Autorizações e Cadastros
+Capacitação e pesquisa
+Consultas e comunicações
+Financiamentos e prêmios
+Reconhecimento
+Defesa Civil e Defesa Nacional
+Documentação e Serviço Militar
+Educação, Capacitação e Cultura
+Produtos e Atividades Controladas
+Defesa Civil
+Educação e Pesquisa
+Capacitações
+Ensino Superior
+Ensino Técnico-Profissional
+Estudos e Pesquisas
+Gestão Educacional
+Outras
+Empresa, Indústria e Comércio
+Comércio Exterior
+Empresas
+Indústria
+Propriedade Industrial e Intelectual
+Zona Franca de Manaus
+Energia, Minerais e Combustíveis
+Combustíveis
+Energia Elétrica
+Energia Nuclear e Materiais Radiativos
+Minerais
+Petróleo e derivados
+Finanças, Impostos e Gestão Pública
+CPF, CNPJ e Outros Cadastros
+Impostos e Obrigações
+Gestão Pública
+Sistema Financeiro e Mercado
+Outros Serviços
+Justiça e Segurança
+Nacionalidade, Estadia e Outros Direitos
+Policiamento
+Regulação e Fiscalização
+Solução de Contendas
+Outros Serviços
+Meio Ambiente e Clima
+Autorizações, Anuências e Licenças
+Cadastros e Documentações
+Pesquisa e Aprendizado
+Outros Serviços
+Infraestrutura, Trânsito e Transportes
+Transporte Aéreo
+Transporte Aquaviário
+Transporte Terrestre
+Habitação
+Trabalho, Emprego e Previdência
+Trabalho e Emprego
+Previdência
+Saúde e Vigilância Sanitária
+Fiscalização
+Prevenção
+Pesquisa, Formação e Capacitação
+Rede de Atendimento à Saúde
+Viagens e Turismo
+Brasil no Exterior
+Preparação para Viagem
+Turismo
+Apoio e Promoção
+Assistência Técnica e Financiamentos
+Informações e Eventos
+Serviços de Suporte
+Cadastramento e Certificação
+Agrotóxicos
+Comprovantes e Documentos
+Fornecedores e Prestadores de Serviços
+Instalações e Produtos Agropecuários
+Reforma Agrária
+Licenciamento e Habilitação
+Exportação e Importação
+Mercado Interno
+Outros Serviços
+Imóveis
+Monitoramento
+Programas Sociais
+Assistência Direta
+Estímulo à Agricultura Familiar
+Financiamento da Casa Própria
+Rede de Assistência e Proteção Social
+Entidades Beneficentes
+Proteção Social
+Subsistência
+Acesso à Àgua
+Distribuição de Alimentos
+Demais Iniciativas
+Capacitações
+Outros Serviços
+Comunicação Pública
+Comunicação Governamental
+Imprensa Nacional
+Rádios e TVs Públicas
+Telecomunicações
+Autorizações
+Denúncias
+Licenciamentos
+Outorgas e Concessões
+Outros Serviços
+Transparência
+Controle Social
+Desempenho do Estado
+Outros Serviços
+Assistência Especializada
+Análises
+Calibração, processos e experimentos
+Documentos e Informações
+Instrumentos e Instalações
+Material
+Suporte Digital
+Fiscalização
+Acreditações e Registros
+Autorizações e Permissões
+Certidões e Certificados
+Promoção
+Auxílio a empreendimentos
+Estudos e Capacitações
+Eventos e Visitas
+Inclusão Digital
+Parcerias
+Apoio e Assistência Técnica
+Cultura e artes
+História e arqueologia
+Apreciação
+Museus e galerias de artes
+Outros
+Autorizações e Cadastros
+Artes
+História e arqueologia
+Patrimônio Cultural
+Capacitação e pesquisa
+Artes
+História e Museus
+Patrimônio Cultural
+Consultas e comunicações
+Audiovisual
+História e arqueologia
+Patrimônio Cultural
+Financiamentos e prêmios
+Cultura e artes
+Esportes
+Museus
+Preservação do Patrimônio Cultural
+Reconhecimento
+Artes
+Patrimônio Cultural
+Documentação e Serviço Militar
+Certidões e outros Documentos
+Serviço militar
+Educação, Capacitação e Cultura
+Ensino Fundamental e Médio
+Formação de Sargentos e Oficiais
+Informações
+Pesquisas, eventos e visitas
+Produtos e Atividades Controladas
+Armamentos e Explosivos
+Embarcações
+Empresas e Serviços
+Veículos Blindados
+Outros Produtos
+Defesa Civil
+Gestão de Riscos e Desastres
+Capacitações
+Direcionada a professores
+Para Servidores Públicos
+Para Outros Públicos
+Para todos
+Ensino Superior
+Acesso
+Certificação
+Permanência
+Pós
+Ensino Técnico-Profissional
+Apoio Especializado
+Universidades e IFES
+Estudos e Pesquisas
+Apoio Financeiro
+Divulgação
+Material de Pesquisa
+Preparação
+Gestão Educacional
+Educação Básica
+Educação Especializada
+EJA
+Ferramentas de apoio à gestão
+Instituições de Ensino Superior
+Outras
+Educação Básica
+Eventos e Palestras
+Para Estrangeiros
+Certidões e outros documentos
+Comércio Exterior
+Exportação
+Importação
+Medidas de Salvaguarda
+Empresas
+Autorizações e Exigências
+Cadastros e Programas
+Indústria
+Benefícios Fiscais
+Outros Serviços
+Propriedade Industrial e Intelectual
+Circuito Integrado
+Desenho Industrial
+Direitos Autorais
+Marcas
+Patentes
+Software
+Outros Serviços
+Zona Franca de Manaus
+Autorizações e Exigências
+Benefícios Fiscais
+Imóveis
+Pesquisa e Desenvolvimento
+Outros Serviços
+Combustíveis
+Armazenamento
+Compra, Venda e Uso
+Distribuição
+Formulação
+Produção
+Energia Elétrica
+Aprovações e Homologações
+Autorizações
+Certidões e Certificados
+Defesas e recursos
+Pedidos de Alterações
+Energia Nuclear e Materiais Radiativos
+Combustível, Beneficiamento e Enriquecimento
+Conversão, Reconversão e Reprocessamento
+Instalações Nucleares e Radiativas
+Materiais e Equipamentos
+Mineração e Armanezamento
+Monitoramento
+Quadro Técnico
+Minerais
+Lavra Mineral
+Licenciamento Mineral e Lavra garimpeira
+Pesquisa Mineral
+Serviços específicos
+Títulos e Direitos Minerários
+Outras requisições relacionadas ao processo Minerário
+Petróleo e derivados
+Exploração e Produção
+Importação e Exportação
+Processamento e Comercialização - Gás Natural
+Produtos Derivados
+Refino de Petróleo
+Royalties
+Transporte
+Outros Serviços
+CPF, CNPJ e Outros Cadastros
+Pessoa Jurídica (CNPJ)
+Pessoa Física (CPF)
+Imóvel Rural
+Obras
+Outros Cadastros
+Impostos e Obrigações
+Certidões e Outros Serviços
+Divida Ativa da União
+Imposto de Renda e Malha Fiscal
+Pagamentos e Restituições
+Outras Declarações e Comunicações
+Programas
+Registros e Regimes Especiais
+Gestão Pública
+CADIN
+Estados e Municípios
+Patrimônio da União
+Outros Serviços
+Sistema Financeiro e Mercado
+Regulação e Fiscalização
+Serviços Adicionais
+Sistemas e Bases de Dados
+Valores Mobiliários
+Vida Financeira
+Outros Serviços
+Capacitações e Apoio técnico
+Consultas e Sistemas
+Serviços Adicionais
+Nacionalidade, Estadia e Outros Direitos
+Nacionalidade
+Serviços para Estrangeiros
+Outros Direitos
+Policiamento
+Acidentes
+Crimes
+Infrações
+Regulação e Fiscalização
+Armas de Fogo
+Registros e Licenças
+Segurança Privada
+Vigilantes
+Solução de Contendas
+Assessoria Legal
+Mediação e Negociação
+Outros Serviços
+Capacitações e Informações
+Urbanização
+Autorizações, Anuências e Licenças
+Anuências
+Autorizações
+Licenças
+Cadastros e Documentações
+Certidões e Outros Documentos
+Registros e Cadastros
+Pesquisa e Aprendizado
+Estágio e Trabalho Voluntário
+Estudos e Capacitações
+Informações
+Obtenção de espécimens
+Visitas
+Outros Serviços
+Análises
+Direitos e Propriedades
+Rejeitos
+Transporte Aéreo
+Autorizações e Aprovações
+Cadastros e Credenciamentos
+Certidões e Certificados
+Licenças e Habilitações
+Taxas e Multas
+Outros Serviços
+Transporte Aquaviário
+Instalações Portuárias
+Financiamentos
+Transporte
+Transporte Terrestre
+Administrativo e Multas
+Infraestrutura
+Trânsito
+Transporte de Cargas
+Transporte de Passageiros
+Habitação
+Habitação Popular
+Trabalho e Emprego
+Para o cidadão
+Para o empregador
+Para outras entidades
+Para Todos
+Saúde e Segurança no Trabalho
+Previdência
+Benefícios
+Cadastros
+Certidões e Outros Documentos
+Comunicações e Requerimentos
+Outros Regimes Previdenciários
+Outros Serviços
+Fiscalização
+Medicamentos e Produtos para Saúde
+Outras Autorizações, Certificados e Informações
+Outros Produtos
+Planos de Saúde
+Prevenção
+Apoio e registro de ações
+Populações específicas
+Vacinação
+Pesquisa, Formação e Capacitação
+Análises e Materiais
+Capacitações
+Formação
+Pesquisas e Ensaios
+Visitas e Eventos
+Rede de Atendimento à Saúde
+Apoio técnico e financeiro
+Atendimento Especializado
+Credenciamentos e Habilitações
+Informações e Sistemas
+Registros e Certificações
+Urgências e Emergências
+Outros Serviços
+Brasil no Exterior
+Acervos em Relações Internacionais
+Apoio a Cidadãos
+Apoio a Empresas
+Preparação para Viagem
+Brasileiro indo para o exterior
+Estrageiros vindo ao Brasil
+Turismo
+Promoção ao Turismo
+Serviços Turísticos
 Serviços
 Buscar serviços por
 Categorias

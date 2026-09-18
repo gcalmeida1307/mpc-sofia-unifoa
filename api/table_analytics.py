@@ -82,7 +82,16 @@ def analytical_answer(document, question: str):
             values = [number(row.get(header, "")) for _, row in entries]
             null_count += sum(value is None for value in values)
             values = [value for value in values if value is not None]
-            aggregate = None if not values else {"sum": lambda: sum(values), "average": lambda: sum(values)/len(values), "min": lambda: min(values), "max": lambda: max(values)}[operation]()
+            if not values:
+                aggregate = None
+            elif operation == "sum":
+                aggregate = sum(values)
+            elif operation == "average":
+                aggregate = sum(values) / len(values)
+            elif operation == "min":
+                aggregate = min(values)
+            else:
+                aggregate = max(values)
             results[key] = str(aggregate) if aggregate is not None else None
     label = {"sum":"A soma", "average":"A média", "min":"O mínimo", "max":"O máximo", "correlation":"A correlação de Pearson"}[operation]
     values_text = "; ".join(f"{key}: {value if value is not None else 'dados insuficientes'}" for key, value in results.items()) or "nenhum registro atende ao filtro"

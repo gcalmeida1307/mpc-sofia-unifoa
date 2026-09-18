@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .domain_packages import package_for
-from .domains import DOMAIN_CONTRACTS, domain_for
+from .domains import domain_for
 from .query_analysis import normalize
 
 
@@ -15,27 +15,20 @@ class ModulePolicy:
     require_citation: bool
 
 
-POLICIES = {
-    module_id: ModulePolicy(
+def policy_for(module_id: str) -> ModulePolicy:
+    """Build the policy from the single authoritative domain contract.
+
+    Policies used to be copied into a module-level dictionary at import time.
+    That created two sources of truth and made runtime domain updates invisible
+    to retrieval and orchestration.  The domain registry is now authoritative;
+    this adapter only translates its safety fields into the legacy policy type.
+    """
+    contract = domain_for(module_id)
+    return ModulePolicy(
         contract.allow_general_knowledge,
         contract.high_risk,
         contract.minimum_evidence,
         contract.require_citation,
-    )
-    for module_id, contract in DOMAIN_CONTRACTS.items()
-}
-
-
-def policy_for(module_id: str) -> ModulePolicy:
-    contract = domain_for(module_id)
-    return POLICIES.get(
-        module_id,
-        ModulePolicy(
-            contract.allow_general_knowledge,
-            contract.high_risk,
-            contract.minimum_evidence,
-            contract.require_citation,
-        ),
     )
 
 

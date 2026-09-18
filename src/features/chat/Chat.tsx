@@ -334,7 +334,14 @@ export default function Chat({
   }
 
   return (
-    <div className="chat-page">
+    <div className={`chat-page command-chat${busy ? " is-processing" : ""}`}>
+      <section className="sofia-command" aria-label="Central da SOFIA">
+        <div className="command-reactor" aria-hidden="true">
+          <svg viewBox="0 0 160 160"><circle className="reactor-outer" cx="80" cy="80" r="70" /><circle className="reactor-inner" cx="80" cy="80" r="57" /><circle className="reactor-core" cx="80" cy="80" r="42" /><path d="M80 53 87 73 107 80 87 87 80 107 73 87 53 80 73 73Z" /></svg>
+        </div>
+        <div className="command-identity"><span>SOFIA / CENTRAL DE CONVERSA</span><h2>{busy ? "Preparando sua resposta" : "Vamos conectar as ideias."}</h2><p>{busy ? "Aguardando o resultado da consulta." : "Pergunte, explore suas fontes e transforme informação em clareza."}</p><div className="command-state" role="status"><i />{busy ? "Processando solicitação" : lastAssistant?.error ? "Consulta com erro · tente novamente" : lastAssistant ? "Resposta recebida" : "Aguardando sua pergunta"}</div></div>
+        <dl className="command-telemetry"><div><dt>CONTEXTO</dt><dd>{mod.name}</dd></div><div><dt>ACERVO</dt><dd>{mod.docs} documentos</dd></div><div><dt>ÚLTIMA RESPOSTA</dt><dd>{lastAssistant ? `${lastAssistant.sources?.length ?? 0} fontes` : "Ainda sem consulta"}</dd></div></dl>
+      </section>
       <div className="rag-bar">
         <span aria-hidden="true" />
         <strong>RAG {mod.name}</strong>

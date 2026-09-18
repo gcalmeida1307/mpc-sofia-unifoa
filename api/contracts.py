@@ -33,6 +33,10 @@ class EvidenceContract:
     contradiction_score: float = 0.0
     page: int | None = None
     locator: str = ""
+    start_line: int | None = None
+    end_line: int | None = None
+    section_header: str = ""
+    content_type: str = "prose"
 
 
 @dataclass(frozen=True)
@@ -57,6 +61,11 @@ class ContextPackage:
     required_sources: list[str] = field(default_factory=list)
     missing_sources: list[str] = field(default_factory=list)
     conversation_memory: dict[str, Any] = field(default_factory=dict)
+    query_plan: dict[str, Any] = field(default_factory=dict)
+    # Bounded metadata from the local semantic planner.  It is never the
+    # evidence itself and is kept separate so callers can audit whether
+    # Ollama participated without mistaking it for a source.
+    semantic_interpretation: dict[str, Any] = field(default_factory=dict)
 
     def public_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -85,6 +94,7 @@ class IntelligenceDecision:
     reason: str
     privacy_boundary: str = "module-scoped; external provider policy still applies"
     task_route: str = "document_rag"
+    query_plan: dict[str, Any] = field(default_factory=dict)
 
     def public_dict(self) -> dict[str, Any]:
         return asdict(self)

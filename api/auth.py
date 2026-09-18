@@ -7,6 +7,7 @@ import hmac
 import io
 import json
 import os
+import re
 import secrets
 import sqlite3
 import threading
@@ -35,6 +36,7 @@ PASSWORD_RESET_SECONDS = 10 * 60
 LOGIN_MAX_FAILURES = 5
 LOGIN_LOCK_SECONDS = 60
 DEFAULT_INACTIVE_LOCK_DAYS = 90
+_USER_CODE_PATTERN = re.compile(r"^[A-Z]{2}\d{6}$")
 _runtime_secret = secrets.token_bytes(32)
 _rate_lock = threading.Lock()
 _rate_limits: dict[str, tuple[int, float]] = {}
@@ -640,6 +642,24 @@ def authenticate(
             ).fetchone()
         if row is None or not _password_matches(password, row["password_hash"]):
             return None
+        # A password reset is a pending recovery transaction. Do not create a
+        # session before the one-time token is redeemed, but also do not
+        # destroy the previous password while the token is being delivered.
+        pending_reset = connection.execute(
+            "SELECT 1 FROM password_reset_tokens WHERE user_code = ? AND used_at IS NULL AND expires_at >= ? LIMIT 1",
+            (row["user_code"], int(time.time())),
+        ).fetchone()
+        if pending_reset is not None:
+            return {"requires_password_reset": True}
+        # An activated account is not considered complete until its TOTP is
+        # validated. This prevents a user from bypassing the second step by
+        # closing the activation screen and signing in with the new password.
+        pending_activation = connection.execute(
+            "SELECT 1 FROM account_activation_tokens WHERE user_code = ? AND used_at IS NULL AND expires_at >= ? LIMIT 1",
+            (row["user_code"], int(time.time())),
+        ).fetchone()
+        if pending_activation is not None and not int(row["two_factor_enabled"] or 0):
+            return {"requires_activation": True}
         # Toda conta com segundo fator habilitado precisa apresentar o OTP.
         # Antes, essa condição era limitada ao administrador; contas novas
         # ativadas exibiam o QR, mas conseguiam entrar sem usá-lo.
@@ -751,6 +771,13 @@ def _decode(value: str) -> dict[str, Any]:
 
 def _token_hash(token: str) -> str:
     return hashlib.sha256(token.encode()).hexdigest()
+
+
+def _normalize_user_code(value: str) -> str:
+    normalized = str(value or "").strip().upper()
+    if not _USER_CODE_PATTERN.fullmatch(normalized):
+        raise ValueError("Matrícula inválida. Use duas letras e seis números.")
+    return normalized
 
 
 def create_session(user: dict[str, Any]) -> str:
@@ -919,7 +946,7 @@ def set_user_active(
 def create_password_reset_token(user_code: str, admin_code: str) -> dict[str, Any]:
     if admin_code != ADMIN_CODE:
         raise PermissionError("Somente AG000001 pode redefinir senhas")
-    normalized = user_code.strip().upper()
+    normalized = _normalize_user_code(user_code)
     with _connection() as connection:
         connection.execute("BEGIN IMMEDIATE")
         row = connection.execute(
@@ -937,10 +964,9 @@ def create_password_reset_token(user_code: str, admin_code: str) -> dict[str, An
             "INSERT INTO password_reset_tokens (token_hash, user_code, expires_at, created_at, created_by) VALUES (?, ?, ?, ?, ?)",
             (_token_hash(token), normalized, expires_at, _now(), admin_code),
         )
-        connection.execute(
-            "UPDATE users SET password_hash = ?, must_change_password = 1 WHERE user_code = ?",
-            (_hash_password(secrets.token_urlsafe(32)), normalized),
-        )
+        # Do not destroy the current credential before the one-time token is
+        # redeemed. If delivery fails or the token expires, the administrator
+        # can issue another token without leaving the account unusable.
         connection.execute(
             "UPDATE sessions SET revoked_at = ? WHERE user_code = ? AND revoked_at IS NULL",
             (_now(), normalized),
@@ -951,6 +977,53 @@ def create_password_reset_token(user_code: str, admin_code: str) -> dict[str, An
         "reset_token": token,
         "expires_at": expires_at,
         "expires_in_seconds": PASSWORD_RESET_SECONDS,
+    }
+
+
+def create_activation_token(user_code: str, admin_code: str) -> dict[str, Any]:
+    """Reissue activation only for accounts that have not completed 2FA."""
+    if admin_code != ADMIN_CODE:
+        raise PermissionError("Somente AG000001 pode reemitir ativações")
+    normalized = _normalize_user_code(user_code)
+    with _connection() as connection:
+        connection.execute("BEGIN IMMEDIATE")
+        user = connection.execute(
+            "SELECT must_change_password, two_factor_enabled FROM users WHERE user_code = ? AND active = 1",
+            (normalized,),
+        ).fetchone()
+        if user is None:
+            raise ValueError("Usuário não encontrado ou bloqueado")
+        if int(user["two_factor_enabled"] or 0):
+            raise ValueError(
+                "Esta conta já foi ativada. Para recuperar o acesso, gere um token de reset."
+            )
+        pending_password = connection.execute(
+            "SELECT password_set_at FROM account_activation_tokens WHERE user_code = ? AND used_at IS NULL AND password_set_at IS NOT NULL ORDER BY expires_at DESC LIMIT 1",
+            (normalized,),
+        ).fetchone()
+        if int(user["must_change_password"] or 0) != 1 and pending_password is None:
+            raise ValueError("Esta conta não possui uma ativação pendente")
+        connection.execute(
+            "UPDATE account_activation_tokens SET used_at = ? WHERE user_code = ? AND used_at IS NULL",
+            (_now(), normalized),
+        )
+        token = secrets.token_urlsafe(32)
+        expires_at = int(time.time()) + ACTIVATION_SECONDS
+        connection.execute(
+            "INSERT INTO account_activation_tokens (token_hash, user_code, expires_at, password_set_at) VALUES (?, ?, ?, ?)",
+            (
+                _token_hash(token),
+                normalized,
+                expires_at,
+                pending_password["password_set_at"] if pending_password else None,
+            ),
+        )
+        connection.commit()
+    return {
+        "user_code": normalized,
+        "activation_token": token,
+        "expires_at": expires_at,
+        "expires_in_seconds": ACTIVATION_SECONDS,
     }
 
 
@@ -967,7 +1040,7 @@ def reset_password_with_token(
     user_code: str, reset_token: str, new_password: str
 ) -> dict[str, Any]:
     _password_policy(new_password)
-    normalized = user_code.strip().upper()
+    normalized = _normalize_user_code(user_code)
     with _connection() as connection:
         connection.execute("BEGIN IMMEDIATE")
         token = _password_reset_row(connection, normalized, reset_token)
@@ -1250,21 +1323,71 @@ def _activation_row(
     ).fetchone()
 
 
+def _activation_failure_message(
+    connection: Any,
+    user_code: str,
+    activation_token: str,
+    default: str = "Código ou token de ativação inválido, expirado ou já utilizado",
+) -> str:
+    """Return a useful recovery message without exposing token material."""
+    if not activation_token:
+        return "Token de ativação obrigatório"
+    row = connection.execute(
+        "SELECT used_at, expires_at FROM account_activation_tokens WHERE user_code = ? AND token_hash = ?",
+        (user_code, _token_hash(activation_token)),
+    ).fetchone()
+    if row is None:
+        return default
+    if row["used_at"]:
+        user = connection.execute(
+            "SELECT two_factor_enabled FROM users WHERE user_code = ?",
+            (user_code,),
+        ).fetchone()
+        if user is not None and int(user["two_factor_enabled"] or 0):
+            return (
+                "Esta conta já foi ativada. Entre pelo login normal usando a senha "
+                "criada e o código de 6 dígitos do aplicativo autenticador. "
+                "O token de ativação é de uso único."
+            )
+        return (
+            "Este token de ativação já foi utilizado. Solicite à AG000001 uma nova "
+            "ativação ou um token de recuperação."
+        )
+    if int(row["expires_at"] or 0) < int(time.time()):
+        return (
+            "Este token de ativação expirou. Solicite à AG000001 uma nova ativação."
+        )
+    return default
+
+
 def activate_account(
     user_code: str, activation_token: str, new_password: str
 ) -> dict[str, Any]:
     _password_policy(new_password)
+    normalized = _normalize_user_code(user_code)
+    clean_token = str(activation_token or "").strip()
+    if not clean_token:
+        raise ValueError("Token de ativação obrigatório")
     with _connection() as connection:
         connection.execute("BEGIN IMMEDIATE")
-        token = _activation_row(connection, user_code, activation_token)
+        token = _activation_row(connection, normalized, clean_token)
         user = connection.execute(
-            "SELECT * FROM users WHERE user_code = ? AND active = 1 AND must_change_password = 1",
-            (user_code.strip().upper(),),
+            "SELECT * FROM users WHERE user_code = ? AND active = 1",
+            (normalized,),
         ).fetchone()
         if token is None or user is None:
-            raise ValueError(
-                "Código ou token de ativação inválido, expirado ou já utilizado"
-            )
+            raise ValueError(_activation_failure_message(connection, normalized, clean_token))
+        existing_secret = decrypt_text(str(user["two_factor_secret"] or ""))
+        # Activation is resumable. The token remains pending until the OTP is
+        # validated, so a refresh or a lost QR does not force a new password
+        # or a new secret to be generated.
+        if token["password_set_at"]:
+            if not existing_secret or int(user["two_factor_enabled"] or 0):
+                raise ValueError("Esta ativação já foi concluída")
+            connection.commit()
+            return _two_factor_artifact(normalized, existing_secret)
+        if int(user["must_change_password"] or 0) != 1:
+            raise ValueError("A ativação desta conta não está disponível")
         secret = base64.b32encode(secrets.token_bytes(20)).decode().rstrip("=")
         connection.execute(
             "UPDATE users SET password_hash = ?, must_change_password = 0, password_changed_at = ?, two_factor_secret = ?, two_factor_enabled = 0 WHERE user_code = ?",
@@ -1272,7 +1395,7 @@ def activate_account(
                 _hash_password(new_password),
                 _now(),
                 protect_for_storage(secret),
-                user_code.strip().upper(),
+                normalized,
             ),
         )
         connection.execute(
@@ -1280,23 +1403,52 @@ def activate_account(
             (_now(), token["token_hash"]),
         )
         connection.commit()
-    return _two_factor_artifact(user_code.strip().upper(), secret)
+    return _two_factor_artifact(normalized, secret)
+
+
+def resume_account_activation(
+    user_code: str, activation_token: str
+) -> dict[str, Any]:
+    """Return the pending activation QR without changing the password."""
+    normalized = _normalize_user_code(user_code)
+    clean_token = str(activation_token or "").strip()
+    with _connection() as connection:
+        token = _activation_row(connection, normalized, clean_token)
+        user = connection.execute(
+            "SELECT * FROM users WHERE user_code = ? AND active = 1",
+            (normalized,),
+        ).fetchone()
+        if token is None or user is None or not token["password_set_at"]:
+            if token is None or user is None:
+                raise ValueError(
+                    _activation_failure_message(
+                        connection,
+                        normalized,
+                        clean_token,
+                        "A senha ainda não foi criada ou o token está inválido, expirado ou já utilizado",
+                    )
+                )
+            raise ValueError("A senha ainda não foi criada para esta ativação")
+        secret = decrypt_text(str(user["two_factor_secret"] or ""))
+        if not secret or int(user["two_factor_enabled"] or 0):
+            raise ValueError("Esta ativação já foi concluída")
+    return _two_factor_artifact(normalized, secret)
 
 
 def enable_activation_two_factor(
     user_code: str, activation_token: str, code: str
 ) -> None:
+    normalized = _normalize_user_code(user_code)
+    clean_token = str(activation_token or "").strip()
     with _connection() as connection:
         connection.execute("BEGIN IMMEDIATE")
-        token = _activation_row(connection, user_code, activation_token)
+        token = _activation_row(connection, normalized, clean_token)
         row = connection.execute(
             "SELECT password_changed_at, must_change_password, two_factor_secret FROM users WHERE user_code = ? AND active = 1",
-            (user_code.strip().upper(),),
+            (normalized,),
         ).fetchone()
         if token is None or row is None:
-            raise ValueError(
-                "Código ou token de ativação inválido, expirado ou já utilizado"
-            )
+            raise ValueError(_activation_failure_message(connection, normalized, clean_token))
         # Compatibility with activations created by the earlier local build:
         # the password and QR were already saved, but password_set_at was not.
         # The persisted user state is the source of truth in that case.
@@ -1306,11 +1458,6 @@ def enable_activation_two_factor(
             or not row["two_factor_secret"]
         ):
             raise ValueError("Ative a senha antes de validar o 2FA")
-        if not token["password_set_at"]:
-            connection.execute(
-                "UPDATE account_activation_tokens SET password_set_at = ? WHERE token_hash = ?",
-                (_now(), token["token_hash"]),
-            )
         if not verify_totp(decrypt_text(str(row["two_factor_secret"] or "")), code):
             raise ValueError("Código 2FA inválido")
         connection.execute(
@@ -1319,7 +1466,7 @@ def enable_activation_two_factor(
             # and TOTP were successfully configured, trapping the user in the
             # first-access screen after a valid login.
             "UPDATE users SET two_factor_enabled = 1, must_change_password = 0 WHERE user_code = ?",
-            (user_code.strip().upper(),),
+            (normalized,),
         )
         connection.execute(
             "UPDATE account_activation_tokens SET used_at = ? WHERE token_hash = ?",

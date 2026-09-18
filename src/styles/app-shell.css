@@ -17,7 +17,6 @@
   --sofia-sidebar-collapsed: 84px;
   --sofia-focus: 0 0 0 3px color-mix(in srgb, var(--accent, #818cf8) 30%, transparent);
 }
-
 .app {
   --surface: #ffffff;
   --surface-2: #f4f6fc;

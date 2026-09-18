@@ -40,6 +40,7 @@ from .auth import (
     authenticate,
     change_password,
     create_access_request,
+    create_activation_token,
     create_password_reset_token,
     create_session,
     create_user,
@@ -58,6 +59,7 @@ from .auth import (
     require_module_access,
     require_user,
     reset_password_with_token,
+    resume_account_activation,
     revoke_session,
     rotate_session,
     set_inactivity_policy,
@@ -65,6 +67,7 @@ from .auth import (
     setup_two_factor,
     verify_session,
 )
+from .circuit_breaker import circuit_status
 from .contracts import PIPELINE_STAGES
 from .domains import DEFAULT_CONTRACT, DOMAIN_CONTRACTS, domain_for, manifests
 from .embeddings import build_all_embeddings, build_module_embeddings, embedding_status
@@ -81,6 +84,7 @@ from .expansion import (
     record_search_topic,
     run_expansion_cycle,
 )
+from .feedback_candidates import list_candidates, record_candidate, review_candidate
 from .fhir import (
     capability_statement,
     get_resource,
@@ -101,6 +105,7 @@ from .insights import snapshot as insights_snapshot
 from .integrations import initialize as initialize_integrations
 from .integrations import status as integration_status
 from .integrations import sync as sync_integration
+from .job_queue import PersistentJobQueue
 from .knowledge_graph import build_graph, read_graph
 from .links import LinkRepository, ingest_link, link_not_modified
 from .llmops import trace_metrics
@@ -131,7 +136,13 @@ from .production_gate import production_gate as run_production_gate
 from .query_analysis import assess_module_scope
 from .readiness import readiness_checklist
 from .research import research_module
-from .retrieval import retrieve, warm_module_index
+from .retrieval import (
+    activate_index_version,
+    list_index_versions,
+    retrieve,
+    stage_module_index,
+    warm_module_index,
+)
 from .storage import status as storage_status
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -146,6 +157,8 @@ initialize_analytics_store(KNOWLEDGE_ROOT)
 initialize_expansion(KNOWLEDGE_ROOT)
 initialize_observability(KNOWLEDGE_ROOT)
 initialize_insights_store(KNOWLEDGE_ROOT)
+TRAINING_JOB_QUEUE = PersistentJobQueue(ROOT)
+TRAINING_JOB_QUEUE.initialize()
 
 MODULE_CATALOG: dict[str, dict[str, str]] = {
     module_id: {
@@ -187,6 +200,8 @@ TRAINING_QUEUE: asyncio.Queue[str] | None = None
 TRAINING_WORKER: asyncio.Task[Any] | None = None
 TRAINING_QUEUED: set[str] = set()
 TRAINING_REASONS: dict[str, str] = {}
+TRAINING_JOB_IDS: dict[str, str] = {}
+TRAINING_RETRY_TASKS: dict[str, asyncio.Task[Any]] = {}
 TRAINING_LOCK: asyncio.Lock | None = None
 LINK_REFRESH_TASK: asyncio.Task[Any] | None = None
 EXPANSION_TASK: asyncio.Task[Any] | None = None
@@ -236,7 +251,15 @@ def require_statistics_admin(current: dict[str, Any]) -> None:
         raise HTTPException(403, "Somente AG000001 pode consultar estatísticas")
 
 
-def status_for(module_id: str) -> dict[str, Any]:
+def status_for(module_id: str, *, include_runtime: bool = True) -> dict[str, Any]:
+    """Return module metadata, optionally including expensive runtime probes.
+
+    The shell only needs the physical corpus and basic module metadata. Runtime
+    probes (Ollama, embeddings, neural state and expansion storage) belong to
+    Pipeline/administration screens and must not delay the first workspace
+    render or make a healthy API look offline.
+    """
+
     paths = files_for(KNOWLEDGE_ROOT, module_id)
     type_counts = Counter(path.suffix.lower().lstrip(".") for path in paths)
     link_repository = LinkRepository(KNOWLEDGE_ROOT)
@@ -247,24 +270,30 @@ def status_for(module_id: str) -> dict[str, Any]:
         logger.warning("%s", exc)
         link_count = 0
         link_storage = "postgresql-unavailable"
-    neural = neural_model_status(KNOWLEDGE_ROOT, module_id)
-    embeddings = embedding_status(KNOWLEDGE_ROOT, module_id)
     contract = domain_for(module_id)
-    pipeline = expansion_status(KNOWLEDGE_ROOT, module_id)
-    training_task = AUTO_TRAINING.get(module_id)
-    training_state = (
-        "em andamento"
-        if training_task and not training_task.done()
-        else (
-            "na fila"
-            if module_id in TRAINING_QUEUED
+    if include_runtime:
+        neural = neural_model_status(KNOWLEDGE_ROOT, module_id)
+        embeddings = embedding_status(KNOWLEDGE_ROOT, module_id)
+        pipeline = expansion_status(KNOWLEDGE_ROOT, module_id)
+        training_task = AUTO_TRAINING.get(module_id)
+        training_state = (
+            "em andamento"
+            if training_task and not training_task.done()
             else (
-                "pendente"
-                if neural.get("stale")
-                else ("atualizado" if neural.get("trained") else "não treinado")
+                "na fila"
+                if module_id in TRAINING_QUEUED
+                else (
+                    "pendente"
+                    if neural.get("stale")
+                    else ("atualizado" if neural.get("trained") else "não treinado")
+                )
             )
         )
-    )
+    else:
+        neural = {}
+        embeddings = {}
+        pipeline = {}
+        training_state = "detalhes carregados sob demanda"
     return {
         "id": module_id,
         **MODULES[module_id],
@@ -278,6 +307,7 @@ def status_for(module_id: str) -> dict[str, Any]:
         "neural": neural,
         "embeddings": embeddings,
         "training_state": training_state,
+        "training_queue": TRAINING_JOB_QUEUE.counts("neural_training"),
         "auto_training": os.getenv("SOFIA_AUTO_TRAIN", "true").strip().casefold()
         not in {"0", "false", "no", "off"},
         "ready": bool(paths),
@@ -296,7 +326,14 @@ async def training_worker() -> None:
     while True:
         module_id = await TRAINING_QUEUE.get()
         TRAINING_QUEUED.discard(module_id)
+        job_id = TRAINING_JOB_IDS.pop(module_id, None)
         try:
+            if job_id:
+                claimed = TRAINING_JOB_QUEUE.claim("neural_training", job_id=job_id)
+                if claimed is None:
+                    logger.info("Treinamento já executado ou ainda em backoff para %s", module_id)
+                    continue
+                job_id = claimed.job_id
             try:
                 epochs = max(
                     1, min(2_000, int(os.getenv("SOFIA_AUTO_TRAIN_EPOCHS", "24")))
@@ -308,6 +345,15 @@ async def training_worker() -> None:
             AUTO_TRAINING[module_id] = task
             try:
                 await task
+                if job_id:
+                    TRAINING_JOB_QUEUE.complete(job_id)
+            except Exception as exc:
+                if job_id:
+                    failed = TRAINING_JOB_QUEUE.fail(job_id, f"{type(exc).__name__}: {exc}")
+                    if failed and failed.status == "retry":
+                        retry_task = asyncio.create_task(_requeue_training_job(failed.job_id, module_id, failed.available_at))
+                        TRAINING_RETRY_TASKS[module_id] = retry_task
+                raise
             finally:
                 AUTO_TRAINING.pop(module_id, None)
         except asyncio.CancelledError:
@@ -316,6 +362,23 @@ async def training_worker() -> None:
             logger.warning("Treinamento automático falhou para %s: %s", module_id, exc)
         finally:
             TRAINING_QUEUE.task_done()
+
+
+async def _requeue_training_job(job_id: str, module_id: str, available_at: str) -> None:
+    """Wake a retry after its durable backoff without busy-polling the DB."""
+    try:
+        target = datetime.fromisoformat(available_at)
+        delay = max(0.1, (target - datetime.now(UTC)).total_seconds())
+    except ValueError:
+        delay = 1.0
+    try:
+        await asyncio.sleep(min(delay, 86_400.0))
+        if module_id not in TRAINING_QUEUED and module_id not in AUTO_TRAINING:
+            TRAINING_JOB_IDS[module_id] = job_id
+            TRAINING_REASONS.setdefault(module_id, "retry")
+            ensure_training_worker()
+    finally:
+        TRAINING_RETRY_TASKS.pop(module_id, None)
 
 
 async def _train_module(
@@ -346,6 +409,22 @@ def ensure_training_worker() -> None:
     if TRAINING_QUEUE is None:
         TRAINING_QUEUE = asyncio.Queue()
     if TRAINING_WORKER is None or TRAINING_WORKER.done():
+        # A process restart must not erase training work that was already
+        # accepted. Rehydrate only pending/retry jobs into the in-memory
+        # worker; the durable record remains the source of truth.
+        now = datetime.now(UTC)
+        for job in TRAINING_JOB_QUEUE.pending("neural_training"):
+            try:
+                available_at = datetime.fromisoformat(job.available_at)
+            except ValueError:
+                available_at = now
+            if available_at > now:
+                continue
+            if job.module_id not in TRAINING_QUEUED and job.module_id not in AUTO_TRAINING:
+                TRAINING_JOB_IDS[job.module_id] = job.job_id
+                TRAINING_REASONS.setdefault(job.module_id, str(job.payload.get("reason", "source_update")))
+                TRAINING_QUEUED.add(job.module_id)
+                TRAINING_QUEUE.put_nowait(job.module_id)
         TRAINING_WORKER = asyncio.create_task(training_worker())
 
 
@@ -362,6 +441,13 @@ def schedule_auto_training(module_id: str, reason: str = "source_update") -> boo
         TRAINING_REASONS.setdefault(module_id, reason)
         return True
     ensure_training_worker()
+    job_id = TRAINING_JOB_QUEUE.enqueue(
+        "neural_training",
+        module_id,
+        {"reason": reason},
+        idempotency_key=f"neural_training:{module_id}:{reason}:{int(datetime.now(UTC).timestamp()) // 5}",
+    )
+    TRAINING_JOB_IDS[module_id] = job_id
     TRAINING_QUEUED.add(module_id)
     TRAINING_REASONS[module_id] = reason
     TRAINING_QUEUE.put_nowait(module_id)
@@ -991,9 +1077,13 @@ async def rag_answer(
     clinical_scope = module_id == "medicina" or bool(patient_id)
     effective_provider = provider
     if provider == "auto" and clinical_scope and not external_clinical_allowed():
-        # O contexto FHIR não sai da máquina por padrão, mesmo no modo
-        # automático. A autorização clínica externa continua explícita.
-        effective_provider = "ollama"
+        # Keep the AUTO route so the orchestrator can use its deterministic
+        # local-evidence fast path. ``allowed_external=False`` below still
+        # means that any generative fallback is restricted to Ollama; forcing
+        # the provider to ``ollama`` here used to bypass the fast path and
+        # make a slow/unavailable local model look like an API outage.
+        # FHIR/clinical context remains local by policy.
+        effective_provider = "auto"
     provider_guard(
         effective_provider, patient_id=patient_id, clinical=module_id == "medicina"
     )
@@ -1164,15 +1254,20 @@ class AccessDecisionRequest(BaseModel):
 
 
 class AccountActivationRequest(BaseModel):
-    user_code: str = Field(min_length=8, max_length=8, pattern=r"^[A-Z]{2}\d{6}$")
+    user_code: str = Field(min_length=8, max_length=8)
     activation_token: str = Field(min_length=20, max_length=200)
     new_password: str = Field(min_length=8, max_length=200)
 
 
 class ActivationTwoFactorRequest(BaseModel):
-    user_code: str = Field(min_length=8, max_length=8, pattern=r"^[A-Z]{2}\d{6}$")
+    user_code: str = Field(min_length=8, max_length=8)
     activation_token: str = Field(min_length=20, max_length=200)
     code: str = Field(pattern=r"^\d{6}$")
+
+
+class ActivationResumeRequest(BaseModel):
+    user_code: str = Field(min_length=8, max_length=8)
+    activation_token: str = Field(min_length=20, max_length=200)
 
 
 class PasswordChangeRequest(BaseModel):
@@ -1181,7 +1276,7 @@ class PasswordChangeRequest(BaseModel):
 
 
 class PasswordResetRequest(BaseModel):
-    user_code: str = Field(min_length=8, max_length=8, pattern=r"^[A-Z]{2}\d{6}$")
+    user_code: str = Field(min_length=8, max_length=8)
     reset_token: str = Field(min_length=20, max_length=200)
     new_password: str = Field(min_length=8, max_length=200)
 
@@ -1224,6 +1319,15 @@ class ExpansionDomainRequest(BaseModel):
 class ExpansionReprocessRequest(BaseModel):
     module_id: str = Field(min_length=2, max_length=80)
     file_name: str | None = Field(default=None, max_length=500)
+
+
+class IndexActivateRequest(BaseModel):
+    version: str = Field(min_length=1, max_length=160)
+
+
+class CandidateReviewRequest(BaseModel):
+    candidate_id: str = Field(min_length=8, max_length=80)
+    decision: str = Field(pattern="^(approved|rejected)$")
 
 
 class ChatRequest(BaseModel):
@@ -1289,7 +1393,7 @@ async def protect_mcp_transport(request: Request, call_next):
 
 @app.on_event("startup")
 async def start_background_refresh() -> None:
-    global LINK_REFRESH_TASK, EXPANSION_TASK, DOCUMENT_AUDIT_TASK, RETRIEVAL_WARM_TASK
+    global LINK_REFRESH_TASK, EXPANSION_TASK, RETRIEVAL_WARM_TASK
     ensure_training_worker()
     refresh_modules()
     initialize_expansion(KNOWLEDGE_ROOT)
@@ -1343,6 +1447,8 @@ async def health() -> dict[str, Any]:
         "modules": len(MODULES),
         "fhir": "/fhir/metadata",
         "storage": storage,
+        "provider_circuit_breaker": circuit_status(),
+        "training_queue": TRAINING_JOB_QUEUE.counts("neural_training"),
     }
 
 
@@ -1479,6 +1585,11 @@ async def analytics_feedback(
         retry_recommended,
         training_scheduled,
     )
+    evaluation_candidate = None
+    if request.feedback == "bad":
+        evaluation_candidate = await asyncio.to_thread(
+            record_candidate, KNOWLEDGE_ROOT, assessment
+        )
     audit_event(current["sub"], "answer_feedback", request.feedback)
     return {
         "updated": True,
@@ -1501,6 +1612,7 @@ async def analytics_feedback(
             "offline_sources": assessment["source_names"],
             "external_research_status": research_result.get("status"),
             "external_research_stored": int(research_result.get("stored", 0) or 0),
+            "evaluation_candidate": evaluation_candidate,
             "message": (
                 (
                     f"O SOFIA está em constante aprendizado. Consultei {research_result.get('searched', 0)} referências públicas e "
@@ -1529,6 +1641,72 @@ async def admin_expansion_status(
     if module_id:
         module_root(module_id)
     return await asyncio.to_thread(expansion_status, KNOWLEDGE_ROOT, module_id)
+
+
+@app.get("/api/admin/retrieval-index/{module_id}")
+async def admin_retrieval_index(
+    module_id: str, current: dict[str, Any] = Depends(require_user)
+) -> dict[str, Any]:
+    """Inspect active/staged lexical index versions without exposing content."""
+    require_statistics_admin(current)
+    module_root(module_id)
+    return await asyncio.to_thread(list_index_versions, KNOWLEDGE_ROOT, module_id)
+
+
+@app.post("/api/admin/retrieval-index/{module_id}/activate")
+async def admin_activate_retrieval_index(
+    module_id: str,
+    request: IndexActivateRequest,
+    current: dict[str, Any] = Depends(require_user),
+) -> dict[str, Any]:
+    """Switch the active pointer to a previously prepared version."""
+    require_statistics_admin(current)
+    module_root(module_id)
+    try:
+        return await asyncio.to_thread(
+            activate_index_version, KNOWLEDGE_ROOT, module_id, request.version
+        )
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+
+
+@app.post("/api/admin/retrieval-index/{module_id}/stage")
+async def admin_stage_retrieval_index(
+    module_id: str, current: dict[str, Any] = Depends(require_user)
+) -> dict[str, Any]:
+    """Build a candidate index without changing the active production pointer."""
+    require_statistics_admin(current)
+    module_root(module_id)
+    return await asyncio.to_thread(stage_module_index, KNOWLEDGE_ROOT, module_id, True)
+
+
+@app.get("/api/admin/evaluation-candidates")
+async def admin_evaluation_candidates(
+    module_id: str | None = None,
+    current: dict[str, Any] = Depends(require_user),
+) -> dict[str, Any]:
+    """List metadata-only feedback candidates awaiting human review."""
+    require_statistics_admin(current)
+    if module_id:
+        module_root(module_id)
+    rows = await asyncio.to_thread(list_candidates, KNOWLEDGE_ROOT, module_id)
+    return {"candidates": rows, "count": len(rows), "promotion": "manual_only"}
+
+
+@app.post("/api/admin/evaluation-candidates/review")
+async def admin_review_evaluation_candidate(
+    request: CandidateReviewRequest,
+    current: dict[str, Any] = Depends(require_user),
+) -> dict[str, Any]:
+    """Approve/reject a candidate without silently modifying golden evals."""
+    require_statistics_admin(current)
+    try:
+        candidate = await asyncio.to_thread(
+            review_candidate, KNOWLEDGE_ROOT, request.candidate_id, request.decision
+        )
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    return {"updated": True, "candidate": candidate, "promotion": "manual_only"}
 
 
 @app.post("/api/admin/expansion/run")
@@ -1944,6 +2122,25 @@ async def user_password_reset(
     }
 
 
+@app.post("/api/auth/users/{user_code}/activation")
+async def user_activation_reissue(
+    user_code: str, current: dict[str, Any] = Depends(require_user)
+) -> dict[str, Any]:
+    require_admin(current)
+    try:
+        result = create_activation_token(user_code, current["sub"])
+    except PermissionError as exc:
+        raise HTTPException(403, str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    audit_event(current["sub"], "activation_token_reissue", user_code)
+    return {
+        "created": True,
+        **result,
+        "message": "Token de ativação reemitido. Entregue por canal seguro; ele expira em 24 horas e só pode ser usado uma vez.",
+    }
+
+
 @app.post("/api/auth/users/{user_code}/status")
 async def user_status(
     user_code: str,
@@ -1975,6 +2172,20 @@ async def account_activation(request: AccountActivationRequest) -> dict[str, Any
     return {
         **artifact,
         "message": "Senha criada. Adicione o QR ao seu aplicativo autenticador e valide o código para concluir.",
+    }
+
+
+@app.post("/api/auth/activation/resume")
+async def activation_resume(request: ActivationResumeRequest) -> dict[str, Any]:
+    try:
+        artifact = resume_account_activation(
+            request.user_code, request.activation_token
+        )
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+    return {
+        **artifact,
+        "message": "Ativação pendente recuperada. Escaneie o QR e valide o código do autenticador.",
     }
 
 
@@ -2047,7 +2258,7 @@ async def modules_endpoint(
     def collect() -> list[dict[str, Any]]:
         refresh_modules()
         return [
-            status_for(module_id)
+            status_for(module_id, include_runtime=False)
             for module_id in MODULES
             if has_module_access(current, module_id)
         ]
@@ -2119,6 +2330,20 @@ def _capabilities_payload() -> dict[str, Any]:
             "openai_key": openai_key,
             "gemini_key": gemini_key,
             "claude_key": claude_key,
+        },
+        "orchestration": {
+            "semantic_interpreters": ["ollama", "claude"],
+            "semantic_provider_mode": os.getenv("SOFIA_SEMANTIC_PROVIDER", "auto"),
+            "reviewer": "gemini",
+            "final_writer": "openai",
+            "collaboration_mode": os.getenv("SOFIA_COLLABORATION_MODE", "auto"),
+            "collaboration_enabled": bool(
+                privacy["external_data_allowed"]
+                and gemini_key
+                and openai_key
+                and os.getenv("SOFIA_COLLABORATION_MODE", "auto").strip().casefold() in {"auto", "on"}
+            ),
+            "knowledge_writeback": "manual_review_only",
         },
         "openai_store_responses": openai_store,
         "models": {
@@ -2346,6 +2571,7 @@ async def module_links(
     return {"module": module_id, "storage": repository.backend, "links": enriched}
 
 
+@app.get("/fhir/R4/metadata")
 @app.get("/fhir/metadata")
 async def fhir_metadata(
     current: dict[str, Any] = Depends(require_user),
@@ -2354,6 +2580,7 @@ async def fhir_metadata(
     return capability_statement()
 
 
+@app.get("/fhir/R4/{resource_type}")
 @app.get("/fhir/{resource_type}")
 async def fhir_search(
     resource_type: str,
@@ -2371,6 +2598,7 @@ async def fhir_search(
         raise HTTPException(404, str(exc)) from exc
 
 
+@app.get("/fhir/R4/{resource_type}/{resource_id}")
 @app.get("/fhir/{resource_type}/{resource_id}")
 async def fhir_read(
     resource_type: str, resource_id: str, _: dict[str, Any] = Depends(require_user)
@@ -2385,6 +2613,7 @@ async def fhir_read(
     return JSONResponse(resource, media_type="application/fhir+json")
 
 
+@app.post("/fhir/R4/{resource_type}")
 @app.post("/fhir/{resource_type}")
 async def fhir_create(
     resource_type: str,
@@ -2410,6 +2639,7 @@ async def fhir_create(
     )
 
 
+@app.put("/fhir/R4/{resource_type}/{resource_id}")
 @app.put("/fhir/{resource_type}/{resource_id}")
 async def fhir_update(
     resource_type: str,

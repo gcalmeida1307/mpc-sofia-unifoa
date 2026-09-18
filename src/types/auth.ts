@@ -2,6 +2,7 @@ export type AuthUser = {
   user_code: string
   email: string
   name: string
+  demo_mode?: boolean
   role: string
   scopes: string[]
   must_change_password: boolean

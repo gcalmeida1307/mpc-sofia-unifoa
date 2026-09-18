@@ -135,7 +135,9 @@ def train(
         "mse": round(loss, 8),
         "trained_at": datetime.now(UTC).isoformat(),
         "source_signature": _source_signature(root, module_id),
-        "training": "autoencoder_reconstruction_from_knowledge_chunks",
+        "training": "diagnostic_autoencoder_reconstruction_from_knowledge_chunks",
+        "purpose": "diagnostic_chunk_profile",
+        "ranking_enabled": False,
         "training_round": previous_round + 1,
         "training_trigger": trigger,
     }
@@ -146,10 +148,15 @@ def train(
 def status(root: Path, module_id: str) -> dict[str, Any]:
     path = _model_path(root, module_id)
     if not path.exists():
-        return {"trained": False, "module_id": module_id, "architecture": ARCHITECTURE, "samples": 0}
+        return {"trained": False, "module_id": module_id, "architecture": ARCHITECTURE, "samples": 0, "purpose": "diagnostic_chunk_profile", "ranking_enabled": False}
     _, metadata = _load(path)
     current_signature = _source_signature(root, module_id)
-    return metadata | {"trained": True, "stale": metadata.get("source_signature") != current_signature}
+    return metadata | {
+        "trained": True,
+        "stale": metadata.get("source_signature") != current_signature,
+        "purpose": "diagnostic_chunk_profile",
+        "ranking_enabled": False,
+    }
 
 
 def infer(root: Path, module_id: str, values: list[float]) -> dict[str, Any]:
@@ -229,7 +236,9 @@ def graph(root: Path, module_id: str, max_concepts: int = 18, max_documents: int
     if model_path.exists():
         learned_weights, loaded_metadata = _load(model_path)
         trained = True
-        metadata.update({key: loaded_metadata.get(key) for key in ("architecture", "samples", "epochs", "mse", "trained_at")})
+        metadata.update({key: loaded_metadata.get(key) for key in ("architecture", "samples", "epochs", "mse", "trained_at", "purpose", "ranking_enabled")})
+        metadata.setdefault("purpose", "diagnostic_chunk_profile")
+        metadata.setdefault("ranking_enabled", False)
         metadata["stale"] = loaded_metadata.get("source_signature") != _source_signature(root, module_id)
         weights = {key: value.round(6).tolist() for key, value in learned_weights.items() if key in {"w1", "w2"}}
     try:
@@ -244,6 +253,8 @@ def graph(root: Path, module_id: str, max_concepts: int = 18, max_documents: int
         "architecture": metadata["architecture"],
         "training": metadata,
         "features": ["tamanho do chunk", "quantidade de palavras", "densidade numérica"],
+        "ranking_enabled": False,
+        "purpose": "diagnostic_chunk_profile",
         "nodes": nodes,
         "edges": edges,
         "concept_count": len(concepts),

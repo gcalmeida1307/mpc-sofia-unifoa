@@ -9,8 +9,8 @@ import os
 import re
 import shutil
 import unicodedata
-from dataclasses import dataclass
 from contextvars import ContextVar
+from dataclasses import dataclass
 from pathlib import Path
 
 from docx import Document
@@ -53,6 +53,11 @@ class DocumentChunk:
     ordinal: int
     page: int | None = None
     locator: str = ""
+    start_line: int | None = None
+    end_line: int | None = None
+    section_header: str = ""
+    content_type: str = "prose"
+    quality_score: float = 1.0
 
 
 def ocr_status() -> dict[str, str | bool]:
@@ -96,7 +101,7 @@ def _cached_text(path: Path) -> str | None:
     try:
         payload = json.loads(cache.read_text(encoding="utf-8"))
         stat = path.stat()
-        if payload.get("version") == "formats-5" and payload.get("mtime_ns") == stat.st_mtime_ns and payload.get("size") == stat.st_size:
+        if payload.get("version") == "formats-6" and payload.get("mtime_ns") == stat.st_mtime_ns and payload.get("size") == stat.st_size:
             return normalize_document_text(path, str(payload.get("text", "")))
     except (OSError, ValueError, TypeError):
         return None
@@ -107,13 +112,18 @@ def _save_cached_text(path: Path, text: str) -> None:
     try:
         stat = path.stat()
         CACHE_ROOT.mkdir(parents=True, exist_ok=True)
-        _cache_path(path).write_text(json.dumps({"version": "formats-5", "mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "text": text}, ensure_ascii=False), encoding="utf-8")
+        _cache_path(path).write_text(json.dumps({"version": "formats-6", "mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "text": text}, ensure_ascii=False), encoding="utf-8")
     except OSError as exc:
         logger.debug("Could not cache %s: %s", path, exc)
 
 
 def clean_extracted_text(text: str) -> str:
     """Repair PDF line-wrap hyphenation without changing real compound words."""
+    # Several PDF text maps use typographic spaces (U+2004/U+2005, NBSP and
+    # narrow NBSP) between ``Art.`` and its number.  Python's ``\s`` does not
+    # match every one of those glyphs, so structural retrieval could not see
+    # anchors such as ``Art. 59`` even though they were visibly present.
+    text = re.sub(r"[\u00a0\u2000-\u200b\u202f]", " ", str(text or ""))
     text = text.replace("\u00ad", "")
     text = re.sub(r"(?<=[A-Za-zÀ-ÖØ-öø-ÿ])-\s*\n\s*(?=[a-zà-öø-ÿ])", "", text)
     # Some PDF extractors preserve a line-break hyphen as ``cita-ção`` after
@@ -200,7 +210,6 @@ def clean_web_capture(text: str) -> str:
     raw_lines = text.replace("\r\n", "\n").split("\n")
     header = raw_lines[:4] if raw_lines and raw_lines[0].lstrip().startswith("#") else []
     body = raw_lines[len(header):]
-    title_key = _noise_key(re.sub(r"^#+\s*", "", header[0]).strip()) if header else ""
 
     # Institutional crawls may contain several pages in one snapshot. Each
     # page repeats the full menu, then a breadcrumb and an ``Info`` marker.
@@ -273,7 +282,12 @@ def normalize_document_text(path: Path, text: str) -> str:
 
 def extract_text(path: Path) -> str:
     if path.suffix.lower() == ".pdf" or path.suffix.lower() in IMAGE_EXTENSIONS:
-        from .document_pages import extract_pages, read_native_pages, read_pages, pages_ready
+        from .document_pages import (
+            extract_pages,
+            pages_ready,
+            read_native_pages,
+            read_pages,
+        )
         pages = extract_pages(path) if ALLOW_HEAVY_EXTRACTION.get() else read_pages(path)
         # Native PDF text is cheap and does not violate the no-heavy-work
         # query contract.  It keeps older, encrypted page caches usable while
@@ -316,8 +330,8 @@ def extract_text(path: Path) -> str:
         elif suffix == ".docx":
             # Preserve paragraph/table order and label cells with their header.
             document = Document(str(path))
-            from docx.text.paragraph import Paragraph
             from docx.table import Table
+            from docx.text.paragraph import Paragraph
             blocks = []
             for child in document.element.body:
                 if child.tag.endswith("}p"):
@@ -331,7 +345,7 @@ def extract_text(path: Path) -> str:
         elif suffix == ".xml":
             import xml.etree.ElementTree as ET
             raw = _read_text_file(path)
-            if re.search(r"<!\s*(?:DOCTYPE|ENTITY)", raw, re.I):
+            if re.search(r"<!\s*(?:DOCTYPE|ENTITY)", raw, re.IGNORECASE):
                 raise ValueError("XML DTD/entities não permitidas")
             node = ET.fromstring(raw)
             def xml_lines(element, parent=""):
@@ -394,6 +408,34 @@ def read_exact_source_lines(path: Path, start: int, end: int) -> str:
     return "\n".join(lines[start - 1 : min(end, len(lines))]).strip()
 
 
+def read_exact_source_term(path: Path, term: str, limit: int = 8) -> list[tuple[int, str]]:
+    """Find literal occurrences and return their real source line numbers."""
+
+    needle = " ".join(str(term or "").split()).strip()
+    if not needle:
+        return []
+    try:
+        raw = _read_text_file(path) if path.suffix.lower() in {".txt", ".md", ".csv", ".json", ".xml", ".yaml", ".yml", ".log"} else extract_text(path)
+    except (OSError, RuntimeError, ValueError):
+        return []
+    def fold(value: str) -> str:
+        return "".join(
+            char
+            for char in unicodedata.normalize("NFKD", value.casefold())
+            if not unicodedata.combining(char)
+        )
+
+    normalized_needle = " ".join(fold(needle).split())
+    matches: list[tuple[int, str]] = []
+    for line_number, line in enumerate(raw.replace("\r\n", "\n").splitlines(), start=1):
+        normalized_line = " ".join(fold(line).split())
+        if normalized_needle and normalized_needle in normalized_line:
+            matches.append((line_number, line.strip()))
+            if len(matches) >= limit:
+                break
+    return matches
+
+
 def _paragraphs(text: str) -> list[str]:
     return [" ".join(part.split()) for part in text.replace("\r\n", "\n").split("\n\n") if part.strip()]
 
@@ -420,19 +462,183 @@ def _text_units(text: str, suffix: str) -> list[tuple[str, int, int]]:
     return units or [(line.strip(), index, index) for index, line in enumerate(lines, start=1) if line.strip()]
 
 
+def _section_header(text: str, line_start: int) -> str:
+    lines = text.replace("\r\n", "\n").splitlines()
+    if not lines:
+        return ""
+    for line in reversed(lines[: max(0, line_start)]):
+        value = line.strip()
+        if re.match(r"^#{1,6}\s+", value) or value.startswith("[PLANILHA:"):
+            return re.sub(r"^#{1,6}\s+", "", value).strip()
+    return ""
+
+
+def _content_type(path: Path, text: str) -> str:
+    suffix = path.suffix.casefold()
+    if suffix in {".csv", ".xlsx", ".json"}:
+        return "structured_data"
+    if suffix == ".xml":
+        return "xml_record"
+    if suffix in IMAGE_EXTENSIONS:
+        return "ocr_image"
+    if suffix == ".pdf":
+        return "ocr_pdf" if len(re.findall(r"\[Página\s+\d+\]", text)) else "pdf_text"
+    normalized = normalize_document_text(path, text)
+    if path.parent.name.casefold() == "links" and any(marker in normalized.casefold() for marker in ("cursos relacionados", "cursos do programa", "carga horária")):
+        return "list_catalog"
+    if path.suffix.casefold() in {".md", ".txt", ".log"} and sum(1 for line in text.splitlines() if line.strip()) >= 20:
+        return "text_document"
+    return "prose"
+
+
+_CONTINUATION_ENDINGS = {
+    "a", "ao", "aos", "as", "com", "da", "das", "de", "do", "dos", "e", "em",
+    "na", "nas", "no", "nos", "o", "os", "ou", "para", "pela", "pelas", "pelo",
+    "pelos", "por", "que", "se", "um", "uma", "uns", "umas",
+}
+
+
+def _needs_pdf_continuation(text: str) -> bool:
+    """Identify a page chunk that visibly ends before its sentence."""
+
+    compact = " ".join(str(text or "").split()).strip()
+    if not compact:
+        return False
+    if compact.endswith(","):
+        return True
+    if re.search(r"[.!?;:]\s*[\"'»)]?$", compact):
+        return False
+    last_word = re.findall(r"[\wÀ-ÿ]+", compact.casefold())
+    if last_word and last_word[-1] in _CONTINUATION_ENDINGS:
+        return True
+    # Fixed-size PDF chunks can also split a word (``infer`` + ``ior``) or
+    # end after a complete word while the sentence continues on the next
+    # chunk. A non-punctuated alphabetic ending is strong enough evidence for
+    # a bounded continuation view; ordinary completed sentences were already
+    # returned above.
+    return bool(re.search(r"[\wÀ-ÿ)]$", compact))
+
+
+def _stitch_pdf_continuations(chunks: list[DocumentChunk]) -> list[DocumentChunk]:
+    """Add a bounded cross-page view without changing page provenance.
+
+    Legal and technical PDFs frequently split an article at the physical page
+    boundary.  A page-only index then retrieves a passage ending in ``o`` or
+    ``de`` and the answer composer can only reproduce an incomplete sentence.
+    The original pages remain available; an incomplete chunk gets a bounded
+    view with only the next textual continuation.  Headings and new articles
+    are never pulled into that view.
+    """
+
+    result = list(chunks)
+    by_source: dict[Path, list[DocumentChunk]] = {}
+    for chunk in chunks:
+        if chunk.page is not None:
+            by_source.setdefault(chunk.path, []).append(chunk)
+    replacements: dict[tuple[Path, int], DocumentChunk] = {}
+
+    def merge_overlap(left: str, right: str) -> str | None:
+        """Merge adjacent overlapping chunks without repeating their overlap."""
+        maximum = min(400, len(left), len(right))
+        for size in range(maximum, 39, -1):
+            if left[-size:] == right[:size]:
+                return left + right[size:]
+        return None
+
+    for path, source_chunks in by_source.items():
+        ordered = sorted(source_chunks, key=lambda chunk: chunk.ordinal)
+        for index, current in enumerate(ordered):
+            if not _needs_pdf_continuation(current.text):
+                continue
+            combined = current.text.rstrip()
+            end_page = int(current.page)
+            quality = current.quality_score
+            next_index = index + 1
+            for _ in range(2):
+                if not _needs_pdf_continuation(combined):
+                    break
+                if next_index >= len(ordered):
+                    break
+                next_first = ordered[next_index]
+                # Chunks from the same page overlap by design.  Merge their
+                # union, rather than appending the overlap a second time.
+                if next_first.page == current.page:
+                    merged = merge_overlap(combined, next_first.text)
+                    if merged is None:
+                        break
+                    combined = merged
+                    next_index += 1
+                    continue
+                next_start = " ".join(next_first.text.split()).lstrip()
+                # Every printed page of the Vade starts with ``N Consolidação
+                # ...``.  It is provenance noise, not the continuation text;
+                # remove it before deciding whether the next chunk continues
+                # the sentence.
+                next_start = re.sub(
+                    r"(?i)^\d+\s+consolida[cç][aã]o\s+das\s+leis\s+do\s+trabalho\s*",
+                    "",
+                    next_start,
+                ).lstrip(" -•\t")
+                if not next_start or re.match(
+                    r"(?i)^(?:cap[ií]tulo|se[cç][aã]o|art(?:igo)?\.?\s*\d|cl[aá]usula)\b",
+                    next_start,
+                ):
+                    break
+                # A continuation must begin as ordinary prose (or with a
+                # closing punctuation marker).  This prevents a page ending
+                # in a navigation/header fragment from swallowing the next
+                # article or clause.
+                if not re.match(r"(?i)^(?:[a-zà-öø-ÿ]|[§,;:)])", next_start):
+                    break
+                combined = f"{combined}\n{next_start[:900].rstrip()}"
+                if next_first.page is not None:
+                    end_page = int(next_first.page)
+                quality = min(quality, next_first.quality_score)
+                next_index += 1
+            if combined == current.text.rstrip():
+                continue
+            locator = f"página {current.page}" if end_page == current.page else f"páginas {current.page}-{end_page}"
+            replacements[(path, current.ordinal)] = DocumentChunk(
+                current.path,
+                combined,
+                current.ordinal,
+                current.page,
+                locator,
+                current.start_line,
+                current.end_line,
+                current.section_header,
+                current.content_type,
+                quality,
+            )
+    if not replacements:
+        return result
+    return [replacements.get((chunk.path, chunk.ordinal), chunk) for chunk in result]
+
+
 def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: int = 250, selected_paths: tuple[Path, ...] | None = None) -> list[DocumentChunk]:
     chunks: list[DocumentChunk] = []
     source_paths = selected_paths if selected_paths is not None else tuple(files_for(root, module_id))
     for path in source_paths:
         if path.suffix.lower() == ".pdf" or path.suffix.lower() in IMAGE_EXTENSIONS:
-            from .document_pages import extract_pages, read_native_pages, read_pages, pages_ready
+            from .document_pages import (
+                extract_pages,
+                pages_ready,
+                read_native_pages,
+                read_pages,
+            )
             pages = extract_pages(path) if ALLOW_HEAVY_EXTRACTION.get() else read_pages(path)
             if not ALLOW_HEAVY_EXTRACTION.get() and path.suffix.lower() == ".pdf" and (pages is None or not pages_ready(pages)):
                 native_pages = read_native_pages(path)
                 if native_pages is not None:
                     pages = native_pages
-            if not pages or not pages_ready(pages):
+            # A document with one unreadable page must not be advertised as
+            # fully ready, but its readable pages remain valid evidence.  The
+            # pipeline status still comes from ``pages_ready`` and therefore
+            # remains partial/quarantined; retrieval can use only READY pages
+            # instead of losing an otherwise usable manual completely.
+            if not pages or not any(page.status == "READY" for page in pages):
                 continue
+            path_chunks: list[DocumentChunk] = []
             ordinal = 0
             for page in pages:
                 if page.status != "READY":
@@ -440,16 +646,42 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
                 for start in range(0, len(page.text), max(1, max_chars - overlap)):
                     text = page.text[start:start + max_chars].strip()
                     if text:
-                        chunks.append(DocumentChunk(path, text, ordinal, page.number, f"página {page.number}"))
+                        path_chunks.append(
+                            DocumentChunk(
+                                path,
+                                text,
+                                ordinal,
+                                page.number,
+                                f"página {page.number}",
+                                None,
+                                None,
+                                "",
+                                _content_type(path, f"[Página {page.number}]\n{page.text}" if page.method == "ocr" else page.text),
+                                page.quality,
+                            )
+                        )
                         ordinal += 1
                     if start + max_chars >= len(page.text):
                         break
+            chunks.extend(_stitch_pdf_continuations(path_chunks))
             continue
         text = extract_text(path)
         if not text.strip():
             continue
-        # Preserva linhas de tabelas e parágrafos; só divide por tamanho quando necessário.
-        units = _text_units(text, path.suffix.lower())
+        # Catálogos capturados da web precisam preservar cada item como uma
+        # unidade própria.  Se eles forem achatados em um único parágrafo,
+        # títulos de cursos, descrições e metadados se misturam e a resposta
+        # perde a proveniência por linha.
+        content_type = _content_type(path, text)
+        if content_type == "list_catalog":
+            units = [
+                (line.strip(), index, index)
+                for index, line in enumerate(text.replace("\r\n", "\n").splitlines(), start=1)
+                if line.strip()
+            ]
+        else:
+            # Preserva linhas de tabelas e parágrafos; só divide por tamanho quando necessário.
+            units = _text_units(text, path.suffix.lower())
         current = ""
         current_start = 0
         current_end = 0
@@ -463,7 +695,19 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
                 continue
             if current:
                 locator = f"linhas {current_start}-{current_end}" if current_start else ""
-                chunks.append(DocumentChunk(path, current, ordinal, None, locator))
+                chunks.append(
+                    DocumentChunk(
+                        path,
+                        current,
+                        ordinal,
+                        None,
+                        locator,
+                        current_start,
+                        current_end,
+                        _section_header(text, current_start),
+                        content_type,
+                    )
+                )
                 ordinal += 1
             current = ""
             # A single HTML paragraph or PDF table can be much larger than
@@ -472,7 +716,19 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
             start = 0
             while len(unit) - start > max_chars:
                 locator = f"linhas {line_start}-{line_end}"
-                chunks.append(DocumentChunk(path, unit[start:start + max_chars], ordinal, None, locator))
+                chunks.append(
+                    DocumentChunk(
+                        path,
+                        unit[start:start + max_chars],
+                        ordinal,
+                        None,
+                        locator,
+                        line_start,
+                        line_end,
+                        _section_header(text, line_start),
+                        content_type,
+                    )
+                )
                 ordinal += 1
                 start += step
             current = unit[start:]
@@ -480,5 +736,17 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
             current_end = line_end
         if current:
             locator = f"linhas {current_start}-{current_end}" if current_start else ""
-            chunks.append(DocumentChunk(path, current, ordinal, None, locator))
+            chunks.append(
+                DocumentChunk(
+                    path,
+                    current,
+                    ordinal,
+                    None,
+                    locator,
+                    current_start,
+                    current_end,
+                    _section_header(text, current_start),
+                    content_type,
+                )
+            )
     return chunks

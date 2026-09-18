@@ -28,8 +28,12 @@ import {
   Modules,
 } from "./features/workspace/WorkspaceViews"
 import { type AccessRequest, type AdminUser, type AuthUser } from "./types/auth"
-import type { ExpansionStatus, ThemeAnalytics, WorkspaceCapabilities } from "./types/workspace"
-import AppShell from "./layouts/AppShell"
+import type {
+  ExpansionStatus,
+  ThemeAnalytics,
+  WorkspaceCapabilities,
+} from "./types/workspace"
+import AppShell, { type ShellApiStatus } from "./layouts/AppShell"
 import {
   apiRequest,
   describeApiError,
@@ -118,7 +122,9 @@ function App() {
   const [chat, setChat] = useState<ChatItem[]>([])
   const [chatBusy, setChatBusy] = useState(false)
   const [apiOnline, setApiOnline] = useState(false)
-  const [capabilities, setCapabilities] = useState<WorkspaceCapabilities | null>(null)
+  const [apiStatus, setApiStatus] = useState<ShellApiStatus>("checking")
+  const [capabilities, setCapabilities] =
+    useState<WorkspaceCapabilities | null>(null)
   const feedbackInFlight = useRef(new Set<number>())
   const refreshInFlight = useRef(false)
   const mod = useMemo(
@@ -128,15 +134,25 @@ function App() {
 
   const authFetch = (path: string, init: RequestInit = {}) =>
     apiRequest(path, init, { token })
+  const expireSession = () => {
+    localStorage.removeItem("sofia_token")
+    setToken(null)
+    setUser(null)
+    setApiOnline(false)
+    setApiStatus("unauthorized")
+  }
   const refresh = async () => {
     if (!token || refreshInFlight.current) return
     refreshInFlight.current = true
+    setApiStatus("checking")
     try {
-      const [response, capabilityResponse] = await Promise.all([
+      const [moduleResult, capabilityResult] = await Promise.allSettled([
         authFetch("/api/modules"),
         authFetch("/api/capabilities"),
       ])
-      if (!response.ok) throw new Error()
+      if (moduleResult.status === "rejected") throw moduleResult.reason
+      const response = moduleResult.value
+      if (!response.ok) throw new Error("A API não retornou os módulos.")
       const data = (await response.json()) as Array<Record<string, unknown>>
       setItems(
         data.map((item) => {
@@ -162,6 +178,7 @@ function App() {
                 local?.focus ??
                 "Conhecimento e procedimentos do domínio.",
             ),
+            files: Array.isArray(item.files) ? item.files.map(String) : undefined,
             documentsByType:
               item.documents_by_type as Record<string, number> | undefined ??
               {},
@@ -170,11 +187,19 @@ function App() {
           } as Module
         }),
       )
-      if (capabilityResponse.ok)
-        setCapabilities((await capabilityResponse.json()) as WorkspaceCapabilities)
+      if (capabilityResult.status === "fulfilled" && capabilityResult.value.ok)
+        setCapabilities(
+          (await capabilityResult.value.json()) as WorkspaceCapabilities,
+        )
       setApiOnline(true)
-    } catch {
+      setApiStatus("online")
+    } catch (error) {
+      if (error instanceof SofiaApiError && error.kind === "unauthorized") {
+        expireSession()
+        return
+      }
       setApiOnline(false)
+      setApiStatus("offline")
     } finally {
       refreshInFlight.current = false
     }
@@ -194,10 +219,13 @@ function App() {
         setChecking(false)
         void refresh()
       })
-      .catch(() => {
-        localStorage.removeItem("sofia_token")
-        setToken(null)
-        setUser(null)
+      .catch((error) => {
+        if (error instanceof SofiaApiError && error.kind !== "unauthorized") {
+          setApiStatus("offline")
+          setChecking(false)
+          return
+        }
+        expireSession()
         setChecking(false)
       })
   }, [token])
@@ -212,7 +240,11 @@ function App() {
     setChat([])
   }, [moduleId])
   useEffect(() => {
-    if (user && user.user_code !== "AG000001" && (page === "pipeline" || page === "access")) {
+    if (
+      user &&
+      user.user_code !== "AG000001" &&
+      (page === "pipeline" || page === "access")
+    ) {
       setPage("dashboard")
     }
   }, [page, user])
@@ -261,8 +293,20 @@ function App() {
     return (
       <div className="login-screen">
         <div className="login-card" role="status">
-          <div className="login-spinner" />
-          Carregando seu workspace...
+          {apiStatus === "offline" ? (
+            <>
+              <strong>A API local está indisponível.</strong>
+              <p>O workspace não foi apagado. Verifique o servidor e tente novamente.</p>
+              <button className="login-submit" type="button" onClick={() => window.location.reload()}>
+                Tentar novamente
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="login-spinner" />
+              Carregando seu workspace...
+            </>
+          )}
         </div>
       </div>
     )
@@ -290,7 +334,7 @@ function App() {
         }}
       />
     )
-  if (user?.role === "admin" && !user.two_factor_enabled)
+  if (user?.role === "admin" && !user.two_factor_enabled && !user.demo_mode)
     return (
       <TwoFactorEnrollment
         authFetch={authFetch}
@@ -510,6 +554,7 @@ function App() {
       user={user}
       dark={dark}
       apiOnline={apiOnline}
+      apiStatus={apiStatus}
       provider={provider}
       providerAvailability={capabilities?.providers}
       onModuleChange={selectModule}
@@ -521,11 +566,22 @@ function App() {
         })
       }
       onProviderChange={(nextProvider) => setProvider(nextProvider as Provider)}
+      changePassword={async (current, next) => {
+        await authFetch("/api/auth/password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ current_password: current, new_password: next }),
+        })
+      }}
       onLogout={logout}
       isAdmin={user.user_code === "AG000001"}
     >
       {page === "dashboard" && (
         <Dashboard
+          modules={items}
+          onSelectModule={selectModule}
+          onOpenChat={() => setPage("chat")}
+          onOpenSources={() => setPage("upload")}
           mod={mod}
           online={apiOnline}
           authFetch={authFetch}

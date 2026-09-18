@@ -20,13 +20,20 @@ from api.expansion import (
     record_document_pipeline,
     record_search_topic,
 )
-from api.ingestion import clean_extracted_text, clean_web_capture, extract_text, ingest_module
+from api.ingestion import (
+    DocumentChunk,
+    _stitch_pdf_continuations,
+    clean_extracted_text,
+    clean_web_capture,
+    extract_text,
+)
 from api.learning import store_offline_candidate
 from api.links import normalize_url
 from api.neural import status as neural_status
 from api.neural import train as train_neural_model
 from api.orchestration import (
     _comparison_evidence_answer,
+    _compound_answer_complete,
     _retrieval_question,
     _structured_answer,
     _summary_units,
@@ -38,15 +45,114 @@ from api.orchestration import (
 from api.policies import policy_for
 from api.privacy import ExternalRedaction, provider_guard
 from api.providers import Generation
-from api.query_analysis import assess_module_scope, route_query
+from api.query_analysis import assess_module_scope, decompose_query, route_query
 from api.research import research_module
-from api.retrieval import RetrievalResult, retrieve, warm_module_index
+from api.retrieval import (
+    RetrievalResult,
+    retrieve,
+    retrieve_compound,
+    warm_module_index,
+)
 from api.structured_data import analyze_structured_question, resolve_structured_source
 
 ROOT = Path(__file__).resolve().parents[1] / "knowledge"
 
 
 class RagRegressionTests(unittest.TestCase):
+    def test_pdf_page_stitch_preserves_a_rule_split_at_page_boundary(self) -> None:
+        source = Path("manual.pdf")
+        chunks = [
+            DocumentChunk(source, "Art. 59. A jornada poderá ser acrescida de", 0, 530, "página 530"),
+            DocumentChunk(source, "duas horas extras por acordo coletivo.", 1, 531, "página 531"),
+        ]
+        stitched = _stitch_pdf_continuations(chunks)
+        joined = next(item for item in stitched if item.ordinal == 0)
+        self.assertEqual(joined.locator, "páginas 530-531")
+        self.assertIn("duas horas extras", joined.text)
+
+    def test_pdf_structural_spaces_are_normalized_for_article_lookup(self) -> None:
+        self.assertIn("Art. 59", clean_extracted_text("Art.\u200459. A jornada"))
+
+    def test_compound_provider_fragment_is_rejected_and_repaired_from_both_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "direito" / "textos"
+            module.mkdir(parents=True)
+            (module / "SAAE.md").write_text(
+                "Cláusula 5ª: o excesso de horas em um dia pode ser compensado em outro, dentro de 360 dias, com pagamento das horas não compensadas na rescisão.\n",
+                encoding="utf-8",
+            )
+            (module / "Vade_Mecum.md").write_text(
+                "Art. 59. A duração diária pode ser acrescida de horas extras, em número não excedente de duas, com adicional de 50%.\n",
+                encoding="utf-8",
+            )
+            question = "Fiz 3 horas no dia, o que é previsto no SAAE sobre essa conduta e o que é previsto no VADE?"
+            compound = retrieve_compound(
+                root,
+                "direito",
+                question,
+                decompose_query(question),
+                policy_for("direito"),
+                limit=6,
+            )
+            self.assertTrue(compound.has_quality_evidence)
+            self.assertEqual(set(compound.sources), {"SAAE.md", "Vade_Mecum.md"})
+            self.assertFalse(
+                _compound_answer_complete("Conclusão: em excesso, no prazo previsto no caput.", compound)
+            )
+            generated = Generation("Conclusão: em excesso, no prazo previsto no caput.", "ollama", "qwen")
+            with patch("api.orchestration.generate_with_fallback", new=AsyncMock(return_value=generated)) as provider:
+                response = asyncio.run(
+                    answer(
+                        root=root,
+                        module_id="direito",
+                        provider="ollama",
+                        question=question,
+                        history=[],
+                        response_style="structured",
+                        external_allowed=False,
+                    )
+                )
+            provider.assert_awaited_once()
+            self.assertEqual(response.provider, "local-rag")
+            self.assertIn("SAAE.md", response.answer)
+            self.assertIn("Vade_Mecum.md", response.answer)
+            self.assertIn("360 dias", response.answer)
+            self.assertIn("duas", response.answer.casefold())
+            self.assertNotIn("diárias", response.answer.casefold())
+
+    def test_named_legal_question_keeps_topic_when_the_user_does_not_say_compare(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "knowledge"
+            module = root / "direito"
+            module.mkdir(parents=True)
+            (module / "Saae_2026_2027.md").write_text(
+                "Cláusula 5ª: o excesso de horas em um dia pode ser compensado em outro, dentro de 360 dias, com pagamento das horas extras não compensadas na rescisão.",
+                encoding="utf-8",
+            )
+            (module / "Vade_mecum_Senado_Federal_3ed.md").write_text(
+                "Art. 59. A duração diária pode ser acrescida de horas extras, em número não excedente de duas, com adicional de 50%.",
+                encoding="utf-8",
+            )
+            question = "Fiz 3 horas no dia, o que é previsto no SAAE sobre essa conduta e o que é previsto no VADE?"
+            response = asyncio.run(
+                answer(
+                    root=root,
+                    module_id="direito",
+                    provider="auto",
+                    question=question,
+                    history=[],
+                    response_style="structured",
+                    external_allowed=False,
+                )
+            )
+            self.assertEqual(response.provider, "local-rag")
+            self.assertIn("Saae_2026_2027.md", response.answer)
+            self.assertIn("Vade_mecum_Senado_Federal_3ed.md", response.answer)
+            self.assertIn("360 dias", response.answer)
+            self.assertIn("duas", response.answer.casefold())
+            self.assertNotIn("diárias", response.answer.casefold())
+
     def test_intelligence_contract_separates_direct_tasks_from_evidence_tasks(self) -> None:
         conversation = route_query("financeiro", "Oi, como você pode ajudar?")
         writing = route_query("recursos-humanos", "Escreva uma mensagem para uma candidata")
@@ -415,8 +521,8 @@ class RagRegressionTests(unittest.TestCase):
         self.assertEqual(scope["status"], "aligned")
         self.assertEqual(scope["module_name"], "Financeiro")
         message = local_no_evidence(policy_for("financeiro"), module_id="financeiro", question=question)
-        self.assertIn("pertencer ao módulo Financeiro", message)
-        self.assertIn("base de conhecimento local", message)
+        self.assertIn("Não localizei", message)
+        self.assertIn("documentos do módulo Financeiro", message)
 
     def test_bridge_day_uses_the_agreement_and_not_general_knowledge(self) -> None:
         result = retrieve(ROOT, "direito", "O que é dia ponte?", policy_for("direito"), limit=4)
@@ -787,7 +893,7 @@ Limites
             self.assertFalse(response.evidence_found)
             self.assertEqual(response.provider, "openai")
             provider.assert_awaited_once()
-            self.assertIn("não encontrou evidência suficiente", response.answer.casefold())
+            self.assertIn("documentos locais não confirmaram", response.answer.casefold())
 
     def test_no_local_evidence_uses_labeled_local_provider_fallback(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -807,8 +913,8 @@ Limites
                 )
             self.assertEqual(response.provider, "ollama")
             self.assertFalse(response.evidence_found)
-            self.assertIn("Origem da resposta", response.answer)
-            self.assertIn("não encontrou evidência suficiente", response.answer)
+            self.assertNotIn("Origem da resposta", response.answer)
+            self.assertIn("documentos locais não confirmaram", response.answer.casefold())
 
     def test_long_clinical_follow_up_reuses_the_sleep_context(self) -> None:
         question = _retrieval_question(

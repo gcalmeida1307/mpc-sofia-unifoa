@@ -16,6 +16,7 @@ import os
 import re
 import shutil
 import sqlite3
+import threading
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -302,6 +303,8 @@ _PG_ID_TABLES = {
 }
 _PG_FAILURE: str | None = None
 _PG_FAILURE_AT: datetime | None = None
+_INITIALIZE_LOCK = threading.RLock()
+_INITIALIZED_STORES: set[tuple[str, str]] = set()
 _PG_EXTRA_SCHEMA = """
 CREATE TABLE IF NOT EXISTS semantic_embeddings (
     id BIGSERIAL PRIMARY KEY,
@@ -604,70 +607,78 @@ class ExpansionStore:
         self.path = database_path(root)
 
     def initialize(self) -> None:
-        connection = _connect(self.path)
-        try:
-            if getattr(connection, "backend", None) == "postgresql":
-                connection.executescript(_postgres_schema())
-                connection.executescript(_PG_EXTRA_SCHEMA)
+        store_path = str(self.path.resolve())
+        with _INITIALIZE_LOCK:
+            connection = _connect(self.path)
+            store_key = (store_path, getattr(connection, "backend", "sqlite"))
+            if store_key in _INITIALIZED_STORES:
+                connection.close()
+                return
+            try:
+                if getattr(connection, "backend", None) == "postgresql":
+                    connection.executescript(_postgres_schema())
+                    connection.executescript(_PG_EXTRA_SCHEMA)
+                    self._backfill_provenance(connection)
+                    connection.commit()
+                    _INITIALIZED_STORES.add(store_key)
+                    return
+                connection.executescript(SCHEMA)
+                query_columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(search_queries)").fetchall()}
+                if "date_start" not in query_columns:
+                    connection.execute("ALTER TABLE search_queries ADD COLUMN date_start TEXT")
+                if "date_end" not in query_columns:
+                    connection.execute("ALTER TABLE search_queries ADD COLUMN date_end TEXT")
+                columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(sources)").fetchall()}
+                if "etag" not in columns:
+                    connection.execute("ALTER TABLE sources ADD COLUMN etag TEXT NOT NULL DEFAULT ''")
+                if "last_modified" not in columns:
+                    connection.execute("ALTER TABLE sources ADD COLUMN last_modified TEXT NOT NULL DEFAULT ''")
+                document_columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(documents)").fetchall()}
+                additions = {
+                    "file_hash": "TEXT",
+                    "duplicate_of": "INTEGER",
+                    "source_origin": "TEXT NOT NULL DEFAULT 'local'",
+                    "author": "TEXT",
+                    "sensitivity": "TEXT NOT NULL DEFAULT 'internal'",
+                    "current_stage": "TEXT NOT NULL DEFAULT 'RECEIVED'",
+                    "received_at": "TEXT",
+                    "extraction_quality": "REAL",
+                    "ocr_quality": "REAL",
+                    "summary": "TEXT",
+                    "keywords_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "entities_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "concepts_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "relations_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "questions_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "embeddings_status": "TEXT NOT NULL DEFAULT 'PENDING'",
+                    "indexing_status": "TEXT NOT NULL DEFAULT 'PENDING'",
+                    "validation_status": "TEXT NOT NULL DEFAULT 'PENDING'",
+                    "insights_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "created_at": "TEXT",
+                }
+                for column, definition in additions.items():
+                    if column not in document_columns:
+                        connection.execute(f"ALTER TABLE documents ADD COLUMN {column} {definition}")
+                artifact_columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(knowledge_artifacts)").fetchall()}
+                artifact_additions = {
+                    "artifact_version": "TEXT NOT NULL DEFAULT '1.0'",
+                    "claims_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "dates_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "people_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "organizations_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "topics_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "contradictions_json": "TEXT NOT NULL DEFAULT '[]'",
+                    "embedding_json": "TEXT NOT NULL DEFAULT '{}'",
+                    "provenance_json": "TEXT NOT NULL DEFAULT '{}'",
+                }
+                for column, definition in artifact_additions.items():
+                    if column not in artifact_columns:
+                        connection.execute(f"ALTER TABLE knowledge_artifacts ADD COLUMN {column} {definition}")
                 self._backfill_provenance(connection)
                 connection.commit()
-                return
-            connection.executescript(SCHEMA)
-            query_columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(search_queries)").fetchall()}
-            if "date_start" not in query_columns:
-                connection.execute("ALTER TABLE search_queries ADD COLUMN date_start TEXT")
-            if "date_end" not in query_columns:
-                connection.execute("ALTER TABLE search_queries ADD COLUMN date_end TEXT")
-            columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(sources)").fetchall()}
-            if "etag" not in columns:
-                connection.execute("ALTER TABLE sources ADD COLUMN etag TEXT NOT NULL DEFAULT ''")
-            if "last_modified" not in columns:
-                connection.execute("ALTER TABLE sources ADD COLUMN last_modified TEXT NOT NULL DEFAULT ''")
-            document_columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(documents)").fetchall()}
-            additions = {
-                "file_hash": "TEXT",
-                "duplicate_of": "INTEGER",
-                "source_origin": "TEXT NOT NULL DEFAULT 'local'",
-                "author": "TEXT",
-                "sensitivity": "TEXT NOT NULL DEFAULT 'internal'",
-                "current_stage": "TEXT NOT NULL DEFAULT 'RECEIVED'",
-                "received_at": "TEXT",
-                "extraction_quality": "REAL",
-                "ocr_quality": "REAL",
-                "summary": "TEXT",
-                "keywords_json": "TEXT NOT NULL DEFAULT '[]'",
-                "entities_json": "TEXT NOT NULL DEFAULT '[]'",
-                "concepts_json": "TEXT NOT NULL DEFAULT '[]'",
-                "relations_json": "TEXT NOT NULL DEFAULT '[]'",
-                "questions_json": "TEXT NOT NULL DEFAULT '[]'",
-                "embeddings_status": "TEXT NOT NULL DEFAULT 'PENDING'",
-                "indexing_status": "TEXT NOT NULL DEFAULT 'PENDING'",
-                "validation_status": "TEXT NOT NULL DEFAULT 'PENDING'",
-                "insights_json": "TEXT NOT NULL DEFAULT '[]'",
-                "created_at": "TEXT",
-            }
-            for column, definition in additions.items():
-                if column not in document_columns:
-                    connection.execute(f"ALTER TABLE documents ADD COLUMN {column} {definition}")
-            artifact_columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(knowledge_artifacts)").fetchall()}
-            artifact_additions = {
-                "artifact_version": "TEXT NOT NULL DEFAULT '1.0'",
-                "claims_json": "TEXT NOT NULL DEFAULT '[]'",
-                "dates_json": "TEXT NOT NULL DEFAULT '[]'",
-                "people_json": "TEXT NOT NULL DEFAULT '[]'",
-                "organizations_json": "TEXT NOT NULL DEFAULT '[]'",
-                "topics_json": "TEXT NOT NULL DEFAULT '[]'",
-                "contradictions_json": "TEXT NOT NULL DEFAULT '[]'",
-                "embedding_json": "TEXT NOT NULL DEFAULT '{}'",
-                "provenance_json": "TEXT NOT NULL DEFAULT '{}'",
-            }
-            for column, definition in artifact_additions.items():
-                if column not in artifact_columns:
-                    connection.execute(f"ALTER TABLE knowledge_artifacts ADD COLUMN {column} {definition}")
-            self._backfill_provenance(connection)
-            connection.commit()
-        finally:
-            connection.close()
+                _INITIALIZED_STORES.add(store_key)
+            finally:
+                connection.close()
 
     @staticmethod
     def _backfill_provenance(connection: Any) -> None:
@@ -679,6 +690,11 @@ class ExpansionStore:
         honest while preserving the distinction between an unknown author and
         a document that was never organized.
         """
+        missing = connection.execute(
+            "SELECT 1 FROM documents WHERE author IS NULL OR TRIM(author) = '' LIMIT 1"
+        ).fetchone()
+        if missing is None:
+            return
         connection.execute(
             """
             UPDATE documents
@@ -1309,8 +1325,9 @@ def record_document_pipeline(
         is_image = path.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
         page_metrics = []
         if is_image or path.suffix.lower() == ".pdf":
-            from .document_pages import extract_pages, pages_ready
             from dataclasses import asdict
+
+            from .document_pages import extract_pages, pages_ready
             pages = extract_pages(path)
             page_metrics = [{k: v for k, v in asdict(p).items() if k != "text"} for p in pages]
             mark_stage("OCR", "complete" if pages_ready(pages) else "failed", {"pages": page_metrics})

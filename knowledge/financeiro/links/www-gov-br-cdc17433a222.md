@@ -1,0 +1,3102 @@
+# Documentação técnica — Portal da Nota Fiscal de Serviço eletrônica
+
+Fonte: https://www.gov.br/nfse/pt-br/nfs-e-via/documentacao-tecnica
+Capturado em: 2026-09-15T12:43:28.515299+00:00
+Páginas no domínio: 10
+
+## Documentação técnica — Portal da Nota Fiscal de Serviço eletrônica
+URL: https://www.gov.br/nfse/pt-br/nfs-e-via/documentacao-tecnica
+
+Documentação técnica — Portal da Nota Fiscal de Serviço eletrônica
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Portal da Nota Fiscal de Serviço eletrônica
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+MEI e demais empresas
+Emissor de NFS-e WEB
+Consultar Nota Fiscal
+Acesso aos Sistemas
+Consultar Nota Fiscal
+Prestador de Serviços
+Município
+Cidadão
+Consultar Nota Fiscal
+Lista de Serviços Anexa à Lei Complementar nº 116, de 31 de julho de 2003
+Consumidor dos serviços
+Consultar Nota Fiscal
+Apps NFSe Mobile
+Municípios
+Conheça a NFS-e
+O que é a NFS-e
+Histórico da NFS-e
+O padrão nacional da NFS-e
+O que é SPED
+Benefícios
+Produtos disponíveis
+Ambiente de Dados Nacional
+Emissor NFS-e WEB
+APP emissor de NFS-e
+APP Cidadão (NFSe Cidadao)
+Secretaria de Finanças Nacional
+Guia de Recolhimento
+Portal NFS-e
+Webservices Municipais
+Webservices empresariais
+Webservices conveniados
+EFD ISS
+API de integração
+Painel Administrativo Municipal
+Como conveniar-se
+Como conveniar-se
+Como implementar a NFS-e
+Implementação da NFS-e - ADN
+Implementação da NFS-e - Emissores Públicos
+Monitoramento das Adesões à NFS-e
+Plano de Implantação da NFS-e
+Painel Municipal (parametrização)
+NFS-e Via
+Solicitação de cadastro no Portal das Concessionárias de Exploração de Vias
+Documentação técnica
+Links
+Canais de Atendimento
+Biblioteca
+Portarias e Resoluções do CGNFS-e
+Documentação técnica
+Atualizações e Implantações
+Documentação Atual (Produção)
+Documentação Técnica (Homologação/testes)
+APIs - Prod. Restrita e Produção
+RTC
+Leiaute e esquemas antigos (julho de 2022 a 28/09/2025)
+Logos da NFS-e
+Perguntas e Respostas
+Perguntas e Respostas da NFS-e
+Alíquotas de ISSQN
+Links com Passo a Passo
+Legislação Aplicável ao MEI
+Eventos NFS-e
+Perguntas frequentes
+Privacidade e Proteção de Dados
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Twitter
+YouTube
+Facebook
+Flickr
+Você está aqui:
+Página Inicial
+NFS-e Via
+Documentação técnica
+Info
+Documentação técnica
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+Publicado em
+09/02/2026 16h21
+Atualizado em
+10/07/2026 09h41
+Manuais
+Manual para Emissão da NFS-e Via
+Passo a Passo para Emissão da NFS-e Via
+Anexos
+Anexo I - Guia da Parametrização do Portal das Concessionárias
+Anexo II - Guia para utilização das APIs
+Anexo III - Guia do Portal do Homologador
+Anexo IV - Leiautes RN ADN
+Anexo V - Guia para utilização das APIs (Municípios)
+Arquivos XSD
+Arquivos XSD
+Notas Técnicas
+Nota Técnica SE/CGNFS-e nº 006 - Leiaute da NFS-e Via
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+MEI e demais empresas
+Emissor de NFS-e WEB
+Consultar Nota Fiscal
+Acesso aos Sistemas
+Consultar Nota Fiscal
+Prestador de Serviços
+Município
+Cidadão
+Consultar Nota Fiscal
+Lista de Serviços Anexa à Lei Complementar nº 116, de 31 de julho de 2003
+Consumidor dos serviços
+Consultar Nota Fiscal
+Apps NFSe Mobile
+Municípios
+Conheça a NFS-e
+O que é a NFS-e
+Histórico da NFS-e
+O padrão nacional da NFS-e
+O que é SPED
+Benefícios
+Produtos disponíveis
+Ambiente de Dados Nacional
+Emissor NFS-e WEB
+APP emissor de NFS-e
+APP Cidadão (NFSe Cidadao)
+Secretaria de Finanças Nacional
+Guia de Recolhimento
+Portal NFS-e
+Webservices Municipais
+Webservices empresariais
+Webservices conveniados
+EFD ISS
+API de integração
+Painel Administrativo Municipal
+Como conveniar-se
+Como conveniar-se
+Como implementar a NFS-e
+Implementação da NFS-e - ADN
+Implementação da NFS-e - Emissores Públicos
+Monitoramento das Adesões à NFS-e
+Plano de Implantação da NFS-e
+Painel Municipal (parametrização)
+NFS-e Via
+Solicitação de cadastro no Portal das Concessionárias de Exploração de Vias
+Documentação técnica
+Links
+Canais de Atendimento
+Biblioteca
+Portarias e Resoluções do CGNFS-e
+Documentação técnica
+Atualizações e Implantações
+Documentação Atual (Produção)
+Documentação Técnica (Homologação/testes)
+APIs - Prod. Restrita e Produção
+RTC
+Leiaute e esquemas antigos (julho de 2022 a 28/09/2025)
+Logos da NFS-e
+Perguntas e Respostas
+Perguntas e Respostas da NFS-e
+Alíquotas de ISSQN
+Links com Passo a Passo
+Legislação Aplicável ao MEI
+Eventos NFS-e
+Perguntas frequentes
+Privacidade e Proteção de Dados
+Redefinir Cookies
+Redes sociais
+Twitter
+YouTube
+Facebook
+Flickr
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Documentação técnica — Portal da Nota Fiscal de Serviço eletrônica
+URL: https://www.gov.br/nfse/pt-br/nfs-e-via/documentacao-tecnica/documentacao-tecnica
+
+Documentação técnica — Portal da Nota Fiscal de Serviço eletrônica
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Portal da Nota Fiscal de Serviço eletrônica
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+MEI e demais empresas
+Emissor de NFS-e WEB
+Consultar Nota Fiscal
+Acesso aos Sistemas
+Consultar Nota Fiscal
+Prestador de Serviços
+Município
+Cidadão
+Consultar Nota Fiscal
+Lista de Serviços Anexa à Lei Complementar nº 116, de 31 de julho de 2003
+Consumidor dos serviços
+Consultar Nota Fiscal
+Apps NFSe Mobile
+Municípios
+Conheça a NFS-e
+O que é a NFS-e
+Histórico da NFS-e
+O padrão nacional da NFS-e
+O que é SPED
+Benefícios
+Produtos disponíveis
+Ambiente de Dados Nacional
+Emissor NFS-e WEB
+APP emissor de NFS-e
+APP Cidadão (NFSe Cidadao)
+Secretaria de Finanças Nacional
+Guia de Recolhimento
+Portal NFS-e
+Webservices Municipais
+Webservices empresariais
+Webservices conveniados
+EFD ISS
+API de integração
+Painel Administrativo Municipal
+Como conveniar-se
+Como conveniar-se
+Como implementar a NFS-e
+Implementação da NFS-e - ADN
+Implementação da NFS-e - Emissores Públicos
+Monitoramento das Adesões à NFS-e
+Plano de Implantação da NFS-e
+Painel Municipal (parametrização)
+NFS-e Via
+Solicitação de cadastro no Portal das Concessionárias de Exploração de Vias
+Documentação técnica
+Links
+Canais de Atendimento
+Biblioteca
+Portarias e Resoluções do CGNFS-e
+Documentação técnica
+Atualizações e Implantações
+Documentação Atual (Produção)
+Documentação Técnica (Homologação/testes)
+APIs - Prod. Restrita e Produção
+RTC
+Leiaute e esquemas antigos (julho de 2022 a 28/09/2025)
+Logos da NFS-e
+Perguntas e Respostas
+Perguntas e Respostas da NFS-e
+Alíquotas de ISSQN
+Links com Passo a Passo
+Legislação Aplicável ao MEI
+Eventos NFS-e
+Perguntas frequentes
+Privacidade e Proteção de Dados
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Twitter
+YouTube
+Facebook
+Flickr
+Você está aqui:
+Página Inicial
+NFS-e Via
+Documentação técnica
+Info
+Documentação técnica
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+Publicado em
+09/02/2026 16h21
+Atualizado em
+10/07/2026 09h41
+Manuais
+Manual para Emissão da NFS-e Via
+Passo a Passo para Emissão da NFS-e Via
+Anexos
+Anexo I - Guia da Parametrização do Portal das Concessionárias
+Anexo II - Guia para utilização das APIs
+Anexo III - Guia do Portal do Homologador
+Anexo IV - Leiautes RN ADN
+Anexo V - Guia para utilização das APIs (Municípios)
+Arquivos XSD
+Arquivos XSD
+Notas Técnicas
+Nota Técnica SE/CGNFS-e nº 006 - Leiaute da NFS-e Via
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+MEI e demais empresas
+Emissor de NFS-e WEB
+Consultar Nota Fiscal
+Acesso aos Sistemas
+Consultar Nota Fiscal
+Prestador de Serviços
+Município
+Cidadão
+Consultar Nota Fiscal
+Lista de Serviços Anexa à Lei Complementar nº 116, de 31 de julho de 2003
+Consumidor dos serviços
+Consultar Nota Fiscal
+Apps NFSe Mobile
+Municípios
+Conheça a NFS-e
+O que é a NFS-e
+Histórico da NFS-e
+O padrão nacional da NFS-e
+O que é SPED
+Benefícios
+Produtos disponíveis
+Ambiente de Dados Nacional
+Emissor NFS-e WEB
+APP emissor de NFS-e
+APP Cidadão (NFSe Cidadao)
+Secretaria de Finanças Nacional
+Guia de Recolhimento
+Portal NFS-e
+Webservices Municipais
+Webservices empresariais
+Webservices conveniados
+EFD ISS
+API de integração
+Painel Administrativo Municipal
+Como conveniar-se
+Como conveniar-se
+Como implementar a NFS-e
+Implementação da NFS-e - ADN
+Implementação da NFS-e - Emissores Públicos
+Monitoramento das Adesões à NFS-e
+Plano de Implantação da NFS-e
+Painel Municipal (parametrização)
+NFS-e Via
+Solicitação de cadastro no Portal das Concessionárias de Exploração de Vias
+Documentação técnica
+Links
+Canais de Atendimento
+Biblioteca
+Portarias e Resoluções do CGNFS-e
+Documentação técnica
+Atualizações e Implantações
+Documentação Atual (Produção)
+Documentação Técnica (Homologação/testes)
+APIs - Prod. Restrita e Produção
+RTC
+Leiaute e esquemas antigos (julho de 2022 a 28/09/2025)
+Logos da NFS-e
+Perguntas e Respostas
+Perguntas e Respostas da NFS-e
+Alíquotas de ISSQN
+Links com Passo a Passo
+Legislação Aplicável ao MEI
+Eventos NFS-e
+Perguntas frequentes
+Privacidade e Proteção de Dados
+Redefinir Cookies
+Redes sociais
+Twitter
+YouTube
+Facebook
+Flickr
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## anexo-iv_leiautesrn_adn-snnfsevia_v1-00-producao-20260126.xlsx
+URL: https://www.gov.br/nfse/pt-br/nfs-e-via/documentacao-tecnica/anexo-iv_leiautesrn_adn-snnfsevia_v1-00-producao-20260126.xlsx
+
+PK     ! ��y�  J	   [Content_Types].xml �(�                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ̖݊�0��
+}��+�-��8{��B�?
+�}��<�EdIh�l��
+˛��$���{�s�3�=ǳ�mc�
+���*��
+�r���B�~�:�$2�`K0�b!vH�f����q�2��T�:F�YJR56@��h�J�B������V�Dy=�~��و6Nb�!�;�`mb�e˧;'
+mEv��ע
+�� �Q���?���*��tjݰtN> �T#���>h&���#!2}�*��d�j��
+�~���+�t��w���#�}
+�l��w�%f��Ohxq���'V
+�V�i��k�� o@��৛I����F����@ׯ���W����y��L��?I��A��3Hc�I��\C��!��Z�n�o�
+�5�4��_Žn�s.9K�;��
+Mp��~������y0���j�{��I�#�A~��o�r��E]�
+iN�=��xɞC#����y��
+8��}ֵ��B�����1�%�C�jM�5�;�p����   �� PK     ! �
+�b1  q  
+ _rels/.rels �(�                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ���J1 ��;�ܻٮ?�tۋ�� �dv74Ʉ$���M�E�*�c���2�m�a��&W�qQr�N�Ү����~t�YL�rX�-F>���M��@ʗb�}d9��5�R�BD١�X�G�O
+R^�Vx�+hQTey-��
+|�����a�.8[l}~�?���
+IG>dYH:��ZL5W$��v�GY��qP��j(R�
+IVP�h�+�*EY�+�@�:�;h`��/y<pvgs�Аh��}��H�-�td
+��C�W6F�QX-�VC��SZ�:&���k3D�<%	7	�B5��"��(�w   �� PK     ! �slB�  C	     xl/workbook.xml�Vmo�6�>i�!���y�D�W
+���r��	�Ā�$�l�������v
+��nc���>��yy�	�_�E�m	��=ݺ1u��)�h���_g���5!q�᜕���������
+��Kƞ5 (EO�HY��tC
+,nXEJ8Y1^`	K�F��gbC�,rd���
+LK���k0�jES2di]�R
+@8ɱ�ņV�E+�k�
+̟��HYQĒ�T�4��V��h]2��9���<m�����2a�ۛ��⪂��	��7 �F_�o�Ȳޅ`��\�ɖ�
+����'��OX��e�0��j�B�>��l�������@]
+W�*S���X�8��d=�K�#�6x]E5���,���������s9"�� hڎi*I F?���X�+%���׏r��
+l0\��?j�	�
+|��!^�,7Z��C�
+_-�lk/7b�9�-�� 6��9"9�$
+�2�ťx�
+PZ��b�Q[MM�G������)VK��)FcBq-�@g�Ǘ�?X�SJ�<�{x�Wp��-�$��y4
+Cv�r
+�ʎ�`��.^���-Ϗ��ن
+:F�x�10��
+��;����S>m��Q�=��\
+��}{b�aM���_���P�=��<U�rN�N�1M-��-3����
+l����z
+O�v����F��tA��
+��
+my
+�E����
+׊�C�6�$r
+��F�D���;q���︍Q�̪�-�uͬ�M)
+ӾP� ��}�����*ꖮ�P]�G��|=���4�A��I���=�G���x������ 
+����
+������
+-�`�8O�!���4�L;Pd/�B63�"��G^72� 8�X��Z�iD���0q��5
+�^���^��^!�>����&X��Tkh֡���isu�8&�]��ӡr��o���g 'W
+'�+�������x�xJ���G��������,���}7�r]��<j����
+  �� PK     ! ���G@  c   xl/_rels/workbook.xml.rels �(�                                                                                                                                                                                                                                                                 ���N�0E�H�C�=�$--�&]������3y��
+y�#�I!m��U����������~Օ���J%c��P
+��2������yd�Ly�$ƬEb���j�7�eC�U����D�5'_5(�N�t͍
+u
+�#DA�}������Kc�w��߷�u�ЮK����Bՠ��?���`(
+�-OI��u�&fǘ~�%d0n���|��#���5J3R|*}�ќH�A��p������kL_����� 킉f�L�	g�	]0�I�d�ʾ���R��o��7�
+�ɽ
+�[�-X�<���!�S�^�ǂ�g�I�����ט|  �� PK     ! `�4�  �z     xl/worksheets/sheet1.xml��]o�0��'�?D�'���	���_�]L��6�V�8�M����w��
+��J�1��y�s|��r���Q+u["
+�(-וlW%���nR��:�V�ѭ(ѓ�������V���@hm���u�(�|-���D
+Ojms�լ"��*�����1��-3sC׵��F�� F4́�����?��y�t�U��l�{�P(>��j�a�����`g�E���e��GJJr���]�h�|\�4�F�H�����idģ��E�f	gy�%o���o��mdU��1�gdr�/�Iz����Ʉ�wEB������t1�$�p_U`D]��}�
+]�� ��bk_�ǖ_E#� �Q�t�I��Z4
+$S��~b�Z?��`S
+"֧�"�;�(���
+�_^�_�htP}��;��S����٦q_��^��ځf=��v�g�d�`���ǭ�ܺDE��Q��9��k��N���
+<�
+�g@
+��ֳ��B�
+qL�i�Є�?,�#�H�BB�Y�
+�w�D
+P��� )0M�W��$<$?@��SZ�/J��	#�=π8I���Ir�2
+)����g/'�1��S��8Ό�T�  ��   ���]���
+|�
+ Z���dU�G�v��p�\q~$NY����p � ��e�
+6f �|�>}���_�O?���?~����a��÷����o���u8|�������r����/��o
+�㇗�?s˷���>�����_2
+�� B^�!S9!�K9#�M 'ח
+B�&�+B
+9;+7�<;��rG�O
+q��q�jf�(�y�)o����??��4^]�^�l�ܼ?�gS�
+��ѻ�d zٛb^�;��
+��t���^���ZB�����oj��(��9J��0�
+3
+�)d�d��;	�
+ �_R��7��7�(���h
+?��`���*�;"2?O���0扰�7-L��|�����ґ&ŗ
+��]1�6f>���v��#��gy����_⏗���
+a��(
+{�p��k����+��#z��;y�g����|� _A-z^�7��
+_E�yvȵ��%��D���c�r��ٚ�_z����ҁ_�xq��6	�ʑf��D��MAePYAIvzh���#����IGD�g��h��/�����=~��?�
+Ɯ��@ԍ�q8���� ?�O�NT;!�A���	�D��
+��N4��
+T�����I
+���\|i �����w�WP��E@5�)�ǿ�J�WP�
+^�ǾV8Q�{vP�yGD�g�U�i��8ͺ�7b�9QXzU��8'�8��@'
+Ko
+*�@'��C;��OU��#"�Mգ}A�U{�H��,� �����g6��
+���
+U� EXｭ3�4��� ��
+MS�\=�V�*�M�k�AD[��]�
+>#�U�u��+J�(.)
+䋁3���)��J뻯s�
+�U��^�L�z�ze-5H��g�B��3�!E�L�(���4[�4P[�"�/���FNX9�ױb(a�鬰^sYg@b�x��j��~Մ@?E�IL
+;���)Ǚ�l������^Z5r���
+ (W�˓��L�� �:����k���k
+X����Ze'�/���(�!�(�K�
+���/���5���p�%c�TǺ�*���q��9�BďiWDc���X:Njk'� �
+_A�Fǫ�B�
+_��齄��Q�
+�d���ǜ�
+Ķ4��k)ĪK����
+���K�������7�a�3L�w�_��s ���}
+�%^P��B[�w �;[�K� r��q10��ǡH��E;.��&���л��٪��*u����s3�{�������K��t�ǿ��	�9@��~�-,y}"j��
+KW����:{���
+��$ĥ�|�+��q>^CR�FJ�l���4�H�_�v�E+���9)�uC��y��E�$հ�Xx3[uVP[eVP+$ס�¾ �>-�Ѳ�w���@#�<ܒб�`q
+���Ҍ��W�
+���řAQ�ô0TY��Oİ��Pٴ�n�xbq (����
+h���+X�]�)�ak�7�\�_Q@?�yՀ����STX5TM���,�?d
+5��5l2v3���w�{� q,S�|�3 �1��(
+��w1�w�-l�Z�����ŉA�8���7918T:��|�����9��/�$�I5
+���0�L�Ҽ��e( ����3�U�z��񮨚��WF�q���SP��n8��pB7��#��J]�Y!�
+�&[��v�V
+3 ��L��螡n��
+�{����SP>�8��Ӭ`/�"N� ����Gы�Σ��
+;&E�xA�n�EՃ~E�F?�g�%ݮJO�$�N#|r�dY�
+U�ֳ@Q�?�1��ÿ��:�(��Em
+������t��@7�x �þ�5��8˄���b��𝥗ڪ�@sT�B�Э2l���J�}�/5�!�w[��4�1�ħ���)��?Y�X�$�fP�|�D@�?v�!��
+�O���x��ܲ��]a�6��ϝ��ǖ">�(�}%��4�U�"*��=/է ��)*L
+Ey�bj^Q�}>�i��Ս��ܟ���=����I_� �����xsX�w�7��	w^��cR�b�
+U��P�~^��n�,���'�~��oz�X:u�&)�ʌ�<�E�u���
+
+��
+�.E]�׆��)�7	
+��p�!��mC[�����ݬ V^�B�>:�,�n:��S��O��mU.�uR�S��N�K8v�����p�6�kA�Z�sb�.��������G�
+/�)�z_��<��
+J
+ �x&�m
+�[�����c>�4j3
+����PH	/4u&1��m��BB6T
+�T
+�����3���
+[�YH�
+
+b
+��ϴ��]�4
+��
+T���X^�Ή�����
+u>P�
+�J�=�1�;��) T���30�b>�6���f]�%�
+B
+P�ZӞ�"튪iOQޭ��
+���p=�l�:�~b@
+
+�/g��y5���Fm�yWM���(�ڴ�=CE�U����;��s+q�$�
+4p2�A�A��$�5�*�}�9ɢk[bkg�?EE�Uݖkf�/��������<�U��1���
+b7a6{O,��
+�v,�f[$^ ��9���L�.ik���
+j9tu�x�P��΅W�l��S�Y�1ϥ}�����������|P�Ƿ�K?
+bA��BA� �3bA��BA���`}��}��Q���խ�X��ۉ�>�<��s��
+��)�ֵ9�kxC��=G�?�0Ʊ�)�juG �+@�fi�
+
+��ZJ���U�
+���x�Njm�b�>xk�jW�-@�Dk�	-�~��D+O�A�
+��n�In0�\����y���:/HP0��
+��B��`d AB�OQ
+��
+zz
+��[Z��iYW�/�k(�Gi��O�j0E
+�'����P��P�	��
+5�
+�k���&�Ri������m;KU&^�W�Y�J�.
+xSfRk;���7�*U>mo��
+x��#��"�<�[r���(y9�W#����	7�4b���N쭷�y�~Rk;QG�*D
+�k���jMӾ�|��~
+��:[�
+��)�@ޞ���b`�C;��&
+�j0
+?!��ܼ�����3T���`O���h������e�<��ț�+����{����]��(�[�Ҍ�|���j0�᪯��M�
+�л��Y
+��
+_E����\��<JʟL�b����ڷ��
+�
+�S�˗�'��� 2�����lՅ��BN�گ}&�xA_a��~K����]ߥ��<v
+�yw̋���v_����ΘW���E$^Q�"��qg�k�!	�����p�o��v��J�K�J<�^i�
+���!_au�OQ
+�
+�*���u
+B>/3>V�|���Ӫ��
+]ʖ._9�?o�׿|ॹW�A
+�v�1$�� J��L�B�
+^P;��᾵t��B��x!�����t��Kۆv�z�rX���������i�V�
+ũ�Pe>p��
+������+]���[$('F�r:1X	/�����+A|Q{Rk;x�6[��83ާ��3�|W`�#��q+�kq� �L��X�w]��c��Z�qŻı٪]�I��̛����
+�
+X�-����+@/�5�q1��Y!�gE����v\!��jWd���p��~J�KWlI��v\���ꎋ�w�B,���e��
+Wd{¡p5[�+�=� ��3��d$��[����f8�� � źY�w��NH�|}Rk;�PE\�����j
+8��Hu3��}�;KWtKI
+��h�|}ͷ�Gi
+ڱ�b�`P͆;�
+۩fE�*T�
+���
+�Ya5���)�/��%�/���^�PJ'��<.�"���5�g��5�|LZ���I�]��l�s��a�)�?���y�-%}�Q�K���Z=J�
+��yM
+��0r�m�r	á�c��o����?���'1�\���c�Z� V�Y
+h3� 
+���ߺ��2)���)*
+
+2T)�6P<Э�h���ߒ��L&��;�@V�Y
+H��X�mbZ��3+jmg���:���z���z��>��p��o��k&���X���xҼ�|*��|N��0�"�\(5[5�jk�y����g>���w�jy���L #�]�iB�ݱ�*�:�
+</�*l�z�5����OQ����c��
+2��G��G	���u����
+{i���P�
+�I�ńIau=����4PyB�P~@p=i��$<V��Iܐ�]L� v���*;I{
+��pc���������g@��3@?f��Ů��π-q{�ĭ�]�I�a��˟��h�[����_8UX'���o���0D��2{�z�1��Z)�y��:���]l��3`K��w3�]ʥݒ/�;J3%_�U�W����W7kad��Rc;e�ڪ��
+K��({n|$]a~�oi�k�e1��`1.���ԋ�Ċ�FeRk;�'ռA]�K��w�
+�?Rϫ�j�S�%ko;�vi_�<o�I�^�1�
+�%�Iau�QԬi��Û��=��<{XG ��o!<VE��<z˄�;߳����l�f�"����(�?�0)�
+�9�����(��B���P�_?x*�
+ey��	W�"7����0J�.��n��=Q��C��t�٪��n��D�y;Qa��-�z˄�+`��u̳l���`P��Y;)�.�S0*KxCU%�u
+\ȿx�Xy�6qo���^ �{\�<$�;�+7D�p�Ma;��]
+�l��?U�1�P��'Q}���/�ȓ)X�<�a��ۯ�.'
+qp�ԇ�mPk;ԋ��t4[5�j��_�3!��E/�y��
+�3���<h�鼉�k���6��ߠ3��%��ڊ߶rJQ!�H��zնr2SE�xX�}��Y�������_o;G����O1��F}6���*��p���$&��+J��_�go���B���2����^
+����)0w�A�$�2S��[=�t�2�y�()a����S���p��yJ��H	�<1�ֶ剣����t�  ��   ��t�AN�0E�by��8�Qh�-U�*�@��2I,��5�
+��p.�� 
+6���?�����a/x���\Z��
+��Ⱥ����FfVg������Q�Y
+��e%��_;���b[TJU��F�eU�R�gd���
+\�X-"�m�^���� �
+@g�Fn�@�0�c�����y�w�|c$�M�ܽB��g56�cJ�7n
+�T�:���۽ZN��N�锬?��/<{Cz�{ �_   �� PK     ! UI`��  �     xl/worksheets/sheet2.xml��ێ�0��+�
+���pVȪ�YԭzQU=\;�$V0��sXU��
+aSEʢ�
+���3,�N��Li.�
+a�E��,x�����,F�6�.H%k��g������Q���2f, �:C[c��q4�2A�-VÛR*A
+<����H�9���\7t�5�	��e�)[I��6=D��Я���gک��+9B�g=W�����+}�S%�,�M�pzi�Y&N�_��NIT��73 7�ܚW�<w�"K��iSKE���	��Z'����`r
+i�dBG�u%'a��(v�mk����U#�{���	
+GX[.��y�����Ga�E�8z�g��ug�q��0���<���
+Z.
+��fe)Vf�N�$r����qv��ed��Ul�d����r�n}��.@5�m��"�
+X�}�`��?]
+��Gx�@���>Gͻ������d_����������{v���`7�-�۹��"�n=��l3�8J�8
+��n�,�/�k#��~K�dD��tX���n�����߀�itX�7������O�{���܋��p
+GX�xZ�hp��
+�ɤ�P�.Ƕ�BB�"/
+�7�b�6���Ykb����
+�x�`
+�؟�&>lk�����z�   ��   ���]M��:r�+/t�/O�fnH��
+��ɋ#|�Y�B�烽��,�}dP��A��� �E0
+( Q �ӏ?��9}���˧�����Ç�~������������o����p��������z��}�m-��������/�>��݁
+��@2r�wnW�z�G���w���^�������8�Ѓ<�V�У�.�
+f���?�vcn�Ǖ�쀃�a���]� �Ok�߾����?�u��O��\A��:����
+Mӎ�
+4\4_d�Q0��}z��o1�C�� rv�b
+��U� ��8���w@/�a^��jL�۰�v�p�=�
+P0�0�����!s
+Y �p���H �Q
+@��w�;n� `4��4��v�<���
+ Ӎ��b�3��1dk
+X�3
+k
+�������������&�!�t�u�Q\B��C���J
+�q�DqIP:�
+^�4IT��^4��.4I� ��� iV/�3f����a��f�%
++C��&F���<t|Q�Dl��G��%�v)z��c.���0�#�QP�ѽ(`�1� ���brˌG�dҸ_ ���+���c�ة���"�H)E�H
+���D�E�.���t́��
+����$�S?1�puB;T' �¯/t��^9Or  FOaj޴c����ͣ�2�0�.���s^�iG�s�W+���, �4�Oߦ92�D�
+�&�0�f� 5��c2ρ�IދL��EH
+yƐϠ��h�#,$���|Cdҩ�ݥ�ɺ
+��
+@
+�Ɠ=�H��
+�?4��u-̳3ˣ��L��_v����{K���?��;j��	��]�)�L�8��x(Xq�.��p�+	�1�E
+*A
+�i�j�H�r\�	P���g^Z
+��6k�byuʦ\fy�X�P���~��GU��45�h���HS�"(�GOGj
+������}5���Hw�Q<=f��E�LV�B�ތ�vU����C+�v�)���GM{����p�ݷ.�)�ݗ�@+<B��W�2
+�-��gز<�,A9<&9��é
+��sYO܇�(��,;��)��F
+[+�B8ܺ���z�j1�V�@A9�z�M�Ѭ޶M�j��z8ס�
+5
+�����>\��.������)��
+
+Y��X<�gv�6D^R(��iwT�>n���Œ
+��m~���n7\ny�|�����̳3w`a�gE��M�Z��~h�� ��f����۫�h:}�c5K��j�tU�XEwGF��P��b�,[�fA�~��{�ަ��)����d�Y�M�z:��e�fz�+���C�JhwT����pe4m%�u�ز�V�=�H�1)�T�̭
+��T�v��`B��3��)������C�2�(
+z���9SP�X^��,���Eب�̃���б]@�"Y�#�i��\f��䣂b��
+�
+z,PG���Ō��<��SO�
+�fD^�!�"�_kI8e����2Z�
+�]�WF��	d����U�ZO
+\��VO�]�ͥ�!��
+_Qdi-�PpS�YZy�`��.y�+#Za˄��W�e���*l8�z�Φǳ�ۖ
+�<�Z/���
+��?��U��:��fږ�o�nl`�
+�Y0��*@�g�Z����C;bdU�9�Ӂ���IY���
+�5
+,Y�
+N�
+|(XqI��ĕ�@�l���Od��N�|T����tO%���(#�'���
+|�`�K%+=�	�$\�ϖ+Pq��B�V7^
+����
+�������c;��\�J�p�����%w�׌�G
+�sM��K�S��z*�F+î�k���q�Ō�3g���
+Oh^�� ��f���V�䭫��ο]��$e��3�
+
+V��+	Y���(�x�δ
+�Ŗ��Ϝ=���{��N�Y:n�e����g���C���
+i�%+4Y�+Pq�#3���f6��Oy�ffl``z�O'��	y-|Oon�-.N�����+o ��W���'�H�����eH#̂���>�թ�l��S�2��3��:b���U{�8�Ɯ �
+�l\���@<�'�ڳ�7�-l��^
+x6���
+���a�&1�1��Ȳ6)N��G�٫>Hx�FA�D=��)�L�>�q+
+���2�/\ԙ��,(;|XA ��O
+'��gje<B���3����ge��
+Ӭ�
+V��RƸ2bڳuἽ�2L_8oTӞT
+_��iZ��n(
+ْ	�d���
+'��ܺZ*dweGqeD�g���}�e��侰��]a
+�m�1�{zд�l�`�(���.>e�
+	��S��
+4���>���]؅S}Ґ���/���05e����8m�p�ߋ�
+
+`i��D��^��8�Ӂ[ɔk��ʞNٜ��	�%�mm���	�h�g��U�(Qeyr�f�hIu�����|�&����pe4�=[W��[f�_y���X�I�c�|y^3�M>~tO+����W����ӣ�c�Kv!~�����ĕ�^����'O�,OŖu
+�S�'.{�4p�ѫ�&Q�v
+�q
+��	�H!]+�$9U=d�df���V
+^*�dԦχ��,��]���t8����Y��!��T7}��x�O �7�(O�(3c��
+:0��,O�w�x	.�
+�Cm�$_9O~�M�n��}{���~Iۖ��+.l���bY�vؙ�q�����N�ύ�o�b��6�n�ViQt�3/ �K*W�!���=�%-h`�
+�Y0�0=Su�h
+^/̊3D>Yy�
+���6�ٕ3�������_�	M��:��ǘY�դ��O����c֠��N3���^u��m
+u���,�4\
+�^
+T��=���4�a�ف�;0�0�C��S-�F��	�{����`��o| �n�N3@A����^֎�1�)���S������
+�z�O����M��L�|�����݆��P�
+�_@���|��7���gf:�s/(���Ŷ�g	�E>��"J��!B�}�w�a���R�B�#q��'���2=�Q��� �5�z2y<�d���d>�pGu0
+v	[���d\p�G%�	��:o�iL�Oy��?���E�O
+=1l{�Ѿ�
+�}3�E�����SA�w�/.lG���4/�����<K�n<J��~�{
+u�Ⱥ�|�Q��� ��?���
+T���G̷�����f�{���:����c��F	��&��b:b�^}�B�@�bc� ɕ�
+V��u�W[�.���,(���+/���Nn���yjg�ƞ�FQ�H�
+J��
+�2��`��P�BvWWFd{�n��-���^����������� A^ڙ�'^�
+"��`�	*mhD��̳3�<�#������$J�
+@wT�_E�@wf�}>D��8�
+�y!�5���:0sf�z��d��.��c~��jsrj��5%(3$�jr�k���a,���G�֯LI3��*3 �
+N�-=
+,wa��9�H>�̯��Q
+��Q�˝`+�N���#����|o
+��i	��:�3
+�1ᬖ�Po��,=�;�6[rNׇ&�;b�ם&�jo�)P����*Ř�<Lc�n��,�YO��d��e'����'� 
+����#�
+#V�Q�	���;:�D�[�ف��Q�� ��8 �'#����;�)�P�{�	��ԟ�
+
+�(c\�v@�2�3w`���Po���W�B��L�P��@9y�9u`�
+���g=s�g���|��I��l�/��
+J�
+�ޟ�
+
+ Q�fo�pb���`ܦ�l��ف�;0�p�� O�ǵ�&O|�4=�Mr8pPrQշ߀��*7>E�`�)]rY�aV�Պ�Eݪ/D�w�u+
+�z����s~���٨�#�gT����'�9!7�{�n�P����� >x�+-��g����y�w�l��M�E���'��VF�l�5�EzGu4j�}5uC�y
+ز�_��l+��o���������W�=[�
+��-�����fY{6��_���:�Sv#i���<�u>��pkh��G8�I=�<�a)���g=����_�icEQ[� ���
+�	��kC?�8�1_9 �<���tf�j!}��(��e!�j��x{��G�
+Põ�:(P�;�
+��f�M���hs��E8���>!}b!�����FǱ&�`+p ���‽���`�����ag�z
+�	�۹��Q����h>o���%��Z���k�
+\im\��7ih��?;030-�.�Y�KҏvTG��lה0�bՁK\T����.Q�<JP�
+%҄�K:��
+�E8�qI(��}�1�bՑ�6c���	���Va
+�
+�&4
+cfy��~�p���v��� �֨�
+ �k
+@s�[�p[%\�v�#�9��ag�n: ��8 �?��Q`�����
+_�$
+l@�8�Ѽ�2���D݁�;0�p�� O7m�>�~S�?B���k��	���s5@����9`o�Q
+�b��k&K��"��8 ���r ��GuJ��'~^�wD���Pí�_
+T
+ ���p��P�����ag�z
+����r �cTۍ�����
+�[A�M%Pq �7��4�9	�vf�i���z
+��ˮD������?lrGu� �Y���Rl�MYt�eih������"��8 T��C&j�ZF�96�#�S��a�	�8jY�
+�~vؙ�i����s�>^�6�˭�{�]S~��2��19kw���(���k>��`%,A��3
+�X����d5r�a�Q4�,�^��H���}Yk��x�E3�� e׵�'��"��ɾ��e��
+ڞ�ƶ=�F�j����6�^�g<�|8�FM���
+d��Q
+��e;��
+l�o�잂�@	�A3�8�q�{����ȿ�{=�	����D�
+V֨�ɄjNqQg�Pí�sy(Pq��Ʀ������܁Y��
+��:}SG�V֨�c��V���g.�jeR��e-Mh��:0sf�z
+*�Q����;����"�j@�Z�-��p��r�h�8�YY{
+�F@lgg=�u��UL�
+�4�c>��i��V�(�‽���'Mh�����ag�z
+�)���i�=/�ޟR
+a����#���o�M���3�dR�����
+il0?;�{�~�ֳ5ֿ
+�z|���5�
+NQ�:�N����pM�D'��5�G8��c����_f�z
+�W`эj;�CZ�>�� D'�n����o��̳3���Y�<�}l
+<�YQ.�~�ؓӵK\'#p+O՜�$�qJ���
+��|
+j�wf����:��6��_:��{����f��@>�(~�v�-(�'�<��̳3w``z��M����k���]�7>�[�wTS�">^=�X�T{�P��K
+9\�$�<����7w`�gLx�:u���ž�V��Q
+��c��Q}B	�(Z
+x�C��G���Kcۋ)5V����;��^�gB��v
+�+Xk�z��ǫ�T��EȯO.l�W0
+
+V|�<��A��(�L��ͨ�k=�X�̯��iܑ?4�}=�pe�˺vyw�d.<ܓVw%H٫���K٤�
+#�8�~E��g�}��C��/
+�P]�0P]s�+�O��nYs�!{
+�"�5ۥL�]�60�0(G}EY��~��c;���m`��e�O�
+=
+�S��ǂoY:b�"ۍQf�q)���f��XH� b���;���=4��G r����"l�[����a]V���
+o����7di�9��f���͊�񘇂�H�� �b�f���R
+�mg��ȧ������?��9}�����  ��   ��t�]n�@��b�����?v�
+�@�J��7L�*`�8���t-�X�iT���9>s�߹6��1���pN���ӸH������z2��EZ宨s���W|^�>gJ���QE@T�P$Q�\en���TP�\�:����b�b��T
+u<��Q��:
+u<��Q��:H��<�N��q���q܃L
+��#SO3����L=2�,��������
+e���Q��
+e���Q�
+K=
+�=`m)k
+֖��`m)k֎�6���X�`m)k
+֖��`m)k
+֖�6��1��kCY�6��kCY�6���GS��GsXk�ڀ�a�K#��0�J�J�64�|�Gã�Gãi��h��F>�棑���h�Y>e��b�=�{�T
+�(��B>�棐���h�i>8AI�(��	���zϊ*wP���
+$�G��Q�E�m�>P�J%q�,� %P��R+�;
+��h�(��MB���$�J�U]%Y���d}��TPjI�J���G�#��
+'`
+�@�
+J-h�
+�����UiK��Dڒ>��I��Dr�l��\%X
+J�J���4m��o솴�w08�I
+�[`&�/�F�
+%P��R
+�Y��
+�&�����/�b6��ź2�ſ
+������0tZ��qY���0X��f�4î=��C|Ə�,M�v��~�
++U�\�9�t&�3�I���8v��>6�8L{=w�x��җj�q|链�������4O�nh�ilƶ;-ҾơiG��h��t�l'��MW�~�y�ݮ�*�ͱ��������%��^���'�I��
+�K�v����!��м����1��g������q\�  �� PK     ! ͻ��  �&     xl/worksheets/sheet3.xml�T]o�0}�����|��IPU]Q+������8X���6�j�ߵ��JHU"�$���s�=0�:�&x���.P�(�-S�h7
+����(0��mT��t���e�W��l9�0�f���v�(2l�%5��x
+'�ҒZxԛ�t��ʃd�8&���E=�L_¡�Z0�M����I4o��f+:3�Iv	���y�M��
+P�E#�'E�d��M�4]7��!I)
+>��Xƿ?�$�ʨچ�
+��O�/�2���t��E4Ii�"�ߨ��$%ّ
+��M?IF�dn\z���%���q>��m1I�<�.�|�ݮ�i�I�]�h9�>y��yG7�'�O݃ja�� ��h9��Y� C�!��
+t���1v)>��{��>����k{Û�����k��]�=茝�p��?#�]��vɣ��%V�����5�5�F5�Ee��zB����
+���S
+fN3S
+���@
+��7҃���&
+���ȁ��Ur��=��`J�$?��y ��a{��KģPL�l��~? ©�q �0.�
+�1�
+@�0���|�A<���:�(^�3L��"
+���gGSH���f��r�~����F�c���  ��   ����Ko�6����U��MQ�x��,�Ҫ@7�R��E;E����x)��ǔv����s�xy����r�l_>_������>�2������}5��m����S���~�:4>���4��W��k�٭����� 
+AT�
+��HK
+"G�!r"H"g��oEU�t��:DzA�N
+'bm���͓���������߾��~ݭ��A�Ƣ�&[���$/�I���Hs$������<�ttƐ	�,�(<��m�@[
+k��C9%��
+��;ua�Ƣ�{T��
+�
+��iYzd
+���2�\A���ڑ�t�e�
+$7Ɇ�E ��
+J���Tc�ʌ���Bڟ�.@��@9�RG�`�
+��@$9a���NB�����69m
+	�X��^��{���Ww���G�)ˇ��Nr�sc�*�1 c�~\�
+J� Ls�(Lsa*���4�tq�n�B�Y(x7u��e�
+��L(��C{(z�D�%6��B��!�[���#a"�-l-�՝	��ltl�%L���/���%��n>���_{ȑ�6����m�P�
+&�"�	y�Lz'�.�4utְ����2�OL�J&��>�
+�5�q&u-�����%P��K�
+U&�_L�
+�(LȎN��^� k���-�io
+Z'ua-�m�Q�B�.dK�(gYG��0Iu	���Oв�+sVOh<6�{����0�F�ͅ
+K jN!Li
+aN;()��'b:6�.a�ޭ~���I���"���,�m����c%�ٻn'�B�R���
+��|�����
+a~�)A!�
+�D��KT�M
+�z�����>.o�GϿ=���)�db#o>���V��^WPuB�O�n�Q��à�P��K`��A^UPk:>u��
+K�C�f��&�w�~�lH���y���8����x�m��pÊ�"�ST_]O�0HO���@��!�0��_U���^Є*1b3/�x:?x�h��� ���wA�t��َ�IW�e��Fg�\�~
+|3z/�J�>���j!�-�����RQ� }E�B�t� PT-��њ��/yO����r��`.�� M���5�vj�(�y
+n�݈@� P�E ���O�Q��D��հ(x��n
+��*1r3q�.
+�k3���@�00(.
+d<]��SaI��
+��9ܻa@�� ΄��Z����f��)~���.n�p~���Lp�w
+N�%Q 6XW��[����\۽]
+
+��)<2Ż��x#!}�ąt�e�mv�G���MJ�љi�w
+�sE�B=Ԧ&݋�����B����{{���{�ŏ~��n����1ɻ{a�f��LN�oFN�t�?�����>�5��>�������S�uUM<ƏN�ѭ�s��s��㏮�FA�*���K|)X��w������ƫו�n�����Q����=�
+|m��&��������   ��   ��t�Mn1
+��� �,�b�����X�1��L
+9nQ9=�d��˳�{�*T�P��4�X��E}�bQ
+
+��E��M��n��G�{�d��W�`6Y�^��PL�r
+U��ܖ�Y��70�(�]���p}::��VW}E9�
+;X�'����x�q����
+�
+8
+n��PCٗ�.6�s�r���������1X��z�+��Lo,?-!��  �� PK     ! ��bl�  �S     xl/worksheets/sheet4.xml��]o�0��'�? ���t�������Z����X��N�j����RD+�`������A���F�f��"�7�*E�Y�移Y�<cYS�Z5|�޹AW���{�_͖s��1K�����)�\2㫖7�R)-���z�VsV��d
+�0L�D������PU%
+~����=B4���f+Z3�d1'�~ݵ�B�/���A�'����Q��Ԑ�Ǭ�.�h��$E��Q���
+
+5L�4`�H���$
+���D���|MNF9��/��֕K�w�\���zM(��3��,N���fk2�7?R��,J�h�p>yЫE�6�����A{��O�
+�WQ�Z�R�!�"x�WK���G�i��m�-�ޜͽο/J�v
+��+<����9�B�WlW�kU���B���H��$A��/����fka��IG,T
+a��I�
+0�;�qĤ~��<�2���y-��;c�
+B��#V
+ƞ�>�h�Og@C
+ƞ�s��.�i*� �{B��$�I���L��=$!�g3����^G�ǟA{�=!�O�����汱0�B�4"�y9rH�Bg�h�
+}9�٠b\�
+������ҫC-��\ �.t(9�\�D���H�
+�v�
+ĝ]w��  ��   ���\˒ܸ�Ŝ싦I6�ᘙ�m�9�jW:��Ph�>������$
+@Ue
+H��=�$ f�Uh^~���[���ǧ��_�����]q�������~��p����<�==|Z���<v��wo
+����O����O���r3(��4����('^Sq�HV�X�T}oU���O*�3ʃ���j�A}�d����T��OT-}ɽS>�_���:�V�
+~{z���������o��i7O=
+�6�G�#kGuT����:��!�SQ�4 22��&̈́�X��YB�jK�� �)�4ʐ���~�
+����D�0R�8-�y�^TO�+vSU��g�M��5F�T]t75I��i��sa��t!H/��������������3B���sꩨ2�@F@�؀�s=R�P˙
+j��o�����o_�?���D[�a��"�;��j�
+TٙUWj�%:jy�
+��E9�%V��
+���&IwgO*/��R�z>Q!��ƹ�,Ԁ���
+�8Jn�[
+�>�/�䜦U�����H
+���+
+�
+!M�ғ��'�o&*�
+Y]T����
+B��'��=������k�^wb�Xޠ>��IU|�ϢuGݩ=�}"��UWh��e����]�D<$|Л�mʸM��oP�D�MX�e�$׺֋U�i�mK����2�Q����
+�<�n�z�A������K����_KM�
+3���^7YsQ%͞����=#��3���1�����=S_p��r���d�jkK�tz�%Vt�����z
+d��o��u#\Tj:��o��eó��y�M+��'������%���c�t��T�6�NF�3aY��ci��Ks�(o���h�J՚
+ ����
+y��^�D�1Z
++����^U4�_����L9c��
+�ɭ
+ı������)�F
+H�� H��Xy�^���}�x
+�w,��QO�D��G��+��}���:L5E��.�u�_�H6i�!dh����UEz��jOX�;S	�͂�
+�M?��3#vWh���[᫲��Q��cE
+d���X[$�mO�:`�4�P��a��+(N
+�Y-z5@N5W
+�YZ�L����,�=��
+LAa�u
+��n�T��0&�V��
+5ecFJ>-��9chf&F�vpf��ǋo�嚎��C�"���8W�~��[
+�h	YuY��
+�qN&�v�ԡ�2�����j5cMT�I�B��]�}U�O?
+j"���=>�SH&�V���*
+��p���O����{ChB�3��L֧�>`G�M�X&�
+�E>�qv����X���Z����֡���g�ڡ�L�
+vp�
+���0iG�M�X&틴���r���B,��-�|!�uT�Dj�{d֡
+Y��θ����^�hGXM�
+-�t?W����>����
+�,V������G�'�PzΣ
+�qg��D{D��΁8�G��zy���5BЇ���"���
+H�r�Ǚ0#%���)4!�"��L֧�It���6P9�I��}iR
+�W�t����@��Ec�NzE"V�IFv �
+I���l�����0){��3�T�eҮ�4)f
+V�t~��L2X�"QQ
+�
+ۂ�6d=�d=��L���G����W�
+���]�ba�H����<�x��LpE
+Y��yշ�&;#��c��άG��L���G��uG�c��]�*|5	����FO���e��4�Y������U�|1Zr��.`�.46�w�,�I���e��:+��x5�����2݊����E��K'"��
+�ۉ�C`�dB4w�_����6��m���E0Z���z�o��ȱқꮆ�E�8�(u�;�����G7��f'Dj;
+}-�����^�	k!�0,BWv���r�QP�%^y��:��h�:8�0�d�!��t��Zq�T*؟C[Y�5�h�/�P�yb�!���4�:r(�LP�S*n�)@���,0�`U�N�Q+�jN�C[�#��3
+ٕX8
+��ΘXH���O���?`rB���hI~:��?c�0Y ?�x(tԷj��X|*>�k�3�.|&V��
+JB��˄�R�����xwI���tw�!��w)��!��l}<��hѢP)�C�E6K[X|�
+z��l�
+!�e�yuw߹�f�T��}��q����m]��5(�E,��G}kr
+5r���%"�e�^[���
+t_�]�
+*}hn��ǻs�7��Z�:�z��F�&�f�.��s`�U�C���)�[-�[No���f-N(�"�!�#4 4"4!4$4��rM24]*�	]m�����E�C�Gh@hDhBh&Hh�/f�A�𢡉H��u��V�W��\���%-���t��
+s������w��/�����{��Usť�Ɉ��+s_j��T_V��
+���	�� �+���W�
+_E�ӄ"P�	@M
+P�P�P�ЀЈЄ�L�Є�Ϥ	A�&"��iBa
+����E�C�Gh@hDhBh&HhT҄ C��4�ȎkPS�"�!�#4 4"4!4$4��I�
+MD,�ӄ��	@M
+P�P�P�ЀЈЄ�L�Є�n�	A�&���3�4�؆kPS�"�!�#4 4"4!4$4�v��A���g��4Y�r߉P�P�P�P�ЀЈЄ�L�$��&24ٻ�<�����
+���	�� �	�;Ë�&{��'�w"� �"�!�#4 4"4!4$4�}gx��D�;_��Nt����Z�:�z��F�&�f��&��ϱ�EC�����cjj����	��>6�hh�w{�},B
+B-B
+B=BB#BB3AB�ǆQ�b�u�g1�L��Xc`���=�7���F�
+l�'��1K�������<�a`N 
+�
+�	<'`N ��@�9� syL
+�
+(�k	�7*螮�!��z�@�9� s��	��cR ��⻖@{�"�e
+���
+����9����	�0'`N �I�0D��Z�
+��p�T�a��s=xN ��@�9� s��	�1)�K�]K 
+1�S�\f����<�0�[[��\����x������+��=��C��������   ��   ��t��r�0�_���^��Ac��ؙi'�
+�f
+�b�����{��O����=�{v��ʱa�]7f��ܧ�Z��o���"_vʮ�ƮH-�#�A&��A�1Z�hIM�@V"Y��E���)��)u!
+bER�
+�g��-ȭH
+��J�7�b��9�N�9��0�"�# ��;�;�
+A�rL����0�&P�$�M��$�Ip�D7	n��&�D-HIJeaJ���Ɗ��R��ceI\Y���b�X�u�N�?�1�=H]��)%�mn�8
+�O
+�7��{L�C�}z����!���'�Y�G�w�T�D_�=��N��5����#��
+�������QY�M�Ka���wQ�d_CJ��l��
+Uv	N�o=rz
+��
+
+�+��ȧ�p�Bh�q��9>��W�WG�n�a�:���B*;�0��zD�n��8t�������٠���u���a�is�����-s��  �� PK     ! YB9��  "     xl/theme/theme1.xml�Z͏����@�]���{a9Ч7��z�]�HI��^�p@R�+
+��K�i�K��z(�h���1`#M��<rF�ኊ��@�bw/3��=����ސs�����
+"$�I�
+��
+"Ɍ�i��zO&�J�CR�d�OH�[�}r������ �O��z�R�A�*g0��
+��~[pc�bY�
+|	zcV
+}�Y�1M<���N@�9z�X���mԏ̑(�fL�i�$�)a��Fȵ
+0�.0�z0Ӝ_Nȕ��R�]�7^���*>ȅ��#[���\.���fN��n'�Ga�
+l� S��Q[�o� ���I3.e�A���
+[e�ݝVP��%��
+�A���~���w�q�
+ހ2|c���~�f�
+(�7w��Q��,�E�&��f��n��-d�١�i6��0�(��mt�)<Q�b-�ϸ@V4Aj���A
+�R�%R�2��P�.a�� B���cq|@pIZ�&rgH�Ar&h����� /�����_<�ϋ/�x��_�.#����q�,����?�ﯿC����~��On�,�_���������R+L���_����������ҡ�'�
+�ИHtB.�c
+�S���T�LbajI�t;T�TdO֘�p}b��,��_=���Eb��c�Ql�9g}.�x��*Yx�J���Ū�{��k�N,�V)�W�R9��E��D�%I�B�7~N���>�Բ�1�	.�B��(�c�4ɄN�@*�i
+~Y���-�
+?E}�\O=$6�f��,3��+�c��	�Y��GXE.�gk1+�FR����q4�)]2�<o��1$6�ۏ�:��B�s��#�y9��ǩ�3M�2�Sy!��)W.�1�W��?�d���Rb�����	$�2�"@�/+���}����f
+L\Y�'b+��uFG��B���/���S�>O-��D�U�+�
+`;V�}B$A���M�GTZ!{F�|����ĳ�I��>�'�u+t���9��yxB��xq�
+��
+��za�v�{�׵���&k
+�峛�K�!7����ƶ�`fMP�St�J� b���uՈ��r
+{�n����wb����9�B�˟���`]�[��;����.g�W��
+�*9%PNv�mks��x���;�|���64�
+���44E�M��c6~��>
+�ؙZ3r$�֏�ך�͞�٘���\��	,�R`#�W��*:�p
+�C���\�\�R��K�62�fG�\�m6�V�1�g۝f��L(�*��l<e�U�2t��j~���l�nhٛ�(Mf��9H�6��!�w�����E[�߸j�@m�x�F�������A�>�~�\��v�{��>c�r��⮧;�����O���x�"a����M���4x2���<:���?p7�u�p�EO�b�
+����N"�rKʙ�%��x��C3�v���e�B�H����_fJd+�mRK*�be7Y'�OL�Ѹ���߆KL��u`��RɅz���ȁ�m/�ł�T��m��R|�,���kI�w�E�K4e+�C�5Z���J8>2W�)��m3Y�*S���C�"c�F8/)�l��MA��1w[���g��p�������k��\Q;EѴҊ.��l��|�UQE-VYs;�d��,�^�KԊ�,j��n
+�I;���ǎ�T}�{�-NK�m���Q�+Ħ�4�o���g�|�
+��NW,;�f	ܙ�2=ƷS>_�Lf�&�nJ�T��,�_u���9��y7�@��V�V���ق���ق�
+gm�~��Jl�Y��fk�E[]mN�u�nf�˞ڤac)�ڵ"
+�
+
+�sv���^�3W*��
+��z���� l
+*~�1��ku��n�j�^�Q
+F����ρ��⠑}�0�� �ο�0�;_Aě�;3
+W����j�o��B�+��4�9x�H���z�
+��0hV��Yi�j�� l�
+�����.
+8���q#�4����F�ׯ
+*�����Q}�8/?W��snn
+�4���  �� PK     ! ��^�  ׳  
+   xl/styles.xml�
+�n���=@�A�;G���Wg�
+�I���D��R�ARy���TS�ؔ�o5�c?Xb��uWuu����aξ�qD��\���g�n����r�ϯ���$�vk/�v�r��'������$}�/���� �.Y�_���a�HV���K>Eo�F6Q��R��,�����	�i.D�W[/�͏
+��:@�^����[E�7/
+��0H�3X��v����.���P=���
+5g�8�$�z1�6X�Qm�O wm6�ʿD�X
+oU@�� 	ʂK�▐�E�
+���O��h�&�U�ߥ˹�}\yzL~�}�B�/?_<=��0�g���r�����;o��͌/ė6�6ߏE|a�g8����
+�e?�p���mcV��\���߾��Q[�KJN��	}0ș2�����z�}K�0ZK�K�Okk�z\�-�PK/l/
+�㠳����㵷󆄝Y�
+}e_����u�6�
+q��ۈvQſ��7Hl냧���Bƽ"Syz#�v�k���F�������8��o���Tf�	$:A	��*����g��;_f����Aҹ�,��8�ߍ�~��wAT�ߐDa��X���I�3m`A�\=�lE:s6[1��lN��Yt6[1��l��S1[1��lE�yF[1��l��
+�l;蕓��p<>���l�� >
+"g�,���E�mUi�i���\��,�>���Yn(K�f+�
+g�tM�
+N=ΦȺ(e����b�O���s��z�͐lY��d1��l��z�(:����s).oe��s?y�ӗ 
+~+t_>��%"�
+�b6�4гu�o�}
+��-�g !z��5T
+���S�㵧��ߤ�����M�7
+��4�����:�^����(���ʌPQ\��W�����O�1G�;2|2tj� ��x׼�Hd7�Bܢ&��
+�h$n�I#qG]s
+��:61��q�
+��\�3}(���eG�RmxGV���i>6�q@��1����>�*���_p<�uS�j��a3���h���^�a�����������_�v�M�_}��{{
+�?��~��
+�l�쪕���_�(�Wi��m�Ц���#����I#LG0S
+a: )��2.3�������|:mꀃcR$�9
+t
+�9�1�t�"(
+܋�nB�|p�����a8���q+�����
+4݂�����<^�7�
+f���$�p���
+_�ۏ�� �
+���{+ŷ<i�G�0x�m��
+O��U|�:{���w ��]V0�C��7������{����pAⰹ��\q��\K��]A����q�q�^��hVQ$�h��7t����~�:45��P̂���
+�
+j/f^
+|��ܗ6��wv�&�B+�)�a�J����2?��
+�_��Z��%N"!��,܌�DhbA�r>J=b}
+��Sf�w�V����|#WB�t�^RM�S0�����Ӗ#P��r�p��e����~"�G��u���5�8��?%�M��̗�RN�~i�!֮T��$�|�����Z�悳uT��'r
+RJrYv�,"��g�'aRN���q��X4M�KR��
+ݷ�L[u]��E�D��6M�JJ"�bjQ�
+;�
+��}�*�q�����I�s'�xEb�mD�,d���~�%�ug�������
+fvQ�9;���{ǻA,�E��j��������]����
+�M���(�1���;)����Hw2K
+sl�
+FQ$�#q�nx���&)nEfMn���
+�e��kW:bhQ��a�Z���A��Ը躻��B��O�Up��~s��\�m� ��1ߍ,-\�S{��%o�����n���i&��/�:����E}��#����M�h
+N9��j<�A��_��B��u׎�Ck���^�Vr�/�}#�Y?�t5Iə�ܩ���:���Z1GWk���S��Aԅ
+��Da�͚N��
+tp����t}�N�z��tG䚂P��m�F<
+h6|Ѯ�Ɇ/
+��<$}=f���z�2��z"�u���
+������S�!�@�޹���$Me�g/ϟ����߼
+H+MS�g
+?r�M�'��M�Ea�n��Tn��*�l)tj��
+M}��T�
+�q��R'K��x޴fԥ���@��S�ԥ#����lm��B� O����J�4"(}��߱��m|e�f���R��OO�a[ 5
+�nNc{X(��(7�鑻����#�l����@��N����M'Fn��C'�@�}��K��N��F܇N��r{?��N���Ii����AiA���R�t_�`r�g
+���Sۤ'R.�|�ލ��;`\��{�s�ZN�C��c��HIc)0e3_8�a?����p.|
+���75;�j*��6:�a�ݜ
+��m6%
+�ӡ*-:o�Q1/�;�{���'�LI �w>�rb�{==Cnv_��O�N�s6IGIz��XOJ �9͡� �c=)�� ����5��>n1AZ(m\w:�c�yk���
+S�����D }�:r�Ŀ�SZ��]����sk�н���*�6
+�
+����[2rUZ�^>�Ey���c���
+҉N�Md�"��6����a��Z�k��=}H�y��z_�Ju�W��<mȓ
+&px��k�33����G���"��켥�� 3(R7��+�?�+,Jo-��L���Op��@���-u#��L[��^����2b���l�T�����ӈ�]
+&�[|��
+�ծF9�
+u���\�l'l��)���G�(uo�R��̹�䲜��3�j�l������Vpn�rF2�L�����_7��#��%}�d����*3Ɯ�<�y[97W8(䧥��
+�}�^���,�ؼ,r�%8�lYgj��	��
+��,��!��f*��aX�� 6�
+(� U��邪q��:
+L�s�l��kȺl9׀��'�9PݖTM �j˜l�g��9�a9��H�Sr���ʁʪ�h
+�'k��dG�8�]N5
+]s��h�Y���s�q��	IQ ��ɲ�;�3m��T۱e
+��aV�s�8�s�P�>A��+j�`q�-���rD��u�]AV�*1DQ���ρ�U[��ચ��6�J6��
+�3,
+q�#Y�*��T���(:э�6����"Ͳ9E�xNvy�3M$s��+HvET�叾�v/9��<�j꼢*��ٶ�p�����
+2�`m\	��`��
+
+��uM�kh�TP!Y�yPN��
+U�Eױ-I֮�=i'~
+鄭�8�s�$��yC�
+�B�����������͏�`���<IS�D[6t +ڪ
+
+�ڜ%�:�;�j��ڼ^��g��^xJ��
+P
+�*'"���MT9��o�
+g?G񶀉�� L�
+v �m�O�hk
+��"q���L�$��N
+tMM2]M|\�����SW�%��4U�Z���}X87�
+m ���i�(r��#^���򈗤j�_R/�''�):�-�H�
+[<or�f�+����K�,WJ�(�,Y��l��*
+�9
+C�
+�r9\�h��(����;�xp���NɴmW�d��
+P
+�9�����ghf��C�
+ׇ�)��X|��
+���^�x��4��������~	�Eib9/>�
+����f<���s�fg�8���Z��H�t���|�3����A/��@�6�%A^�_���a�HV���K>m�U
+%�&�����h�	V�"y���$���nÅ��0[/�A� I�������rN|9���_ �$�"�
+�x��ƪJ
+�AtT�`)�J;�~!��Cl}�"��r	�WAH��
+��L��_0���  �� PK     ! Xw�-!  �u     xl/sharedStrings.xml�]Os�u��Jߡ�qj�]�H����:H�t$�&)�ˮTj
+�� 3X
+����*WrH�q��ܢ���T�d��c�M�I��������nr�
+�Ġ�������{��Gw㑺��y���׺�5��l������\
+����|��h����_��ڏ�x���<�)�����nf����f>���Q��M��\e�q4����f>���0����x�����n��$]S�l�ΰ�n�ٚ���W�=�v׾�<O��|�ş}�9���M~����G�?>Q�'�g�_�==�?<xuPtq�;韜mx{��g�������/��[�������
+����s���^.~�?���
+
+��c�6��_�E�ׁ�1�n֟�4�����a�������
+�ݪ?|�����0S�8��X
+#U��a*I��%A����{0�O0q���g�������MX(W����;G����Te*��,�J�0�*� 
+&�+����i4R�Ϳ
+���7������=eA�8�����l�I�'����7{�b��QoM}��A����9��(F�xs n2�z�z�ˍ��tC����(�SN���@��>����H0z[
+��4�UK��k �`�����@�9����^}�-�%��*��T:/��&9�'��g��:w�'��h
+��*��l��i���k 
+�N�Q��1��
+��&�u����|�
+iq�=Xg�h�Ɨ���f�<�g`[�8��p
+��h���N��p.S���-<�q6�F�5��w���7%�*muoR�"���T`��L6Wε��;8�E����d6���X_����\h��� ��$@E�0�
+��{>��g���3���
+ݏ�p��̇� �F
+B���lf��`}+�}ꍈf���M6�H��l�w�eF�;�p�Z,e��E_�ޤ�Kpˑ�g�B/��Cu���G@Z��_�n��_����{y~�s��M?Ob�,�u�Ӂ
+Z�g
+$D0�Ղ4q3o��lOM�<���1�r2���)������^�oǗ/��y��Yr�j�oyD
+�R27�i�~�	 �66e���7B��
+����'V�A��������1���
+�{���7L��
+w��;������� �i<|���59J���Y<�f�u
+=C��~�ǩ& ������3
+�}�
+;��,�2 ��,������N�v�w`�@��N�4_���c ���
+�G:�8�&��YF�w�^oDi�:&��>��!�q�pr|�(5b
+a��<:�R����bL9���&���=.�>{��'sN���vw�[;;
+�K
+��B���cv�
+x4t�
+�[ؠ"��T$'���r3(W-C��z��G��Zi�ɔ{�c$�o��eZ���G<�qVP���ޥ�����v�̋?�!̈���V����Y ��H�,�@P�F=vrw��co?x�6���C
+DxuD�+��<��f�
+	��`�~�{�Oq
+�+��N�bL�u]�Q��ы�����@��V9a{�F�
+3o3!6��|.�*�L�i��]͔
+S�^wC]rS+􅝟\�{ꔜb�n2��.x�m�㲈ƻt��7f��ed-�Y5��xSG�"�SO�ւ	o�
+肋o���K h~
+�����$
+�Z�Gy%D>D���|�k��?����*s���;���Sد򩁥�X=Q����d6;��@��g;H�j�7
+ӞJyC �2�a
+������7п7��h��B�FШ
+�A�N���ݵc	`�I6��z����Z �=�4
+�"6�u���@V��}8?l��7���O��h���9.�^
+:"hI��_C|bs�{�=�@Aˎ�B1Un���1��|C��*��]�B8�x��cۓFN�1�/j�#Z�� ����K&���:	�
+>� �|Ь���g�2��xg(�z
+F:���I4�#��
+<<^�3�
+�לv�aD�ܛ��
+�>��H�����8�.���ȧ�
+(y0��v&j�aꩵ�)�é��
+N�Ur��_lmu`r�U}�������T��4�q�K��{f�CY����<ނ��-Ea�F�g�����]�ك�(;ˆn�
+
+OnӀ�Ka��oa�y���Yݪ¹�&����/�~ߎ'��5�3TM�Ô��q�ᠠn���� ���qzz��ǋ��X�,'�
+
+�8�X]ͧל��Z[*�sy�>��
+�#h��j��Bng��i4�j��6T�6ƹ�Ú��
+'��2�� l; �z*@pm�E�'4�e¶�1�0��]�.��L��J�p�r)�5`� Ń�s碕�1s�8p=�ȹv��h�}
+\Oʹ�tW}�\O��H�0	�A2ųt�d���K8��sy<M(is��H����\�h��~��	ڷ�S
+�xâQ��ã<��
+ݶ'�N����-Dvn�A�����_�mz
+;��L�A4�%S�)T(��kh�p]�08�eb�b��B
+-V
+̳���hR���#�Y*#z�u���x��5]Wݧ�c>s�z�?d�nړu
+���"
+�w;
+r&#(�uVwʇ܊�4X/Tt� j� ^�8�U6�^ ���	����x P�;2�hD4����
+��
+ɍ�X��`[��Q
+g�Ss|
+4��3؄�8�}M;nA���9D��vk��(�Y��A�$����r�s ��,�<%�ҮO�fC���v��w[2�'R���[wG����$�?�~��6��:��&���;�[*q^�w��y�5�
+
+b�m^��n��
+z�N �&�И�G��
+o�j���w�)]k���-�B��G���(��9����S�
+"2�'�Z�'��\>�wf�.V4�h�H�܁(��b�:�Kg�^����ıq��Ds���dN�aq��<�Uq5,�[�5�]QV�O�E?�o���� �Ż
+����r��z��M�=b$,�"g����%��/�x閃1��&�Io�|�ߦ;I{�x�՜�0<)��o�yşU0
+���#�F@�V�b�=Y�cr+6R�UCR �w��=2)1<ݩ H;��H�8;����@���Av�񪰺����|�rxt왗����r�,8�����Қ�W�p,�
+��sa��֔@�V����F�[��ӛ��_�㮘����y��w9��C�u�w��B]� �D�Vz�^�M��}~����c�\����4L��]ix1�
+�!R��t���9�܊�,��"PBQ���v�k�Q
+�֢=�0\�!��u$���fr��e�Ϻ������������_�Ak�è��Ă5(s�w�Na�3F8z)��
+�/��I�^
+�oÜ�%ϐ>"�S{�������g
+v�%8�o�a��3��r��s�@
+i Kh��� ��'��4�e>�\�y��i�V�bJ�>�=w@�
+1�����l|
+8-c
+�<
+����ǭ�
+�#�@��u �j�	t2C�
+-�v
+ ��MgI�L���t�|ob�O<�cw	
+��A���$�����^�eo���G\����Ņ��4��,nݥчVj�苚��61��Z��7ꋒ�D8�يW ����r
+�+�hM���~�����$ѷխ�ۭ�֮�ve�e��;M
+�<ц�Vg{K�~3KF�?O2�ꤾ���+_?���fǇa�_����!��
+�v�[��	�ʜV
+��������B�O���
+\׎Ӟ~h��*ÙR؈�O�
+NU�XE�}2@�JX4�n*�ؔ�
+��A�8S|S��5
+7*40���2����c�2�x �ހo���ʇA��/Tu�.����;T:�כC���~ }~�1�ί|�B� ���:ՄC&� �J��,�7�͡䜖Y�:%��70���=42���񸏐�&%�JI6gY h�(��M~�t�pT��&GJ���||b���
+@%��{8� �j����d�W�Q�=���]$va��t}�+����
+ ��g�3!���q�=��-�0ϓkdTΧ^NNB^����_������ԪI4��Kː�
+`�yӔÛ�����Mn��$�2�{b�N�wSD� hk�6��
+��{y��U0Q����˳��z��髣�'a�.N�����Pgg�7��_��8>���?�*���������;�\
+'�${;g�3qD�ѥ��dJ�}�L���\��a8-#
+~����H�,����]�<�#�=�"l^'��ht� 1��ضi��lSpuśL����E$v&l�u ����nW뵮kp_�3!�6-J1\*�Y#�v�����FW��S��.�E�e�
+��Fp���0,o���
+n�¤̢�q�I � ��L�"t�������J�\ټ��y��ZO��G���,w�V��=
+������ZG�m#�
+H�/���(I4"�
+nh���
+!�)���f�E�)9B����,܎a_a6E<`���{qdf=�H%Td��BJ6p'[2��	14~`�
+J
+2����Sgx�
+��!�V�����l����
+`ɳ�
+&��=�"�rƃ��M���Z��u��"��ґ�yN�+�V
+@�G��qbs�X�V,�Rsl���D�mfh���G
+S&XX�Yq��<��Z�
+C�LV��{��"]��2��.�K/t���e��g
+e0�lE
+2`�|��_��*D������#T��?����F����G��:Yp��W���$��F
+4M&{r�=�
+�/c�I�#
+����E�ޮ@�k���+T�
+�:�,pP�P�N��_�f�el���'X]HY�ўo����bx��rn,l?ͷ��$�@��#���ֲ�:���σw6Ȑ�j�A����@|�(�b�3s����3�J�0�Ru�I����D)qOj�T 0��j.M���R��[f�0��)h
+l���(ybT��o5���i�/�
+WMYD��`n�m�F�.���bJ�x�N�h�T7��	���/	db9�O�Y�{�tw?��%�U%L姯ʤA�E*��N�yh�^*��;Lhu��mR�JgT
+���~,��b����eԫ9L7�[!_$T�V�Q�t��9��u!� ^͹'Ҕ�k�Vj�䭔��'�d��Q�8��X��<��be�Ӫ`
+���^U�/�)T�:
+O4�|���J.i��ࣆu�s���z�&������LpU<�Ag@6���P<�VZV
++�v���ť�s9�I2��'օt6ڊmZ�� �@U��M�k��UQ��E-c٠A[>~�
+���g��7g�P=�w��1>�Ŏ��5
+�D�aJP�u��:nx10��'p�8K�BUu/P�Y����0u>���!ސ2��B�M�2ğ�H�(��i�-��ߘ��G��	���|�&Tו++��ZՃew�[����|0 Ў۬�rtdA�;��,����� R�?t�~��
+�h�^�!-ғ��2F6"�����ʾ|_X�p
+ț��oi�j��M]@�y��dJ�R�-v
+e�֗6�h��^
+xl��a���(�?���;][1�PJ[X݆��(�?6uԮ���O���?�ex���c]�G���j464@7��
+
+ɾB�*�- �B�%zgH}-kOaR�	��d�fj�aY4'o��R�12R���'�V��J�BRX�B�^k#�
+�K�K׋1��P�*ڕ�Rts�d�
+; �䖥���|#���1F����r�:�ݸ���X�9e(ǩF> ��,8/W@��JH�P��<�&̥kw��%�II�Er_�$h��0m�9�9�Pr<�},ke~�>k���U�F�4W-�������B�^Af �~�7��tf���k`�,��ԯ�����{��IG.'RIP�!����9�j�	�Bq}B{��3p'�Z�S�{��[���P�&)\'�R�f*p�'2�m�\Q}[��
+`ͨsn�G�N��rR$��"*N�s�e˚
+����������^�.��Eɱ5�0ȅr��,���+�X�>��
+\kVoRA�H�}���
+(�T�M6�Y�P9=`���[�t�IM���Clף�:�������:zLq�a�@�[~X�;X��C��2�Lu��R���q(�J �#���k}_�������X��:u[�@�WO����
+]#OS��,|e>lY���S	�Πbf�	{�����
+k�$�����e��{dv]�j��s]� �
+��뚗�򄐘��I}��!��81��g6�"�T�̔��nN+�5B}z٫��
+Q��b��TW���ݗg"�S��f
+�����LM��gY��Xh�K�<Q]o&��d6o�:K�v�
+Ǥ
+-�E\���1
+���޳� �`�I��j��.m�a�u<���L}����9X	�$��e��j�24��b�� tb��9��Rڐ,/���-�x����-Ӊx��{��
+Ӡdz�كdᖕo��l�|j݂`��̞�Ggg�H�g�^=�Ԍ�d�1L�e��d�{=�@�^�Eo\��L_K�s�m7��u���Ji� ��D'�ִE]j�i���$#�?��<JgV�H��n�P
+�4�5�|f�Ƅ`��a�Y�:{����c"̐x	��� ��lK��l��1Eҡ�ٚ܃���'��e��KHD��"g���4�N]��Y�39Hw�U�&Y�d����K��
+�؟�rK��d�
+�W�4�`7�����~W���uۦ��E@ԟ
+2��B:t/
+�Ȫ�^�ϤЁ���-t$�]������"tw
+˿;�w}����2���]I�Ǟlz(=qh��n|�p�Ҟ��u�¸��ն )
+Yg�j2`�3ѰzV��l
+{
+eRE`�A�Û�g?������o��S+��)G���Ɂ5��	�ៈ1r�y􉼍�
+�����9j��i��n��1�eX�v��|k����dw�����
+��O��a]
+�
+9{M$�O����H�KF����gBH�U �
+�����Xv��2�n=�W��B:�.��ׯf��jݎ��ȵ����
+�i�4�9� _G
+�:��+zߕ�@&��Z�C��#L�,����t��*q`_a�X\�fi�Ǥ]����b��B���6�m�ҝ<j
+�T��tmo%
+Z���E��}�Z���^�z�#96'���Ը�:�W�bP`+^���L/��B�3Huy��c� t���K<_��!ʹh�
+h5�6+�Dj�'Ql�b���
+��X#��*�������gn_�"q�M�l޵���O]F�Ԉ���}��ײ|��N
+��|smuv���Q,ۭI'M
+�m���W��G��ٖҲ��Ʉ$]�SQ�娀��E�d�fuz
+��C�b��c��*!g�y�n�$1��tb��H6`诖��J�Z���v�+uۡi�U�.
+j����-��[���Z����
+�^z:���[M���Lu�Y��HSt&'�Z:�M"뻍�&�!P,�7��e ͉��5h	6r};�n�L����A�$L���
+`ۦ���S�;� �ټ�U����t��M=�l���ԣ�	z��HZp8ڰbsv(��Y��x1���<ܾ
+M�����B
+�Z���Ohu��a4�vgk���a<M�ڒ$�f�M�h]�;��-����Q����<���U�U�l�)b��������N�9���F&E%��ƞb��v�i���˵���YZ�������7׽>}���
+P;����Z��@�=ܧ>>T+h��3��
+�'���;������l�Z�X}#X2�g��wį6D��
++覛��Y����Gh��F��\����+"�!\/Zh�Jl���Ӱ��D�b�+�OX �qW��V9+�Շ
+A ��[�JM�w�vZ�o�д�m-�L��#�?�ӻtk�B��k��qc��2�ȷ
+*���9���N���݋�Eo�Ƣ��I`+sο�_oh(%,�q���/���iB����O!d�K�F�(18h��:'
+�
+�Xa%
+0��}'���k��S����jb�؄-���B('n�Yh46a��̍r��H[�Qi���(��|�
+��׍���W��HG��jc����jK~W� �
+d�;���ڨZQ���>����NO��9G�לߨ��-����R�U��a/�KmЧ��c&��U�4����?@EtSn��AL�n�R�%e$~�d��[��(��B���?�
+�$N�cE�FI�E��>�@o=��G7�4!H���-�ܫ3,��k��[�oA�
+��1�U�i�w䐳�;����Ts/��n�+|Y��\ f��&b:����Y�5[
+4(���+#�M����k�N�z~��V��y	ܶz +7QI^=;���P?�%�
+tUY���r�+��5%<�W�G����m��_Б��h����)��#{N��$KR��WgJ7��憔�\�+^L��.��:�
+�c��v�����^�a��d�\�u��}���mݖ�Ї�f�h�U�	y5�PEȫY�Aؤ���rv����9��G��au[
+������6���_|s�_a�`�ܡ����O�
+�
+��=�3^�nt��Y��^�l5��
+�v6zҐ����:'a񨗂{_���h��@��3
+3�|��Ŵ�D��)Z$39=E��,z:��Fk�e%P�^�T][v_g�u�x�ѧ�J�;>ن�����~Z"p�����   �� PK     ! \X�o  �     xl/drawings/vmlDrawing1.vml�TQo�0~G�?X�/-MB�u^Ri
+�H���&7vo�/��Y�_�9N�
+M�J��������Ҽ�-���+��u����զl��g%Ԣ�-�f��U�vkJ-��t���3�/��k�'�+�h+�G�	�c��28�CިZ6/2LI�O�|����X�]��C��Q����b�d�� ���Q<Kϒd:�rF
+�
+j�-�H�
+^Om̷��ƥ�cst�p��
+��`	�6����V۵R�p�
+��pa	��C�oiw�����s&>M�%g���b��ANȍ�G}Hղ�7�z�"]./�/�
+���ҋ�{0
++��e����U(V�!�83N�^�`g��k� *��v�5֖`�-�q[�(��]
+{���Ur�Yl�p�4�ӛAs��kP���#�T�49B�^�
+��&�<�ڂ?�3��r�j��(�i8
+"�y�7�S�a����L�0+w&-���$ؐ�\��X�Q��rO����C]>���{qm�;>��ٷ�
+��
+<�pt�{�:��`u����p� /��reml�]Lه�b��WS�H��yyF�9m�,���y9�^��$����^�H�ڋ��^&!v��5��v���!5<�HƷvt9)CK�?   �� PK     ! ;m2K�   B  #   xl/worksheets/_rels/sheet1.xml.rels�����0E��Cx{�օ
+CS7"�U�b��ۗ���{�
+e���p��6��<�f�,Ժ��ch��{�-�A�8��	-<�a�.��NNJ�ǐX
+��Q$��~�ٱ�	��>��I�y0���Ь�jm�_�/N��,�}W�:=RY��}<n���H�τI9�`>�H9�E��bA�w��k}�m����	  �� PK     ! ��%e�   ]  #   xl/worksheets/_rels/sheet2.xml.rels���J1����nfwi��"���bvv7t�$V��Nl�T������c����MbG)��ԲAބ��A�����D.�wz
+��)ò��Y�Ф
+ʣ�Y0�gc)�	1����2D��!9]�LFm�z l���)�S�;i�݃��#O��
+��Z��ȗ
+#�w�23u�(��YKv���\Sc�Uҟ��H���x�k�ￜ�k:�d}��J���|Cg�Ս|�� ���h�  �� PK     ! 4�	��   B  #   xl/worksheets/_rels/sheet3.xml.rels���j�0D����{$'�R��\B �6� U^�"�Jh�����X�B��c�0��{����,�u
+ɧ>R��~��^@�8�ݔ-<���m7�+NNj�ǘYU
+��Q$�a?��X��Tɐ���Lv���C�<����©���r���n�\��w�a�
+���H�Ǆ�%�`yC�z��ڕ�bA�5[�'�	Lך���  �� PK     ! lh��   X  '   xl/printerSettings/printerSettings1.binJe�e`(b�gHfHe(�|R #
+3�
+����
+��
+�
+��M8R�"���t3�td0!�T���� �	�a|t]A�a�
+�h1�(	0-��
+
+ 
+
+�p�eBB�!���A��I)��o���ae�b�O}/��8DB W�����D�o�H^��b�|	   �� PK     ! lh��   X  '   xl/printerSettings/printerSettings2.binJe�e`(b�gHfHe(�|R #
+3�
+����
+��
+�
+��M8R�"���t3�td0!�T���� �	�a|t]A�a�
+�h1�(	0-��
+
+ 
+
+�p�eBB�!���A��I)��o���ae�b�O}/��8DB W�����D�o�H^��b�|	   �� PK     ! AmL�  �     xl/comments1.xml��Mn�0��r�{��ג )p�
+
+�Em�c����G҆ܢ�)��r_�#�dS� ȏ�ǇG����� �+g
+>�ŜI[�F�]��~���3�6���?J���ۛ�v�H<#�
+ޅ�gB��������N��@�%��QB�;)��b��e�����D
+��}��=�UZ��Y�3Sg�;����x
+���Q5:��0#!��V����@yPc2��a:��:e.^�%��ʇ�
+C���r��T�����
+��20�+�?��J�$M����"�[%�(Yn�Q���廇ժ����L9�
+H����
+@ӫŜ��N;d�����s1VΆ�n�
+��Z0J'��8�r��7=�F��F��� �I�a<�8�=�q3����A��F�
+r(ȝ�̊K8^�t]��   �� PK     ! �]=��   X  '   xl/printerSettings/printerSettings3.binJe�e`(b�gHfHe(�|R #
+3�
+����
+�L
+�
+��M8R�"���t3�td0!�T���� �	�a|t]A�a�
+�h1�(	0-��
+
+ 
+
+�p�eBB�!���A��I)��o���ae�b�O}/��8DB W�����D�o�H^��b�|	   �� PK     ! �1�]�   �      xl/persons/person.xmldͽ�0
+�
+�w����
+����11�D��Dj�*�Py{����k�--��D�*SB��y�4w�z�/5��F�0a��]�
+�#�;A�AP]k�LNL�>���s�<Mѣ�5�% jZ쵬j��ḷ�
+��f;��"�_��T
+����7�\$��  �� PK     ! 
+�<"�        xl/calcChain.xmld��j�0����!����:�FS��=@H���?%	��~�56���~ߗ��_�f�atV@����U��Y��������΢�?
+��^_Z%���h%� `�q��<��
++7��7'獌���<L
+e�h4o�j�
+@�*�|�l�iZ��3�a��f	��,�GHM研\>
+��&�_�5��9��=�е>�UESQT�5)�Y^])#��1����  �� PK     ! h1��   +     docMetadata/LabelInfo.xml���j�0
+��W1�'v�д!Nσ�!d[^
+�(�V6��}�m;�&���r�H�=q��d͇^r������
+g� ;�%��X�m]l4q�`0�C%֐\�c��F����v��O��O�-I�E���"���^���Ͳ�4�:��
+0���RЍV��z�d��4Ii��F~�`"��V����Ɩ
+_�����P�ĺ��?�?   �� PK     ! 達�~  �   docProps/core.xml �(�                                                                                                                                                                                                                                                                 |��n�0E�������A�XI��`U���j՝k��ؖm^_'�@���g��d掳�*�
+X'��Q�KP�k!�"G�I|�"���
+r�����M�
+������@R�r�����b��*�z�Bq�m�|��Wl�$�W��`�����H�;�Y۲���
+�w8���T��V��F9���ߛ0ӡ�s���U��
+��mo�o����s��֌KU{����K_B���1�����o�]n�ym��R:� z�Bo�r+��r
+ตƇ���?����9?
+K�K����˪z�6�~
+!>��o��6AD���wT>���	*HBH��/��JF�?��G�s�6�MT�>�'.&�Yڧ�!%��V\<��  �� PK     ! =�_�  �   docProps/app.xml �(�                                                                                                                                                                                                                                                                 ��[��0��
+��۰� k	/[H��q���8U$#ML�__9&^��63�p���O
+5輲&���I
+���Pf�ƛ�y�9�<�)@[�i|F?�����
+)�Q�0>�+�zʘ�
+���l�RZw 
+��3[�J����
+��$y`x"4�����iC�ZX���m~��೺�J�]��J:�mIQv��9�<ЭQ
+���H8�|-A�S%h���
+�
+B{h+P�
+�дAI�E^�
+�vG��c���
+8�Vk�K�kON�4�+���]ʡuX���\
+��5�
+Gn	sE�k�G�
+�/
+
+n��@G���y�[��|y���=��^~׺Ⱦ�6y�˶�2��G�
+��+�=��1���2?����
+��z;��
+
+�)����K�R�ې�
+�
+���O�}����q�)	l0���S�_   �� PK     ! �e   �   docProps/custom.xml �(�                                                                                                                                                                                                                                                                 ��Mo�0
+�����iL�� �*��v�vGZ$� ���i�}A��}G�?vz��-b6�V�w��P��u�����ۨ��^�����!}��$f;�
+B�
+_��BL{�1;+��z��u�|&��Vp�^�P�P�'�^��қ�p���,���N���y;�������zi�.�<*9� �h�J���X�b� ��e͎�'F��L1R�t��ZY��A�;G]l2N���9��1 bV�(�aXVq
+���y�e����>��_�<%�g�_   �� PK-      ! ��y�  J	                   [Content_Types].xmlPK-      ! �
+�b1  q  
+             #  _rels/.relsPK-      ! �slB�  C	               �  xl/workbook.xmlPK-      ! ���G@  c               h
+  xl/_rels/workbook.xml.relsPK-      ! `�4�  �z               �
+  xl/worksheets/sheet1.xmlPK-      ! UI`��  �                $  xl/worksheets/sheet2.xmlPK-      ! ͻ��  �&               @  xl/worksheets/sheet3.xmlPK-      ! ��bl�  �S               �H  xl/worksheets/sheet4.xmlPK-      ! YB9��  "               $Y  xl/theme/theme1.xmlPK-      ! ��^�  ׳  
+             a  xl/styles.xmlPK-      ! Xw�-!  �u               �o  xl/sharedStrings.xmlPK-      ! \X�o  �               4�  xl/drawings/vmlDrawing1.vmlPK-      ! ;m2K�   B  #             ܓ  xl/worksheets/_rels/sheet1.xml.relsPK-      ! ��%e�   ]  #             ޔ  xl/worksheets/_rels/sheet2.xml.relsPK-      ! 4�	��   B  #             �  xl/worksheets/_rels/sheet3.xml.relsPK-      ! lh��   X  '             �  xl/printerSettings/printerSettings1.binPK-      ! lh��   X  '             ��  xl/printerSettings/printerSettings2.binPK-      ! AmL�  �               �  xl/comments1.xmlPK-      ! �]=��   X  '             ��  xl/printerSettings/printerSettings3.binPK-      ! �1�]�   �                ��  xl/persons/person.xmlPK-      ! 
+�<"�                  r�  xl/calcChain.xmlPK-      ! h1��   +               ��  docMetadata/LabelInfo.xmlPK-      ! 達�~  �               ��  docProps/core.xmlPK-      ! =�_�  �               7�  docProps/app.xmlPK-      ! �e   �               �  docProps/custom.xmlPK      �  `�    
+
+## GOV.BR
+URL: https://www.gov.br/pt-br
+
+GOV.BR
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Info
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Serviços para você
+MAIS ACESSADOS
+1
+Assinatura Eletrônica
+2
+Consultar Meu Imposto de Renda
+3
+Entregar Meu Imposto de Renda
+4
+Consultar restituição do imposto de renda
+5
+Consultar dados do Cadastro Único
+6
+Consultar CPF
+DESTAQUE
+Cultura, Artes, História e Esportes
+Tela Brasil
+Finanças, Impostos e Gestão Pública
+Entregar Meu Imposto de Renda (DIRPF)
+Finanças, Impostos e Gestão Pública
+Novo
+Renegociação de Dívidas - Famílias
+Justiça e Segurança
+Celular Seguro
+Assistência Social
+Novo
+Bolsa Família (PBF)
+SERVIÇOS DIGITAIS POR PERFIL
+Novos perfís serão adicionados brevemente
+Agricultor
+Turista
+Aposentado
+Empreendedor
+Trabalhador
+Motorista
+Em breve
+Em breve
+Próximo
+Anterior
+Paginação
+Paginação
+Todos os Perfis
+Saúde
+Vacina pneumo20 vai ser ofertada para quem tem mais de 85 anos
+Educação
+Enamed 2026: aberto prazo para solicitar reaplicação
+Educação
+MEC disponibiliza painel com dados do Ideb para análise da aprendizagem
+Mais Notícias
+Navegue por categoria
+Encontre o serviço ou a informação desejada pelas opções abaixo:
+Agricultura e Pecuária
+Serviços relacionados ao apoio e promoção à produção agrícola no país, exportação dos produtos agrícolas, entre outros.
+Assistência Social
+Serviços relacionados à proteção e assistência a indivíduos e comunidades em situação de vulnerabilidade, entre outros.
+Ciência e Tecnologia
+Serviços relacionados à assistência para pesquisas e empresas, fiscalização e promoção da ciência e tecnologia.
+Comunicações e Transparência Pública
+Serviços relacionados à fiscalização e regulamentação do setor de telecomunicações, transparência e comunicação pública.
+Cultura, Artes, História e Esportes
+Serviços relacionados ao apoio e promoção às artes e a cultura, a regularização do esporte, entre outros.
+Defesa Civil e Defesa Nacional
+Serviços relacionados ao alistamento e outras formas de ingresso na carreira militar, defesa civil, entre outros.
+Educação e Pesquisa
+Serviços destinados a quem deseja estudar no ensino superior, a servidores da educação pública, entre outros.
+Empresa, Indústria e Comércio
+Serviços relacionados a autorizações, cadastro e programas de apoio a empresas e indústrias, entre outros.
+Energia, Minerais e Combustíveis
+Serviços relacionados à prestação de energia elétrica, comercialização de minerais, entre outros.
+Finanças, Impostos e Gestão Pública
+Serviços relacionados a cadastro financeiros, fornecimento de bens e serviços à administração pública, entre outros.
+Justiça e Segurança
+Serviços relacionados ao controle de entrada no Brasil, policiamento de competência federal, entre outros.
+Meio Ambiente e Clima
+Serviços relacionados à proteção e cuidado com o meio ambiente, assim como ensino e pesquisas na área.
+Saúde e Vigilância Sanitária
+Serviços relacionados ao apoio no atendimento e prevenção a problemas de saúde, entre outros.
+Trabalho, Emprego e Previdência
+Serviços relacionados à fiscalização e regulamentação do mercado de trabalho, benefícios previdenciários, entre outros.
+Infraestrutura, Trânsito e Transportes
+Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mercadorias por vias de administração federal, entre outros.
+Viagens e Turismo
+Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
+Desempenho dos Serviços
+5667
+Serviços no Portal
+94 %
+Serviços Digitais
+49 %
+Avaliações positivas
+Mais Indicadores
+Você já conhece os aplicativos móveis da Administração Pública Federal?
+gov.br
+O aplicativo Gov.br está disponível para Android e iPhone (iOS). Com ele o cidadão pode acessar serviços do governo, apresentar seus documentos em formato digital, assinar documentos eletronicamente, gerenciar o uso de seus dados pessoais e realizar a prova de vida digital.
+Baixar gov.br na App Store
+gov.br disponível no Google Play
+Carteira Digital de Trânsito
+A Carteira Digital de Trânsito (CDT) é a evolução da CNH Digital. Agora, além da CNH, também é possível baixar a versão digital do Certificado de Registro e Licenciamento de Veículo – CRLV.
+Baixar Carteira Digital de Trânsito na App Store
+Carteira Digital de Trânsito disponível no Google Play
+Meu INSS - Central de Serviços
+O aplicativo é um canal de contato online com os cidadãos, possibilitando consultas e emissão de extratos, acesso a dados sobre contribuições previdenciárias, empregadores e períodos trabalhados.
+Baixar Meu INSS - Central de Serviços na App Store
+Meu INSS - Central de Serviços disponível no Google Play
+GALERIA DE APLICATIVOS
+Ouvidoria e Acesso à Informação
+Você pode realizar manifestações nos seguintes canais
+Denúncia
+Solicitação
+Elogio
+Reclamações
+Protocolo GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Página Inicial — Portal da Nota Fiscal de Serviço eletrônica
+URL: https://www.gov.br/nfse/pt-br
+
+Página Inicial — Portal da Nota Fiscal de Serviço eletrônica
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Portal da Nota Fiscal de Serviço eletrônica
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+MEI e demais empresas
+Emissor de NFS-e WEB
+Consultar Nota Fiscal
+Acesso aos Sistemas
+Consultar Nota Fiscal
+Prestador de Serviços
+Município
+Cidadão
+Consultar Nota Fiscal
+Lista de Serviços Anexa à Lei Complementar nº 116, de 31 de julho de 2003
+Consumidor dos serviços
+Consultar Nota Fiscal
+Apps NFSe Mobile
+Municípios
+Conheça a NFS-e
+O que é a NFS-e
+Histórico da NFS-e
+O padrão nacional da NFS-e
+O que é SPED
+Benefícios
+Produtos disponíveis
+Ambiente de Dados Nacional
+Emissor NFS-e WEB
+APP emissor de NFS-e
+APP Cidadão (NFSe Cidadao)
+Secretaria de Finanças Nacional
+Guia de Recolhimento
+Portal NFS-e
+Webservices Municipais
+Webservices empresariais
+Webservices conveniados
+EFD ISS
+API de integração
+Painel Administrativo Municipal
+Como conveniar-se
+Como conveniar-se
+Como implementar a NFS-e
+Implementação da NFS-e - ADN
+Implementação da NFS-e - Emissores Públicos
+Monitoramento das Adesões à NFS-e
+Plano de Implantação da NFS-e
+Painel Municipal (parametrização)
+NFS-e Via
+Solicitação de cadastro no Portal das Concessionárias de Exploração de Vias
+Documentação técnica
+Links
+Canais de Atendimento
+Biblioteca
+Portarias e Resoluções do CGNFS-e
+Documentação técnica
+Atualizações e Implantações
+Documentação Atual (Produção)
+Documentação Técnica (Homologação/testes)
+APIs - Prod. Restrita e Produção
+RTC
+Leiaute e esquemas antigos (julho de 2022 a 28/09/2025)
+Logos da NFS-e
+Perguntas e Respostas
+Perguntas e Respostas da NFS-e
+Alíquotas de ISSQN
+Links com Passo a Passo
+Legislação Aplicável ao MEI
+Eventos NFS-e
+Perguntas frequentes
+Privacidade e Proteção de Dados
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Twitter
+YouTube
+Facebook
+Flickr
+Serviços recomendados para você
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços recomendados para você
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços recomendados para você
+Serviços mais acessados do govbr
+1
+Assinatura Eletrônica
+2
+Consultar Meu Imposto de Renda
+3
+Entregar Meu Imposto de Renda
+4
+Consultar restituição do imposto de renda
+5
+Consultar dados do Cadastro Único
+6
+Consultar CPF
+Serviços em destaque do govbr
+Outros
+Tela Brasil
+Vida Financeira
+Novo
+Renegociação de Dívidas - Famílias
+Crimes
+Celular Seguro
+Assistência Direta
+Novo
+Bolsa Família
+(PBF)
+Fechar
+Fechar
+Fechar
+Info
+Secretaria Executiva do CGNFS-e participa de homologação de novas funcionalidades da Nota Fiscal de Serviço Eletrônica para a Reforma Tributária
+Atividades aconteceram na sede do Serpro em Belo Horizonte (MG)
+Comitê Gestor do Simples Nacional prorroga a obrigatoriedade de emissão de notas fiscais de serviço pelo Emissor Nacional da NFS-e
+CGNFS-e orienta sobre os prazos para destaque de IBS/CBS nas notas fiscais de serviço
+Comitê Gestor do IBS e Receita Federal flexibilizaram a obrigatoriedade de informações nos documentos fiscais. Regras de validação que exigem informações do IBS e da CBS foram alteradas para evitar rejeição de documentos fiscais.
+Plataforma NFS-e disponibiliza novas evoluções em Produção Restrita e divulga cronograma de implantação
+Entre as evoluções estão o CNPJ Alfanumérico e os grupos IBS/CBS no Emissor Web
+Mais Notícias
+EM DESTAQUE
+Emitir Nota Fiscal
+Acesso ao Município
+Acesso ao Cidadão
+Consultar Nota Fiscal
+Documentação Técnica
+NFS-e Via
+A NFS-e
+Como conveniar-se
+Informações aos municípios que desejem aderir ao projeto da NFS-e.
+Perguntas e Respostas
+Últimas Notícias
+Canais de Atendimento
+Você pode realizar manifestações nos seguintes canais
+Denúncia
+Solicitação
+Sugestão
+Elogio
+MEI e demais empresas
+Emissor de NFS-e WEB
+Consultar Nota Fiscal
+Acesso aos Sistemas
+Consultar Nota Fiscal
+Prestador de Serviços
+Município
+Cidadão
+Consultar Nota Fiscal
+Lista de Serviços Anexa à Lei Complementar nº 116, de 31 de julho de 2003
+Consumidor dos serviços
+Consultar Nota Fiscal
+Apps NFSe Mobile
+Municípios
+Conheça a NFS-e
+O que é a NFS-e
+Histórico da NFS-e
+O padrão nacional da NFS-e
+O que é SPED
+Benefícios
+Produtos disponíveis
+Ambiente de Dados Nacional
+Emissor NFS-e WEB
+APP emissor de NFS-e
+APP Cidadão (NFSe Cidadao)
+Secretaria de Finanças Nacional
+Guia de Recolhimento
+Portal NFS-e
+Webservices Municipais
+Webservices empresariais
+Webservices conveniados
+EFD ISS
+API de integração
+Painel Administrativo Municipal
+Como conveniar-se
+Como conveniar-se
+Como implementar a NFS-e
+Implementação da NFS-e - ADN
+Implementação da NFS-e - Emissores Públicos
+Monitoramento das Adesões à NFS-e
+Plano de Implantação da NFS-e
+Painel Municipal (parametrização)
+NFS-e Via
+Solicitação de cadastro no Portal das Concessionárias de Exploração de Vias
+Documentação técnica
+Links
+Canais de Atendimento
+Biblioteca
+Portarias e Resoluções do CGNFS-e
+Documentação técnica
+Atualizações e Implantações
+Documentação Atual (Produção)
+Documentação Técnica (Homologação/testes)
+APIs - Prod. Restrita e Produção
+RTC
+Leiaute e esquemas antigos (julho de 2022 a 28/09/2025)
+Logos da NFS-e
+Perguntas e Respostas
+Perguntas e Respostas da NFS-e
+Alíquotas de ISSQN
+Links com Passo a Passo
+Legislação Aplicável ao MEI
+Eventos NFS-e
+Perguntas frequentes
+Privacidade e Proteção de Dados
+Redefinir Cookies
+Redes sociais
+Twitter
+YouTube
+Facebook
+Flickr
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=Desenrola+Brasil&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=assinatura&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=imposto+de+renda&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=inss&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=mei&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca

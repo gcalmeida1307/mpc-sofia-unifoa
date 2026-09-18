@@ -50,7 +50,7 @@ def _connection() -> Iterator[object]:
 # memory until the provider answer has been rehydrated, and is never written to
 # analytics, audit logs, learning events or the offline knowledge base.
 _PLACEHOLDER_RE = re.compile(
-    r"__SOFIA_(?:EMAIL|CPF|CNPJ|PHONE|IP|UUID|IDENTIFIER|PII)_\d+__"
+    r"__SOFIA_(?:EMAIL|CPF|CNPJ|PHONE|IP|UUID|IDENTIFIER|PII|ENTITY)_\d+__"
 )
 _SECRET_RE = re.compile(
     r"(?ix)"
@@ -192,6 +192,21 @@ class ExternalRedaction:
             if item.get("role") in {"user", "assistant"}
             and str(item.get("content", "")).strip()
         ]
+
+    def clean_with_entities(
+        self, text: str | None, entities: list[str] | tuple[str, ...] | None = None, *, clinical: bool = False
+    ) -> str:
+        """Mask caller-supplied sensitive entities after generic redaction.
+
+        Regexes catch common identifiers, but institutional names, patient
+        names and local account labels are application-specific. The entity
+        dictionary is request-scoped and is never persisted.
+        """
+        cleaned = self.clean_clinical(text) if clinical else self.clean(text)
+        for entity in sorted({str(item).strip() for item in (entities or ()) if str(item).strip()}, key=len, reverse=True):
+            pattern = re.compile(rf"(?<!\w){re.escape(entity)}(?!\w)", re.IGNORECASE)
+            cleaned = pattern.sub(lambda _, value=entity: self._placeholder("ENTITY", value), cleaned)
+        return cleaned
 
     def clean_clinical(self, text: str | None) -> str:
         """Apply the normal minimization plus the FHIR identifier boundary.

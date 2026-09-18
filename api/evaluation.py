@@ -23,7 +23,12 @@ from .retrieval import retrieve
 
 
 def _normalize(text: str) -> str:
-    return "".join(char for char in unicodedata.normalize("NFKD", text.casefold()) if not unicodedata.combining(char))
+    without_accents = "".join(
+        char
+        for char in unicodedata.normalize("NFKD", text.casefold())
+        if not unicodedata.combining(char)
+    )
+    return re.sub(r"\s+", " ", without_accents).strip()
 
 
 def _manifest_path(root: Path) -> Path:
@@ -118,6 +123,15 @@ def evaluate_semantic_cases(root: Path) -> dict[str, Any]:
         else:
             source_score = float(bool(source_match)) if expected_sources else 0.0
             score = 0.40 * float(bool(result.evidence)) + 0.30 * term_coverage + 0.20 * source_score + 0.10 * float(provenance_ok)
+        strict_pass = (
+            (not expects_evidence and not result.evidence)
+            or (
+                expects_evidence
+                and result.has_quality_evidence
+                and bool(source_match)
+                and term_coverage >= 0.6
+            )
+        )
         rows.append({
             "case_id": f"case-{index:03d}",
             "module": module_id,
@@ -130,7 +144,7 @@ def evaluate_semantic_cases(root: Path) -> dict[str, Any]:
             "provenance_ok": provenance_ok,
             "expected_evidence": expects_evidence,
             "score": round(score * 100, 1),
-            "status": "pass" if score >= 0.6 and provenance_ok else "review",
+            "status": "pass" if strict_pass else "review",
         })
     coverage = evaluation_coverage(root)
     return {
@@ -141,6 +155,39 @@ def evaluate_semantic_cases(root: Path) -> dict[str, Any]:
         "global_score": round(sum(row["score"] for row in rows) / max(1, len(rows)), 1),
         "coverage": coverage,
         "note": "Métrica de recuperação, cobertura de termos e aderência de fontes; não representa a qualidade da redação de uma LLM.",
+    }
+
+
+def golden_gate(root: Path) -> dict[str, Any]:
+    """Return a hard release decision for reviewed retrieval cases.
+
+    Draft cases are visible but never count as approval. An answer only passes
+    when the expected source, meaningful terms and Evidence Judge gate all
+    agree; this prevents a high aggregate score from hiding a wrong document.
+    """
+    semantic = evaluate_semantic_cases(root)
+    coverage = semantic.get("coverage", evaluation_coverage(root))
+    rows = semantic.get("cases", [])
+    reviewed_modules = {str(row.get("module")) for row in rows}
+    no_corpus = {str(module) for module in coverage.get("modules_without_corpus", [])}
+    configured = {str(module) for module in coverage.get("configured_modules", [])}
+    pending_modules = sorted(configured - no_corpus - reviewed_modules)
+    failures = [row for row in rows if row.get("status") != "pass"]
+    issues: list[str] = []
+    if pending_modules:
+        issues.append(f"módulos sem avaliação dourada aprovada: {', '.join(pending_modules)}")
+    if failures:
+        issues.append(f"{len(failures)} caso(s) dourado(s) falharam ou precisam de revisão")
+    if no_corpus:
+        issues.append(f"módulos sem corpus: {', '.join(sorted(no_corpus))}")
+    return {
+        "status": "pass" if not issues and bool(rows) else "blocked",
+        "release_allowed": not issues and bool(rows),
+        "issues": issues,
+        "case_count": len(rows),
+        "reviewed_case_count": coverage.get("reviewed_case_count", len(rows)),
+        "failed_case_count": len(failures),
+        "coverage": coverage,
     }
 
 
@@ -167,6 +214,12 @@ def evaluate_corpus(root: Path) -> dict[str, Any]:
             }
         )
     semantic = evaluate_semantic_cases(root)
+    golden = {
+        "status": "pass" if semantic.get("case_count") and not any(row.get("status") != "pass" for row in semantic.get("cases", [])) else "blocked",
+        "release_allowed": bool(semantic.get("case_count")) and not any(row.get("status") != "pass" for row in semantic.get("cases", [])),
+        "case_count": semantic.get("case_count", 0),
+        "failed_case_count": sum(1 for row in semantic.get("cases", []) if row.get("status") != "pass"),
+    }
     return {
         "kind": "retrieval_smoke",
         "note": "Não é uma avaliação de qualidade de geração; respostas ainda precisam de casos dourados revisados por especialistas.",
@@ -174,4 +227,5 @@ def evaluate_corpus(root: Path) -> dict[str, Any]:
         "global_score": round(sum(row["score"] for row in rows) / max(1, len(rows)), 1),
         "semantic_evaluation": semantic,
         "evaluation_coverage": evaluation_coverage(root),
+        "golden_gate": golden,
     }

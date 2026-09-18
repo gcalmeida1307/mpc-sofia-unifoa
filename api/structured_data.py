@@ -20,8 +20,8 @@ import json
 import re
 from collections import Counter
 from dataclasses import dataclass, field
-from functools import lru_cache
 from difflib import SequenceMatcher
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -334,7 +334,11 @@ def resolve_structured_source(root: Path, module_id: str, question: str) -> Stru
 
 def _is_structured_query(question: str) -> bool:
     query = normalize(question)
-    return any(marker in query for marker in COUNT_MARKERS + SUMMARY_MARKERS) or any(
+    risk_value_query = "risco" in query and any(
+        _contains_phrase(query, alias)
+        for alias in ("alto", "medio", "médio", "baixo", "average", "avarege", "averege")
+    )
+    return risk_value_query or any(marker in query for marker in COUNT_MARKERS + SUMMARY_MARKERS) or any(
         marker in query
         for marker in ("coluna", "campo", "nivel de risco", "status", "registros", "linhas", "planilha", "soma", "media", "maior", "menor", "correlacao")
     )
@@ -462,6 +466,26 @@ def _format_answer(
     return f"Conclusão\n{conclusion}\n\nBase documental\n{basis}\n\nPontos de atenção\n{attention}\n\nLimites\n{limits}"
 
 
+def _format_schema_summary(document: StructuredDocument, language: str, response_style: str) -> str:
+    """Summarize a table without pretending that a row count is its content."""
+    schema = document.schema
+    columns = ", ".join(f"{name} ({details['type']})" for name, details in schema.items())
+    source = document.path.name
+    locator = _source_locator(document)
+    if language == "en":
+        text = f"The file {source} contains {len(document.rows)} records and the following typed columns: {columns}."
+        text += f"\n\nSource: {source}; {locator}. No personal rows were included in this summary."
+    elif language == "es":
+        text = f"El archivo {source} contiene {len(document.rows)} registros y las siguientes columnas tipadas: {columns}."
+        text += f"\n\nFuente: {source}; {locator}. No se incluyeron filas personales en este resumen."
+    else:
+        text = f"O arquivo {source} contém {len(document.rows)} registros e as seguintes colunas tipadas: {columns}."
+        text += f"\n\nFonte: {source}; {locator}. Nenhuma linha pessoal foi incluída neste resumo."
+    if response_style == "structured":
+        return text
+    return text
+
+
 def analyze_structured_question(
     root: Path,
     module_id: str,
@@ -476,6 +500,22 @@ def analyze_structured_question(
     if document is None:
         return None
     normalized_question = normalize(question)
+    summary_requested = any(marker in normalized_question for marker in SUMMARY_MARKERS)
+    analytic_markers = ("soma", "somatorio", "valor total", "media", "maior", "menor", "correlacao")
+    risk_value_query = "risco" in normalized_question and any(
+        _contains_phrase(normalized_question, alias)
+        for alias in ("alto", "medio", "médio", "baixo", "average", "avarege", "averege")
+    )
+    count_requested = any(marker in normalized_question for marker in COUNT_MARKERS) or risk_value_query
+    if summary_requested and not count_requested and not any(marker in normalized_question for marker in analytic_markers):
+        return StructuredAnswer(
+            _format_schema_summary(document, language, response_style),
+            document.path,
+            len(document.rows),
+            None,
+            "schema_summary",
+            analysis={"schema": document.schema, "verified": True, "evidence_kind": "schema"},
+        )
     from .table_analytics import analytical_answer
     analytical = analytical_answer(document, question)
     if analytical is not None:
@@ -483,7 +523,6 @@ def analyze_structured_question(
     filter_spec = _find_filter(document, question)
     if filter_spec:
         filter_column, filter_value = filter_spec
-        value_norm = normalize(filter_value).strip()
         filters = [(filter_column, filter_value)]
         for header in document.headers:
             if header == filter_column:

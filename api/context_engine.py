@@ -7,7 +7,12 @@ from pathlib import Path
 
 from .contracts import ContextPackage, EvidenceContract, VerificationResult
 from .domains import domain_for
-from .query_analysis import build_conversation_memory, classify_query, normalize
+from .query_analysis import (
+    QueryPlan,
+    build_conversation_memory,
+    classify_query,
+    normalize,
+)
 from .retrieval import RetrievalResult
 
 
@@ -50,6 +55,10 @@ def build_context_package(
             contradiction_score=round(float(item.contradiction_score), 4),
             page=item.chunk.page,
             locator=item.chunk.locator or (f"página {item.chunk.page}" if item.chunk.page else f"trecho {item.chunk.ordinal}"),
+            start_line=item.chunk.start_line,
+            end_line=item.chunk.end_line,
+            section_header=item.chunk.section_header,
+            content_type=item.chunk.content_type,
         )
         for item in result.evidence
     ]
@@ -70,11 +79,21 @@ def build_context_package(
             contradiction_score=round(float(item.contradiction_score), 4),
             page=item.chunk.page,
             locator=item.chunk.locator or (f"página {item.chunk.page}" if item.chunk.page else f"trecho {item.chunk.ordinal}"),
+            start_line=item.chunk.start_line,
+            end_line=item.chunk.end_line,
+            section_header=item.chunk.section_header,
+            content_type=item.chunk.content_type,
         )
         for item in result.rejected_evidence
     ]
     from .relational_reasoning import analyze
     relational = analyze(result)
+    query_plan = QueryPlan.from_mapping(
+        profile.get("query_plan"),
+        fallback_intent="DOCUMENT_RAG" if bool(profile.get("retrieval_required", True)) else "CONVERSA_DIRETA",
+        retrieval_required=bool(profile.get("retrieval_required", True)),
+        response_mode=str(profile.get("response_mode", "evidence")),
+    )
     relations = relational["relations"]
     return ContextPackage(
         question=question,
@@ -103,6 +122,7 @@ def build_context_package(
         required_sources=list(result.required_sources),
         missing_sources=list(result.missing_sources),
         conversation_memory=conversation_memory,
+        query_plan=query_plan.public_dict(),
     )
 
 

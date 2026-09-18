@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client"
 import App from "./App"
 import AppErrorBoundary from "./app/AppErrorBoundary"
 import "./index.css"
-import "./styles/app-shell.css"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,334 +1,73 @@
-import { useState, type CSSProperties, type ReactNode } from "react"
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react"
+import ProfileMenu from "../features/authentication/ProfileMenu"
+import UiIcon, { type IconName } from "../components/UiIcon"
 
 export type ShellPage = "dashboard" | "chat" | "modules" | "upload" | "neural" | "connections" | "pipeline" | "access"
-
 export type ShellProvider = "auto" | "openai" | "gemini" | "claude" | "ollama"
-
-export type ShellModule = {
-  id: string
-  name: string
-  icon: string
-  color: string
-  docs: string
-}
-
-export type ShellUser = {
-  user_code: string
-  name: string
-  email: string
-  role: string
-}
-
+export type ShellModule = { id: string; name: string; icon: string; color: string; docs: string }
+export type ShellUser = { user_code: string; name: string; email: string; role: string; demo_mode?: boolean }
+export type ShellApiStatus = "checking" | "online" | "offline" | "unauthorized"
 type AppShellProps = {
-  children: ReactNode
-  modules: ShellModule[]
-  activeModule: ShellModule
-  activePage: ShellPage
-  user: ShellUser
-  dark: boolean
-  apiOnline: boolean
-  provider: ShellProvider
+  children: ReactNode; modules: ShellModule[]; activeModule: ShellModule; activePage: ShellPage
+  user: ShellUser; dark: boolean; apiOnline: boolean; apiStatus?: ShellApiStatus; provider: ShellProvider
   providerAvailability?: Partial<Record<ShellProvider, boolean>>
-  onModuleChange: (moduleId: string) => void
-  onPageChange: (page: ShellPage) => void
-  onThemeChange: () => void
-  onProviderChange: (provider: ShellProvider) => void
-  onLogout: () => void
-  isAdmin: boolean
+  onModuleChange: (id: string) => void; onPageChange: (page: ShellPage) => void
+  onThemeChange: () => void; onProviderChange: (provider: ShellProvider) => void
+  changePassword: (current: string, next: string) => Promise<void>;
+  onLogout: () => void; isAdmin: boolean
 }
-
-const navigation: Array<{ id: ShellPage; label: string; icon: string }> = [
-  { id: "dashboard", label: "Dashboard", icon: "▦" },
-  { id: "chat", label: "Chat Sofia", icon: "▱" },
-  { id: "modules", label: "Conhecimento", icon: "▱" },
-  { id: "upload", label: "Ingestão", icon: "↥" },
-  { id: "neural", label: "Rede Neural", icon: "♧" },
-  { id: "connections", label: "Conexões & Fluxos", icon: "⎇" },
+const navigation: Array<{ id: ShellPage; label: string; icon: IconName }> = [
+  { id: "dashboard", label: "Visão geral", icon: "grid" },
+  { id: "chat", label: "Conversar com a SOFIA", icon: "chat" },
+  { id: "modules", label: "Conhecimento", icon: "library" },
+  { id: "upload", label: "Adicionar fontes", icon: "upload" },
+  { id: "neural", label: "Rede neural", icon: "network" },
+  { id: "connections", label: "Conexões", icon: "link" },
+]
+const administration: Array<{ id: ShellPage; label: string; icon: IconName }> = [
+  { id: "pipeline", label: "Pipeline Explorer", icon: "pipeline" },
+  { id: "access", label: "Usuários e acessos", icon: "users" },
 ]
 
-const administration: Array<{ id: ShellPage; label: string; icon: string }> = [
-  { id: "pipeline", label: "Pipeline Explorer", icon: "◎" },
-  { id: "access", label: "Usuários e acessos", icon: "♙" },
-]
-
-function pageLabel(page: ShellPage): string {
-  return (
-    [...navigation, ...administration].find((item) => item.id === page)
-      ?.label ?? "Workspace"
-  )
-}
-
-export default function AppShell({
-  children,
-  modules,
-  activeModule,
-  activePage,
-  user,
-  dark,
-  apiOnline,
-  provider,
-  providerAvailability,
-  onModuleChange,
-  onPageChange,
-  onThemeChange,
-  onProviderChange,
-  onLogout,
-  isAdmin,
-}: AppShellProps) {
+export default function AppShell({ children, activeModule, activePage, user, dark, apiOnline, apiStatus, provider, providerAvailability, onPageChange, onThemeChange, onProviderChange, onLogout, isAdmin, changePassword }: AppShellProps) {
+  const [profileOpen, setProfileOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const sidebarClass = [
-    "sidebar",
-    collapsed ? "is-collapsed" : "",
-    mobileOpen ? "is-mobile-open" : "",
-  ]
-    .filter(Boolean)
-    .join(" ")
-
-  const goToPage = (page: ShellPage) => {
-    onPageChange(page)
-    setMobileOpen(false)
-  }
-
-  const goToModule = (moduleId: string) => {
-    onModuleChange(moduleId)
-    setMobileOpen(false)
-  }
-
-  const providerEnabled = (name: ShellProvider) =>
-    providerAvailability?.[name] !== false
-
+  const goToPage = (page: ShellPage) => { onPageChange(page); setMobileOpen(false) }
+  const providerEnabled = (name: ShellProvider) => providerAvailability?.[name] !== false
+  const connectionStatus = apiStatus ?? (apiOnline ? "online" : "offline")
+  const connectionLabel = connectionStatus === "checking" ? "Conectando com a API" : connectionStatus === "unauthorized" ? "Sessão expirada" : connectionStatus === "online" ? "Conectado" : "Sem conexão com a API"
+  useEffect(() => {
+    if (!mobileOpen) return
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") setMobileOpen(false) }
+    window.addEventListener("keydown", close)
+    return () => window.removeEventListener("keydown", close)
+  }, [mobileOpen])
+  const navButton = (item: typeof navigation[number]) => (
+    <button key={item.id} className={`nav-item${activePage === item.id ? " selected" : ""}`} type="button" title={collapsed ? item.label : undefined} aria-current={activePage === item.id ? "page" : undefined} onClick={() => goToPage(item.id)}>
+      <UiIcon name={item.icon} /><span className="nav-label">{item.label}</span>
+      {item.id === "chat" && <small className="nav-ai">IA</small>}
+    </button>
+  )
   return (
-    <div
-      className={dark ? "app dark" : "app"}
-      style={{ "--accent": activeModule.color } as CSSProperties}
-    >
-      {mobileOpen && (
-        <button
-          className="shell-overlay"
-          type="button"
-          aria-label="Fechar menu"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
-      <aside className={sidebarClass} aria-label="Navegação principal">
-        <div className="logo">
-          <div className="logo-mark" aria-hidden="true">
-            S
-          </div>
-          <div className="logo-copy">
-            <strong>S.O.F.I.A.</strong>
-            <span>Gestão inteligente</span>
-          </div>
-          <button
-            className="sidebar-toggle"
-            type="button"
-            aria-label={collapsed ? "Expandir navegação" : "Recolher navegação"}
-            aria-expanded={!collapsed}
-            onClick={() => setCollapsed((value) => !value)}
-          >
-            {collapsed ? "›" : "‹"}
-          </button>
-        </div>
-
+    <div className={dark ? "app sofia-studio dark" : "app sofia-studio"} style={{ "--accent": activeModule.color } as CSSProperties}>
+      {mobileOpen && <button className="shell-overlay" type="button" aria-label="Fechar menu" onClick={() => setMobileOpen(false)} />}
+      <aside id="sofia-navigation" className={`sidebar${collapsed ? " is-collapsed" : ""}${mobileOpen ? " is-mobile-open" : ""}`} aria-label="Navegação principal">
+        <div className="logo"><div className="logo-mark"><UiIcon name="spark" /></div><div className="logo-copy"><strong>SOFIA<span className="brand-dot">.</span></strong><span>GESTÃO INTELIGENTE</span></div><button className="sidebar-toggle" type="button" aria-label={collapsed ? "Expandir navegação" : "Recolher navegação"} aria-expanded={!collapsed} onClick={() => setCollapsed(!collapsed)}><UiIcon name="chevron" style={{ transform: collapsed ? undefined : "rotate(180deg)" }} /></button></div>
         <div className="sidebar-scroll">
-          <div className="side-heading">DOMÍNIOS</div>
-          <div className="module-list" aria-label="Módulos RAG">
-            {modules.map((module) => (
-              <button
-                key={module.id}
-                className={
-                  module.id === activeModule.id
-                    ? "module-option selected"
-                    : "module-option"
-                }
-                type="button"
-                title={collapsed ? module.name : undefined}
-                aria-current={
-                  module.id === activeModule.id ? "page" : undefined
-                }
-                onClick={() => goToModule(module.id)}
-                style={
-                  module.id === activeModule.id
-                    ? { "--module-color": module.color } as CSSProperties
-                    : undefined
-                }
-              >
-                <span aria-hidden="true">{module.icon}</span>
-                <b>{module.name}</b>
-                <small>{module.docs}</small>
-                <i aria-hidden="true" />
-              </button>
-            ))}
-          </div>
-
-          <div className="side-divider" />
-          <div className="side-heading">WORKSPACE</div>
-          <nav aria-label="Workspace">
-            {navigation.map((item) => (
-              <button
-                key={item.id}
-                className={
-                  activePage === item.id ? "nav-item selected" : "nav-item"
-                }
-                type="button"
-                title={collapsed ? item.label : undefined}
-                aria-current={activePage === item.id ? "page" : undefined}
-                onClick={() => goToPage(item.id)}
-              >
-                <span aria-hidden="true">{item.icon}</span>
-                <span className="nav-label">{item.label}</span>
-                <i aria-hidden="true" />
-              </button>
-            ))}
-          </nav>
-
-          {isAdmin && (
-            <>
-              <div className="side-heading admin-heading">ADMINISTRAÇÃO</div>
-              <nav aria-label="Administração">
-                {administration.map((item) => (
-                  <button
-                    key={item.id}
-                    className={
-                      activePage === item.id ? "nav-item selected" : "nav-item"
-                    }
-                    type="button"
-                    title={collapsed ? item.label : undefined}
-                    aria-current={activePage === item.id ? "page" : undefined}
-                    onClick={() => goToPage(item.id)}
-                  >
-                    <span aria-hidden="true">{item.icon}</span>
-                    <span className="nav-label">{item.label}</span>
-                    <i aria-hidden="true" />
-                  </button>
-                ))}
-              </nav>
-            </>
-          )}
+          <div className="side-heading">WORKSPACE</div><nav aria-label="Workspace">{navigation.map(navButton)}</nav>
+          {isAdmin && <><div className="side-heading">ADMINISTRAÇÃO</div><nav aria-label="Administração">{administration.map(navButton)}</nav></>}
         </div>
-
-        <div className="side-footer">
-          <div className="online" role="status">
-            <i className={apiOnline ? "is-online" : "is-offline"} />
-            <span>
-              {apiOnline ? "Serviços locais online" : "API local indisponível"}
-            </span>
-          </div>
-          <button
-            className="theme-button"
-            type="button"
-            onClick={onThemeChange}
-          >
-            <span aria-hidden="true">☼</span>
-            <span>{dark ? "Modo claro" : "Modo escuro"}</span>
-          </button>
-          <button className="logout-button" type="button" onClick={onLogout}>
-            <span aria-hidden="true">↪</span>
-            <span>Sair</span>
-          </button>
-          <div className="profile">
-            <div aria-hidden="true">{user.user_code.slice(-2)}</div>
-            <span>
-              <b>{user.name}</b>
-              <small>
-                {user.user_code} · {user.email}
-              </small>
-            </span>
-          </div>
-        </div>
+        <div className="side-footer"><button type="button" className="profile profile-trigger" aria-label="Abrir meu perfil" onClick={() => setProfileOpen(true)} aria-haspopup="dialog"><div className="profile-initials" aria-hidden="true">{user.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}</div><span><b>{user.name}</b><small>{isAdmin ? "Administrador" : "Workspace pessoal"}</small></span><i className={`profile-status ${connectionStatus === "online" ? "online" : connectionStatus === "checking" ? "checking" : "offline"}`} title={connectionLabel} /></button><div className="mobile-account-actions"><button type="button" onClick={onThemeChange}>{dark ? "Modo claro" : "Modo escuro"}</button><button type="button" onClick={onLogout}>Sair</button></div></div>
       </aside>
-
+      {profileOpen && <ProfileMenu user={user} changePassword={changePassword} onClose={() => setProfileOpen(false)} />}
       <main className="content">
-        {activePage !== "chat" && activePage !== "upload" && (
-          <div className={`shell-ambient shell-ambient-${activePage}`} aria-hidden="true">
-            <div className="ambient-orb">
-              <span className="ambient-orb-ring ring-one" />
-              <span className="ambient-orb-ring ring-two" />
-              <span className="ambient-orb-ring ring-three" />
-              {Array.from({ length: 18 }, (_, index) => (
-                <i key={index} style={{ "--node-index": index } as CSSProperties} />
-              ))}
-            </div>
-          </div>
-        )}
         <header className="topbar">
-          <button
-            className="mobile-menu-button"
-            type="button"
-            aria-label="Abrir menu"
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen(true)}
-          >
-            ☰
-          </button>
-          <div className="crumb">
-            <span style={{ color: activeModule.color }}>
-              {activeModule.icon} &nbsp;{activeModule.name}
-            </span>
-            <b>{pageLabel(activePage)}</b>
-          </div>
-          <div className="top-right">
-            <span className="precision">
-              <i aria-hidden="true">●</i> {activeModule.docs} documentos
-            </span>
-            <label className="provider-control">
-              <span className="sr-only">Motor de resposta</span>
-              <select
-                className="provider-select"
-                value={provider}
-                onChange={(event) =>
-                  onProviderChange(event.target.value as ShellProvider)
-                }
-                aria-label="Motor de resposta"
-              >
-                <option value="auto">Automático</option>
-                <option value="openai" disabled={!providerEnabled("openai")}>
-                  OpenAI Responses
-                  {!providerEnabled("openai") ? " · bloqueado" : ""}
-                </option>
-                <option value="gemini" disabled={!providerEnabled("gemini")}>
-                  Gemini{!providerEnabled("gemini") ? " · bloqueado" : ""}
-                </option>
-                <option value="claude" disabled={!providerEnabled("claude")}>
-                  Claude{!providerEnabled("claude") ? " · bloqueado" : ""}
-                </option>
-                <option value="ollama" disabled={!providerEnabled("ollama")}>
-                  Ollama{!providerEnabled("ollama") ? " · indisponível" : ""}
-                </option>
-              </select>
-            </label>
-            <div
-              className="top-avatar"
-              style={{ background: activeModule.color }}
-            >
-              S
-            </div>
-          </div>
+          {user.demo_mode && <strong style={{color: "#a78bfa", fontSize: 11}}>DEMO LOCAL · DADOS FICTÍCIOS</strong>}
+          <button className="mobile-menu-button" type="button" aria-label="Abrir menu" aria-controls="sofia-navigation" aria-expanded={mobileOpen} onClick={() => setMobileOpen(true)}><UiIcon name="menu" /></button>
+          <div className="crumb"><span>Workspace</span><UiIcon name="chevron" width="12" /><b>{[...navigation, ...administration].find((item) => item.id === activePage)?.label}</b></div>
+          <div className="top-right"><span className={`studio-status ${connectionStatus}`} role="status"><i />{connectionLabel}</span><label className="provider-control"><span className="sr-only">Motor de resposta</span><select className="provider-select" value={provider} onChange={(event) => onProviderChange(event.target.value as ShellProvider)} aria-label="Motor de resposta"><option value="auto">✧ Automático</option>{([['openai', 'OpenAI'], ['gemini', 'Gemini'], ['claude', 'Claude'], ['ollama', 'Ollama']] as const).map(([id, label]) => <option key={id} value={id} disabled={!providerEnabled(id)}>{label}{!providerEnabled(id) ? " · indisponível" : ""}</option>)}</select></label><button type="button" className="studio-button compact" onClick={() => goToPage("chat")}><UiIcon name="spark" width="15" />Conversar</button></div>
         </header>
-        {activePage !== "chat" && (
-          <div className="workspace-strip" aria-label="Contexto do workspace">
-            <div className="workspace-strip-main">
-              <span
-                className="workspace-strip-dot"
-                style={{ background: activeModule.color }}
-                aria-hidden="true"
-              />
-              <strong>{activeModule.name}</strong>
-              <span>módulo ativo</span>
-              <span className="workspace-strip-separator" aria-hidden="true">
-                /
-              </span>
-              <span>{activeModule.docs} documentos no conhecimento local</span>
-            </div>
-            <div className="workspace-strip-meta">
-              <span className={apiOnline ? "is-online" : "is-offline"}>
-                {apiOnline ? "Serviços locais online" : "API local indisponível"}
-              </span>
-              <span>{provider === "auto" ? "CORE automático" : provider}</span>
-            </div>
-          </div>
-        )}
         {children}
       </main>
     </div>

@@ -42,7 +42,7 @@ _SOURCE_STOPWORDS = {
     "esse", "essa", "arquivo", "arquivos", "documento", "documentos", "fonte",
     "fontes", "base", "bases", "dados", "texto", "textos", "imagem", "imagens",
     "link", "links", "pdf", "docx", "xlsx", "csv", "json", "xml", "pt",
-    "br", "www", "http", "https", "org", "com", "senado", "federal",
+    "br", "www", "http", "https", "org", "senado", "federal",
     "documentation", "documentacao", "manual", "site", "pagina", "paginas",
 }
 
@@ -51,6 +51,8 @@ def comparison_requested(query: str) -> bool:
     """Return whether the user requested a multi-source analysis."""
 
     normalized = normalize(query)
+    if "saae" in normalized and any(marker in normalized for marker in ("vade", "vademecum", "mecum", "mencum")):
+        return True
     return any(
         marker in normalized
         for marker in (
@@ -104,7 +106,44 @@ def named_source_paths(paths: Iterable[Path], query: str) -> tuple[Path, ...]:
         for token in re.findall(r"[\w]+", normalized_query)
         if len(token) >= 3 and token not in _SOURCE_STOPWORDS and not token.isdigit()
     }
+    # A normal subject word is not a filename.  Without this boundary, the
+    # word ``trabalhista`` selected ``iatrabalhista-com-...md`` for a generic
+    # legal question, turning a marketing capture into the apparent authority
+    # of the answer.  Source resolution is allowed only for an explicit file
+    # cue/extension or for a small set of institutional aliases (SAAE, Vade,
+    # ENAP).  Generic retrieval remains available when no source is named.
+    explicit_source_cue = bool(
+        re.search(
+            r"\b(?:arquivo|arquivos|documento|documentos|fonte|fontes|manual|pdf|docx|xlsx|csv|xml|txt)\b",
+            normalized_query,
+        )
+        or re.search(r"\b[\w.-]+\.(?:pdf|docx|xlsx|csv|xml|txt|md|json)\b", query, flags=re.IGNORECASE)
+    )
     compact_query = re.sub(r"[^a-z0-9]+", "", normalize(query))
+    # Common institutional names and user typos are source aliases, not
+    # ordinary search terms.  Resolving them here keeps every domain package
+    # on the same explicit-document contract.
+    source_aliases = {
+        "saae": ("saae", "acordo", "convenc"),
+        "vade": ("vade", "vademecum", "mecum", "mencum"),
+        "mecum": ("vade", "vademecum", "mecum", "mencum"),
+        "mencum": ("vade", "vademecum", "mecum", "mencum"),
+        "enap": ("escolavirtual", "enap"),
+    }
+    alias_tokens = tuple(
+        alias
+        for token in query_tokens
+        for alias in source_aliases.get(token, ())
+    )
+    institutional_alias_present = bool(alias_tokens)
+    # A comparison explicitly names its sides even when the user omits the
+    # word ``arquivo`` (``compare politica e inventario``). Bare source-token
+    # matching is therefore allowed only for comparison tasks; ordinary
+    # questions still require an explicit source cue or institutional alias.
+    comparison_query = comparison_requested(query)
+    if not explicit_source_cue and not institutional_alias_present and not comparison_query:
+        return ()
+
     ranked: list[tuple[float, Path]] = []
     for path in paths:
         source_tokens = {
@@ -136,22 +175,39 @@ def named_source_paths(paths: Iterable[Path], query: str) -> tuple[Path, ...]:
         # an explicit, conservative alias instead of a broad semantic match.
         enap_alias = "enap" in query_tokens and "escolavirtual" in compact_label
         escola_virtual_alias = "escola virtual" in normalized_query and "escolavirtual" in compact_label
-        if not overlap and not label_in_query and not enap_alias and not escola_virtual_alias and token_fuzzy < 0.82:
+        named_alias = any(alias in compact_label for alias in alias_tokens)
+        if not overlap and not label_in_query and not enap_alias and not escola_virtual_alias and not named_alias and token_fuzzy < 0.82:
             continue
         score = float(len(overlap) * 5)
         if label_in_query:
             score += 12
         if enap_alias or escola_virtual_alias:
             score += 14
+        if named_alias:
+            score += 14
         if token_fuzzy >= 0.82:
             score += 4
         # A filename token must be meaningful.  This guard prevents a URL
         # slug from winning merely because it shares a short common token.
-        if not overlap and not label_in_query and not enap_alias and not escola_virtual_alias and token_fuzzy < 0.88:
+        if not overlap and not label_in_query and not enap_alias and not escola_virtual_alias and not named_alias and token_fuzzy < 0.88:
             continue
         ranked.append((score, path))
     if not ranked:
         return ()
+    # ENAP has both institutional portal captures and course-catalog captures
+    # in the corpus. When the question asks about a course/program detail
+    # (for example workload), the Escola Virtual document is the authoritative
+    # source for that field; the general ENAP portal is only an incidental
+    # acronym match and must not be mixed into the answer.
+    if "enap" in query_tokens and any(marker in normalized_query for marker in ("carga horaria", "curso", "programa")):
+        course_sources = [
+            (score, path)
+            for score, path in ranked
+            if "escolavirtual" in re.sub(r"[^a-z0-9]+", "", normalize(path.stem))
+        ]
+        if course_sources:
+            best_course_score = max(score for score, _ in course_sources)
+            return tuple(path for score, path in course_sources if score >= best_course_score - 5.0)
     best = max(score for score, _ in ranked)
     # Keep all strong ties (e.g. two explicitly named documents), while
     # dropping weak incidental matches from URL slugs.

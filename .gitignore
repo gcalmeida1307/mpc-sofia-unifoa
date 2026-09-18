@@ -18,6 +18,9 @@ data/text-cache/
 data/knowledge-graph/
 data/retrieval-index/
 data/gate-cache/
+knowledge/**/textos/RiskyUsers.csv
+knowledge/**/links/quarantine/
+knowledge/infraestrutura/links/www-gov-br-450816376a16.md
 __pycache__/
 *.pyc
 .claude-replay.*

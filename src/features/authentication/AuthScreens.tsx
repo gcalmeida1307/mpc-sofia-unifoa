@@ -15,7 +15,10 @@ export function Login({
   const [identifier, setIdentifier] = useState("")
   const [password, setPassword] = useState("")
   const [otp, setOtp] = useState("")
-  const [requires2FA, setRequires2FA] = useState(false)
+  // O acesso local do SOFIA usa 2FA como segunda etapa padrão. Manter o campo
+  // visível desde o primeiro paint evita um fluxo quebrado em duas telas e
+  // deixa explícito que o autenticador não substitui a senha.
+  const [requires2FA, setRequires2FA] = useState(true)
   const [requesting, setRequesting] = useState(false)
   const [activating, setActivating] = useState(false)
   const [resetting, setResetting] = useState(false)
@@ -38,12 +41,30 @@ export function Login({
       const data = (await response.json()) as {
         detail?: string
         requires_2fa?: boolean
+        requires_activation?: boolean
+        requires_password_reset?: boolean
         token?: string
         user?: AuthUser
       }
       if (data.requires_2fa) {
         setRequires2FA(true)
         setError("Digite o código de 6 dígitos do seu aplicativo autenticador.")
+        setBusy(false)
+        return
+      }
+      if (data.requires_activation) {
+        setActivating(true)
+        setError(
+          "A ativação do 2FA ainda não foi concluída. Informe novamente a matrícula e o token para continuar.",
+        )
+        setBusy(false)
+        return
+      }
+      if (data.requires_password_reset) {
+        setResetting(true)
+        setError(
+          "Existe uma recuperação pendente para esta conta. Informe o token de reset para definir a nova senha.",
+        )
         setBusy(false)
         return
       }
@@ -54,7 +75,7 @@ export function Login({
       if (reason instanceof SofiaApiError && reason.status === 401) {
         setError(
           requires2FA
-            ? "Código 2FA inválido ou expirado. Confira o horário do autenticador e tente novamente."
+            ? "Usuário, senha ou código 2FA inválidos. Confira os dados e o horário do autenticador."
             : "E-mail, matrícula ou senha inválidos.",
         )
       } else {
@@ -121,8 +142,9 @@ export function Login({
         {requires2FA && (
           <>
             <div className="login-success">
-              Senha aceita. Agora informe o código de 6 dígitos exibido no
-              aplicativo autenticador. Esse código não é a sua senha.
+              Sua conta usa autenticação em dois fatores. Informe o código de
+              6 dígitos exibido no aplicativo autenticador. Esse código não é
+              a sua senha.
             </div>
             <label>
               Código 2FA do autenticador
@@ -247,7 +269,8 @@ export function ResetPassword({ onBack }: { onBack: () => void }) {
           <input
             value={resetToken}
             onChange={(event) => setResetToken(event.target.value)}
-            autoComplete="one-time-code"
+            autoComplete="off"
+            spellCheck={false}
             required
           />
         </label>
@@ -588,6 +611,45 @@ export function ActivateAccount({ onBack }: { onBack: () => void }) {
       setBusy(false)
     }
   }
+  const resumeActivation = async () => {
+    setBusy(true)
+    setError("")
+    setMessage("")
+    try {
+      const response = await apiRequest("/api/auth/activation/resume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_code: userCode,
+          activation_token: activationToken,
+        }),
+      })
+      const data = (await response.json()) as {
+        detail?: string
+        qr_data_uri?: string
+        secret?: string
+        otpauth_uri?: string
+        message?: string
+      }
+      if (
+        !response.ok ||
+        !data.qr_data_uri ||
+        !data.secret ||
+        !data.otpauth_uri
+      )
+        throw new Error(data.detail ?? "Não foi possível recuperar o QR")
+      setArtifact({
+        qr_data_uri: data.qr_data_uri,
+        secret: data.secret,
+        otpauth_uri: data.otpauth_uri,
+      })
+      setMessage(data.message ?? "Ativação pendente recuperada.")
+    } catch (reason) {
+      setError(describeApiError(reason))
+    } finally {
+      setBusy(false)
+    }
+  }
   const enable = async () => {
     setBusy(true)
     setError("")
@@ -647,7 +709,8 @@ export function ActivateAccount({ onBack }: { onBack: () => void }) {
               <input
                 value={activationToken}
                 onChange={(event) => setActivationToken(event.target.value)}
-                autoComplete="one-time-code"
+                autoComplete="off"
+                spellCheck={false}
                 required
               />
             </label>
@@ -680,6 +743,18 @@ export function ActivateAccount({ onBack }: { onBack: () => void }) {
             <button className="login-submit" disabled={busy}>
               {busy ? "Ativando..." : "Criar senha e continuar →"}
             </button>
+            <button
+              type="button"
+              className="login-link"
+              disabled={busy || !userCode || !activationToken}
+              onClick={() => void resumeActivation()}
+            >
+              Já criei a senha e preciso recuperar o QR
+            </button>
+            <small>
+              O autenticador não cria a senha da conta: ele gera somente o
+              código temporário de 6 dígitos usado depois da senha.
+            </small>
           </>
         ) : (
           <>
@@ -868,6 +943,11 @@ export function AccessControl({
   const [message, setMessage] = useState("")
   const [error, setError] = useState("")
   const [busy, setBusy] = useState(false)
+  const [activationArtifact, setActivationArtifact] = useState<{
+    user_code: string
+    activation_token: string
+    expires_at: number
+  } | null>(null)
   const [setup, setSetup] = useState<{
     qr_data_uri: string
     secret: string
@@ -918,12 +998,23 @@ export function AccessControl({
         detail?: string
         user_code?: string
         activation_token?: string
+        activation_expires_at?: number
       }
       if (!response.ok)
         throw new Error(data.detail ?? "Falha ao decidir solicitação")
+      if (approve && data.user_code && data.activation_token) {
+        setActivationArtifact({
+          user_code: data.user_code,
+          activation_token: data.activation_token,
+          expires_at:
+            typeof data.activation_expires_at === "number"
+              ? data.activation_expires_at
+              : Math.floor(Date.now() / 1000) + 24 * 60 * 60,
+        })
+      }
       setMessage(
         approve
-          ? `Acesso aprovado. Matrícula: ${data.user_code}. Token de ativação: ${data.activation_token}. Entregue o token ao usuário por um canal seguro.`
+          ? `Acesso aprovado. Matrícula: ${data.user_code}. O token de ativação está disponível abaixo para entrega por um canal seguro.`
           : "Solicitação rejeitada.",
       )
       await load()
@@ -1025,6 +1116,27 @@ export function AccessControl({
       </section>
       {error && <div className="login-error">{error}</div>}
       {message && <div className="login-success">{message}</div>}
+      {activationArtifact && (
+        <section className="reset-token-box">
+          <b>Token de ativação — {activationArtifact.user_code}</b>
+          <code>{activationArtifact.activation_token}</code>
+          <small>
+            Entregue por canal seguro. Expira em 24 horas e só pode ser usado
+            uma vez para criar a senha e concluir o 2FA.
+          </small>
+          <button
+            className="login-link"
+            type="button"
+            onClick={() =>
+              void navigator.clipboard?.writeText(
+                activationArtifact.activation_token,
+              )
+            }
+          >
+            Copiar token
+          </button>
+        </section>
+      )}
       <section className="access-list">
         <div className="access-list-heading">
           <h2>Solicitações pendentes</h2>
@@ -1090,6 +1202,11 @@ export function UserAdministration({
     reset_token: string
     expires_at: number
   } | null>(null)
+  const [activationArtifact, setActivationArtifact] = useState<{
+    user_code: string
+    activation_token: string
+    expires_at: number
+  } | null>(null)
   const [message, setMessage] = useState("")
   const [error, setError] = useState("")
   const [busy, setBusy] = useState(false)
@@ -1146,6 +1263,46 @@ export function UserAdministration({
         expires_at: data.expires_at,
       })
       setMessage(data.message ?? "Token de reset criado.")
+      await load()
+    } catch (reason) {
+      setError(describeApiError(reason))
+    } finally {
+      setBusy(false)
+    }
+  }
+  const reissueActivation = async (user: AdminUser) => {
+    setBusy(true)
+    setError("")
+    setMessage("")
+    setResetArtifact(null)
+    setActivationArtifact(null)
+    try {
+      const response = await authFetch(
+        `/api/auth/users/${user.user_code}/activation`,
+        { method: "POST" },
+      )
+      const data = (await response.json()) as {
+        detail?: string
+        activation_token?: string
+        expires_at?: number
+        user_code?: string
+        message?: string
+      }
+      if (
+        !response.ok ||
+        !data.activation_token ||
+        !data.expires_at ||
+        !data.user_code
+      )
+        throw new Error(
+          data.detail ?? "Não foi possível reemitir a ativação",
+        )
+      setActivationArtifact({
+        user_code: data.user_code,
+        activation_token: data.activation_token,
+        expires_at: data.expires_at,
+      })
+      setMessage(data.message ?? "Token de ativação reemitido.")
       await load()
     } catch (reason) {
       setError(describeApiError(reason))
@@ -1285,6 +1442,27 @@ export function UserAdministration({
           </button>
         </section>
       )}
+      {activationArtifact && (
+        <section className="reset-token-box">
+          <b>Token de ativação — {activationArtifact.user_code}</b>
+          <code>{activationArtifact.activation_token}</code>
+          <small>
+            Entregue por canal seguro. Expira em 24 horas e só poderá ser usado
+            uma vez.
+          </small>
+          <button
+            className="login-link"
+            type="button"
+            onClick={() =>
+              void navigator.clipboard?.writeText(
+                activationArtifact.activation_token,
+              )
+            }
+          >
+            Copiar token
+          </button>
+        </section>
+      )}
       <section className="user-list">
         <div className="access-list-heading">
           <h2>Contas cadastradas ({users.length})</h2>
@@ -1347,6 +1525,13 @@ export function UserAdministration({
                 onClick={() => void resetPassword(user)}
               >
                 Gerar reset · 10 min
+              </button>
+              <button
+                className="neural-run"
+                disabled={busy || !user.active || Boolean(user.two_factor_enabled)}
+                onClick={() => void reissueActivation(user)}
+              >
+                Reemitir ativação · 24 h
               </button>
               {user.role !== "admin" && (
                 <button

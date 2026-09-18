@@ -1,0 +1,2333 @@
+# Registro de Convenções e Acordo Coletivo de Trabalho — Ministério do Trabalho e Emprego
+
+Fonte: https://www.gov.br/trabalho-e-emprego/pt-br/servicos/empregador/mediacao/registro-de-convencoes-e-acordo-coletivo-de-trabalho
+Capturado em: 2026-09-17T15:16:56.795919+00:00
+Páginas no domínio: 10
+
+## Registro de Convenções e Acordo Coletivo de Trabalho — Ministério do Trabalho e Emprego
+URL: https://www.gov.br/trabalho-e-emprego/pt-br/servicos/empregador/mediacao/registro-de-convencoes-e-acordo-coletivo-de-trabalho
+
+Registro de Convenções e Acordo Coletivo de Trabalho — Ministério do Trabalho e Emprego
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Ministério do Trabalho e Emprego
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Acesso à Informação
+Institucional
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências
+Horário de Atendimento
+Organograma
+Perfil Profissional
+Quem é Quem
+Regimento Interno (SRTE)
+Ações e Programas
+Programas, Projetos, Ações, Obras e Atividades
+Governança
+Concessões de recursos financeiros ou Renúncias de Receitas
+Carta de Serviços
+Participação Social
+Conselhos e órgãos colegiados
+Ouvidoria
+Conferências
+Editais de Chamamentos Públicos
+Auditorias
+Convênios e Transferências
+Convênios
+Transferências
+Termos de Execução Descentralizada - TEDs
+Receitas e Despesas
+Receitas
+Despesas
+Licitações e Contratos
+Licitações
+Ata de Registro de Preços
+Contratos
+PCA
+Plano de Logística Sustentável do MTE
+Ordem Cronológica dos Pagamentos
+Servidores
+Lista de Servidores e Terceirizados
+Concursos
+Programa de Gestão
+Avaliação de Desempenho
+Informações Classificadas
+Serviço de Informações ao Cidadão - SIC
+Equipe SIC
+Autoridade de Monitoramento
+Prazos
+Relatórios
+Painel de Acesso á Informação (CGU)
+Fluxos
+Como utilizar
+Perguntas Frequentes
+Dados Abertos
+Transparência e Prestação de Contas
+Sistema Eletrônico de Informações - SEI
+Demonstrações Contábeis
+Guias de Emendas Parlamentares
+Termos de Adesão
+Acordos de Cooperação Técnica
+Tratamento de Dados Pessoais
+Planos de Tecnologia do MTE
+Termos de Reconhecimento de Dívidas
+Sanções Administrativas
+Pactos pelo Trabalho Decente
+Icons
+Assuntos
+Aprendizagem Profissional
+Arquivos
+Análise de Impacto Regulatório - AIR
+O que é AIR
+Participação Social, Audiências e Consultas Públicas
+Relatórios de AIR
+Dispensas de AIR
+CBO
+Informações Gerais
+Regulamentação
+Legislação
+Perguntas Frequentes
+Serviços
+Tábua de Conversão
+Busca
+Crédito do Trabalhador
+Dados Abertos de Servidores do MTE
+Servidores Efetivos e Cargos de Chefia do MTE
+Remuneração de Servidores do MTE
+Capacitação de Servidores do MTE
+Economia Popular e Solidária
+Cadastro Nacional de Empreendimentos Econômicos Solidários - CADSOL
+Editais e Chamamentos Públicos
+Escola do Trabalhador 4.0
+Guia de Prevenção ao Assédio Moral e Sexual
+Inspeção do Trabalho
+Acesso à Informação
+Escola Nacional de Inspeção do Trabalho
+Fiscalização da Legislação do Trabalho
+Fiscalização de Segurança e Saúde no Trabalho
+Gabinete Inspeção do Trabalho
+Relatórios Anuais
+Aliança 8.7
+Conheça a Secretaria de Inspeção do Trabalho (SIT)
+MEI
+Segurança e Saúde nas Escolas
+Proteção dos Trabalhadores Migrantes e Refugiados
+Cadastro de Empregadores em Ajustamento de Conduta (CEAC)
+Cadastro de Empregadores em Ajustamento de Conduta (CEAC) - Normativos
+Legislação
+Decretos
+Portarias
+Instruções Normativas
+Normas Regulamentadoras (NR) e legislação de Segurança e Saúde no Trabalho
+Ementas
+Orientações Técnicas
+Portarias Internas
+Portarias de Designação de Fiscais de TED, ACT, Protocolos de Intenções e instrumentos congêneres
+Observatório Nacional do Mercado de Trabalho
+Quadro Brasileiro de Qualificações - QBQ
+IMG
+Sobre o QBQ
+Conceitos e Terminologia
+Consultar
+Sistema Nacional de Emprego (Sine)
+Conferência Nacional do Trabalho (CNT)
+Quadro de delegados (CNT)
+Documento-base e Diagnósticos
+Área dos delegados
+Cronograma da Conferência
+Notícias e conteúdos
+2026
+Março
+Maio
+Junho
+Julho
+Agosto
+Setembro
+Canais de Atendimento
+Fale Conosco
+Contatos Regionais
+Envio de Oficíos Judiciais
+Ouvidoria
+Quem Somos
+Base Legal
+Serviço de Informação ao Cidadão (SIC)
+Relatórios
+Simplifique!
+Conselho de Usuários
+Ouvidoria
+Publicações
+Imprensa
+Serviços
+Empregador
+CAGED
+RAIS
+eSocial
+Mediação
+Registro de Instrumento Coletivo de Trabalho (Convenção, Acordo e Termo Aditivo)
+Registro de Empresa de Trabalho Temporário
+Programa de Alimentação do Trabalhador (PAT)
+Registro de Contratante
+Domicilio Eletrônico Trabalhista - DET
+Trabalhador
+Abono Salarial
+Carteira de Trabalho
+Fundo de Garantia do Tempo de Serviço (FGTS)
+Seguro-Desemprego
+Registro Profissional
+Qualificação Profissional
+Mais Ações
+Empreendedorismo
+Sindicatos
+Cadastro de Entidades
+Central Sindical
+Contribuição Sindical
+Mediação
+Painel de Relações do Trabalho
+Registro de Instrumento Coletivo de Trabalho (Convenção, Acordo e Termo Aditivo)
+Carta de serviços
+Facilita - Plataforma de Serviços
+QualificaPRO
+Composição
+Ministro e Secretários
+Quem é Quem
+Unidades Descentralizadas
+Superintendências Regionais do Trabalho e Emprego
+Entidades Vinculadas
+Fundação Jorge Duprat Figueiredo de Segurança e Medicina do Trabalho (Fundacentro)
+Órgãos Colegiados
+Conselho Nacional do Trabalho - CNT
+Comissão Tripartite Paritária Permanente - CTPP
+Conselho Curador do FGTS - CCFGTS
+Conselho Deliberativo do FAT - CODEFAT
+Comitê Gestor do Programa de Produtividade da Auditoria-Fiscal do Trabalho - CGPP-AFT
+Comissão Nacional de Erradicação do Trabalho Infantil (CONAETI)
+Corregedoria
+Organograma
+Coordenações
+Coordenação-Geral de Inteligência Trabalhista (CGINT)
+Galerias de Imagem
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Twitter
+YouTube
+Facebook
+Instagram
+Flickr
+Você está aqui:
+Página Inicial
+Serviços
+Empregador
+Mediação
+Registro de Convenções e Acordo Coletivo de Trabalho
+Info
+Registro de Convenções e Acordo Coletivo de Trabalho
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+Publicado em
+11/09/2015 20h55
+Atualizado em
+21/08/2024 09h39
+Convenções e acordos coletivos de trabalho são instrumentos de caráter normativo, firmados entre entidades sindicais ou entre estas e empresas, que estabelecem condições de trabalho aplicáveis no âmbito de representação das partes envolvidas.
+Para que tenham validade e se apliquem a todos os envolvidos, precisam ser registrados no Ministério do Trabalho e Emprego (MTE). A obrigatoriedade de depósito dos instrumentos no MTE, para fins de registro e arquivo, tem previsão legal no art. 614 da CLT e objetiva a verificação dos requisitos formais exigidos para a sua celebração e a publicidade que deve ser dada a tais atos.
+Os instrumentos coletivos deverão ser, obrigatoriamente, transmitidos para registro eletrônico pelo
+Sistema Mediador
+.
+O protocolo do requerimento do registro emitido por meio do Sistema Mediador deverá ser efetuado: na Secretaria de Relações do Trabalho (SRT), quando se tratar de norma com abrangência nacional ou interestadual; e nos órgãos regionais do MTE, nos demais casos.
+Com o registro os instrumentos coletivos ficarão disponíveis para consulta de qualquer interessado no endereço eletrônico (
+http://www3.mte.gov.br/sistemas/mediador/
+).
+Contato:
+Telefones: __SOFIA_PHONE_1__ / __SOFIA_PHONE_2__
+Convenções e Acordos Coletivos via Internet - Sistema Mediador
+Cartilha do Mediador
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+Acesso à Informação
+Institucional
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências
+Horário de Atendimento
+Organograma
+Perfil Profissional
+Quem é Quem
+Regimento Interno (SRTE)
+Ações e Programas
+Programas, Projetos, Ações, Obras e Atividades
+Governança
+Concessões de recursos financeiros ou Renúncias de Receitas
+Carta de Serviços
+Participação Social
+Conselhos e órgãos colegiados
+Ouvidoria
+Conferências
+Editais de Chamamentos Públicos
+Auditorias
+Convênios e Transferências
+Convênios
+Transferências
+Termos de Execução Descentralizada - TEDs
+Receitas e Despesas
+Receitas
+Despesas
+Licitações e Contratos
+Licitações
+Ata de Registro de Preços
+Contratos
+PCA
+Plano de Logística Sustentável do MTE
+Ordem Cronológica dos Pagamentos
+Servidores
+Lista de Servidores e Terceirizados
+Concursos
+Programa de Gestão
+Avaliação de Desempenho
+Informações Classificadas
+Serviço de Informações ao Cidadão - SIC
+Equipe SIC
+Autoridade de Monitoramento
+Prazos
+Relatórios
+Painel de Acesso á Informação (CGU)
+Fluxos
+Como utilizar
+Perguntas Frequentes
+Dados Abertos
+Transparência e Prestação de Contas
+Sistema Eletrônico de Informações - SEI
+Demonstrações Contábeis
+Guias de Emendas Parlamentares
+Termos de Adesão
+Acordos de Cooperação Técnica
+Tratamento de Dados Pessoais
+Planos de Tecnologia do MTE
+Termos de Reconhecimento de Dívidas
+Sanções Administrativas
+Pactos pelo Trabalho Decente
+Icons
+Assuntos
+Aprendizagem Profissional
+Arquivos
+Análise de Impacto Regulatório - AIR
+O que é AIR
+Participação Social, Audiências e Consultas Públicas
+Relatórios de AIR
+Dispensas de AIR
+CBO
+Informações Gerais
+Regulamentação
+Legislação
+Perguntas Frequentes
+Serviços
+Tábua de Conversão
+Busca
+Crédito do Trabalhador
+Dados Abertos de Servidores do MTE
+Servidores Efetivos e Cargos de Chefia do MTE
+Remuneração de Servidores do MTE
+Capacitação de Servidores do MTE
+Economia Popular e Solidária
+Cadastro Nacional de Empreendimentos Econômicos Solidários - CADSOL
+Editais e Chamamentos Públicos
+Escola do Trabalhador 4.0
+Guia de Prevenção ao Assédio Moral e Sexual
+Inspeção do Trabalho
+Acesso à Informação
+Escola Nacional de Inspeção do Trabalho
+Fiscalização da Legislação do Trabalho
+Fiscalização de Segurança e Saúde no Trabalho
+Gabinete Inspeção do Trabalho
+Relatórios Anuais
+Aliança 8.7
+Conheça a Secretaria de Inspeção do Trabalho (SIT)
+MEI
+Segurança e Saúde nas Escolas
+Proteção dos Trabalhadores Migrantes e Refugiados
+Cadastro de Empregadores em Ajustamento de Conduta (CEAC)
+Cadastro de Empregadores em Ajustamento de Conduta (CEAC) - Normativos
+Legislação
+Decretos
+Portarias
+Instruções Normativas
+Normas Regulamentadoras (NR) e legislação de Segurança e Saúde no Trabalho
+Ementas
+Orientações Técnicas
+Portarias Internas
+Portarias de Designação de Fiscais de TED, ACT, Protocolos de Intenções e instrumentos congêneres
+Observatório Nacional do Mercado de Trabalho
+Quadro Brasileiro de Qualificações - QBQ
+IMG
+Sobre o QBQ
+Conceitos e Terminologia
+Consultar
+Sistema Nacional de Emprego (Sine)
+Conferência Nacional do Trabalho (CNT)
+Quadro de delegados (CNT)
+Documento-base e Diagnósticos
+Área dos delegados
+Cronograma da Conferência
+Notícias e conteúdos
+2026
+Março
+Maio
+Junho
+Julho
+Agosto
+Setembro
+Canais de Atendimento
+Fale Conosco
+Contatos Regionais
+Envio de Oficíos Judiciais
+Ouvidoria
+Quem Somos
+Base Legal
+Serviço de Informação ao Cidadão (SIC)
+Relatórios
+Simplifique!
+Conselho de Usuários
+Ouvidoria
+Publicações
+Imprensa
+Serviços
+Empregador
+CAGED
+RAIS
+eSocial
+Mediação
+Registro de Instrumento Coletivo de Trabalho (Convenção, Acordo e Termo Aditivo)
+Registro de Empresa de Trabalho Temporário
+Programa de Alimentação do Trabalhador (PAT)
+Registro de Contratante
+Domicilio Eletrônico Trabalhista - DET
+Trabalhador
+Abono Salarial
+Carteira de Trabalho
+Fundo de Garantia do Tempo de Serviço (FGTS)
+Seguro-Desemprego
+Registro Profissional
+Qualificação Profissional
+Mais Ações
+Empreendedorismo
+Sindicatos
+Cadastro de Entidades
+Central Sindical
+Contribuição Sindical
+Mediação
+Painel de Relações do Trabalho
+Registro de Instrumento Coletivo de Trabalho (Convenção, Acordo e Termo Aditivo)
+Carta de serviços
+Facilita - Plataforma de Serviços
+QualificaPRO
+Composição
+Ministro e Secretários
+Quem é Quem
+Unidades Descentralizadas
+Superintendências Regionais do Trabalho e Emprego
+Entidades Vinculadas
+Fundação Jorge Duprat Figueiredo de Segurança e Medicina do Trabalho (Fundacentro)
+Órgãos Colegiados
+Conselho Nacional do Trabalho - CNT
+Comissão Tripartite Paritária Permanente - CTPP
+Conselho Curador do FGTS - CCFGTS
+Conselho Deliberativo do FAT - CODEFAT
+Comitê Gestor do Programa de Produtividade da Auditoria-Fiscal do Trabalho - CGPP-AFT
+Comissão Nacional de Erradicação do Trabalho Infantil (CONAETI)
+Corregedoria
+Organograma
+Coordenações
+Coordenação-Geral de Inteligência Trabalhista (CGINT)
+Galerias de Imagem
+Redefinir Cookies
+Redes sociais
+Twitter
+YouTube
+Facebook
+Instagram
+Flickr
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## GOV.BR
+URL: https://www.gov.br/pt-br
+
+GOV.BR
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Info
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços para você
+MAIS ACESSADOS
+1
+Assinatura Eletrônica
+2
+Consultar Meu Imposto de Renda
+3
+Consultar dados do Cadastro Único
+4
+Consultar CPF
+5
+Consultar restituição do imposto de renda
+6
+Consultar CNPJ
+DESTAQUE
+Cultura, Artes, História e Esportes
+Tela Brasil
+Finanças, Impostos e Gestão Pública
+Entregar Meu Imposto de Renda (DIRPF)
+Finanças, Impostos e Gestão Pública
+Novo
+Renegociação de Dívidas - Famílias
+Justiça e Segurança
+Celular Seguro
+Assistência Social
+Novo
+Bolsa Família (PBF)
+SERVIÇOS DIGITAIS POR PERFIL
+Novos perfís serão adicionados brevemente
+Agricultor
+Turista
+Aposentado
+Empreendedor
+Trabalhador
+Motorista
+Em breve
+Em breve
+Próximo
+Anterior
+Paginação
+Paginação
+Todos os Perfis
+Economia
+Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
+Justiça
+Segunda fase da Operação Última Chamada amplia fiscalização do comércio de celulares irregulares
+Cultura
+São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
+Mais Notícias
+Navegue por categoria
+Encontre o serviço ou a informação desejada pelas opções abaixo:
+Agricultura e Pecuária
+Serviços relacionados ao apoio e promoção à produção agrícola no país, exportação dos produtos agrícolas, entre outros.
+Assistência Social
+Serviços relacionados à proteção e assistência a indivíduos e comunidades em situação de vulnerabilidade, entre outros.
+Ciência e Tecnologia
+Serviços relacionados à assistência para pesquisas e empresas, fiscalização e promoção da ciência e tecnologia.
+Comunicações e Transparência Pública
+Serviços relacionados à fiscalização e regulamentação do setor de telecomunicações, transparência e comunicação pública.
+Cultura, Artes, História e Esportes
+Serviços relacionados ao apoio e promoção às artes e a cultura, a regularização do esporte, entre outros.
+Defesa Civil e Defesa Nacional
+Serviços relacionados ao alistamento e outras formas de ingresso na carreira militar, defesa civil, entre outros.
+Educação e Pesquisa
+Serviços destinados a quem deseja estudar no ensino superior, a servidores da educação pública, entre outros.
+Empresa, Indústria e Comércio
+Serviços relacionados a autorizações, cadastro e programas de apoio a empresas e indústrias, entre outros.
+Energia, Minerais e Combustíveis
+Serviços relacionados à prestação de energia elétrica, comercialização de minerais, entre outros.
+Finanças, Impostos e Gestão Pública
+Serviços relacionados a cadastro financeiros, fornecimento de bens e serviços à administração pública, entre outros.
+Justiça e Segurança
+Serviços relacionados ao controle de entrada no Brasil, policiamento de competência federal, entre outros.
+Meio Ambiente e Clima
+Serviços relacionados à proteção e cuidado com o meio ambiente, assim como ensino e pesquisas na área.
+Saúde e Vigilância Sanitária
+Serviços relacionados ao apoio no atendimento e prevenção a problemas de saúde, entre outros.
+Trabalho, Emprego e Previdência
+Serviços relacionados à fiscalização e regulamentação do mercado de trabalho, benefícios previdenciários, entre outros.
+Infraestrutura, Trânsito e Transportes
+Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mercadorias por vias de administração federal, entre outros.
+Viagens e Turismo
+Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
+Desempenho dos Serviços
+5667
+Serviços no Portal
+94 %
+Serviços Digitais
+49 %
+Avaliações positivas
+Mais Indicadores
+Você já conhece os aplicativos móveis da Administração Pública Federal?
+gov.br
+O aplicativo Gov.br está disponível para Android e iPhone (iOS). Com ele o cidadão pode acessar serviços do governo, apresentar seus documentos em formato digital, assinar documentos eletronicamente, gerenciar o uso de seus dados pessoais e realizar a prova de vida digital.
+Baixar gov.br na App Store
+gov.br disponível no Google Play
+Carteira Digital de Trânsito
+A Carteira Digital de Trânsito (CDT) é a evolução da CNH Digital. Agora, além da CNH, também é possível baixar a versão digital do Certificado de Registro e Licenciamento de Veículo – CRLV.
+Baixar Carteira Digital de Trânsito na App Store
+Carteira Digital de Trânsito disponível no Google Play
+Meu INSS - Central de Serviços
+O aplicativo é um canal de contato online com os cidadãos, possibilitando consultas e emissão de extratos, acesso a dados sobre contribuições previdenciárias, empregadores e períodos trabalhados.
+Baixar Meu INSS - Central de Serviços na App Store
+Meu INSS - Central de Serviços disponível no Google Play
+GALERIA DE APLICATIVOS
+Ouvidoria e Acesso à Informação
+Você pode realizar manifestações nos seguintes canais
+Denúncia
+Solicitação
+Elogio
+Reclamações
+Protocolo GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=Desenrola+Brasil&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=assinatura&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=imposto+de+renda&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=inss&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/search?SearchableText=mei&origem=termos
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## www.gov.br
+URL: https://www.gov.br/pt-br/sitemap
+
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Info
+Mapa do Site
+Uma visão geral do conteúdo disponível no site. Mantenha o ponteiro do mouse sobre o item por alguns segundos para visualizar sua descrição.
+Serviços
+Buscar serviços por
+Serviços por público alvo
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Serviços
+URL: https://www.gov.br/pt-br/servicos
+
+Serviços
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Serviços
+Info
+Listagem de Órgãos
+Filtrar
+Pesquisar Órgãos
+Limpar
+Aplicar
+Advocacia-Geral da União (AGU)
+Agência Brasileira de Inteligência (ABIN)
+Agência Brasileira Gestora de Fundos Garantidores e Garantias S.A. (ABGF)
+Agência Espacial Brasileira (AEB)
+Agência Nacional de Águas e Saneamento Básico (ANA)
+Agência Nacional de Aviação Civil (ANAC)
+Agência Nacional de Energia Elétrica (ANEEL)
+Agência Nacional de Mineração (ANM)
+Agência Nacional de Proteção de Dados (ANPD)
+Agência Nacional de Saúde Suplementar (ANS)
+Agência Nacional de Telecomunicações (ANATEL)
+Agência Nacional de Transportes Aquaviários (ANTAQ)
+Agência Nacional de Transportes Terrestres (ANTT)
+Agência Nacional de Vigilância Sanitária (ANVISA)
+Agência Nacional do Cinema (ANCINE)
+Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)
+Amazônia Azul Tecnologias de Defesa S.A. (AMAZUL)
+Arquivo Nacional (AN)
+Assessoria Especial do Presidente da República (AEPR)
+Autoridade Brasileira de Controle de Dopagem (ABCD)
+Autoridade de Governança do Legado Olímpico (AGLO)
+Autoridade Nacional de Segurança Nuclear (ANSN)
+Autoridade Portuária de Santos S.A. (APS S.A.)
+Banco Central do Brasil (BCB)
+Banco da Amazônia S.A. (BASA)
+Banco do Brasil S.A. (BB)
+Banco do Nordeste do Brasil S.A. (BNB)
+Banco Nacional de Desenvolvimento Econômico e Social (BNDES)
+Caixa de Construções de Casas para o Pessoal da Marinha (CCCPCM)
+Caixa de Financiamento Imobiliário da Aeronáutica (CFIAE)
+Itens por página
+30
+60
+Todos
+« Anterior
+1
+2
+3
+4
+5
+6
+7
+...
+12
+Próximo »
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Serviços
+URL: https://www.gov.br/pt-br/servicos?b_start%3Aint=120
+
+Serviços
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Serviços e Informações do Brasil
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+imposto de renda
+inss
+Termos mais buscados
+assinatura
+Desenrola Brasil
+mei
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Você está aqui:
+Página Inicial
+Serviços
+Info
+Listagem de Órgãos
+Filtrar
+Pesquisar Órgãos
+Limpar
+Aplicar
+Fundação Escola Nacional de Administração Pública (Enap)
+Fundação Habitacional do Exército (FHE)
+Fundação Instituto Brasileiro de Geografia e Estatística (IBGE)
+Fundação Joaquim Nabuco (FUNDAJ)
+Fundação Jorge Duprat Figueiredo, de Segurança e Medicina do Trabalho (FUNDACENTRO)
+Fundação Nacional de Artes (FUNARTE)
+Fundação Nacional de Saúde (FUNASA)
+Fundação Nacional dos Povos Indígenas (FUNAI)
+Fundação Osório (FOSORIO)
+Fundação Oswaldo Cruz (FIOCRUZ)
+Fundação Universidade de Brasília (UNB)
+Fundação Universidade do Amazonas (UFAM)
+Fundação Universidade Federal da Grande Dourados (UFGD)
+Fundação Universidade Federal de Ciências da Saúde de Porto Alegre (UFCSPA)
+Fundação Universidade Federal de Mato Grosso (UFMT)
+Fundação Universidade Federal de Mato Grosso do Sul (UFMS)
+Fundação Universidade Federal de Ouro Preto (UFOP)
+Fundação Universidade Federal de Pelotas (UFPel)
+Fundação Universidade Federal de Rondônia (UNIR)
+Fundação Universidade Federal de Roraima (UFRR)
+Fundação Universidade Federal de São Carlos (UFSCar)
+Fundação Universidade Federal de São João Del Rei (FUNRei)
+Fundação Universidade Federal de Sergipe (UFS)
+Fundação Universidade Federal de Viçosa (UFV)
+Fundação Universidade Federal do ABC (UFABC)
+Fundação Universidade Federal do Acre (UFAC)
+Fundação Universidade Federal do Amapá (UNIFAP)
+Fundação Universidade Federal do Maranhão (UFMA)
+Fundação Universidade Federal do Pampa (UNIPAMPA)
+Fundação Universidade Federal do Piauí (UFPI)
+Itens por página
+30
+60
+Todos
+« Anterior
+1
+2
+3
+4
+5
+6
+7
+8
+...
+12
+Próximo »
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Redefinir Cookies
+Redes sociais
+Instagram
+Facebook
+YouTube
+Linkedin
+WhatsApp canal
+TikTok
+Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca

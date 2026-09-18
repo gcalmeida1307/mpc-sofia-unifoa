@@ -84,6 +84,110 @@ def _hard_query_anchors(question: str) -> tuple[str, ...]:
     return tuple(dict.fromkeys(anchors))
 
 
+def _topic_anchor_groups(question: str) -> tuple[tuple[str, ...], ...]:
+    """Return high-signal concepts a supporting passage must address.
+
+    Filename membership is not topical evidence.  This is intentionally a
+    small deterministic gate: it catches the dangerous case where a named
+    legal code contributes an unrelated page merely because the document was
+    explicitly requested.
+    """
+    normalized = normalize(question)
+    def contains(marker: str) -> bool:
+        return marker in normalized if " " in marker else marker in set(re.findall(r"[\w]+", normalized))
+    groups: list[tuple[str, ...]] = []
+    if any(marker in normalized for marker in ("atras", "pontual", "minut", "transit", "transporte")):
+        groups.append((
+            "atras", "atrasado", "minut", "pontual", "registro de ponto",
+            "horario", "tempo despendido", "deslocamento", "transporte",
+            "compensado", "repouso remunerado", "cinco minutos", "dez minutos",
+        ))
+    if "acesso a informacao" in normalized:
+        groups.append(("acesso a informacao", "transparencia", "informacoes publicas", "dados publicos"))
+    if re.search(r"\b12\.527\b", normalized):
+        # A law-number query must be supported by the law number or its
+        # unmistakable subject. Navigation menus and personnel tables from
+        # the same module are not evidence for the LAI.
+        groups.append(("12.527", "lei de acesso a informacao", "acesso a informacao"))
+    if "zabbix" in normalized:
+        groups.append(("zabbix", "trigger", "host", "item", "monitoramento"))
+    if any(marker in normalized for marker in ("riskusers", "riskyusers", "nivel de risco", "estado do risco")):
+        groups.append(("riskusers", "riskyusers", "nivel de risco", "estado do risco", "em risco"))
+    if "mandado de seguranca" not in normalized and any(
+        marker in normalized
+        for marker in (
+            "direito trabalhista",
+            "direito do trabalho",
+            "vinculo de carteira",
+            "carteira assinada",
+            "emprego a",
+            "emprego b",
+        )
+    ):
+        groups.append(
+            (
+                "contrato de trabalho",
+                "relacao de emprego",
+                "empregado",
+                "empregador",
+                "carteira de trabalho",
+                "jornada de trabalho",
+                "salario",
+                "direito do trabalho",
+            )
+        )
+    if any(
+        marker in normalized
+        for marker in (
+            "assedio",
+            "importunacao",
+            "abuso de poder",
+            "denuncia",
+            "denunciar",
+            "perseguicao",
+            "retaliacao",
+            "represalia",
+            "sem me expor",
+            "anonimo",
+            "anonimato",
+        )
+    ):
+        groups.append(
+            (
+                "assedio moral",
+                "assedio sexual",
+                "importunacao",
+                "importunacao sexual",
+                "abuso de poder",
+                "denuncia",
+                "canal de denuncia",
+                "ouvidoria",
+                "corregedoria",
+                "sigilo",
+                "confidencialidade",
+                "anonimato",
+                "retaliacao",
+                "perseguicao",
+                "represalia",
+                "rescisao indireta",
+                "art. 483",
+                "rigor excessivo",
+            )
+        )
+    if len(re.findall(r"\b\d{1,2}:\d{2}\b", normalized)) >= 2 or any(marker in normalized for marker in ("dsr", "descanso semanal", "repouso semanal")):
+        groups.append((
+            "jornada", "registro de ponto", "horas extras", "hora extra", "art. 58",
+            "art. 59", "repouso semanal", "descanso semanal", "dsr",
+        ))
+    if any(contains(marker) for marker in ("tosse", "febre", "muco", "catarro", "secrecao", "garganta", "coriza", "chiado", "falta de ar", "dispneia", "gripe", "influenza", "bronquite")):
+        groups.append((
+            "tosse", "febre", "muco", "catarro", "secrecao", "sintoma",
+            "sinais e sintomas", "infeccao respiratoria", "vias respiratorias",
+            "influenza", "gripe", "bronquite", "respiratorio", "respiratoria",
+        ))
+    return tuple(groups)
+
+
 def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candidates: Iterable[Evidence], required_sources: tuple[str, ...] = ()) -> EvidenceDecision:
     """Score relevance, authority, freshness, provenance and support.
 
@@ -97,6 +201,7 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
         if term not in {"como", "qual", "quais", "sobre", "para", "documento", "arquivo"}
     }
     hard_anchors = _hard_query_anchors(question)
+    topic_groups = _topic_anchor_groups(question)
     normalized_question = normalize(question)
     version_anchors = tuple(dict.fromkeys(re.findall(r"\b\d+\.\d+\b", normalized_question)))
     version_comparison = len(version_anchors) >= 2 and any(marker in normalized_question for marker in ("versao", "versoes", "diferenca entre", "compar"))
@@ -108,8 +213,8 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
     # module policy effectively accept evidence around 0.21, which allowed
     # broad domain vocabulary to outrank genuinely relevant passages.
     threshold = max(0.28, min(0.68, float(policy.min_evidence_score) * 0.95))
-    from .domain_packages.base import comparison_requested
     from .document_pages import text_quality
+    from .domain_packages.base import comparison_requested
     compare_named = comparison_requested(question) and len(required_sources) >= 2
     for candidate in candidates:
         text = normalize(candidate.chunk.text)
@@ -139,6 +244,84 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
             anchor in text or anchor in normalize(candidate.chunk.path.name)
             for anchor in hard_anchors
         )
+        topic_supported = all(any(marker in text for marker in group) for group in topic_groups)
+        harassment_query = any(
+            marker in normalized_question
+            for marker in (
+                "assedio",
+                "importunacao",
+                "abuso de poder",
+                "denuncia",
+                "denunciar",
+                "perseguicao",
+                "retaliacao",
+                "represalia",
+                "sem me expor",
+                "anonimo",
+                "anonimato",
+            )
+        )
+        if harassment_query:
+            direct_harassment_markers = (
+                "assedio moral",
+                "assedio sexual",
+                "importunacao",
+                "importunacao sexual",
+                "abuso de poder",
+                "canal de denuncia",
+                "ouvidoria",
+                "corregedoria",
+                "sigilo",
+                "confidencialidade",
+                "anonimato",
+                "retaliacao",
+                "perseguicao",
+                "represalia",
+            )
+            navigation_markers = (
+                "receitas",
+                "despesas",
+                "licitacoes",
+                "servidores",
+                "concursos",
+                "dados abertos",
+                "painel",
+                "informacoes classificadas",
+                "servico de informacoes",
+                "acordos de cooperacao",
+                "relatorios",
+            )
+            topic_supported = topic_supported and any(marker in text for marker in direct_harassment_markers)
+            workplace_markers = (
+                "trabalho",
+                "trabalhador",
+                "empregado",
+                "empregador",
+                "empresa",
+                "ambiente de trabalho",
+                "cipa",
+                "relacao de emprego",
+                "contrato de trabalho",
+            )
+            if "assedio moral" in normalized_question:
+                topic_supported = topic_supported and (
+                    ("assedio moral" in text or ("assedio" in text and "assedio sexual" not in text))
+                    and any(marker in text for marker in workplace_markers)
+                )
+            if "assedio sexual" in normalized_question:
+                topic_supported = topic_supported and any(
+                    marker in text
+                    for marker in (
+                        "trabalho",
+                        "trabalhador",
+                        "empregado",
+                        "empregador",
+                        "empresa",
+                        "relacao de emprego",
+                    )
+                )
+            if sum(text.count(marker) for marker in navigation_markers) >= 5:
+                topic_supported = False
         if version_comparison:
             # A versioned filename alone is not enough: a random page from a
             # 7.4 manual must not support a comparison with 8.0. The passage
@@ -152,7 +335,7 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
                 if index >= 0
             )
             anchor_supported = anchor_supported and any(version in text for version in version_anchors) and version_context
-        has_question_anchor = anchor_supported and (
+        has_question_anchor = anchor_supported and topic_supported and (
             question_coverage >= 0.10
             or candidate.coverage >= 0.18
             or candidate.semantic_score >= 0.48
@@ -164,6 +347,8 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
             reason = "não atingiu relevância, suporte ou proveniência mínimos"
             if hard_anchors and not anchor_supported:
                 reason = "não contém no trecho o identificador e o contexto necessários para sustentar a pergunta"
+            elif topic_groups and not topic_supported:
+                reason = "o trecho pertence à fonte indicada, mas não trata do tema específico da pergunta"
             rejected.append(
                 enriched.__class__(
                     enriched.chunk,

@@ -11,7 +11,7 @@ from pathlib import Path
 
 from .secure_storage import decrypt_text, protect_for_storage
 
-EXTRACTOR_VERSION = "pages-4"
+EXTRACTOR_VERSION = "pages-6"
 
 
 @dataclass(frozen=True)
@@ -37,6 +37,38 @@ def text_quality(text: str) -> float:
     readable = sum(char.isalnum() or char.isspace() or char in ".,;:!?%()/+-'\"ºª°" for char in clean) / len(clean)
     bad = sum(char == "\ufffd" or (ord(char) < 32 and not char.isspace()) for char in clean) / len(clean)
     return round(max(0.0, min(1.0, readable - bad * 4)), 4)
+
+
+def _pypdf_native_texts(path: Path) -> tuple[str, ...] | None:
+    """Return page text from pypdf when a PDF font map is broken in fitz."""
+    try:
+        from pypdf import PdfReader
+    except ImportError:
+        return None
+    try:
+        return tuple(page.extract_text() or "" for page in PdfReader(path).pages)
+    except (OSError, ValueError, TypeError):
+        return None
+    except _pypdf_error_types():
+        # A malformed/truncated optional fallback must never take down
+        # indexing of the remaining module sources.
+        return None
+
+
+def _pypdf_error_types() -> tuple[type[BaseException], ...]:
+    """Load pypdf's parse-error base without making pypdf mandatory."""
+    try:
+        from pypdf.errors import PyPdfError
+    except ImportError:
+        return ()
+    return (PyPdfError,)
+
+
+def _native_text_is_corrupt(text: str) -> bool:
+    # PyMuPDF may expose an otherwise readable page with replacement glyphs
+    # when the embedded font map is malformed.  Stripping those glyphs would
+    # make the page look healthy while silently deleting legal words.
+    return text.count("\ufffd") >= 1
 
 
 def cache_path(path: Path) -> Path:
@@ -76,9 +108,13 @@ def read_native_pages(path: Path) -> tuple[ExtractedPage, ...] | None:
         from .ingestion import clean_extracted_text, fitz
         pages: list[ExtractedPage] = []
         if fitz is not None:
+            fallback_texts = _pypdf_native_texts(path)
             with fitz.open(path) as document:
                 for number, page in enumerate(document, 1):
-                    text = clean_extracted_text(page.get_text("text") or "")
+                    text = page.get_text("text") or ""
+                    if fallback_texts and number <= len(fallback_texts) and _native_text_is_corrupt(text):
+                        text = fallback_texts[number - 1]
+                    text = clean_extracted_text(text)
                     if not text.strip() and not page.get_images() and not page.get_drawings():
                         pages.append(ExtractedPage(number, "", "blank", 1.0, "BLANK"))
                         continue
@@ -98,7 +134,10 @@ def read_native_pages(path: Path) -> tuple[ExtractedPage, ...] | None:
         # strict all-pages quality gate, so this never marks the document ready.
         readable = tuple(page for page in pages if page.status in {"READY", "BLANK"})
         return readable if any(page.status == "READY" for page in readable) else None
-    except (OSError, ValueError, TypeError):
+    # A malformed or partially downloaded PDF is a document-level failure,
+    # not a module-level failure.  The complete-module index must be able to
+    # skip it and continue serving the readable sources beside it.
+    except (AttributeError, ImportError, KeyError, OSError, RuntimeError, TypeError, ValueError):
         return None
 
 
@@ -128,7 +167,7 @@ def _sanitize_page_text(text: str) -> str:
 
 
 def extract_pages(path: Path) -> tuple[ExtractedPage, ...]:
-    from .ingestion import Image, fitz, ocr_status, clean_extracted_text
+    from .ingestion import Image, clean_extracted_text, fitz, ocr_status
     cached = read_pages(path)
     if cached is not None:
         return cached
@@ -150,38 +189,47 @@ def extract_pages(path: Path) -> tuple[ExtractedPage, ...]:
                     with render() as image:
                         text, confidence = _ocr(image)
                     method, quality = "ocr", min(text_quality(text), confidence)
-                except Exception as exc:
+                except (OSError, RuntimeError, TypeError, ValueError) as exc:
                     text, method, quality, reason = "", "ocr", 0.0, type(exc).__name__
             else:
                 reason = "OCR indisponível"
         status = "READY" if quality >= 0.75 else "QUARANTINED"
         pages.append(ExtractedPage(number, clean_extracted_text(text), method, round(quality, 4), status, reason or ("baixa legibilidade" if status != "READY" else "")))
 
-    if path.suffix.lower() == ".pdf":
-        if fitz is None:
-            from pypdf import PdfReader
-            for n, page in enumerate(PdfReader(path).pages, 1):
-                text = page.extract_text() or ""
-                score = text_quality(text)
-                pages.append(ExtractedPage(n, text, "native", score, "READY" if score >= .75 else "QUARANTINED", "renderizador OCR indisponível" if score < .75 else ""))
+    try:
+        if path.suffix.lower() == ".pdf":
+            if fitz is None:
+                from pypdf import PdfReader
+                for n, page in enumerate(PdfReader(path).pages, 1):
+                    text = page.extract_text() or ""
+                    score = text_quality(text)
+                    pages.append(ExtractedPage(n, text, "native", score, "READY" if score >= .75 else "QUARANTINED", "renderizador OCR indisponível" if score < .75 else ""))
+            else:
+                fallback_texts = _pypdf_native_texts(path)
+                with fitz.open(path) as doc:
+                    for n, page in enumerate(doc, 1):
+                        native = page.get_text("text")
+                        if fallback_texts and n <= len(fallback_texts) and _native_text_is_corrupt(native):
+                            native = fallback_texts[n - 1]
+                        # Vector-only divider pages contain no recoverable text;
+                        # they should not trigger a fake OCR failure. A scanned
+                        # page still has an image and is sent through the strict
+                        # OCR gate below.
+                        blank = not native.strip() and not page.get_images()
+                        image_area = sum(rect.get_area() for info in page.get_images() for rect in page.get_image_rects(info[0]))
+                        scanned_body = image_area > page.rect.get_area() * .5 and len(native.strip()) < 40
+                        section_marker = bool(native.strip()) and not page.get_images() and len(native.strip()) <= 120 and len(native.split()) <= 12
+                        process(n, native, lambda page=page: Image.open(io.BytesIO(page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False).tobytes("png"))), blank, scanned_body, section_marker)
         else:
-            with fitz.open(path) as doc:
-                for n, page in enumerate(doc, 1):
-                    native = page.get_text("text")
-                    # Vector-only divider pages contain no recoverable text;
-                    # they should not trigger a fake OCR failure. A scanned
-                    # page still has an image and is sent through the strict
-                    # OCR gate below.
-                    blank = not native.strip() and not page.get_images()
-                    image_area = sum(rect.get_area() for info in page.get_images() for rect in page.get_image_rects(info[0]))
-                    scanned_body = image_area > page.rect.get_area() * .5 and len(native.strip()) < 40
-                    section_marker = bool(native.strip()) and not page.get_images() and len(native.strip()) <= 120 and len(native.split()) <= 12
-                    process(n, native, lambda page=page: Image.open(io.BytesIO(page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False).tobytes("png"))), blank, scanned_body, section_marker)
-    else:
-        with Image.open(path) as image:
-            from PIL import ImageSequence
-            for n, frame in enumerate(ImageSequence.Iterator(image), 1):
-                process(n, "", lambda frame=frame: frame.convert("RGB"))
+            with Image.open(path) as image:
+                from PIL import ImageSequence
+                for n, frame in enumerate(ImageSequence.Iterator(image), 1):
+                    process(n, "", lambda frame=frame: frame.convert("RGB"))
+    except (AttributeError, KeyError, OSError, RuntimeError, TypeError, ValueError):
+        # Do not let one corrupt PDF/image abort ingestion of the active
+        # module.  No page is marked READY, so the source remains unavailable
+        # until a valid replacement is supplied and reprocessed.
+        pages = []
     destination = cache_path(path)
     destination.parent.mkdir(parents=True, exist_ok=True)
     stat = path.stat()

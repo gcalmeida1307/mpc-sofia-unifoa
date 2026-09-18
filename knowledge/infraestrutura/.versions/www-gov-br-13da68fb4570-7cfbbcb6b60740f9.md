@@ -1,0 +1,5084 @@
+# DNIT – Pagina Inicial - Período Eleitoral — Departamento Nacional de Infraestrutura de Transportes
+
+Fonte: https://www.gov.br/dnit/pt-br
+Capturado em: 2026-09-15T12:48:27.465045+00:00
+Páginas no domínio: 10
+
+## DNIT – Pagina Inicial - Período Eleitoral — Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br
+
+DNIT – Pagina Inicial - Período Eleitoral — Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Serviços recomendados para você
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços recomendados para você
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços recomendados para você
+Serviços mais acessados do govbr
+1
+Assinatura Eletrônica
+2
+Consultar Meu Imposto de Renda
+3
+Entregar Meu Imposto de Renda
+4
+Consultar restituição do imposto de renda
+5
+Consultar dados do Cadastro Único
+6
+Consultar CPF
+Serviços em destaque do govbr
+Outros
+Tela Brasil
+Vida Financeira
+Novo
+Renegociação de Dívidas - Famílias
+Crimes
+Celular Seguro
+Assistência Direta
+Novo
+Bolsa Família
+(PBF)
+Fechar
+Fechar
+Fechar
+Info
+Saiba mais sobre
+Saiba mais sobre
+Saiba mais sobre
+Saiba mais sobre
+Saiba mais sobre
+Saiba mais sobre
+Saiba mais sobre
+Saiba mais sobre
+DNIT libera tráfego em viaduto no km 59 da BR-282/SC, em Rancho Queimado
+Saiba mais sobre DNIT libera tráfego em viaduto no km 59 da BR-282/SC, em Rancho Queimado
+DNIT atua na gestão e regulamentação do uso da faixa de domínio
+Norma estabelece critérios para a ocupação das áreas e garantem funcionalidade e segurança às rodovias
+Saiba mais sobre DNIT atua na gestão e regulamentação do uso da faixa de domínio
+Ponte sobre o Rio Ibicuí, no km 289 da BR-293/RS, está totalmente liberada ao tráfego
+Travessia passou por serviços de reabilitação
+Saiba mais sobre Ponte sobre o Rio Ibicuí, no km 289 da BR-293/RS, está totalmente liberada ao tráfego
+DNIT libera viaduto do acesso Sul de Formosa, na BR-020/GO
+Liberação aconteceu nesta quinta-feira (03)
+Saiba mais sobre DNIT libera viaduto do acesso Sul de Formosa, na BR-020/GO
+AET permite transporte de cargas especiais nas rodovias federais
+Autorização Especial de Trânsito é necessária para veículos ou combinações que circulam em condições especiais de peso ou dimensões
+Saiba mais sobre AET permite transporte de cargas especiais nas rodovias federais
+Mais Notícias
+DNIT alerta para alteração no trânsito da BR-343/PI, no contorno rodoviário de Teresina
+DNIT alerta para desvio provisório próximo à ponte sobre o Rio Brígida, no km 43,84 da BR-428/PE, em Orocó
+No Paraná, DNIT alerta para rodovia com pontos interditados, nesta segunda-feira (14), devido às chuvas no estado
+Mais alertas
+Infraestrutura Aquaviária
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Fala.BR
+Você pode registrar manifestações no Fala.BR nos links abaixo:
+Denúncia
+Solicitação
+Sugestão
+Elogio
+Serviços
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/search?SearchableText=Desenrola+Brasil&origem=termos
+
+Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/search?SearchableText=assinatura&origem=termos
+
+Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/search?SearchableText=imposto+de+renda&origem=termos
+
+Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/search?SearchableText=inss&origem=termos
+
+Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/search?SearchableText=mei&origem=termos
+
+Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Busca
+Busca
+Info
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Assuntos — Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/assuntos
+
+Assuntos — Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Assuntos
+Assuntos
+Info
+Infraestrutura Aquaviária
+Infraestrutura Ferroviária
+Licitações
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Portais Temáticos
+Atlas e Mapas
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Serviços — Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/servicos
+
+Serviços — Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Serviços
+Info
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## Composição — Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/composicao
+
+Composição — Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Composição
+Info
+Composição
+Diretoria
+Superintendências Regionais
+Diretoria Colegiada
+Órgãos Vinculados
+Conselho de Administração
+Quem é Quem
+Compartilhe:
+Compartilhe por Facebook
+Compartilhe por Twitter
+Compartilhe por LinkedIn
+Compartilhe por WhatsApp
+link para Copiar para área de transferência
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## PROARTE — Departamento Nacional de Infraestrutura de Transportes
+URL: https://www.gov.br/dnit/pt-br/assuntos/infraestrutura-rodoviaria/proarte
+
+PROARTE — Departamento Nacional de Infraestrutura de Transportes
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Departamento Nacional de Infraestrutura de Transportes
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+inss
+Desenrola Brasil
+Termos mais buscados
+imposto de renda
+assinatura
+mei
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Você está aqui:
+Página Inicial
+Assuntos
+Infraestrutura Rodoviária
+PROARTE
+PROARTE
+Info
+Desenvolvido pelo Departamento Nacional de Infraestrutura de Transportes (DNIT), o Programa de Manutenção e Reabilitação de Estruturas (PROARTE) consiste em uma iniciativa voltada ao gerenciamento, planejamento, execução, monitoramento e controle das intervenções em Obras de Arte Especiais (OAEs) e estruturas de contenção que integram a malha rodoviária federal.
+Desde a sua implementação, o PROARTE atuou na gestão de atendimento à recuperação e conservação das OAEs por meio dos contratos de Manutenção preventiva e Reabilitação que abrange os serviços de reforço e alargamento dos elementos estruturais. Com a publicação da Instrução Normativa nº 2, de 05 de março de 2026, o programa passou por uma importante reestruturação, ampliando seu escopo e estabelecendo novos critérios técnicos para aumentar a eficiência e abrangência das intervenções.
+Instrução Normativa PROARTE Nº 2/2026:
+https://www.gov.br/dnit/pt-br/central-de-conteudos/atos-normativos/tipo/instrucao-normativa/2026/instrucao-normativa-no-2-2026
+Saiba mais sobre o PROARTE
+Licitações - Acompanhe os Processos Concluídos e em Andamento
+Para entrar em contato com a equipe do PROARTE, ligue (61) 3315-8457.
+Assuntos
+Infraestrutura Aquaviária
+Glossário
+Estudos do Rio Madeira
+Painéis Informativos
+Parcerias DAQ
+Patrimônio
+Plano de Monitoramento Hidroviário (PMH)
+Plano Anual de Dragagem de Manutenção Aquaviária (PADMA)
+Programa de Eclusas (PROECLUSAS)
+Manuais, Guias, Instruções e Procedimentos DAQ
+Programa de IP4 (PROIP4)
+Plano Nacional de Manutenção Hidroviária (PNMH)
+Infraestrutura Ferroviária
+Infraestrutura Rodoviária
+Planejamento e Pesquisa
+Meio Ambiente
+Planejamento e Programação de Investimentos
+Desenvolvimento de Projetos
+Desapropriação e Reassentamento
+BIM no DNIT
+ENINFRA
+Instituto de Pesquisas em Transportes - IPR
+Instituto Nacional de Pesquisas Hidroviárias
+Sistema Nacional de Viação
+Custos Referenciais
+Governança, Estratégia e Riscos
+Instâncias de Integridade
+Auditoria
+Comissão de Ética
+Coordenação-Geral de Integridade
+Corregedoria
+Ouvidoria
+Portais Temáticos
+Audiência Pública BR-135/BA
+Audiência Pública BR-316/PA
+Audiência Pública BR-317/AM
+BR-135 MA
+BR-280 SC
+BR-319 AM/RO
+BR-487 PR
+Concilia BR-381/MG
+Contorno Ferroviário de Joinville
+DNIT Sem Papel
+Ponte da Revolução MG/SP
+Atlas e Mapas
+Atlas Multimodais
+Mapas Multimodais
+PNV e SNV
+VGeo
+Acesso à Informação
+Institucional
+Agenda de Autoridades
+Organograma
+Quem é Quem
+Regimento Interno
+Mapa Estratégico
+Base Jurídica da Estrutura Organizacional e das Competências
+Competências por Nível Hierárquico
+Perfil Profissional
+Carta de Serviços
+Corregedoria
+Ações e Programas
+DNIT Sustentável
+Renúncia de Receitas
+Programas Financiados pelo Fundo de Amparo ao Trabalhador (FAT)
+Painel de acompanhamento dos infratores do Plano Nacional de Pesagem – PNP
+Participação Social
+Ouvidoria
+Audiências Públicas
+Consultas Públicas
+Auditorias
+Acordos, Convênios e Transferências
+Termos de Execução Descentralizada
+Acordos de Cooperação Técnica
+Termos de Compromissos
+Receitas e Despesas
+Cadernos Orçamentários
+Consultar Receitas e Despesas
+Diárias e Passagens
+Execução Financeira
+Execução Orçamentária
+Programação de Pagamentos
+Receitas e Despesas das Multas de Trânsito
+Licitações e Contratos
+Licitações no portal DNIT
+Passo a Passo – Acesso à Informação das Licitações
+Contratos no portal DNIT
+Passo a Passo - Acesso à Informação dos Contratos
+Servidores
+Processos Seletivos
+Servidores e Terceirizados
+Concurso Público
+Relatórios
+Teletrabalho
+Programa de Gestão e Desempenho
+Desenvolvimento de Pessoas
+Informações Classificadas
+Serviço de Informações ao Cidadão
+Perguntas Frequentes
+Dados Abertos
+Sobre a Lei de Acesso à Informação
+Demonstrativos Contábeis
+2025
+Transparência e Prestação de Contas
+Relatório de Gestão 2025
+Relatório de Gestão – exercícios anteriores
+Tratamento de Dados Pessoais
+Perguntas Frequentes sobre a LGPD e atuação da Agência Nacional de Proteção de Dados (ANPD)
+Compartilhamento de dados do PNCV e do PNP
+Cursos ENAP
+Compartilhamento de dados do PNCV ao MPF
+Política de Privacidade e Proteção de Dados Pessoais
+Bens Móveis e Imóveis
+Emendas Parlamentares - RP9
+Composição
+Diretoria
+Diretoria-Geral
+Diretoria Executiva
+Diretoria de Administração e Finanças
+Diretoria de Planejamento e Pesquisa
+Diretoria de Infraestrutura Aquaviária
+Diretoria de Infraestrutura Rodoviária
+Diretoria de Infraestrutura Ferroviária
+Superintendências Regionais
+Acre
+Alagoas
+Amapá
+Amazonas
+Bahia
+Ceará
+Espírito Santo
+Goiás e Distrito Federal
+Maranhão
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Pará
+Paraíba
+Paraná
+Pernambuco
+Piauí
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Santa Catarina
+São Paulo
+Sergipe
+Tocantins
+Diretoria Colegiada
+Composição
+Competência
+Atas
+Extrato de Atas
+Órgãos Vinculados
+Auditoria Interna
+Corregedoria
+Procuradoria
+Ouvidoria
+Conselho de Administração
+Quem é Quem
+Canais de Atendimento
+Fale Conosco
+Imprensa
+Comunicação Social
+Ouvidoria
+Portal de Multas
+Central de Conteúdos
+Publicações
+Manuais de Gestão da Marca
+Alertas DNIT
+Marcas DNIT
+Instruções
+Instrução de Registro Cadastral
+Instruções de Serviços
+Delegações de Competência
+Atos Normativos
+Serviços
+Autorização Especial de Trânsito - AET
+Custos Referenciais
+DNIT Sustentável
+Faixa de Domínio
+Fala BR
+Licitações e Contratos
+Plano Nacional de Viação e Sistema Nacional de Viação
+Pontos de Parada e Descanso
+Portal Cidadão
+Portal de Multas
+PROARTE
+Programação de Pagamentos
+Protocolar documentos junto ao DNIT
+Sistemas Gerenciais
+Redefinir Cookies
+Redes sociais
+Instagram
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca

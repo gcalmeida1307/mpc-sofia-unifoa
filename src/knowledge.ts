@@ -12,6 +12,7 @@ export type KnowledgeModule = {
   greeting: string
   manager: string
   focus: string
+  files?: string[]
   documentsByType?: Record<string, number>
   links?: number
   linkStorage?: string

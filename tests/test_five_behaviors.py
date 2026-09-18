@@ -5,27 +5,24 @@ known facts plus counterexamples. No provider is necessary for these contracts.
 """
 import asyncio
 import io
-import re
-from pathlib import Path
 
-import pytest
-from fastapi import HTTPException
-from docx import Document
-from openpyxl import Workbook
 import pymupdf
+import pytest
+from docx import Document
+from fastapi import HTTPException
+from openpyxl import Workbook
 from PIL import Image, ImageDraw, ImageFont
 
 from api import ingestion
 from api.auth import require_admin
 from api.context_engine import verify_answer
 from api.document_pages import extract_pages, pages_ready
-from api.expansion import record_document_pipeline, pipeline_documents
-from api.ingestion import extract_text, ingest_module
-from api.orchestration import answer, _format_external_assist_answer
+from api.expansion import pipeline_documents, record_document_pipeline
+from api.ingestion import ingest_module
+from api.orchestration import _format_external_assist_answer, answer
 from api.policies import policy_for
-from api.relational_reasoning import analyze, render
-from api.retrieval import retrieve, warm_module_index, _index, _normalized_index
-from api.structured_data import analyze_structured_question, load_structured_document
+from api.retrieval import retrieve, warm_module_index
+from api.structured_data import analyze_structured_question
 
 
 @pytest.fixture
@@ -162,7 +159,7 @@ def test_typed_numeric_aggregation_and_filter(corpus, suffix):
 
 
 def test_medium_risk_does_not_select_risk_state_and_typo_does_not_count_all(corpus):
-    path = source(corpus, "RiskyUsers.csv", "Usuário;Estado do risco;Nível de risco;Status\nA;Em risco;Alto;Ativo\nB;Em risco;Médio;Ativo\nC;Comprometimento confirmado;Médio;Inativo\n")
+    source(corpus, "RiskyUsers.csv", "Usuário;Estado do risco;Nível de risco;Status\nA;Em risco;Alto;Ativo\nB;Em risco;Médio;Ativo\nC;Comprometimento confirmado;Médio;Inativo\n")
     for question in ("Quantos usuários estão em risco médio?", "Quantos tem risco avarege?"):
         result = analyze_structured_question(corpus, "infraestrutura", question)
         assert result.matched_count == 2

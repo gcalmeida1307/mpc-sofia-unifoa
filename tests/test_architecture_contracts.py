@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import json
 import tempfile
 from pathlib import Path
@@ -56,6 +57,25 @@ def test_tools_are_allowlisted_and_have_operational_contracts() -> None:
         assert contract.timeout_seconds > 0
         assert contract.required_capability
         assert contract.audit_event
+
+
+def test_api_route_surface_has_no_duplicate_method_and_path_pairs() -> None:
+    server = ast.parse((Path(__file__).parents[1] / "api" / "server.py").read_text(encoding="utf-8"))
+    registered: list[tuple[str, str]] = []
+    for node in ast.walk(server):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        for decorator in node.decorator_list:
+            if not isinstance(decorator, ast.Call) or not isinstance(decorator.func, ast.Attribute):
+                continue
+            if not isinstance(decorator.func.value, ast.Name) or decorator.func.value.id != "app":
+                continue
+            if not decorator.args or not isinstance(decorator.args[0], ast.Constant):
+                continue
+            path = decorator.args[0].value
+            if isinstance(path, str) and decorator.func.attr not in {"middleware", "on_event"}:
+                registered.append((decorator.func.attr.upper(), path))
+    assert len(registered) == len(set(registered))
 
 
 def test_eval_manifest_covers_every_domain_and_required_categories() -> None:

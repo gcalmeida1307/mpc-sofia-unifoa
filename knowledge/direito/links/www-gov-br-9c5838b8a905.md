@@ -1,7 +1,7 @@
 # Atos Normativos — Arquivo Nacional
 
 Fonte: https://www.gov.br/arquivonacional/pt-br/servicos/gestao-de-documentos/legislacao
-Capturado em: 2026-09-03T12:00:12.155027+00:00
+Capturado em: 2026-09-17T15:16:31.998941+00:00
 Páginas no domínio: 10
 
 ## Atos Normativos — Arquivo Nacional
@@ -637,14 +637,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -653,13 +653,13 @@ Assinatura Eletrônica
 2
 Consultar Meu Imposto de Renda
 3
-Entregar Meu Imposto de Renda
-4
-Consultar restituição do imposto de renda
-5
 Consultar dados do Cadastro Único
-6
+4
 Consultar CPF
+5
+Consultar restituição do imposto de renda
+6
+Consultar CNPJ
 DESTAQUE
 Cultura, Artes, História e Esportes
 Tela Brasil
@@ -688,12 +688,12 @@ Anterior
 Paginação
 Paginação
 Todos os Perfis
-Educação
-80% das escolas públicas estão conectadas com wi-fi e velocidade adequada, aponta levantamento
-Tecnologia
-Embraer celebra a entrega do jato comercial E-Jet número 2.000
-Mulheres
-FAQ Lei Maria da Penha: 25 respostas a perguntas mais frequentes
+Economia
+Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
+Justiça
+Segunda fase da Operação Última Chamada amplia fiscalização do comércio de celulares irregulares
+Cultura
+São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -849,14 +849,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -1020,14 +1020,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -1191,14 +1191,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -1362,14 +1362,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -1533,14 +1533,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -1704,14 +1704,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -1919,14 +1919,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -2140,14 +2140,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -2224,6 +2224,7 @@ Filtrar
 Pesquisar Órgãos
 Limpar
 Aplicar
+Fundação Escola Nacional de Administração Pública (Enap)
 Fundação Habitacional do Exército (FHE)
 Fundação Instituto Brasileiro de Geografia e Estatística (IBGE)
 Fundação Joaquim Nabuco (FUNDAJ)
@@ -2253,7 +2254,6 @@ Fundação Universidade Federal do Amapá (UNIFAP)
 Fundação Universidade Federal do Maranhão (UFMA)
 Fundação Universidade Federal do Pampa (UNIPAMPA)
 Fundação Universidade Federal do Piauí (UFPI)
-Fundação Universidade Federal do Rio Grande (FURG)
 Itens por página
 30
 60

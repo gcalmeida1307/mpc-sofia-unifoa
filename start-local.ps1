@@ -7,12 +7,13 @@ $port = 5174
 $url = "http://127.0.0.1:$port/"
 $frontendCommand = "dev:network"
 $apiHost = "0.0.0.0"
+$expectedPython = [string](Resolve-Path "$projectRoot\.venv\Scripts\python.exe")
+$projectMarker = [regex]::Escape($projectRoot)
 $existing = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue
-$apiExisting = Get-NetTCPConnection -LocalPort 8787 -State Listen -ErrorAction SilentlyContinue
+$apiExisting = @(Get-NetTCPConnection -LocalPort 8787 -State Listen -ErrorAction SilentlyContinue)
 
 if ($existing) {
   $viteProcess = Get-CimInstance Win32_Process -Filter "ProcessId = $($existing.OwningProcess)" -ErrorAction SilentlyContinue
-  $projectMarker = [regex]::Escape($projectRoot)
   if (-not $viteProcess -or $viteProcess.CommandLine -notmatch $projectMarker -or $viteProcess.CommandLine -notmatch '--host 0.0.0.0') {
     Stop-Process -Id $existing.OwningProcess -Force -ErrorAction SilentlyContinue
     Start-Sleep -Milliseconds 500
@@ -20,9 +21,38 @@ if ($existing) {
   }
 }
 
+# Keep a single project API listener. On Windows the virtual-environment
+# launcher and its child interpreter can both remain visible after repeated
+# starts, making the browser appear to switch between API instances.
+$apiProcesses = @(
+  foreach ($connection in $apiExisting) {
+    $process = Get-CimInstance Win32_Process -Filter "ProcessId = $($connection.OwningProcess)" -ErrorAction SilentlyContinue
+    if ($process -and $process.CommandLine -match $projectMarker -and $process.CommandLine -match 'api\.server:app') {
+      [pscustomobject]@{
+        Id = [int]$connection.OwningProcess
+        CommandLine = [string]$process.CommandLine
+        ExecutablePath = [string]$process.ExecutablePath
+      }
+    }
+  }
+)
+$apiKeeper = $apiProcesses | Where-Object {
+  $_.CommandLine -match '--host 0\.0\.0\.0' -and $_.ExecutablePath -eq $expectedPython
+} | Select-Object -First 1
+foreach ($duplicate in @($apiProcesses | Where-Object { $apiKeeper -and $_.Id -ne $apiKeeper.Id })) {
+  Stop-Process -Id $duplicate.Id -Force -ErrorAction SilentlyContinue
+  Start-Sleep -Milliseconds 300
+}
+$staleApiProcesses = @($apiProcesses | Where-Object { -not $apiKeeper -or $_.Id -ne $apiKeeper.Id })
+foreach ($stale in $staleApiProcesses) {
+  Stop-Process -Id $stale.Id -Force -ErrorAction SilentlyContinue
+  Start-Sleep -Milliseconds 300
+}
+$apiExisting = @(Get-NetTCPConnection -LocalPort 8787 -State Listen -ErrorAction SilentlyContinue)
+
 if ($apiExisting) {
   $apiProcess = Get-CimInstance Win32_Process -Filter "ProcessId = $($apiExisting.OwningProcess)" -ErrorAction SilentlyContinue
-  if (-not $apiProcess -or $apiProcess.CommandLine -notmatch '--host 0.0.0.0') {
+  if (-not $apiProcess -or $apiProcess.CommandLine -notmatch '--host 0.0.0.0' -or [string]$apiProcess.ExecutablePath -ne $expectedPython) {
     Stop-Process -Id $apiExisting.OwningProcess -Force -ErrorAction SilentlyContinue
     Start-Sleep -Milliseconds 500
     $apiExisting = $null

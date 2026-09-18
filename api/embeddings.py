@@ -48,12 +48,14 @@ def _truthy(value: str | None, default: bool = False) -> bool:
 
 def embedding_settings() -> dict[str, Any]:
     try:
-        # 500 gives the neural reranker useful coverage without forcing a
-        # no-GPU workstation to embed the entire corpus during startup. The
-        # persistent lexical index still covers every chunk.
-        max_chunks = max(100, min(30000, int(os.getenv("SOFIA_EMBEDDING_MAX_CHUNKS", "500"))))
+        # The default is complete coverage. Embeddings are built only by the
+        # background preparation/training path; a query never performs this
+        # expensive extraction. Deployments with constrained hardware can
+        # lower the value explicitly and the status endpoint will report the
+        # resulting partial index instead of calling it ready.
+        max_chunks = max(100, min(30000, int(os.getenv("SOFIA_EMBEDDING_MAX_CHUNKS", "30000"))))
     except ValueError:
-        max_chunks = 100
+        max_chunks = 30000
     try:
         batch_size = max(1, min(64, int(os.getenv("SOFIA_EMBEDDING_BATCH_SIZE", "32"))))
     except ValueError:

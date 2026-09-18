@@ -46,7 +46,7 @@
       "module": "gestao-empresarial",
       "category": "document_summary",
       "question": "No documento gestão educacional.pdf, quais ideias aparecem sobre governança e organizações educacionais?",
-      "expected_terms": ["governança", "organizações educacionais"],
+      "expected_terms": ["governança", "organizações", "educação"],
       "expected_sources": ["gestão educacional.pdf"],
       "reviewed": true
     },

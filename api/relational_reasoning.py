@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import asdict, dataclass
+
 from .query_analysis import normalize
 
 
@@ -55,7 +56,7 @@ def extract_relations(units: list[Unit]) -> list[dict]:
             (r"^(.+?)\s+(?:causa|provoca)\s+(.+)$", "reported_cause", "causal_claim"),
         ]
         for pattern, relation_type, kind in patterns:
-            match = re.match(pattern, text, re.I)
+            match = re.match(pattern, text, re.IGNORECASE)
             if match:
                 relations.append({"from": match[1], "to": match[2], "type": relation_type, "kind": kind, "premises": [unit.id], "inferred": False, "source": unit.source, "quote": unit.text})
                 break

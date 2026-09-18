@@ -2,3 +2,5 @@
 @import 'tailwindcss';
 @import './styles/tokens.css';
 @import './styles/legacy.css';
+@import './styles/app-shell.css';
+@import './styles/reference-theme.css';

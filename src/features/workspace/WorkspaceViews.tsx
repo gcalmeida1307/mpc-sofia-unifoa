@@ -1,4 +1,6 @@
 import { useEffect, useState, type CSSProperties } from "react"
+import ModuleDocumentCard from "./ModuleDocumentCard"
+import OverviewCards from "./OverviewCards"
 import { describeApiError } from "../../services/api-client"
 import type { KnowledgeModule } from "../../knowledge"
 import type { ExpansionStatus, ThemeAnalytics, WorkspaceCapabilities } from "../../types/workspace"
@@ -7,11 +9,19 @@ type Module = KnowledgeModule
 type Capabilities = WorkspaceCapabilities
 
 export function Dashboard({
+  modules,
+  onSelectModule,
+  onOpenChat,
+  onOpenSources,
   mod,
   online,
   authFetch,
   isAdmin,
 }: {
+  modules: Module[]
+  onSelectModule: (id: string) => void
+  onOpenChat: () => void
+  onOpenSources: () => void
   mod: Module
   online: boolean
   authFetch: (path: string, init?: RequestInit) => Promise<Response>
@@ -33,14 +43,14 @@ export function Dashboard({
   const storage =
     mod.linkStorage === "postgresql" ? "PostgreSQL" : "adaptador local"
   const stats = [
-    ["Arquivos indexados", mod.docs, `knowledge/${mod.id}`],
-    ["Links associados", String(mod.links ?? 0), storage],
+    ["Documentos", mod.docs, mod.name],
+    ["Links associados", String(mod.links ?? 0), "Fontes complementares"],
     [
-      "Imagens com OCR",
+      "Imagens no acervo",
       String(imageCount),
-      imageCount > 0 ? "texto extraído sob demanda" : "nenhuma imagem",
+      imageCount > 0 ? "disponíveis para consulta" : "aguardando fontes",
     ],
-    ["Runtime", online ? "API online" : "API offline", "local + MCP"],
+    ["Conexão", online ? "Disponível" : "Indisponível", "Seu ambiente SOFIA"],
   ]
   const [analysisQuestion, setAnalysisQuestion] = useState("")
   const [analysis, setAnalysis] = useState("")
@@ -200,15 +210,8 @@ export function Dashboard({
   return (
     <div className="dashboard">
       <section className="welcome">
-        <h1>
-          Visão do gestor · <em>{mod.name}</em>
-        </h1>
-        <p>{mod.focus}</p>
-        <div className="chips">
-          <span>{mod.manager}</span>
-          <span>{mod.docs} arquivos reais</span>
-          <span>{empty ? "Aguardando fontes" : "RAG ativo"}</span>
-        </div>
+        <div className="welcome-heading"><h1>Visão geral</h1><span className="welcome-date">{new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" })}</span></div>
+        <p>Seu conhecimento, suas conexões e novas possibilidades. Tudo em um só lugar.</p>
       </section>
       <div className="stats">
         {stats.map(([label, value, change], index) => (
@@ -222,6 +225,7 @@ export function Dashboard({
           </div>
         ))}
       </div>
+      <OverviewCards mod={mod} modules={modules} online={online} onSelectModule={onSelectModule} onOpenChat={onOpenChat} onOpenSources={onOpenSources} />
       {isAdmin && expansion && (
         <section
           className="expansion-card"
@@ -513,25 +517,11 @@ export function Modules({
         Módulos <em>RAG</em>
       </h1>
       <p className="page-subtitle">
-        Domínios carregados diretamente da pasta knowledge.
+        Vire um cartão para explorar os documentos do módulo.
       </p>
       <div className="rag-grid">
         {items.map((item) => (
-          <button
-            key={item.id}
-            className={item.id === selected ? "rag-card active" : "rag-card"}
-            onClick={() => selectModule(item.id)}
-            style={{ "--module-color": item.color } as CSSProperties}
-          >
-            <div className="rag-icon">{item.icon}</div>
-            <h3>{item.name}</h3>
-            <small>{item.category}</small>
-            <p>{item.docs} documentos indexados</p>
-            <footer>
-              <span>knowledge/{item.id}</span>
-              <b>{item.docs}</b>
-            </footer>
-          </button>
+          <ModuleDocumentCard key={item.id} item={item} selected={item.id === selected} onOpen={() => selectModule(item.id)} />
         ))}
       </div>
     </div>
