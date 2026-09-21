@@ -11,6 +11,13 @@ from .agents import build_plan, remember_run, update_stage
 from .agents import critic as agent_critic
 from .context_engine import build_context_package, verify_answer
 from .contracts import IntelligenceDecision
+from .core_pipeline import (
+    grounded_fallback,
+    grouped_evidence,
+    is_complete_answer,
+    judge_result,
+    plan_from_query_plan,
+)
 from .domain_packages.base import requested_line_range
 from .domain_packages.medical import is_medical_symptom_query
 from .domains import domain_for
@@ -347,7 +354,11 @@ def _prompt(
     response_mode: str = "evidence",
 ) -> str:
     if result.has_quality_evidence:
-        evidence = result.context if evidence_override is None else evidence_override
+        # The model receives accepted evidence grouped by source and locator.
+        # ``result.context`` is kept for compatibility with API consumers, but
+        # this prompt boundary must not flatten sources or expose rejected
+        # candidates to the synthesizer.
+        evidence = grouped_evidence(result, question) if evidence_override is None else evidence_override
         if response_style == "concise" and "host" in question.casefold() and ("zabbix" in question.casefold() or any("zabbix_documentation" in source.casefold() for source in result.sources)):
             evidence = _focused_procedure_evidence(evidence)
         instruction = "Atue como sintetizador da evidência, não como copiador de recortes. Use somente as evidências abaixo como base; não complemente com conhecimento geral, memória ou outro módulo. Escreva frases completas, com começo, meio e fim; nunca devolva uma linha cortada do PDF, uma expressão sem contexto ou um fragmento que termine no meio da oração. Para perguntas procedurais, extraia a sequência explícita da fonte e inclua todos os passos necessários, sem repetir ações."
@@ -3031,6 +3042,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         retrieval_required=bool(profile.get("retrieval_required", True)),
         response_mode=str(profile.get("response_mode", "evidence")),
     )
+    core_plan = plan_from_query_plan(query_plan)
     current_query_parts = decompose_query(question)
     strategy = query_plan.strategy
     strong_comparison = strategy in {"MULTI_DOCUMENT_SYNTHESIS", "CONCEPT_COMPARISON"}
@@ -3077,6 +3089,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             "task_route": decision.task_route,
             "retrieval_required": decision.retrieval_required,
             "query_plan": decision.query_plan,
+            "core_pipeline": core_plan.public_dict(),
         }
     )
     update_stage(trace, "route", "complete", f"Rota {decision.route}: {decision.reason}.")
@@ -3360,6 +3373,9 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         query_plan=query_plan,
         classified_profile=profile,
     ).public_dict()
+    evidence_gate = judge_result(result)
+    context_package["core_pipeline"] = core_plan.public_dict()
+    context_package["evidence_gate"] = evidence_gate.public_dict()
     context_package["harness"] = {"attempts": harness.attempts, "decision": harness.decision, "steps": list(harness.steps)}
     context_package["llmops"] = {"versions": runtime_versions(), "retrieval_attempts": harness.attempts}
     context_package["relational_analysis"] = relational
@@ -3538,6 +3554,11 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         or _enap_local_answer(retrieval_question, result, language)
         or _defeso_local_answer(retrieval_question, result, language)
     ))
+    # A deterministic renderer is allowed to accelerate a high-signal fact,
+    # but it can never expose a sentence fragment.  If a legacy handler
+    # returns a cut PDF line, the CORE continues to the grouped synthesizer.
+    if local_source_answer and not is_complete_answer(local_source_answer):
+        local_source_answer = None
     if local_source_answer:
         local_source_answer = _append_source_citations(local_source_answer, result, language)
         update_stage(trace, "reason", "complete", "Resposta composta diretamente da evidência local solicitada.")
@@ -3604,6 +3625,8 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     if provider == "auto" and response_style in {"concise", "structured"} and local_fast_path_allowed and decision.response_mode == "evidence":
         fast_answer = _fast_evidence_answer(module_id, retrieval_question, result, language, structured=response_style == "structured")
         if fast_answer:
+            if not is_complete_answer(fast_answer):
+                fast_answer = grounded_fallback(result, retrieval_question, language)
             if response_style == "structured" and "Fonte:" not in fast_answer:
                 fast_answer = _structured_answer(fast_answer, result, language)
             fast_answer = _append_source_citations(fast_answer, result, language)
@@ -3657,7 +3680,12 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         elif response_style == "structured" and decision.response_mode == "evidence":
             generated = Generation(_structured_answer(generated.answer, result, language), generated.provider, generated.model)
     except RuntimeError:
-        fallback = _compound_evidence_answer(retrieval_question, result, language) if compound_query else _fast_evidence_answer(module_id, retrieval_question, result, language, structured=response_style == "structured")
+        # The generic composer is the reliability floor.  Topic-specific
+        # renderers remain available only as a compatibility fallback after
+        # the CORE has attempted to preserve complete, source-grouped prose.
+        fallback = grounded_fallback(result, retrieval_question, language)
+        if not is_complete_answer(fallback):
+            fallback = _compound_evidence_answer(retrieval_question, result, language) if compound_query else _fast_evidence_answer(module_id, retrieval_question, result, language, structured=response_style == "structured")
         if not fallback:
             fallback = _compact_answer(_extractive_answer(retrieval_question, result, language), retrieval_question, result.context)
         if response_style == "structured" and decision.response_mode == "evidence" and not any(normalize(section) in normalize(fallback) for section in ("conclusao", "conclusion", "conclusión")):
@@ -3689,17 +3717,19 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     verified = compound_contract_ok and _verify(generated.answer, result, policy) and verification.status == "verified"
     critic_result = agent_critic(generated.answer, result.context, policy.high_risk)
     if not verified:
-        safe_answer = (
-            _compound_evidence_answer(retrieval_question, result, language)
-            if compound_query
-            else _fast_evidence_answer(
-                module_id,
-                retrieval_question,
-                result,
-                language,
-                structured=response_style == "structured",
-            )
-        ) or _compact_answer(_extractive_answer(retrieval_question, result, language), retrieval_question, result.context)
+        safe_answer = grounded_fallback(result, retrieval_question, language)
+        if not is_complete_answer(safe_answer):
+            safe_answer = (
+                _compound_evidence_answer(retrieval_question, result, language)
+                if compound_query
+                else _fast_evidence_answer(
+                    module_id,
+                    retrieval_question,
+                    result,
+                    language,
+                    structured=response_style == "structured",
+                )
+            ) or _compact_answer(_extractive_answer(retrieval_question, result, language), retrieval_question, result.context)
         if response_style == "structured" and decision.response_mode == "evidence":
             safe_answer = _structured_answer(safe_answer, result, language)
         safe_answer = _append_source_citations(safe_answer, result, language)
