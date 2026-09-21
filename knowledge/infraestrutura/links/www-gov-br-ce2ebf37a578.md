@@ -1,7 +1,7 @@
 # Instrução Normativa nº 03/2026. — Departamento Nacional de Infraestrutura de Transportes
 
 Fonte: https://www.gov.br/dnit/pt-br/central-de-conteudos/atos-normativos/tipo/instrucao-normativa/2026/instrucao-normativa-no-03-2026
-Capturado em: 2026-09-17T14:14:57.233513+00:00
+Capturado em: 2026-09-21T11:03:19.757344+00:00
 Páginas no domínio: 10
 
 ## Instrução Normativa nº 03/2026. — Departamento Nacional de Infraestrutura de Transportes
@@ -26,14 +26,14 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Assuntos
 Infraestrutura Aquaviária
@@ -69,6 +69,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -2427,6 +2428,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -2677,6 +2679,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2687,14 +2690,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -2739,11 +2742,11 @@ Paginação
 Paginação
 Todos os Perfis
 Economia
-Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
-Cultura
-São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
-Economia
-Política de minerais críticos prevê rastreabilidade e agregação de valor
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
+Saúde
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -2780,7 +2783,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -2877,6 +2880,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## DNIT – Pagina Inicial - Período Eleitoral — Departamento Nacional de Infraestrutura de Transportes
 URL: https://www.gov.br/dnit/pt-br
@@ -2900,13 +2908,13 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Assuntos
@@ -2943,6 +2951,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -3179,16 +3188,19 @@ Assinatura Eletrônica
 2
 Consultar Meu Imposto de Renda
 3
-Entregar Meu Imposto de Renda
-4
-Consultar restituição do imposto de renda
-5
 Consultar dados do Cadastro Único
-6
+4
 Consultar CPF
+5
+Consultar restituição do imposto de renda
+6
+Consultar CNPJ
 Serviços em destaque do govbr
 Outros
 Tela Brasil
+Imposto de Renda e Malha Fiscal
+Entregar Meu Imposto de Renda
+(DIRPF)
 Vida Financeira
 Novo
 Renegociação de Dívidas - Famílias
@@ -3210,17 +3222,16 @@ Saiba mais sobre
 Saiba mais sobre
 Saiba mais sobre
 Saiba mais sobre
+Contenção de encostas: técnica protege as rodovias e ajuda a prevenir deslizamentos
+Saiba mais sobre Contenção de encostas: técnica protege as rodovias e ajuda a prevenir deslizamentos
+Entenda como funciona a nomenclatura das rodovias federais
+Saiba mais sobre Entenda como funciona a nomenclatura das rodovias federais
 DNIT libera ao tráfego ponte reabilitada sobre o Rio Jaru, na BR-364/RO
 Saiba mais sobre DNIT libera ao tráfego ponte reabilitada sobre o Rio Jaru, na BR-364/RO
-DNIT libera tráfego em viaduto no km 59 da BR-282/SC, em Rancho Queimado
-Saiba mais sobre DNIT libera tráfego em viaduto no km 59 da BR-282/SC, em Rancho Queimado
-DNIT atua na gestão e regulamentação do uso da faixa de domínio
-Norma estabelece critérios para a ocupação das áreas e garantem funcionalidade e segurança às rodovias
-Saiba mais sobre DNIT atua na gestão e regulamentação do uso da faixa de domínio
 Mais Notícias
-DNIT alerta para liberação da travessia por balsa no Rio Piquiri, na BR-272/PR
-DNIT alerta para condições de tráfego e serviços em andamento na BR-476/PR
-DNIT alerta para interrupção total de tráfego na BR-280/SC, em Corupá, nesta sexta-feira (18)
+DNIT alerta para interdição temporária na ponte sobre o Igarapé Pará, no km 354,20 da BR-319/AM
+DNIT alerta para serviços de manutenção nas rodovias do Rio Grande do Sul a partir deste sábado (19)
+DNIT alerta para restrição de tráfego na ponte sobre o Igarapé Baruaninha, na BR-432/RR
 Mais alertas
 Infraestrutura Aquaviária
 Infraestrutura Ferroviária
@@ -3267,6 +3278,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -3459,14 +3471,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -3526,6 +3538,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3651,6 +3664,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -3674,14 +3692,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -3741,6 +3759,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3872,6 +3891,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Navegação
 URL: https://www.gov.br/pt-br/navegacao
@@ -3895,14 +3919,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -3962,6 +3986,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -4000,36 +4025,4 @@ Educação Profissional para Jovens e Adultos
 Trabalho e Emprego
 Serviços para Pessoas com Deficiência
 Combate à Discriminação Racial
-Política de Proteção Social
-Política para Mulheres
-Saúde Reprodutiva da Mulher
-Cuidados na Primeira Infância
-Habitação Popular
-Controle de Poluição e Resíduos Sólidos
-Notícias
-Galeria de Aplicativos
-Acompanhe o Planalto
-Navegação
-Acessibilidade
-Mapa do Site
-Termo de Uso e Aviso de Privacidade
-Consultar minhas solicitações
-Órgãos do Governo
-Por dentro do Gov.br
-Dúvidas Frequentes em relação ao Portal gov.br
-Dúvidas Frequentes da conta gov.br
-Ajuda para Navegar o Portal
-Conheça os elementos do Portal
-Política de e-participação
-Termos de Uso
-Governo Digital
-Guia de Edição de Serviços do Portal Gov.br
-Canais do Executivo Federal
-Dados da Administração Pública Federal
-Dados Abertos
-Painel Estatístico de Pessoal
-Painel de Compras da Administração Pública Federal
-Acesso à Informação
-Empresas e Negócios
-Redefinir Cookies
-Redes soc
+Política de Prote

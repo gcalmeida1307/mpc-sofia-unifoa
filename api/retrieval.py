@@ -30,10 +30,10 @@ from .embeddings import semantic_scores
 from .ingestion import (
     ALLOW_HEAVY_EXTRACTION,
     DocumentChunk,
-    files_for,
     ingest_module,
     read_exact_source_lines,
     read_exact_source_term,
+    ready_files_for,
 )
 from .policies import ModulePolicy, expand_query
 from .query_analysis import requested_exact_term
@@ -141,7 +141,10 @@ def _index_payload(root: Path, module_id: str, signature: tuple[tuple[str, int, 
         return os.path.relpath(str(value.resolve()), str(root))
 
     return {
-        "version": 15,
+        # Bump when chunk boundaries or provenance metadata change.  This
+        # prevents a running installation from silently serving an index
+        # created before structural ingestion was enabled.
+        "version": 16,
         "module_id": module_id,
         "signature": _signature_digest(signature),
         "sources": [
@@ -256,7 +259,7 @@ def _load_persisted_index(root: Path, module_id: str, signature: tuple[tuple[str
         payload = _read_index_payload(path)
         if payload is None:
             return None
-        if payload.get("version") != 15 or payload.get("module_id") != module_id:
+        if payload.get("version") != 16 or payload.get("module_id") != module_id:
             return None
         stored = {str((root / s["path"]).resolve()): (s["mtime_ns"], s["size"]) for s in payload["sources"]}
         requested = {str(Path(source).resolve()): (mtime, size) for source, mtime, size in signature}
@@ -393,7 +396,7 @@ def _normalized_index(root_text: str, module_id: str, signature: tuple[tuple[str
 
 def warm_module_index(root: Path, module_id: str, force: bool = False) -> dict[str, Any]:
     """Prepare and persist the complete primary lexical index for one module."""
-    paths = [path for path in files_for(root, module_id) if not _is_offline_candidate(path)]
+    paths = [path for path in ready_files_for(root, module_id) if not _is_offline_candidate(path)]
     signature = tuple(sorted((str(path), path.stat().st_mtime_ns, path.stat().st_size) for path in paths if path.exists()))
     source_paths = tuple(str(path) for path in paths if path.exists())
     if force:
@@ -419,7 +422,7 @@ def warm_module_index(root: Path, module_id: str, force: bool = False) -> dict[s
 
 def stage_module_index(root: Path, module_id: str, force: bool = False) -> dict[str, Any]:
     """Prepare a version without changing production's active pointer."""
-    paths = [path for path in files_for(root, module_id) if not _is_offline_candidate(path)]
+    paths = [path for path in ready_files_for(root, module_id) if not _is_offline_candidate(path)]
     signature = tuple(sorted((str(path), path.stat().st_mtime_ns, path.stat().st_size) for path in paths if path.exists()))
     source_paths = tuple(str(path) for path in paths if path.exists())
     chunks = tuple(ingest_module(root, module_id, selected_paths=tuple(paths))) if force else _index(str(root), module_id, signature, source_paths)
@@ -563,16 +566,29 @@ def _summary_result(
         normalized_index = tuple(text_by_key[(str(chunk.path), chunk.ordinal)] for chunk in chunks)
 
     best_by_source: dict[str, DocumentChunk] = {}
+    best_by_section: dict[tuple[str, str], DocumentChunk] = {}
     first_by_source: dict[str, DocumentChunk] = {}
     for chunk in chunks:
         source = chunk.path.name.casefold()
         current = best_by_source.get(source)
         if current is None or _summary_quality(text_by_key[(str(chunk.path), chunk.ordinal)]) > _summary_quality(text_by_key[(str(current.path), current.ordinal)]):
             best_by_source[source] = chunk
+        section = chunk.section_header.strip() or f"__source__:{source}"
+        section_key = (source, section.casefold())
+        current_section = best_by_section.get(section_key)
+        if current_section is None or _summary_quality(text_by_key[(str(chunk.path), chunk.ordinal)]) > _summary_quality(text_by_key[(str(current_section.path), current_section.ordinal)]):
+            best_by_section[section_key] = chunk
         first = first_by_source.get(source)
         if first is None or (chunk.page or chunk.ordinal) < (first.page or first.ordinal):
             first_by_source[source] = chunk
-    representatives: list[DocumentChunk] = list(best_by_source.values())
+    # A summary must cover the document's prepared sections, not only the
+    # single globally strongest chunk.  Section representatives are bounded
+    # later, but preserving them here gives legal articles, manual chapters
+    # and report headings a chance to survive retrieval.
+    representatives: list[DocumentChunk] = sorted(
+        best_by_section.values(),
+        key=lambda item: (str(item.path), item.page or 0, item.ordinal),
+    )
     # A high-quality body passage can outrank a document's title or opening
     # scope. Keep the first prepared passage as well so summaries retain the
     # document identity and its declared subject (for example, a PDF title).
@@ -587,7 +603,7 @@ def _summary_result(
     # globally highest-scoring chunk.  Keep one representative passage for
     # every source so a module with several documents is actually covered;
     # the persistent index still keeps the complete page/chunk inventory.
-    summary_limit = min(max(limit, len(best_by_source)), 12)
+    summary_limit = min(max(limit, len(best_by_source)), 24)
     selected = representatives[:summary_limit]
     evidence = tuple(Evidence(chunk, 0.55, 0.55, 0.0, 1.0, 0.0) for chunk in selected)
     return RetrievalResult(evidence, tuple(dict.fromkeys(chunk.path.name for chunk in selected)), query, expanded, judge_confidence=0.78)
@@ -636,7 +652,7 @@ def _retrieval_cache_key(root: Path, module_id: str, query: str, policy: ModuleP
     """Build a correctness-first key for the in-process read-through cache."""
     root = root.resolve()
     stamps: list[tuple[str, int, int]] = []
-    for path in files_for(root, module_id):
+    for path in ready_files_for(root, module_id):
         try:
             stat = path.stat()
         except OSError:
@@ -777,7 +793,7 @@ def retrieve_compound(
     # still choosing the wrong clause inside a long agreement.  These passes
     # keep the source contract but add the structural anchor that identifies
     # the requested subject inside each document.
-    named_paths = named_source_paths(list(files_for(root, module_id)), query)
+    named_paths = named_source_paths(list(ready_files_for(root, module_id)), query)
     if len(named_paths) >= 2:
         for path in named_paths:
             source = normalize(path.name)
@@ -917,7 +933,7 @@ def _retrieve(
     _candidate_paths: list[Path] | None = None,
 ) -> RetrievalResult:
     """Retrieve evidence through a module package and the common judge."""
-    all_paths = files_for(root, module_id)
+    all_paths = ready_files_for(root, module_id)
     if _candidate_paths is None:
         # The normal pass uses only original, ingested sources. A candidate
         # may be consulted only if the authoritative pass has no accepted

@@ -1,7 +1,7 @@
 # Horas extras: adicional, limite diário e as regras de compensação | Blog IAtrabalhista
 
 Fonte: https://iatrabalhista.com/blog/jornada/horas-extras-adicional-limite-e-compensacao
-Capturado em: 2026-09-18T13:24:26.158574+00:00
+Capturado em: 2026-09-21T11:01:09.520766+00:00
 Páginas no domínio: 10
 
 ## Horas extras: adicional, limite diário e as regras de compensação | Blog IAtrabalhista
@@ -1248,6 +1248,10 @@ R$
 /mês
 Cobrado mensalmente
 Assinar o Essencial
+Plano personalizado.
+Se nenhum destes planos se encaixa no seu escritório, montamos um com limites e quantidade de créditos sob medida para o seu caso. Para pedir o seu, fale com o nosso suporte em
+suporte@iatrabalhista.com
+, contando quantas peças você faz por mês e quantas pessoas vão usar a conta.
 Sem letra miúda
 Em todos os planos com IA
 Todas as funções do painel do advogado estão incluídas nos planos Simples, Avançado e Profissional. O que muda entre eles é a quantidade, não o que você pode fazer
@@ -1433,7 +1437,7 @@ suporte@iatrabalhista.com
 2026
 IAtrabalhista. Todos os direitos reservados. CNPJ 68.062.078/0001-74
 Termos de Uso, Privacidade e Transparência
-Última atualização: setembro de 2026.
+Última atualização: 18 de setembro de 2026.
 I. O que a IAtrabalhista é, e o que não é
 A IAtrabalhista é uma plataforma de tecnologia que oferece ferramentas de informação e produtividade baseadas em inteligência artificial e em fontes públicas oficiais.
 A plataforma não é um escritório de advocacia, não presta serviços privativos de advocacia, não oferece parecer jurídico e não intermedeia a contratação de advogados. As análises entregues aos trabalhadores têm natureza exclusivamente informativa e preliminar, e as minutas entregues a advogados são instrumentos de apoio sujeitos a revisão profissional integral.
@@ -1450,14 +1454,14 @@ II. Assumir a responsabilidade técnica pelos atos praticados com apoio da plata
 III. Supervisionar o uso da plataforma por usuários adicionais e membros da equipe vinculados à sua conta, sendo responsável pelos atos destes.
 IV. Inserir na plataforma somente dados de clientes cujo tratamento esteja autorizado, na qualidade de controlador desses dados, observando o sigilo profissional e a LGPD.
 IV. Privacidade, dados tratados, finalidade e base legal (LGPD)
-I. Dados tratados: dados de cadastro (nome, e-mail e, quando aplicável, número e seccional da OAB); relatos, documentos e imagens enviados para análise, elaboração de peças ou uso das ferramentas; agenda, clientes, intimações e lançamentos financeiros inseridos pelo usuário; e registros técnicos mínimos necessários ao funcionamento e à segurança do serviço.
-II. Finalidade: exclusivamente a prestação das funcionalidades utilizadas pelo usuário. Os dados não são vendidos, alugados nem utilizados para publicidade ou perfilamento.
+I. Dados tratados: dados de cadastro (nome, e-mail e, quando aplicável, número e seccional da OAB); dados de faturamento informados pelo titular da conta para a emissão das notas fiscais de serviço (CPF ou CNPJ, nome completo ou razão social, endereço e, se informado, um e-mail adicional para receber a nota); relatos, documentos e imagens enviados para análise, elaboração de peças ou uso das ferramentas; agenda, clientes, intimações e lançamentos financeiros inseridos pelo usuário; e registros técnicos mínimos necessários ao funcionamento e à segurança do serviço.
+II. Finalidade: a prestação das funcionalidades utilizadas pelo usuário e o cumprimento das obrigações legais ligadas a ela, como a emissão de nota fiscal. Os dados não são vendidos, alugados nem utilizados para publicidade ou perfilamento.
 III. Bases legais (art. 7º da LGPD): execução de contrato e de procedimentos preliminares a pedido do titular (inciso V); cumprimento de obrigação legal/regulatória (inciso II); exercício regular de direitos (inciso VI); e, quando necessário, consentimento do titular (inciso I), que pode ser revogado a qualquer tempo.
 IV. Papéis: em relação à conta do usuário, a plataforma atua como controladora; em relação aos dados de terceiros (clientes) inseridos pelo advogado, este é o controlador e a plataforma atua como operadora, tratando os dados conforme as instruções e finalidades do advogado.
 V. Dados sensíveis: os relatos e documentos submetidos podem conter dados pessoais sensíveis (art. 5º, II, da LGPD), entre outros os relativos à saúde, à filiação sindical ou a convicções do titular, notadamente em demandas de acidente de trabalho, doença ocupacional ou representação sindical. O tratamento desses dados limita-se à execução do serviço contratado e ao exercício regular de direitos em processo judicial ou administrativo, nas hipóteses autorizativas do art. 11 da LGPD, com sigilo e medidas de segurança reforçados.
 VI. Dados do trabalhador: na análise preliminar, o trabalhador fornece os dados do próprio caso para processamento por inteligência artificial de natureza informativa, sem decisão automatizada que produza efeitos jurídicos na forma do art. 20 da LGPD. Ao solicitar o contato de advogado, o titular consente, de forma específica e destacada (art. 7º, I, da LGPD), com o compartilhamento em duas etapas: (a) fica visível aos usuários com conta de advogado ativa na plataforma, que tenham declarado no cadastro o número e a seccional de sua inscrição na OAB, um resumo do caso, pedidos identificados, estimativa de valor, nome da empresa reclamada, cidade, unidade da federação e idade, sem qualquer dado de contato, para que possam avaliar se têm interesse no atendimento; e (b) aos advogados que efetivamente assumem o atendimento, no limite de dois, são liberados o nome, o e-mail, o telefone, o relato escrito pelo próprio titular, a íntegra das respostas por ele prestadas no questionário e, quando contratada a análise completa, o respectivo relatório, conjunto necessário à orientação jurídica pretendida e que pode conter dados sensíveis na forma do item anterior. A inscrição na OAB é declarada pelo próprio advogado no cadastro e a plataforma não a confere perante a OAB nem perante qualquer outra fonte externa; as garantias existentes são a admissão de uma única conta por inscrição, assegurada por restrição de unicidade no banco de dados, e o enquadramento da utilização de inscrição de terceiro como uso abusivo, sujeito ao bloqueio da conta e da inscrição na forma da Seção XIII destes Termos. O consentimento é revogável a qualquer tempo.
 V. Compartilhamento e subprocessadores
-Para operar, a plataforma utiliza prestadores de serviço (operadores) que tratam dados estritamente para viabilizar as funcionalidades:
+Para operar, a plataforma utiliza prestadores de serviço (operadores) que tratam dados estritamente para viabilizar as funcionalidades e cumprir as obrigações legais ligadas a elas:
 I. Supabase, autenticação, banco de dados e armazenamento dos documentos.
 II. Vercel, hospedagem e entrega da aplicação.
 III. Provedor de inteligência artificial, processa os conteúdos submetidos somente para gerar a resposta solicitada, sem reutilizá-los para outras finalidades.
@@ -1470,11 +1474,14 @@ O que o cliente vê é escolhido por categoria pelo(a) advogado(a), e todas nasc
 IX. Chatwoot, em instância operada pela PandaHub, atendimento por chat das dúvidas na página inicial. O chat só é carregado quando a pessoa clica para falar com a atendente: quem não clica não estabelece contato algum com esse serviço. Recebe o que a pessoa escrever na conversa e dados técnicos da sessão, e a conversa fica guardada nesse serviço, não na plataforma. O chat não é oferecido na área logada nem no portal do cliente. Não escreva dados sensíveis nem informações de terceiros nessa conversa: para tratar do seu caso, procure advogado(a) inscrito(a) na OAB.
 X. Sentry, monitoramento técnico de erros da aplicação. Recebe a mensagem do erro, o endereço da página e dados técnicos da sessão, para que falhas sejam descobertas e corrigidas. A plataforma aplica um saneador antes do envio, que remove identificadores pessoais e substitui por rótulos os endereços que carregam credencial (o endereço secreto do portal do cliente e o da agenda). O tratamento ocorre fora do Brasil.
 XI. Provedor de e-mail transacional (Zoho), envio das mensagens de serviço: confirmação de cadastro e de pagamento, aviso de cobrança recusada, aviso de vencimento de plano ou de créditos, peça pronta e avisos de compromisso. Recebe o endereço de e-mail do destinatário e o conteúdo da própria mensagem. Não é usado para publicidade.
+XII. Focus NFe, emissão das notas fiscais de serviço dos pagamentos feitos na plataforma. Recebe os dados de faturamento do titular da conta (CPF ou CNPJ, nome ou razão social e endereço), o e-mail de cadastro do titular e, se informado, o e-mail adicional para a nota, além do valor e da descrição do serviço. Transmite a nota ao Sistema Nacional da NFS-e, da administração tributária, a quem a plataforma é obrigada por lei a informá-la. Os usuários adicionais do escritório não têm acesso a esses dados.
 Alguns desses serviços podem realizar tratamento fora do Brasil; a transferência internacional observa as hipóteses do art. 33 da LGPD. Fora desses operadores, a plataforma não compartilha os dados com terceiros por iniciativa própria, salvo por determinação legal ou judicial. O compartilhamento descrito no item VIII depende de ato do(a) próprio(a) usuário(a), que decide se o faz, para qual cliente e o que fica visível.
 VI. Retenção e eliminação de dados
 I. Os dados são mantidos enquanto a conta estiver ativa e pelo tempo necessário às finalidades aqui descritas ou ao cumprimento de obrigações legais.
 II. O usuário pode excluir registros (clientes, peças, agenda, lançamentos) a qualquer momento dentro da plataforma.
 III. Encerrada a conta, os dados pessoais associados são eliminados ou anonimizados em prazo razoável, ressalvada a guarda mínima exigida por lei.
+IV. As notas fiscais emitidas, com os dados do tomador nelas contidos, são conservadas pelo prazo exigido pela legislação tributária, inclusive depois do encerramento da conta, desvinculadas dela (art. 16, I, da LGPD). A nota também fica registrada no Sistema Nacional da NFS-e, mantido pela administração tributária. Os dados de faturamento cadastrados na conta são eliminados com ela.
+V. A correção dos dados de faturamento vale para as notas seguintes; a nota já emitida só pode ser corrigida por cancelamento e substituição, nos prazos da legislação tributária.
 VII. Direitos do titular (art. 18 da LGPD)
 O titular pode, a qualquer momento, solicitar: confirmação da existência de tratamento; acesso aos dados; correção de dados incompletos, inexatos ou desatualizados; anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade; portabilidade; informação sobre compartilhamento; e revogação do consentimento.
 As solicitações e dúvidas sobre proteção de dados podem ser dirigidas ao encarregado pelo canal

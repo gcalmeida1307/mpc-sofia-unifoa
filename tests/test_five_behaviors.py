@@ -5,6 +5,7 @@ known facts plus counterexamples. No provider is necessary for these contracts.
 """
 import asyncio
 import io
+from pathlib import Path
 
 import pymupdf
 import pytest
@@ -58,7 +59,8 @@ def ask(root, question, module="infraestrutura"):
 def scanned_pdf(path, text, mixed=False):
     image = Image.new("RGB", (1654, 2339), "white")
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 36)
+    font_path = Path("C:/Windows/Fonts/arial.ttf")
+    font = ImageFont.truetype(str(font_path), 36) if font_path.exists() else ImageFont.load_default()
     draw.multiline_text((90, 150), text, fill="black", font=font, spacing=18)
     buffer = io.BytesIO(); image.save(buffer, format="PNG")
     with pymupdf.open() as doc:

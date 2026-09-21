@@ -25,6 +25,7 @@ from urllib.parse import urlparse
 from .ingestion import DocumentChunk, extract_text, files_for, ingest_module
 from .knowledge_builder import build_artifacts
 from .links import LinkRepository, fetch_link, normalize_url, save_fetched_link
+from .module_admission import assess_module_document
 from .privacy import ExternalRedaction, external_clinical_allowed, external_data_allowed
 from .query_analysis import classify_query, normalize
 from .research import _search_links
@@ -508,7 +509,9 @@ def expansion_settings() -> dict[str, Any]:
         "max_storage_mb_per_module": integer("max_storage_mb_per_module", 64, 102400),
         "relevance_threshold": number("relevance_threshold", 0, 10),
         "lease_seconds": integer("lease_seconds", 300, 86400),
-        "enabled": os.getenv("SOFIA_AUTO_EXPANSION", "true").strip().casefold() not in {"0", "false", "no", "off"},
+        # Public expansion is an explicit administrative action. A user query
+        # must never enlarge the corpus implicitly.
+        "enabled": os.getenv("SOFIA_AUTO_EXPANSION", "false").strip().casefold() not in {"0", "false", "no", "off"},
         "paused": os.getenv("SOFIA_EXPANSION_PAUSED", "false").strip().casefold() in {"1", "true", "yes", "on", "sim"},
     }
 
@@ -1024,8 +1027,8 @@ def _source_score(module_id: str, url: str, title: str, keywords: list[str]) -> 
     trusted = TRUSTED_DOMAINS.get(module_id, ())
     if any(host == domain or host.endswith(f".{domain}") for domain in trusted):
         score += 4
-    if host.endswith((".gov.br", ".gov", ".edu", ".edu.br")):
-        score += 3
+    # Official hosting is provenance, not topical relevance. A generic
+    # ``.gov.br`` result must not enter a module only because it is official.
     if host.endswith((".org", ".org.br")):
         score += 1
     return float(score)
@@ -1039,7 +1042,7 @@ def _domain_allowed(store: ExpansionStore, module_id: str, url: str, score: floa
             return mode == "allow"
     if os.getenv("SOFIA_EXPANSION_ALLOW_ANY_DOMAIN", "false").strip().casefold() in {"1", "true", "yes", "on", "sim"}:
         return True
-    return (score >= expansion_settings()["relevance_threshold"] and any(normalize(term) in normalize(url) for term in keywords)) or score >= 4
+    return score >= expansion_settings()["relevance_threshold"] and any(normalize(term) in normalize(url) for term in keywords)
 
 
 def _clean_public_content(content: str) -> str:
@@ -1275,7 +1278,7 @@ def record_document_pipeline(
             # Reconciliation is idempotent. A restart must not create a new
             # version, re-run OCR or rebuild artifacts for an unchanged file.
             artifact = connection.execute("SELECT artifact_version FROM knowledge_artifacts WHERE document_id = ?", (row["id"],)).fetchone()
-            if artifact and artifact["artifact_version"] == "2.0" and str(row["file_hash"] or "") == str(file_hash or "") and str(row["status"] or "") in {"READY", "DUPLICATE"}:
+            if artifact and artifact["artifact_version"] == "2.2" and str(row["file_hash"] or "") == str(file_hash or "") and str(row["status"] or "") in {"READY", "DUPLICATE"}:
                 return {
                     "status": "UNCHANGED",
                     "document_id": int(row["id"]),
@@ -1334,6 +1337,29 @@ def record_document_pipeline(
             if not pages_ready(pages):
                 raise ValueError("quality gate por página reprovado: " + ", ".join(str(p.number) for p in pages if p.status == "QUARANTINED"))
         text = extract_text(path)
+        admission = assess_module_document(module_id, path, text)
+        if not admission.accepted:
+            reason = admission.reason
+            mark_stage(
+                "ADMISSION",
+                "failed",
+                {
+                    "positive_markers": admission.positive_markers,
+                    "negative_markers": admission.negative_markers,
+                },
+                reason,
+            )
+            connection.execute(
+                "UPDATE documents SET status = 'FAILED', current_stage = 'ADMISSION', validation_status = 'FAILED', summary = ?, updated_at = ? WHERE id = ?",
+                (reason, _now(), document_id),
+            )
+            if job_id is not None:
+                connection.execute(
+                    "UPDATE processing_jobs SET status = 'FAILED', finished_at = ?, metrics_json = ? WHERE id = ?",
+                    (_now(), json.dumps({"stage": "ADMISSION", "error": reason}, ensure_ascii=False), job_id),
+                )
+            connection.commit()
+            return {"status": "FAILED", "document_id": document_id, "error": reason, "stage": "ADMISSION"}
         mark_stage("EXTRACTING", "complete", {"text_chars": len(text)})
         invalid_chars = sum(1 for char in text if ord(char) < 9 or (13 < ord(char) < 32))
         quality = max(0.0, min(1.0, (len(text.strip()) / 300.0) - (invalid_chars / max(1, len(text)))))

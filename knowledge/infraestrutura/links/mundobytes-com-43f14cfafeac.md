@@ -1,7 +1,7 @@
 # Como criar documentação para uma infraestrutura de TI
 
 Fonte: https://mundobytes.com/pt/Como-criar-documenta%c3%a7%c3%a3o-para-uma-infraestrutura-de-TI-completa
-Capturado em: 2026-09-17T14:15:20.822890+00:00
+Capturado em: 2026-09-21T11:03:43.002563+00:00
 Páginas no domínio: 1
 
 ## Como criar documentação para uma infraestrutura de TI
@@ -112,7 +112,7 @@ Configurações do servidor:
 Sistema operacional e versão, recursos alocados (CPU, RAM, discos), software instalado, serviços em execução e dependências críticas. Se um servidor falhar ou precisar ser reconstruído, essas informações reduzem o tempo de recuperação.
 Serviços na nuvem:
 Máquinas virtuais, contêineres, bancos de dados gerenciados, balanceadores de carga, políticas de segurança, VPCs, grupos de segurança e pontos de integração em provedores como AWS, Azure ou Google Cloud.
-O que consome mais bateria no seu celular, Wi-Fi ou 5G?
+Como corrigir o erro Err_Quic_Protocol_Error no Google Chrome
 Idealmente, esse trabalho deve ser apoiado por uma ferramenta ITAM ou uma solução de documentação de TI para
 automatizar a descoberta e o rastreamento de alterações
 sempre que possível, em vez de manter tudo manualmente em uma planilha que se torna obsoleta.
@@ -181,7 +181,7 @@ nem todos os documentos têm a mesma finalidade ou são destinados ao mesmo púb
 Por um lado, existe a documentação concebida para os utilizadores finais:
 manuais do utilizador, guias rápidos, perguntas frequentes, tutoriais escritos ou em vídeo
 que explicam como utilizar uma aplicação ou serviço sem necessidade de conhecer os seus mecanismos internos.
-Exportar políticas de rede e configuração com netsh, gpresult e secedit
+Portas de rede: o que são, seus tipos e para que servem
 Por outro lado, existe a documentação técnica e do produto, que detalha os requisitos, a arquitetura e o projeto do sistema:
 especificações funcionais e não funcionais
 , diagramas UML, descrições de módulos, documentação da API, guias de integração ou documentação de testes (casos de execução, critérios de aceitação, resultados).
@@ -245,7 +245,7 @@ Alta disponibilidade, segurança de TI e seu reflexo na documentação
 Em arquiteturas mais complexas, a documentação da infraestrutura de TI se cruza diretamente com
 alta disponibilidade (HA) e cibersegurança
 . Saber qual hardware você possui já não é suficiente; é preciso demonstrar como você garante que os serviços permanecerão operacionais apesar de falhas e ataques.
-Como listar todas as interfaces de rede no CMD
+Como adicionar atalhos para locais de rede ou servidores em 'Este PC' no Windows
 Comece pelos SLAs: documente claramente as metas de
 tempo de atividade, MTBF e MTTR
 para cada serviço crítico, como são calculadas, quais janelas de manutenção são consideradas e quais mecanismos de escalonamento entram em ação quando não são atendidas. Essas informações devem orientar diretamente o projeto de redundância e os procedimentos de resposta.

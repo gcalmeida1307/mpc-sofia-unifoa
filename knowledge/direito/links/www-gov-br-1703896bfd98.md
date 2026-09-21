@@ -1,7 +1,7 @@
 # Legislação — Planalto
 
 Fonte: https://www.gov.br/planalto/pt-br/conheca-a-presidencia/biblioteca-da-pr/legislacao
-Capturado em: 2026-09-18T13:24:19.850759+00:00
+Capturado em: 2026-09-21T11:01:13.276915+00:00
 Páginas no domínio: 10
 
 ## Legislação — Planalto
@@ -26,14 +26,14 @@ Mapa do site
 Abrir menu principal de navegação
 Planalto
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -500,6 +500,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -510,14 +511,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -561,12 +562,12 @@ Anterior
 Paginação
 Paginação
 Todos os Perfis
-Direitos humanos
-ECA Digital completa um ano e estabelece maior proteção para crianças e adolescentes
+Economia
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
 Saúde
-Cartilha da Anvisa orienta sobre o uso correto dos fitoterápicos
-Cultura
-Polícia Federal restitui 164 publicações históricas à Fundação Biblioteca Nacional
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -603,7 +604,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -700,6 +701,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## www.gov.br
 URL: https://www.gov.br/pt-br/sitemap
@@ -722,14 +728,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -789,6 +795,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -914,474 +921,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
-
-## Página Inicial — Planalto
-URL: https://www.gov.br/planalto/pt-br
-
-Página Inicial — Planalto
-Ir para o
-Conteúdo
-1
-Ir para a
-Página Inicial
-2
-Ir para o menu de
-Navegação
-3
-Ir para a
-Busca
-4
-Ir para o
-Mapa do site
-5
-Abrir menu principal de navegação
-Planalto
-Termos mais buscados
-assinatura
-Desenrola Brasil
-mei
-imposto de renda
-inss
-Termos mais buscados
-assinatura
-Desenrola Brasil
-mei
-Acesso à Informação
-Institucional
-Estrutura da Presidência
-Competências
-Base Jurídica
-QUEM É QUEM | Principais cargos e respectivos ocupantes
-Perfil Profissional
-Atos normativos
-Horários de atendimento do órgão
-Gabinete Pessoal do Presidente da República
-Assessoria Especial do Presidente da República
-Ações e Programas
-Programas, Projetos, Ações, Obras e Atividades
-Carta de Serviços
-Concessões de Recursos Financeiros ou Renúncias de Receitas
-Programas Financiados pelo Fundo de Amparo ao Trabalhador – FAT
-Governança
-Plano Diretor de Logística Sustentável
-Orçamento Público
-Governo Digital
-Participação Social
-Ouvidoria
-Audiências e Consultas Públicas
-Conselhos e Órgãos Colegiados
-Conferências
-Editais de Chamamento Público
-Outras Ações
-Auditorias
-Prestação de Contas
-Relatórios de Gestão
-Demonstrações Contábeis
-Rol de Responsáveis
-Relatórios de Auditoria
-Plano Anual de Atividades de Auditoria Interna
-Relatório Anual de Atividades de Auditoria Interna
-Convênios e Transferências
-Receitas e Despesas
-Licitações e Contratos
-Servidores
-Informações Classificadas
-Serviço de Informação ao Cidadão
-Tratamento de Dados Pessoais
-FAQ - Perguntas Frequentes
-Dados Abertos
-Sanções Administrativas
-Ferramentas e aspectos tecnológicos
-Prestação de Contas
-Radar da Transparência Pública
-Acompanhe o Planalto
-Notícias
-Área de Imprensa
-Agenda do Presidente da República
-Agenda da Primeira-Dama
-Agenda do Presidente em exercício
-Conheça a Presidência
-Biografia do Presidente da República
-Biografia do Vice-Presidente
-Órgãos da Presidência da República
-Orgãos Essenciais
-Órgãos de Assessoramento Imediato
-Órgãos de Consulta
-Conselhos
-Órgão Vinculado
-Ministros e Ministras
-Conselhos
-Principais Tropas
-Ritos e Solenidades
-Palácios e Residências
-Palácio do Planalto
-Palácio da Alvorada
-Palácio do Jaburu
-Granja do Torto
-Agende sua visita ao Palácio do Planalto
-Programas de visitação
-Biblioteca da Presidência da República
-Símbolos Nacionais
-Constituição Federal
-Legislação
-Biblioteca da Presidência
-Acervos Presidenciais
-Comissão Memória
-Acervo
-Credenciamento de Imprensa
-Cobertura Diária e Eventos em Brasília
-Cobertura de Viagens
-Credenciamento para a viagem do Senhor Presidente da República à cidade do Rio de Janeiro - RJ
-Credenciamento para a viagem do Senhor Presidente da República à cidade do Rio de Janeiro - RJ
-Credenciamento para a viagem do Senhor Presidente da República ao estado de São Paulo - SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de São Paulo - SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de São Paulo - SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Iperó – SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Macaíba - RN
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Governador Valadares - MG
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Canoas-RS
-Fale Conosco
-Vice-Presidência
-Acesso à Informação
-Institucional
-Ações e Programas
-Participação Social
-Licitações e Contratos
-Convênios e Transferências
-Auditorias
-Receitas e Despesas
-Informações Classificadas
-Serviço de Informação ao Cidadão
-Perguntas Frequentes
-Dados Abertos
-Demonstrações Contábeis
-Diárias e Passagens
-Servidores
-LGPD
-Sanções Administrativas
-Ferramentas e aspectos tecnológicos
-Presentes entregues a Vice-Presidentes
-Outros
-Relatório Anual da LAI
-Gestão Estratégica
-Agenda Vice-Presidente Geraldo Alckmin
-Agenda do Vice-Presidente
-Agenda de Presidente em Exercício
-Agenda de Autoridades
-Compromissos Públicos
-Gestões Passadas
-Central de Conteúdo
-Comunicados à imprensa
-Canais de Atendimento
-Ouvidoria
-Imprensa
-GOV.BR
-Serviços
-Buscar serviços por
-Categorias
-Órgãos
-Estados
-Serviços por público alvo
-Cidadãos
-Empresas
-Órgãos e Entidades Públicas
-Demais segmentos (ONGs, organizações sociais, etc)
-Servidor Público
-Temas em Destaque
-Orçamento Nacional
-Redes de Atendimento da Administração Pública Federal
-Proteção de Dados Pessoais
-Serviços para Imigrantes
-Política e Orçamento Educacionais
-Educação Profissional e Tecnológica
-Educação Profissional para Jovens e Adultos
-Trabalho e Emprego
-Serviços para Pessoas com Deficiência
-Combate à Discriminação Racial
-Política de Proteção Social
-Política para Mulheres
-Saúde Reprodutiva da Mulher
-Cuidados na Primeira Infância
-Habitação Popular
-Controle de Poluição e Resíduos Sólidos
-Notícias
-Galeria de Aplicativos
-Acompanhe o Planalto
-Navegação
-Acessibilidade
-Mapa do Site
-Termo de Uso e Aviso de Privacidade
-Consultar minhas solicitações
-Órgãos do Governo
-Por dentro do Gov.br
-Dúvidas Frequentes em relação ao Portal gov.br
-Dúvidas Frequentes da conta gov.br
-Ajuda para Navegar o Portal
-Conheça os elementos do Portal
-Política de e-participação
-Termos de Uso
-Governo Digital
-Guia de Edição de Serviços do Portal Gov.br
-Canais do Executivo Federal
-Dados da Administração Pública Federal
-Dados Abertos
-Painel Estatístico de Pessoal
-Painel de Compras da Administração Pública Federal
-Acesso à Informação
-Empresas e Negócios
-Links Úteis
-Galeria de Aplicativos
-Participe
-Galeria de Aplicativos
-Participe
-Redes sociais
-Instagram
-Facebook
-Flickr
-RSS
-WhatsApp canal
-YouTube
-TikTok
-Kwai
-Linkedin
-Serviços recomendados para você
-Serviços mais acessados do govbr
-Serviços em destaque do govbr
-Serviços recomendados para você
-Serviços mais acessados do govbr
-Serviços em destaque do govbr
-Serviços mais acessados do govbr
-Serviços em destaque do govbr
-Serviços recomendados para você
-Serviços mais acessados do govbr
-1
-Assinatura Eletrônica
-2
-Consultar Meu Imposto de Renda
-3
-Consultar dados do Cadastro Único
-4
-Consultar CPF
-5
-Consultar restituição do imposto de renda
-6
-Consultar CNPJ
-Serviços em destaque do govbr
-Outros
-Tela Brasil
-Imposto de Renda e Malha Fiscal
-Entregar Meu Imposto de Renda
-(DIRPF)
-Vida Financeira
-Novo
-Renegociação de Dívidas - Famílias
-Crimes
-Celular Seguro
-Assistência Direta
-Novo
-Bolsa Família
-(PBF)
-Fechar
-Fechar
-Fechar
-Info
-Agenda do Presidente da República
-SET
-2026
-15
-Ter
-16
-Qua
-17
-Qui
-18
-Sex
-19
-Sáb
-20
-Dom
-21
-Seg
-Compromissos do dia
-Apresentação das forças de segurança que atuam no Estado do Rio de Janeiro
-Pátio do Complexo da Polícia Rodoviária Federal, BR-116, Km 163, Vigário Geral – Rio de Janeiro
-10h30
-Intervenções no contexto das ações integradas de Segurança Pública no Estado do Rio de Janeiro
-BR-116, Km 163, Vigário Geral – Rio de Janeiro
-11h30
-Partida para São Paulo
-III COMAR – Rio de Janeiro
-14h15
-Chegada a São Paulo
-Aeroporto de Congonhas – São Paulo
-15h15
-Agenda Completa
-MAIS NOTÍCIAS
-Serviços e Informações
-Imprensa
-Credenciamento
-Acesso à Informação
-Portal da Transparência do Governo Federal
-Fale Conosco
-Conheça a Presidência
-Órgãos da Presidência
-Conselhos
-Principais Tropas
-Ritos e Solenidades
-Palácios e Residências
-Presentes recebidos pelo Presidente
-Símbolos Nacionais
-Central de Conteúdos
-Imagens
-CANAIS DE ATENDIMENTO
-Registre manifestações nos canais da Plataforma Fala.BR
-Acesso à Informação
-Institucional
-Estrutura da Presidência
-Competências
-Base Jurídica
-QUEM É QUEM | Principais cargos e respectivos ocupantes
-Perfil Profissional
-Atos normativos
-Horários de atendimento do órgão
-Gabinete Pessoal do Presidente da República
-Assessoria Especial do Presidente da República
-Ações e Programas
-Programas, Projetos, Ações, Obras e Atividades
-Carta de Serviços
-Concessões de Recursos Financeiros ou Renúncias de Receitas
-Programas Financiados pelo Fundo de Amparo ao Trabalhador – FAT
-Governança
-Plano Diretor de Logística Sustentável
-Orçamento Público
-Governo Digital
-Participação Social
-Ouvidoria
-Audiências e Consultas Públicas
-Conselhos e Órgãos Colegiados
-Conferências
-Editais de Chamamento Público
-Outras Ações
-Auditorias
-Prestação de Contas
-Relatórios de Gestão
-Demonstrações Contábeis
-Rol de Responsáveis
-Relatórios de Auditoria
-Plano Anual de Atividades de Auditoria Interna
-Relatório Anual de Atividades de Auditoria Interna
-Convênios e Transferências
-Receitas e Despesas
-Licitações e Contratos
-Servidores
-Informações Classificadas
-Serviço de Informação ao Cidadão
-Tratamento de Dados Pessoais
-FAQ - Perguntas Frequentes
-Dados Abertos
-Sanções Administrativas
-Ferramentas e aspectos tecnológicos
-Prestação de Contas
-Radar da Transparência Pública
-Acompanhe o Planalto
-Notícias
-Área de Imprensa
-Agenda do Presidente da República
-Agenda da Primeira-Dama
-Agenda do Presidente em exercício
-Conheça a Presidência
-Biografia do Presidente da República
-Biografia do Vice-Presidente
-Órgãos da Presidência da República
-Orgãos Essenciais
-Órgãos de Assessoramento Imediato
-Órgãos de Consulta
-Conselhos
-Órgão Vinculado
-Ministros e Ministras
-Conselhos
-Principais Tropas
-Ritos e Solenidades
-Palácios e Residências
-Palácio do Planalto
-Palácio da Alvorada
-Palácio do Jaburu
-Granja do Torto
-Agende sua visita ao Palácio do Planalto
-Programas de visitação
-Biblioteca da Presidência da República
-Símbolos Nacionais
-Constituição Federal
-Legislação
-Biblioteca da Presidência
-Acervos Presidenciais
-Comissão Memória
-Acervo
-Credenciamento de Imprensa
-Cobertura Diária e Eventos em Brasília
-Cobertura de Viagens
-Credenciamento para a viagem do Senhor Presidente da República à cidade do Rio de Janeiro - RJ
-Credenciamento para a viagem do Senhor Presidente da República à cidade do Rio de Janeiro - RJ
-Credenciamento para a viagem do Senhor Presidente da República ao estado de São Paulo - SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de São Paulo - SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de São Paulo - SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Iperó – SP
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Macaíba - RN
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Governador Valadares - MG
-Credenciamento para a viagem do Senhor Presidente da República à cidade de Canoas-RS
-Fale Conosco
-Vice-Presidência
-Acesso à Informação
-Institucional
-Ações e Programas
-Participação Social
-Licitações e Contratos
-Convênios e Transferências
-Auditorias
-Receitas e Despesas
-Informações Classificadas
-Serviço de Informação ao Cidadão
-Perguntas Frequentes
-Dados Abertos
-Demonstrações Contábeis
-Diárias e Passagens
-Servidores
-LGPD
-Sanções Administrativas
-Ferramentas e aspectos tecnológicos
-Presentes entregues a Vice-Presidentes
-Outros
-Relatório Anual da LAI
-Gestão Estratégica
-Agenda Vice-Presidente Geraldo Alckmin
-Agenda do Vice-Presidente
-Agenda de Presidente em Exercício
-Agenda de Autoridades
-Compromissos Públicos
-Gestões Passadas
-Central de Conteúdo
-Comunicados à imprensa
-Canais de Atendimento
-Ouvidoria
-Imprensa
-Redefinir Cookies
-Redes sociais
-Instagram
-Facebook
-Flickr
-RSS
-WhatsApp canal
-YouTube
-TikTok
-Kwai
-Linkedin
-Todo o conteúdo deste site está publicado sob a licença
-Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
-.
-Voltar ao topo da página
-Rejeitar
-Fale Agora
-Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -1405,14 +949,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -1472,6 +1016,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -1603,6 +1148,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Navegação
 URL: https://www.gov.br/pt-br/navegacao
@@ -1626,14 +1176,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -1693,6 +1243,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -1778,6 +1329,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Planalto
 URL: https://www.gov.br/planalto//search?SearchableText=assinatura&origem=termos
@@ -1801,14 +1357,14 @@ Mapa do site
 Abrir menu principal de navegação
 Planalto
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 GOV.BR
 Serviços
@@ -1925,14 +1481,14 @@ Mapa do site
 Abrir menu principal de navegação
 Planalto
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 GOV.BR
 Serviços
@@ -2049,14 +1605,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2116,6 +1672,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2652,6 +2209,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Termo de Uso e Aviso de Privacidade
 URL: https://www.gov.br/pt-br/termos-de-uso
@@ -2742,6 +2304,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3528,6 +3091,491 @@ Linkedin
 WhatsApp canal
 TikTok
 Kwai
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
+
+## Home — Governo Digital
+URL: https://www.gov.br/governodigital/pt-br
+
+Home — Governo Digital
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Governo Digital
+Termos mais buscados
+Desenrola Brasil
+assinatura
+mei
+imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
+assinatura
+mei
+Estratégias e Governança Digital
+Secretaria de Governo Digital
+Sistema de Administração dos Recursos de Tecnologia da Informação (Sisp)
+Autodiagnóstico - iGOVSISP
+Comissão de Coordenação do SISP - CCSISP
+Guia do Gestor
+Sobre o SISP
+Gestão de GSISP
+ATI
+CCSISP
+Transformação Digital
+Ferramentas
+O que oferece?
+Central de Qualidade
+Estratégia Nacional de Governo Digital
+Perguntas Frequentes
+Comitê
+Estratégia Federal de Governo Digital
+PORTARIA SGD/MGI Nº 6.618, DE 25 DE SETEMBRO DE 2024
+Um Governo Centrado no Cidadão e Inclusivo
+Um Governo Integrado e Colaborativo
+Um Governo Inteligente e Inovador
+Um Governo Confiável e Seguro
+Um Governo Transparente, Aberto e Participativo
+Um Governo Eficiente e Sustentável
+Monitoramento EFGD
+Monitoramento EFGD 2024-2027
+EFGD 2024 - 2027
+Contratação de Soluções de TIC
+EFGD 2024 - 2027
+Rede Nacional de Governo Digital
+Mapa
+Guia: 10 passos para a transformação digital em estados e municípios
+Startup GOV.BR
+Plataformas e Serviços Digitais
+Conta GOV.BR
+Ferramenta de Avaliação
+Links
+Ferramenta de Automação
+Conecta GOV.BR
+Protocolo GOV.BR
+Software Público
+Assinatura Eletrônica
+Rede Nacional de Governo Digital - Rede GOV.BR
+Agenda gov.br
+Identidade
+Identificação do Cidadão e Carteira de Identidade Nacional
+Câmara Executiva Federal de Identificação do Cidadão (CEFIC)
+Beneficiário Social
+Onde emitir a sua nova Carteira de Identidade?
+Dúvidas Frequentes sobre a CIN
+Dúvidas frequentes: Cadastro da biometria para benefícios sociais
+Cadastro biométrico: documentos comprobatórios para dispensa
+Identidade Digital para Gestores Públicos
+Programa Balcão GOV.BR
+Dúvidas Frequentes do Ecossistema da Identidade Digital GOV.BR
+Orientações sobre os critérios de segurança adotados na Conta GOV.BR
+Conta gov.br
+O que é a conta gov.br?
+Onde usar a conta gov.br
+Níveis da conta gov.br
+Segurança da conta
+Vídeos tutoriais
+Ajuda da conta gov.br
+Termo de Uso e Aviso de Privacidade
+Exclusão da conta gov.br
+Assinatura Eletrônica
+Saiba mais sobre a assinatura eletrônica
+Assinatura Eletrônica para Órgãos
+Importar certificados gov.br no Adobe Acrobat Reader
+Carteira de documentos digitais
+Gerenciar o uso dos seus dados pessoais
+Prova de Vida
+Inteligência Artificial
+Acessibilidade e Usuário
+Atendimento gov.br
+Dúvidas na conta gov.br
+Dúvidas na assinatura gov.br
+Dúvidas no aplicativo gov.br
+Dúvidas nos dados cadastrais
+Atendimento Presencial
+Integração dos Serviços Estaduais
+Acessibilidade Digital
+Modelo de Acessibilidade
+Ferramentas
+Padrões Web em Governo Eletrônico
+Referências e Modelos de Implementação
+Recursos de Acessibilidade
+ABNT NBR 17225 - Acessibilidade em Conteúdo e Aplicações Web
+ABNT NBR 17060 - Acessibilidade em Dispositivos Moveis
+Experiência do Usuário
+VLibras
+Contratações de TIC
+Catálogos de Soluções de TIC com Condições Padronizadas
+Compras de TIC
+Cronograma dos Projetos de TIC da Central de Compras
+Legislação
+Instrução Normativa SGD/ME nº 94, de 2022
+Instrução Normativa SGD/ME nº 1, de 2019
+Análise de Alçadas Regido Pela Lei n° 14.133, de 2021
+Legislação Aplicada à Contratação de TIC
+Modelo de Contratação de Software e Serviços de Computação em Nuvem
+Modelo de Contratação e Gestão de Estações de Trabalho
+Modelo de Contratação de Serviços de Desenvolvimento, Manutenção e Sustentação de Software
+Modelo de Contratação de Serviços de Outsourcing de Impressão
+Modelo de Contração de Serviços de Operação de Infraestrutura e de Atendimento a Usuários de TIC
+Modelo de Composição de Preços nas Contratações com Empresas Públicas Federais
+Orientações - Contratos Baseados em UST
+Todos os Modelos, Diretrizes e Orientações para Contratação de Soluções de TIC
+Orientações - Contratos Baseados em UST
+Orientações - Realização de Análise Crítica na Pesquisa de Preços
+Orientações e Apoio Especializado
+Conceito de Solução de TIC
+Informações e Orientações sobre Análise de Alçadas
+Pedidos de Excepcionalidade para Contratação de TIC
+Central de Serviços e Suporte do SISP
+Capacitações
+Templates de Artefatos para Contratação e Lista de Verificação
+FAQ
+Central de Serviços e Suporte do SISP (C3S)
+Capacitações
+Privacidade e Segurança
+CEPS GOV.BR
+Jogos Educativos
+CISC GOV.BR
+PPSI 2.0
+Infraestrutura Nacional de Dados
+Interoperabilidade
+Conecta gov.br
+Catálogo Nacional de Dados
+Governança de Dados
+Guia de Implementação dos Programas de Governança de Dados
+Informações geoespaciais
+Ambiente Tecnológico
+Nuvem
+Data Centers
+Infovia
+Decisão Baseada em Dados
+Qualificação de Endereços
+Capacitação
+Eventos e Prêmios
+Legislação
+Mapa do Site
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+Instagram
+Twitter
+Serviços recomendados para você
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços recomendados para você
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços mais acessados do govbr
+Serviços em destaque do govbr
+Serviços recomendados para você
+Serviços mais acessados do govbr
+1
+Assinatura Eletrônica
+2
+Consultar Meu Imposto de Renda
+3
+Consultar dados do Cadastro Único
+4
+Consultar CPF
+5
+Consultar restituição do imposto de renda
+6
+Consultar CNPJ
+Serviços em destaque do govbr
+Outros
+Tela Brasil
+Imposto de Renda e Malha Fiscal
+Entregar Meu Imposto de Renda
+(DIRPF)
+Vida Financeira
+Novo
+Renegociação de Dívidas - Famílias
+Crimes
+Celular Seguro
+Assistência Direta
+Novo
+Bolsa Família
+(PBF)
+Fechar
+Fechar
+Fechar
+Info
+Conheça as experiências e ferramentas de governo digital
+Atendimento GOV.BR
+Acesso rápido
+Navegue por categoria
+Encontre o serviço ou ferramenta de governo digital dentre as opções abaixo:
+Estratégias e Governança Digital
+Plataformas e Serviços Digitais
+Identidade
+Inteligência Artificial
+Acessibilidade e Usuário
+Contratações de TIC
+Privacidade e Segurança
+Infraestrutura Nacional de Dados
+Capacitação
+Legislação
+Outros destaques
+Portaria ENGD - 2024 a 2027
+Transformação Digital
+Pesquisa com Usuários
+Computação em Nuvem
+Padrões Digitais
+Infraestrutura de Chaves Públicas
+Startup GOV.BR
+Proteção de Dados Pessoais
+Números do Governo Digital
+5.179
+serviços digitais no GOV.BR (mai/26)
+3.200
+sistemas integrados a Conta GOV.BR (até abr/26)
+500
+milhões de assinaturas eletrônicas (até mai/26)
+175
+milhões de contas ativas GOV.BR (até mai/26)
+Centrais de conteúdo
+Privacidade e Segurança da Informação
+Agora, o seu CPF vai ser o seu novo RG
+Como aumentar o nível da conta GOV.BR com reconhecimento facial?
+Como Acessar a Nova Carteira de Identidade
+**
+Confira nosso canal no YouTube
+Mais vídeos sobre a Conta GOV.BR
+Proteção de dados: Denúncias ou Petições de titular
+Canais de Atendimento
+Você pode fazer mais manifestações nos seguintes canais
+Denúncia
+Solicitação
+Sugestão
+Elogio
+Estratégias e Governança Digital
+Secretaria de Governo Digital
+Sistema de Administração dos Recursos de Tecnologia da Informação (Sisp)
+Autodiagnóstico - iGOVSISP
+Comissão de Coordenação do SISP - CCSISP
+Guia do Gestor
+Sobre o SISP
+Gestão de GSISP
+ATI
+CCSISP
+Transformação Digital
+Ferramentas
+O que oferece?
+Central de Qualidade
+Estratégia Nacional de Governo Digital
+Perguntas Frequentes
+Comitê
+Estratégia Federal de Governo Digital
+PORTARIA SGD/MGI Nº 6.618, DE 25 DE SETEMBRO DE 2024
+Um Governo Centrado no Cidadão e Inclusivo
+Um Governo Integrado e Colaborativo
+Um Governo Inteligente e Inovador
+Um Governo Confiável e Seguro
+Um Governo Transparente, Aberto e Participativo
+Um Governo Eficiente e Sustentável
+Monitoramento EFGD
+Monitoramento EFGD 2024-2027
+EFGD 2024 - 2027
+Contratação de Soluções de TIC
+EFGD 2024 - 2027
+Rede Nacional de Governo Digital
+Mapa
+Guia: 10 passos para a transformação digital em estados e municípios
+Startup GOV.BR
+Plataformas e Serviços Digitais
+Conta GOV.BR
+Ferramenta de Avaliação
+Links
+Ferramenta de Automação
+Conecta GOV.BR
+Protocolo GOV.BR
+Software Público
+Assinatura Eletrônica
+Rede Nacional de Governo Digital - Rede GOV.BR
+Agenda gov.br
+Identidade
+Identificação do Cidadão e Carteira de Identidade Nacional
+Câmara Executiva Federal de Identificação do Cidadão (CEFIC)
+Beneficiário Social
+Onde emitir a sua nova Carteira de Identidade?
+Dúvidas Frequentes sobre a CIN
+Dúvidas frequentes: Cadastro da biometria para benefícios sociais
+Cadastro biométrico: documentos comprobatórios para dispensa
+Identidade Digital para Gestores Públicos
+Programa Balcão GOV.BR
+Dúvidas Frequentes do Ecossistema da Identidade Digital GOV.BR
+Orientações sobre os critérios de segurança adotados na Conta GOV.BR
+Conta gov.br
+O que é a conta gov.br?
+Onde usar a conta gov.br
+Níveis da conta gov.br
+Segurança da conta
+Vídeos tutoriais
+Ajuda da conta gov.br
+Termo de Uso e Aviso de Privacidade
+Exclusão da conta gov.br
+Assinatura Eletrônica
+Saiba mais sobre a assinatura eletrônica
+Assinatura Eletrônica para Órgãos
+Importar certificados gov.br no Adobe Acrobat Reader
+Carteira de documentos digitais
+Gerenciar o uso dos seus dados pessoais
+Prova de Vida
+Inteligência Artificial
+Acessibilidade e Usuário
+Atendimento gov.br
+Dúvidas na conta gov.br
+Dúvidas na assinatura gov.br
+Dúvidas no aplicativo gov.br
+Dúvidas nos dados cadastrais
+Atendimento Presencial
+Integração dos Serviços Estaduais
+Acessibilidade Digital
+Modelo de Acessibilidade
+Ferramentas
+Padrões Web em Governo Eletrônico
+Referências e Modelos de Implementação
+Recursos de Acessibilidade
+ABNT NBR 17225 - Acessibilidade em Conteúdo e Aplicações Web
+ABNT NBR 17060 - Acessibilidade em Dispositivos Moveis
+Experiência do Usuário
+VLibras
+Contratações de TIC
+Catálogos de Soluções de TIC com Condições Padronizadas
+Compras de TIC
+Cronograma dos Projetos de TIC da Central de Compras
+Legislação
+Instrução Normativa SGD/ME nº 94, de 2022
+Instrução Normativa SGD/ME nº 1, de 2019
+Análise de Alçadas Regido Pela Lei n° 14.133, de 2021
+Legislação Aplicada à Contratação de TIC
+Modelo de Contratação de Software e Serviços de Computação em Nuvem
+Modelo de Contratação e Gestão de Estações de Trabalho
+Modelo de Contratação de Serviços de Desenvolvimento, Manutenção e Sustentação de Software
+Modelo de Contratação de Serviços de Outsourcing de Impressão
+Modelo de Contração de Serviços de Operação de Infraestrutura e de Atendimento a Usuários de TIC
+Modelo de Composição de Preços nas Contratações com Empresas Públicas Federais
+Orientações - Contratos Baseados em UST
+Todos os Modelos, Diretrizes e Orientações para Contratação de Soluções de TIC
+Orientações - Contratos Baseados em UST
+Orientações - Realização de Análise Crítica na Pesquisa de Preços
+Orientações e Apoio Especializado
+Conceito de Solução de TIC
+Informações e Orientações sobre Análise de Alçadas
+Pedidos de Excepcionalidade para Contratação de TIC
+Central de Serviços e Suporte do SISP
+Capacitações
+Templates de Artefatos para Contratação e Lista de Verificação
+FAQ
+Central de Serviços e Suporte do SISP (C3S)
+Capacitações
+Privacidade e Segurança
+CEPS GOV.BR
+Jogos Educativos
+CISC GOV.BR
+PPSI 2.0
+Infraestrutura Nacional de Dados
+Interoperabilidade
+Conecta gov.br
+Catálogo Nacional de Dados
+Governança de Dados
+Guia de Implementação dos Programas de Governança de Dados
+Informações geoespaciais
+Ambiente Tecnológico
+Nuvem
+Data Centers
+Infovia
+Decisão Baseada em Dados
+Qualificação de Endereços
+Capacitação
+Eventos e Prêmios
+Legislação
+Mapa do Site
+Redefinir Cookies
+Redes sociais
+Instagram
+Twitter
 Todo o conteúdo deste site está publicado sob a licença
 Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
 .

@@ -1,7 +1,7 @@
 # Documentos Técnicos - CIOT — Agência Nacional de Transportes Terrestres - ANTT
 
 Fonte: https://www.gov.br/antt/pt-br/assuntos/cargas/ciot-para-todos-1/documentos-tecnicos
-Capturado em: 2026-09-17T16:17:33.999842+00:00
+Capturado em: 2026-09-21T11:04:36.001395+00:00
 Páginas no domínio: 10
 
 ## Documentos Técnicos - CIOT — Agência Nacional de Transportes Terrestres - ANTT
@@ -26,13 +26,13 @@ Mapa do site
 Abrir menu principal de navegação
 Agência Nacional de Transportes Terrestres - ANTT
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 A ANTT
@@ -252,6 +252,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -259,18 +260,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -625,6 +626,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -632,18 +634,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -712,14 +714,14 @@ Mapa do site
 Abrir menu principal de navegação
 Agência Nacional de Transportes Terrestres - ANTT
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 A ANTT
 Acesso à Informação
@@ -938,6 +940,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -945,18 +948,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -1311,6 +1314,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -1318,18 +1322,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -1455,6 +1459,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -1465,14 +1470,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -1517,11 +1522,11 @@ Paginação
 Paginação
 Todos os Perfis
 Economia
-Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
-Justiça
-Segunda fase da Operação Última Chamada amplia fiscalização do comércio de celulares irregulares
-Cultura
-São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
+Saúde
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -1558,7 +1563,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -1655,6 +1660,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Agência Nacional de Transportes Terrestres - ANTT
 URL: https://www.gov.br/antt/pt-br
@@ -1678,13 +1688,13 @@ Mapa do site
 Abrir menu principal de navegação
 Agência Nacional de Transportes Terrestres - ANTT
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 A ANTT
@@ -1904,6 +1914,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -1911,18 +1922,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -2060,14 +2071,14 @@ Fechar
 Fechar
 Fechar
 Info
+SEGURANÇA VIÁRIA
+ANTT reforça uso de dados e investigação para ampliar segurança nas rodovias
+Saiba mais sobre SEGURANÇA VIÁRIA
+SEMANA NACIONAL DO TRÂNSITO
+Da regra ao contrato: como a ANTT coloca a segurança no centro das concessões
+Saiba mais sobre SEMANA NACIONAL DO TRÂNSITO
 DIA DO CAMINHONEIRO
 Quem move o Brasil também precisa de cuidado: ANTT mobiliza PPDs em ação nacional pelos caminhoneiros
-Saiba mais sobre DIA DO CAMINHONEIRO
-INFRAESTRUTURA DE RODOVIAS
-ANTT testa controle de velocidade média em rodovias concedidas
-Saiba mais sobre INFRAESTRUTURA DE RODOVIAS
-DIA DO CAMINHONEIRO
-Como a regulação da ANTT acompanha quem vive do transporte de cargas
 Saiba mais sobre DIA DO CAMINHONEIRO
 TRANSPORTE DE PASSAGEIROS
 ANTT publica primeiras autorizações da Janela Extraordinária; decisões abrangem mais de 3.000 pares de origem e destino
@@ -2092,9 +2103,9 @@ REGULAÇÃO
 Palestra magna do Diretor-Geral da ANTT marca seminário sobre avanços e desafios da regulação rodoviária
 TRANSPORTE DE CARGAS
 Agência Nacional de Transportes Terrestres inicia procedimentos para suspensão de empresas que descumprem o piso mínimo do frete
-RÉGIS BITTENCOURT
-ANTT homologa leilão da Régis Bittencourt com desconto de 22,53% na tarifa de pedágio
-EPR foi declarada vencedora do processo competitivo para transferência do controle da concessionária que administra trecho da BR-116 entre São Paulo e Paraná
+FISCALIZAÇÃO
+ANTT amplia acompanhamento das rodovias concedidas com Verificadores Independentes
+Nova camada de apoio técnico fortalece a produção de dados e evidências para a fiscalização dos contratos
 PARTICIPAÇÃO SOCIAL
 ANTT realiza RP sobre metodologia de análise das soluções alternativas para os investimentos em concessões
 Proposta estabelece critérios para análise de mudanças em soluções de engenharia previstas nos contratos de concessão
@@ -2364,6 +2375,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -2371,18 +2383,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -2450,14 +2462,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2517,6 +2529,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2642,6 +2655,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -2665,14 +2683,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2732,6 +2750,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2863,6 +2882,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Navegação
 URL: https://www.gov.br/pt-br/navegacao
@@ -2886,14 +2910,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2953,6 +2977,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3038,6 +3063,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Categorias
 URL: https://www.gov.br/pt-br/categorias
@@ -3061,14 +3091,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -3128,6 +3158,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3664,6 +3695,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## A ANTT — Agência Nacional de Transportes Terrestres - ANTT Organograma - ANTT Atuação da ANTT
 URL: https://www.gov.br/antt/pt-br/a-antt
@@ -3687,13 +3723,13 @@ Mapa do site
 Abrir menu principal de navegação
 Agência Nacional de Transportes Terrestres - ANTT
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 A ANTT
@@ -3913,6 +3949,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -3920,18 +3957,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -4287,6 +4324,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -4294,18 +4332,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -4374,14 +4412,14 @@ Mapa do site
 Abrir menu principal de navegação
 Agência Nacional de Transportes Terrestres - ANTT
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 A ANTT
 Acesso à Informação
@@ -4600,6 +4638,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -4607,18 +4646,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas
@@ -4937,6 +4976,7 @@ Manual de Identidade Visual
 Composição
 Diretoria Geral
 Gabinete do Diretor-Geral - GAB
+Assessoria Especial de Inteligência - AESIN
 Diretoria Colegiada
 Ouvidoria - OUVID
 Auditoria Interna - AUDIT
@@ -4944,18 +4984,18 @@ Corregedoria - COREG
 Procuradoria Federal junto à ANTT – PF/ANTT
 Secretaria-Executiva da Comissão de Ética da ANTT - SECET
 Superintendências
+Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
+Superintendência de Gestão Administrativa - SUDEG
+Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Sustentabilidade, Pessoas e Inovação - SUSPI
 Superintendência de Governança, Gestão da Estratégia e Informações - SUESP
 Superintendência de Serviços de Transporte Rodoviário de Passageiros - SUPAS
 Superintendência de Concessão da Infraestrutura - SUCON
-Superintendência de Transporte Ferroviário - SUFER
 Superintendência de Infraestrutura Rodoviária - SUROD
 Superintendência de Fiscalização de Serviços de Transporte Rodoviário de Cargas e Passageiros - SUFIS
 Superintendência de Serviços de Transporte Rodoviário e Multimodal de Cargas - SUROC
 Superintendência de Tecnologia da Informação - SUTEC
-Superintendência de Gestão Administrativa - SUDEG
 Quem é Quem
-Superintendência Executiva de Articulação, Relações Institucionais e Comunicação - SUARC
 Autoridades
 Agenda de Autoridades
 Histórico de Agendas

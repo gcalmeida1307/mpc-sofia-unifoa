@@ -1,7 +1,7 @@
 # Outros Documentos — Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 
 Fonte: https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/outros-documentos
-Capturado em: 2026-09-17T14:16:16.689346+00:00
+Capturado em: 2026-09-21T11:05:58.762516+00:00
 Páginas no domínio: 10
 
 ## Outros Documentos — Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
@@ -26,14 +26,14 @@ Mapa do site
 Abrir menu principal de navegação
 Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -439,10 +439,11 @@ link para Copiar para área de transferência
 Publicado em
 06/07/2026 16h29
 Atualizado em
-17/07/2026 15h11
+18/09/2026 09h27
 Matrizes de Referência
 Matriz de Referência do Enem
 Guias, Cartilhas e Manuais
+Cartilha do participante – A redação do Enem 2026
 Cartilha do Participante – A redação do Enem 2025
 Cartilha do Participante – A redação do Enem 2024
 Cartilha do Participante – A redação do Enem 2023
@@ -891,6 +892,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -901,14 +903,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -953,11 +955,11 @@ Paginação
 Paginação
 Todos os Perfis
 Economia
-Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
-Cultura
-São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
-Economia
-Política de minerais críticos prevê rastreabilidade e agregação de valor
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
+Saúde
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -994,7 +996,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -1091,6 +1093,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira — Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 URL: https://www.gov.br/inep/pt-br
@@ -1114,14 +1121,14 @@ Mapa do site
 Abrir menu principal de navegação
 Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -1551,27 +1558,27 @@ Fechar
 Fechar
 Fechar
 Info
+PND 2026: encerrada a aplicação
+A PND faz parte do programa Mais Professores para o Brasil, que reúne ações de reconhecimento e qualificação do magistério da educação básica e de incentivo à docência no país.
+Saiba mais sobre PND 2026: encerrada a aplicação
+Enem 2026: cartilha da redação está disponível
+Material traz orientações sobre a prova, detalha as competências avaliadas e apresenta redações produzidas pelos participantes do Enem 2025, com comentários pedagógicos
+Saiba mais sobre Enem 2026: cartilha da redação está disponível
 PND 2026: entenda como funciona a prova
 Aplicação acontece neste domingo (20), em todo o país; resultados podem ser utilizados por entes federativos em processos seletivos para ingresso na carreira docente
 Saiba mais sobre PND 2026: entenda como funciona a prova
-Inep divulga gabarito preliminar do Enamed 2026 e da 1ª etapa do Revalida 2026/2
-O prazo de apresentação de recursos vai desta terça-feira (15) até quinta-feira (17). Os cadernos de provas e os gabaritos preliminares estão disponíveis para consulta.
-Saiba mais sobre Inep divulga gabarito preliminar do Enamed 2026 e da 1ª etapa do Revalida 2026/2
-PND 2026: participantes devem consultar local de prova com antecedência
-Informações estão disponíveis no Cartão de Confirmação da Inscrição, no Sistema PND. Prova será aplicada no próximo domingo, 20 de setembro
-Saiba mais sobre PND 2026: participantes devem consultar local de prova com antecedência
 Inep reduz conteúdos institucionais durante o período eleitoral
 Medida atende às regras da legislação eleitoral e mantém apenas informações de utilidade pública, serviços e comunicados de interesse do cidadão
 Saiba mais sobre Inep reduz conteúdos institucionais durante o período eleitoral
 REVALIDA
+Inep divulga gabarito preliminar do Enamed 2026 e da 1ª etapa do Revalida 2026/2
+O prazo de apresentação de recursos vai desta terça-feira (15) até quinta-feira (17). Os cadernos de provas e os gabaritos preliminares estão disponíveis para consulta.
+PROVA NACIONAL DOCENTE
+PND 2026: participantes devem consultar local de prova com antecedência
+Informações estão disponíveis no Cartão de Confirmação da Inscrição, no Sistema PND. Prova será aplicada no próximo domingo, 20 de setembro
+REVALIDA
 Prazo de envio de documentação comprobatória da formação médica começa hoje (14)
 Participantes da 1ª Etapa do Revalida 2026/2 têm até 19/09 para comprovar conclusão de curso de graduação em Medicina
-ENAMED
-Enamed 2026: aberto prazo para solicitar reaplicação
-Participantes que se enquadrarem nos critérios estabelecidos para a reaplicação poderão fazer a solicitação até esta terça (15). A reaplicação será realizada em 18/10
-ENEM
-Inep conclui reuniões técnicas regionais sobre Saeb e Enem
-Os encontros com representantes das secretarias estaduais de Educação abordaram os padrões de desempenho do ensino médio e as novas matrizes de referência das avaliações
 CELPE-BRAS
 Celpe-Bras 2026/2: inscrições estão abertas até 6 de agosto
 Interessados devem se inscrever exclusivamente pelo Sistema Celpe-Bras. O pagamento da taxa de inscrição poderá ser realizado até 7 de agosto
@@ -1971,14 +1978,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2038,6 +2045,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2163,6 +2171,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -2186,14 +2199,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2253,6 +2266,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2384,6 +2398,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Navegação
 URL: https://www.gov.br/pt-br/navegacao
@@ -2407,14 +2426,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2474,6 +2493,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2559,6 +2579,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Categorias
 URL: https://www.gov.br/pt-br/categorias
@@ -2582,14 +2607,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2649,6 +2674,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3185,6 +3211,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 URL: https://www.gov.br/inep/pt-br/search?SearchableText=Desenrola+Brasil&origem=termos
@@ -3208,14 +3239,14 @@ Mapa do site
 Abrir menu principal de navegação
 Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -3968,14 +3999,14 @@ Mapa do site
 Abrir menu principal de navegação
 Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -4728,13 +4759,13 @@ Mapa do site
 Abrir menu principal de navegação
 Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira | Inep
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Acesso à Informação

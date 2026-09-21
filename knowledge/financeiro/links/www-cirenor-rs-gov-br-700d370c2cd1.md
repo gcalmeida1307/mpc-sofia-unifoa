@@ -1,7 +1,7 @@
 # www.cirenor.rs.gov.br
 
 Fonte: https://www.cirenor.rs.gov.br/pg.php?area=PUBLICACAOVER&descricao=DOCUMENTOS+SIM&nome_pub=DOCUMENTOS+PADRONIZA%EF%BF%BD%EF%BF%BDO+SIM+&secao=1448
-Capturado em: 2026-09-18T13:25:09.072865+00:00
+Capturado em: 2026-09-21T11:02:14.749947+00:00
 Páginas no domínio: 9
 
 ## www.cirenor.rs.gov.br

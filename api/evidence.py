@@ -169,6 +169,7 @@ def _topic_anchor_groups(question: str) -> tuple[tuple[str, ...], ...]:
                 "retaliacao",
                 "perseguicao",
                 "represalia",
+                "cipa",
                 "rescisao indireta",
                 "art. 483",
                 "rigor excessivo",
@@ -305,7 +306,7 @@ def judge_candidates(question: str, module_id: str, policy: ModulePolicy, candid
             )
             if "assedio moral" in normalized_question:
                 topic_supported = topic_supported and (
-                    ("assedio moral" in text or ("assedio" in text and "assedio sexual" not in text))
+                    ("assedio moral" in text or ("assedio" in text and "assedio sexual" not in text) or "cipa" in text)
                     and any(marker in text for marker in workplace_markers)
                 )
             if "assedio sexual" in normalized_question:

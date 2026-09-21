@@ -1,7 +1,7 @@
 # Manual de Elaboração de Atos Oficiais: Portarias, Atos Administrativos e Resoluções — Portal SEI UFSCar
 
 Fonte: https://www.portalsei.ufscar.br/documentos-institucionais/capacitacao/manuais/manual-de-elaboracao-de-atos-oficiais
-Capturado em: 2026-09-18T13:23:59.230017+00:00
+Capturado em: 2026-09-21T10:59:13.810576+00:00
 Páginas no domínio: 6
 
 ## Manual de Elaboração de Atos Oficiais: Portarias, Atos Administrativos e Resoluções — Portal SEI UFSCar

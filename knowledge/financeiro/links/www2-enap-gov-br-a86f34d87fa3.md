@@ -1,7 +1,7 @@
 # Portal Enap
 
 Fonte: https://www2.enap.gov.br/
-Capturado em: 2026-09-17T14:13:28.836155+00:00
+Capturado em: 2026-09-21T11:02:10.864452+00:00
 Páginas no domínio: 9
 
 ## Portal Enap
@@ -71,6 +71,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -89,6 +90,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -106,6 +108,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -610,15 +613,6 @@ chevron_right
 Ver todos os cursos
 Eventos e Oficinas
 Informações relacionadas às atividades pedagógicas da Enap
-18
-Setembro
-2026
-Sexta-feira
-14:30
-Evento
-Banca de Qualificação de Doutorado Profissional em Políticas Públicas -DPPP
-Banca de Qualificação de Doutorado Profissional …
-Remoto
 22
 Setembro
 2026
@@ -663,6 +657,15 @@ Terça-feira
 Evento
 Banca de Defesa de Dissertação do Mestrado Profissional em Governança …
 Banca de Defesa de Dissertação do Mestrado Profi…
+Remoto
+29
+Setembro
+2026
+Terça-feira
+10:00
+Evento
+Fronteiras e Tendências: Novos Rumos
+Tema: A Experiência Internacional na Transformaç…
 Remoto
 Ver todos os eventos
 Nossos Parceiros
@@ -797,6 +800,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -815,6 +819,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -832,6 +837,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -1258,25 +1264,25 @@ Reserva de sala
 Carta de Serviços
 Busca
 Todos os resultados disponíveis
-10987 Resultados em todo o ENAP.GOV.BR
+10985 Resultados em todo o ENAP.GOV.BR
 Cursos
-1016
+1014
 Serviços
 70
 Notícias
-34
+35
 Eventos e Oficinas
 624
 Pesquisa e Conhecimento
 9347
 Todos
-10987
+10985
 Mais Recentes
 Mais Relevantes
 filter_list
 Filtros
 Limpar Filtros
-1 - 12 de 1016 resultados encontrados
+1 - 12 de 1014 resultados encontrados
 Modalidade
 A Distância
 Presencial
@@ -1390,7 +1396,7 @@ Aberta
 Enap Aqui! Orçamento e Finanças
 Aprimore seus conhecimentos sobre instrumentos de planejamento e orçamento públicos a partir das especificidades de estados e municípios, buscando a melhoria desses processos.
 11/09/2026
-Em Breve
+Aberta
 Participação em Comissões de Confirmação da Autodeclaração (Heteroidentificação)
 Se você for fazer parte de bancas de heteroidentificação e quer participar de forma isenta de estereótipos e preconceitos, este curso o ajudará a compreender …
 19/09/2026
@@ -1529,6 +1535,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -1547,6 +1554,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -1564,6 +1572,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -1990,19 +1999,19 @@ Reserva de sala
 Carta de Serviços
 Busca
 Todos os resultados disponíveis
-10987 Resultados em todo o ENAP.GOV.BR
+10985 Resultados em todo o ENAP.GOV.BR
 Cursos
-1016
+1014
 Serviços
 70
 Notícias
-34
+35
 Eventos e Oficinas
 624
 Pesquisa e Conhecimento
 9347
 Todos
-10987
+10985
 Mais Recentes
 Mais Relevantes
 1 - 10 de 624 resultados encontrados
@@ -2167,6 +2176,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -2185,6 +2195,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -2202,6 +2213,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -2784,6 +2796,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -2802,6 +2815,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -2819,6 +2833,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -3386,6 +3401,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -3404,6 +3420,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -3421,6 +3438,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -3981,6 +3999,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -3999,6 +4018,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -4016,6 +4036,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -4609,6 +4630,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -4627,6 +4649,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -4644,6 +4667,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide
@@ -5220,6 +5244,7 @@ Plano de Gestão de Logística Sustentável (PLS)
 Plano Diretor de Tecnologia da Informação (PDTIC)
 Plano Setorial de Prevenção e Enfrentamento do Assédio e da Discriminação na Enap
 Programa de Governança Institucional da Enap
+Programas e ações específicas do exercício.
 Corregedoria ENAP
 Normas vigentes inerentes à atividade correcional
 Unidade de Correição Instituída
@@ -5238,6 +5263,7 @@ Atos normativos
 Base Jurídica
 Brandbook
 Competências
+›
 Horário de atendimento
 Perfil profissional
 Protocolo Digital
@@ -5255,6 +5281,7 @@ Responsabilidade Social
 Trabalhe Conosco
 Trajetória da Enap
 Voluntariado na Enap
+Competências dos órgãos de assistência direta e imediata ao Presidente da Fundação ENAP
 Adriana Mandarino
 Alexandre Avelino Pereira
 Alexandre de Ávila Gomide

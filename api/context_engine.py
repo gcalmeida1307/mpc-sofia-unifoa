@@ -14,6 +14,7 @@ from .query_analysis import (
     normalize,
 )
 from .retrieval import RetrievalResult
+from .session_context import bound_history
 
 
 def complexity_for(question: str, evidence_count: int = 0) -> str:
@@ -34,9 +35,17 @@ def build_context_package(
     history: list[dict[str, str]] | None = None,
     expected_response_type: str = "structured",
     root: Path | None = None,
+    query_plan: QueryPlan | None = None,
+    classified_profile: dict[str, object] | None = None,
 ) -> ContextPackage:
-    profile = classify_query(module_id, question, history=history)
-    conversation_memory = build_conversation_memory(module_id, question, history)
+    # Retrieval and generation must consume the same plan.  The compatibility
+    # fallback is only for direct callers/tests that predate the orchestrator
+    # contract; the HTTP/MCP path always supplies both values.
+    profile = classified_profile
+    if profile is None:
+        profile = classify_query(module_id, question, history=history)
+    bounded_history = bound_history(history)
+    conversation_memory = build_conversation_memory(module_id, question, bounded_history, query_plan=query_plan)
     contract = domain_for(module_id)
     accepted = [
         EvidenceContract(
@@ -88,7 +97,7 @@ def build_context_package(
     ]
     from .relational_reasoning import analyze
     relational = analyze(result)
-    query_plan = QueryPlan.from_mapping(
+    plan = query_plan or QueryPlan.from_mapping(
         profile.get("query_plan"),
         fallback_intent="DOCUMENT_RAG" if bool(profile.get("retrieval_required", True)) else "CONVERSA_DIRETA",
         retrieval_required=bool(profile.get("retrieval_required", True)),
@@ -101,7 +110,7 @@ def build_context_package(
         intent=str(profile.get("intent", "module_knowledge_lookup")),
         complexity=complexity_for(question, len(accepted)),
         risk="high" if contract.high_risk else "standard",
-        conversation_context=(history or [])[-6:],
+        conversation_context=bounded_history,
         accepted_evidence=accepted,
         rejected_evidence=rejected,
         relations=relations,
@@ -122,7 +131,7 @@ def build_context_package(
         required_sources=list(result.required_sources),
         missing_sources=list(result.missing_sources),
         conversation_memory=conversation_memory,
-        query_plan=query_plan.public_dict(),
+        query_plan=plan.public_dict(),
     )
 
 

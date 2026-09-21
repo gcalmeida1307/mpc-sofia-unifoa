@@ -1,7 +1,7 @@
 # Gestão atualiza modelo de contratação de serviços de operação de infraestrutura e atendimento a usuários - Portal Zênite
 
 Fonte: https://zenite.com.br/2024/10/10/gestao-atualiza-modelo-de-contratacao-de-servicos-de-operacao-de-infraestrutura-e-atendimento-a-usuarios
-Capturado em: 2026-09-17T14:15:35.012924+00:00
+Capturado em: 2026-09-21T11:03:57.901022+00:00
 Páginas no domínio: 10
 
 ## Gestão atualiza modelo de contratação de serviços de operação de infraestrutura e atendimento a usuários - Portal Zênite
@@ -169,16 +169,16 @@ DICIONÁRIO
 Confira modalidades e termos mais comuns utilizados no mundo das licitações e contratos e seus significados nessa área.
 ACESSAR AGORA
 NOTÍCIAS
+21 de setembro de 2026
+TCE/PR: Município deve cessar licitação de obras com parcelamento injustificado
+21 de setembro de 2026
+TJ/RN: Município é condenado a pagar R$ 50 mil por dívida contratual com microempresa
+18 de setembro de 2026
+PodContas debate o papel dos Consórcios Públicos na gestão municipal
 17 de setembro de 2026
 Webinário da OCDE aborda uso de inteligência artificial na auditoria pública
 16 de setembro de 2026
 TCE/SC suspende cautelarmente licitação de R$ 781 milhões para concessão de serviços de resíduos sólidos e limpeza urbana
-15 de setembro de 2026
-TCE/SC suspende cautelarmente licitação de R$ 10,2 milhões para serviços de manejo de resíduos
-15 de setembro de 2026
-TJRN afasta pedido de empresa para anular alterações em contrato de fornecimento de gases
-14 de setembro de 2026
-TCU aprova normativo com diretrizes para fiscalização de entidades do Sistema S
 VER TODAS AS NOTÍCIAS
 Soluções
 Conte com o apoio e a experiência da Zênite e decida com segurança e eficiência.

@@ -1,7 +1,7 @@
 # Oficial de Operações em Infraestrutura — Guatemala (Edital nº 1296.2025).pdf — Portal do Servidor
 
 Fonte: https://www.gov.br/servidor/pt-br/acesso-a-informacao/gestao-de-pessoas/movimentacao-de-pessoal/desenvolvimento-profissional/resultado-das-listas-triplices/oficial-de-operacoes-em-infraestrutura-2014-guatemala-edital-no-1296-2025.pdf/view
-Capturado em: 2026-09-17T14:15:01.846482+00:00
+Capturado em: 2026-09-21T11:03:23.625448+00:00
 Páginas no domínio: 10
 
 ## Oficial de Operações em Infraestrutura — Guatemala (Edital nº 1296.2025).pdf — Portal do Servidor
@@ -26,14 +26,14 @@ Mapa do site
 Abrir menu principal de navegação
 Portal do Servidor
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Canais de Atendimento
 Central Sipec
@@ -375,6 +375,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -385,14 +386,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -437,11 +438,11 @@ Paginação
 Paginação
 Todos os Perfis
 Economia
-Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
-Cultura
-São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
-Economia
-Política de minerais críticos prevê rastreabilidade e agregação de valor
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
+Saúde
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -478,7 +479,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -575,6 +576,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## www.gov.br
 URL: https://www.gov.br/pt-br/sitemap
@@ -597,14 +603,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -664,6 +670,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -789,6 +796,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -812,14 +824,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -879,6 +891,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -1010,6 +1023,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Portal do Servidor
 URL: https://www.gov.br/servidor/pt-br
@@ -1033,14 +1051,14 @@ Mapa do site
 Abrir menu principal de navegação
 Portal do Servidor
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Canais de Atendimento
 Central Sipec
@@ -1396,14 +1414,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -1463,6 +1481,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -1548,6 +1567,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Categorias
 URL: https://www.gov.br/pt-br/categorias
@@ -1571,14 +1595,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -1638,6 +1662,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2174,6 +2199,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Termo de Uso e Aviso de Privacidade
 URL: https://www.gov.br/pt-br/termos-de-uso
@@ -2197,14 +2227,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -2264,6 +2294,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3057,6 +3088,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Home — Governo Digital
 URL: https://www.gov.br/governodigital/pt-br
@@ -3080,14 +3116,14 @@ Mapa do site
 Abrir menu principal de navegação
 Governo Digital
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Estratégias e Governança Digital
 Secretaria de Governo Digital
@@ -3560,13 +3596,13 @@ Mapa do site
 Abrir menu principal de navegação
 Portal do Servidor
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Canais de Atendimento

@@ -120,7 +120,8 @@ def build_artifacts(path: Path, text: str, module_id: str) -> dict[str, Any]:
     from .relational_reasoning import Unit, extract_relations
     typed_relations = extract_relations([Unit(f"E{i+1}", path.name, i, None, s) for i, s in enumerate(sentences)])
     return {
-        "artifact_version": "2.0",
+        # 2.2 strengthens admission by comparing topical marker density.
+        "artifact_version": "2.2",
         "summary": summary,
         "keywords": keywords,
         "entities": entities,

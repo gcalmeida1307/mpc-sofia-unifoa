@@ -1,7 +1,7 @@
 # Resoluções Novembro de 2025 | Secretaria de Estado de Infraestrutura e Obras Públicas
 
 Fonte: https://www.rj.gov.br/seiop/node/679
-Capturado em: 2026-09-18T13:25:52.040342+00:00
+Capturado em: 2026-09-21T11:04:43.967282+00:00
 Páginas no domínio: 10
 
 ## Resoluções Novembro de 2025 | Secretaria de Estado de Infraestrutura e Obras Públicas

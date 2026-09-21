@@ -1,7 +1,7 @@
 # Base Nacional Comum Curricular (BNCC) — Ministério da Educação
 
 Fonte: https://www.gov.br/mec/pt-br/cne/base-nacional-comum-curricular-bncc
-Capturado em: 2026-09-18T13:24:10.011776+00:00
+Capturado em: 2026-09-21T10:59:03.947654+00:00
 Páginas no domínio: 10
 
 ## Base Nacional Comum Curricular (BNCC) — Ministério da Educação
@@ -748,6 +748,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -758,14 +759,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -809,12 +810,12 @@ Anterior
 Paginação
 Paginação
 Todos os Perfis
-Direitos humanos
-ECA Digital completa um ano e estabelece maior proteção para crianças e adolescentes
+Economia
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
 Saúde
-Cartilha da Anvisa orienta sobre o uso correto dos fitoterápicos
-Cultura
-Polícia Federal restitui 164 publicações históricas à Fundação Biblioteca Nacional
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -851,7 +852,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -948,6 +949,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Ministério da Educação
 URL: https://www.gov.br/mec/pt-br
@@ -971,14 +977,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Educação
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -1330,19 +1336,21 @@ Fechar
 Fechar
 Fechar
 Info
+Últimos dias para inscrição no curso de licenciatura intercultural indígena
+Terminam no domingo (20), as inscrições para formação de professores indígenas (Mẽbêngôkre, Tapayuna, Trumai e Yudjá) na TI Capoto-Jarina. O curso, fruto de parceria entre MEC e UFMT, oferece 60 vagas
 Notícias
+EDUCAÇÃO INCLUSIVA
+Edital cria rede nacional de pesquisa em Educação Especial Inclusiva
+No Dia Nacional de Luta da Pessoa com Deficiência, celebrado em 21 de setembro, iniciativa do MEC e da Capes recebe propostas de universidades públicas para integrar rede nacional voltada à Educação Especial Inclusiva
+ENSINO MÉDIO
+Enem 2026: cartilha da redação está disponível
+Material traz orientações sobre a prova, detalha as competências avaliadas e apresenta redações produzidas pelos participantes do Enem 2025, com comentários pedagógicos
 PROFESSORES
 O que você precisa saber para fazer a PND
 Prova Nacional Docente será realizada em todo o país neste domingo (20). Exame pode subsidiar os processos seletivos e concursos públicos da educação básica pública
-EQUIDADE
-Últimos dias para inscrição no curso de licenciatura intercultural indígena
-Terminam no domingo (20), as inscrições para formação de professores indígenas (Mẽbêngôkre, Tapayuna, Trumai e Yudjá) na TI Capoto-Jarina. O curso, fruto de parceria entre MEC e UFMT, oferece 60 vagas
-LEITURA
-Do clássico à literatura contemporânea: MEC Livros reúne autores negros de diferentes gerações
-Biblioteca digital do Ministério da Educação reúne obras de escritores negros brasileiros e estrangeiros, com títulos que atravessam diferentes períodos e gêneros literários
-EDUCAÇÃO BÁSICA
-Fundeb-VAAR: análise das condicionalidades começa após envio das informações
-Todas as redes de ensino concluíram o envio de documentos do ciclo 2026/2027. Agora, informações serão analisadas e redes devem acompanhar o Simec
+EDUCAÇÃO EM DIREITOS HUMANOS
+UFPR oferece 3 mil vagas para formação em Direitos Humanos
+O curso será ministrado de forma online, para todo Brasil, e as inscrições seguem até o dia 26 de setembro de 2026
 Mais notícias
 Notícias por estado
 MEC No Rádio
@@ -2318,14 +2326,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2385,6 +2393,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2510,6 +2519,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -2533,14 +2547,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2600,6 +2614,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2731,6 +2746,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Navegação
 URL: https://www.gov.br/pt-br/navegacao
@@ -2754,14 +2774,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2821,6 +2841,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2906,6 +2927,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Ministério da Educação
 URL: https://www.gov.br/mec/pt-br/search?SearchableText=Desenrola+Brasil&origem=termos
@@ -2929,14 +2955,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Educação
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -3533,14 +3559,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Educação
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional

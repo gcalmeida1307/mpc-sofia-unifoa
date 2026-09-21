@@ -8,8 +8,11 @@ $rules = @(
 )
 
 foreach ($rule in $rules) {
-  if (-not (Get-NetFirewallRule -DisplayName $rule.Name -ErrorAction SilentlyContinue)) {
+  $existing = Get-NetFirewallRule -DisplayName $rule.Name -ErrorAction SilentlyContinue
+  if (-not $existing) {
     New-NetFirewallRule -DisplayName $rule.Name -Direction Inbound -Action Allow -Protocol TCP -LocalPort $rule.Port -Profile Private -Description 'Acesso da plataforma SOFIA na rede interna'
+  } else {
+    Set-NetFirewallRule -DisplayName $rule.Name -Enabled True -Direction Inbound -Action Allow -Profile Private
   }
 }
 

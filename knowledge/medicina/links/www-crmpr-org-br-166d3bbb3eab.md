@@ -1,7 +1,7 @@
 # CFM atualiza norma que regulamenta a emissão de documentos médicos - Portal CRM-PR
 
 Fonte: https://www.crmpr.org.br/CFM-atualiza-norma-que-regulamenta-a-emissao-de-documentos-medicos-11-59301.shtml
-Capturado em: 2026-09-17T17:18:24.640553+00:00
+Capturado em: 2026-09-21T11:05:30.467260+00:00
 Páginas no domínio: 10
 
 ## CFM atualiza norma que regulamenta a emissão de documentos médicos - Portal CRM-PR
@@ -327,20 +327,25 @@ Conheça os representantes
 do CRM-PR nas diferentes
 regiões do estado
 EDUCAÇÃO MÉDICA CONTINUADA
-17
-SET
-Evento online
-Das 19:30 às 21:00
-Inscreva-se
 22
 SET
 Evento presencial
 Das 19:00 às 21:00
 Inscreva-se
+22
+SET
+Evento online
+Das 19:30 às 21:00
+Inscreva-se
 23
 SET
 Evento online
 Das 19:00 às 21:00
+Inscreva-se
+23
+SET
+Evento online
+Das 19:30 às 21:00
 Inscreva-se
 Ver todos
 Selecione o Setor:
@@ -365,12 +370,15 @@ Notícias
 RESPONSABILIDADE DA PESSOA JURÍDICA
 CRM-PR apura denúncias de inadimplemento de honorários médicos
 Desde a publicação da Resolução nº 256/2026, Conselho já recebeu 91 denúncias, com a resolução dos primeiros casos por meio do pagamento dos valores devidos aos médicos e julgamento de empresas denunciadas
-ESPECIALIDADES
-Especialidades Médicas: Saiba mais sobre a Clínica Médica
-A especialidade reconhecida pelo Conselho Federal de Medicina (CFM) é frequentemente confundida com a atuação do médico generalista. Conheça as atribuições e papel do clínico no cuidado integral da saúde dos pacientes
-RESOLUÇÃO Nº 2.336/2023
-Publicidade Médica: Atuação do CRM-PR resulta em adequação de plataforma de divulgação médica
-Trabalho de orientação da Comissão de Divulgação de Assuntos Médicos (Codame) da autarquia tem sido realizado também com as empresas ligadas à publicidade médica, como plataformas online e agências de publicidade
+ÉTICA MÉDICA
+CRM-PR define novas diretrizes éticas para decisões médicas no fim da vida
+Resolução nº 261/2026 orienta atuação médica no cuidado de pacientes adultos em fase final de vida e reforça autonomia do paciente, decisão compartilhada e cuidados paliativos
+DIREITO PROFISSIONAL
+CRM-PR impugna edital do Detran-PR e questiona condições para atuação de médicos de trânsito
+Conselho contesta carga horária e valores previstos no edital e defende condições adequadas para o exercício da Medicina
+PESQUISA
+CRM-PR inicia pesquisa no Portal de Serviços como parte de ações de melhorias estratégicas
+A pesquisa conta com três perguntas objetivas; proposta é utilizar esta primeira experiência para avaliar o funcionamento da plataforma e coletar as primeiras avaliações dos médicos
 LUTO
 Pesar pelo falecimento do médico Odoni Alberto Quintana
 Natural do Rio Grande do Sul, médico faleceu no dia 13 de setembro, em Curitiba
@@ -380,9 +388,6 @@ O II Encontro Nacional dos Conselhos de Medicina, aconteceu nos dias, 10 e 11 de
 PICADINHO CULTURAL
 190º Picadinho Cultural aborda a importância da Oncogenética na prática médica
 Palestra com a Dra. Leticia Czeczko Rutz será realizada no dia 29 de setembro, em Curitiba, e propõe ampliar o conhecimento dos médicos sobre a área
-BIÊNIO 2026-28
-Valderilio Feijó Azevedo assume presidência da SBR para a gestão 2026-28
-Em cerimônia que aconteceu em Curitiba, o médico foi nomeado presidente da Sociedade Brasileira de Reumatologia; ele também é professor da UFPR
 Ver todas
 Informes
 ALERTA CONTRA GOLPES
@@ -1308,13 +1313,22 @@ Mostrando
 a
 20
 de
-11932
+11935
 Ordenar por
 Selecione
 Ordem alfabética (A - Z)
 Ordem alfabética (Z - A)
 Mais recentes
 Mais antigos
+18/09/2026
+CRM-PR define novas diretrizes éticas para decisões médicas no fim da vida
+Resolução nº 261/2026 orienta atuação médica no cuidado de pacientes adultos em fase final de vida e reforça autonomia do paciente, decisão compartilhada e cuidados paliativos
+17/09/2026
+CRM-PR impugna edital do Detran-PR e questiona condições para atuação de médicos de trânsito
+Conselho contesta carga horária e valores previstos no edital e defende condições adequadas para o exercício da Medicina
+17/09/2026
+CRM-PR inicia pesquisa no Portal de Serviços como parte de ações de melhorias estratégicas
+A pesquisa conta com três perguntas objetivas; proposta é utilizar esta primeira experiência para avaliar o funcionamento da plataforma e coletar as primeiras avaliações dos médicos
 15/09/2026
 Pesar pelo falecimento do médico Odoni Alberto Quintana
 Natural do Rio Grande do Sul, médico faleceu no dia 13 de setembro, em Curitiba
@@ -1366,15 +1380,6 @@ Nova estrutura integra o processo de fortalecimento da presença do CRM-PR no Es
 01/09/2026
 Homenagem aos médicos que completam o Jubileu de Ouro em 2026 será no dia 15 de outubro
 Em sua 41ª edição, solenidade será realizada a partir das 17h30 no Espaço Torres Kennedy (Antigo Paraná Clube), em Curitiba, e fará homenagem a 311 profissionais que completam 50 anos de Medicina com histórico ético exemplar
-01/09/2026
-CRM-PR publica edital de abertura do Concurso Público 2026
-Certame será conduzido pelo Instituto Nosso Rumo e oferece oportunidades para os cargos de Operador Audiovisual e de Tecnologia da Informação. As inscrições poderão ser feitas entre 4 de setembro e 1º de outubro
-31/08/2026
-Encontro de processos-consulta e resoluções promove debate entre o CFM e os CRMs
-Evento foi realizado no dia 28 de agosto e reuniu representantes do CFM e dos CRMs de todos os Estados para promover a troca de experiências. Secretário-geral do CRM-PR, Anderson Grimminger Ramos, representou a autarquia
-31/08/2026
-Pesar pelo falecimento das médicas Neusa Toshie Kuwaki e Mariângela Manfrim Carnasciali
-A Dra. Neusa tinha 74 anos e era formado pela PUCPR, com especialidade em Cirurgia Geral. A Dra. Mariângela tinha 71 anos e também era formada pela Universidade Católica do Paraná. Ambas faleceram no dia 30 de agosto, em Curitiba
 Primeira
 1
 2

@@ -8,6 +8,7 @@ import logging
 import os
 import re
 import shutil
+import sqlite3
 import unicodedata
 from contextvars import ContextVar
 from dataclasses import dataclass
@@ -79,6 +80,42 @@ def files_for(root: Path, module_id: str) -> list[Path]:
         and p.suffix.lower() in ALLOWED_EXTENSIONS
         and not {part.casefold() for part in p.relative_to(module_root).parts} & {"quarantine", ".versions"}
     )
+
+
+def ready_files_for(root: Path, module_id: str) -> list[Path]:
+    """Return only sources approved by the persistent document pipeline.
+
+    Legacy/test workspaces without a pipeline database keep the previous
+    behaviour so isolated retrieval tests and first-run development remain
+    usable. Once the database exists and has records for a module, unknown
+    physical files are excluded until they reach ``READY``.
+    """
+
+    paths = files_for(root, module_id)
+    database = root.parent / "data" / "knowledge_expansion.sqlite3"
+    if not database.exists():
+        return paths
+    try:
+        connection = sqlite3.connect(database, timeout=2)
+        rows = connection.execute(
+            "SELECT path, status, validation_status FROM documents WHERE module_id = ?",
+            (module_id,),
+        ).fetchall()
+        connection.close()
+    except sqlite3.Error:
+        logger.warning("Não foi possível consultar o estado do corpus de %s", module_id, exc_info=True)
+        return []
+    if not rows:
+        return paths
+    status_by_path = {
+        str(Path(str(path)).resolve()).casefold(): (str(status).upper(), str(validation or "").upper())
+        for path, status, validation in rows
+    }
+    return [
+        path
+        for path in paths
+        if status_by_path.get(str(path.resolve()).casefold()) in {("READY", "READY"), ("READY", "")}
+    ]
 
 
 def _read_text_file(path: Path) -> str:
@@ -440,6 +477,21 @@ def _paragraphs(text: str) -> list[str]:
     return [" ".join(part.split()) for part in text.replace("\r\n", "\n").split("\n\n") if part.strip()]
 
 
+_STRUCTURAL_BOUNDARY = re.compile(
+    r"(?i)^(?:"
+    r"#{1,6}\s+|"
+    r"(?:t[ií]tulo|cap[ií]tulo|se[cç][aã]o|subse[cç][aã]o|cl[aá]usula)\b|"
+    r"(?:art(?:igo)?\.?\s*\d+[A-Za-zºª-]*\b)|"
+    r"(?:par[aá]grafo\s+[uú]nico\b)|"
+    r"(?:§\s*\d+)"
+    r")"
+)
+
+
+def _is_structural_boundary(line: str) -> bool:
+    return bool(_STRUCTURAL_BOUNDARY.match(line.strip()))
+
+
 def _text_units(text: str, suffix: str) -> list[tuple[str, int, int]]:
     """Build text units and preserve line provenance for answer citations."""
     lines = text.replace("\r\n", "\n").splitlines()
@@ -449,12 +501,26 @@ def _text_units(text: str, suffix: str) -> list[tuple[str, int, int]]:
     current: list[str] = []
     start = 0
     for index, line in enumerate(lines, start=1):
+        # Keep legal articles, clauses and titled sections as independent
+        # semantic units even when the extractor removed blank lines.  Size
+        # based chunking remains the bounded fallback for unusually large
+        # units, but it no longer decides the document hierarchy by itself.
+        if current and _is_structural_boundary(line):
+            units.append((" ".join(current), start, index - 1))
+            current = []
         if line.strip():
             if not current:
                 start = index
             current.append(line.strip())
             continue
         if current:
+            # A heading followed by a blank line still belongs to the
+            # structural unit that follows it.  Keeping the heading open
+            # here lets the ingestion layer attach ``Origem``/``Art. 5``/
+            # ``Cláusula 3`` to its first paragraph instead of indexing the
+            # heading as an orphaned chunk.
+            if len(current) == 1 and _is_structural_boundary(current[0]):
+                continue
             units.append((" ".join(current), start, index - 1))
             current = []
     if current:
@@ -468,8 +534,8 @@ def _section_header(text: str, line_start: int) -> str:
         return ""
     for line in reversed(lines[: max(0, line_start)]):
         value = line.strip()
-        if re.match(r"^#{1,6}\s+", value) or value.startswith("[PLANILHA:"):
-            return re.sub(r"^#{1,6}\s+", "", value).strip()
+        if re.match(r"^#{1,6}\s+", value) or value.startswith("[PLANILHA:") or _is_structural_boundary(value):
+            return re.sub(r"^#{1,6}\s+", "", value).strip()[:240]
     return ""
 
 
@@ -643,26 +709,29 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
             for page in pages:
                 if page.status != "READY":
                     continue
-                for start in range(0, len(page.text), max(1, max_chars - overlap)):
-                    text = page.text[start:start + max_chars].strip()
-                    if text:
-                        path_chunks.append(
-                            DocumentChunk(
-                                path,
-                                text,
-                                ordinal,
-                                page.number,
-                                f"página {page.number}",
-                                None,
-                                None,
-                                "",
-                                _content_type(path, f"[Página {page.number}]\n{page.text}" if page.method == "ocr" else page.text),
-                                page.quality,
+                page_units = _text_units(page.text, ".txt") or [(page.text, 1, 1)]
+                for unit, line_start, line_end in page_units:
+                    step = max(1, max_chars - overlap)
+                    for start in range(0, len(unit), step):
+                        text = unit[start:start + max_chars].strip()
+                        if text:
+                            path_chunks.append(
+                                DocumentChunk(
+                                    path,
+                                    text,
+                                    ordinal,
+                                    page.number,
+                                    f"página {page.number}",
+                                    line_start,
+                                    line_end,
+                                    _section_header(page.text, line_start),
+                                    _content_type(path, f"[Página {page.number}]\n{page.text}" if page.method == "ocr" else page.text),
+                                    page.quality,
+                                )
                             )
-                        )
-                        ordinal += 1
-                    if start + max_chars >= len(page.text):
-                        break
+                            ordinal += 1
+                        if start + max_chars >= len(unit):
+                            break
             chunks.extend(_stitch_pdf_continuations(path_chunks))
             continue
         text = extract_text(path)
@@ -687,6 +756,30 @@ def ingest_module(root: Path, module_id: str, max_chars: int = 1800, overlap: in
         current_end = 0
         ordinal = 0
         for unit, line_start, line_end in units:
+            # Do not silently merge independent sections/articles into one
+            # large chunk.  A semantic boundary must remain visible in the
+            # index and in the evidence package even when the whole document
+            # fits below ``max_chars``.
+            starts_structural_unit = _is_structural_boundary(unit)
+            if current and starts_structural_unit:
+                locator = f"linhas {current_start}-{current_end}" if current_start else ""
+                chunks.append(
+                    DocumentChunk(
+                        path,
+                        current,
+                        ordinal,
+                        None,
+                        locator,
+                        current_start,
+                        current_end,
+                        _section_header(text, current_start),
+                        content_type,
+                    )
+                )
+                ordinal += 1
+                current = ""
+                current_start = 0
+                current_end = 0
             if len(current) + len(unit) + 1 <= max_chars:
                 if not current:
                     current_start = line_start

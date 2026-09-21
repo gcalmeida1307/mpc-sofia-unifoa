@@ -1,7 +1,7 @@
 # Seu documento médico é válido? Veja o que deve constar, segundo o CFM | Dr. Anderson Montalvão
 
 Fonte: https://andersonmontalvao.com.br/seu-documento-medico-e-valido-veja-o-que-deve-constar-segundo-o-cfm
-Capturado em: 2026-09-17T17:18:46.829060+00:00
+Capturado em: 2026-09-21T11:05:39.373731+00:00
 Páginas no domínio: 8
 
 ## Seu documento médico é válido? Veja o que deve constar, segundo o CFM | Dr. Anderson Montalvão
@@ -103,8 +103,6 @@ Autismo
 BPC
 CFM
 Cirurgia Bariátrica
-Cirurgia Cardíaca com TAVI
-Cirurgia de Retina
 Cirurgia Ortognática
 Cirurgia para Endometriose Profunda
 Cirurgia para Escoliose
@@ -112,16 +110,17 @@ Cirurgia Plástica
 Conselho Federal de Medicina
 CRM
 Dano Moral
-Dupilumabe (Dupixent)
+Doença Preexistente
 Elacestranto (Orserdu)
 Erro Médico
 Greve de Fome
 Home Care
 Imperícia Médica
-Implante Coclear
 Imprudência Médica
 Infecção Hospitalar
+INSS
 LGPD
+LOAS
 Medicamento Não Incorporado no SUS
 Medicamento Sem Registro ANVISA
 Negligência Médica
@@ -129,16 +128,17 @@ Plano de Saúde
 Prontuário Médico
 Receita Médica
 Recusa Terapêutica
+Registro de Qualificação de Especialista
 Relatório Médico
 Rol da ANS
+RQE
 Sigilo Médico
 SUS
 TCLE
 TEA
 Terapia ABA
 Termo de Consentimento
-Tofacitinibe (Xeljanz)
-Ultomiris (Ravulizumabe)
+UTI
 Violência Obstétrica
 © 2026 Dr. Anderson Montalvão
 /
@@ -164,6 +164,16 @@ Documentos Médicos
 × Fechar menu
 Abrir menu
 Advogado em Direito Médico e Direito da Saúde
+18 de setembro de 2026
+Paciente que não seguiu a orientação médica tem direito à indenização?
+Direito da Saúde
+O descumprimento de uma orientação médica não afasta automaticamente a indenização. Entenda quando a conduta do paciente pode influenciar a responsabilidade.
+Dr. Anderson Montalvão
+18 de setembro de 2026
+Bioestimulador de colágeno: seu TCLE deixa claros os riscos do procedimento?
+Documentos Médicos
+Entenda quais informações devem constar no consentimento para bioestimuladores de colágeno e por que um TCLE genérico pode ser considerado insuficiente.
+Dr. Anderson Montalvão
 17 de setembro de 2026
 Médico pode divulgar especialidade sem ter RQE? Entenda os riscos jurídicos
 Direito Médico
@@ -254,22 +264,13 @@ Aplicação de Botox: seu TCLE te protege em caso de complicações?
 Documentos Médicos
 Entenda o que o TCLE realmente comprova, quais informações devem ser prestadas antes do Botox e quando uma complicação pode gerar responsabilidade.
 Dr. Anderson Montalvão
-4 de setembro de 2026
-Plano de parto: médico é obrigado a seguir todas as escolhas da gestante?
-Direito da Saúde
-O plano de parto expressa as preferências da gestante, mas pode ser adaptado diante de indicação clínica, emergência ou mudança relevante nas circunstâncias.
-Dr. Anderson Montalvão
-4 de setembro de 2026
-Conheça 10 direitos garantidos pelo Estatuto dos Direitos do Paciente
-Direito da Saúde
-O Estatuto dos Direitos do Paciente fortalece a autonomia, a informação, a segurança e a privacidade de quem recebe cuidados de saúde. Veja os principais direitos.
-Dr. Anderson Montalvão
 Navegação por posts
 Publicações mais antigas
 Pesquisar
 Pesquisar
 Alta a Pedido
 ANS
+Artrodese da Coluna
 Atestado Médico
 Autismo
 BPC
@@ -279,7 +280,6 @@ Cirurgia Ortognática
 Cirurgia para Endometriose Profunda
 Cirurgia para Escoliose
 Cirurgia Plástica
-Cirurgia Robótica para Câncer de Próstata
 Conselho Federal de Medicina
 CRM
 Dano Moral
@@ -311,180 +311,7 @@ TCLE
 TEA
 Terapia ABA
 Termo de Consentimento
-Tezepelumabe (Tezspire)
-Violência Obstétrica
-© 2026 Dr. Anderson Montalvão
-/
-Tema:
-Really Simple
-/
-Licença:
-GPLv3
-Tire sua dúvida agora
-Iniciar atendimento
-Olá, seja bem-vindo(a) ao site do Dr. Anderson Montalvão.
-Como podemos te ajudar hoje?
-Falar no WhatsApp
-
-## Dr. Anderson Montalvão | Advogado em Direito Médico e Direito da Saúde
-URL: https://andersonmontalvao.com.br/page/2
-
-Dr. Anderson Montalvão | Advogado em Direito Médico e Direito da Saúde
-Pular para o conteúdo
-Direito Médico
-Direito da Saúde
-Documentos Médicos
-× Fechar menu
-Abrir menu
-3 de setembro de 2026
-Médico é obrigado a explicar os riscos do tratamento ao paciente? Entenda
-Direito Médico
-O paciente tem direito a informações claras sobre riscos, benefícios e alternativas do tratamento para tomar decisões de forma livre e consciente.
-Dr. Anderson Montalvão
-3 de setembro de 2026
-Paciente pode deixar o médico escolher o tratamento? Entenda
-Direito da Saúde
-O paciente pode autorizar o médico a escolher entre as opções de tratamento, desde que sua autonomia, informação e consentimento sejam respeitados.
-Dr. Anderson Montalvão
-2 de setembro de 2026
-Violência contra a mulher: o que o médico deve comunicar?
-Direito Médico
-A legislação exige comunicação de casos de violência contra a mulher, mas o sigilo médico e a proteção do prontuário da paciente continuam preservados.
-Dr. Anderson Montalvão
-2 de setembro de 2026
-Paciente menor de 14 anos revela relação sexual: o que o médico deve fazer?
-Direito Médico
-Saiba como devem ser tratados o sigilo médico, a proteção da paciente e a comunicação às autoridades quando uma menor de 14 anos relata relação sexual.
-Dr. Anderson Montalvão
-1 de setembro de 2026
-Médico pode obrigar paciente a fazer teste de HIV? Entenda as exceções
-Direito da Saúde
-O paciente tem direito à autonomia e à privacidade, e pode se recusar a fazer o teste de HIV, salvo nas exceções previstas pelas normas médicas.
-Dr. Anderson Montalvão
-1 de setembro de 2026
-Paciente confessa crime ao médico: ele deve denunciar?
-Direito Médico
-A confissão de crime ao médico é protegida pelo sigilo profissional, mas situações excepcionais podem justificar a revelação conforme o caso concreto.
-Dr. Anderson Montalvão
-31 de agosto de 2026
-Médico pode usar o prontuário do paciente para se defender na Justiça?
-Direito Médico
-O médico pode usar informações do prontuário na própria defesa, mas deve respeitar o sigilo, a necessidade da prova e todos os direitos do paciente.
-Dr. Anderson Montalvão
-31 de agosto de 2026
-Médico pode quebrar o sigilo do paciente ao testemunhar na Justiça?
-Direito Médico
-O médico chamado a depor na Justiça deve preservar o sigilo do paciente, salvo hipóteses específicas de consentimento, dever legal ou justa causa.
-Dr. Anderson Montalvão
-28 de agosto de 2026
-Paciente pode recusar tratamento médico por motivos religiosos?
-Direito da Saúde
-Paciente adulto e capaz pode recusar tratamento por convicção religiosa, desde que a decisão seja livre, informada e esclarecida, respeitados os limites legais.
-Dr. Anderson Montalvão
-28 de agosto de 2026
-Obstinação terapêutica: quando insistir no tratamento prejudica o paciente?
-Direito da Saúde
-Entenda quando tratamentos deixam de trazer benefício proporcional, como funciona a recusa terapêutica e quais são os direitos do paciente em cuidados paliativos.
-Dr. Anderson Montalvão
-27 de agosto de 2026
-Posso discordar do meu médico sobre o tratamento?
-Direito da Saúde
-O paciente tem direito de participar das decisões sobre sua saúde, buscar segunda opinião e, em determinadas situações, recusar tratamentos de forma livre e informada.
-Dr. Anderson Montalvão
-27 de agosto de 2026
-Cuidados paliativos: quais são os direitos do paciente e da família?
-Direito da Saúde
-Direitos de pacientes em cuidados paliativos, incluindo autonomia, informação, controle da dor, participação familiar e acesso ao cuidado no SUS e nos planos de saúde.
-Dr. Anderson Montalvão
-26 de agosto de 2026
-Paciente pode escolher não saber seu diagnóstico? Entenda esse direito
-Direito da Saúde
-O paciente pode recusar informações sobre seu diagnóstico e definir quais dados deseja receber, respeitando sua autonomia e o dever médico de informar.
-Dr. Anderson Montalvão
-26 de agosto de 2026
-Distanásia: quando prolongar a vida pode significar prolongar o sofrimento?
-Direito da Saúde
-Entenda o que é distanásia, os limites dos tratamentos e os direitos do paciente sobre decisões e cuidados no fim da vida, incluindo a autonomia e os cuidados paliativos.
-Dr. Anderson Montalvão
-25 de agosto de 2026
-Criança e adolescente podem participar das decisões sobre o próprio tratamento?
-Direito da Saúde
-Crianças e adolescentes têm direito de ser informados e ouvidos sobre tratamentos médicos, considerando idade, maturidade, compreensão e melhor interesse.
-Dr. Anderson Montalvão
-25 de agosto de 2026
-Médico manda, paciente obedece? Entenda quem decide o tratamento
-Direito da Saúde
-Médico indica a conduta adequada, mas o paciente tem direito de participar das decisões e, em regra, aceitar ou recusar o tratamento após ser informado.
-Dr. Anderson Montalvão
-24 de agosto de 2026
-Idoso pode recusar tratamento médico contra a vontade da família?
-Direito da Saúde
-A idade não retira a autonomia do paciente, mas a validade da recusa depende da capacidade decisória, das informações recebidas e das circunstâncias do caso.
-Dr. Anderson Montalvão
-24 de agosto de 2026
-Pessoa com deficiência pode escolher o próprio tratamento?
-Direito da Saúde
-A pessoa com deficiência tem direito de participar das decisões sobre sua saúde, com informação acessível, apoio e respeito, inclusive para consentir ou recusar tratamento.
-Dr. Anderson Montalvão
-21 de agosto de 2026
-Fim da vida: o paciente pode escolher onde quer receber cuidados?
-Direito da Saúde
-A Lei assegura cuidados paliativos e a escolha do local da morte, mas a assistência domiciliar depende das condições clínicas e das regras aplicáveis.
-Dr. Anderson Montalvão
-21 de agosto de 2026
-Quem pode decidir pelo paciente quando ele não pode escolher?
-Direito da Saúde
-Quando o paciente não consegue manifestar sua vontade, diretivas antecipadas, representante e regras legais ajudam a definir quem pode participar da decisão.
-Dr. Anderson Montalvão
-Navegação por posts
-Publicações mais antigas
-Publicações mais novas
-Pesquisar
-Pesquisar
-Alta a Pedido
-ANS
-Atestado Médico
-Autismo
-BPC
-CFM
-Cirurgia Bariátrica
-Cirurgia Ortognática
-Cirurgia para Endometriose Profunda
-Cirurgia para Escoliose
-Cirurgia Plástica
-Cirurgia Robótica para Câncer de Próstata
-Conselho Federal de Medicina
-CRM
-Dano Moral
-Doença Preexistente
-Elacestranto (Orserdu)
-Erro Médico
-Greve de Fome
-Home Care
-Imperícia Médica
-Imprudência Médica
-Infecção Hospitalar
-INSS
-LGPD
-LOAS
-Medicamento Não Incorporado no SUS
-Medicamento Sem Registro ANVISA
-Negligência Médica
-Plano de Saúde
-Prontuário Médico
-Receita Médica
-Recusa Terapêutica
-Registro de Qualificação de Especialista
-Relatório Médico
-Rol da ANS
-RQE
-Sigilo Médico
-SUS
-TCLE
-TEA
-Terapia ABA
-Termo de Consentimento
-Tezepelumabe (Tezspire)
+UTI
 Violência Obstétrica
 © 2026 Dr. Anderson Montalvão
 /
@@ -531,16 +358,14 @@ Autismo
 BPC
 CFM
 Cirurgia Bariátrica
-Cirurgia Cardíaca com TAVI
-Cirurgia de Retina
 Cirurgia Ortognática
 Cirurgia para Endometriose Profunda
+Cirurgia para Escoliose
 Cirurgia Plástica
-Cirurgia Robótica para Câncer de Próstata
 Conselho Federal de Medicina
 CRM
 Dano Moral
-Dupilumabe (Dupixent)
+Doença Preexistente
 Elacestranto (Orserdu)
 Erro Médico
 Greve de Fome
@@ -548,7 +373,9 @@ Home Care
 Imperícia Médica
 Imprudência Médica
 Infecção Hospitalar
+INSS
 LGPD
+LOAS
 Medicamento Não Incorporado no SUS
 Medicamento Sem Registro ANVISA
 Negligência Médica
@@ -556,17 +383,17 @@ Plano de Saúde
 Prontuário Médico
 Receita Médica
 Recusa Terapêutica
+Registro de Qualificação de Especialista
 Relatório Médico
 Rol da ANS
+RQE
 Sigilo Médico
 SUS
 TCLE
 TEA
 Terapia ABA
 Termo de Consentimento
-Tezepelumabe (Tezspire)
-Tofacitinibe (Xeljanz)
-Upadacitinibe (Rinvoq)
+UTI
 Violência Obstétrica
 © 2026 Dr. Anderson Montalvão
 /
@@ -608,16 +435,14 @@ Autismo
 BPC
 CFM
 Cirurgia Bariátrica
-Cirurgia Cardíaca com TAVI
-Cirurgia de Retina
 Cirurgia Ortognática
 Cirurgia para Endometriose Profunda
+Cirurgia para Escoliose
 Cirurgia Plástica
-Cirurgia Robótica para Câncer de Próstata
 Conselho Federal de Medicina
 CRM
 Dano Moral
-Dupilumabe (Dupixent)
+Doença Preexistente
 Elacestranto (Orserdu)
 Erro Médico
 Greve de Fome
@@ -625,7 +450,9 @@ Home Care
 Imperícia Médica
 Imprudência Médica
 Infecção Hospitalar
+INSS
 LGPD
+LOAS
 Medicamento Não Incorporado no SUS
 Medicamento Sem Registro ANVISA
 Negligência Médica
@@ -633,17 +460,17 @@ Plano de Saúde
 Prontuário Médico
 Receita Médica
 Recusa Terapêutica
+Registro de Qualificação de Especialista
 Relatório Médico
 Rol da ANS
+RQE
 Sigilo Médico
 SUS
 TCLE
 TEA
 Terapia ABA
 Termo de Consentimento
-Tezepelumabe (Tezspire)
-Tofacitinibe (Xeljanz)
-Upadacitinibe (Rinvoq)
+UTI
 Violência Obstétrica
 © 2026 Dr. Anderson Montalvão
 /
@@ -695,8 +522,6 @@ Autismo
 BPC
 CFM
 Cirurgia Bariátrica
-Cirurgia Cardíaca com TAVI
-Cirurgia de Retina
 Cirurgia Ortognática
 Cirurgia para Endometriose Profunda
 Cirurgia para Escoliose
@@ -704,16 +529,17 @@ Cirurgia Plástica
 Conselho Federal de Medicina
 CRM
 Dano Moral
-Dupilumabe (Dupixent)
+Doença Preexistente
 Elacestranto (Orserdu)
 Erro Médico
 Greve de Fome
 Home Care
 Imperícia Médica
-Implante Coclear
 Imprudência Médica
 Infecção Hospitalar
+INSS
 LGPD
+LOAS
 Medicamento Não Incorporado no SUS
 Medicamento Sem Registro ANVISA
 Negligência Médica
@@ -721,16 +547,17 @@ Plano de Saúde
 Prontuário Médico
 Receita Médica
 Recusa Terapêutica
+Registro de Qualificação de Especialista
 Relatório Médico
 Rol da ANS
+RQE
 Sigilo Médico
 SUS
 TCLE
 TEA
 Terapia ABA
 Termo de Consentimento
-Tofacitinibe (Xeljanz)
-Ultomiris (Ravulizumabe)
+UTI
 Violência Obstétrica
 © 2026 Dr. Anderson Montalvão
 /
@@ -777,16 +604,14 @@ Autismo
 BPC
 CFM
 Cirurgia Bariátrica
-Cirurgia Cardíaca com TAVI
-Cirurgia de Retina
 Cirurgia Ortognática
 Cirurgia para Endometriose Profunda
+Cirurgia para Escoliose
 Cirurgia Plástica
-Cirurgia Robótica para Câncer de Próstata
 Conselho Federal de Medicina
 CRM
 Dano Moral
-Dupilumabe (Dupixent)
+Doença Preexistente
 Elacestranto (Orserdu)
 Erro Médico
 Greve de Fome
@@ -794,7 +619,9 @@ Home Care
 Imperícia Médica
 Imprudência Médica
 Infecção Hospitalar
+INSS
 LGPD
+LOAS
 Medicamento Não Incorporado no SUS
 Medicamento Sem Registro ANVISA
 Negligência Médica
@@ -802,17 +629,17 @@ Plano de Saúde
 Prontuário Médico
 Receita Médica
 Recusa Terapêutica
+Registro de Qualificação de Especialista
 Relatório Médico
 Rol da ANS
+RQE
 Sigilo Médico
 SUS
 TCLE
 TEA
 Terapia ABA
 Termo de Consentimento
-Tezepelumabe (Tezspire)
-Tofacitinibe (Xeljanz)
-Upadacitinibe (Rinvoq)
+UTI
 Violência Obstétrica
 © 2026 Dr. Anderson Montalvão
 /
@@ -848,6 +675,7 @@ Pesquisar
 Pesquisar
 Alta a Pedido
 ANS
+Artrodese da Coluna
 Atestado Médico
 Autismo
 BPC
@@ -857,7 +685,6 @@ Cirurgia Ortognática
 Cirurgia para Endometriose Profunda
 Cirurgia para Escoliose
 Cirurgia Plástica
-Cirurgia Robótica para Câncer de Próstata
 Conselho Federal de Medicina
 CRM
 Dano Moral
@@ -889,7 +716,181 @@ TCLE
 TEA
 Terapia ABA
 Termo de Consentimento
-Tezepelumabe (Tezspire)
+UTI
+Violência Obstétrica
+© 2026 Dr. Anderson Montalvão
+/
+Tema:
+Really Simple
+/
+Licença:
+GPLv3
+Tire sua dúvida agora
+Iniciar atendimento
+Olá, seja bem-vindo(a) ao site do Dr. Anderson Montalvão.
+Como podemos te ajudar hoje?
+Falar no WhatsApp
+
+## SUS | Dr. Anderson Montalvão
+URL: https://andersonmontalvao.com.br/topicos/sus
+
+SUS | Dr. Anderson Montalvão
+Pular para o conteúdo
+Direito Médico
+Direito da Saúde
+Documentos Médicos
+× Fechar menu
+Abrir menu
+Tag:
+SUS
+14 de setembro de 2026
+Paciente pode pedir indenização por erro em hospital particular conveniado pelo SUS?
+Direito da Saúde
+Falha no atendimento em hospital particular conveniado ao SUS pode gerar indenização quando houver dano comprovado e nexo causal com o serviço prestado.
+Dr. Anderson Montalvão
+7 de agosto de 2026
+Cirurgia para epilepsia refratária: como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba como obter na Justiça a cirurgia para epilepsia refratária, quando o tratamento indicado pelo médico for negado pelo SUS ou pelo plano de saúde.
+Dr. Anderson Montalvão
+6 de agosto de 2026
+Kisunla (Donanemabe): como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba quando o Kisunla (Donanemabe) pode ser obtido pela Justiça contra o SUS ou plano de saúde, quais documentos reunir e os requisitos para a liminar.
+Dr. Anderson Montalvão
+4 de agosto de 2026
+Cirurgia para distonia com DBS: como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Descubra quando a cirurgia para distonia com DBS pode ser exigida na Justiça contra o SUS ou plano de saúde, quais documentos são necessários e como obter liminar.
+Dr. Anderson Montalvão
+3 de agosto de 2026
+Cirurgia cancelada por falta de leito no SUS: veja os direitos do paciente
+Direito da Saúde
+Entenda quando o paciente pode exigir nova data, transferência ou recorrer à Justiça após o cancelamento de cirurgia no SUS por falta de leito.
+Dr. Anderson Montalvão
+30 de julho de 2026
+Falta de vaga na UTI pelo SUS: quais são os direitos do paciente e da família?
+Direito da Saúde
+Os direitos de quem não consegue vaga na UTI pelo SUS, quando cabe liminar, quais documentos reunir e quando o Estado pode ser obrigado a custear a internação.
+Dr. Anderson Montalvão
+27 de julho de 2026
+Cirurgia não foi marcada pelo SUS: quando cabe liminar contra o Estado?
+Direito da Saúde
+Descubra quando a demora na realização de cirurgia pelo SUS pode justificar uma liminar, quais provas são necessárias e como a Justiça analisa esses casos.
+Dr. Anderson Montalvão
+24 de julho de 2026
+Morte por demora no encaminhamento para cirurgia pelo SUS: entenda quando cabe indenização
+Direito da Saúde
+Perder um familiar na fila do SUS gera dor e revolta. Entenda em quais casos a demora para a realização de cirurgia de urgência dá direito a indenização pelo Estado.
+Dr. Anderson Montalvão
+24 de julho de 2026
+Demora no SUS agravou a doença: é possível pedir indenização ao Estado?
+Direito da Saúde
+Saiba se a demora no atendimento ou cirurgia do SUS, que agrava o estado de saúde do paciente, gera direito a indenização por danos morais e materiais contra o Estado.
+Dr. Anderson Montalvão
+22 de julho de 2026
+Paciente pode exigir segunda opinião médica pelo SUS? Entenda seus direitos
+Direito da Saúde
+Descubra quando o paciente pode solicitar uma segunda opinião médica no SUS, quais são os seus direitos e o que fazer em caso de recusa do profissional ou instituição.
+Dr. Anderson Montalvão
+21 de julho de 2026
+Briguei com o médico no SUS: posso ter problemas?
+Direito da Saúde
+Brigar com um médico do SUS pode gerar consequências criminais, civis e no atendimento. Saiba seus direitos, os limites da lei e como agir corretamente.
+Dr. Anderson Montalvão
+21 de julho de 2026
+Paciente pode gravar consulta médica no SUS? Entenda esse direito
+Direito da Saúde
+Descubra se o paciente pode gravar a consulta médica no SUS, quais os limites éticos envolvidos e a importância disso para provar direitos na Justiça.
+Dr. Anderson Montalvão
+17 de julho de 2026
+Elacestranto (Orserdu): como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba como obter o Elacestranto (Orserdu) pela Justiça contra o SUS ou plano de saúde e quais documentos aumentam as chances de conseguir o tratamento.
+Dr. Anderson Montalvão
+16 de julho de 2026
+Cirurgia ortognática: como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba como obter a cirurgia ortognática pela Justiça contra o SUS ou plano de saúde, quais documentos são necessários e quando a negativa pode ser abusiva.
+Dr. Anderson Montalvão
+15 de julho de 2026
+Cirurgia para endometriose profunda: como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba quando a Justiça pode garantir a cirurgia para endometriose profunda pelo SUS ou plano de saúde e quais documentos aumentam as chances de sucesso.
+Dr. Anderson Montalvão
+14 de julho de 2026
+Tezepelumabe (Tezspire): como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba como obter o Tezepelumabe (Tezspire) pela Justiça contra o SUS ou plano de saúde, quais documentos são necessários e quando a ação é cabível.
+Dr. Anderson Montalvão
+13 de julho de 2026
+Sacituzumabe Govitecana (Trodelvy): como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Seu direito ao Sacituzumabe Govitecana (Trodelvy) foi negado? Saiba como a Justiça pode obrigar o SUS ou seu plano de saúde a fornecer o tratamento.
+Dr. Anderson Montalvão
+10 de julho de 2026
+Tofacitinibe (Xeljanz): como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Negaram seu tratamento com Tofacitinibe (Xeljanz)? Saiba como a Justiça pode garantir seu direito ao medicamento contra o plano de saúde ou SUS. Conheça os passos.
+Dr. Anderson Montalvão
+9 de julho de 2026
+Dupilumabe (Dupixent): como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba como a Justiça pode garantir seu acesso ao Dupilumabe (Dupixent) pelo SUS ou plano de saúde. Conheça os requisitos e os seus direitos para obter o tratamento.
+Dr. Anderson Montalvão
+8 de julho de 2026
+Upadacitinibe (Rinvoq): como obter na Justiça contra SUS ou Plano de Saúde
+Direito da Saúde
+Saiba como a Justiça pode garantir seu direito ao Upadacitinibe (Rinvoq) pelo SUS ou plano de saúde. Conheça os requisitos e as decisões judiciais recentes.
+Dr. Anderson Montalvão
+Navegação por posts
+Publicações mais antigas
+Pesquisar
+Pesquisar
+Alta a Pedido
+ANS
+Artrodese da Coluna
+Atestado Médico
+Autismo
+BPC
+CFM
+Cirurgia Bariátrica
+Cirurgia Ortognática
+Cirurgia para Endometriose Profunda
+Cirurgia para Escoliose
+Cirurgia Plástica
+Conselho Federal de Medicina
+CRM
+Dano Moral
+Doença Preexistente
+Elacestranto (Orserdu)
+Erro Médico
+Greve de Fome
+Home Care
+Imperícia Médica
+Imprudência Médica
+Infecção Hospitalar
+INSS
+LGPD
+LOAS
+Medicamento Não Incorporado no SUS
+Medicamento Sem Registro ANVISA
+Negligência Médica
+Plano de Saúde
+Prontuário Médico
+Receita Médica
+Recusa Terapêutica
+Registro de Qualificação de Especialista
+Relatório Médico
+Rol da ANS
+RQE
+Sigilo Médico
+SUS
+TCLE
+TEA
+Terapia ABA
+Termo de Consentimento
+UTI
 Violência Obstétrica
 © 2026 Dr. Anderson Montalvão
 /

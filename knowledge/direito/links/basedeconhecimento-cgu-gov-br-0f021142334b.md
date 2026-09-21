@@ -1,7 +1,7 @@
 # Base de Conhecimento da CGU :: Início
 
 Fonte: https://basedeconhecimento.cgu.gov.br/home
-Capturado em: 2026-09-18T13:24:48.636208+00:00
+Capturado em: 2026-09-21T11:00:42.601345+00:00
 Páginas no domínio: 10
 
 ## Base de Conhecimento da CGU :: Início
@@ -41,7 +41,7 @@ Meu Espaço
 Base de Conhecimento da CGU
 Buscar na biblioteca digital
 O repositório da CGU disponibiliza
-18.895
+18.896
 documentos oficiais, incluindo dados abertos, relatórios de auditoria, decisões administrativas, estudos técnicos, manuais e muito mais.
 Comunidades
 442
@@ -56,7 +56,7 @@ Ver comunidade Articulação Nacional e Internacional
 12181
 Atos Administrativos
 Ver comunidade Atos Administrativos
-1026
+1027
 Atos Normativos
 Ver comunidade Atos Normativos
 1102
@@ -79,6 +79,9 @@ Publicações
 Ver comunidade Publicações
 Documentos Recentes
 Ver todos
+Portaria n. 2.523, de 16 de setembro de 2026
+16/09/2026
+Esta Portaria subdelega ao Senhor OSMAR NILO DE JESUS LIMA BEZERRA NETO, Superintendente da Controladoria-Geral da União no Estado do Acre, competência para firmar, nos termos propostos no processo administrativo nº 00201.100068/2026-79, Acordo de Cooperação Técnica entre a União, por meio da Controladoria-Geral da União no Estado do Acre, e o Estado do Acre, por intermédio do Ministério Público do Estado do Acre, para os fins que especifica.
 Segundo Termo de Apostilamento [contrato n. 14/2025]
 15/09/2026
 Trata-se de apostilamento que tem como objeto o reajuste do valor do Material de Consumo e Uniformes, em conformidade com o previsto na sua cláusula sétima do Contrato n° 14/2025.
@@ -100,9 +103,6 @@ Esta Portaria subdelega à Senhora MARIA ESMERALDA RODRIGUES, Superintendente da
 Portaria n. 2.442, de 10 de setembro de 2026
 10/09/2026
 Esta portaria designa MARIANA MACHADO DA SILVEIRA BOM, para substituir o Coordenador-Geral, código FCE 1.13, da Coordenação-Geral de Investigação e Processos Avocados da Diretoria de Responsabilização de Entes Privados da Secretaria de Integridade Privada da Controladoria-Geral da União, em seus afastamentos e impedimentos legais ou regulamentares, no período de 5 a 16 de outubro de 2026.
-Acordo de Cooperação não Oneroso n. 1, de 10 de setembro de 2026
-10/09/2026
-Acordo de Cooperação destinado ao estabelecimento de parceria institucional e técnica, sem transferência de recursos, para promover a educação cidadã e fortalecer iniciativas relacionadas à cidadania, participação social, educação democrática, direitos fundamentais e democracia, respeitando as competências e a autonomia das instituições signatárias.
 Principais Comunidades
 Publicações
 Atos Normativos
@@ -161,7 +161,7 @@ Meu Espaço
 Base de Conhecimento da CGU
 Buscar na biblioteca digital
 O repositório da CGU disponibiliza
-18.895
+18.896
 documentos oficiais, incluindo dados abertos, relatórios de auditoria, decisões administrativas, estudos técnicos, manuais e muito mais.
 Comunidades
 442
@@ -176,7 +176,7 @@ Ver comunidade Articulação Nacional e Internacional
 12181
 Atos Administrativos
 Ver comunidade Atos Administrativos
-1026
+1027
 Atos Normativos
 Ver comunidade Atos Normativos
 1102
@@ -199,6 +199,9 @@ Publicações
 Ver comunidade Publicações
 Documentos Recentes
 Ver todos
+Portaria n. 2.523, de 16 de setembro de 2026
+16/09/2026
+Esta Portaria subdelega ao Senhor OSMAR NILO DE JESUS LIMA BEZERRA NETO, Superintendente da Controladoria-Geral da União no Estado do Acre, competência para firmar, nos termos propostos no processo administrativo nº 00201.100068/2026-79, Acordo de Cooperação Técnica entre a União, por meio da Controladoria-Geral da União no Estado do Acre, e o Estado do Acre, por intermédio do Ministério Público do Estado do Acre, para os fins que especifica.
 Segundo Termo de Apostilamento [contrato n. 14/2025]
 15/09/2026
 Trata-se de apostilamento que tem como objeto o reajuste do valor do Material de Consumo e Uniformes, em conformidade com o previsto na sua cláusula sétima do Contrato n° 14/2025.
@@ -220,9 +223,6 @@ Esta Portaria subdelega à Senhora MARIA ESMERALDA RODRIGUES, Superintendente da
 Portaria n. 2.442, de 10 de setembro de 2026
 10/09/2026
 Esta portaria designa MARIANA MACHADO DA SILVEIRA BOM, para substituir o Coordenador-Geral, código FCE 1.13, da Coordenação-Geral de Investigação e Processos Avocados da Diretoria de Responsabilização de Entes Privados da Secretaria de Integridade Privada da Controladoria-Geral da União, em seus afastamentos e impedimentos legais ou regulamentares, no período de 5 a 16 de outubro de 2026.
-Acordo de Cooperação não Oneroso n. 1, de 10 de setembro de 2026
-10/09/2026
-Acordo de Cooperação destinado ao estabelecimento de parceria institucional e técnica, sem transferência de recursos, para promover a educação cidadã e fortalecer iniciativas relacionadas à cidadania, participação social, educação democrática, direitos fundamentais e democracia, respeitando as competências e a autonomia das instituições signatárias.
 Principais Comunidades
 Publicações
 Atos Normativos
@@ -348,7 +348,7 @@ Página inicial
 Atos Normativos
 Subcomunidades e coleções
 Atos Normativos
-1026
+1027
 Reúne o acervo legal emitido e/ou utilizado pela CGU (efeitos externos) no desempenho de suas atividades, tais como: leis, medidas provisórias, decretos, enunciados, instruções normativas, decisões judicias, jurisprudências, pareceres jurídicos, súmulas, orientações e portarias normativas.
 Subcomunidades e Coleções
 Pesquisar
@@ -381,7 +381,7 @@ Ver comunidade Gabinete do Ministro
 377
 Gestão Interna
 Ver comunidade Gestão Interna
-37
+38
 Governança Interna
 Ver comunidade Governança Interna
 71
@@ -398,6 +398,9 @@ Tecnologia da Informação
 Ver comunidade Tecnologia da Informação
 Documentos Recentes
 Ver todos
+Portaria n. 2.523, de 16 de setembro de 2026
+16/09/2026
+Esta Portaria subdelega ao Senhor OSMAR NILO DE JESUS LIMA BEZERRA NETO, Superintendente da Controladoria-Geral da União no Estado do Acre, competência para firmar, nos termos propostos no processo administrativo nº 00201.100068/2026-79, Acordo de Cooperação Técnica entre a União, por meio da Controladoria-Geral da União no Estado do Acre, e o Estado do Acre, por intermédio do Ministério Público do Estado do Acre, para os fins que especifica.
 Portaria Normativa GM/CGU n. 281, de 19 de agosto de 2026
 19/08/2026
 Orienta tecnicamente os órgãos e entidades sujeitos ao Controle Interno do Poder Executivo Federal sobre a instauração e a organização da fase interna do processo de Tomada de Contas Especial.
@@ -418,10 +421,7 @@ Portaria Normativa n. 276, de 17 de julho de 2026
 Esta Portaria Normativa disciplina os procedimentos para a prevenção e o tratamento de situações de nepotismo no âmbito da Controladoria-Geral da União.
 Portaria n. 1.813, de 13 de julho de 2026
 13/07/2026
-Esta Portaria subdelega à Senhora à Senhora LORENA PINHO MORBACH PAREDES, Superintendente da Controladoria-Geral da União no Estado do Pará, competência para firmar, nos termos propostos no processo administrativo nº 00213.100041/2024-85, Primeiro Termo Aditivo referente ao Acordo de Cooperação Técnica nº 53/2024 celebrado entre a União, por intermédio da Controladoria-Geral da União (CGU) e a Polícia Civil do Estado do Pará, por intermédio da Secretaria de Segurança Pública e Defesa Social do Estado do Pará.
-Portaria Normativa n. 274, de 9 de julho de 2026
-09/07/2026
-Esta Portaria Normativa institui a Política de Gestão de Dispositivos Corporativos no âmbito da Controladoria-Geral da União (CGU), estabelecendo princípios, diretrizes e responsabilidades para a gestão do ciclo de vida dos dispositivos corporativos.
+Esta Portaria subdelega à Senhora LORENA PINHO MORBACH PAREDES, Superintendente da Controladoria-Geral da União no Estado do Pará, competência para firmar, nos termos propostos no processo administrativo nº 00213.100041/2024-85, Primeiro Termo Aditivo referente ao Acordo de Cooperação Técnica nº 53/2024 celebrado entre a União, por intermédio da Controladoria-Geral da União (CGU) e a Polícia Civil do Estado do Pará, por intermédio da Secretaria de Segurança Pública e Defesa Social do Estado do Pará.
 Principais Comunidades
 Publicações
 Atos Normativos
@@ -727,59 +727,59 @@ DSpace
 URL: https://basedeconhecimento.cgu.gov.br/communities/87123d06-5d14-4a99-b71e-9366991d75b8
 
 Publicações
-Skip to main content
-Office of the Comptroller General of the Union
-Quick Access
-Government agencies
-Access to information
-Legislation
-Accessibility
-EN
-Accessibility
+Pular para o conteúdo principal
+Controladoria-Geral da União
+Acesso Rápido
+Órgãos do governo
+Acesso à informação
+Legislação
+Acessibilidade
+PT-BR
+Acessibilidade
 A+
 A-
-High contrast
-Login
-CGU Knowledge Base
-Label
-CGU Knowledge Base
-All Communities
-Main Communities
-Publications
-Normative Acts
-Administrative Acts
-Governance
-Browse
-Date
-Title
-Author
-Subject
-More
-Recent Submissions
-Search Page
-My DSpace
+Alto contraste
+Entrar
+Base de Conhecimento da CGU
+Label / Rótulo
+Base de Conhecimento CGU
+Todas as Comunidades
+Principais Comunidades
+Publicações
+Atos Normativos
+Atos Administrativos
+Governança
+Navegar
+Data
+Título
+Autor
+Assunto
+Mais
+Submissões Recentes
+Página de Busca
+Meu Espaço
 Página inicial
 Publicações
-Subcommunities and Collections
+Subcomunidades e coleções
 Publicações
 2342
 Reúne um conjunto de publicações de gestão pública, tais como informativos, boletins, além de edições da Revista da CGU e Ementários de Gestão Pública.
-Subcommunities and Collections
-Search
-Browse by:
-Issue Date
-Author
-Title
-Subject
-Subcommunities and Collections
-Issue Date
-Author
-Title
-Subject
-Search
+Subcomunidades e Coleções
+Pesquisar
+Navegue por:
+Data
+Autor
+Título
+Assunto
+Subcomunidades e Coleções
+Data
+Autor
+Título
+Assunto
+Pesquisar
 Subcomunidades
-Now showing
-1 - 11 of 11
+Agora exibindo
+1 - 11 de 11
 175
 Auditoria Interna
 Ver comunidade Auditoria Interna
@@ -813,8 +813,8 @@ Ver comunidade Prevenção da Corrupção, Integridade e Transparência Pública
 0
 Tecnologia da Informação
 Ver comunidade Tecnologia da Informação
-Recent Documents
-View all
+Documentos Recentes
+Ver todos
 Guia do Programa de Leniência Anticorrupção da Controladoria-Geral da União - 2ª Ediç...
 26/06/2026
 Este Guia detalha as regras e etapas dos acordos de leniência celebrados pela Controladoria-Geral da União (CGU), com objetivo de orientar as pessoas jurídicas e a sociedade em geral sobre o processo de apresentação das propostas, negociação e monitoramento dos acordos. A primeira versão do Guia foi publicada em 2023 e já tinha como objetivo auxiliar as pessoas jurídicas interessadas na decisão de colaborar com o poder público a propor um acordo de leniência, nos termos do art. 16 da Lei nº 12.846/2013. A publicação da segunda edição do Guia justifica-se pela necessidade de atualizar as diretrizes procedimentais em face da evolução normativa e da maturidade institucional alcançada desde 2023. Nesse período, a experiência acumulada com a celebração de 13 novos acordos de leniência proporcionou um aprendizado prático essencial para o aperfeiçoamento da consensualidade administrativa. Além disso, o documento incorpora as atualizações introduzidas pela Portaria Normativa Interministerial CGU/AGU nº 1/2025, que estabeleceu parâmetros objetivos para as negociações, bem como as balizas operacionais da cooperação com o Ministério Público Federal, consolidadas por meio do Acordo de Cooperação Técnica firmado em 25 de abril de 2025.
@@ -839,24 +839,24 @@ Relatório de Resultados do 2° Ciclo de Avaliação de Maturidade do Sistema de
 Boletim CGU Internacional: Edição 38
 02/03/2026
 A edição 38 do Boletim CGU Internacional reúne os eventos no exterior e as discussões internacionais em que a CGU participou entre agosto a dezembro de 2025.
-Main Communities
-Publications
-Normative Acts
-Administrative Acts
-Governance
-Browse
-Date
-Title
-Author
-Subject
-More
-Recent Submissions
-Search Page
-All Communities
-My DSpace
-Social Networks
-All content on this site is published under the license
-Creative Commons Attribution-NoDerivs 3.0 Unported.
+Principais Comunidades
+Publicações
+Atos Normativos
+Atos Administrativos
+Governança
+Navegar
+Data
+Título
+Autor
+Assunto
+Mais
+Submissões Recentes
+Página de Busca
+Todas as Comunidades
+Meu Espaço
+Redes Sociais
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não adaptada.
 Desenvolvido utilizando a plataforma
 DSpace
 

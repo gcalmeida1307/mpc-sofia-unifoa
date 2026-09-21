@@ -1,7 +1,7 @@
 # Notas Técnicas — Ministério da Saúde
 
 Fonte: https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/g/gripe-influenza/notas-tecnicas
-Capturado em: 2026-09-18T13:25:40.471448+00:00
+Capturado em: 2026-09-21T11:05:01.349469+00:00
 Páginas no domínio: 10
 
 ## Notas Técnicas — Ministério da Saúde
@@ -26,14 +26,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 SUS
 Assuntos
@@ -513,14 +513,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 SUS
 Assuntos
@@ -1448,6 +1448,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -1458,14 +1459,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -1509,12 +1510,12 @@ Anterior
 Paginação
 Paginação
 Todos os Perfis
-Direitos humanos
-ECA Digital completa um ano e estabelece maior proteção para crianças e adolescentes
+Economia
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
 Saúde
-Cartilha da Anvisa orienta sobre o uso correto dos fitoterápicos
-Cultura
-Polícia Federal restitui 164 publicações históricas à Fundação Biblioteca Nacional
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -1551,7 +1552,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -1648,6 +1649,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Ministério da Saúde
 URL: https://www.gov.br/saude/pt-br
@@ -1671,14 +1677,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 SUS
 Assuntos
@@ -1919,33 +1925,33 @@ Fechar
 Fechar
 Fechar
 Info
+MAIS ATENDIMENTOS
+Carretas do Agora Tem Especialistas ultrapassam 1 milhão de procedimentos no SUS
+Saiba mais sobre MAIS ATENDIMENTOS
+CUIDADO ESPECIALIZADO
+Ministro da Saúde visita filantrópicas que ampliam atendimento especializado em Juiz de Fora
+Saiba mais sobre CUIDADO ESPECIALIZADO
+INOVAÇÃO
+Saúde mobiliza SAMU 192 para treinar equipes e apoiar estudo clínico com polilaminina
+Saiba mais sobre INOVAÇÃO
 INOVAÇÃO
 "Canetas emagrecedoras serão disponibilizadas de forma responsável no SUS", diz ministro
 Saiba mais sobre INOVAÇÃO
 AGORA TEM ESPECIALISTAS
-Ministério da Saúde qualifica assistência para prevenir progressão da doença renal
-Saiba mais sobre AGORA TEM ESPECIALISTAS
+Ministério da Saúde qualifica assistência à doença renal
 FARMÁCIA POPULAR
-Grupo de trabalho discute ampliação de serviços e inovação no Farmácia Popular
-Saiba mais sobre FARMÁCIA POPULAR
+Grupo de trabalho discute inovação no Farmácia Popular
 ATENÇÃO ESPECIALIZADA
-Ministro visita Hospital Universitário dos Servidores do Estado após reestruturação da unidade
-Saiba mais sobre ATENÇÃO ESPECIALIZADA
-INCENTIVO
-Pesquisa aponta que FIESMED reduz rotatividade de médicos
+Ministro visita Hospital Universitário dos Servidores do Estado
+ACESSO À SAÚDE
+Parintins celebra 20 anos de Telessaúde na Amazônia
+Parintins chega a 22 pontos de telessaúde em meio à expansão da estratégia no SUS
 IMUNIZAÇÃO
 SUS vacina mais de 1 milhão de crianças com a Pneumo 20
-ATENÇÃO ESPECIALIZADA
-SUS fortalece atenção primária e especializada em Montes Claros
+Incorporada ao SUS em junho, a Pneumo 20 protege contra 20 sorotipos do pneumococo
 CUIDADO CARDIOVASCULAR
 Lei prevê oferta de trombolíticos para tratamento de infarto e AVC no SUS
 Medida aprimora a disponibilidade dos medicamentos na rede pública e fortalece o atendimento a pacientes
-MUDANÇAS CLIMÁTICAS
-Saúde reforça preparação em Roraima diante dos impactos do El Niño
-Missão técnica vai avaliar a capacidade de resposta e construir plano para enfrentar os efeitos climáticos
-VIGILÂNCIA EM SAÚDE
-Atualização de casos de sarampo no Brasil
-Ministério da Saúde envia equipes ao Amazonas para apoiar investigação e monitoramento de contatos
 Últimas notícias
 Notícias para os estados
 Acesso Rápido
@@ -2140,7 +2146,7 @@ Next
 2
 Comissão Nacional de Incorporação de Tecnologias no Sistema Único de Saúde - CONITEC
 1
-1
+2
 Mais notícias
 Veja mais sobre Avaliação de Tecnologias em Saúde
 Veja mais sobre Participação Social
@@ -2156,7 +2162,7 @@ Recomendações sobre tecnologias avaliadas
 Acesse a página completa
 Agenda da Conitec
 Compromissos de hoje
-18/09/2026
+21/09/2026
 Nenhum compromisso para hoje.
 Agenda completa
 Canais de Atendimento
@@ -2244,14 +2250,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2311,6 +2317,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2436,6 +2443,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -2459,14 +2471,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2526,6 +2538,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2657,6 +2670,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Secretaria Executiva — Ministério da Saúde
 URL: https://www.gov.br/saude/pt-br/se
@@ -2680,14 +2698,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 SUS
 Assuntos
@@ -3113,14 +3131,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -3180,6 +3198,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3265,3 +3284,8 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.

@@ -1,7 +1,7 @@
 # Legislação | EMOP-RJ
 
 Fonte: https://www.rj.gov.br/emop/legislacao
-Capturado em: 2026-09-17T14:15:52.860464+00:00
+Capturado em: 2026-09-21T11:04:19.339024+00:00
 Páginas no domínio: 10
 
 ## Legislação | EMOP-RJ
@@ -257,8 +257,8 @@ SEDE
 Campo de São Cristóvão, 138 São Cristóvão
 Rio de Janeiro | CEP: 20921-904
 Seg-Sex 9:00-18:00
-__SOFIA_PHONE_1__
-__SOFIA_EMAIL_1__
+(21)3295-5862
+ouvidoria@emop.rj.gov.br
 Clique na imagem para ver o mapa interativo EMOP-RJ Obras e Ações
 Redes Sociais
 Instagram
@@ -336,16 +336,6 @@ Av Erasmo Braga, n° 118 - 12° e 13° andares
 Centro - Rio de Janeiro, CEP: 20020-000
 ➤
 v_20260901_0
-
-## Governo do Estado do Rio de Janeiro
-URL: https://www.rj.gov.br/noticias
-
-Governo do Estado do Rio de Janeiro
-
-## Governo do Estado do Rio de Janeiro
-URL: https://www.rj.gov.br/ouvidoria
-
-Governo do Estado do Rio de Janeiro
 
 ## Dispensa | EMOP-RJ
 URL: https://www.rj.gov.br/emop/dispensa
@@ -492,86 +482,6 @@ LICITAÇÃO-DISPENSA N° 014/2024
 VALOR PREVISTO: R$ SIGILOSO Dispensa
 OBJETO:
 CONTRATAÇÃO DE LEVANTAMENTO CADASTRAL E ELABORAÇÃO DE PROJETOS BÁSICO E EXECUTIVO DE INSTALAÇÕES DE INCÊNDIO E SPDA, PARA OBRA DE REFORMA DO PRÉDIO SEDE DO RIOPREVIDÊNCIA, LOCALIZADO NA RUA DA ALFÂNDEGA Nº 8- CENTRO MUNICÍPIO DO RIO DE JANEIRO
-Campo de São Cristóvão, 138 São Cristóvão, Rio de Janeiro | CEP: 20921-904
-SECRETARIA DE INFRAESTRUTURA E OBRAS PÚBLICAS
-Horário de atendimento
-Segunda a sexta, das 9h às 18h
-➤
-v_20251020_0
-➤
-
-## Comunicado: | EMOP-RJ
-URL: https://www.rj.gov.br/emop/node/727
-
-Comunicado: | EMOP-RJ
-Pular para o conteúdo principal
-Acesso a Informação
-Coronavírus
-Portal da Transparência
-Acessibilidade
-Contraste
-A
-A
-Tamanho da fonte
-☰
-Seu navegador não suporta HTML5
-OUÇA A RÁDIO ROQUETTE-PINTO
-94FM
-Instagram
-×
-Institucional
-Agenda do Presidente
-Base Jurídica da EMOP
-Legislação
-Quem Somos
-Código de Conduta
-Organograma
-Regimento Interno e Competência
-Estatuto Social
-Carta de Serviço ao Cidadão
-Perfil do Presidente
-Diretoria
-Quem é quem
-Departamento de Manutenção
-Mapa Estratégico da EMOP-RJ
-Serviços
-Quais são
-Cadastro RGE
-Catálogo EMOP
-Programas e Ações
-Saiba mais
-Licitações
-Licitação Presencial
-Pregão Eletrônico
-Atas de Registro de Preços
-Dispensa
-Contratos
-Boletins de Serviço
-Ver Mais
-Imprensa
-Expediente
-Notícias
-Fale Conosco
-OuveRj
-Transparência
-Institucional
-Ações e Programas
-Participação Social
-Auditorias
-Convênios e Transferências
-Receitas e Despesas
-Licitações e Contratos
-Servidores
-Informações Classificadas
-Serviços de Informação ao Cidadão - SIC
-Perguntas Frequentes
-Dados Abertos
-Dispensa
-Mapa EMOP-RJ Obras
-Webmail
-Webmail
-Comunicado:
-.
 Campo de São Cristóvão, 138 São Cristóvão, Rio de Janeiro | CEP: 20921-904
 SECRETARIA DE INFRAESTRUTURA E OBRAS PÚBLICAS
 Horário de atendimento
@@ -895,6 +805,340 @@ Boletim 687
 Boletim 686
 Boletim 685
 Boletim 684
+Campo de São Cristóvão, 138 São Cristóvão, Rio de Janeiro | CEP: 20921-904
+SECRETARIA DE INFRAESTRUTURA E OBRAS PÚBLICAS
+Horário de atendimento
+Segunda a sexta, das 9h às 18h
+➤
+v_20251020_0
+➤
+
+## Contratos | EMOP-RJ
+URL: https://www.rj.gov.br/emop/contratos
+
+Contratos | EMOP-RJ
+Pular para o conteúdo principal
+Acesso a Informação
+Coronavírus
+Portal da Transparência
+Acessibilidade
+Contraste
+A
+A
+Tamanho da fonte
+☰
+Seu navegador não suporta HTML5
+OUÇA A RÁDIO ROQUETTE-PINTO
+94FM
+Instagram
+×
+Institucional
+Agenda do Presidente
+Base Jurídica da EMOP
+Legislação
+Quem Somos
+Código de Conduta
+Organograma
+Regimento Interno e Competência
+Estatuto Social
+Carta de Serviço ao Cidadão
+Perfil do Presidente
+Diretoria
+Quem é quem
+Departamento de Manutenção
+Mapa Estratégico da EMOP-RJ
+Serviços
+Quais são
+Cadastro RGE
+Catálogo EMOP
+Programas e Ações
+Saiba mais
+Licitações
+Licitação Presencial
+Pregão Eletrônico
+Atas de Registro de Preços
+Dispensa
+Contratos
+Boletins de Serviço
+Ver Mais
+Imprensa
+Expediente
+Notícias
+Fale Conosco
+OuveRj
+Transparência
+Institucional
+Ações e Programas
+Participação Social
+Auditorias
+Convênios e Transferências
+Receitas e Despesas
+Licitações e Contratos
+Servidores
+Informações Classificadas
+Serviços de Informação ao Cidadão - SIC
+Perguntas Frequentes
+Dados Abertos
+Dispensa
+Mapa EMOP-RJ Obras
+Webmail
+Webmail
+Contratos
+Relação dos contratos da EMOP
+Contratos 2026
+Diretoria de Administração e Finanças - Contratos em vigor (atualizado em 16/04/2026)
+Diretoria de Planejamento e Projetos (atualizado em
+02/02/2026
+)
+Diretoria de Obras (atualizado em 02/07/2026)
+Diretoria de Manutenção (atualizado em 04/08/2026)
+Contratos 2025
+Diretoria de Manutenção (atualizado em 01/12/2025)
+Diretoria de Planejamento e Projetos (atualizado em 03/12/2025)
+Diretoria de Obras (atualizado em 02/12/2025)
+Diretoria de Administração e Finanças - Contratos administrativos vigentes e de concessionárias 2024 (atualizado em 25/03/2025)
+Contratos 2024
+Diretoria de Administração e Finanças - Contratos em vigor (atualizado em 29/05/2024)
+Contratos 2023
+Diretoria de Administração e Finanças Planilha1
+Diretoria de Administração e Finanças Planilha 2 (atualizado em 30/08/2023)
+Diretoria de Administração e Finanças - Contratos administrativos e de concessionárias 2023
+Contratos 2022
+Diretora de Administração e Finanças - Contratos Concessionárias 2022
+Diretoria de Administração e Finanças - Contratos Atuais
+Diretoria de Administração e Finanças - Contratos vigentes
+Para acessar as informações dos contratos da EMOP no Portal Siga é só clicar no link abaixo.
+Em UNIDADE selecionar EMOP e, em seguida, escolher o STATUS e clicar em pesquisar.
+Portal Siga – Compras Públicas
+Sistema Integrado de Gestão de Aquisições
+Campo de São Cristóvão, 138 São Cristóvão, Rio de Janeiro | CEP: 20921-904
+SECRETARIA DE INFRAESTRUTURA E OBRAS PÚBLICAS
+Horário de atendimento
+Segunda a sexta, das 9h às 18h
+➤
+v_20251020_0
+➤
+
+## Diretoria | EMOP-RJ
+URL: https://www.rj.gov.br/emop/diretoria
+
+Diretoria | EMOP-RJ
+Pular para o conteúdo principal
+Acesso a Informação
+Coronavírus
+Portal da Transparência
+Acessibilidade
+Contraste
+A
+A
+Tamanho da fonte
+☰
+Seu navegador não suporta HTML5
+OUÇA A RÁDIO ROQUETTE-PINTO
+94FM
+Instagram
+×
+Institucional
+Agenda do Presidente
+Base Jurídica da EMOP
+Legislação
+Quem Somos
+Código de Conduta
+Organograma
+Regimento Interno e Competência
+Estatuto Social
+Carta de Serviço ao Cidadão
+Perfil do Presidente
+Diretoria
+Quem é quem
+Departamento de Manutenção
+Mapa Estratégico da EMOP-RJ
+Serviços
+Quais são
+Cadastro RGE
+Catálogo EMOP
+Programas e Ações
+Saiba mais
+Licitações
+Licitação Presencial
+Pregão Eletrônico
+Atas de Registro de Preços
+Dispensa
+Contratos
+Boletins de Serviço
+Ver Mais
+Imprensa
+Expediente
+Notícias
+Fale Conosco
+OuveRj
+Transparência
+Institucional
+Ações e Programas
+Participação Social
+Auditorias
+Convênios e Transferências
+Receitas e Despesas
+Licitações e Contratos
+Servidores
+Informações Classificadas
+Serviços de Informação ao Cidadão - SIC
+Perguntas Frequentes
+Dados Abertos
+Dispensa
+Mapa EMOP-RJ Obras
+Webmail
+Webmail
+Diretoria
+PRESIDENTE
+Fernanda Corrêa Giambroni
+Campo de São Cristóvão, 138, 4º andar, sala 401
+CEP: 20.921-904 - São Cristóvão
+Rio de Janeiro / RJ
+21- 3295-5802
+presidencia@emop.rj.gov.br
+Fernanda Corrêa Giambroni
+é advogada, com especialização em Direito Processual Civil e Administração Pública. Foi subsecretária de Gestão Fomento e Defesa Agropecuária, na Secretaria de Estado de Agricultura, Pecuária, Pesca, Abastecimento e Desenvolvimento do Interior (SEAPPADI), entre outubro 2019 e julho 2026; coordenadora geral de Convênios na Secretaria de Estado de Esporte, Lazer e Juventude, entre janeiro de 2019 e outubro de 2019; assessora especial da Diretoria de Gestão da Procuradoria Geral do Estado do Rio de Janeiro, entre outubro 2018 e janeiro de 2019; assessora especial na Chefia de Gabinete, subsecretária adjunta de Projetos Especiais, na Secretaria de Estado da Casa Civil e Desenvolvimento Econômico, entre outubro de 2011 e outubro de 2018.
+CHEFIA DE GABINETE
+Sandra Garcia Lima
+Campo de São Cristóvão, 138, 4º andar
+CEP: 20.921-904 - São Cristóvão
+Rio de Janeiro / RJ
+21- 3295-5802
+presidencia@emop.rj.gov.br
+Sandra Garcia Lima
+é formada em Administração. No Governo do Estado foi coordenadora de Projetos Especiais, na Secretaria de Trabalho e Renda (maio/2025 a agosto/2026); assessorou os Núcleos de Convênios e de Adimplência e foi coordenadora suplente da Unidade Gestora da Rede + Brasil, na Casa Civil (julho/2015 a agosto/2018); atuou como assessora de Planejamento e Gestão, foi coordenadora de Convênios e Contratos e gerente de Turismo Prodetur, na Secretaria de Turismo (novembro/2011 a junho/2015); coordenou o Sistema Integrado de Gestão de Ações de Emprego e atuou na supervisão das ações de qualificação, na Secretaria de Trabalho e Renda (julho/2002 a outubro/2011). Na Prefeitura de Queimados foi subsecretária de Captação de Recursos (janeiro/2021 a junho/2025) e superintendente de Convênios, Contratos e Prestação de Contas, na Prefeitura de Nova Iguaçu (agosto/2018 a dezembro/2020).
+DIRETORIA DE ADMINISTRAÇÃO E FINANÇAS
+Humberto Costa Barros
+Campo de São Cristóvão, 138, 4º; andar
+CEP: 20.921-904 - São Cristóvão
+Rio de Janeiro / RJ
+21- 3295-5810
+diraf@emop.rj.gov.br
+Humberto Costa Barros
+é economista formado pela Faculdade de Economia e Finanças – RJ (1974), com especialização em planejamento de execução orçamentária, assessoramento administrativo e financeiro em órgãos municipais e federais; e pós-graduação em Auditoria de Sistemas de Saúde, pela Faculdade São Camilo – RJ. Atuou no mercado de capitais, nas cidades do Rio de Janeiro e São Paulo. Foi coordenador administrativo no Hospital Federal do Andaraí (março/2018 a novembro/2019); gerente de Orçamento e Finanças (março a dezembro/2005), assessor de Planejamento (fevereiro/2008 a dezembro/2010), pela Fundação para o Desenvolvimento Científico e Tecnológico em Saúde (Fiotec) (dezembro/2012 a fevereiro/2018), no Hospital Federal de Bonsucesso; assessor econômico-financeiro e administrativo, no Instituto de Puericultura e Pediatria Martagão Gesteira (IPPMG) da UFRJ (janeiro a dezembro/2011); assessor técnico especializado, na Secretaria de Saúde e Abastecimento na Prefeitura de Nova Iguaçu (janeiro/2006 a dezembro/2007); e professor no Curso de Pós Graduação ADM Hospitalar, na Faculdade São Camilo RJ (janeiro a dezembro/2005).
+DIRETORIA DE PLANEJAMENTO E PROJETOS
+Leila Baião Feder
+Campo de São Cristóvão, 138, 4º andar
+CEP: 20.921-904 - São Cristóvão
+Rio de Janeiro / RJ
+21- 3295-5835
+dirpp@emop.rj.gov.br
+Leila Baião Feder
+é formada em Arquitetura e Urbanismo pela Universidade Federal Fluminense (UFF) (1981); foi contratada como funcionária na carreira de arquiteta na EMOP-RJ (agosto/1982 - atual), onde começou como estagiária (fevereiro/1978 a agosto/1982). Com especialização no desenvolvimento de projetos na área de saúde, tem pós-graduação em Arquitetura Hospitalar com Ênfase em BIM (Building Information Modeling) (abril/2025); e em Inteligência Artificial (IA) Aplicada à Engenharia e Arquitetura (maio/2026). Na EMOP-RJ foi coordenadora-geral e diretora-substituta na então Diretoria Técnica – atual Diretoria de Planejamento e Projetos – (fevereiro/1988 a fevereiro/1994), onde atuou nas ações de construção de escolas moduladas no estado (1988 a 1992); na implosão do antigo esqueleto do Palácio da Justiça, (maio/1989) e reconstituição da Praça da República (dezembro/1989), em Niterói; e na reforma geral da prédio-sede da Imprensa Oficial, em Niterói. Por último e mais recente, assinou e coordenou a elaboração, dentre outros, de projetos hospitalares e escolas, na Diretoria de Obras da EMOP-RJ (março/2015 a agosto/2026).
+DIRETORIA DE OBRAS
+Rodrigo Werner da Silva
+Campo de São Cristóvão, 138, 1º andar
+CEP: 20.921-904 - São Cristóvão
+Rio de Janeiro / RJ
+21- 3295-5833
+dirob@emop.rj.gov.br
+Rodrigo Werner da Silva
+é coronel do Corpo de Bombeiros; engenheiro civil formado pela Universidade do Estado do Rio de Janeiro (UERJ) (2011), com especialização em obras públicas, gerenciamento operacional, planejamento e gestão; mestre em Engenharia Nuclear (2017) e doutor em Engenharia de Defesa pelo Instituto Militar de Engenharia (IME) (2021). No Governo do Estado foi diretor do Centro Estadual de Monitoramento e Alertas de Desastres Naturais (dezembro/2015 a dezembro/2018) ; diretor-geral de Ações Comunitárias (março a maio/ 2025); diretor da Escola de Defesa Civil (setembro/2021 a fevereiro/2022); diretor do Instituto Científico e Tecnológico de Defesa Civil (fevereiro/2022 a março/2024); diretor do Centro de Estudos e Pesquisas em Defesa Civil (dezembro/2018 a setembro/2021), pela Secretaria de Estado de Defesa Civil (SEDEC-RJ); e secretário de Proteção e Defesa Civil no Município de Petrópolis (SEMPDEC) (março/2024 a dezembro/2024), chefe do Estado Maior do Comando de Área da Capital (fevereiro a agosto/2026).
+DIRETORIA DE MANUTENÇÃO
+Felipe Cordeiro Pereira
+Campo de São Cristóvão, 138, 1º andar
+CEP: 20.921-904 - São Cristóvão
+Rio de Janeiro / RJ
+21- 3295-5851
+dirm@emop.rj.gov.br
+Felipe Cordeiro Pereira
+é arquiteto e urbanista formado pela Universidade Santa Úrsula (2008), com experiência na área de gestão de contratos, coordenação, planejamento físico-financeiro, fiscalização e execução de obras públicas de infraestrutura, urbanização, habitação e edificações. Na Prefeitura da Cidade do Rio de Janeiro, exerceu as funções de coordenador de Obras e de Programas de Investimentos(abril/2021 a março/2024)(janeiro/2025 a julho/2026), na Secretaria Municipal de Habitação (SMH); e atuou como coordenador Geral na Secretaria Especial de Ação Comunitária(SEAC) (março/2024 a dezembro/2024).
+Campo de São Cristóvão, 138 São Cristóvão, Rio de Janeiro | CEP: 20921-904
+SECRETARIA DE INFRAESTRUTURA E OBRAS PÚBLICAS
+Horário de atendimento
+Segunda a sexta, das 9h às 18h
+➤
+v_20251020_0
+➤
+
+## Quais São | EMOP-RJ
+URL: https://www.rj.gov.br/emop/quais-sao
+
+Quais São | EMOP-RJ
+Pular para o conteúdo principal
+Acesso a Informação
+Coronavírus
+Portal da Transparência
+Acessibilidade
+Contraste
+A
+A
+Tamanho da fonte
+☰
+Seu navegador não suporta HTML5
+OUÇA A RÁDIO ROQUETTE-PINTO
+94FM
+Instagram
+×
+Institucional
+Agenda do Presidente
+Base Jurídica da EMOP
+Legislação
+Quem Somos
+Código de Conduta
+Organograma
+Regimento Interno e Competência
+Estatuto Social
+Carta de Serviço ao Cidadão
+Perfil do Presidente
+Diretoria
+Quem é quem
+Departamento de Manutenção
+Mapa Estratégico da EMOP-RJ
+Serviços
+Quais são
+SERVIÇOS
+Cadastro RGE
+Catálogo EMOP
+Programas e Ações
+Saiba mais
+Licitações
+Licitação Presencial
+Pregão Eletrônico
+Atas de Registro de Preços
+Dispensa
+Contratos
+Boletins de Serviço
+Ver Mais
+Imprensa
+Expediente
+Notícias
+Fale Conosco
+OuveRj
+Transparência
+Institucional
+Ações e Programas
+Participação Social
+Auditorias
+Convênios e Transferências
+Receitas e Despesas
+Licitações e Contratos
+Servidores
+Informações Classificadas
+Serviços de Informação ao Cidadão - SIC
+Perguntas Frequentes
+Dados Abertos
+Dispensa
+Mapa EMOP-RJ Obras
+Webmail
+Webmail
+Quais São
+Elaboração de projetos de arquitetura
+Está a cargo do Departamento de Estudos e Projetos da Diretoria Planejamento e Projetos da EMOP-RJ. Cabe aos arquitetos e engenheiros da área desenhar e detalhar os projetos de obras solicitadas pelas Secretarias. Os setores de Instalações prediais e de Cálculo Estrutural desse Departamento também participam da preparação de projetos. As obras podem ser reformas, ampliações, restaurações e construções novas. A EMOP-RJ atua nos prédios públicos estaduais em todo o Estado do Rio de Janeiro. São mais de 5 mil prédios entre escolas, CIEPs, hospitais, presídios, delegacias, fóruns, bibliotecas, museus, teatros, palácios, etc.
+Preparação de orçamentos
+Fica a cargo da Divisão de Orçamento da Diretoria de Planejamento e Projetos da EMOP-RJ. Os engenheiros da área, com base nos projetos de arquitetura e nas obras e serviços a serem feitos, listam os preços e compõem uma planilha de custos. A obra sendo aprovada, a Secretaria solicitante libera recursos e a EMOP-RJ faz a licitação pública, aberta às firmas de engenharia inscritas no setor de Registro Geral dos Empreiteiros da EMOP-RJ.
+Gerenciamento e fiscalização de obras
+Esse serviço está sob responsabilidade dos engenheiros que trabalham na Diretoria de Obras da EMOP-RJ. As obras executadas pelas firmas de engenharia são acompanhadas por um engenheiro ou arquiteto fiscal da EMOP-RJ. Esse acompanhamento se dá em duas frentes: no local da obra, no sentido de preservar todos os itens do projeto, inclusive no que tange à qualidade dos materiais e serviços; e na sede da EMOP-RJ ( com o auxílio do Departamento de Informática), computando o percentual do trabalho realizado na obra, para proceder o pagamento às firmas, em etapas. Cabe ainda ao fiscal apresentar relatórios semanais sobre o andamento das obras, bem como acompanhamento fotográfico.
+Vistoria de prédios e encostas
+A Divisão de Geotecnia e o Setor de Cálculo Estrutural da Diretoria de Planejamento e Projetos da EMOP-RJ são responsáveis pela vistoria de prédios estaduais que apresentam em sua estrutura e de encostas risco de desabamento (em todo o Estado, com exceção do Município do Rio de Janeiro). As Secretarias e Prefeituras solicitam esses serviços diretamente à EMOP-RJ ou através do Corpo de Bombeiros (Defesa Civil).
+Emissão de laudos de vistorias para a Defesa Civil
+A EMOP-RJ executa os serviços em duas etapas: vistoria e laudos. Após executada a vistoria, os engenheiros preparam um relatório sobre os problemas encontrados no local e o remetem para o Corpo de Bombeiros - instuição que comanda a Defesa Civil do Estado. Esse laudo de vistoria, que é também uma avaliação de riscos, pode resultar em obras de contenção de encostas, de reforço estrutural de prédios e até de interdições.
+Gerência de projetos urbanos (para as Prefeituras)
+A EMOP-RJ está capacitada para atender as solicitações das prefeituras em seus projetos de desenvolvimento urbano, como escolas, implantação de parques com ciclovias, centros culturais e esportivos, creches, postos comunitários etc. Através de seus 08 (oito) Departamentos de Manutenção Itaperuna, Miracema, Campos, Macaé, Friburgo, Petrópolis, Volta Redonda e Nova Iguaçu e com as 02 (duas) DEORM`s (Rio de Janeiro e Niterói), a EMOP-RJ pode atuar em colaboração com as Prefeituras de suas respectivas áreas.
+Edição mensal do Índice de Preços da Construção Civil
+A EMOP-RJ edita, mensalmente, o Boletim de Custos com os preços e índices oficiais de custo das obras públicas no Estado. O trabalho é executado pela Divisão da Composição de Preços da Diretoria de Planejamento e Projetos da EMOP-RJ, que pesquisa mais de três mil itens ( materiais e serviços) por mês. O boletim é referência indispensável para levantamento de custos, execução de orçamentos, pagamento de faturas e reajustamento de preços. Utilizado por todas as firmas de construção civil que realizam obras para o Estado, além de clientes como Caixa Econômica Federal, que utiliza os índices como referência para a construção de casas.
+Para garantir excelência em todos os serviços prestados, a EMOP-RJ conta com uma experiente e capacitada equipe de engenheiros e arquitetos.
 Campo de São Cristóvão, 138 São Cristóvão, Rio de Janeiro | CEP: 20921-904
 SECRETARIA DE INFRAESTRUTURA E OBRAS PÚBLICAS
 Horário de atendimento

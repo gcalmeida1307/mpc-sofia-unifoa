@@ -1,7 +1,7 @@
 # Protocolos Clínicos e Diretrizes Terapêuticas — Ministério da Saúde
 
 Fonte: https://www.gov.br/saude/pt-br/assuntos/pcdt
-Capturado em: 2026-09-17T17:19:01.325335+00:00
+Capturado em: 2026-09-21T11:05:42.241331+00:00
 Páginas no domínio: 10
 
 ## Protocolos Clínicos e Diretrizes Terapêuticas — Ministério da Saúde
@@ -26,13 +26,13 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 SUS
@@ -452,14 +452,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 SUS
 Assuntos
@@ -979,13 +979,13 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 SUS
@@ -1379,14 +1379,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 SUS
 Assuntos
@@ -1837,14 +1837,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 SUS
 Assuntos
@@ -2234,404 +2234,6 @@ Aprova o Protocolo Clínico e Diretrizes Terapêuticas da Doença Pulmonar Obstr
 publicado
 29/01/2026
 10h53
-Arquivo
-« Anterior
-1
-2
-Próximo »
-SUS
-Assuntos
-Notícias
-Notícias para os estados
-Saúde de A a Z
-A
-B
-C
-D
-E
-F
-G
-H
-I
-L
-M
-O
-P
-Q
-R
-S
-T
-U
-V
-Z
-Brasil Saudável
-Meu SUS Digital
-Novo PAC Saúde
-Protocolos Clínicos e Diretrizes Terapêuticas
-Saúde com Ciência
-Saúde sem Racismo
-Vacinação
-Calendário de Vacinação
-Segurança das Vacinas
-Vacinas para Grupos Especiais
-Vacinação para os Viajantes
-Perguntas Frequentes (FAQ)
-Composição
-Organograma
-Quem é Quem
-DenaSUS
-Corregedoria
-Consultoria Jurídica
-Secretaria Executiva
-Atenção Primária
-Atenção Especializada à Saúde
-Vigilância em Saúde e Ambiente
-Saúde Indígena
-Ciência e Tecnologia em Saúde
-Trabalho e Educação na Saúde
-Informação e Saúde Digital
-Órgãos Colegiados
-Comissão Nacional de Incorporação de Tecnologias no SUS - CONITEC
-Conselho Nacional de Saúde
-Conselho de Saúde Suplementar - Consu
-Instância Nacional de Ética em Pesquisa - INAEP
-Acesso à Informação
-Institucional
-Ações e Programas
-Carta de Serviços
-Agenda de Autoridades
-Auditorias
-Banco de Preços
-Concursos e Seleções
-Convênios e Transferências
-Corregedoria
-Dados Abertos
-Estágio
-Gestão do SUS
-Governança Pública
-Planejamento Estratégico
-Gestão de Riscos
-IntegriSaúde
-Comissão de Ética do Ministério da Saúde
-Comissão de Ética do MS no Rio de Janeiro
-Informações Classificadas
-Lei Geral de Proteção de Dados Pessoais (LGPD)
-Licitações e Contratos
-Aquisições internacionais de medicamentos para IOT
-Concorrências
-Cotação Eletrônica
-Credenciamentos
-Dispensa de Licitação
-Inexigibilidade de Licitação
-Pregões
-Sessões Públicas
-Tomada de Preços
-Contratos ASCOM
-Contratos Coronavírus
-Contratos de Bens e Serviços Administrativos – SAA
-Contratos do Departamento de Logística em Saúde - DLOG
-Contratos das Superintendências - SEMS
-Contratos da Secretaria Especial de Saúde Indígena - SESAI
-Plano de Contratação Anual
-Plano de Logística Sustentável
-Requisições de Anestésicos
-Termos de Cooperação
-Contratos de Gestão
-Termos de Adesão
-Participação Social
-Audiências Públicas
-Consultas Públicas
-Chamamentos Públicos
-Câmaras, Conselhos, Comitês e Órgãos Colegiados
-Conferências
-Ouvidoria
-Perguntas Frequentes (FAQ)
-Receitas e Despesas
-Serviço de Informação ao Cidadão (SIC)
-Servidores
-Avaliação de Desempenho
-Despesas das Ações de Desenvolvimento de Pessoas
-Programa de Gestão e Desempenho
-SEI!
-Transparência e prestação de contas
-Centrais de Conteúdo
-Publicações MS
-Guias e Manuais
-Vigilância em Saúde
-Boletins
-Estudos e Notas informativas
-Notas Técnicas
-Relatórios
-Apresentações
-Canais de Atendimento
-Ouvidoria-Geral do SUS
-Sala de Imprensa
-OuvSUS 136
-Campanhas da Saúde
-2026
-Redefinir Cookies
-Redes sociais
-YouTube
-Facebook
-Instagram
-SoundCloud
-Flickr
-Linkedin
-Kwai
-TikTok
-Todo o conteúdo deste site está publicado sob a licença
-Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
-.
-Voltar ao topo da página
-Rejeitar
-Fale Agora
-Refazer a busca
-
-## D — Ministério da Saúde
-URL: https://www.gov.br/saude/pt-br/assuntos/pcdt/d?b_start%3Aint=30
-
-D — Ministério da Saúde
-Ir para o
-Conteúdo
-1
-Ir para a
-Página Inicial
-2
-Ir para o menu de
-Navegação
-3
-Ir para a
-Busca
-4
-Ir para o
-Mapa do site
-5
-Abrir menu principal de navegação
-Ministério da Saúde
-Termos mais buscados
-assinatura
-Desenrola Brasil
-mei
-imposto de renda
-inss
-Termos mais buscados
-assinatura
-Desenrola Brasil
-mei
-SUS
-Assuntos
-Notícias
-Notícias para os estados
-Saúde de A a Z
-A
-B
-C
-D
-E
-F
-G
-H
-I
-L
-M
-O
-P
-Q
-R
-S
-T
-U
-V
-Z
-Brasil Saudável
-Meu SUS Digital
-Novo PAC Saúde
-Protocolos Clínicos e Diretrizes Terapêuticas
-Saúde com Ciência
-Saúde sem Racismo
-Vacinação
-Calendário de Vacinação
-Segurança das Vacinas
-Vacinas para Grupos Especiais
-Vacinação para os Viajantes
-Perguntas Frequentes (FAQ)
-Composição
-Organograma
-Quem é Quem
-DenaSUS
-Corregedoria
-Consultoria Jurídica
-Secretaria Executiva
-Atenção Primária
-Atenção Especializada à Saúde
-Vigilância em Saúde e Ambiente
-Saúde Indígena
-Ciência e Tecnologia em Saúde
-Trabalho e Educação na Saúde
-Informação e Saúde Digital
-Órgãos Colegiados
-Comissão Nacional de Incorporação de Tecnologias no SUS - CONITEC
-Conselho Nacional de Saúde
-Conselho de Saúde Suplementar - Consu
-Instância Nacional de Ética em Pesquisa - INAEP
-Acesso à Informação
-Institucional
-Ações e Programas
-Carta de Serviços
-Agenda de Autoridades
-Auditorias
-Banco de Preços
-Concursos e Seleções
-Convênios e Transferências
-Corregedoria
-Dados Abertos
-Estágio
-Gestão do SUS
-Governança Pública
-Planejamento Estratégico
-Gestão de Riscos
-IntegriSaúde
-Comissão de Ética do Ministério da Saúde
-Comissão de Ética do MS no Rio de Janeiro
-Informações Classificadas
-Lei Geral de Proteção de Dados Pessoais (LGPD)
-Licitações e Contratos
-Aquisições internacionais de medicamentos para IOT
-Concorrências
-Cotação Eletrônica
-Credenciamentos
-Dispensa de Licitação
-Inexigibilidade de Licitação
-Pregões
-Sessões Públicas
-Tomada de Preços
-Contratos ASCOM
-Contratos Coronavírus
-Contratos de Bens e Serviços Administrativos – SAA
-Contratos do Departamento de Logística em Saúde - DLOG
-Contratos das Superintendências - SEMS
-Contratos da Secretaria Especial de Saúde Indígena - SESAI
-Plano de Contratação Anual
-Plano de Logística Sustentável
-Requisições de Anestésicos
-Termos de Cooperação
-Contratos de Gestão
-Termos de Adesão
-Participação Social
-Audiências Públicas
-Consultas Públicas
-Chamamentos Públicos
-Câmaras, Conselhos, Comitês e Órgãos Colegiados
-Conferências
-Ouvidoria
-Perguntas Frequentes (FAQ)
-Receitas e Despesas
-Serviço de Informação ao Cidadão (SIC)
-Servidores
-Avaliação de Desempenho
-Despesas das Ações de Desenvolvimento de Pessoas
-Programa de Gestão e Desempenho
-SEI!
-Transparência e prestação de contas
-Centrais de Conteúdo
-Publicações MS
-Guias e Manuais
-Vigilância em Saúde
-Boletins
-Estudos e Notas informativas
-Notas Técnicas
-Relatórios
-Apresentações
-Canais de Atendimento
-Ouvidoria-Geral do SUS
-Sala de Imprensa
-OuvSUS 136
-Campanhas da Saúde
-2026
-GOV.BR
-Serviços
-Buscar serviços por
-Categorias
-Órgãos
-Estados
-Serviços por público alvo
-Cidadãos
-Empresas
-Órgãos e Entidades Públicas
-Demais segmentos (ONGs, organizações sociais, etc)
-Servidor Público
-Temas em Destaque
-Orçamento Nacional
-Redes de Atendimento da Administração Pública Federal
-Proteção de Dados Pessoais
-Serviços para Imigrantes
-Política e Orçamento Educacionais
-Educação Profissional e Tecnológica
-Educação Profissional para Jovens e Adultos
-Trabalho e Emprego
-Serviços para Pessoas com Deficiência
-Combate à Discriminação Racial
-Política de Proteção Social
-Política para Mulheres
-Saúde Reprodutiva da Mulher
-Cuidados na Primeira Infância
-Habitação Popular
-Controle de Poluição e Resíduos Sólidos
-Notícias
-Galeria de Aplicativos
-Acompanhe o Planalto
-Navegação
-Acessibilidade
-Mapa do Site
-Termo de Uso e Aviso de Privacidade
-Consultar minhas solicitações
-Órgãos do Governo
-Por dentro do Gov.br
-Dúvidas Frequentes em relação ao Portal gov.br
-Dúvidas Frequentes da conta gov.br
-Ajuda para Navegar o Portal
-Conheça os elementos do Portal
-Política de e-participação
-Termos de Uso
-Governo Digital
-Guia de Edição de Serviços do Portal Gov.br
-Canais do Executivo Federal
-Dados da Administração Pública Federal
-Dados Abertos
-Painel Estatístico de Pessoal
-Painel de Compras da Administração Pública Federal
-Acesso à Informação
-Empresas e Negócios
-Links Úteis
-Galeria de Aplicativos
-Participe
-Galeria de Aplicativos
-Participe
-Redes sociais
-YouTube
-Facebook
-Instagram
-SoundCloud
-Flickr
-Linkedin
-Kwai
-TikTok
-Você está aqui:
-Página Inicial
-Assuntos
-Protocolos Clínicos e Diretrizes Terapêuticas
-D
-Info
-D
-Publicado em
-20/01/2025 16h22
-Atualizado em
-21/01/2025 11h14
-Dor Crônica
-Aprova o Protocolo Clínico e Diretrizes Terapêuticas da Dor Crônica - Nova Portaria em 23/08/2024
-publicado
-20/01/2025
-16h58
 Arquivo
 « Anterior
 1
@@ -3255,13 +2857,13 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 SUS
@@ -3667,14 +3269,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 SUS
 Assuntos
@@ -4061,14 +3663,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Saúde
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 SUS
 Assuntos
@@ -4374,6 +3976,472 @@ Aprova o Protocolo Clínico e Diretrizes Terapêuticas Homocistinúria Clássica
 publicado
 20/01/2025
 18h14
+Arquivo
+SUS
+Assuntos
+Notícias
+Notícias para os estados
+Saúde de A a Z
+A
+B
+C
+D
+E
+F
+G
+H
+I
+L
+M
+O
+P
+Q
+R
+S
+T
+U
+V
+Z
+Brasil Saudável
+Meu SUS Digital
+Novo PAC Saúde
+Protocolos Clínicos e Diretrizes Terapêuticas
+Saúde com Ciência
+Saúde sem Racismo
+Vacinação
+Calendário de Vacinação
+Segurança das Vacinas
+Vacinas para Grupos Especiais
+Vacinação para os Viajantes
+Perguntas Frequentes (FAQ)
+Composição
+Organograma
+Quem é Quem
+DenaSUS
+Corregedoria
+Consultoria Jurídica
+Secretaria Executiva
+Atenção Primária
+Atenção Especializada à Saúde
+Vigilância em Saúde e Ambiente
+Saúde Indígena
+Ciência e Tecnologia em Saúde
+Trabalho e Educação na Saúde
+Informação e Saúde Digital
+Órgãos Colegiados
+Comissão Nacional de Incorporação de Tecnologias no SUS - CONITEC
+Conselho Nacional de Saúde
+Conselho de Saúde Suplementar - Consu
+Instância Nacional de Ética em Pesquisa - INAEP
+Acesso à Informação
+Institucional
+Ações e Programas
+Carta de Serviços
+Agenda de Autoridades
+Auditorias
+Banco de Preços
+Concursos e Seleções
+Convênios e Transferências
+Corregedoria
+Dados Abertos
+Estágio
+Gestão do SUS
+Governança Pública
+Planejamento Estratégico
+Gestão de Riscos
+IntegriSaúde
+Comissão de Ética do Ministério da Saúde
+Comissão de Ética do MS no Rio de Janeiro
+Informações Classificadas
+Lei Geral de Proteção de Dados Pessoais (LGPD)
+Licitações e Contratos
+Aquisições internacionais de medicamentos para IOT
+Concorrências
+Cotação Eletrônica
+Credenciamentos
+Dispensa de Licitação
+Inexigibilidade de Licitação
+Pregões
+Sessões Públicas
+Tomada de Preços
+Contratos ASCOM
+Contratos Coronavírus
+Contratos de Bens e Serviços Administrativos – SAA
+Contratos do Departamento de Logística em Saúde - DLOG
+Contratos das Superintendências - SEMS
+Contratos da Secretaria Especial de Saúde Indígena - SESAI
+Plano de Contratação Anual
+Plano de Logística Sustentável
+Requisições de Anestésicos
+Termos de Cooperação
+Contratos de Gestão
+Termos de Adesão
+Participação Social
+Audiências Públicas
+Consultas Públicas
+Chamamentos Públicos
+Câmaras, Conselhos, Comitês e Órgãos Colegiados
+Conferências
+Ouvidoria
+Perguntas Frequentes (FAQ)
+Receitas e Despesas
+Serviço de Informação ao Cidadão (SIC)
+Servidores
+Avaliação de Desempenho
+Despesas das Ações de Desenvolvimento de Pessoas
+Programa de Gestão e Desempenho
+SEI!
+Transparência e prestação de contas
+Centrais de Conteúdo
+Publicações MS
+Guias e Manuais
+Vigilância em Saúde
+Boletins
+Estudos e Notas informativas
+Notas Técnicas
+Relatórios
+Apresentações
+Canais de Atendimento
+Ouvidoria-Geral do SUS
+Sala de Imprensa
+OuvSUS 136
+Campanhas da Saúde
+2026
+Redefinir Cookies
+Redes sociais
+YouTube
+Facebook
+Instagram
+SoundCloud
+Flickr
+Linkedin
+Kwai
+TikTok
+Todo o conteúdo deste site está publicado sob a licença
+Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+.
+Voltar ao topo da página
+Rejeitar
+Fale Agora
+Refazer a busca
+
+## I — Ministério da Saúde
+URL: https://www.gov.br/saude/pt-br/assuntos/pcdt/i
+
+I — Ministério da Saúde
+Ir para o
+Conteúdo
+1
+Ir para a
+Página Inicial
+2
+Ir para o menu de
+Navegação
+3
+Ir para a
+Busca
+4
+Ir para o
+Mapa do site
+5
+Abrir menu principal de navegação
+Ministério da Saúde
+Termos mais buscados
+Desenrola Brasil
+assinatura
+mei
+imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
+assinatura
+mei
+SUS
+Assuntos
+Notícias
+Notícias para os estados
+Saúde de A a Z
+A
+B
+C
+D
+E
+F
+G
+H
+I
+L
+M
+O
+P
+Q
+R
+S
+T
+U
+V
+Z
+Brasil Saudável
+Meu SUS Digital
+Novo PAC Saúde
+Protocolos Clínicos e Diretrizes Terapêuticas
+Saúde com Ciência
+Saúde sem Racismo
+Vacinação
+Calendário de Vacinação
+Segurança das Vacinas
+Vacinas para Grupos Especiais
+Vacinação para os Viajantes
+Perguntas Frequentes (FAQ)
+Composição
+Organograma
+Quem é Quem
+DenaSUS
+Corregedoria
+Consultoria Jurídica
+Secretaria Executiva
+Atenção Primária
+Atenção Especializada à Saúde
+Vigilância em Saúde e Ambiente
+Saúde Indígena
+Ciência e Tecnologia em Saúde
+Trabalho e Educação na Saúde
+Informação e Saúde Digital
+Órgãos Colegiados
+Comissão Nacional de Incorporação de Tecnologias no SUS - CONITEC
+Conselho Nacional de Saúde
+Conselho de Saúde Suplementar - Consu
+Instância Nacional de Ética em Pesquisa - INAEP
+Acesso à Informação
+Institucional
+Ações e Programas
+Carta de Serviços
+Agenda de Autoridades
+Auditorias
+Banco de Preços
+Concursos e Seleções
+Convênios e Transferências
+Corregedoria
+Dados Abertos
+Estágio
+Gestão do SUS
+Governança Pública
+Planejamento Estratégico
+Gestão de Riscos
+IntegriSaúde
+Comissão de Ética do Ministério da Saúde
+Comissão de Ética do MS no Rio de Janeiro
+Informações Classificadas
+Lei Geral de Proteção de Dados Pessoais (LGPD)
+Licitações e Contratos
+Aquisições internacionais de medicamentos para IOT
+Concorrências
+Cotação Eletrônica
+Credenciamentos
+Dispensa de Licitação
+Inexigibilidade de Licitação
+Pregões
+Sessões Públicas
+Tomada de Preços
+Contratos ASCOM
+Contratos Coronavírus
+Contratos de Bens e Serviços Administrativos – SAA
+Contratos do Departamento de Logística em Saúde - DLOG
+Contratos das Superintendências - SEMS
+Contratos da Secretaria Especial de Saúde Indígena - SESAI
+Plano de Contratação Anual
+Plano de Logística Sustentável
+Requisições de Anestésicos
+Termos de Cooperação
+Contratos de Gestão
+Termos de Adesão
+Participação Social
+Audiências Públicas
+Consultas Públicas
+Chamamentos Públicos
+Câmaras, Conselhos, Comitês e Órgãos Colegiados
+Conferências
+Ouvidoria
+Perguntas Frequentes (FAQ)
+Receitas e Despesas
+Serviço de Informação ao Cidadão (SIC)
+Servidores
+Avaliação de Desempenho
+Despesas das Ações de Desenvolvimento de Pessoas
+Programa de Gestão e Desempenho
+SEI!
+Transparência e prestação de contas
+Centrais de Conteúdo
+Publicações MS
+Guias e Manuais
+Vigilância em Saúde
+Boletins
+Estudos e Notas informativas
+Notas Técnicas
+Relatórios
+Apresentações
+Canais de Atendimento
+Ouvidoria-Geral do SUS
+Sala de Imprensa
+OuvSUS 136
+Campanhas da Saúde
+2026
+GOV.BR
+Serviços
+Buscar serviços por
+Categorias
+Órgãos
+Estados
+Serviços por público alvo
+Cidadãos
+Empresas
+Órgãos e Entidades Públicas
+Demais segmentos (ONGs, organizações sociais, etc)
+Servidor Público
+Temas em Destaque
+Orçamento Nacional
+Redes de Atendimento da Administração Pública Federal
+Proteção de Dados Pessoais
+Serviços para Imigrantes
+Política e Orçamento Educacionais
+Educação Profissional e Tecnológica
+Educação Profissional para Jovens e Adultos
+Trabalho e Emprego
+Serviços para Pessoas com Deficiência
+Combate à Discriminação Racial
+Política de Proteção Social
+Política para Mulheres
+Saúde Reprodutiva da Mulher
+Cuidados na Primeira Infância
+Habitação Popular
+Controle de Poluição e Resíduos Sólidos
+Notícias
+Galeria de Aplicativos
+Acompanhe o Planalto
+Navegação
+Acessibilidade
+Mapa do Site
+Termo de Uso e Aviso de Privacidade
+Consultar minhas solicitações
+Órgãos do Governo
+Por dentro do Gov.br
+Dúvidas Frequentes em relação ao Portal gov.br
+Dúvidas Frequentes da conta gov.br
+Ajuda para Navegar o Portal
+Conheça os elementos do Portal
+Política de e-participação
+Termos de Uso
+Governo Digital
+Guia de Edição de Serviços do Portal Gov.br
+Canais do Executivo Federal
+Dados da Administração Pública Federal
+Dados Abertos
+Painel Estatístico de Pessoal
+Painel de Compras da Administração Pública Federal
+Acesso à Informação
+Empresas e Negócios
+Links Úteis
+Galeria de Aplicativos
+Participe
+Galeria de Aplicativos
+Participe
+Redes sociais
+YouTube
+Facebook
+Instagram
+SoundCloud
+Flickr
+Linkedin
+Kwai
+TikTok
+Você está aqui:
+Página Inicial
+Assuntos
+Protocolos Clínicos e Diretrizes Terapêuticas
+I
+Info
+I
+Publicado em
+20/01/2025 16h22
+Atualizado em
+21/01/2025 11h12
+Ictioses Hereditárias
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas das Ictioses Hereditárias - Portaria atualizada em 25/07/2022
+publicado
+21/01/2025
+10h03
+Arquivo
+Imunodeficiência Primária com Predominância de Defeitos de Anticorpos - Imunoglobulina Humana
+Portaria nº 495, de 11 de Setembro de 2007 - PCDT
+publicado
+20/01/2025
+18h23
+Arquivo
+Imunossupressão no Transplante Hepático em Pediatria
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas para Imunossupressão no Transplante Hepático em Pediatria.
+publicado
+20/01/2025
+18h23
+Arquivo
+Imunossupressão no Transplante Cardíaco
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas para imunossupressão no Transplante Cardíaco - Anexo alterado em 29/03/2022
+publicado
+20/01/2025
+18h23
+Arquivo
+Imunossupressão no Transplante Renal
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas para Imunossupressão em Transplante Renal - Anexo alterado em 29/03/2022
+publicado
+20/01/2025
+18h24
+Arquivo
+Imunosupressão no Transplante Hépático em Adultos
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas – Imunossupressão no Transplante Hepático em Adultos.
+publicado
+20/01/2025
+18h23
+Arquivo
+Incontinência Urinária não Neurogênica
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas da Incontinência Urinária não Neurogênica
+publicado
+20/01/2025
+18h24
+Arquivo
+Indução de Imunotolerância para Indivíduos com Hemofilia A e Inibidor
+Aprova o Protocolo de Uso de fator VIII da coagulação na imunotolerância para indivíduos com hemofilia A e inibidor do fator VIII da coagulação sanguínea - (Protocolo de Uso) Nova Portaria em 22/10/2024
+publicado
+20/01/2025
+18h24
+Arquivo
+Insuficiência Adrenal
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas da Insuficiência Adrenal - Anexo alterado em 30/06/2021
+publicado
+20/01/2025
+18h24
+Arquivo
+Insuficiência Cardíaca com Fração de Ejeção Reduzida
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas da Insuficiência Cardíaca com Fração de Ejeção Reduzida - Anexo Alterado em 11/11/2024
+publicado
+20/01/2025
+18h24
+Arquivo
+Insuficiência Pancreática Exócrina
+Aprova o Protocolo Clínico e Diretrizes Terapêuticas da Insuficiência Pancreática Exócrina
+publicado
+20/01/2025
+18h24
+Arquivo
+Iodeto de Potássio na Emergência Nuclear
+Aprova o Protocolo de Uso do Iodeto de Potássio na Emergência Nuclear
+publicado
+04/09/2026
+10h03
+Arquivo
+Isotretinoína no tratamento da acne grave
+Aprova o Protocolo de uso da isotretinoína no tratamento da acne grave - (Protocolo de Uso)
+publicado
+20/01/2025
+18h24
 Arquivo
 SUS
 Assuntos

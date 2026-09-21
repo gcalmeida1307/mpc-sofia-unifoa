@@ -6,6 +6,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from .domains import DOMAIN_CONTRACTS
+from .session_context import bound_text
 
 
 def normalize(text: str) -> str:
@@ -339,6 +340,20 @@ STRUCTURED_MARKERS = (
     "xlsx",
     "planilha",
     "tabela",
+)
+
+SUMMARY_MARKERS = (
+    "resuma",
+    "resumo",
+    "resumir",
+    "sintese",
+    "síntese",
+    "documentos disponiveis",
+    "documentos disponíveis",
+    "listar documentos",
+    "o que aborda",
+    "leia o documento",
+    "leia o arquivo",
 )
 
 COMPLEX_REASONING_MARKERS = (
@@ -827,11 +842,15 @@ def build_query_plan(
     exact_term = requested_exact_term(question)
     normalized = normalize(question)
     subqueries = decompose_query(question)
+    source_hints = _source_hints(question)
+    comparison = comparison_requested_for_plan(question) or len(source_hints) >= 2
+    summary = any(marker in normalized for marker in SUMMARY_MARKERS)
+    complex_reasoning = any(marker in normalized for marker in COMPLEX_REASONING_MARKERS) or bool(re.search(r"\brca\b", normalized))
     if exact_term or re.search(r"\b(?:linha|linhas|line|lines)\s*\d+", normalized):
         intent = "BUSCA_EXATA_LINHA"
     elif _list_elements_requested(question):
         intent = "LISTA_ELEMENTOS"
-    elif comparison_requested_for_plan(question) or len(_source_hints(question)) >= 2:
+    elif comparison:
         intent = "COMPARACAO_DOCUMENTOS"
     elif task_route == "structured_data" or "correlac" in normalized:
         intent = "STRUCTURED_DATA"
@@ -845,16 +864,33 @@ def build_query_plan(
         intent = "COMPLEX_REASONING"
     else:
         intent = "DOCUMENT_RAG" if retrieval_required else "CONVERSA_DIRETA"
+    if intent == "BUSCA_EXATA_LINHA":
+        strategy = "FACT_LOOKUP"
+    elif intent == "DOCUMENT_RAG" and summary:
+        strategy = "DOCUMENT_SUMMARY"
+    elif intent in {"DOCUMENT_RAG", "LISTA_ELEMENTOS"}:
+        strategy = "FACT_LOOKUP"
+    elif intent == "COMPARACAO_DOCUMENTOS":
+        strategy = "MULTI_DOCUMENT_SYNTHESIS" if len(source_hints) >= 2 else "CONCEPT_COMPARISON"
+    elif intent == "STRUCTURED_DATA":
+        strategy = "STRUCTURED_DATA"
+    elif complex_reasoning:
+        strategy = "RCA_INVESTIGATION" if bool(re.search(r"\brca\b|causa raiz|root cause", normalized)) else "MULTI_HOP"
+    elif summary:
+        strategy = "DOCUMENT_SUMMARY"
+    else:
+        strategy = "FACT_LOOKUP"
     return QueryPlan(
         intent=intent,
         target_collection=_target_collection(module_id, question),
         search_term=exact_term,
         requires_exact_match=intent == "BUSCA_EXATA_LINHA",
-        source_hints=_source_hints(question),
+        source_hints=source_hints,
         retrieval_required=retrieval_required,
         response_mode=response_mode,
         reason=reason,
         subqueries=subqueries,
+        strategy=strategy,
     )
 
 
@@ -915,6 +951,18 @@ QUERY_PLAN_COLLECTIONS = frozenset(
     }
 )
 
+QUERY_PLAN_STRATEGIES = frozenset(
+    {
+        "FACT_LOOKUP",
+        "DOCUMENT_SUMMARY",
+        "MULTI_DOCUMENT_SYNTHESIS",
+        "CONCEPT_COMPARISON",
+        "MULTI_HOP",
+        "STRUCTURED_DATA",
+        "RCA_INVESTIGATION",
+    }
+)
+
 
 @dataclass(frozen=True)
 class QueryPlan:
@@ -935,6 +983,7 @@ class QueryPlan:
     response_mode: str = "evidence"
     reason: str = ""
     subqueries: tuple[str, ...] = field(default_factory=tuple)
+    strategy: str = "FACT_LOOKUP"
 
     def __post_init__(self) -> None:
         if self.intent not in QUERY_PLAN_INTENTS:
@@ -943,6 +992,8 @@ class QueryPlan:
             raise ValueError(f"coleção de consulta inválida: {self.target_collection}")
         if self.response_mode not in {"conversational", "evidence"}:
             raise ValueError(f"modo de resposta inválido: {self.response_mode}")
+        if self.strategy not in QUERY_PLAN_STRATEGIES:
+            raise ValueError(f"estratégia de consulta inválida: {self.strategy}")
         if self.requires_exact_match and not self.search_term and self.intent != "BUSCA_EXATA_LINHA":
             raise ValueError("uma consulta exata precisa informar o termo de busca")
 
@@ -967,6 +1018,9 @@ class QueryPlan:
         hints = mapping.get("source_hints") or ()
         if isinstance(hints, str):
             hints = (hints,)
+        strategy = str(mapping.get("strategy") or "FACT_LOOKUP")
+        if strategy not in QUERY_PLAN_STRATEGIES:
+            strategy = "FACT_LOOKUP"
         return cls(
             intent=intent,
             target_collection=target,
@@ -981,6 +1035,7 @@ class QueryPlan:
                 for item in (mapping.get("subqueries") or ())
                 if str(item).strip()
             ) or decompose_query(str(mapping.get("question") or "")),
+            strategy=strategy,
         )
 
 
@@ -1165,6 +1220,7 @@ def build_conversation_memory(
     module_id: str,
     question: str,
     history: list[dict[str, str]] | None = None,
+    query_plan: QueryPlan | None = None,
 ) -> dict[str, Any]:
     """Build bounded, session-scoped memory for the response composer.
 
@@ -1174,13 +1230,25 @@ def build_conversation_memory(
     forcing retrieval or persisting sensitive conversation text.
     """
     turns = [
-        {"role": str(item.get("role", "")), "content": str(item.get("content", ""))[:4000]}
+        {"role": str(item.get("role", "")), "content": bound_text(item.get("content", ""), 1200)}
         for item in (history or [])[-8:]
         if item.get("role") in {"user", "assistant"} and str(item.get("content", "")).strip()
     ]
     combined = " ".join(item["content"] for item in turns + [{"role": "user", "content": question}])
     normalized = normalize(combined)
-    route = route_query(module_id, question, history=[])
+    # The orchestrator passes the already validated plan.  Re-routing here
+    # would allow memory construction to disagree with retrieval and create a
+    # second, hidden decision.  The fallback keeps this helper compatible with
+    # administrative callers that do not yet have a plan.
+    plan = query_plan
+    if plan is None:
+        route = route_query(module_id, question, history=[])
+        plan = QueryPlan.from_mapping(
+            route.get("query_plan"),
+            fallback_intent="DOCUMENT_RAG" if bool(route.get("retrieval_required", True)) else "CONVERSA_DIRETA",
+            retrieval_required=bool(route.get("retrieval_required", True)),
+            response_mode=str(route.get("response_mode", "evidence")),
+        )
     entity_patterns = (
         r"\b[\wÀ-ÿ-]+\.(?:pdf|docx|xlsx|csv|xml|txt)\b",
         r"\b(?:SAAE|Zabbix|FHIR|HL7|CLT|STJ|STF)\b",
@@ -1203,13 +1271,15 @@ def build_conversation_memory(
     ]
     return {
         "topic": " ".join(dict.fromkeys(topic_terms[:8])) or normalize(module_id),
-        "intent": route.get("task_route", route.get("route", "conversation")),
+        "intent": plan.intent,
+        "strategy": plan.strategy,
         "entities": entities[:12],
         "context_recent": turns[-6:],
         "pending_question": pending_question,
         "module": module_id,
         "has_context": bool(turns),
         "context_terms": sorted(set(re.findall(r"[\wÀ-ÿ]{5,}", normalized)))[:24],
+        "query_plan": plan.public_dict(),
     }
 
 

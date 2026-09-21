@@ -1,7 +1,7 @@
 # Módulo 2: noções de gestão de documentação
 
 Fonte: https://repositorio.enap.gov.br/items/ca2c44ac-d1ab-402a-b757-cc4863c7724f
-Capturado em: 2026-09-17T16:17:28.873309+00:00
+Capturado em: 2026-09-21T11:03:02.271803+00:00
 Páginas no domínio: 10
 
 ## Módulo 2: noções de gestão de documentação
@@ -148,16 +148,40 @@ Essa Comunidade visa reunir o acervo virtual de estudos de caso com foco na admi
 130 itens
 Cursos da Enap
 Essa Comunidade visa organizar os Cursos completos ofertados pela Enap e ainda documentos e materiais relacionados ao gerenciamento dos cursos. Serão inseridos nessa Comunidade: cursos completos; desenhos de cursos; avaliações; projetos; processos de seleção etc.
-981 itens
+982 itens
 Eventos Nacionais e Internacionais
 194 itens
 Inovação Aberta, Premiações e Concursos
 835 itens
 Memória Enap
 Essa Comunidade visa prestigiar e dar visibilidade a história da Enap. Serão inseridos nessa Comunidade documentos que representem ou contenham a história da Escola, tais como relatórios de gestão, resultados da ENAP, eventos nacionais e internacionais, e documentos referentes às cooperações e parcerias da ENAP.
-1,630 itens
+1,631 itens
 Ver todas as comunidades
 Submissões Recentes
+Dissertação
+Desenho e implementação da Política de Crédito Rural no Brasil: uma análise qualitativa com as instituições participantes
+Ademir Pedro Vilaça Júnior, Ademir
+2025-12-08
+Dissertação
+PAA no Território Indígena Igarapé Lage: barreiras, oportunidades e arranjos de governança na percepção de produtores Oro Wari' e gestores públicos (2023-2025)
+Roldan Jara de Alencar, Roldan
+2026-01-21
+Dissertação
+Difusão Internacional de Políticas Públicas: O Processo de Nacionalização dos ODS em Cabo Verde
+Maria Goretti Santos Lima, Maria
+2026-02-12
+Foto/Imagem/Desenho
+Organograma da Escola Nacional de Administração Pública (Enap) - versão 2026.
+Escola Nacional de Administração Pública (Brasil)
+2026
+Dissertação
+AVALIAÇÃO DE IMPACTO DO PROGRAMA MINHA CASA MINHA VIDA SOBRE O PROCESSO DE FAVELIZAÇÃO
+Raimundo Everton de Aquino Moreira, Raimundo
+2026-07-20
+Caderno
+Mapa de Cuidados Participativo (Cuidadograma): desenho de uma metodologia integrativa para co-construção de políticas públicas
+Araújo, Danielle Ferreira Medeiro da Silva de
+2026-09
 Edital
 Edital Enap 15/2016 - 21º Concurso Inovação no Setor Público
 Escola Nacional de Administração Pública (Enap)
@@ -172,30 +196,6 @@ Escola Nacional de Administração Pública (Brasil)
 2026
 Other
 Desafio Soluções que Alimentam 2026
-Escola Nacional de Administração Pública (Enap)
-2026
-Thesis
-Entre a racionalidade regulatória e a escolha do consumidor: análise do programa brasileiro de etiquetagem de pneus novos
-Lombardi, Leandro
-2026-06-26
-Ato Normativo
-Chamada Pública – Toolkit de Inovação com Inteligência Artificial
-Escola Nacional de Administração Pública (Enap)
-2026
-Material Textual
-Acompanhamento de projeto
-Escola Nacional de Administração Pública (Enap)
-2026
-Material Textual
-Acordo de Adesão nº 02/2026 à Ação Enap Aqui
-Fundação Escola Nacional de Administração Pública (Brasil)
-2026-05-07
-Material Textual
-Acordo de Cooperação Técnica nº 19/2026 entre a Escola Nacional de Administração Pública e a Results for America
-Fundação Escola Nacional de Administração Pública (Brasil)
-2026-08-26
-Material Textual
-Checklist - Garantindo acessibilidade mínima na sua solução
 Escola Nacional de Administração Pública (Enap)
 2026
 Ver todas as publicações
@@ -276,16 +276,40 @@ Essa Comunidade visa reunir o acervo virtual de estudos de caso com foco na admi
 130 itens
 Cursos da Enap
 Essa Comunidade visa organizar os Cursos completos ofertados pela Enap e ainda documentos e materiais relacionados ao gerenciamento dos cursos. Serão inseridos nessa Comunidade: cursos completos; desenhos de cursos; avaliações; projetos; processos de seleção etc.
-981 itens
+982 itens
 Eventos Nacionais e Internacionais
 194 itens
 Inovação Aberta, Premiações e Concursos
 835 itens
 Memória Enap
 Essa Comunidade visa prestigiar e dar visibilidade a história da Enap. Serão inseridos nessa Comunidade documentos que representem ou contenham a história da Escola, tais como relatórios de gestão, resultados da ENAP, eventos nacionais e internacionais, e documentos referentes às cooperações e parcerias da ENAP.
-1,630 itens
+1,631 itens
 Ver todas as comunidades
 Submissões Recentes
+Dissertação
+Desenho e implementação da Política de Crédito Rural no Brasil: uma análise qualitativa com as instituições participantes
+Ademir Pedro Vilaça Júnior, Ademir
+2025-12-08
+Dissertação
+PAA no Território Indígena Igarapé Lage: barreiras, oportunidades e arranjos de governança na percepção de produtores Oro Wari' e gestores públicos (2023-2025)
+Roldan Jara de Alencar, Roldan
+2026-01-21
+Dissertação
+Difusão Internacional de Políticas Públicas: O Processo de Nacionalização dos ODS em Cabo Verde
+Maria Goretti Santos Lima, Maria
+2026-02-12
+Foto/Imagem/Desenho
+Organograma da Escola Nacional de Administração Pública (Enap) - versão 2026.
+Escola Nacional de Administração Pública (Brasil)
+2026
+Dissertação
+AVALIAÇÃO DE IMPACTO DO PROGRAMA MINHA CASA MINHA VIDA SOBRE O PROCESSO DE FAVELIZAÇÃO
+Raimundo Everton de Aquino Moreira, Raimundo
+2026-07-20
+Caderno
+Mapa de Cuidados Participativo (Cuidadograma): desenho de uma metodologia integrativa para co-construção de políticas públicas
+Araújo, Danielle Ferreira Medeiro da Silva de
+2026-09
 Edital
 Edital Enap 15/2016 - 21º Concurso Inovação no Setor Público
 Escola Nacional de Administração Pública (Enap)
@@ -300,30 +324,6 @@ Escola Nacional de Administração Pública (Brasil)
 2026
 Other
 Desafio Soluções que Alimentam 2026
-Escola Nacional de Administração Pública (Enap)
-2026
-Thesis
-Entre a racionalidade regulatória e a escolha do consumidor: análise do programa brasileiro de etiquetagem de pneus novos
-Lombardi, Leandro
-2026-06-26
-Ato Normativo
-Chamada Pública – Toolkit de Inovação com Inteligência Artificial
-Escola Nacional de Administração Pública (Enap)
-2026
-Material Textual
-Acompanhamento de projeto
-Escola Nacional de Administração Pública (Enap)
-2026
-Material Textual
-Acordo de Adesão nº 02/2026 à Ação Enap Aqui
-Fundação Escola Nacional de Administração Pública (Brasil)
-2026-05-07
-Material Textual
-Acordo de Cooperação Técnica nº 19/2026 entre a Escola Nacional de Administração Pública e a Results for America
-Fundação Escola Nacional de Administração Pública (Brasil)
-2026-08-26
-Material Textual
-Checklist - Garantindo acessibilidade mínima na sua solução
 Escola Nacional de Administração Pública (Enap)
 2026
 Ver todas as publicações

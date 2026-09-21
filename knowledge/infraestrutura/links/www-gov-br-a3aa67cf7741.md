@@ -1,7 +1,7 @@
 # PORTARIA SGD/MGI Nº 6.680, DE 4 DE OUTUBRO DE 2024 — Governo Digital
 
 Fonte: https://www.gov.br/governodigital/pt-br/contratacoes-de-tic/legislacao/modelo-de-contracao-de-servicos-de-operacao-de-infraestrutura-e-de-atendimento-a-usuarios-de-tic/portaria-sgd-mgi-no-6-680-de-4-de-outubro-de-2024
-Capturado em: 2026-09-17T14:15:43.001160+00:00
+Capturado em: 2026-09-21T11:04:10.750580+00:00
 Páginas no domínio: 10
 
 ## PORTARIA SGD/MGI Nº 6.680, DE 4 DE OUTUBRO DE 2024 — Governo Digital
@@ -26,14 +26,14 @@ Mapa do site
 Abrir menu principal de navegação
 Governo Digital
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Estratégias e Governança Digital
 Secretaria de Governo Digital
@@ -2273,6 +2273,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2283,14 +2284,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -2335,11 +2336,11 @@ Paginação
 Paginação
 Todos os Perfis
 Economia
-Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
-Cultura
-São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
-Economia
-Política de minerais críticos prevê rastreabilidade e agregação de valor
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
+Saúde
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -2376,7 +2377,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -2473,6 +2474,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## www.gov.br
 URL: https://www.gov.br/pt-br/sitemap
@@ -2495,14 +2501,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2562,6 +2568,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2687,6 +2694,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -2710,14 +2722,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2777,6 +2789,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -2908,6 +2921,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Navegação
 URL: https://www.gov.br/pt-br/navegacao
@@ -2931,14 +2949,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -2998,6 +3016,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3083,6 +3102,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Categorias
 URL: https://www.gov.br/pt-br/categorias
@@ -3106,14 +3130,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -3173,6 +3197,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3709,6 +3734,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Termo de Uso e Aviso de Privacidade
 URL: https://www.gov.br/pt-br/termos-de-uso
@@ -3732,14 +3762,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-imposto de renda
 assinatura
-mei
-inss
 Desenrola Brasil
-Termos mais buscados
+mei
 imposto de renda
+inss
+Termos mais buscados
 assinatura
+Desenrola Brasil
 mei
 Serviços
 Buscar serviços por
@@ -3799,6 +3829,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -4427,19 +4458,4 @@ serão utilizados e armazenados no Brasil, durante o tempo necessário para a pr
 Os dados coletados por cookies do Google Analytics podem ser transferidos para fora do Brasil, porém há cláusulas nos Termos para o tratamento de dados, para que os dados estejam igualmente bem protegidos
 Os dados serão mantidos enquanto relevantes. Após período em que os dados pessoais precisam permanecer armazenados, estes serão excluídos de nossas bases de dados ou anonimizados, respeitando as hipóteses legalmente previstas no
 art. 16
-da LGPD. Isto é, informações pessoais que sejam necessárias para o cumprimento de determinações legais, judiciais e administrativas e/ou para o exercício do direito de defesa em processos judiciais e administrativos serão mantidas, apesar da exclusão dos demais dados.
-4. Segurança no tratamento dos dados pessoais
-A maneira como são tratados os dados pelo portal
-gov.br
-refletem seu compromisso com a segurança e proteção dos dados pessoais para garantir a privacidade. São usadas medidas e soluções técnicas de proteção apropriadas para garantir a confidencialidade, integridade e inviolabilidade dos dados pessoais. Para manter os dados pessoais protegidos, são usadas ferramentas físicas, eletrônicas e gerenciais direcionadas para a proteção e privacidade.
-A aplicação dessas ferramentas leva em consideração a natureza dos dados pessoais tratados, o contexto e a finalidade do tratamento e os riscos que eventuais violações gerariam para os direitos e liberdades do titular dos dados.
-Portaria nº 218, de 19 de maio de 2020
-- Institui a Política de Segurança da Informação do Ministério da Economia. Entre as medidas aplicadas, estão:
-Políticas de Segurança e Privacidade
-Plano de Continuidade de Negócios
-Controle de acesso
-Codificação (criptografia)
-O portal
-gov.br
-se compromete a utilizar as melhores práticas para evitar incidentes de segurança.
-Em caso
+da LGPD. Isto é, informações pessoais que sejam necessárias para o cumprimento de determinações legais, judiciais e administrativas e/ou para o exercício do direito de defesa em processos judiciais e administrativos serão mantidas

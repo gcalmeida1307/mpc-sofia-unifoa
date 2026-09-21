@@ -1,7 +1,7 @@
 # Horas extras, compensação de jornada e banco de horas: quais as diferenças? - Schiefler Advocacia
 
 Fonte: https://schiefler.adv.br/horas-extras-compensacao-de-jornada-e-banco-de-horas-quais-as-diferencas
-Capturado em: 2026-09-18T13:24:37.051889+00:00
+Capturado em: 2026-09-21T11:01:01.945087+00:00
 Páginas no domínio: 10
 
 ## Horas extras, compensação de jornada e banco de horas: quais as diferenças? - Schiefler Advocacia
@@ -160,7 +160,7 @@ Copiar
 Horas extras, compensação de jornada e banco de horas:
 quais as diferenças? São Paulo: Schiefler Advocacia, 2020. Disponível em:
 https://schiefler.adv.br/horas-extras-compensacao-de-jornada-e-banco-de-horas-quais-as-diferencas/
-Acesso em: 17 set. 2026
+Acesso em: 21 set. 2026
 advocacia
 advogado
 banco de horas

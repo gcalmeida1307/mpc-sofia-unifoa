@@ -1,7 +1,7 @@
 # Horas Extras e Compensações: Regras, Banco de Horas e Limites Legais - Jurismenteaberta
 
 Fonte: https://jurismenteaberta.com.br/horas-extras-e-compensacoes-regras-banco-de-horas-e-limites-legais
-Capturado em: 2026-09-17T16:18:16.854093+00:00
+Capturado em: 2026-09-21T11:00:05.609797+00:00
 Páginas no domínio: 10
 
 ## Horas Extras e Compensações: Regras, Banco de Horas e Limites Legais - Jurismenteaberta
@@ -445,6 +445,34 @@ Como estudante de Direito e profissional experiente em Administração, sou a vo
 Compartilhe
 Instagram
 Mais posts
+Anotações Acadêmicas de 19/09/2026: Propriedade Industrial
+Norma Silva
+20/09/2026
+As Anotações Acadêmicas de 19/09/2026 organizam a propriedade industrial de forma clara para quem estuda Direito Empresarial. Neste artigo, você vai entender a diferença entre patente e registro, o teste de patenteabilidade, os requisitos do desenho industrial e da marca, o processo no INPI, a prioridade unionista, a licença, a cessão e o nome empresarial, com exemplos práticos.
+Ação Rescisória por Incompetência Absoluta: Prazo, Requisitos e Jurisprudência do TST
+Norma Silva
+20/09/2026
+A ação rescisória por incompetência absoluta desconstitui decisões proferidas por juízo sem competência para julgar a causa. Neste artigo, você entende o fundamento no art. 966, II, do CPC, o termo inicial do prazo decadencial de dois anos (art. 975 CPC), os requisitos de cabimento segundo a Súmula 100 do TST e exemplos de casos julgados envolvendo a competência da Justiça do Trabalho.
+Tutela Provisória no Processo Civil: Conceito, Requisitos e Modalidades
+Norma Silva
+19/09/2026
+A tutela provisória permite ao juiz antecipar, ainda que parcialmente, uma proteção jurisdicional antes da decisão final. Neste artigo, você entende o conceito, os requisitos legais e as modalidades previstas no CPC/2015: tutela de urgência (antecipada e cautelar) e tutela de evidência, com o procedimento antecedente e incidental explicado passo a passo.
+Anotações Acadêmicas de 18/09/2026: Adoção e Conselho Tutelar no ECA
+Norma Silva
+18/09/2026
+As Anotações Acadêmicas de 18/09/2026 reúnem o estudo completo da adoção no Estatuto da Criança e do Adolescente e o início da unidade dos Conselhos. Neste artigo, você vai entender as vedações, os requisitos, o procedimento de habilitação, o apadrinhamento e os efeitos da sentença de adoção, além da composição e do processo de escolha do Conselho Tutelar.
+Exceção de Incompetência Trabalhista: Rito do Art. 800 CLT
+Norma Silva
+18/09/2026
+A imagem apresenta uma mesa com um mapa da América do Sul em destaque, sobre o qual estão dispostos elementos jurídicos e de orientação: um malhete de juiz de madeira, uma bússola metálica dourada, uma pasta ou documento branco fechado e marcadores de couro interligados por fios a alfinetes vermelhos afixados no mapa. Ao fundo, observa-se um ambiente de escritório elegante e bem iluminado, sugerindo uma composição temática relacionada a direito, jurisdição territorial ou planejamento legal.
+Anotações Acadêmicas de 17/09/2026: Liquidação de Sentença
+Norma Silva
+17/09/2026
+Anotações Acadêmicas de 17/09/2026: este artigo explica a liquidação de sentença no CPC, da natureza jurídica e suas espécies aos aspectos procedimentais, à liquidação provisória e à liquidação com dano zero, além dos primeiros conceitos sobre o título executivo. Neste artigo, você vai entender como aplicar cada instituto na prática forense e nos estudos para a prova.
+Princípio da Oralidade no Processo do Trabalho: Guia Completo
+Norma Silva
+17/09/2026
+O princípio da oralidade no processo do trabalho orienta a dinâmica das audiências trabalhistas, priorizando a palavra falada sobre a forma escrita. Compreender seus subprincípios é essencial para advogados e estudantes. Neste artigo, você vai entender a concentração dos atos, a imediatidade, a identidade física do juiz e a prevalência da prova oral, conforme a doutrina majoritária.
 Anotações Acadêmicas de 16/09/2026: Da Petição à Audiência Trabalhista
 Norma Silva
 16/09/2026
@@ -477,34 +505,6 @@ O Que São Os 5 Poderes No Brasil? Entenda Como Funcionam
 Norma Silva
 13/09/2026
 Você já pesquisou o que são os 5 poderes no Brasil e encontrou respostas diferentes? Embora a Constituição fale em três poderes, a estrutura do Estado envolve funções institucionais que ampliam essa discussão. Neste artigo, você vai entender de forma clara e objetiva o que são os 5 poderes no Brasil, como surgem e qual é o papel de cada um.
-Registro do Empresário Rural: Entenda os Efeitos da Opção
-Norma Silva
-13/09/2026
-O registro do empresário rural na Junta Comercial é facultativo, mas gera efeitos jurídicos concretos para quem vive do campo. O artigo compara a agricultura familiar e a agroindústria à luz do art. 971 do Código Civil, destacando riscos e benefícios de cada caminho. Neste artigo, você vai entender as vantagens, os riscos e as consequências práticas de registrar ou não a atividade rural.
-Anotações Acadêmicas de 12/09/2026: Nome Empresarial e Suas Proteções
-Norma Silva
-12/09/2026
-O nome empresarial identifica o empresário em suas relações jurídicas e recebe proteção legal própria, distinta da marca e do nome fantasia. Nas Anotações Acadêmicas de 12/09/2026, você confere os princípios da veracidade e da novidade, as espécies firma e denominação e a regra da inalienabilidade. Neste artigo, você vai entender como proteger corretamente a identidade do seu negócio.
-Anotações Acadêmicas de 11/09/2026: Direitos, Guarda e Tutela no ECA
-Norma Silva
-12/09/2026
-Nas Anotações Acadêmicas de 11/09/2026, o estudo avança da proteção especial e do direito à educação para a convivência familiar e comunitária. Neste artigo, você compreenderá a distinção entre pedofilia e abuso sexual, o enfrentamento aos maus-tratos, as políticas educacionais, as regras de prevenção e viagens, o acolhimento, a família substituta, a guarda e a tutela no ECA.
-Teoria dos Perfis da Empresa: Origem em Asquini e Recepção no Brasil
-Norma Silva
-12/09/2026
-A Teoria dos Perfis da Empresa, formulada por Alberto Asquini em 1943, chegou ao Brasil por meio da tradução de Fábio Konder Comparato e hoje orienta a leitura do art. 966 do Código Civil. Neste artigo, você vai entender a origem histórica da teoria, sua recepção doutrinária no Brasil e seus reflexos práticos no conceito de empresário e na estrutura do direito empresarial brasileiro.
-Quem Não Pode Ser Empresário: Impedimentos Legais Explicados
-Norma Silva
-11/09/2026
-Nem toda pessoa pode exercer atividade empresarial no Brasil. A lei impõe impedimentos legais específicos a magistrados, membros do Ministério Público, servidores públicos, militares, estrangeiros e falidos não reabilitados. Neste artigo, você vai entender quem não pode ser empresário e por quê, com base na legislação vigente e na doutrina majoritária.
-Anotações Acadêmicas de 08/09/2026: Direito de Propriedade e Aquisição dos Bens Móveis
-Norma Silva
-11/09/2026
-Nas Anotações Acadêmicas de 08/09/2026, a aula de Direito Civil percorre o conceito e a função social da propriedade, sua extensão vertical, suas faculdades e seus atributos. Neste artigo, você também entenderá a descoberta e os modos de aquisição da propriedade móvel, como ocupação, achado do tesouro, tradição, especificação, confusão, comistão e adjunção.
-Anotações Acadêmicas de 10/09/2026: Princípios da Execução Civil
-Norma Silva
-10/09/2026
-Nas Anotações Acadêmicas de 10/09/2026, estudamos os princípios fundamentais da execução civil, com destaque para tipicidade e atipicidade, boa-fé, responsabilidade patrimonial, contraditório, menor onerosidade, disponibilidade e responsabilidade objetiva do exequente. Neste artigo, você compreenderá ainda os critérios do STF e do STJ e a introdução à liquidação de sentença.
 Envie-nos uma mensagem
 Full Name
 Phone
@@ -587,25 +587,25 @@ Confira as
 novidades!
 Nossos posts mais recentes estão aqui para deixar sua leitura mais dinâmica e atualizada. Role a página e descubra tudo o que o site JurismenteAberta tem a oferecer!
 Direito Processual do Trabalho
-Princípio da Oralidade no Processo do Trabalho: Guia Completo
-O princípio da oralidade no processo do trabalho orienta a dinâmica das audiências trabalhistas, priorizando a palavra falada sobre a forma escrita. Compreender seus subprincípios é essencial para advogados e estudantes. Neste artigo, você vai entender a concentração dos atos, a imediatidade, a identidade física do juiz e a prevalência da prova oral, conforme a doutrina majoritária.
+Prorrogação de Competência no Processo do Trabalho: Efeitos da Inércia da Parte
+A prorrogação de competência no processo do trabalho ocorre quando a parte deixa de alegar a incompetência relativa no momento processual adequado. Neste artigo, você entenderá a diferença entre competência absoluta e relativa, o fundamento legal da prorrogação e os efeitos concretos da inércia sobre o andamento do processo trabalhista.
 Norma Silva
-17/09/2026
+21/09/2026
 Anotações Acadêmicas
-Anotações Acadêmicas de 16/09/2026: Da Petição à Audiência Trabalhista
-A petição inicial trabalhista exige requisitos próprios, distintos do processo civil, e a audiência segue um rito rígido, cheio de armadilhas processuais para quem não está preparado. Neste artigo, as Anotações Acadêmicas de 16/09/2026 mostram como estruturar a reclamação trabalhista, qualificar as partes, formular a causa de pedir e conduzir cada fase da audiência una da CLT.
+Anotações Acadêmicas de 19/09/2026: Propriedade Industrial
+As Anotações Acadêmicas de 19/09/2026 organizam a propriedade industrial de forma clara para quem estuda Direito Empresarial. Neste artigo, você vai entender a diferença entre patente e registro, o teste de patenteabilidade, os requisitos do desenho industrial e da marca, o processo no INPI, a prioridade unionista, a licença, a cessão e o nome empresarial, com exemplos práticos.
 Norma Silva
-16/09/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 15/09/2026: Registro e Acessão Imobiliária
-O Código Civil prevê modos próprios para adquirir a propriedade de um imóvel, e ignorá-los custa caro a quem compra, herda ou constrói. Nas Anotações Acadêmicas de 15/09/2026, você confere o registro imobiliário e a acessão, da formação de ilhas à invasão de terreno vizinho. Neste artigo, você entende quando a boa-fé garante indenização e quando garante a propriedade do solo.
+20/09/2026
+Direito Processual do Trabalho
+Ação Rescisória por Incompetência Absoluta: Prazo, Requisitos e Jurisprudência do TST
+A ação rescisória por incompetência absoluta desconstitui decisões proferidas por juízo sem competência para julgar a causa. Neste artigo, você entende o fundamento no art. 966, II, do CPC, o termo inicial do prazo decadencial de dois anos (art. 975 CPC), os requisitos de cabimento segundo a Súmula 100 do TST e exemplos de casos julgados envolvendo a competência da Justiça do Trabalho.
 Norma Silva
-16/09/2026
+20/09/2026
 Direito Processual Civil
-Tutela Antecipada Antecedente: Entenda o Procedimento no CPC
-A tutela antecipada antecedente permite obter uma decisão urgente antes mesmo de formular o pedido final, agilizando a proteção do direito ameaçado no processo civil. Neste artigo, você vai entender como funciona o procedimento previsto no CPC, quais são os requisitos legais, como ocorre a estabilização da tutela e o que decidiu o STJ sobre o tema.
+Tutela Provisória no Processo Civil: Conceito, Requisitos e Modalidades
+A tutela provisória permite ao juiz antecipar, ainda que parcialmente, uma proteção jurisdicional antes da decisão final. Neste artigo, você entende o conceito, os requisitos legais e as modalidades previstas no CPC/2015: tutela de urgência (antecipada e cautelar) e tutela de evidência, com o procedimento antecedente e incidental explicado passo a passo.
 Norma Silva
-16/09/2026
+19/09/2026
 Para quem é o JurisMenteAberta?
 O JurisMenteAberta é um portal jurídico voltado a quem deseja estudar o Direito com profundidade, organização e fundamento técnico, integrando teoria, prática e reflexão crítica.
 Estudantes de Direito
@@ -732,6 +732,48 @@ Conectando teoria e prática para um conhecimento jurídico mais dinâmico. O Di
 Um Espaço para o Pensamento Jurídico Livre
 Aqui, o Direito não tem limites – explore, aprenda e inove. Mais do que um site, o JurisMenteAberta é um ambiente para mentes inquietas e curiosas. Aqui, incentivamos o pensamento crítico, a interdisciplinaridade e a troca de ideias para construir um Direito mais acessível, eficiente e conectado com a realidade. Participe dessa revolução no conhecimento jurídico!
 Anotações Acadêmicas
+Anotações Acadêmicas de 19/09/2026: Propriedade Industrial
+As Anotações Acadêmicas de 19/09/2026 organizam a propriedade industrial de forma clara para quem estuda Direito Empresarial. Neste artigo, você vai entender a diferença entre patente e registro, o teste de patenteabilidade, os requisitos do desenho industrial e da marca, o processo no INPI, a prioridade unionista, a licença, a cessão e o nome empresarial, com exemplos práticos.
+Leia mais »
+Norma Silva
+20/09/2026
+Direito Processual do Trabalho
+Ação Rescisória por Incompetência Absoluta: Prazo, Requisitos e Jurisprudência do TST
+A ação rescisória por incompetência absoluta desconstitui decisões proferidas por juízo sem competência para julgar a causa. Neste artigo, você entende o fundamento no art. 966, II, do CPC, o termo inicial do prazo decadencial de dois anos (art. 975 CPC), os requisitos de cabimento segundo a Súmula 100 do TST e exemplos de casos julgados envolvendo a competência da Justiça do Trabalho.
+Leia mais »
+Norma Silva
+20/09/2026
+Direito Processual Civil
+Tutela Provisória no Processo Civil: Conceito, Requisitos e Modalidades
+A tutela provisória permite ao juiz antecipar, ainda que parcialmente, uma proteção jurisdicional antes da decisão final. Neste artigo, você entende o conceito, os requisitos legais e as modalidades previstas no CPC/2015: tutela de urgência (antecipada e cautelar) e tutela de evidência, com o procedimento antecedente e incidental explicado passo a passo.
+Leia mais »
+Norma Silva
+19/09/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 18/09/2026: Adoção e Conselho Tutelar no ECA
+As Anotações Acadêmicas de 18/09/2026 reúnem o estudo completo da adoção no Estatuto da Criança e do Adolescente e o início da unidade dos Conselhos. Neste artigo, você vai entender as vedações, os requisitos, o procedimento de habilitação, o apadrinhamento e os efeitos da sentença de adoção, além da composição e do processo de escolha do Conselho Tutelar.
+Leia mais »
+Norma Silva
+18/09/2026
+Direito Processual do Trabalho
+Exceção de Incompetência Trabalhista: Rito do Art. 800 CLT
+A imagem apresenta uma mesa com um mapa da América do Sul em destaque, sobre o qual estão dispostos elementos jurídicos e de orientação: um malhete de juiz de madeira, uma bússola metálica dourada, uma pasta ou documento branco fechado e marcadores de couro interligados por fios a alfinetes vermelhos afixados no mapa. Ao fundo, observa-se um ambiente de escritório elegante e bem iluminado, sugerindo uma composição temática relacionada a direito, jurisdição territorial ou planejamento legal.
+Leia mais »
+Norma Silva
+18/09/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 17/09/2026: Liquidação de Sentença
+Anotações Acadêmicas de 17/09/2026: este artigo explica a liquidação de sentença no CPC, da natureza jurídica e suas espécies aos aspectos procedimentais, à liquidação provisória e à liquidação com dano zero, além dos primeiros conceitos sobre o título executivo. Neste artigo, você vai entender como aplicar cada instituto na prática forense e nos estudos para a prova.
+Leia mais »
+Norma Silva
+17/09/2026
+Direito Processual do Trabalho
+Princípio da Oralidade no Processo do Trabalho: Guia Completo
+O princípio da oralidade no processo do trabalho orienta a dinâmica das audiências trabalhistas, priorizando a palavra falada sobre a forma escrita. Compreender seus subprincípios é essencial para advogados e estudantes. Neste artigo, você vai entender a concentração dos atos, a imediatidade, a identidade física do juiz e a prevalência da prova oral, conforme a doutrina majoritária.
+Leia mais »
+Norma Silva
+17/09/2026
+Anotações Acadêmicas
 Anotações Acadêmicas de 16/09/2026: Da Petição à Audiência Trabalhista
 A petição inicial trabalhista exige requisitos próprios, distintos do processo civil, e a audiência segue um rito rígido, cheio de armadilhas processuais para quem não está preparado. Neste artigo, as Anotações Acadêmicas de 16/09/2026 mostram como estruturar a reclamação trabalhista, qualificar as partes, formular a causa de pedir e conduzir cada fase da audiência una da CLT.
 Leia mais »
@@ -833,904 +875,6 @@ A função social da empresa e a responsabilidade social costumam ser confundida
 Leia mais »
 Norma Silva
 10/09/2026
-Direito Empresarial
-Sociedade Limitada Unipessoal: Guia Completo para Empreender Sozinho
-A Sociedade Limitada Unipessoal permite empreender sozinho com patrimônio separado e responsabilidade limitada, sem precisar de sócio. Criada pela Lei da Liberdade Econômica, ela mudou o cenário empresarial brasileiro. Neste artigo, você vai entender como funciona a Sociedade Limitada Unipessoal e suas vantagens frente ao empresário individual.
-Leia mais »
-Norma Silva
-09/09/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 05/09/2026: Teoria Geral da Execução Civil
-As Anotações Acadêmicas de 05/09/2026 abrem o estudo da execução civil: tutela jurisdicional, direito à prestação, cumprimento de sentença x processo autônomo e classificação das espécies executivas. Neste artigo, você vai entender também os princípios do título executivo, da boa-fé e da responsabilidade patrimonial e pessoal que sustentam toda execução no CPC de 2015.
-Leia mais »
-Norma Silva
-09/09/2026
-Direito Empresarial
-Teoria da Empresa: A Evolução Histórica do Direito Comercial
-A Teoria da Empresa superou a antiga Teoria dos Atos de Comércio no Direito Comercial brasileiro. Do Código Comercial de 1850 ao Codice Civile italiano de 1942 e ao Código Civil de 2002, o conceito de atividade empresarial mudou profundamente ao longo do tempo. Neste artigo, você vai entender essa evolução histórica e como ela molda o direito empresarial atual.
-Leia mais »
-Norma Silva
-08/09/2026
-Direito Penal
-Aplicação da Lei Penal no Espaço: Territorialidade, Extraterritorialidade e Exemplos
-A aplicação da lei penal no espaço define quando um crime será julgado pela lei brasileira, mesmo que o fato tenha ligação com outro país. Neste artigo, você vai entender territorialidade, extraterritorialidade, lugar do crime e princípios aplicáveis, com muitos exemplos práticos (navios, aeronaves, internet e crimes transnacionais) para não se confundir.
-Leia mais »
-Norma Silva
-06/09/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 03/09/2026: Estabilização da Tutela Antecipada e Tutela de Evidência no CPC
-Neste artigo, você entende como o CPC de 2015 trata o periculum in mora inverso, o poder geral de efetivação e, principalmente, a estabilização da tutela antecipada antecedente, incluindo a divergência atual do STJ sobre agravo de instrumento e contestação, além da tutela cautelar antecedente e da tutela de evidência.
-Leia mais »
-Norma Silva
-04/09/2026
-Direito Processual Civil
-Princípio da Dialeticidade Recursal: O Que é e Como Aplicar no Processo Civil?
-O princípio da dialeticidade recursal exige que todo recurso seja fundamentado de forma clara e específica, indicando os pontos da decisão impugnada e as razões do inconformismo. Neste artigo, você vai entender o que é esse princípio, sua base legal no CPC/2015, suas consequências práticas e como ele é aplicado pelos tribunais brasileiros.
-Leia mais »
-Norma Silva
-04/09/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 02/09/2026: Partes e Procuradores no Trabalho
-Quem são as partes e os procuradores no processo do trabalho, e o que muda quando um deles falha em juízo? Neste artigo, as Anotações Acadêmicas de 02/09/2026 explicam as denominações processuais, a capacidade postulatória, o jus postulandi, os honorários de sucumbência, o preposto e o rito sumário na Justiça do Trabalho, com base na aula da professora Vera Mônica.
-Leia mais »
-Norma Silva
-03/09/2026
-« Anterior
-Página
-1
-Página
-2
-Página
-3
-Página
-4
-Página
-5
-Seguinte »
-© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
-
-## Blog - Jurismenteaberta
-URL: https://jurismenteaberta.com.br/blog/2
-
-Blog - Jurismenteaberta
-Ir para o conteúdo
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Pesquisar ...
-Resultados
-Ver todos os resultados
-Transformando a jornada de aprendizado e colaboração no Direito​
-No JurisMenteAberta, unimos o Direito à inovação tecnológica para desbravar novas formas de aprendizado. Aqui, cada artigo, cada projeto, transforma teorias complexas em conhecimentos acessíveis, desafiando o convencional e ampliando nossas perspectivas jurídicas. Junte-se a esta jornada inovadora e colabore em um ambiente que valoriza o conhecimento contínuo e a aplicação prática do Direito.
-O Direito em Evolução
-Conectando teoria e prática para um conhecimento jurídico mais dinâmico. O Direito está em constante transformação, e o aprendizado jurídico deve acompanhar essa evolução. No JurisMenteAberta, exploramos conceitos tradicionais sob novas perspectivas, trazendo análises aprofundadas e aplicações práticas para um mundo jurídico mais dinâmico e acessível. Desenvolva seu conhecimento de forma inovadora e colaborativa conosco!
-Um Espaço para o Pensamento Jurídico Livre
-Aqui, o Direito não tem limites – explore, aprenda e inove. Mais do que um site, o JurisMenteAberta é um ambiente para mentes inquietas e curiosas. Aqui, incentivamos o pensamento crítico, a interdisciplinaridade e a troca de ideias para construir um Direito mais acessível, eficiente e conectado com a realidade. Participe dessa revolução no conhecimento jurídico!
-Anotações Acadêmicas
-Anotações Acadêmicas de 01/09/2026: Efeitos da Posse e sua Defesa
-As Anotações Acadêmicas de 01/09/2026 revelam como o Código Civil trata as consequências práticas da posse, do direito aos frutos à possibilidade de indenização por benfeitorias e prejuízos. Neste artigo, você vai entender a diferença entre esbulho, turbação e ameaça, os requisitos do desforço incontinente e por que não cabe alegar propriedade nas ações possessórias.
-Leia mais »
-Norma Silva
-03/09/2026
-Direito Civil
-Evicção: O Risco Jurídico Oculto em Todo Contrato de Compra e Venda
-Todo contrato de compra e venda esconde um risco que poucos conhecem: a evicção. É o instituto do Direito Civil que protege o adquirente quando perde, total ou parcialmente, o bem adquirido por força de decisão judicial ou ato administrativo anterior ao negócio. Neste artigo, você vai entender o conceito, os fundamentos legais, os elementos que configuram a evicção, os efeitos jurídicos para as partes e como os tribunais brasileiros têm aplicado esse instituto na prática contratual.
-Leia mais »
-Norma Silva
-03/09/2026
-Direito Civil
-Vícios Redibitórios: O Que São, Efeitos e Direitos do Comprador
-Os vícios redibitórios são defeitos ocultos que tornam a coisa adquirida imprópria ao uso ou lhe diminuem o valor, gerando direitos legais ao adquirente. Neste artigo, você vai entender o conceito, os fundamentos do Código Civil, os requisitos de configuração, as ações cabíveis e as principais controvérsias doutrinárias sobre o tema.
-Leia mais »
-Norma Silva
-02/09/2026
-Direito Penal
-Concussão: O Crime do Funcionário que Exige o que Não É Seu
-A concussão é um dos crimes contra a Administração Pública mais debatidos no Direito Penal brasileiro, praticado por funcionário público que exige vantagem indevida. Apesar de frequentemente confundido com a corrupção passiva, o instituto possui elementos e implicações próprias que merecem análise aprofundada. Neste artigo, você vai entender o conceito, os sujeitos do crime, os elementos objetivos e subjetivos, as penas aplicáveis e as principais distinções doutrinárias e jurisprudenciais.
-Leia mais »
-Norma Silva
-01/09/2026
-Direito Penal
-Prevaricação: O Que é, Elementos do Crime e Consequências Penais
-A prevaricação é um dos crimes contra a Administração Pública mais relevantes do Direito Penal brasileiro. Praticado exclusivamente por funcionário público, o delito revela uma das formas mais graves de abuso da função estatal: a violação do dever de agir conforme a lei por interesse pessoal. Neste artigo, você vai entender o conceito, os elementos do tipo penal, as penas aplicáveis, as distinções doutrinárias e a posição dos tribunais superiores sobre o tema.
-Leia mais »
-Norma Silva
-31/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 29/08/2026: Escrituração e Estabelecimento
-As Anotações Acadêmicas de 29/08/2026 reúnem o conteúdo da aula de Direito Empresarial sobre livros empresariais, escrituração mercantil e estabelecimento empresarial. Neste artigo, você vai entender as obrigações do empresário, a regularidade dos livros, sua força probatória em juízo e a proteção jurídica do ponto comercial na locação empresarial e na ação renovatória.
-Leia mais »
-Norma Silva
-30/08/2026
-Direito da Criança, do Adolescente e da Pessoa Idosa
-Anotações Acadêmicas de 28/08/2026: Princípios e Jurisprudência do ECA
-Neste artigo, você confere as Anotações Acadêmicas de 28/08/2026 sobre a arquitetura dos direitos da criança e do adolescente: a evolução histórica da proteção infantojuvenil, o debate acadêmico sobre a redução da maioridade penal, os princípios estruturantes do ECA, o direito à vida na jurisprudência do STF e a proteção contra a violência doméstica e institucional.
-Leia mais »
-Norma Silva
-30/08/2026
-Direito Penal
-Excesso de Exação: O Que é, Elementos e Consequências Penais
-Neste artigo, você vai entender o que é o excesso de exação, crime previsto no art. 316, §§1º e 2º, do Código Penal Brasileiro, praticado por funcionário público que exige tributo ou contribuição indevidos, ou os cobra por meios vexatórios. Conheça os elementos típicos, a distinção com a concussão, as penas aplicáveis e os reflexos na Lei de Improbidade Administrativa.
-Leia mais »
-Norma Silva
-30/08/2026
-Direito Penal
-Corrupção Ativa: O Que é, Elementos do Crime e Penas Previstas
-Neste artigo, você vai entender o que é a corrupção ativa, como esse crime está tipificado no Código Penal brasileiro, quais são seus elementos constitutivos, as penas aplicáveis, as distinções em relação à corrupção passiva e as principais posições doutrinárias e jurisprudenciais sobre o tema.
-Leia mais »
-Norma Silva
-30/08/2026
-Direito Penal
-Corrupção Passiva: Conceito, Pena e Aplicação no Direito Penal
-A corrupção passiva é um dos crimes contra a Administração Pública mais relevantes do ordenamento jurídico brasileiro, praticado pelo funcionário público que solicita, recebe ou aceita vantagem indevida em razão do cargo. Neste artigo, você vai entender o conceito, os elementos típicos, as modalidades, as penas previstas no Código Penal e os principais entendimentos do STJ e do STF sobre o tema.
-Leia mais »
-Norma Silva
-29/08/2026
-Direito Penal
-Peculato de Uso: Quando o Servidor Público Comete Crime Sem Saber
-Usar o carro da prefeitura para levar o filho na escola ou pegar materiais do almoxarifado parece banal, mas pode configurar o peculato de uso, crime cometido por servidores públicos muitas vezes sem consciência da ilicitude. Neste artigo, você vai entender o conceito, as distinções doutrinárias, o posicionamento dos tribunais e quais condutas colocam o servidor em risco penal.
-Leia mais »
-Norma Silva
-28/08/2026
-Direito Penal
-Crimes contra a Administração Pública: Conceito, Tipos e Penas
-Neste artigo, você vai entender o que são os crimes contra a administração pública no Direito Penal brasileiro, quais são os tipos mais relevantes previstos no Código Penal, como a doutrina e a jurisprudência os interpretam, e quais as consequências jurídicas para quem os pratica. Um guia completo e didático para estudantes, advogados e concurseiros.
-Leia mais »
-Norma Silva
-27/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 26/08/2026: Competência da Justiça do Trabalho
-A Anotações Acadêmicas de 26/08/2026 aprofunda o estudo da competência da Justiça do Trabalho, trazendo os critérios absolutos e relativos, a prorrogação de competência, a exceção de incompetência e a ação rescisória. Neste artigo, você também vai entender o conceito de jurisdição e como se resolvem os conflitos de jurisdição entre órgãos trabalhistas, do TRT ao STF.
-Leia mais »
-Norma Silva
-26/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 25/08/2026: Classificações da Posse
-As Anotações Acadêmicas de 25/08/2026 exploram as seis classificações da posse no direito civil brasileiro, da posse direta e indireta à composse, passando pela posse justa, de boa-fé e pela tradição como forma de aquisição. Neste artigo, você vai entender os critérios legais que definem cada espécie possessória e suas consequências práticas nas ações possessórias.
-Leia mais »
-Norma Silva
-26/08/2026
-Direito Civil
-Fiador e Bem de Família: O Que a Lei 8.245-91 Não te Conta
-Neste artigo, você vai entender por que ser fiador em contratos de locação pode ser uma das decisões mais arriscadas da sua vida financeira. A Lei 8.245/91 permite que o bem de família do fiador seja penhorado para quitar dívidas do locatário, proteção que o próprio devedor não perde. Entenda os riscos reais antes de assinar qualquer fiança.
-Leia mais »
-Norma Silva
-26/08/2026
-Direito Civil
-Contrato de Transporte: Direitos, Deveres e Responsabilidade Civil
-O Contrato de Transporte é um dos institutos mais presentes no cotidiano jurídico brasileiro, disciplinado pelo Código Civil de 2002. Ele impõe obrigações claras ao transportador e garante direitos ao passageiro e ao remetente. Neste artigo, você vai entender a responsabilidade civil do transportador, a cláusula de incolumidade, as excludentes e os principais aspectos práticos envolvendo esse contrato no Direito Civil.
-Leia mais »
-Norma Silva
-25/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 24/08/2026: Controle de Constitucionalidade
-As Anotações Acadêmicas de 24/08/2026 retomam a teoria das inconstitucionalidades e avançam para os parâmetros e as fórmulas do controle de constitucionalidade no Brasil. Neste artigo, você vai entender o bloco de constitucionalidade, a controvérsia sobre o preâmbulo e as modalidades de controle preventivo e repressivo, político e jurídico, essenciais para a prova de Jurisdição Constitucional.
-Leia mais »
-Norma Silva
-24/08/2026
-Direito Civil
-Contrato de Agência e Distribuição: Guia Completo e Atualizado
-O contrato de agência e distribuição ocupa posição central no direito civil dos contratos empresariais, sendo frequentemente confundido com a representação comercial. Sua regulamentação pelo Código Civil de 2002 trouxe importantes inovações normativas e doutrinárias. Neste artigo, você vai compreender o conceito legal, os elementos essenciais, as diferenças entre as duas modalidades, as regras de extinção e as indenizações cabíveis às partes.
-Leia mais »
-Norma Silva
-24/08/2026
-Direito Civil
-Contrato de Seguro: O Que Fazer Quando a Seguradora Não Paga?
-O contrato de seguro é um dos institutos mais presentes na vida cotidiana, mas poucos conhecem sua estrutura jurídica. Regulado pelo Código Civil de 2002, envolve risco, interesse segurável e prêmio. Neste artigo, você vai entender o que é o contrato de seguro, suas espécies, obrigações das partes e os principais efeitos jurídicos segundo a doutrina e a legislação brasileira.
-Leia mais »
-Norma Silva
-23/08/2026
-Direito Civil
-REsp 2.227.076: Por que o STJ Negou União Estável e Reconheceu Namoro Qualificado
-No REsp 2.227.076, a 3ª Turma do STJ afastou o reconhecimento de união estável post mortem de um casal com filho em comum e noivado, concluindo pela existência de namoro qualificado. Neste artigo, você entende os fundamentos do voto vencedor do ministro Cueva, o voto vencido da relatora Nancy Andrighi e por que a Súmula 7 impediu o STJ de reexaminar as provas do processo.
-Leia mais »
-Alexandre Andrade
-22/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 22/08/2026: Empresário, Regime e Registro
-As Anotações Acadêmicas de 22/08/2026 reúnem, em um só lugar, três pilares essenciais do Direito Empresarial: a figura do empresário individual e seus prepostos, os pressupostos constitucionais do regime jurídico comercial e a sistemática do registro de empresa perante o DREI e as Juntas Comerciais. Neste artigo, você vai entender como esses institutos se conectam na prática e como aplicá-los.
-Leia mais »
-Norma Silva
-22/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 21/08/2026: Direito da Criança e Adolescente
-As Anotações Acadêmicas de 21/08/2026 reúnem o conteúdo completo da aula inaugural de Direito da Criança e do Adolescente. Neste artigo, você vai entender a natureza jurídica mista da disciplina, a doutrina da proteção integral, a evolução histórica da proteção à infância no Brasil e a gênese do sistema internacional de proteção à criança e ao adolescente.
-Leia mais »
-Norma Silva
-22/08/2026
-Direito Civil
-Contrato de Constituição de Renda: O Que é e Como Funciona
-O Contrato de Constituição de Renda é um dos institutos mais singulares dos contratos em espécie do Direito Civil brasileiro, marcado por sua natureza aleatória e pela criação de obrigações periódicas. Pouco conhecido na prática cotidiana, ele tem aplicação relevante em situações envolvendo planejamento patrimonial, transferência de bens e garantia de renda futura. Neste artigo, você vai entender o conceito, os elementos essenciais, as partes envolvidas, os efeitos jurídicos e as formas de extinção desse contrato, com fundamento no Código Civil e na doutrina majoritária.
-Leia mais »
-Norma Silva
-22/08/2026
-Direito Civil
-Contrato de Jogo e Aposta: Regime Jurídico no Direito Civil
-O Contrato de Jogo e Aposta é um dos institutos mais singulares do Direito Civil brasileiro, situado na fronteira entre a autonomia privada e os limites impostos pelo ordenamento jurídico. Com regras que vão da inexigibilidade das dívidas de jogo às exceções expressamente autorizadas pelo Estado, o tema exige atenção cuidadosa de juristas e advogados. Neste artigo, você vai compreender a natureza jurídica do contrato, seus efeitos, classificações, o tratamento dado pelos tribunais e os impactos da nova regulamentação das apostas esportivas no Brasil.
-Leia mais »
-Norma Silva
-21/08/2026
-« Anterior
-Página
-1
-Página
-2
-Página
-3
-Página
-4
-Página
-5
-Seguinte »
-© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
-
-## Blog - Jurismenteaberta
-URL: https://jurismenteaberta.com.br/blog/3
-
-Blog - Jurismenteaberta
-Ir para o conteúdo
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Pesquisar ...
-Resultados
-Ver todos os resultados
-Transformando a jornada de aprendizado e colaboração no Direito​
-No JurisMenteAberta, unimos o Direito à inovação tecnológica para desbravar novas formas de aprendizado. Aqui, cada artigo, cada projeto, transforma teorias complexas em conhecimentos acessíveis, desafiando o convencional e ampliando nossas perspectivas jurídicas. Junte-se a esta jornada inovadora e colabore em um ambiente que valoriza o conhecimento contínuo e a aplicação prática do Direito.
-O Direito em Evolução
-Conectando teoria e prática para um conhecimento jurídico mais dinâmico. O Direito está em constante transformação, e o aprendizado jurídico deve acompanhar essa evolução. No JurisMenteAberta, exploramos conceitos tradicionais sob novas perspectivas, trazendo análises aprofundadas e aplicações práticas para um mundo jurídico mais dinâmico e acessível. Desenvolva seu conhecimento de forma inovadora e colaborativa conosco!
-Um Espaço para o Pensamento Jurídico Livre
-Aqui, o Direito não tem limites – explore, aprenda e inove. Mais do que um site, o JurisMenteAberta é um ambiente para mentes inquietas e curiosas. Aqui, incentivamos o pensamento crítico, a interdisciplinaridade e a troca de ideias para construir um Direito mais acessível, eficiente e conectado com a realidade. Participe dessa revolução no conhecimento jurídico!
-Direito Civil
-Contrato de Jogo e Aposta: Regime Jurídico no Direito Civil
-O Contrato de Jogo e Aposta é um dos institutos mais singulares do Direito Civil brasileiro, situado na fronteira entre a autonomia privada e os limites impostos pelo ordenamento jurídico. Com regras que vão da inexigibilidade das dívidas de jogo às exceções expressamente autorizadas pelo Estado, o tema exige atenção cuidadosa de juristas e advogados. Neste artigo, você vai compreender a natureza jurídica do contrato, seus efeitos, classificações, o tratamento dado pelos tribunais e os impactos da nova regulamentação das apostas esportivas no Brasil.
-Leia mais »
-Norma Silva
-21/08/2026
-Direito Civil
-Contrato de Transação: Encerre Litígios com Segurança Jurídica
-O contrato de transação é um dos mecanismos mais eficazes para resolver conflitos no Direito Civil. Previsto nos arts. 840 a 850 do Código Civil, permite que as partes encerrem litígios mediante concessões mútuas, sem depender da lentidão do Judiciário. Neste artigo, você vai entender o conceito, os requisitos, as espécies e os efeitos jurídicos desse contrato essencial à prática jurídica.
-Leia mais »
-Norma Silva
-20/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 19/08/2026: Organização da Justiça do Trabalho
-Este artigo reúne as Anotações Acadêmicas de 19/08/2026, dedicadas à organização da Justiça do Trabalho brasileira e à atuação institucional do Ministério Público do Trabalho. Neste artigo, você vai compreender a estrutura hierárquica dos órgãos trabalhistas, o ingresso na magistratura e o papel do MPT na defesa dos direitos sociais dos trabalhadores.
-Leia mais »
-Norma Silva
-19/08/2026
-Direito Civil
-Contrato de Corretagem: Quando a Comissão é Devida e Quais São os Direitos do Corretor?
-O Contrato de Corretagem é um dos contratos típicos do Direito Civil brasileiro, regulado pelos arts. 722 a 729 do Código Civil, e tem papel central nas relações de intermediação, especialmente no mercado imobiliário. Apesar de sua frequência na prática, muitos desconhecem seus requisitos, os limites da obrigação do corretor e as condições que tornam a comissão exigível. Neste artigo, você vai entender o conceito, a natureza jurídica, os elementos essenciais, as obrigações das partes, a remuneração devida e as principais controvérsias doutrinárias e jurisprudenciais sobre o tema.
-Leia mais »
-Norma Silva
-19/08/2026
-Direito Civil
-Contrato de Comissão: Guia Completo para Entender Esse Instituto
-O contrato de comissão é um dos contratos em espécie mais relevantes do Direito Civil brasileiro, amplamente utilizado nas relações comerciais e empresariais, mas frequentemente confundido com o mandato e a agência. Regulado pelo Código Civil de 2002, nos artigos 693 a 709, ele disciplina a atuação do comissário em nome próprio, por conta do comitente. Neste artigo, você vai entender sua natureza jurídica, as obrigações das partes, a cláusula del credere e os efeitos práticos desse contrato.
-Leia mais »
-Norma Silva
-18/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 17/08/2026: Controle de Constitucionalidade
-Neste artigo, você confere as Anotações Acadêmicas de 17/08/2026 sobre a Teoria Geral do Controle de Constitucionalidade. O conteúdo percorre as premissas do sistema, as funções do controle, a origem histórica nos modelos difuso e concentrado, a evolução constitucional brasileira e as espécies de inconstitucionalidade quanto ao objeto e à natureza do vício, com exemplos práticos.
-Leia mais »
-Norma Silva
-18/08/2026
-Direito Civil
-Contrato de Empréstimo: Comodato, Mútuo e Efeitos Jurídicos
-O contrato de empréstimo é um dos institutos mais presentes no cotidiano do Direito Civil, abrangendo desde o empréstimo gratuito de um bem até operações financeiras com incidência de juros. Regulado pelo Código Civil nos artigos 579 a 592, desdobra-se em comodato e mútuo. Neste artigo, você vai entender as diferenças entre essas espécies, as obrigações das partes e os principais efeitos jurídicos.
-Leia mais »
-Norma Silva
-17/08/2026
-Direito Civil
-Contrato de Mandato: O Que É, como Funciona e Seus Efeitos
-O contrato de mandato é um dos institutos mais presentes na prática jurídica brasileira, utilizado em escritórios, cartórios e negócios cotidianos. Compreender seus elementos, espécies, obrigações e efeitos é indispensável para advogados e estudantes de Direito. Neste artigo, você vai encontrar uma análise completa e didática sobre o mandato no Direito Civil brasileiro, da conceituação doutrinária às hipóteses de extinção.
-Leia mais »
-Norma Silva
-16/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 13/08/2026: Tutelas Provisórias no CPC
-As Anotações Acadêmicas de 13/08/2026 tratam do regime das tutelas provisórias no Código de Processo Civil, distinguindo tutela antecipada, cautelar e de evidência. Neste artigo, você vai compreender os fundamentos constitucionais, os requisitos legais e as principais controvérsias doutrinárias sobre o tema.
-Leia mais »
-Norma Silva
-15/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 15/08/2026: Perfis e Princípios da Empresa
-O que faz de uma atividade uma verdadeira empresa perante o Direito? Nas Anotações Acadêmicas de 15/08/2026, você vai revisar os perfis de Ascini, os elementos do conceito legal de empresário e os princípios da função social, da livre iniciativa e da livre concorrência. Neste artigo, você vai entender também os impedimentos legais e as hipóteses de atividades econômicas civis.
-Leia mais »
-Norma Silva
-15/08/2026
-Direito Civil
-Contrato de Depósito: Do Conceito à Prisão Civil do Depositário
-O contrato de depósito é um dos institutos mais relevantes dos contratos em espécie no Direito Civil brasileiro, regulado pelo Código Civil de 2002. Envolve obrigações específicas de guarda, conservação e restituição, com consequências jurídicas importantes para depositante e depositário. Neste artigo, você vai entender o conceito, as espécies, as obrigações de cada parte, o regime de responsabilidade civil e as controvérsias sobre a prisão civil do depositário infiel.
-Leia mais »
-Norma Silva
-15/08/2026
-Direito Civil
-Contrato Estimatório: O Que é, Como Funciona e Seus Efeitos Jurídicos
-O contrato estimatório é um dos institutos mais versáteis do Direito Civil, regulado pelos Arts. 534 a 537 do Código Civil. Muito utilizado no comércio, ele ainda gera dúvidas entre operadores do Direito. Neste artigo, você vai entender o conceito, a natureza jurídica, as obrigações das partes, os riscos, as vedações legais e a aplicação prática desse contrato no dia a dia jurídico.
-Leia mais »
-Norma Silva
-14/08/2026
-Direito Civil
-Contrato de Empreitada: O Que Assinar, Cobrar e Exigir
-O Contrato de Empreitada é um dos contratos mais relevantes do Direito Civil brasileiro, presente em obras de construção, reformas e serviços de grande porte. Compreender seus tipos, as obrigações de cada parte e os limites da responsabilidade civil do empreiteiro é essencial para quem contrata ou executa obras. Neste artigo, você vai encontrar uma análise completa, doutrinária e atualizada sobre o tema.
-Leia mais »
-Norma Silva
-13/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 11/08/2026: Direitos Reais e a Posse
-As Anotações Acadêmicas de 11/08/2026 reúnem os principais princípios que regem os direitos reais, como aderência, absolutismo e publicidade, além da introdução à teoria da posse no direito civil brasileiro. Neste artigo, você vai entender a diferença entre posse e detenção, as teorias de Savigny e Jhering e como o artigo 1.196 do Código Civil resolveu essa controvérsia doutrinária.
-Leia mais »
-Norma Silva
-13/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 12/08/2026: Fontes e Princípios do Trabalho
-As Anotações Acadêmicas de 12/08/2026 reúnem os principais conceitos sobre as fontes e os princípios do Direito Processual do Trabalho, disciplina essencial para entender como a Justiça do Trabalho resolve conflitos entre empregados e empregadores. Neste artigo, você vai compreender a classificação das fontes e os princípios que orientam o processo trabalhista.
-Leia mais »
-Norma Silva
-12/08/2026
-Direito Civil
-Contrato de Prestação de Serviços: Tudo que Você Precisa Saber
-O Contrato de Prestação de Serviços é um dos instrumentos jurídicos mais utilizados na prática civil. Mas você sabe o que o Código Civil exige para sua validade? Quais são os direitos e deveres das partes? Neste artigo, você vai encontrar uma análise completa, com fundamentos legais, doutrina majoritária e orientações práticas essenciais para prestadores e tomadores de serviço.
-Leia mais »
-Norma Silva
-12/08/2026
-Direito Civil
-Contrato de Mútuo: O Que É, Como Funciona e Seus Efeitos
-O Contrato de Mútuo é um dos mais comuns no Direito Civil brasileiro, regulado pelo Código Civil nos arts. 586 a 592. Apesar de sua ampla presença, muitos desconhecem seus elementos essenciais, regras sobre juros e efeitos jurídicos. Neste artigo, você vai entender o conceito, a natureza jurídica, os tipos, as obrigações das partes e as principais questões práticas e doutrinárias sobre esse contrato.
-Leia mais »
-Norma Silva
-11/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 10/08/2026: O Controle de Constitucionalidade
-Neste artigo, você vai entender o controle de constitucionalidade a partir das Anotações Acadêmicas de 10/08/2026: o conceito, o fundamento na supremacia da Constituição, a diferença entre lei e ato normativo, as ações típicas (ADI, ADC, ADO e ADPF), a reclamação constitucional e os remédios constitucionais que protegem direitos fundamentais no ordenamento jurídico brasileiro.
-Leia mais »
-Norma Silva
-10/08/2026
-Direito Civil
-Contrato de Comodato: O que é, Como Funciona e Direitos das Partes
-O Contrato de Comodato é uma das modalidades de empréstimo mais comuns no cotidiano jurídico, mas ainda gera muitas dúvidas. Trata-se de contrato gratuito, real e unilateral, com regramento específico no Código Civil. Neste artigo, você vai entender o que é o comodato, como ele se diferencia do mútuo, quais as obrigações das partes e o que ocorre em caso de descumprimento contratual.
-Leia mais »
-Norma Silva
-10/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 05/08/2026: Fontes e Princípios do Processo
-Neste artigo, você vai entender o conceito de Direito Processual do Trabalho, suas fontes materiais e formais, e a aplicação subsidiária do CPC ao processo trabalhista via art. 769 da CLT e da Instrução Normativa 39/2016 do TST, além dos princípios fundamentais e peculiares que orientam a Justiça do Trabalho. Anotações Acadêmicas de 05/08/2026 para revisão completa e aprofundada.
-Leia mais »
-Norma Silva
-09/08/2026
-Direito Civil
-Contrato de Doação: O que é, Requisitos e Efeitos Jurídicos
-O contrato de doação é um dos institutos mais presentes no cotidiano jurídico brasileiro, seja em transferências patrimoniais entre familiares, partilhas em vida ou atos de liberalidade entre particulares. Apesar da aparente simplicidade, envolve regras rígidas sobre forma, capacidade, limites e revogação. Neste artigo, você vai entender tudo sobre o contrato de doação: conceito, modalidades, requisitos, efeitos e os principais cuidados jurídicos.
-Leia mais »
-Norma Silva
-09/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 08/08/2026: Da Mercancia à Teoria da Empresa
-Anotações Acadêmicas de 08/08/2026, Direito Empresarial, Direito Comercial, Teoria da Empresa, Teoria dos Atos de Comércio, Código Civil de 2002, artigo 966 do Código Civil, empresário, atividade empresarial, história do direito comercial, fontes do direito empresarial, Código Comercial de 1850, Código Civil italiano de 1942, direito de empresa, sociedade empresária, estabelecimento empresarial, calendário de avaliações, direito empresarial brasileiro.
-Leia mais »
-Norma Silva
-08/08/2026
-Direito Civil
-Contrato de Troca ou Permuta: O Que é, Como Funciona e Efeitos Jurídicos
-O contrato de troca permuta é um dos institutos mais antigos do Direito Civil, mas ainda gera dúvidas sobre requisitos, efeitos e distinções em relação à compra e venda. Conhecer suas regras evita litígios e garante segurança nas negociações. Neste artigo, você vai entender o conceito, a natureza jurídica, as obrigações das partes e as principais aplicações práticas da permuta.
-Leia mais »
-Norma Silva
-08/08/2026
-Direito Civil
-Contrato de Compra e Venda: Conceito, Efeitos e Aspectos Jurídicos
-O contrato de compra e venda está presente em quase todas as relações jurídicas cotidianas, das mais simples às mais complexas. Entender seus elementos essenciais, requisitos de validade, efeitos e riscos é fundamental para qualquer operador do Direito. Neste artigo, você vai conhecer tudo o que o Código Civil brasileiro estabelece sobre esse instituto e como ele se aplica na prática.
-Leia mais »
-Norma Silva
-07/08/2026
-« Anterior
-Página
-1
-Página
-2
-Página
-3
-Página
-4
-Página
-5
-Seguinte »
-© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
-
-## Blog - Jurismenteaberta
-URL: https://jurismenteaberta.com.br/blog/4
-
-Blog - Jurismenteaberta
-Ir para o conteúdo
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Pesquisar ...
-Resultados
-Ver todos os resultados
-Transformando a jornada de aprendizado e colaboração no Direito​
-No JurisMenteAberta, unimos o Direito à inovação tecnológica para desbravar novas formas de aprendizado. Aqui, cada artigo, cada projeto, transforma teorias complexas em conhecimentos acessíveis, desafiando o convencional e ampliando nossas perspectivas jurídicas. Junte-se a esta jornada inovadora e colabore em um ambiente que valoriza o conhecimento contínuo e a aplicação prática do Direito.
-O Direito em Evolução
-Conectando teoria e prática para um conhecimento jurídico mais dinâmico. O Direito está em constante transformação, e o aprendizado jurídico deve acompanhar essa evolução. No JurisMenteAberta, exploramos conceitos tradicionais sob novas perspectivas, trazendo análises aprofundadas e aplicações práticas para um mundo jurídico mais dinâmico e acessível. Desenvolva seu conhecimento de forma inovadora e colaborativa conosco!
-Um Espaço para o Pensamento Jurídico Livre
-Aqui, o Direito não tem limites – explore, aprenda e inove. Mais do que um site, o JurisMenteAberta é um ambiente para mentes inquietas e curiosas. Aqui, incentivamos o pensamento crítico, a interdisciplinaridade e a troca de ideias para construir um Direito mais acessível, eficiente e conectado com a realidade. Participe dessa revolução no conhecimento jurídico!
-Direito Civil
-Aluguel-Pena: Consequências Jurídicas para Quem não Devolve
-Você sabe o que acontece quando o locatário ou comodatário se recusa a devolver a coisa após o término do contrato? O Código Civil prevê uma consequência direta e severa: o aluguel-pena. Neste artigo, você vai entender o que é esse instituto, sua natureza jurídica, como é calculado, quais são seus efeitos práticos e como o credor pode agir para proteger seus direitos.
-Leia mais »
-Norma Silva
-06/08/2026
-Direito Civil
-Turbações de Terceiros na Locação: Obrigações e Defesa do Locatário
-Quando terceiros perturbam o uso do imóvel alugado, surge uma dúvida central: quem deve agir? As turbações de terceiros na locação envolvem obrigações distintas para locador e locatário, conforme a Lei do Inquilinato e o Código Civil. Neste artigo, você vai entender o que caracteriza a turbação, como cada parte deve responder juridicamente e quais são as consequências do descumprimento dessas obrigações.
-Leia mais »
-Norma Silva
-05/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 04/08/2026: Direitos Reais x Direitos Pessoais
-As Anotações Acadêmicas de 04/08/2026 reúnem o conteúdo da aula inaugural da disciplina de Posse e Propriedade, também chamada Direito das Coisas. O material aborda a distinção entre direitos reais e pessoais e a lógica do Código Civil. Neste artigo, você vai entender esses fundamentos e o cronograma completo das avaliações do semestre, incluindo o trabalho de usucapião.
-Leia mais »
-Norma Silva
-04/08/2026
-Direito Civil
-Benfeitorias na Locação: Direitos do Locatário à Indenização
-Quem realiza benfeitorias no imóvel alugado tem direito à indenização? A resposta depende do tipo de benfeitoria e das cláusulas contratuais. Neste artigo, você vai entender a classificação legal das benfeitorias, quando o locatário pode exigir indenização ou exercer o direito de retenção e como se proteger juridicamente antes de assinar qualquer contrato.
-Leia mais »
-Norma Silva
-04/08/2026
-Direito Civil
-Alienação da Coisa Locada: O que Acontece com o Contrato Quando o Bem é Vendido?
-Quando um imóvel alugado é vendido, o que acontece com o contrato de locação? A alienação da coisa locada gera dúvidas práticas para locatários e locadores. O comprador é obrigado a respeitar o aluguel? Existe direito de preferência? Neste artigo, você vai entender como funciona esse instituto, quais direitos a lei garante ao inquilino e quando o contrato pode ou não ser rescindido após a venda.
-Leia mais »
-Norma Silva
-03/08/2026
-Direito Civil
-Direito de Retenção na Locação: Quando o Locatário Pode Reter o Imóvel
-O direito de retenção na locação garante ao locatário recusar a devolução do imóvel enquanto não for indenizado pelas benfeitorias realizadas. Mas nem toda benfeitoria autoriza essa recusa — há requisitos legais precisos a observar. Neste artigo, você vai entender o que é o direito de retenção, quais benfeitorias o fundamentam, como exercê-lo e o que dizem os tribunais sobre o tema.
-Leia mais »
-Norma Silva
-02/08/2026
-Direito Civil
-Contrato de Locação de Coisas: Tudo o que Você Precisa Saber
-O contrato de locação de coisas é um dos institutos mais importantes do Direito Civil, disciplinado pelo Código Civil de 2002. Presente em situações do cotidiano — do aluguel de veículos à locação de equipamentos —, esse contrato exige atenção às suas regras e efeitos jurídicos. Neste artigo, você vai entender o conceito, os elementos essenciais, as obrigações das partes e os principais aspectos práticos desse contrato fundamental no ordenamento civil brasileiro.
-Leia mais »
-Norma Silva
-01/08/2026
-Direito Eleitoral
-Fidelidade e Disciplina Partidária: Regras, Limites e Consequências
-A fidelidade e disciplina partidária ocupam posição central no sistema eleitoral brasileiro e impactam diretamente o mandato parlamentar. A relação entre eleito e partido envolve regras constitucionais, jurisprudência do STF e do TSE e hipóteses de justa causa para desfiliação. Neste artigo, você vai compreender como funciona esse instituto, suas consequências práticas e os limites impostos pela democracia representativa.
-Leia mais »
-Norma Silva
-31/07/2026
-Direito Eleitoral
-Alistamento Eleitoral e o Voto no Brasil: Guia Completo Atualizado
-O alistamento eleitoral e o voto no Brasil representam a base da democracia e da cidadania ativa. Compreender quem deve se alistar, quando o voto é obrigatório ou facultativo e quais são as consequências legais é essencial para evitar problemas com a Justiça Eleitoral. Neste artigo, você vai entender as regras constitucionais, os prazos, os direitos e os deveres do eleitor brasileiro.
-Leia mais »
-Norma Silva
-30/07/2026
-Psicologia Jurídica
-Mediação e Conciliação com Base Psicológica: Emoções e Novo Paradigma no Direito
-A Mediação e Conciliação com Base Psicológica representam uma transformação profunda na forma de lidar com conflitos no sistema jurídico brasileiro. Ao integrar aspectos emocionais à técnica jurídica, esses métodos desafiam a cultura do litígio e promovem soluções mais humanas e eficazes. Neste artigo, você vai entender como a interdisciplinaridade entre Psicologia e Direito impulsiona uma nova lógica de pacificação social.
-Leia mais »
-Norma Silva
-29/07/2026
-Direito Eleitoral
-Partidos Políticos no Brasil: Estrutura, Funções e Regras
-Os partidos políticos no Brasil desempenham papel central na democracia representativa, sendo condição indispensável para candidaturas e organização do sistema eleitoral. Neste artigo, você vai compreender como surgem, como funcionam, quais são suas regras constitucionais, formas de financiamento, cláusula de desempenho e hipóteses de fusão, incorporação e extinção.
-Leia mais »
-Norma Silva
-28/07/2026
-Direito do Trabalho
-Férias Anuais Remuneradas: Regras, Cálculo, Prazos e Direitos do Trabalhador
-As férias anuais remuneradas constituem um dos mais importantes direitos sociais do trabalhador, garantindo período de descanso sem prejuízo salarial após determinado tempo de trabalho. Esse instituto possui fundamentos constitucionais, legais e internacionais, especialmente na CLT e na Convenção nº 132 da OIT. Neste artigo, você vai entender como funcionam as férias no Direito do Trabalho brasileiro, seus requisitos, prazos, cálculo, hipóteses de perda do direito, fracionamento e as diferenças entre férias individuais e coletivas.
-Leia mais »
-Norma Silva
-25/07/2026
-Psicologia Jurídica
-Perícia Psicológica no Processo Judicial: Como Funciona e Seu Peso no Laudo
-A perícia psicológica no processo judicial é um instrumento essencial para esclarecer questões como competência mental, credibilidade de testemunhas e capacidade civil. Neste artigo, você vai entender como funciona a avaliação psicológica no processo, qual é o papel do psicólogo perito judicial e qual o peso do laudo psicológico judicial na decisão do juiz, com base na Resolução CFP 006/2019.
-Leia mais »
-Norma Silva
-24/07/2026
-Direito Eleitoral
-Emenda Constitucional de 1969: O Endurecimento do Regime Militar
-A Emenda Constitucional de 1969 representou o momento mais duro do regime militar brasileiro, consolidando a centralização do poder e restringindo severamente os direitos políticos. Suas mudanças afetaram eleições, partidos e garantias constitucionais. Neste artigo, você vai entender como essa Emenda alterou o cenário jurídico-eleitoral e marcou profundamente a história constitucional do Brasil.
-Leia mais »
-Norma Silva
-23/07/2026
-Direito Eleitoral
-Constituição de 1988: A Consolidação da Democracia e do Sufrágio Universal
-A Constituição de 1988 marcou a consolidação da democracia brasileira ao instituir o sufrágio universal como pilar do Estado Democrático de Direito. Ao ampliar direitos políticos e fortalecer garantias eleitorais, transformou o sistema representativo nacional. Neste artigo, você compreenderá os fundamentos jurídicos, impactos práticos e a relevância histórica desse marco constitucional.
-Leia mais »
-Norma Silva
-22/07/2026
-Direito Eleitoral
-Constituição de 1967: O Direito Eleitoral no Regime Militar
-A Constituição de 1967 marcou uma profunda transformação no sistema político brasileiro, especialmente no Direito Eleitoral. Elaborada durante o Regime Militar, ela redefiniu regras sobre partidos, eleições e participação democrática. Neste artigo, você vai compreender como esse texto constitucional moldou o processo eleitoral, restringiu direitos políticos e influenciou a democracia brasileira.
-Leia mais »
-Norma Silva
-21/07/2026
-Direito Eleitoral
-Constituição de 1824: Origem do Direito Eleitoral Brasileiro
-A Constituição de 1824 marcou o início da organização institucional do Brasil independente e estruturou o primeiro modelo de participação política do país. Ao estabelecer regras sobre cidadania, voto censitário e organização dos poderes, ela lançou as bases do Direito Eleitoral brasileiro. Neste artigo, você vai compreender como esse texto constitucional moldou o sistema político imperial e influenciou as constituições posteriores.
-Leia mais »
-Norma Silva
-20/07/2026
-Direito Eleitoral
-Constituição de 1946: A Redemocratização e o Sistema Eleitoral
-A Constituição de 1946 marcou o fim do Estado Novo e inaugurou uma nova fase democrática no Brasil, com impacto direto no Direito Eleitoral e na organização do sistema político. Neste artigo, você vai compreender como a Constituição de 1946 fortaleceu o sistema eleitoral, restaurou direitos políticos e estruturou instituições fundamentais para a democracia brasileira.
-Leia mais »
-Norma Silva
-19/07/2026
-Direito Penal
-Violência Contra a Mulher no Brasil: Por Que Ainda Falhamos em Proteger?
-A violência contra a mulher no Brasil continua sendo uma das mais graves violações de direitos humanos da atualidade. Mesmo com avanços legislativos como a Lei Maria da Penha e a tipificação do feminicídio, milhares de mulheres seguem sendo vítimas de agressões físicas, psicológicas e assassinatos. Neste artigo, você vai entender as causas desse problema estrutural e refletir sobre caminhos reais para combatê-lo na sociedade.
-Leia mais »
-Norma Silva
-19/07/2026
-Direito Eleitoral
-Constituição de 1937: O Retrocesso Autoritário no Direito Eleitoral
-A Constituição de 1937 marcou um dos períodos mais autoritários da história constitucional brasileira e representou um profundo retrocesso no Direito Eleitoral. Ao dissolver partidos, suspender eleições e concentrar poderes no Executivo, o texto inaugurou o Estado Novo. Neste artigo, você vai entender como esse modelo impactou o sistema eleitoral e a democracia no Brasil.
-Leia mais »
-Norma Silva
-18/07/2026
-Direito Eleitoral
-Constituição de 1934: Origem da Justiça Eleitoral e do Voto Feminino
-A Constituição de 1934 representou um marco decisivo no constitucionalismo brasileiro ao consolidar a Justiça Eleitoral e reconhecer o voto feminino. Essas mudanças redefiniram o sistema político nacional e ampliaram a participação democrática. Neste artigo, você vai compreender como a Constituição de 1934 transformou o Direito Eleitoral e moldou a democracia brasileira.
-Leia mais »
-Norma Silva
-17/07/2026
-Direito Eleitoral
-Urna Eletrônica: Segurança e Transparência nas Eleições
-A urna eletrônica é frequentemente alvo de debates públicos, questionamentos políticos e desinformação. No entanto, o sistema eleitoral brasileiro é estruturado sobre bases constitucionais sólidas, fiscalização ampla e múltiplas camadas de auditoria. Neste artigo, você vai entender como funciona a urna eletrônica, quais são os mecanismos de segurança e como a transparência do processo eleitoral é juridicamente garantida no Brasil.
-Leia mais »
-Norma Silva
-16/07/2026
-Psicologia Jurídica
-Diversidade de Modelos Familiares: Impactos na Legislação Brasileira
-A diversidade de modelos familiares transformou profundamente a aplicação do Direito de Família no Brasil. O reconhecimento das famílias homoafetivas e das famílias recompostas impôs novos desafios interpretativos aos tribunais. Neste artigo, você vai compreender como essas mudanças impactam decisões judiciais e quais são as implicações psicológicas para os envolvidos.
-Leia mais »
-Norma Silva
-15/07/2026
-Direito Eleitoral
-Constituição de 1891: Impactos no Direito Eleitoral
-A Constituição de 1891 marcou a consolidação do regime republicano e transformou profundamente o sistema eleitoral brasileiro. Ao instituir o federalismo, o voto direto e novas regras de cidadania política, ela redefiniu o exercício do poder no país. Neste artigo, você vai entender como a Constituição de 1891 impactou o Direito Eleitoral e moldou a democracia brasileira nascente.
-Leia mais »
-Norma Silva
-14/07/2026
-« Anterior
-Página
-1
-Página
-2
-Página
-3
-Página
-4
-Página
-5
-Seguinte »
-© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
-
-## Blog - Jurismenteaberta
-URL: https://jurismenteaberta.com.br/blog/5
-
-Blog - Jurismenteaberta
-Ir para o conteúdo
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Pesquisar ...
-Resultados
-Ver todos os resultados
-Transformando a jornada de aprendizado e colaboração no Direito​
-No JurisMenteAberta, unimos o Direito à inovação tecnológica para desbravar novas formas de aprendizado. Aqui, cada artigo, cada projeto, transforma teorias complexas em conhecimentos acessíveis, desafiando o convencional e ampliando nossas perspectivas jurídicas. Junte-se a esta jornada inovadora e colabore em um ambiente que valoriza o conhecimento contínuo e a aplicação prática do Direito.
-O Direito em Evolução
-Conectando teoria e prática para um conhecimento jurídico mais dinâmico. O Direito está em constante transformação, e o aprendizado jurídico deve acompanhar essa evolução. No JurisMenteAberta, exploramos conceitos tradicionais sob novas perspectivas, trazendo análises aprofundadas e aplicações práticas para um mundo jurídico mais dinâmico e acessível. Desenvolva seu conhecimento de forma inovadora e colaborativa conosco!
-Um Espaço para o Pensamento Jurídico Livre
-Aqui, o Direito não tem limites – explore, aprenda e inove. Mais do que um site, o JurisMenteAberta é um ambiente para mentes inquietas e curiosas. Aqui, incentivamos o pensamento crítico, a interdisciplinaridade e a troca de ideias para construir um Direito mais acessível, eficiente e conectado com a realidade. Participe dessa revolução no conhecimento jurídico!
-Direito Eleitoral
-O que é o Direito Eleitoral: Conceito, Princípios e Funções
-O que é o Direito Eleitoral e por que ele é essencial para a democracia? Esse ramo jurídico organiza o processo eleitoral, garante a legitimidade do voto e assegura a soberania popular. Neste artigo, você vai entender seus fundamentos, princípios, estrutura normativa e aplicação prática no sistema político brasileiro.
-Leia mais »
-Norma Silva
-13/07/2026
-Direito Eleitoral
-Princípio da Eleição Proporcional: Como Funciona no Brasil?
-O Princípio da Eleição Proporcional é o critério constitucional que define como são distribuídas as cadeiras nas eleições para deputado e vereador no Brasil. Diferente do sistema majoritário, ele considera os votos dados aos partidos e aos candidatos. Neste artigo, você vai entender como funciona o cálculo do quociente eleitoral, sua base constitucional, sua finalidade democrática e suas implicações práticas.
-Leia mais »
-Norma Silva
-12/07/2026
-Direito Eleitoral
-Princípio da Eleição Majoritária: Fundamentos e Aplicação Prática
-O Princípio da Eleição Majoritária estrutura a escolha de representantes para cargos específicos no sistema eleitoral brasileiro, priorizando a vontade da maioria dos eleitores. Neste artigo, você vai compreender seus fundamentos constitucionais, diferenças em relação ao sistema proporcional, hipóteses de aplicação, segundo turno e os principais debates doutrinários e jurisprudenciais.
-Leia mais »
-Norma Silva
-11/07/2026
-Psicologia Jurídica
-Ética na Psicologia Jurídica: Confidencialidade e Imparcialidade
-A ética na psicologia jurídica orienta a atuação do profissional no sistema de justiça, especialmente quanto à confidencialidade no processo judicial, à imparcialidade do perito e à prevenção de conflito de interesses do psicólogo. Neste artigo, você compreenderá os princípios éticos que fundamentam essa atuação e como aplicá-los na prática forense.
-Leia mais »
-Norma Silva
-10/07/2026
-Psicologia Jurídica
-Psicologia Jurídica nas Redes de Proteção: Violência e Reabilitação
-A Psicologia Jurídica nas Redes de Proteção exerce papel central no enfrentamento da violência doméstica, na proteção da infância e na reabilitação de infratores. Neste artigo, você vai entender como a atuação psicológica no sistema prisional e nos serviços socioassistenciais fortalece políticas públicas, rompe ciclos de violência e promove reintegração social efetiva.
-Leia mais »
-Norma Silva
-09/07/2026
-Psicologia Jurídica
-Psicologia Jurídica e Psicologia Forense: Entenda as Diferenças na Prática
-A psicologia jurídica e psicologia forense costumam ser tratadas como sinônimos, mas apresentam diferenças relevantes na prática profissional. Enquanto uma possui campo mais amplo de atuação junto ao Direito, a outra está diretamente ligada à produção de prova técnica. Neste artigo, você vai compreender a diferença psicologia forense e jurídica, suas funções e aplicações reais.
-Leia mais »
-Norma Silva
-08/07/2026
-Psicologia Jurídica
-Psicologia Jurídica: Conceito, Origem e Importância Prática
-A Psicologia Jurídica é a área que conecta o conhecimento psicológico ao funcionamento do sistema de justiça. Apesar de frequentemente confundida com a Psicologia Forense, possui campo de atuação mais amplo e estratégico. Neste artigo, você vai entender o que é Psicologia Jurídica, como surgiu, qual sua importância prática e qual a diferença entre psicologia jurídica e psicologia forense no Judiciário.
-Leia mais »
-Norma Silva
-07/07/2026
-Direito Penal
-Dosimetria da Pena Passo a Passo: Guia Prático da 1ª à 3ª fase
-Dosimetria da Pena Passo a Passo é o caminho para compreender como o juiz chega ao “tamanho” da pena no caso concreto, fase por fase. Neste artigo, você vai ver o método trifásico com linguagem clara, exemplos práticos, frações usuais e alertas sobre erros comuns que geram nulidades e recursos.
-Leia mais »
-Norma Silva
-06/07/2026
-Direito Penal
-Qual a Diferença Entre Dolo e Culpa? Entenda de Vez
-Qual a diferença entre dolo e culpa? Essa é uma das dúvidas mais comuns no Direito Penal e influencia diretamente a responsabilização criminal. A distinção impacta a pena, a tipificação e a estratégia de defesa. Neste artigo, você vai compreender os conceitos, exemplos práticos e como tribunais aplicam essa diferença.
-Leia mais »
-Norma Silva
-05/07/2026
-Criminologia
-Escola Positiva: Determinismo, Lombroso e a Pena Individualizada
-A Escola Positiva revolucionou a criminologia ao defender que o crime decorre de fatores biológicos, psicológicos e sociais. Liderada por Lombroso, Ferri e Garofalo, rompeu com o livre-arbítrio da Escola Clássica e introduziu o método científico no estudo do criminoso. Neste artigo, você vai compreender seus fundamentos, críticas e impactos no Direito Penal contemporâneo.
-Leia mais »
-Norma Silva
-04/07/2026
-Direito Processual Civil
-Meios de Prova no Processo Civil: Tipos, Regras e Aplicações Práticas
-Os meios de prova no processo civil são fundamentais para a formação do convencimento do juiz e para o êxito da demanda. Cada tipo probatório possui regras próprias de admissibilidade, produção e valoração. Neste artigo, você vai compreender os principais meios de prova previstos no CPC, suas aplicações práticas, limites legais e impactos estratégicos na instrução processual.
-Leia mais »
-Norma Silva
-03/07/2026
-Direito Processual Civil
-Verdade Formal e Convencimento Judicial no CPC: Limites e Critérios
-A verdade formal e o convencimento judicial no CPC estruturam a forma como o juiz decide com base nas provas constantes dos autos. Neste artigo, analisamos a diferença entre a verdade construída processualmente e a verdade real dos fatos, os limites da atividade probatória, o papel da evidência e os critérios racionais que orientam a formação do convencimento judicial no processo civil contemporâneo.
-Leia mais »
-Norma Silva
-02/07/2026
-Direito Processual Civil
-Direito à Prova: Base Constitucional, Contraditório e Ampla Defesa
-O Direito à Prova é um dos pilares do processo civil constitucional, garantindo às partes a efetiva participação na formação do convencimento judicial. Neste artigo, analisamos o Direito à Prova sob sua base constitucional, com especial atenção ao contraditório e à ampla defesa, demonstrando como esses princípios estruturam a atividade probatória, limitam o poder do juiz e asseguram decisões legítimas e fundamentadas.
-Leia mais »
-Norma Silva
-01/07/2026
-Direito Processual Civil
-Teoria da Prova no Processo Civil: Função, Constituição e CPC
-A Teoria da Prova no Processo Civil é essencial para compreender como o juiz forma sua convicção a partir dos elementos trazidos pelas partes. Neste artigo, analisamos o conceito de prova, sua função no processo civil brasileiro e seus fundamentos constitucionais e legais, especialmente à luz da Constituição Federal e do Código de Processo Civil, com enfoque prático e doutrinário.
-Leia mais »
-Norma Silva
-30/06/2026
-Direito Processual Civil
-Fase de Saneamento e Organização do Processo Civil: Guia Completo no CPC/2015
-A fase de saneamento e organização do processo civil representa um dos momentos mais estratégicos do procedimento comum no CPC/2015, pois é nela que o juiz estrutura o processo para a fase instrutória. Nesse estágio, são resolvidas questões processuais pendentes, delimitados os pontos controvertidos e definidos os meios de prova. Neste artigo, você vai entender a função do saneamento processual, seus objetivos jurídicos essenciais, a distinção entre atos preparatórios e a importância da correta delimitação das controvérsias para a eficiência do processo.
-Leia mais »
-Norma Silva
-29/06/2026
-Criminologia
-Escola Clássica na Criminologia: Fundamentos e Impacto Atual
-A Escola Clássica na Criminologia marcou o início da racionalização do Direito Penal moderno ao defender o livre-arbítrio, o princípio da legalidade e a proporcionalidade das penas. Neste artigo, você vai compreender como Beccaria e Bentham transformaram a lógica punitiva do século XVIII e por que suas ideias ainda influenciam o sistema penal contemporâneo.
-Leia mais »
-Norma Silva
-28/06/2026
-Criminologia
-Escola Sociológica: Teorias que Explicam a Criminalidade
-A Escola Sociológica revolucionou a Criminologia ao deslocar o foco do indivíduo para o contexto social na explicação do crime. Teorias como a desorganização social, anomia, conflito e rotulação revelam como o ambiente urbano, as desigualdades estruturais e as reações sociais moldam a criminalidade. Neste artigo, você vai compreender como essas teorias explicam o fenômeno criminal e sua relevância prática.
-Leia mais »
-Norma Silva
-27/06/2026
-Criminologia
-Novas Tendências Criminológicas: Enfoques Críticos, Ambientais e Digitais
-As novas tendências criminológicas revelam uma mudança profunda na forma de compreender o crime, o controle penal e seus impactos sociais. Neste artigo, analisamos como a criminologia crítica, a vitimologia, a criminologia ambiental e a criminologia da tecnologia ampliam o olhar tradicional sobre a criminalidade, incorporando fatores estruturais, ambientais e digitais à análise criminológica contemporânea.
-Leia mais »
-Norma Silva
-26/06/2026
-Direito Processual Civil
-Audiência de Instrução e Julgamento: Função, Etapas e Importância no CPC
-A Audiência de Instrução e Julgamento é um dos momentos mais relevantes do processo civil, pois concentra a produção de provas orais e permite o contato direto do juiz com as partes e testemunhas. Neste artigo, você vai compreender a finalidade da audiência, suas etapas, a atuação do magistrado, das partes e dos advogados, além dos impactos práticos na formação do convencimento judicial e no resultado da demanda.
-Leia mais »
-Norma Silva
-25/06/2026
-Direito Processual Civil
-Suspensão do Processo Civil: Hipóteses Legais, Efeitos e Limites no CPC
-A suspensão do processo civil é um instituto essencial para garantir segurança jurídica e racionalidade procedimental diante de eventos que impedem o regular andamento da demanda. Prevista no Código de Processo Civil, ela interrompe temporariamente o curso do processo sem extinguir a relação processual. Neste artigo, você vai compreender o conceito, as hipóteses legais, os efeitos práticos da suspensão, seus limites, a suspensão por convenção das partes e os reflexos sobre atos processuais e recursos.
-Leia mais »
-Norma Silva
-24/06/2026
-Direito Processual Civil
-Improcedência Liminar do Pedido: Conceito, Requisitos e Efeitos no CPC
-A improcedência liminar do pedido permite ao juiz julgar o mérito da causa logo no início do processo, sem a produção de provas ou a citação do réu, quando presentes hipóteses legais específicas. Neste artigo, você vai entender o conceito, a finalidade e os pressupostos da improcedência liminar do pedido no CPC, suas diferenças em relação ao julgamento antecipado do mérito, os efeitos sobre a petição inicial e as peculiaridades de sua aplicação em ações de família e de consumo, com análise prática e técnica do instituto.
-Leia mais »
-Norma Silva
-23/06/2026
-Direito Processual Civil
-Petição Inicial Mal Protocolada: Consequências Práticas no Processo
-A petição inicial mal protocolada é uma falha que pode comprometer seriamente o andamento do processo civil, gerando desde atrasos até a extinção sem resolução do mérito. Neste artigo, você vai entender quais são os erros mais comuns no protocolo da petição inicial, como o Judiciário trata essas irregularidades, quais consequências práticas recaem sobre a parte e o advogado, além de como a jurisprudência e o CPC lidam com essas situações.
-Leia mais »
-Norma Silva
-22/06/2026
-Direito Processual Civil
-Cumulação de Pedidos: Requisitos, Espécies e Aplicação no CPC
-A cumulação de pedidos é uma técnica processual fundamental no Direito Processual Civil, permitindo que o autor formule mais de uma pretensão na mesma ação, desde que observados os requisitos legais do CPC. Neste artigo, você vai compreender as espécies de cumulação de pedidos, seus limites, fundamentos doutrinários, consequências práticas e como os tribunais aplicam o instituto no dia a dia forense.
-Leia mais »
-Norma Silva
-21/06/2026
-Direito Processual Civil
-Petição Inicial Eletrônica no CPC: Regras, Padrões e Erros Comuns
-A Petição Inicial Eletrônica no CPC transformou profundamente a prática forense, exigindo atenção redobrada às regras processuais e aos padrões técnicos dos sistemas judiciais. Erros formais, falhas na juntada de documentos ou descuidos na estrutura podem levar ao indeferimento da inicial. Neste artigo, você vai entender como elaborar corretamente a petição inicial no meio eletrônico, evitar nulidades e atuar com mais segurança no processo civil.
-Leia mais »
-Norma Silva
-20/06/2026
 « Anterior
 Página
 1
@@ -1797,156 +941,53 @@ Resultados
 Ver todos os resultados
 Confira abaixo os resultados que correspondem à sua pesquisa. Esperamos que encontre o que procura e continue sua exploração pelo JurisMenteAberta!
 Direito Processual do Trabalho
+Prorrogação de Competência no Processo do Trabalho: Efeitos da Inércia da Parte
+A prorrogação de competência no processo do trabalho ocorre quando a parte deixa de alegar a incompetência relativa no momento processual adequado. Neste artigo, você entenderá a diferença entre competência absoluta e relativa, o fundamento legal da prorrogação e os efeitos concretos da inércia sobre o andamento do processo trabalhista.
+Leia mais
+Norma Silva
+20/09/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 19/09/2026: Propriedade Industrial
+As Anotações Acadêmicas de 19/09/2026 organizam a propriedade industrial de forma clara para quem estuda Direito Empresarial. Neste artigo, você vai entender a diferença entre patente e registro, o teste de patenteabilidade, os requisitos do desenho industrial e da marca, o processo no INPI, a prioridade unionista, a licença, a cessão e o nome empresarial, com exemplos práticos.
+Leia mais
+Norma Silva
+20/09/2026
+Direito Processual do Trabalho
+Ação Rescisória por Incompetência Absoluta: Prazo, Requisitos e Jurisprudência do TST
+A ação rescisória por incompetência absoluta desconstitui decisões proferidas por juízo sem competência para julgar a causa. Neste artigo, você entende o fundamento no art. 966, II, do CPC, o termo inicial do prazo decadencial de dois anos (art. 975 CPC), os requisitos de cabimento segundo a Súmula 100 do TST e exemplos de casos julgados envolvendo a competência da Justiça do Trabalho.
+Leia mais
+Norma Silva
+28/08/2026
+Direito Processual Civil
+Tutela Provisória no Processo Civil: Conceito, Requisitos e Modalidades
+A tutela provisória permite ao juiz antecipar, ainda que parcialmente, uma proteção jurisdicional antes da decisão final. Neste artigo, você entende o conceito, os requisitos legais e as modalidades previstas no CPC/2015: tutela de urgência (antecipada e cautelar) e tutela de evidência, com o procedimento antecedente e incidental explicado passo a passo.
+Leia mais
+Norma Silva
+30/08/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 18/09/2026: Adoção e Conselho Tutelar no ECA
+As Anotações Acadêmicas de 18/09/2026 reúnem o estudo completo da adoção no Estatuto da Criança e do Adolescente e o início da unidade dos Conselhos. Neste artigo, você vai entender as vedações, os requisitos, o procedimento de habilitação, o apadrinhamento e os efeitos da sentença de adoção, além da composição e do processo de escolha do Conselho Tutelar.
+Leia mais
+Norma Silva
+19/09/2026
+Direito Processual do Trabalho
+Exceção de Incompetência Trabalhista: Rito do Art. 800 CLT
+A imagem apresenta uma mesa com um mapa da América do Sul em destaque, sobre o qual estão dispostos elementos jurídicos e de orientação: um malhete de juiz de madeira, uma bússola metálica dourada, uma pasta ou documento branco fechado e marcadores de couro interligados por fios a alfinetes vermelhos afixados no mapa. Ao fundo, observa-se um ambiente de escritório elegante e bem iluminado, sugerindo uma composição temática relacionada a direito, jurisdição territorial ou planejamento legal.
+Leia mais
+Norma Silva
+30/08/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 17/09/2026: Liquidação de Sentença
+Anotações Acadêmicas de 17/09/2026: este artigo explica a liquidação de sentença no CPC, da natureza jurídica e suas espécies aos aspectos procedimentais, à liquidação provisória e à liquidação com dano zero, além dos primeiros conceitos sobre o título executivo. Neste artigo, você vai entender como aplicar cada instituto na prática forense e nos estudos para a prova.
+Leia mais
+Norma Silva
+17/09/2026
+Direito Processual do Trabalho
 Princípio da Oralidade no Processo do Trabalho: Guia Completo
 O princípio da oralidade no processo do trabalho orienta a dinâmica das audiências trabalhistas, priorizando a palavra falada sobre a forma escrita. Compreender seus subprincípios é essencial para advogados e estudantes. Neste artigo, você vai entender a concentração dos atos, a imediatidade, a identidade física do juiz e a prevalência da prova oral, conforme a doutrina majoritária.
 Leia mais
 Norma Silva
 30/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 16/09/2026: Da Petição à Audiência Trabalhista
-A petição inicial trabalhista exige requisitos próprios, distintos do processo civil, e a audiência segue um rito rígido, cheio de armadilhas processuais para quem não está preparado. Neste artigo, as Anotações Acadêmicas de 16/09/2026 mostram como estruturar a reclamação trabalhista, qualificar as partes, formular a causa de pedir e conduzir cada fase da audiência una da CLT.
-Leia mais
-Norma Silva
-16/09/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 15/09/2026: Registro e Acessão Imobiliária
-O Código Civil prevê modos próprios para adquirir a propriedade de um imóvel, e ignorá-los custa caro a quem compra, herda ou constrói. Nas Anotações Acadêmicas de 15/09/2026, você confere o registro imobiliário e a acessão, da formação de ilhas à invasão de terreno vizinho. Neste artigo, você entende quando a boa-fé garante indenização e quando garante a propriedade do solo.
-Leia mais
-Norma Silva
-16/09/2026
-Direito Processual Civil
-Tutela Antecipada Antecedente: Entenda o Procedimento no CPC
-A tutela antecipada antecedente permite obter uma decisão urgente antes mesmo de formular o pedido final, agilizando a proteção do direito ameaçado no processo civil. Neste artigo, você vai entender como funciona o procedimento previsto no CPC, quais são os requisitos legais, como ocorre a estabilização da tutela e o que decidiu o STJ sobre o tema.
-Leia mais
-Norma Silva
-30/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 14/09/2026: ADI, Legitimidade e Procedimento
-A Ação Direta de Inconstitucionalidade é o principal instrumento do controle concentrado no Brasil, mas quem pode propô-la e o que ela pode atacar segue regras rígidas. Neste artigo, você vai entender a legitimidade ativa e passiva, o objeto da ADI, o procedimento perante o STF, a cautelar e os efeitos da decisão, com base na Lei 9.868/1999 e na jurisprudência do STF.
-Leia mais
-Norma Silva
-16/09/2026
-Direito Empresarial
-Concorrência Desleal e Aviltamento: Entenda as Fronteiras Legais
-A concorrência desleal e o aviltamento de preços ameaçam o equilíbrio do mercado e a livre iniciativa. Enquanto a deslealdade fere a ética concorrencial, o aviltamento distorce preços e prejudica consumidores e concorrentes. Neste artigo, você vai entender as fronteiras entre concorrência legítima, desleal, aviltamento e monopólio à luz da Lei de Propriedade Industrial e do CADE.
-Leia mais
-Norma Silva
-30/08/2026
-Direito Processual do Trabalho
-Jus Postulandi na Justiça do Trabalho: Alcance e Limites Segundo o TST
-O jus postulandi na Justiça do Trabalho permite que empregado e empregador atuem sem advogado em algumas fases do processo trabalhista, mas essa prerrogativa tem limites importantes fixados pela Súmula 425 do TST. Neste artigo, você vai entender o alcance real do instituto, suas restrições e quando a assistência de um advogado se torna indispensável.
-Leia mais
-Norma Silva
-20/08/2026
-Direito Empresarial
-Desconsideração da Personalidade Jurídica: Requisitos e Aplicação
-A Desconsideração da Personalidade Jurídica permite responsabilizar o patrimônio pessoal de sócios em casos de abuso, fraude ou confusão patrimonial. Neste artigo, você vai entender a origem do instituto, seus requisitos legais, a diferença entre teoria maior e menor, e como funciona a inclusão do sócio no polo passivo da ação.
-Leia mais
-Norma Silva
-17/08/2026
-« Anterior
-Posterior»
-© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
-
-## 20/05/2026 - Jurismenteaberta
-URL: https://jurismenteaberta.com.br/2026/05/20?e-page-6e265f69=2
-
-20/05/2026 - Jurismenteaberta
-Ir para o conteúdo
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Home
-Áreas de Estudo
-Anotações Acadêmicas
-Anotações Acadêmicas – I Semestre
-Anotações Acadêmicas – II Semestre
-Anotações Acadêmicas – III Semestre
-Anotações Acadêmicas – IV Semestre
-Anotações Acadêmicas – V Semestre
-Anotações Acadêmicas – VI Semestre
-Disciplina de Jurisdição e Processo Constitucional
-Disciplina de Posse e Propriedade
-Disciplina de Processo do Trabalho
-Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
-Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
-Disciplina de Teoria da Empresa e Títulos de Crédito
-Disciplina de Direito Digital
-Disciplina de Projeto de Extensão V – Direito
-Direito em Vídeos
-Projeto de Extensão
-Blog
-Quem Somos?
-Pesquisar ...
-Resultados
-Ver todos os resultados
-Confira abaixo os resultados que correspondem à sua pesquisa. Esperamos que encontre o que procura e continue sua exploração pelo JurisMenteAberta!
-Direito Constitucional
-O Que São Os 5 Poderes No Brasil? Entenda Como Funcionam
-Você já pesquisou o que são os 5 poderes no Brasil e encontrou respostas diferentes? Embora a Constituição fale em três poderes, a estrutura do Estado envolve funções institucionais que ampliam essa discussão. Neste artigo, você vai entender de forma clara e objetiva o que são os 5 poderes no Brasil, como surgem e qual é o papel de cada um.
-Leia mais
-Norma Silva
-13/09/2026
-Direito Empresarial
-Registro do Empresário Rural: Entenda os Efeitos da Opção
-O registro do empresário rural na Junta Comercial é facultativo, mas gera efeitos jurídicos concretos para quem vive do campo. O artigo compara a agricultura familiar e a agroindústria à luz do art. 971 do Código Civil, destacando riscos e benefícios de cada caminho. Neste artigo, você vai entender as vantagens, os riscos e as consequências práticas de registrar ou não a atividade rural.
-Leia mais
-Norma Silva
-17/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 12/09/2026: Nome Empresarial e Suas Proteções
-O nome empresarial identifica o empresário em suas relações jurídicas e recebe proteção legal própria, distinta da marca e do nome fantasia. Nas Anotações Acadêmicas de 12/09/2026, você confere os princípios da veracidade e da novidade, as espécies firma e denominação e a regra da inalienabilidade. Neste artigo, você vai entender como proteger corretamente a identidade do seu negócio.
-Leia mais
-Norma Silva
-12/09/2026
-Direito da Criança, do Adolescente e da Pessoa Idosa
-Anotações Acadêmicas de 11/09/2026: Direitos, Guarda e Tutela no ECA
-Nas Anotações Acadêmicas de 11/09/2026, o estudo avança da proteção especial e do direito à educação para a convivência familiar e comunitária. Neste artigo, você compreenderá a distinção entre pedofilia e abuso sexual, o enfrentamento aos maus-tratos, as políticas educacionais, as regras de prevenção e viagens, o acolhimento, a família substituta, a guarda e a tutela no ECA.
-Leia mais
-Norma Silva
-12/09/2026
-Direito Empresarial
-Teoria dos Perfis da Empresa: Origem em Asquini e Recepção no Brasil
-A Teoria dos Perfis da Empresa, formulada por Alberto Asquini em 1943, chegou ao Brasil por meio da tradução de Fábio Konder Comparato e hoje orienta a leitura do art. 966 do Código Civil. Neste artigo, você vai entender a origem histórica da teoria, sua recepção doutrinária no Brasil e seus reflexos práticos no conceito de empresário e na estrutura do direito empresarial brasileiro.
-Leia mais
-Norma Silva
-16/08/2026
-Direito Empresarial
-Quem Não Pode Ser Empresário: Impedimentos Legais Explicados
-Nem toda pessoa pode exercer atividade empresarial no Brasil. A lei impõe impedimentos legais específicos a magistrados, membros do Ministério Público, servidores públicos, militares, estrangeiros e falidos não reabilitados. Neste artigo, você vai entender quem não pode ser empresário e por quê, com base na legislação vigente e na doutrina majoritária.
-Leia mais
-Norma Silva
-16/08/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 08/09/2026: Direito de Propriedade e Aquisição dos Bens Móveis
-Nas Anotações Acadêmicas de 08/09/2026, a aula de Direito Civil percorre o conceito e a função social da propriedade, sua extensão vertical, suas faculdades e seus atributos. Neste artigo, você também entenderá a descoberta e os modos de aquisição da propriedade móvel, como ocupação, achado do tesouro, tradição, especificação, confusão, comistão e adjunção.
-Leia mais
-Norma Silva
-12/09/2026
-Anotações Acadêmicas
-Anotações Acadêmicas de 10/09/2026: Princípios da Execução Civil
-Nas Anotações Acadêmicas de 10/09/2026, estudamos os princípios fundamentais da execução civil, com destaque para tipicidade e atipicidade, boa-fé, responsabilidade patrimonial, contraditório, menor onerosidade, disponibilidade e responsabilidade objetiva do exequente. Neste artigo, você compreenderá ainda os critérios do STF e do STJ e a introdução à liquidação de sentença.
-Leia mais
-Norma Silva
-13/09/2026
 « Anterior
 Posterior»
 © JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
@@ -2021,4 +1062,555 @@ A filosofia do site é dupla: primeiro, servir como minha ferramenta de aprendiz
 Além de ser um recurso pessoal de estudo, o JurisMenteAberta é um convite aberto a outros estudantes que desejam compartilhar seus conhecimentos e contribuir para uma comunidade de apoio jurídico. Supervisionado por três advogados experientes—Alexandre Andrade, Larissa Amaral e Raquel Cruz—, nosso site garante que cada informação compartilhada seja não apenas educativa, mas também juridicamente confiável.
 Com minha sólida experiência em Administração de Empresas e habilidades em desenvolvimento de sites, almejo integrar práticas administrativas com inovações tecnológicas, como a inteligência artificial, para simplificar e enriquecer a interação com o Direito. No JurisMenteAberta, buscamos transformar o campo jurídico, fazendo-o mais acessível e eficiente para todos.
 Este espaço é onde o futuro do Direito é moldado por ideias inovadoras e uma comunidade engajada, comprometida em empoderar cidadãos e reformular a prática jurídica.
+© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
+
+## Norma Silva
+URL: https://jurismenteaberta.com.br/author/admin
+
+Norma Silva
+Ir para o conteúdo
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Pesquisar ...
+Resultados
+Ver todos os resultados
+Confira abaixo os resultados que correspondem à sua pesquisa. Esperamos que encontre o que procura e continue sua exploração pelo JurisMenteAberta!
+Direito Processual do Trabalho
+Prorrogação de Competência no Processo do Trabalho: Efeitos da Inércia da Parte
+A prorrogação de competência no processo do trabalho ocorre quando a parte deixa de alegar a incompetência relativa no momento processual adequado. Neste artigo, você entenderá a diferença entre competência absoluta e relativa, o fundamento legal da prorrogação e os efeitos concretos da inércia sobre o andamento do processo trabalhista.
+Leia mais
+Norma Silva
+20/09/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 19/09/2026: Propriedade Industrial
+As Anotações Acadêmicas de 19/09/2026 organizam a propriedade industrial de forma clara para quem estuda Direito Empresarial. Neste artigo, você vai entender a diferença entre patente e registro, o teste de patenteabilidade, os requisitos do desenho industrial e da marca, o processo no INPI, a prioridade unionista, a licença, a cessão e o nome empresarial, com exemplos práticos.
+Leia mais
+Norma Silva
+20/09/2026
+Direito Processual do Trabalho
+Ação Rescisória por Incompetência Absoluta: Prazo, Requisitos e Jurisprudência do TST
+A ação rescisória por incompetência absoluta desconstitui decisões proferidas por juízo sem competência para julgar a causa. Neste artigo, você entende o fundamento no art. 966, II, do CPC, o termo inicial do prazo decadencial de dois anos (art. 975 CPC), os requisitos de cabimento segundo a Súmula 100 do TST e exemplos de casos julgados envolvendo a competência da Justiça do Trabalho.
+Leia mais
+Norma Silva
+28/08/2026
+Direito Processual Civil
+Tutela Provisória no Processo Civil: Conceito, Requisitos e Modalidades
+A tutela provisória permite ao juiz antecipar, ainda que parcialmente, uma proteção jurisdicional antes da decisão final. Neste artigo, você entende o conceito, os requisitos legais e as modalidades previstas no CPC/2015: tutela de urgência (antecipada e cautelar) e tutela de evidência, com o procedimento antecedente e incidental explicado passo a passo.
+Leia mais
+Norma Silva
+30/08/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 18/09/2026: Adoção e Conselho Tutelar no ECA
+As Anotações Acadêmicas de 18/09/2026 reúnem o estudo completo da adoção no Estatuto da Criança e do Adolescente e o início da unidade dos Conselhos. Neste artigo, você vai entender as vedações, os requisitos, o procedimento de habilitação, o apadrinhamento e os efeitos da sentença de adoção, além da composição e do processo de escolha do Conselho Tutelar.
+Leia mais
+Norma Silva
+19/09/2026
+Direito Processual do Trabalho
+Exceção de Incompetência Trabalhista: Rito do Art. 800 CLT
+A imagem apresenta uma mesa com um mapa da América do Sul em destaque, sobre o qual estão dispostos elementos jurídicos e de orientação: um malhete de juiz de madeira, uma bússola metálica dourada, uma pasta ou documento branco fechado e marcadores de couro interligados por fios a alfinetes vermelhos afixados no mapa. Ao fundo, observa-se um ambiente de escritório elegante e bem iluminado, sugerindo uma composição temática relacionada a direito, jurisdição territorial ou planejamento legal.
+Leia mais
+Norma Silva
+30/08/2026
+Anotações Acadêmicas
+Anotações Acadêmicas de 17/09/2026: Liquidação de Sentença
+Anotações Acadêmicas de 17/09/2026: este artigo explica a liquidação de sentença no CPC, da natureza jurídica e suas espécies aos aspectos procedimentais, à liquidação provisória e à liquidação com dano zero, além dos primeiros conceitos sobre o título executivo. Neste artigo, você vai entender como aplicar cada instituto na prática forense e nos estudos para a prova.
+Leia mais
+Norma Silva
+17/09/2026
+Direito Processual do Trabalho
+Princípio da Oralidade no Processo do Trabalho: Guia Completo
+O princípio da oralidade no processo do trabalho orienta a dinâmica das audiências trabalhistas, priorizando a palavra falada sobre a forma escrita. Compreender seus subprincípios é essencial para advogados e estudantes. Neste artigo, você vai entender a concentração dos atos, a imediatidade, a identidade física do juiz e a prevalência da prova oral, conforme a doutrina majoritária.
+Leia mais
+Norma Silva
+30/08/2026
+« Anterior
+Posterior»
+© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
+
+## Áreas de Estudo - Jurismenteaberta
+URL: https://jurismenteaberta.com.br/areas-de-estudo
+
+Áreas de Estudo - Jurismenteaberta
+Ir para o conteúdo
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Pesquisar ...
+Resultados
+Ver todos os resultados
+áREAS DE ESTUDO
+Criminologia
+Explore as causas do crime e o comportamento desviante com a disciplina de Criminologia. Aqui, você entenderá as teorias criminais, o controle social e os fatores sociais que influenciam o crime. Ideal para quem busca analisar o fenômeno criminal e sua relação com a sociedade.
+Direito Penal
+Explore o universo das infrações e sanções com a disciplina de Direito Penal. Aqui, você compreenderá as normas que definem crimes, penas e as garantias fundamentais do indivíduo frente ao poder punitivo do Estado. Ideal para quem deseja mergulhar nas complexidades do crime e da justiça criminal.
+Direito Civil
+Desvende as relações jurídicas que regem a vida cotidiana, desde contratos até direitos de família e sucessões. Com conteúdo atualizado e análises profundas, esta disciplina oferece um entendimento sólido das normas que estruturam a convivência social.
+Direito Processual
+Domine as regras e procedimentos que norteiam a aplicação da justiça. Desde o início de uma ação judicial até a execução da sentença, esta disciplina desvenda os meandros do processo civil, penal e administrativo.
+Direito Administrativo
+Explore a estrutura e o funcionamento da administração pública, incluindo os princípios que regem a atuação do Estado. Ideal para quem busca entender as relações entre o poder público e os cidadãos, com foco em transparência e legalidade.
+Projeto de Extensão
+Participe de projetos que conectam o conhecimento acadêmico com a realidade social. Aqui, teoria e prática se encontram para promover a cidadania e a transformação social, oferecendo oportunidades únicas de aprendizado e impacto na comunidade.
+Hermenêutica e Argumentação Jurídica
+Aprenda as técnicas interpretativas e argumentativas essenciais para a prática jurídica. Descubra como construir argumentos sólidos, interpretar normas jurídicas com precisão e persuadir com eficácia em qualquer contexto jurídico.
+Modelagem de Novos Negócios
+Desperte o empreendedor que há em você! Esta disciplina oferece ferramentas e estratégias para criar e desenvolver novos negócios, com foco em inovação, viabilidade jurídica e sustentabilidade no mercado contemporâneo.
+Construção do Pensamento
+Aprimore suas habilidades de raciocínio crítico e lógico. Aqui, você aprenderá a estruturar ideias de forma coerente e convincente, fortalecendo sua capacidade argumentativa e interpretativa no campo jurídico.
+Direito Constitucional
+Imersa nos princípios que fundamentam nossa sociedade, esta página é o seu ponto de encontro com a cidadania e a estrutura do Estado. Explore análises aprofundadas, comentários e reflexões sobre a Carta Magna que molda nosso ordenamento jurídico, e envolva-se com os direitos e deveres que nos unem como nação.
+Teoria do Direito e das Relações Jurídicas
+Entenda os fundamentos que estruturam o Direito com a disciplina "Teoria do Direito e das Relações Jurídicas". Aqui, você mergulhará nas bases teóricas que definem as interações legais e a construção das normas jurídicas. Ideal para quem deseja compreender a estrutura que guia as práticas legais na sociedade. Clique para explorar mais!
+Teoria do Estado e Democracia
+Descubra os pilares da governança e da participação cívica nesta disciplina, que aborda os conceitos essenciais sobre como os Estados são organizados e funcionam, além de explorar o significado e a importância da democracia nas sociedades modernas. Ideal para quem busca compreender os mecanismos políticos e seu impacto na vida pública.
+Antropologia e Sociedade
+Mergulhamos na diversidade do tecido social, examinando as forças que moldam identidades, comportamentos e leis. Da microescala das interações humanas ao macrocosmo das instituições globais, junte-se a nós na busca por compreensão e por um diálogo mais profundo entre o Direito e as disciplinas antropológicas.
+Leitura e Produção Acadêmica
+Aqui, você encontrará recursos, técnicas e exercícios projetados para melhorar a compreensão leitora e a habilidade de produzir textos claros e persuasivos, fundamentais no campo jurídico. Desde o aperfeiçoamento da argumentação até a arte da redação jurídica, mergulhe em conteúdo que alimenta a mente e aguça a palavra escrita.
+Felicidade
+Atravessando os campos da psicologia, filosofia e ciências sociais, buscamos entender como a felicidade influencia e é influenciada pelo Direito e pela sociedade. Aqui, você encontrará artigos estimulantes, histórias inspiradoras e práticas recomendadas para nutrir o contentamento em sua vida pessoal e profissional.
+© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
+
+## Direito em Vídeos - Jurismenteaberta
+URL: https://jurismenteaberta.com.br/direito-em-videos
+
+Direito em Vídeos - Jurismenteaberta
+Ir para o conteúdo
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Pesquisar ...
+Resultados
+Ver todos os resultados
+Direito em Vídeos
+Explore vídeos dinâmicos sobre temas jurídicos e amplie sua compreensão do Direito.
+Bem-vindos à nossa página de vídeos jurídicos, onde o direito ganha vida através da tela. Aqui, você encontrará uma variedade de vídeos que cobrem uma ampla gama de tópicos jurídicos, desde introduções a conceitos complexos até discussões aprofundadas sobre legislação e ética.
+Nossa seleção inclui filmes e séries, palestras, documentários, debates e análises feitas por especialistas que irão enriquecer seu conhecimento e oferecer novos insights sobre o mundo jurídico.
+Navegue por nossa biblioteca e explore o direito em formato visual.
+Ainda estou aqui
+Retrata a história de Rubens Paiva, ex-deputado sequestrado e morto durante a Ditadura Militar. O filme acompanha a luta de sua família por respostas, expondo as graves violações de direitos humanos praticadas pelo regime. Com uma narrativa que combina drama e suspense, a obra explora temas como justiça, memória e os impactos do autoritarismo na sociedade brasileira.
+Saiba mais
+Jurado Nº 2
+Dirigido por Clint Eastwood, o filme acompanha Justin Kemp, um jurado que enfrenta um dilema ético ao perceber que pode estar envolvido no crime que está sendo julgado. Com uma narrativa que combina suspense e drama,
+Jurado Nº 2
+explora temas como justiça, moralidade e o impacto das decisões individuais no sistema jurídico, levantando questões profundas sobre ética e responsabilidade no tribunal.
+Saiba mais
+Julgamento em Nuremberg
+Retrata o julgamento de quatro juízes alemães acusados de crimes contra a humanidade após a Segunda Guerra Mundial. Liderado pelo juiz Dan Haywood (Spencer Tracy), o tribunal examina as ações dos réus, incluindo o respeitado jurista Dr. Ernst Janning (Burt Lancaster).
+Saiba mais
+12 Homens e uma Sentença
+12 Homens e uma Sentença” acompanha doze jurados que devem decidir a culpa ou inocência de um jovem acusado de assassinato. Um dos jurados, convencido da dúvida razoável, desafia os preconceitos e opiniões dos demais, levando a intensas discussões sobre justiça e verdade.
+Saiba mais
+O Sol é Para Todos
+Narra a história de Atticus Finch, um advogado que defende um homem negro acusado de estuprar uma mulher branca na década de 1930. Através dos olhos de sua filha Scout, a trama explora temas de racismo, moralidade e justiça em uma cidade do sul dos EUA.
+Saiba mais
+Julgamento em Nuremberg
+Retrata o julgamento de quatro juízes alemães acusados de crimes contra a humanidade após a Segunda Guerra Mundial. Liderado pelo juiz Dan Haywood (Spencer Tracy), o tribunal examina as ações dos réus, incluindo o respeitado jurista Dr. Ernst Janning (Burt Lancaster).
+Saiba mais
+O Poder e a Lei
+Acompanha Mickey Haller, um carismático advogado de defesa em Los Angeles que trabalha no banco de trás de seu Lincoln Town Car. Ele assume o caso de um cliente rico acusado de agressão, mas logo descobre que o caso é muito mais complexo e perigoso do que parecia. O filme explora temas de justiça, moralidade e as complexidades do sistema legal.
+Saiba mais
+Filadélfia
+Explora questões de discriminação por AIDS e homofobia no local de trabalho. O filme segue Andrew Beckett, um advogado talentoso que é demitido de seu escritório de advocacia ao descobrir que tem AIDS. Com a ajuda do advogado Joe Miller, Andrew luta contra o preconceito e busca justiça, destacando temas de direitos humanos e igualdade.
+Saiba mais
+Erin Brockovich - Uma Mulher de Talento
+Conta a história real de Erin Brockovich, uma mãe solteira que trabalha como assistente em um escritório de advocacia. Ao investigar um caso de contaminação de água em uma pequena cidade, ela descobre que a empresa Pacific Gas and Electric está envenenando os moradores locais. Com determinação e coragem, Erin lidera uma batalha legal para trazer justiça à comunidade.
+Saiba mais
+O Informante
+Baseado na história real de Jeffrey Wigand, um ex-executivo da indústria do tabaco que decide expor práticas antiéticas de sua antiga empresa. Com a ajuda do jornalista Lowell Bergman, Wigand revela como a empresa ocultou informações sobre os perigos do fumo. O filme aborda temas de ética, coragem e a luta pela verdade em face de poderosas corporações.
+Saiba mais
+Uma Questão de Honra
+Segue o jovem advogado da Marinha, Daniel Kaffee, enquanto defende dois fuzileiros navais acusados de assassinar um colega. À medida que investiga o caso, Kaffee descobre uma conspiração encoberta pelo alto comando militar. O filme aborda temas de honra, dever e a busca pela verdade dentro das rígidas hierarquias militares.
+Saiba mais
+O Veredicto
+Acompanhe Frank Galvin, um advogado decadente que vê uma chance de redenção ao aceitar um caso de negligência médica. Lutando contra um poderoso hospital e advogados influentes, Galvin busca justiça para uma mulher deixada em coma por um erro médico. O filme explora temas de ética, perseverança e o poder da justiça
+Saiba mais
+Legalmente Loira
+Uma comédia que segue Elle Woods, uma jovem loira e aparentemente superficial, que decide entrar na faculdade de direito de Harvard para reconquistar seu ex-namorado. Superando estereótipos e subestimada por seus colegas, Elle prova que é inteligente e capaz, destacando temas de perseverança, autoaceitação e rompimento de preconceitos.
+Saiba mais
+Amistad
+Relata um caso histórico sobre escravidão e liberdade. O filme narra a revolta de escravos africanos a bordo do navio La Amistad em 1839 e sua subsequente captura pelos americanos. Os escravos são então julgados por assassinato e pirataria. O advogado de defesa, Theodore Joadson, luta para provar que eles foram ilegalmente escravizados e que devem ser libertados. O filme destaca temas de justiça, direitos humanos e a luta pela liberdade.
+Saiba mais
+O Júri
+Explora a manipulação do sistema jurídico e o poder dos jurados. O filme segue um caso de responsabilidade civil contra uma empresa de armas, onde um membro do júri e sua namorada tentam influenciar o veredicto para obter um grande pagamento. Enquanto isso, os advogados dos dois lados usam todos os meios possíveis para manipular o júri. O filme aborda temas de corrupção, ética e a influência no sistema de justiça.
+Saiba mais
+Advogado do Diabo
+Mistura elementos de drama legal com questões éticas e sobrenaturais. O filme segue Kevin Lomax, um ambicioso advogado que é recrutado por um poderoso escritório de advocacia em Nova York. À medida que sua carreira avança, ele começa a perceber que seu chefe, John Milton, tem intenções sinistras e um passado demoníaco. O filme aborda temas de ambição, moralidade e as tentações do poder.
+Saiba mais
+Frost/Nixon
+Retrata a batalha de entrevistas entre o ex-presidente Richard Nixon e o apresentador de televisão David Frost após o escândalo Watergate. O filme foca na preparação e na intensidade das entrevistas, onde Nixon busca redenção e Frost luta para obter a confissão que a nação espera. O filme explora temas de poder, responsabilidade e a busca pela verdade
+Saiba mais
+Michael Clayton
+Segue o personagem-título, um “faxineiro” jurídico em um grande escritório de advocacia em Nova York. Michael Clayton é chamado para lidar com a crise quando um dos principais advogados da firma sofre um colapso mental ao descobrir a verdade sobre o caso em que está trabalhando, envolvendo uma grande empresa agroquímica. O filme explora temas de ética, corrupção corporativa e a luta pessoal de Clayton para fazer a coisa certa.
+Saiba mais
+A Qualquer Preço
+Narra a batalha legal de Jan Schlichtmann, um advogado que enfrenta duas grandes empresas químicas acusadas de poluir a água em uma pequena cidade, resultando em um surto de leucemia infantil. Conforme Jan se aprofunda no caso, ele arrisca sua carreira e vida pessoal, enfrentando dilemas éticos e a implacável busca por justiça. O filme aborda temas de responsabilidade corporativa, ética e o custo pessoal da luta pela verdade.
+Saiba mais
+Sob Suspeita
+Segue o advogado Tony Aaron, que se vê envolvido em uma rede de assassinatos enquanto investigava casos de infidelidade. Tony, que trabalha como detetive particular, forja evidências para ajudar em divórcios. Quando um de seus clientes e a própria esposa de Tony são assassinados, ele se torna o principal suspeito. O filme explora temas de corrupção, manipulação e a busca pela verdade.
+Saiba mais
+Capote
+É um filme biográfico que segue o escritor Truman Capote enquanto ele pesquisa para seu livro “A Sangue Frio”. O filme começa com Capote viajando para o Kansas para investigar o assassinato brutal de uma família. À medida que Capote se aprofunda no caso, ele desenvolve uma relação complexa com os assassinos, especialmente Perry Smith. O filme explora temas de ética, obsessão e as consequências emocionais da escrita de um livro baseado em um crime real.
+Saiba mais
+A Firma
+Segue Mitch McDeere, um jovem advogado recém-formado que aceita uma oferta lucrativa de um pequeno escritório de advocacia. Ao se estabelecer na firma, Mitch descobre que a empresa está envolvida em atividades ilegais, incluindo lavagem de dinheiro para a máfia. Com a vida em risco, Mitch deve encontrar uma maneira de expor os crimes da firma sem destruir sua própria carreira e segurança. O filme explora temas de corrupção, ética e sobrevivência.
+Saiba mais
+Ponte dos Espiões
+James Donovan, um advogado de seguros que inesperadamente é recrutado pela CIA para negociar a troca de espiões durante a Guerra Fria. Ao aceitar a missão, Donovan se vê em meio a uma complexa rede de intrigas políticas e espionagem internacional. Enfrentando a desconfiança de ambos os lados, ele deve navegar por um território perigoso e moralmente ambíguo para assegurar a libertação de um piloto americano capturado. “Ponte dos Espiões” explora temas de lealdade, justiça e diplomacia em um contexto de tensão global.
+Saiba mais
+O Vento Será Tua Herança
+Siga Bertram Cates, um professor corajoso que desafia uma lei estadual ao ensinar a teoria da evolução em uma escola pública. Quando Cates é levado a julgamento, o caso se transforma em um confronto épico entre ciência e religião, liberdade de pensamento e censura. Com a participação de dois advogados renomados, Henry Drummond e Matthew Harrison Brady, “O Vento Será Tua Herança” explora temas de liberdade de expressão, integridade acadêmica e os conflitos entre crenças tradicionais e a busca pelo conhecimento.
+Saiba mais
+Tempo de Matar
+É um drama jurídico que segue Jake Brigance, um jovem advogado no Mississippi, que assume a defesa de Carl Lee Hailey, um homem negro acusado de matar dois homens brancos que estupraram sua filha de dez anos. O caso provoca tensões raciais na comunidade, e Jake enfrenta ameaças de violência enquanto luta por justiça. O filme explora temas de racismo, moralidade e a busca pela verdade no sistema judicial.
+Saiba mais
+A Condenação
+É baseado na história real de Betty Anne Waters, uma mulher que dedica anos de sua vida para provar a inocência de seu irmão, Kenny, condenado por assassinato. Sem recursos financeiros, Betty Anne decide estudar direito enquanto cria seus filhos, na esperança de reabrir o caso e encontrar novas evidências. O filme destaca temas de perseverança, justiça e os desafios do sistema judicial.
+Saiba mais
+A Testemunha
+Thriller policial que segue John Book, um detetive da Filadélfia, que protege uma jovem mãe amish e seu filho, os únicos testemunhos de um assassinato. À medida que John se esconde na comunidade amish para protegê-los, ele deve adaptar-se ao estilo de vida deles enquanto tenta desvendar a corrupção dentro de sua própria força policial. O filme explora temas de choque cultural, ética e proteção de testemunhas.
+Saiba mais
+Assassinato sob Custódia
+Drama jurídico que segue Ben du Toit, um professor branco na África do Sul, que começa a investigar a morte suspeita do filho de seu jardineiro negro, Gordon Ngubene, enquanto estava sob custódia policial. A investigação de Ben revela um emaranhado de corrupção e abuso de poder dentro do regime do apartheid. O filme explora temas de racismo, justiça, e a luta contra a opressão no sistema judicial
+Saiba mais
+O Juiz
+O Juiz” é um drama emocionante que segue Hank Palmer (Robert Downey Jr.), um advogado da cidade grande, que retorna à sua cidade natal para defender seu pai (Robert Duvall), um juiz respeitado, acusado de assassinato. O filme explora temas de redenção familiar, conflitos entre pai e filho, e a busca pela verdade e justiça dentro e fora do tribunal.
+Saiba mais
+A Testemunha
+Thriller policial que segue John Book, um detetive da Filadélfia, que protege uma jovem mãe amish e seu filho, os únicos testemunhos de um assassinato. À medida que John se esconde na comunidade amish para protegê-los, ele deve adaptar-se ao estilo de vida deles enquanto tenta desvendar a corrupção dentro de sua própria força policial. O filme explora temas de choque cultural, ética e proteção de testemunhas.
+Saiba mais
+Faça parte da nossa Comunidade Jurídica
+Conecte-se ao JurisMenteAberta
+Sua voz importa. Compartilhe suas ideias, dúvidas ou contribuições e ajude a enriquecer nossa jornada coletiva pelo Direito.
+Nome
+E-mail
+Mensagem
+Enviar
+© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
+
+## Projeto de Extensão - Jurismenteaberta
+URL: https://jurismenteaberta.com.br/projeto-de-extensao
+
+Projeto de Extensão - Jurismenteaberta
+Ir para o conteúdo
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Pesquisar ...
+Resultados
+Ver todos os resultados
+Projeto de Extensão
+Impacto acadêmico na comunidade
+Nossa seção destaca iniciativas que transcendem as salas de aula, levando aprendizado e benefícios diretos à comunidade. Aqui, a teoria se encontra com a prática em projetos que não só complementam a formação acadêmica, mas também promovem a transformação social.
+Texto de CTA
+Conheça os artigos disponíveis
+Módulo 2
+Lorem ipsum dolor sit amet consectetur?
+Lorem ipsum dolor sit amet consectetur adipiscing elit lacinia urna tincidunt, natoque fermentum fringilla.
+Módulo 2
+Lorem ipsum dolor sit amet consectetur?
+Lorem ipsum dolor sit amet consectetur adipiscing elit lacinia urna tincidunt, natoque fermentum fringilla.
+Módulo 3
+Lorem ipsum dolor sit amet consectetur?
+Lorem ipsum dolor sit amet consectetur adipiscing elit lacinia urna tincidunt, natoque fermentum fringilla faucibus pretium pharetra.
+Módulo 4
+Lorem ipsum dolor sit amet consectetur?
+Lorem ipsum dolor sit amet consectetur adipiscing elit lacinia urna tincidunt, natoque.
+Educação Eleitoral: Voto, Fiscalização e Cidadania nas Escolas
+O direito ao voto é uma das maiores conquistas da democracia brasileira, e entendê-lo vai muito além de comparecer à urna. Da Constituição Federal de 1988 às urnas eletrônicas, da Justiça Eleitoral aos crimes que ameaçam o processo democrático, exercer o voto com consciência exige conhecimento. Neste artigo, você vai entender os fundamentos constitucionais do voto e o que significa ser, de fato, um eleitor consciente.
+Projeto de Extensão no Curso de Direito: Por Que É Obrigatório?
+Todo semestre ela aparece na grade e gera dúvidas: a disciplina de extensão. Mas o que é, de fato, um projeto de extensão no curso de Direito? Por que as faculdades são obrigadas a oferecê-lo? E o que você, estudante, tem a ganhar com isso? Neste artigo, você vai entender a origem legal dessa exigência, o papel da extensão na formação jurídica e por que ela vai muito além de uma obrigação curricular.
+Faça parte da nossa Comunidade Jurídica
+Conecte-se ao JurisMenteAberta
+Sua voz importa. Compartilhe suas ideias, dúvidas ou contribuições e ajude a enriquecer nossa jornada coletiva pelo Direito.
+Nome
+E-mail
+Mensagem
+Enviar
+© JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026
+
+## Anotações Acadêmicas - Jurismenteaberta
+URL: https://jurismenteaberta.com.br/anotacoes-academicas
+
+Anotações Acadêmicas - Jurismenteaberta
+Ir para o conteúdo
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Home
+Áreas de Estudo
+Anotações Acadêmicas
+Anotações Acadêmicas – I Semestre
+Anotações Acadêmicas – II Semestre
+Anotações Acadêmicas – III Semestre
+Anotações Acadêmicas – IV Semestre
+Anotações Acadêmicas – V Semestre
+Anotações Acadêmicas – VI Semestre
+Disciplina de Jurisdição e Processo Constitucional
+Disciplina de Posse e Propriedade
+Disciplina de Processo do Trabalho
+Disciplina de Execução, Cumprimento de Sentença e Tutela de Urgência Cível
+Disciplina de Direito da Criança, do Adolescente e da Pessoa Idosa
+Disciplina de Teoria da Empresa e Títulos de Crédito
+Disciplina de Direito Digital
+Disciplina de Projeto de Extensão V – Direito
+Direito em Vídeos
+Projeto de Extensão
+Blog
+Quem Somos?
+Pesquisar ...
+Resultados
+Ver todos os resultados
+Anotações Acadêmicas
+Da Sala de Aula e do Caderno às Reflexões Aprofundadas
+Esta página é uma ponte entre o aprendizado formal e o entendimento aprofundado das complexidades do Direito. Aqui, compartilho as anotações tiradas diretamente das salas de aula da UNIJORGE, cuidadosamente transformadas em artigos detalhados que exploram os principais temas e conceitos jurídicos.
+Cada texto é uma jornada que vai além das notas básicas, oferecendo análises ricas e insights profundos sobre como o Direito molda e é moldado pela sociedade.
+Mergulhe nas discussões, amplie seu conhecimento e participe do diálogo sobre os fundamentos e desafios do mundo jurídico.
+Texto de CTA
+Selecione o semestre e acesse as anotações acadêmicas
+1º Semestre
+Os Primeiros Passos no Direito
+O início da jornada jurídica começa com a construção da base teórica essencial. Neste semestre, são abordados temas fundamentais como
+Teoria do Direito, Teoria do Estado, Produção Acadêmica e Relações Jurídicas
+.
+Essas disciplinas ajudam a compreender os princípios estruturantes do Direito e a desenvolver habilidades de leitura e escrita acadêmica. Explore as anotações deste semestre e construa uma base sólida para sua trajetória acadêmica.
+Clique aqui
+2º Semestre
+Aprofundamento e Argumentação Jurídica
+Aqui, o estudo do Direito se torna mais denso e reflexivo, introduzindo temas essenciais para a formação crítica do estudante. São abordados tópicos como
+Criminologia, Argumentação Jurídica, Constituição e Direitos Fundamentais, Pessoas e Bens
+, além de um primeiro contato com práticas de extensão e interdisciplinaridade.
+Aqui, o aluno fortalece sua capacidade de interpretação jurídica e estruturação de argumentos. Aprofunde seus estudos e refine sua capacidade analítica.
+Clique aqui
+3º Semestre
+Direito em Expansão e Novas Perspectivas
+Com o avanço na jornada acadêmica, o terceiro semestre traz disciplinas que começam a conectar o Direito às suas aplicações práticas. Entre os temas estudados estão
+Negócios Jurídicos, Organização do Estado, Teoria Geral do Processo e Penas e Medidas Alternativas
+.
+O aluno começa a compreender como as normas jurídicas operam na sociedade e os desafios para sua efetivação. Este semestre marca um ponto de transição importante para a visão crítica do estudante sobre o sistema jurídico.
+Clique aqui
+4º Semestre
+Especialização e Direito Público
+Este semestre aprofunda a jornada acadêmica com disciplinas que expandem a compreensão do Direito e sua aplicação prática. Entre os temas estudados estão
+Direito Individual do Trabalho, Licitações e Contratos Administrativos, Processo de Conhecimento Cível, Proteção Penal do Indivíduo ao Patrimônio e outros.
+Esse semestre representa um passo importante para consolidar o conhecimento e desenvolver uma visão estratégica sobre o papel do Direito na sociedade.
+Clique aqui
+5º Semestre
+Direito Contratual e Processual
+Os estudos avançam para
+Contratos Trabalhistas, Crimes contra a Administração Pública, Psicologia Jurídica e Recursos Processuais
+, preparando o aluno para as complexidades do Direito.
+Clique aqui
+6º Semestre
+Processo, Patrimônio e Novas Relações Jurídicas
+O Direito se moderniza com temas como
+Direito Digital, Processo do Trabalho, Execução de Sentença e Posse e Propriedade
+, unindo teoria e prática.
+Clique Aqui
+7º Semestre
+Família, Penal e Direitos Humanos
+Este semestre aprofunda o conhecimento em áreas como
+Direito das Famílias, Processo Penal, Políticas Públicas e Direitos Humanos, além de Direito Societário
+.
+Ainda tenho muito a aprender! No futuro, esta página terá anotações valiosas sobre o 7º semestre do curso de Direito!
+8º Semestre
+Sucessões, Tributação e Estágio Supervisionado
+Agora, os estudos incluem
+Direito Sucessório, Processo Penal, Insolvência Empresarial e estágio supervisionado, preparando para o mundo jurídico real
+.
+Estou construindo essa jornada passo a passo. Em breve, este semestre também fará parte do site!
+9º Semestre
+Prática e Conclusão de Curso
+A reta final traz disciplinas como
+Direito Econômico e Financeiro, Ética Profissional, Processo Penal Negocial e Trabalho de Conclusão de Curso
+.
+Ainda não cheguei aqui, mas quando eu cursar o 9º semestre, esta página será atualizada com novos conteúdos!
+10º Semestre
+Direito Internacional e Especializações
+No último semestre, os alunos se aprofundam em
+Direito Internacional, Direito do Consumidor e Sustentabilidade Jurídica, consolidando sua formação
+.
+A reta final do curso! Ainda não estou aqui, mas quando chegar, esta página terá todas as minhas anotações e reflexões!
+Faça parte da nossa Comunidade Jurídica
+Conecte-se ao JurisMenteAberta
+Sua voz importa. Compartilhe suas ideias, dúvidas ou contribuições e ajude a enriquecer nossa jornada coletiva pelo Direito.
+Nome
+E-mail
+Mensagem
+Enviar
 © JurisMenteAberta. Sua parceira na jornada do conhecimento jurídico! Todos os direitos reservados. 2026

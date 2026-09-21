@@ -36,8 +36,8 @@ class LegalPackage(DomainRetrievalPackage):
             "decimo terceiro": "decimo terceiro salario gratificacao natalina adiantamento antecipacao",
             "13": "decimo terceiro salario gratificacao natalina adiantamento antecipacao",
             "mandado de seguranca": "lei 12.016 artigo 23 prazo decadencial cento e vinte dias ato coator ciencia do interessado",
-            "abuso de poder": "abuso de poder assedio moral denuncia ouvidoria corregedoria sigilo confidencialidade anonimato retaliacao perseguicao protecao trabalhador",
-            "denuncia": "denuncia assedio moral abuso de poder canal de denuncia ouvidoria corregedoria sigilo confidencialidade anonimato retaliacao protecao trabalhador",
+            "abuso de poder": "abuso de poder assedio moral denuncia cipa ouvidoria corregedoria sigilo confidencialidade anonimato retaliacao perseguicao protecao trabalhador",
+            "denuncia": "denuncia assedio moral cipa abuso de poder canal de denuncia ouvidoria corregedoria sigilo confidencialidade anonimato retaliacao protecao trabalhador",
             "persegu": "retaliacao perseguicao represalia denuncia assedio moral abuso de poder protecao trabalhador sigilo confidencialidade canal de denuncia",
             # Keep sexual-criminal anchors context-aware.  A generic
             # "assédio moral" question must not be expanded into art. 216-A
@@ -241,6 +241,7 @@ class LegalPackage(DomainRetrievalPackage):
                 "retaliacao",
                 "perseguicao",
                 "represalia",
+                "cipa",
                 "rescisao indireta",
                 "art. 483",
                 "rigor excessivo",
@@ -265,6 +266,7 @@ class LegalPackage(DomainRetrievalPackage):
                 "retaliacao",
                 "perseguicao",
                 "represalia",
+                "cipa",
             )
             workplace_markers = (
                 "trabalho",
@@ -293,7 +295,7 @@ class LegalPackage(DomainRetrievalPackage):
             if not any(marker in text for marker in direct_markers):
                 return False
             if "moral_harassment" in profile.features and not (
-                ("assedio moral" in text or ("assedio" in text and "assedio sexual" not in text))
+                ("assedio moral" in text or ("assedio" in text and "assedio sexual" not in text) or "cipa" in text)
                 and any(marker in text for marker in workplace_markers)
             ):
                 return False
@@ -455,7 +457,7 @@ class LegalPackage(DomainRetrievalPackage):
                 for item in candidates
                 if any(
                     marker in normalize(item.chunk.text)
-                    for marker in ("art. 215-a", "art. 216-a", "importunacao sexual", "assedio sexual", "assedio moral")
+                    for marker in ("art. 215-a", "art. 216-a", "importunacao sexual", "assedio sexual", "assedio moral", "cipa")
                 )
             ]
             if anchored:

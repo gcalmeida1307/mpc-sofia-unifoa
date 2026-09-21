@@ -1,7 +1,7 @@
 # Início | Secretaria de Estado de Infraestrutura e Obras Públicas
 
 Fonte: https://www.rj.gov.br/seiop
-Capturado em: 2026-09-18T13:25:49.312606+00:00
+Capturado em: 2026-09-21T11:04:46.734365+00:00
 Páginas no domínio: 10
 
 ## Início | Secretaria de Estado de Infraestrutura e Obras Públicas

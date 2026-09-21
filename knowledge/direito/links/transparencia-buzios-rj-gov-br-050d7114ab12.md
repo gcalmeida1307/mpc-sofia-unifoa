@@ -1,7 +1,7 @@
 # transparencia.buzios.rj.gov.br
 
 Fonte: https://transparencia.buzios.rj.gov.br/diariooficial.php
-Capturado em: 2026-09-18T13:24:58.040218+00:00
+Capturado em: 2026-09-21T11:00:34.313330+00:00
 Páginas no domínio: 10
 
 ## transparencia.buzios.rj.gov.br
@@ -234,6 +234,7 @@ LGPD - Lei Geral de Proteção de Dados 13.709
 Cancelar
 Enviar
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -243,7 +244,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -540,6 +540,7 @@ Acessar
 4
 69
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -549,7 +550,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -674,6 +674,7 @@ Selo ATRICON Diamante 2025
 08/12/2025
 O selo Atricon é uma certificação concedida pelo Atricon (Associação dos Tribunais de Contas do Brasil), uma entidade que reúne os Tribunais de Contas estaduais e municipais do país. Esse selo é atribuído a práticas e ações que demonstram transparência, eficiência e responsabilidade na gestão pública, especialmente relacionadas à fiscalização e auditoria das contas públicas
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -683,7 +684,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -860,7 +860,7 @@ SECRETARIA MUNICIPAL DE SERVIÇOS PÚBLICOS
 Secretaria Municipal de Turismo e Desenvolvimento Econômico
 SECRETARIA MUNICIPAL DO IDOSO
 Filtro por período de data de publicação
-Foram encontrados 1381 registros
+Foram encontrados 1382 registros
 Pesquisar
 Limpar
 Opções para exportação
@@ -870,6 +870,10 @@ Número
 Exercício
 Secretária
 Mais
+18/09/2026
+762
+2026
+PREFEITURA MUNICIPAL DE ARMAÇÃO DOS BÚZIOS
 16/09/2026
 761
 2026
@@ -986,16 +990,13 @@ PREFEITURA MUNICIPAL DE ARMAÇÃO DOS BÚZIOS
 733
 2026
 PREFEITURA MUNICIPAL DE ARMAÇÃO DOS BÚZIOS
-17/07/2026
-732
-2026
-PREFEITURA MUNICIPAL DE ARMAÇÃO DOS BÚZIOS
 1
 2
 3
 4
 47
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -1005,7 +1006,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -1144,8 +1144,8 @@ Endereço do SIC
 Estrada da Usina, 600 - Centro - Armação dos Búzios/RJ
 Horário do SIC
 De segunda a sexta de 08:00 às 17:00
-Solicitações até o momento: 572
-Última solicitação: 17/09/2026 15:46
+Solicitações até o momento: 575
+Última solicitação: 20/09/2026 11:03
 Acesse o sistema
 Caso já tenha conta, informe o seu e-mail
 Informe a sua senha
@@ -1183,6 +1183,7 @@ LGPD - Lei Geral de Proteção de Dados 13.709
 Cancelar
 Enviar
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -1192,7 +1193,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -1502,6 +1502,7 @@ UNIDADE BÁSICA DE SAÚDE JOÃO DE SOUZA DOS ANJOS (ARPOADOR [...]
 UNIDADE BÁSICA DE SAÚDE LILSON M. DE SOUZA (CEM BRAÇAS)
 (22) 2350-6094
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -1511,7 +1512,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -1988,6 +1988,7 @@ Acessar
 4
 174
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -1997,7 +1998,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -2118,23 +2118,16 @@ Portal de Obras
 Portal de Turismo
 Gestores
 Prefeito(a) e Vice-prefeito(a).
+Prefeito
 Alexandre Martins
-Prefeito(a)
 (22)2623-9087
 Endereço do Gabinete: Estrada da Usina, 600 - Centro
-×
-ALEXANDRE MARTINS
-Endereço do Gabinete: Estrada da Usina, 600 - Centro
-Fechar
+Vice-prefeito
 Leandro Pereira dos Santos
-Vice-prefeito(a)
 (22)2623-6000
 Endereço do Gabinete: Estrada da Usina, 600 - Centro
-×
-LEANDRO PEREIRA DOS SANTOS
-Endereço do Gabinete: Estrada da Usina, 600 - Centro
-Fechar
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -2144,7 +2137,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -2267,6 +2259,7 @@ Pesquisa Avançada
 Olá! Use o campo abaixo para pesquisar.
 Carregando temáticas disponíveis...
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -2276,7 +2269,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.
@@ -2449,6 +2441,7 @@ Transparência
 Webmail
 Webmail
 Prefeitura Municipal de Armação dos Búzios - RJ
+Siga a Prefeitura
 Institucional
 Prefeito Alexandre Martins
 CNPJ: 01.616.171/0001-02
@@ -2458,7 +2451,6 @@ contato@buzios.rj.gov.br
 Endereço e horário
 Estrada da Usina, 600 - Centro, 28.950-000
 de Segunda A Sexta de 08:00 às 17:00
-Siga a Prefeitura
 © 2026
 NPI Brasil
 . Todos os Direitos Reservados.

@@ -241,6 +241,7 @@ def _prompt(module_id: str, question: str, deterministic_plan: dict[str, Any]) -
             "question": question[:3000],
             "deterministic_plan": {
                 "intent": deterministic_plan.get("intent", "DOCUMENT_RAG"),
+                "strategy": deterministic_plan.get("strategy", "FACT_LOOKUP"),
                 "theme": deterministic_plan.get("theme", ""),
                 "source_profile": deterministic_plan.get("source_profile", ""),
             },

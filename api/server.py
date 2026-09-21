@@ -136,6 +136,7 @@ from .production_gate import production_gate as run_production_gate
 from .query_analysis import assess_module_scope
 from .readiness import readiness_checklist
 from .research import research_module
+from .response_policy import should_enqueue_unanswered_topic
 from .retrieval import (
     activate_index_version,
     list_index_versions,
@@ -618,9 +619,10 @@ async def warm_retrieval_indexes() -> None:
 
 async def prepare_knowledge_background() -> None:
     """Serialize reconciliation and index warming to protect small hosts."""
-    if expansion_settings()["enabled"] and os.getenv(
-        "SOFIA_EXPANSION_AUDIT_ON_STARTUP", "false"
-    ).strip().casefold() not in {"0", "false", "no", "off"}:
+    # Corpus admission is independent from public expansion. Every local file
+    # must be reconciled before retrieval can use it, even when web expansion
+    # is paused (the safe default).
+    if os.getenv("SOFIA_CORPUS_AUDIT_ON_STARTUP", "true").strip().casefold() not in {"0", "false", "no", "off"}:
         await audit_existing_documents_once()
     if os.getenv("SOFIA_RETRIEVAL_PREWARM", "true").strip().casefold() not in {"0", "false", "no", "off"}:
         await warm_retrieval_indexes()
@@ -1063,17 +1065,6 @@ async def rag_answer(
         "complete",
         {"language": language, "response_style": response_style},
     )
-    try:
-        # This is a privacy-minimized topic record. It creates the persistent
-        # expansion queue but never blocks an answer if its local store is
-        # temporarily unavailable.
-        await asyncio.to_thread(
-            record_search_topic, KNOWLEDGE_ROOT, module_id, question, user_code
-        )
-    except Exception as exc:
-        # Topic analytics and expansion are auxiliary. A database dialect or
-        # migration issue must never turn a valid RAG question into HTTP 500.
-        logger.warning("Não foi possível registrar o tema para expansão: %s", exc)
     clinical_scope = module_id == "medicina" or bool(patient_id)
     effective_provider = provider
     if provider == "auto" and clinical_scope and not external_clinical_allowed():
@@ -1131,6 +1122,28 @@ async def rag_answer(
         )
         raise
     package = getattr(result, "context_package", {})
+    # Conversation and successful documentary requests are not expansion
+    # candidates.  Previously every turn was persisted before retrieval,
+    # including greetings and questions already answered by the local corpus;
+    # that made the learning/orchestration store grow with chat history and
+    # caused later expansion cycles to treat conversation as missing knowledge.
+    # Only an actual documentary gap is eligible for the separate, bounded
+    # expansion queue.  The queue remains asynchronous and optional.
+    record_unanswered = os.getenv("SOFIA_RECORD_UNANSWERED_TOPICS", "true").strip().casefold() not in {"0", "false", "no", "off"}
+    if should_enqueue_unanswered_topic(
+        evidence_found=result.evidence_found,
+        context_package=package,
+        enabled=record_unanswered,
+    ):
+        try:
+            await asyncio.to_thread(
+                record_search_topic, KNOWLEDGE_ROOT, module_id, question, user_code
+            )
+        except Exception as exc:
+            # Topic analytics and expansion are auxiliary. A database dialect
+            # or migration issue must never turn a valid RAG answer into HTTP
+            # 500.
+            logger.warning("Não foi possível registrar o tema sem evidência: %s", exc)
     trace.span(
         "retrieve",
         "complete" if result.evidence_found else "blocked",

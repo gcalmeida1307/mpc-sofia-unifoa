@@ -39,9 +39,11 @@ from .query_analysis import (
     requested_exact_term,
 )
 from .rca import is_rca_request, render_report
+from .response_policy import choose_response_policy
 from .retrieval import Evidence, RetrievalResult, normalize, retrieve, retrieve_compound
 from .semantic_planner import SemanticPlan
 from .semantic_planner import interpret as interpret_semantics
+from .session_context import SessionContext
 from .structured_data import StructuredAnswer, analyze_structured_question
 
 
@@ -836,7 +838,7 @@ def _compound_evidence_answer(question: str, result: RetrievalResult, language: 
     evidence and can make the prose more natural when available.
     """
 
-    if language != "pt-BR" or not result.subqueries or not result.evidence:
+    if language != "pt-BR" or (not result.subqueries and not result.required_sources) or not result.evidence:
         return None
     from .relational_reasoning import sentences
 
@@ -988,10 +990,14 @@ def _compound_evidence_answer(question: str, result: RetrievalResult, language: 
         points.append(f"{index}. {display_task}\n   Fato documentado: “{_clip_summary_unit(passage, 1200)}”\n   Fonte do ponto: {item.chunk.path.name}, {locator}.")
 
     normalized_question = normalize(question)
-    comparison_requested = any(marker in normalized_question for marker in ("compare", "comparar", "comum e diferente", "diferenca entre", "o que ha de comum"))
+    comparison_requested = any(marker in normalized_question for marker in ("compare", "comparar", "comum e diferente", "diferenca entre", "o que ha de comum", "junt", "em conjunto"))
     blocks = [
         "Conclusão",
-        "A pergunta reúne vários pontos. Separei cada um e preservei a fonte correspondente para não transformar uma única evidência em resposta para tudo.",
+        (
+            "As fontes tratam de dois pontos diferentes. Separei cada um e preservei a fonte correspondente para não transformar uma única evidência em resposta para tudo."
+            if comparison_requested
+            else "A pergunta reúne vários pontos. Separei cada um e preservei a fonte correspondente para não transformar uma única evidência em resposta para tudo."
+        ),
         "Resposta por ponto",
         "\n\n".join(points),
     ]
@@ -1003,6 +1009,12 @@ def _compound_evidence_answer(question: str, result: RetrievalResult, language: 
             ]
         )
         all_text = normalize(" ".join(item.chunk.text for item in result.evidence))
+        if any(marker in normalized_question for marker in ("adiantamento", "decimo terceiro", "13o", "13")) and not any(
+            marker in all_text for marker in ("adiantamento", "decimo terceiro", "gratificacao natalina")
+        ):
+            blocks.append(
+                "Sobre o adiantamento do décimo terceiro, o trecho recuperado não informa uma regra específica para recusar ou dispensar esse adiantamento."
+            )
         if "saae" in normalize(" ".join(result.sources)) and "vade" in normalize(" ".join(result.sources)) and any(
             marker in all_text for marker in ("horas extras", "horas extraordinarias", "horas suplementares")
         ):
@@ -2466,7 +2478,7 @@ def _legal_multiple_employment_answer(question: str, result: RetrievalResult, la
 def _legal_harassment_answer(question: str, result: RetrievalResult, language: str) -> str | None:
     """Keep harassment/reporting questions from becoming unrelated legal clips."""
 
-    if language != "pt-BR" or not result.has_quality_evidence:
+    if language != "pt-BR":
         return None
     normalized = normalize(question)
     if not any(
@@ -2500,7 +2512,7 @@ def _legal_harassment_answer(question: str, result: RetrievalResult, language: s
         return None
     context = normalize(result.context)
     parts: list[str] = []
-    if "cipa" in context and "assedio" in context:
+    if "cipa" in context:
         parts.append(
             "Nos trechos recuperados do Vade Mecum, a CLT menciona a Comissão Interna de Prevenção de Acidentes e de Assédio (CIPA). Isso sustenta uma obrigação de prevenção no ambiente de trabalho, mas não traz, por si só, um passo a passo para denunciar um caso individual."
         )
@@ -2913,6 +2925,7 @@ def _structured_context_package(
             retrieval_required=True,
             response_mode="evidence",
             reason="leitura integral e consulta analítica da fonte estruturada",
+            strategy="STRUCTURED_DATA",
         ).public_dict(),
     }
 
@@ -2998,6 +3011,13 @@ def local_no_evidence(policy: ModulePolicy, language: str = "pt-BR", module_id: 
 
 
 async def answer(*, root: Path, module_id: str, provider: str, question: str, history: list[dict[str, str]], extra_context: str = "", language: str = "pt-BR", response_style: str = "structured", external_allowed: bool | None = None, user_code: str | None = None, retry: bool = False, retry_of: int | None = None) -> OrchestrationResult:
+    # The client may send the complete visible chat on every request.  Keep a
+    # bounded request window before any router, retriever or provider sees it;
+    # conversation is context, never knowledge and never an orchestration
+    # artifact.  The original question remains the only user task.
+    session = SessionContext.from_request(history, extra_context)
+    history = session.history
+    extra_context = session.extra_context
     language = normalize_language(language)
     response_style = normalize_response_style(response_style)
     policy = policy_for(module_id)
@@ -3012,14 +3032,8 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         response_mode=str(profile.get("response_mode", "evidence")),
     )
     current_query_parts = decompose_query(question)
-    current_normalized = normalize(question)
-    strong_comparison = any(
-        marker in current_normalized
-        for marker in (
-            "compare", "comparar", "confronte", "versus", "diferenca entre", "comum e diferente",
-            "o que ha de comum", "pontos em comum", "brecha", "ambiguidade", "conflito entre",
-        )
-    )
+    strategy = query_plan.strategy
+    strong_comparison = strategy in {"MULTI_DOCUMENT_SYNTHESIS", "CONCEPT_COMPARISON"}
     # A source hand-off can carry the previous turn into ``retrieval_question``
     # so the retriever knows the topic.  It is still one current user task;
     # otherwise the compound fallback would replace a precise legal/clinical
@@ -3031,7 +3045,12 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     # Require at least two interrogative parts unless the user explicitly asks
     # for comparison/relations.
     interrogative_parts = sum(1 for part in current_query_parts if "?" in part)
-    compound_query = strong_comparison or interrogative_parts >= 2
+    compound_query = strategy in {
+        "MULTI_DOCUMENT_SYNTHESIS",
+        "CONCEPT_COMPARISON",
+        "MULTI_HOP",
+        "RCA_INVESTIGATION",
+    } or interrogative_parts >= 2
     compound_queries = (query_plan.subqueries or decompose_query(retrieval_question)) if compound_query else (retrieval_question,)
     decision = IntelligenceDecision(
         route=str(profile.get("route", "evidence")),
@@ -3042,7 +3061,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         task_route=str(profile.get("task_route", "document_rag")),
         query_plan=query_plan.public_dict(),
     )
-    conversation_memory = build_conversation_memory(module_id, retrieval_question, history)
+    conversation_memory = build_conversation_memory(module_id, retrieval_question, history, query_plan=query_plan)
     semantic_plan = SemanticPlan(
         intent=query_plan.intent,
         reason="interpretação local não necessária para esta rota",
@@ -3105,7 +3124,11 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
                 **profile,
                 **query_plan.public_dict(),
             },
-            external_allowed=external_allowed,
+            # Do not call a cloud interpreter before knowing whether the
+            # active module can answer locally.  Cloud LLMOps belong to the
+            # no-evidence fallback; explicit provider selection remains an
+            # operator override for the final grounded synthesis.
+            external_allowed=False,
         )
         decision.query_plan["semantic_interpretation"] = semantic_plan.public_dict()
         trace.append(
@@ -3217,7 +3240,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             language,
             response_style,
         )
-        if query_plan.intent == "STRUCTURED_DATA"
+        if query_plan.strategy == "STRUCTURED_DATA"
         else None
     )
     if structured is not None:
@@ -3278,7 +3301,14 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             True,
             trace,
             analytics_id,
-            context_package=_route_context_package(module_id, retrieval_question, history, decision.public_dict(), response_style),
+            context_package=_route_context_package(
+                module_id,
+                retrieval_question,
+                history,
+                decision.public_dict(),
+                response_style,
+                conversation_memory,
+            ),
             verification_status="verified",
             confidence=0.86,
         )
@@ -3320,7 +3350,16 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     from .relational_reasoning import render as render_relations
     relational = analyze_relations(result)
     trace.append({"id": "reflect", "stage": "Refletir", "agent": "Evidence Judge", "status": "complete" if harness.decision != "report_evidence_gap" else "blocked", "detail": harness.decision, "attempts": harness.attempts})
-    context_package = build_context_package(module_id, retrieval_question, result, history, response_style, root=root).public_dict()
+    context_package = build_context_package(
+        module_id,
+        retrieval_question,
+        result,
+        history,
+        response_style,
+        root=root,
+        query_plan=query_plan,
+        classified_profile=profile,
+    ).public_dict()
     context_package["harness"] = {"attempts": harness.attempts, "decision": harness.decision, "steps": list(harness.steps)}
     context_package["llmops"] = {"versions": runtime_versions(), "retrieval_attempts": harness.attempts}
     context_package["relational_analysis"] = relational
@@ -3332,6 +3371,19 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         else "plano determinístico; Ollama semântico não foi necessário ou não respondeu"
     )
     evidence_score = max((item.score for item in result.evidence), default=0.0)
+    response_policy = choose_response_policy(
+        result,
+        query_plan=query_plan,
+        policy=policy,
+        provider=provider,
+        external_allowed=external_allowed,
+    )
+    context_package["response_policy"] = {
+        "route": response_policy.route,
+        "uses_local_evidence": response_policy.use_local_evidence,
+        "external_assist_allowed": response_policy.allow_external_assist,
+        "reason": response_policy.reason,
+    }
     partial_answer = _partial_evidence_answer(retrieval_question, result, language)
     if partial_answer:
         update_stage(trace, "retrieve", "partial", f"Evidência parcial recuperada de {len(result.sources)} fonte(s); há uma lacuna de cobertura.")
@@ -3353,7 +3405,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             verification_status="partial-evidence",
             confidence=min(0.82, max(0.18, evidence_score)),
         )
-    if not result.has_quality_evidence:
+    if response_policy.route in {"external_assist", "evidence_gap"}:
         update_stage(trace, "retrieve", "blocked", "Nenhuma evidência local atingiu o gate de qualidade.")
         # The local RAG remains the first authority. When it cannot answer,
         # the configured provider route is allowed to offer a clearly labeled
@@ -3365,13 +3417,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         # must not turn partial context into an apparently complete answer.
         # General fallback remains available for open questions that did not
         # name a document.
-        requires_source_coverage = bool(result.required_sources) or is_rca_request(retrieval_question) or any(word in normalize(retrieval_question) for word in ("arquivo", "documento", "compare", "comparacao", "infer", "base local", "desvio", "desvios", "producao", "variacao", "meta", "realizado")) or (
-            module_id == "medicina" and is_medical_symptom_query(retrieval_question)
-        )
-        can_assist_without_local_evidence = (
-            not requires_source_coverage
-            and (provider in {"auto", "ollama"} or external_generation_may_be_used(provider, external_allowed))
-        )
+        can_assist_without_local_evidence = response_policy.allow_external_assist
         if can_assist_without_local_evidence:
             redaction = ExternalRedaction() if external_generation_may_be_used(provider, external_allowed) else None
             provider_question = redaction.clean_with_entities(retrieval_question, ()) if redaction else retrieval_question
@@ -3442,7 +3488,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         analytics_id = remember_run(root, module_id, question, list(result.sources), "policy", True, user_code)
         return OrchestrationResult(local_no_evidence(policy, language, module_id, retrieval_question), "policy", "evidence-gate", list(result.sources), 0.0, False, True, trace, analytics_id, context_package=context_package, verification_status="unverified", confidence=0.0)
     update_stage(trace, "retrieve", "complete", f"{len(result.evidence)} evidência(s) local(is) recuperada(s) de {len(result.sources)} fonte(s).")
-    rca_answer = render_report(retrieval_question, result, language)
+    rca_answer = render_report(retrieval_question, result, language) if query_plan.strategy == "RCA_INVESTIGATION" else None
     if rca_answer:
         rca_answer = _append_source_citations(rca_answer, result, language)
         update_stage(trace, "reason", "complete", "RCA organizada a partir de fatos documentados e hipóteses explicitamente separadas.")
@@ -3471,7 +3517,13 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     # but they would answer only the first clause of a multi-question turn.
     # Compound turns must reach the joint composer with all retrieved sides.
     legal_harassment_comparison = _legal_harassment_comparison_answer(retrieval_question, result, language)
-    local_source_answer = legal_harassment_comparison or (None if compound_query and strong_comparison else (
+    # Attendance-delay questions are intrinsically comparative when the user
+    # names both an internal agreement and the Vade/CLT.  This renderer is
+    # bounded to the two verified legal anchors and is therefore safe to run
+    # before the generic compound gate; otherwise the useful conclusion is
+    # replaced by disconnected extractive bullets.
+    legal_lateness = _legal_lateness_answer(retrieval_question, result, language)
+    local_source_answer = legal_harassment_comparison or legal_lateness or (None if compound_query and strong_comparison else (
         _exact_source_answer(retrieval_question, result, language)
         or _exact_source_term_answer(retrieval_question, result, language)
         or _legal_habeas_corpus_types_answer(retrieval_question, result, language)
@@ -3479,7 +3531,6 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
         or _legal_harassment_answer(retrieval_question, result, language)
         or _legal_multiple_employment_answer(retrieval_question, result, language)
         or _law_summary_answer(retrieval_question, result, language)
-        or _legal_lateness_answer(retrieval_question, result, language)
         or _legal_overtime_answer(retrieval_question, result, language)
         or _legal_workday_answer(retrieval_question, result, language)
         or _medical_symptom_answer(retrieval_question, result, language)
@@ -3514,7 +3565,11 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     # let the generic relation renderer consume the turn first and replace
     # that stronger, module-aware answer with two disconnected excerpts.
     legal_comparison_profile = module_id in {"direito", "departamento-pessoal"} and strong_comparison
-    relational_requested = query_plan.intent in {"COMPARACAO_DOCUMENTOS", "COMPLEX_REASONING"}
+    relational_requested = query_plan.strategy in {
+        "MULTI_DOCUMENT_SYNTHESIS",
+        "CONCEPT_COMPARISON",
+        "MULTI_HOP",
+    }
     relational_answer = (
         None
         if legal_comparison_profile or not relational_requested
@@ -3532,20 +3587,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     # The deterministic path is the safe local accelerator for automatic mode.
     # An explicit provider selection must actually invoke that provider so the
     # operator can compare OpenAI, Gemini, Claude and Ollama on the same RAG.
-    summary_request = any(
-        term in normalize(retrieval_question)
-        for term in (
-            "resuma",
-            "resumo do conhecimento",
-            "resumo do documento",
-            "resumo do arquivo",
-            "resumo breve",
-            "resumir o documento",
-            "resumir o arquivo",
-            "documentos disponiveis",
-            "listar documentos",
-        )
-    )
+    summary_request = query_plan.strategy == "DOCUMENT_SUMMARY"
     cloud_credentials_configured = any(os.getenv(name, "").strip() for name in ("OPENAI_API_KEY", "GEMINI_API_KEY", "ANTHROPIC_API_KEY"))
     # A retry is an explicit quality-recovery request. Skip the deterministic
     # shortcut so AUTO can call the configured providers and compare a fresh
@@ -3569,11 +3611,12 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
             update_stage(trace, "critic", "complete", "Resumo conferido contra a evidência local.")
             update_stage(trace, "output", "complete", "Resposta curta entregue com fontes.")
             analytics_id = remember_run(root, module_id, question, list(result.sources), "local-rag", True, user_code)
-            return OrchestrationResult(fast_answer, "local-rag", "evidence-summary", list(result.sources), evidence_score, True, True, trace, analytics_id, context_package=context_package, verification_status="verified", confidence=min(0.99, evidence_score))
+            return OrchestrationResult(fast_answer, "local-rag", "local-source-evidence", list(result.sources), evidence_score, True, True, trace, analytics_id, context_package=context_package, verification_status="verified", confidence=min(0.99, evidence_score))
     # If the selected route can reach a cloud provider, minimize the request
     # before it leaves this machine. Local retrieval and verification continue
     # to use the original evidence, so masking never weakens the RAG gate.
-    redaction = ExternalRedaction() if external_generation_may_be_used(provider, external_allowed) else None
+    grounded_provider = "ollama" if response_policy.route == "grounded" and provider == "auto" else provider
+    redaction = ExternalRedaction() if external_generation_may_be_used(grounded_provider, external_allowed) else None
     provider_question = redaction.clean_with_entities(retrieval_question, ()) if redaction else retrieval_question
     provider_evidence = _provider_context(redaction, result.context, policy) if redaction else None
     provider_extra_context = _provider_context(redaction, extra_context, policy)
@@ -3590,7 +3633,7 @@ async def answer(*, root: Path, module_id: str, provider: str, question: str, hi
     try:
         max_output_tokens = _output_token_budget(response_style, decision.task_route)
         generated: Generation = await generate_with_fallback(
-            provider,
+            grounded_provider,
             system_prompt,
             _prompt(
                 provider_question,

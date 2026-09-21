@@ -1,7 +1,7 @@
 # Relatório de usuários arriscados - Microsoft Entra ID Protection | Microsoft Learn
 
 Fonte: https://learn.microsoft.com/pt-br/entra/id-protection/concept-risky-user-report
-Capturado em: 2026-09-16T13:21:45.712850+00:00
+Capturado em: 2026-09-21T11:03:27.274325+00:00
 Páginas no domínio: 1
 
 ## Relatório de usuários arriscados - Microsoft Entra ID Protection | Microsoft Learn

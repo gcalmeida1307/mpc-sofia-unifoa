@@ -1,7 +1,7 @@
 # Governança — Ministério da Gestão e da Inovação em Serviços Públicos
 
 Fonte: https://www.gov.br/gestao/pt-br/acesso-a-informacao/acoes-e-programas/integra/governanca
-Capturado em: 2026-09-17T14:13:44.742772+00:00
+Capturado em: 2026-09-21T11:02:27.865973+00:00
 Páginas no domínio: 10
 
 ## Governança — Ministério da Gestão e da Inovação em Serviços Públicos
@@ -110,7 +110,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -174,6 +173,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -408,7 +410,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -472,6 +473,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -536,13 +540,13 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Acesso à Informação
@@ -620,7 +624,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -684,6 +687,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -918,7 +924,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -982,6 +987,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -1046,13 +1054,13 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Acesso à Informação
@@ -1130,7 +1138,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -1194,6 +1201,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -1378,7 +1388,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -1442,6 +1451,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -1506,13 +1518,13 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Acesso à Informação
@@ -1590,7 +1602,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -1654,6 +1665,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -1847,7 +1861,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -1911,6 +1924,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -1975,14 +1991,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -2059,7 +2075,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -2123,6 +2138,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -2348,7 +2366,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -2412,6 +2429,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -2476,13 +2496,13 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Acesso à Informação
@@ -2560,7 +2580,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -2624,6 +2643,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -2832,7 +2854,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -2896,6 +2917,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -3017,6 +3041,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3027,14 +3052,14 @@ TikTok
 Kwai
 Info
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços para você
 MAIS ACESSADOS
@@ -3079,11 +3104,11 @@ Paginação
 Paginação
 Todos os Perfis
 Economia
-Mais de 1 milhão de brasileiros se autoexcluíram das plataformas de jogos e apostas
-Cultura
-São Luís: azulejos e casarões contam a história de um Patrimônio Mundial
-Economia
-Política de minerais críticos prevê rastreabilidade e agregação de valor
+Conselho composto por governos, universidades e setor privado vai coordenar política de minerais críticos
+Saúde
+Ministério da Saúde lamenta falecimento de Paulo Roberto Teixeira
+Saúde
+A Anvisa na história recente de 36 anos do Sistema Único de Saúde
 Mais Notícias
 Navegue por categoria
 Encontre o serviço ou a informação desejada pelas opções abaixo:
@@ -3120,7 +3145,7 @@ Serviços relacionados a infraestrutura, trânsito e transporte de pessoas e mer
 Viagens e Turismo
 Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.
 Desempenho dos Serviços
-5667
+5713
 Serviços no Portal
 94 %
 Serviços Digitais
@@ -3217,6 +3242,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Ministério da Gestão e da Inovação em Serviços Públicos
 URL: https://www.gov.br/gestao/pt-br
@@ -3240,14 +3270,14 @@ Mapa do site
 Abrir menu principal de navegação
 Ministério da Gestão e da Inovação em Serviços Públicos
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Acesso à Informação
 Institucional
@@ -3324,7 +3354,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -3388,6 +3417,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -3619,7 +3651,6 @@ Perguntas Frequentes
 Legislação
 Empresas Estatais Federais
 A SEST
-Agenda Pública
 Governança
 IG-SEST
 Rede de Universidades Corporativas
@@ -3683,6 +3714,9 @@ Prevenção e Enfrentamento do Assédio
 Integridade
 Integridade
 Defeso Eleitoral
+Carreiras Transversais
+Atos administrativos
+Central de Atendimento das Carreiras Transversais
 Mobilidade do cargo de Analista Técnico Executivo
 Canais de Atendimento
 Chat de atendimento da conta gov.br
@@ -3746,14 +3780,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -3813,6 +3847,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -3938,6 +3973,11 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.
 
 ## Serviços
 URL: https://www.gov.br/pt-br/servicos
@@ -3961,14 +4001,14 @@ Mapa do site
 Abrir menu principal de navegação
 Serviços e Informações do Brasil
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Serviços
 Buscar serviços por
@@ -4028,6 +4068,7 @@ Galeria de Aplicativos
 Participe
 Galeria de Aplicativos
 Participe
+Ajude a melhorar o gov.br
 Redes sociais
 Instagram
 Facebook
@@ -4159,3 +4200,8 @@ Voltar ao topo da página
 Rejeitar
 Fale Agora
 Refazer a busca
+Ajude a melhorar o gov.br
+Ao compartilhar sua opinião, você nos ajuda a identificar problemas e a melhorar a navegação para você.
+Agora não
+Responder pesquisa
+Não exibir esta mensagem novamente.

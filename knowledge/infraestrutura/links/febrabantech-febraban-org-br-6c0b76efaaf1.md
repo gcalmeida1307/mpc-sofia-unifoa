@@ -1,7 +1,7 @@
 # Conheça as principais tendências para Infraestrutura e Operações em 2025
 
 Fonte: https://febrabantech.febraban.org.br/temas/infraestrutura/conheca-as-principais-tendencias-para-infraestrutura-e-operacoes-em-2025
-Capturado em: 2026-09-17T14:15:48.151134+00:00
+Capturado em: 2026-09-21T11:04:16.611090+00:00
 Páginas no domínio: 1
 
 ## Conheça as principais tendências para Infraestrutura e Operações em 2025

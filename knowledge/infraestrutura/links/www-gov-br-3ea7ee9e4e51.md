@@ -1,7 +1,7 @@
 # Operações Rodoviárias — Departamento Nacional de Infraestrutura de Transportes
 
 Fonte: https://www.gov.br/dnit/pt-br/rodovias/operacoes-rodoviarias
-Capturado em: 2026-09-17T14:15:17.065441+00:00
+Capturado em: 2026-09-21T11:03:39.934721+00:00
 Páginas no domínio: 10
 
 ## Operações Rodoviárias — Departamento Nacional de Infraestrutura de Transportes
@@ -26,13 +26,13 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Assuntos
@@ -69,6 +69,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -367,6 +368,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -560,13 +562,13 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Assuntos
@@ -603,6 +605,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -1315,6 +1318,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -1508,14 +1512,14 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Assuntos
 Infraestrutura Aquaviária
@@ -1551,6 +1555,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -1841,6 +1846,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -2034,13 +2040,13 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Assuntos
@@ -2077,6 +2083,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -2366,6 +2373,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -2559,14 +2567,14 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Assuntos
 Infraestrutura Aquaviária
@@ -2602,6 +2610,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -2883,6 +2892,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -3076,14 +3086,14 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Assuntos
 Infraestrutura Aquaviária
@@ -3119,6 +3129,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -3424,6 +3435,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -3617,14 +3629,14 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Assuntos
 Infraestrutura Aquaviária
@@ -3660,6 +3672,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -3942,6 +3955,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -4135,14 +4149,14 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Assuntos
 Infraestrutura Aquaviária
@@ -4178,6 +4192,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -4476,6 +4491,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -4669,14 +4685,14 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 imposto de renda
 inss
 Termos mais buscados
-assinatura
 Desenrola Brasil
+assinatura
 mei
 Pagamentos
 FalaBR
@@ -4840,13 +4856,13 @@ Mapa do site
 Abrir menu principal de navegação
 Departamento Nacional de Infraestrutura de Transportes
 Termos mais buscados
-imposto de renda
+Desenrola Brasil
 assinatura
 mei
-inss
-Desenrola Brasil
-Termos mais buscados
 imposto de renda
+inss
+Termos mais buscados
+Desenrola Brasil
 assinatura
 mei
 Assuntos
@@ -4883,6 +4899,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
@@ -5162,6 +5179,7 @@ Coordenação-Geral de Integridade
 Corregedoria
 Ouvidoria
 Portais Temáticos
+Audiência Pública BR-020/GO/BA
 Audiência Pública BR-135/BA
 Audiência Pública BR-316/PA
 Audiência Pública BR-317/AM
